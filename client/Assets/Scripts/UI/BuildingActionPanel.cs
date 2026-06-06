@@ -6,6 +6,7 @@ using GameClient.Gameplay.BaseBuilder;
 using GameClient.BaseBuilding.Core;
 using GameClient.Network.Api;
 using GameClient;
+using GameClient.Managers;
 using System.Threading.Tasks;
 
 namespace GameClient.UI
@@ -147,8 +148,11 @@ namespace GameClient.UI
             _btnConfirmPlacement.onClick.AddListener(OnConfirmPlacementClicked);
             confirmGo.SetActive(true); // Đảm bảo active
             
+            string okText = LocalizationManager.Instance.GetText("ui_common_ok");
+            if (string.IsNullOrEmpty(okText) || okText.StartsWith("[")) okText = "✓ OK";
+
             var txt = confirmGo.GetComponentInChildren<TMP_Text>();
-            if (txt != null) txt.text = "✓ OK";
+            if (txt != null) txt.text = okText;
             var img = confirmGo.GetComponent<Image>();
             if (img != null) img.color = new Color(0.2f, 0.8f, 0.2f, 1f); // Xanh lục tươi
 
@@ -160,8 +164,11 @@ namespace GameClient.UI
             _btnCancelPlacement.onClick.AddListener(OnCancelPlacementClicked);
             cancelGo.SetActive(true); // Đảm bảo active
 
+            string cancelText = LocalizationManager.Instance.GetText("ui_common_cancel");
+            if (string.IsNullOrEmpty(cancelText) || cancelText.StartsWith("[")) cancelText = "✗ Hủy";
+
             var txtCancel = cancelGo.GetComponentInChildren<TMP_Text>();
-            if (txtCancel != null) txtCancel.text = "✗ Hủy";
+            if (txtCancel != null) txtCancel.text = cancelText;
             var imgCancel = cancelGo.GetComponent<Image>();
             if (imgCancel != null) imgCancel.color = new Color(0.8f, 0.2f, 0.2f, 1f); // Đỏ tươi
         }
@@ -206,9 +213,15 @@ namespace GameClient.UI
                     (_btnCancelPlacement.transform as RectTransform).anchoredPosition = new Vector2(-50, -85);
                 }
 
-                if (txtBuildingName != null) txtBuildingName.text = "Đang Chọn Vị Trí";
+                string choosingPosText = LocalizationManager.Instance.GetText("ui_building_action_choosing_position");
+                if (string.IsNullOrEmpty(choosingPosText) || choosingPosText.StartsWith("[")) choosingPosText = "Đang Chọn Vị Trí";
+
+                string moveInstructionText = LocalizationManager.Instance.GetText("ui_building_action_move_instruction");
+                if (string.IsNullOrEmpty(moveInstructionText) || moveInstructionText.StartsWith("[")) moveInstructionText = "Di chuyển đến ô đất trống...";
+
+                if (txtBuildingName != null) txtBuildingName.text = choosingPosText;
                 if (txtBuildingLevel != null) txtBuildingLevel.text = "";
-                if (txtBuildingStatus != null) txtBuildingStatus.text = "Di chuyển đến ô đất trống...";
+                if (txtBuildingStatus != null) txtBuildingStatus.text = moveInstructionText;
                 return;
             }
 
