@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+import "disciple.proto";
+import "player.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message GachaBanner {
+  int32 banner_id = 1;     // C# đang tìm .BannerId
+  string name = 2;
+  string description = 3;
+  int32 cost_diamond = 4;  // C# đang tìm .CostDiamond
+  string end_time = 5;
+}
+
+message GetGachaBannersRequest {}
+
+message GetGachaBannersResponse {
+  BaseResponse base = 1;   // C# đang tìm .Base
+  repeated GachaBanner banners = 2;
+}
+
+message DoGachaRequest {
+  int32 banner_id = 1;
+  int32 count = 2;
+}
+
+message DoGachaResponse {
+  BaseResponse base = 1;           // C# đang tìm .Base
+  PlayerProfile player_after = 2;  // C# đang tìm .PlayerAfter
+  repeated Hero heroes = 3;        // C# đang tìm .Heroes
+}

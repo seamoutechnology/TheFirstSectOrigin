@@ -1,0 +1,19 @@
+﻿{
+    "sequences": [
+        {
+            "sequenceId": "sequence_20260529031019",
+            "entryNodeId": "4b19e160-05b8-4e6f-ab5b-b9e0627a9df0",
+            "nodes": [
+                {
+                    "nodeId": "4b19e160-05b8-4e6f-ab5b-b9e0627a9df0",
+                    "textKey": "dia_4b19e160-05b8-4e6f-ab5b-b9e0627a9df0",
+                    "speakerNameKey": "Tên người nói...",
+                    "avatarId": "avatar_01",
+                    "position": 0,
+                    "nextNodeId": "",
+                    "choices": []
+                }
+            ]
+        }
+    ]
+}

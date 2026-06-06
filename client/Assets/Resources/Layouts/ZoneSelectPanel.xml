@@ -1,0 +1,30 @@
+<panel name="ZoneSelect" width="900" height="650" background="0.05, 0.05, 0.05, 0.95" border="1" borderColor="0.9, 0.5, 0.1, 1">
+    <header height="80">
+        <text content="CHỌN THẾ GIỚI" size="36" color="1, 0.8, 0.2, 1" align="center" style="bold"/>
+    </header>
+
+    <content axis="horizontal" padding="20" spacing="20">
+        <!-- Vùng chứa Tab (Bên trái - Cuộn dọc nếu nhiều tab) -->
+        <group name="sidebar" width="200" height="480">
+            <text content="Cụm Máy Chủ" size="16" color="0.5, 0.5, 0.5, 1" align="center"/>
+            <spacer height="10"/>
+            <scrollview name="tabRoot" height="440" spacing="8" scrollbar="false">
+                <!-- Code sẽ sinh TabButtonPrefab ở đây -->
+            </scrollview>
+        </group>
+
+        <!-- Vùng chứa Server List (Bên phải) -->
+        <group name="mainContent" width="620" height="480">
+            <text content="Danh sách các vùng đất linh thiêng:" size="18" color="0.7, 0.7, 0.7, 1"/>
+            <spacer height="10"/>
+            <scrollview name="serverListRoot" height="440" spacing="12">
+                <!-- Code sẽ sinh ServerItemPrefab ở đây -->
+            </scrollview>
+        </group>
+    </content>
+
+    <footer height="70">
+        <button name="btnBack" width="160" height="45" content="QUAY LẠI" align="left" background="0.2, 0.2, 0.2, 1"/>
+        <button name="btnEnter" width="220" height="55" content="VÀO THẾ GIỚI" align="right" background="0.9, 0.4, 0, 1"/>
+    </footer>
+</panel>

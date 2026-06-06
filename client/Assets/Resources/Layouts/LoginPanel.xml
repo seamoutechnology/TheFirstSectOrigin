@@ -1,0 +1,35 @@
+<panel name="LoginPanel" width="500" height="600" background="0.1, 0.1, 0.1, 0.8" border="2" borderColor="0.9, 0.5, 0.1, 1">
+    <header height="80">
+        <text content="ĐĂNG NHẬP" size="32" color="1, 1, 1, 1" align="center" style="bold"/>
+    </header>
+
+    <content padding="40" spacing="15">
+
+        <!-- Input Tài khoản -->
+        <group name="inputGroup" spacing="5">
+            <text content="Tài khoản:" size="18" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputAccount" placeholder="Nhập tài khoản..." height="50"/>
+        </group>
+
+        <!-- Input Mật khẩu -->
+        <group name="inputGroup" spacing="5">
+            <text content="Mật khẩu:" size="18" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputPassword" placeholder="Nhập mật khẩu..." height="50" secure="true"/>
+        </group>
+
+        <spacer height="20"/>
+
+        <!-- Nút Đăng nhập -->
+        <button name="btnLogin" width="full" height="60" content="BẮT ĐẦU TU TIÊN" background="0.9, 0.4, 0, 1"/>
+        
+        <!-- Link Đăng ký / Quên mật khẩu -->
+        <group name="links" axis="horizontal" spacing="50">
+            <button name="btnRegister" content="Đăng ký ngay" background="clear" color="0.4, 0.7, 1, 1"/>
+            <button name="btnForgot" content="Quên mật khẩu?" background="clear" color="0.6, 0.6, 0.6, 1"/>
+        </group>
+    </content>
+
+    <footer height="40">
+        <text content="v1.0.0 - The First Sect Origin" size="12" color="0.3, 0.3, 0.3, 1" align="center"/>
+    </footer>
+</panel>

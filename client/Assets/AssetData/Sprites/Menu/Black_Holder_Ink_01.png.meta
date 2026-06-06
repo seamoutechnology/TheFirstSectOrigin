@@ -1,0 +1,1430 @@
+fileFormatVersion: 2
+guid: cd5d21e1b18f6514b93e9ad37ca19d0d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7615715603773900426
+    second: Black_Holder_Ink_01_0
+  - first:
+      213: 315476924106224667
+    second: Black_Holder_Ink_01_1
+  - first:
+      213: 3093059906633946545
+    second: Black_Holder_Ink_01_2
+  - first:
+      213: 8476747110999142987
+    second: Black_Holder_Ink_01_3
+  - first:
+      213: -4090067315036476510
+    second: Black_Holder_Ink_01_4
+  - first:
+      213: 7702731260228056146
+    second: Black_Holder_Ink_01_5
+  - first:
+      213: -1368916017391641448
+    second: Black_Holder_Ink_01_6
+  - first:
+      213: -8381478857325714405
+    second: Black_Holder_Ink_01_7
+  - first:
+      213: 7585628494949375508
+    second: Black_Holder_Ink_01_8
+  - first:
+      213: 3797100691549551097
+    second: Black_Holder_Ink_01_9
+  - first:
+      213: 7156762478472908710
+    second: Black_Holder_Ink_01_10
+  - first:
+      213: -1165258267828009065
+    second: Black_Holder_Ink_01_11
+  - first:
+      213: -8416108295197660826
+    second: Black_Holder_Ink_01_12
+  - first:
+      213: 6920571305045970820
+    second: Black_Holder_Ink_01_13
+  - first:
+      213: 540897935321752608
+    second: Black_Holder_Ink_01_14
+  - first:
+      213: 1222735173137650967
+    second: Black_Holder_Ink_01_15
+  - first:
+      213: -3003310621654328490
+    second: Black_Holder_Ink_01_16
+  - first:
+      213: -819566153208919149
+    second: Black_Holder_Ink_01_17
+  - first:
+      213: -8414999900445122927
+    second: Black_Holder_Ink_01_18
+  - first:
+      213: -971453876654418748
+    second: Black_Holder_Ink_01_19
+  - first:
+      213: 8905439257496236594
+    second: Black_Holder_Ink_01_20
+  - first:
+      213: 282767987464563008
+    second: Black_Holder_Ink_01_21
+  - first:
+      213: 5105549986246343433
+    second: Black_Holder_Ink_01_22
+  - first:
+      213: -3235641989071899061
+    second: Black_Holder_Ink_01_23
+  - first:
+      213: 6745032394859191909
+    second: Black_Holder_Ink_01_24
+  - first:
+      213: 5595982564183922539
+    second: Black_Holder_Ink_01_25
+  - first:
+      213: -7630905406682120102
+    second: Black_Holder_Ink_01_26
+  - first:
+      213: -6665575678157461641
+    second: Black_Holder_Ink_01_27
+  - first:
+      213: -7188691504579388181
+    second: Black_Holder_Ink_01_28
+  - first:
+      213: 1694424176651136898
+    second: Black_Holder_Ink_01_29
+  - first:
+      213: 5583211796810020260
+    second: Black_Holder_Ink_01_30
+  - first:
+      213: -966733015436395193
+    second: Black_Holder_Ink_01_31
+  - first:
+      213: -4648247478273370298
+    second: Black_Holder_Ink_01_32
+  - first:
+      213: 7506215538856163045
+    second: Black_Holder_Ink_01_33
+  - first:
+      213: -3202860962740399643
+    second: Black_Holder_Ink_01_34
+  - first:
+      213: 4510712071263899710
+    second: Black_Holder_Ink_01_35
+  - first:
+      213: -7689959399976945577
+    second: Black_Holder_Ink_01_36
+  - first:
+      213: 7612416396594138466
+    second: Black_Holder_Ink_01_37
+  - first:
+      213: 2738999554659340521
+    second: Black_Holder_Ink_01_38
+  - first:
+      213: 3418550749157929397
+    second: Black_Holder_Ink_01_39
+  - first:
+      213: 4370218256493836801
+    second: Black_Holder_Ink_01_40
+  - first:
+      213: 4797939689252056103
+    second: Black_Holder_Ink_01_41
+  - first:
+      213: -5594359065917905520
+    second: Black_Holder_Ink_01_42
+  - first:
+      213: 6604802943153681207
+    second: Black_Holder_Ink_01_43
+  - first:
+      213: -5657125543304470979
+    second: Black_Holder_Ink_01_44
+  - first:
+      213: 5139726454472641891
+    second: Black_Holder_Ink_01_45
+  - first:
+      213: -5675137174641183405
+    second: Black_Holder_Ink_01_46
+  - first:
+      213: 1641160702896403334
+    second: Black_Holder_Ink_01_47
+  - first:
+      213: -7661989822785015195
+    second: Black_Holder_Ink_01_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 999
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67938a6120b8f4690800000000000000
+      internalID: -7615715603773900426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 160
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b143f2c479cc06400800000000000000
+      internalID: 315476924106224667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 153
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b55bebe891ccea20800000000000000
+      internalID: 3093059906633946545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_3
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 163
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b423ce1f59473a570800000000000000
+      internalID: 8476747110999142987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_4
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 136
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aba0d372792d37c0800000000000000
+      internalID: -4090067315036476510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_5
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 166
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 254b036354995ea60800000000000000
+      internalID: 7702731260228056146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 127
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89c57009222a00de0800000000000000
+      internalID: -1368916017391641448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 138
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1467a0e2610fab80800000000000000
+      internalID: -8381478857325714405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_8
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 122
+        width: 37
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41ed98ffce0954960800000000000000
+      internalID: 7585628494949375508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_9
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 122
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f9733806f202b430800000000000000
+      internalID: 3797100691549551097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_10
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 129
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6afc8375e8de15360800000000000000
+      internalID: 7156762478472908710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 109
+        width: 12
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 797468a77cb24dfe0800000000000000
+      internalID: -1165258267828009065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 115
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6696681981af33b80800000000000000
+      internalID: -8416108295197660826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_13
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 114
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48fc6086feeca0060800000000000000
+      internalID: 6920571305045970820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_14
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 123
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 024689e6ec7a18700800000000000000
+      internalID: 540897935321752608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_15
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 118
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715de31692708f010800000000000000
+      internalID: 1222735173137650967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 94
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65bd22ed6e81256d0800000000000000
+      internalID: -3003310621654328490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 83
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39b8c080de050a4f0800000000000000
+      internalID: -819566153208919149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_18
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 90
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19e5505dc2ae73b80800000000000000
+      internalID: -8414999900445122927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_19
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 73
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4565e98d3b482f0800000000000000
+      internalID: -971453876654418748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_20
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 104
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 232b1e752d9769b70800000000000000
+      internalID: 8905439257496236594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_21
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 66
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0496da68cf79ce300800000000000000
+      internalID: 282767987464563008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_22
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 91
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90bb63189ae8ad640800000000000000
+      internalID: 5105549986246343433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_23
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 100
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b46f70d01c0b813d0800000000000000
+      internalID: -3235641989071899061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_24
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 75
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56e9516f93b2b9d50800000000000000
+      internalID: 6745032394859191909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_25
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 97
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b67567b4e7ce8ad40800000000000000
+      internalID: 5595982564183922539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_26
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 89
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50ca1086f3991690800000000000000
+      internalID: -7630905406682120102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_27
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 83
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 777e0f78c3e1f73a0800000000000000
+      internalID: -6665575678157461641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_28
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 80
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bec5da5f923ac3c90800000000000000
+      internalID: -7188691504579388181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_29
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 81
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28fef1cafcdc38710800000000000000
+      internalID: 1694424176651136898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_30
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 91
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a5b1ae4c8d8b7d40800000000000000
+      internalID: 5583211796810020260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_31
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 62
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d7546c1797592f0800000000000000
+      internalID: -966733015436395193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_32
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 95
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6471965cb8b1e7fb0800000000000000
+      internalID: -4648247478273370298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_33
+      rect:
+        serializedVersion: 2
+        x: 996
+        y: 73
+        width: 23
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e6f901534f6b2860800000000000000
+      internalID: 7506215538856163045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_34
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 90
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e194e28ce62d83d0800000000000000
+      internalID: -3202860962740399643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_35
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 48
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3050c3eab4499e30800000000000000
+      internalID: 4510712071263899710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_36
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 75
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758b23b3ba6c74590800000000000000
+      internalID: -7689959399976945577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_37
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 59
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d4a51616cb4a960800000000000000
+      internalID: 7612416396594138466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_38
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 50
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e05c674591e20620800000000000000
+      internalID: 2738999554659340521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_39
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 44
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b1343a4bc1217f20800000000000000
+      internalID: 3418550749157929397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_40
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 50
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10afd31995226ac30800000000000000
+      internalID: 4370218256493836801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_41
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 57
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ced9f0ab4b59240800000000000000
+      internalID: 4797939689252056103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_42
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 43
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0952af9d118dc52b0800000000000000
+      internalID: -5594359065917905520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_43
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 34
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73331267849f8ab50800000000000000
+      internalID: 6604802943153681207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_44
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 43
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e5c858a4add71b0800000000000000
+      internalID: -5657125543304470979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_45
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 43
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36d05899af9f35740800000000000000
+      internalID: 5139726454472641891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_46
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 40
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 355f5edceccdd31b0800000000000000
+      internalID: -5675137174641183405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_47
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 26
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 683787bc6f296c610800000000000000
+      internalID: 1641160702896403334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Black_Holder_Ink_01_48
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 27
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562bd34e9d42ba590800000000000000
+      internalID: -7661989822785015195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Black_Holder_Ink_01_0: -7615715603773900426
+      Black_Holder_Ink_01_1: 315476924106224667
+      Black_Holder_Ink_01_10: 7156762478472908710
+      Black_Holder_Ink_01_11: -1165258267828009065
+      Black_Holder_Ink_01_12: -8416108295197660826
+      Black_Holder_Ink_01_13: 6920571305045970820
+      Black_Holder_Ink_01_14: 540897935321752608
+      Black_Holder_Ink_01_15: 1222735173137650967
+      Black_Holder_Ink_01_16: -3003310621654328490
+      Black_Holder_Ink_01_17: -819566153208919149
+      Black_Holder_Ink_01_18: -8414999900445122927
+      Black_Holder_Ink_01_19: -971453876654418748
+      Black_Holder_Ink_01_2: 3093059906633946545
+      Black_Holder_Ink_01_20: 8905439257496236594
+      Black_Holder_Ink_01_21: 282767987464563008
+      Black_Holder_Ink_01_22: 5105549986246343433
+      Black_Holder_Ink_01_23: -3235641989071899061
+      Black_Holder_Ink_01_24: 6745032394859191909
+      Black_Holder_Ink_01_25: 5595982564183922539
+      Black_Holder_Ink_01_26: -7630905406682120102
+      Black_Holder_Ink_01_27: -6665575678157461641
+      Black_Holder_Ink_01_28: -7188691504579388181
+      Black_Holder_Ink_01_29: 1694424176651136898
+      Black_Holder_Ink_01_3: 8476747110999142987
+      Black_Holder_Ink_01_30: 5583211796810020260
+      Black_Holder_Ink_01_31: -966733015436395193
+      Black_Holder_Ink_01_32: -4648247478273370298
+      Black_Holder_Ink_01_33: 7506215538856163045
+      Black_Holder_Ink_01_34: -3202860962740399643
+      Black_Holder_Ink_01_35: 4510712071263899710
+      Black_Holder_Ink_01_36: -7689959399976945577
+      Black_Holder_Ink_01_37: 7612416396594138466
+      Black_Holder_Ink_01_38: 2738999554659340521
+      Black_Holder_Ink_01_39: 3418550749157929397
+      Black_Holder_Ink_01_4: -4090067315036476510
+      Black_Holder_Ink_01_40: 4370218256493836801
+      Black_Holder_Ink_01_41: 4797939689252056103
+      Black_Holder_Ink_01_42: -5594359065917905520
+      Black_Holder_Ink_01_43: 6604802943153681207
+      Black_Holder_Ink_01_44: -5657125543304470979
+      Black_Holder_Ink_01_45: 5139726454472641891
+      Black_Holder_Ink_01_46: -5675137174641183405
+      Black_Holder_Ink_01_47: 1641160702896403334
+      Black_Holder_Ink_01_48: -7661989822785015195
+      Black_Holder_Ink_01_5: 7702731260228056146
+      Black_Holder_Ink_01_6: -1368916017391641448
+      Black_Holder_Ink_01_7: -8381478857325714405
+      Black_Holder_Ink_01_8: 7585628494949375508
+      Black_Holder_Ink_01_9: 3797100691549551097
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

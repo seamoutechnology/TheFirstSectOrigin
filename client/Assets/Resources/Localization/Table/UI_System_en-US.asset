@@ -1,0 +1,296 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_System_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 8ae05fd13e83d0d489e1c24e94deb397, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 9987138523136
+    m_Localized: Hide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28021794279424
+    m_Localized: Optimizing hardware...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28060931330048
+    m_Localized: Checking updates...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28085220544512
+    m_Localized: Optimizing graphics...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28099351154688
+    m_Localized: Boot complete! Entering game...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193684781404160
+    m_Localized: Username
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193837063999488
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 194062939852800
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 194128861728768
+    m_Localized: Register
+    m_Metadata:
+      m_Items: []
+  - m_Id: 407966399860736
+    m_Localized: "Show password\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 412479986864128
+    m_Localized: Welcome back, traveler,\n<color=#FFD700>{0}</color>
+    m_Metadata:
+      m_Items: []
+  - m_Id: 412687353253888
+    m_Localized: Player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 515714315718656
+    m_Localized: Your email address
+    m_Metadata:
+      m_Items: []
+  - m_Id: 515866933858304
+    m_Localized: New Username
+    m_Metadata:
+      m_Items: []
+  - m_Id: 516131535720448
+    m_Localized: New password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517060775383040
+    m_Localized: Repeat new password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 551987667537920
+    m_Localized: Validating access...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3015083591348224
+    m_Localized: '           '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135373319221248
+    m_Localized: Please complete all fields.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135904552988672
+    m_Localized: Unknown error.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3136037814415360
+    m_Localized: Unable to connect to the server.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3473400180649984
+    m_Localized: Account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5320193770786816
+    m_Localized: Notifications
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5320361685553152
+    m_Localized: Start journey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5323293034287104
+    m_Localized: 'Game version:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5323410080534528
+    m_Localized: Choose Server
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5440729108713472
+    m_Localized: Pref.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545653230374912
+    m_Localized: Recommend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545738743844864
+    m_Localized: Have character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545823674306560
+    m_Localized: Newest Zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6329291035381760
+    m_Localized: Zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6331742673178624
+    m_Localized: Opening
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374552877142016
+    m_Localized: '[Rules]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374557650259968
+    m_Localized: '[Maintain]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374559290232832
+    m_Localized: '[Event]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377210094555136
+    m_Localized: Loading notices...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377252486385664
+    m_Localized: Notice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377290293841920
+    m_Localized: There are currently no notices.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377337089691648
+    m_Localized: '[News]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031011717681152
+    m_Localized: 'Level: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031081536065536
+    m_Localized: 'Sect: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031144047972352
+    m_Localized: 'Server: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031176113426432
+    m_Localized: Not connected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031246170886144
+    m_Localized: 'Playtime: <color=yellow>{0} min\n<size=80%>(Warning: Playing over
+      180 mins affects health)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031326038822912
+    m_Localized: Feature in development!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031283152064512
+    m_Localized: Server connection error!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031307940401152
+    m_Localized: Notice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033257796833280
+    m_Localized: Top up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033290353020928
+    m_Localized: Redeem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033299723096064
+    m_Localized: Sign out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7055658714664960
+    m_Localized: 'Account ID: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7055701223936000
+    m_Localized: 'Account Role: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7057148636303360
+    m_Localized: 'Copied:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7827532046405632
+    m_Localized: Contains 18+ content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7827797944307712
+    m_Localized: Play more than 180 mins daily can cause harm to your health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7828083136008192
+    m_Localized: Male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7828135912935424
+    m_Localized: Female
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7862249089142784
+    m_Localized: Random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8003371698491392
+    m_Localized: Enter character name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860006387249152
+    m_Localized: Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860136515530752
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861390121693184
+    m_Localized: Claim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861462922227712
+    m_Localized: Speed up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861555251441664
+    m_Localized: Repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861653452681216
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861726181912576
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861808918753280
+    m_Localized: Demolish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861883984211968
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

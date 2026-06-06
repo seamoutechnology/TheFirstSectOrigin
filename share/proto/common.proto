@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message BaseResponse {
+  int32 code = 1;
+  string message = 2; // Đổi từ message_id sang message cho khớp C#
+}
+
+message BaseRequest {
+  string token = 1;
+}
+
+message GetBaseRequest {
+  string token = 1;
+}

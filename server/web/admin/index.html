@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Sect Origin - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .sidebar { height: 100vh; background: #212529; color: white; padding: 20px; }
+        .card { border: none; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); border-radius: 10px; }
+        .nav-link { color: #adb5bd; }
+        .nav-link.active { color: white; font-weight: bold; }
+        .type-badge { font-size: 0.8rem; padding: 3px 8px; border-radius: 5px; }
+        .badge-MAINTENANCE { background: #dc3545; color: white; }
+        .badge-RULES { background: #6c757d; color: white; }
+        .badge-ACTIVITY { background: #0d6efd; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h4 class="mb-4">TSO Admin</h4>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#">📢 Thông báo</a>
+                    <a class="nav-link" href="#">👥 Người chơi</a>
+                    <a class="nav-link" href="#">⚔️ Trận đấu</a>
+                    <a class="nav-link" href="#">⚙️ Cài đặt</a>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Quản lý Thông báo</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">+ Thêm Thông báo</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Loại</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Thời gian</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="announcementTable">
+                                <!-- Data will be loaded here -->
+                                <tr>
+                                    <td><span class="type-badge badge-MAINTENANCE">MAINTENANCE</span></td>
+                                    <td>Bảo trì định kỳ cụm Server S1 - S10</td>
+                                    <td>12/05 08:00 - 12:00</td>
+                                    <td><span class="badge bg-success">Đang diễn ra</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary">Sửa</button>
+                                        <button class="btn btn-sm btn-outline-danger">Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm thông báo -->
+    <div class="modal fade" id="addModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm Thông báo mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addForm">
+                        <div class="mb-3">
+                            <label class="form-label">Loại thông báo</label>
+                            <select class="form-select" id="type">
+                                <option value="MAINTENANCE">Bảo trì</option>
+                                <option value="RULES">Quy tắc</option>
+                                <option value="ACTIVITY">Hoạt động mở Server</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tiêu đề</label>
+                            <input type="text" class="form-image form-control" id="title" placeholder="VD: Khai mở Server mới">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung</label>
+                            <textarea class="form-control" id="content" rows="4"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Bắt đầu</label>
+                                <input type="datetime-local" class="form-control" id="startAt">
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Kết thúc</label>
+                                <input type="datetime-local" class="form-control" id="endAt">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#addModal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="submitAnnouncement()">Lưu thông báo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function submitAnnouncement() {
+            const data = {
+                type: document.getElementById('type').value,
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value,
+                start_at: document.getElementById('startAt').value,
+                end_at: document.getElementById('endAt').value
+            };
+            
+            console.log("Gửi thông báo:", data);
+            // Ở đây sẽ gọi API fetch('/api/admin/announcements', { method: 'POST', body: JSON.stringify(data) })
+            alert("Đã lưu thông báo thành công!");
+            bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
+        }
+    </script>
+</body>
+</html>

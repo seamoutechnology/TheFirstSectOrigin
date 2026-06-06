@@ -1,0 +1,304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_System Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI_System
+  m_TableCollectionNameGuidString: 8ae05fd13e83d0d489e1c24e94deb397
+  m_Entries:
+  - m_Id: 9987138523136
+    m_Key: ui_button_cancel_zone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28021794279424
+    m_Key: boot_optimizing_hardware
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28060931330048
+    m_Key: boot_checking_updates
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28085220544512
+    m_Key: boot_optimizing_graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28099351154688
+    m_Key: boot_complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193684781404160
+    m_Key: ui_placeholder_login_account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193837063999488
+    m_Key: ui_placeholder_login_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 194062939852800
+    m_Key: ui_button_login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 194128861728768
+    m_Key: ui_button_register
+    m_Metadata:
+      m_Items: []
+  - m_Id: 407966399860736
+    m_Key: ui_label_show_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 412479986864128
+    m_Key: ui_quick_auth_welcome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 412687353253888
+    m_Key: "ui_default_player_name\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 515714315718656
+    m_Key: ui_placeholder_register_email
+    m_Metadata:
+      m_Items: []
+  - m_Id: 515866933858304
+    m_Key: ui_placeholder_register_account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 516131535720448
+    m_Key: ui_placeholder_register_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517060775383040
+    m_Key: ui_placeholder_register_password_repeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 551987667537920
+    m_Key: boot_auth_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557579417161728
+    m_Key: boot_loading_percent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3015083591348224
+    m_Key: ui_label_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135373319221248
+    m_Key: error_empty_fields
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135904552988672
+    m_Key: error_unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3136037814415360
+    m_Key: error_connection_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3473400180649984
+    m_Key: ui_label_submenu_item_account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5320193770786816
+    m_Key: ui_label_notify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5320361685553152
+    m_Key: ui_label_enter_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5323293034287104
+    m_Key: ui_game_version
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5323410080534528
+    m_Key: ui_server_unselected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5440729108713472
+    m_Key: ui_server_recommended
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545653230374912
+    m_Key: ui_zone_recommend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545738743844864
+    m_Key: ui_zone_my_chars
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5545823674306560
+    m_Key: ui_zone_recent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6329291035381760
+    m_Key: ui_zone_group_prefix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6331742673178624
+    m_Key: ui_zone_status_open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374552877142016
+    m_Key: ui_notice_type_rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374557650259968
+    m_Key: ui_notice_type_maintenance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6374559290232832
+    m_Key: ui_notice_type_activity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377210094555136
+    m_Key: ui_notice_loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377252486385664
+    m_Key: ui_notice_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377290293841920
+    m_Key: ui_notice_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377337089691648
+    m_Key: ui_notice_type_news
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031011717681152
+    m_Key: ui_account_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031081536065536
+    m_Key: ui_account_sect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031144047972352
+    m_Key: ui_account_server
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031176113426432
+    m_Key: ui_account_no_server
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031246170886144
+    m_Key: ui_account_playtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031283152064512
+    m_Key: ui_account_error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031307940401152
+    m_Key: ui_notice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7031326038822912
+    m_Key: ui_feature_dev
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033257796833280
+    m_Key: ui_label_topup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033290353020928
+    m_Key: ui_label_redeem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7033299723096064
+    m_Key: ui_label_signout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7055658714664960
+    m_Key: ui_account_id
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7055701223936000
+    m_Key: ui_account_role
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7057148636303360
+    m_Key: ui_copied
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7827532046405632
+    m_Key: msg_18plus_content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7827797944307712
+    m_Key: msg_180_mins_warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7828083136008192
+    m_Key: ui_sex_male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7828135912935424
+    m_Key: ui_sex_famale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7862249089142784
+    m_Key: ui_label_random_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8003371698491392
+    m_Key: ui_label_input_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860006387249152
+    m_Key: ui_label_building_action_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8860136515530752
+    m_Key: ui_label_building_action_upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861390121693184
+    m_Key: ui_label_building_action_harvest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861462922227712
+    m_Key: ui_label_building_action_speedup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861555251441664
+    m_Key: ui_label_building_action_repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861653452681216
+    m_Key: ui_label_building_action_cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861726181912576
+    m_Key: ui_label_building_action_move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861808918753280
+    m_Key: ui_label_building_action_demolish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8861883984211968
+    m_Key: ui_label_building_action_close
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8599346670085341439
+  references:
+    version: 2
+    RefIds:
+    - rid: 8599346670085341439
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1778652173941

@@ -1,0 +1,19 @@
+<Layout name="LoadingScreen">
+    <Panel name="MainContainer" size="1920,1080">
+        <!-- Background: Có thể là Video hoặc Image -->
+        <Video name="BgVideo" clipName="intro_video" loop="true" size="1920,1080" />
+        
+        <!-- Overlay mờ -->
+        <Panel name="Overlay" color="#00000088" size="1920,1080" />
+
+        <!-- Loading Bar -->
+        <Panel name="LoadingGroup" position="0, -350" size="800, 100">
+            <Image name="BarBg" color="#2C3E50" size="800, 20" />
+            <Image name="BarFill" color="#3498DB" position="0, 0" size="0, 20" />
+            <Text name="TxtProgress" content="Đang khởi tạo..." position="0, -50" size="400, 50" fontSize="24" />
+        </Panel>
+
+        <!-- Sprite trang trí -->
+        <Image name="IconLoading" sprite="icon_sect_logo" position="0, 0" size="200, 200" />
+    </Panel>
+</Layout>

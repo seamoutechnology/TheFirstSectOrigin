@@ -1,0 +1,43 @@
+<panel name="RegisterPanel" width="500" height="720" background="0.1, 0.1, 0.1, 0.8" border="2" borderColor="0.4, 0.7, 1, 1">
+    <header height="80">
+        <text content="ĐĂNG KÝ TÀI KHOẢN" size="28" color="1, 1, 1, 1" align="center" style="bold"/>
+    </header>
+
+    <content padding="40" spacing="12">
+        <!-- Tên tài khoản -->
+        <group name="userGroup" spacing="5">
+            <text content="Tài khoản:" size="16" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputUser" placeholder="Nhập tên tài khoản..." height="45"/>
+        </group>
+
+        <!-- Email -->
+        <group name="emailGroup" spacing="5">
+            <text content="Email:" size="16" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputEmail" placeholder="Nhập email (ví dụ: a@b.com)..." height="45"/>
+        </group>
+
+        <!-- Mật khẩu -->
+        <group name="passGroup" spacing="5">
+            <text content="Mật khẩu:" size="16" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputPass" placeholder="Ít nhất 6 ký tự..." height="45" secure="true"/>
+        </group>
+
+        <!-- Xác nhận mật khẩu -->
+        <group name="confirmGroup" spacing="5">
+            <text content="Xác nhận mật khẩu:" size="16" color="0.8, 0.8, 0.8, 1"/>
+            <input name="inputConfirm" placeholder="Nhập lại mật khẩu..." height="45" secure="true"/>
+        </group>
+
+        <spacer height="25"/>
+
+        <!-- Nút Đăng ký -->
+        <button name="btnRegister" width="full" height="60" content="XÁC NHẬN ĐĂNG KÝ" background="0.2, 0.6, 0.2, 1"/>
+        
+        <!-- Quay lại -->
+        <button name="btnBack" content="Quay lại Đăng nhập" background="clear" color="0.6, 0.6, 0.6, 1" align="center"/>
+    </content>
+
+    <footer height="40">
+        <text content="The First Sect Origin - Hệ thống đăng ký" size="12" color="0.3, 0.3, 0.3, 1" align="center"/>
+    </footer>
+</panel>

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message VersionConfig {
+    string client_version = 1;      // e.g. "1.0.5"
+    string addressable_version = 2; // e.g. "2026.05.07.1"
+    string catalog_url = 3;         // URL tới file .json catalog của Addressables
+    bool force_update = 4;          // Bắt buộc tải app mới từ Store
+    string update_desc = 5;         // Nội dung cập nhật
+}
+
+message GetVersionRequest {
+    string platform = 1; // "android", "ios", "pc"
+}
+
+message GetVersionResponse {
+    int32 code = 1;
+    string message_id = 2;
+    VersionConfig config = 3;
+}
+
+// --- Cutscenes ---
+message CutsceneData {
+    string id = 1;
+    string json_content = 2;
+}
+
+message ListCutscenesResponse {
+    repeated string ids = 1;
+}
+
+message SaveCutsceneRequest {
+    CutsceneData cutscene = 1;
+}
+
+message GetCutsceneRequest {
+    string id = 1;
+}
+message EmptyRequest {}

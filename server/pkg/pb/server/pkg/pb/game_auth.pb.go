@@ -1,0 +1,759 @@
+
+package pb
+
+import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
+	unsafe "unsafe"
+)
+
+const (
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
+	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
+)
+
+type RegisterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterRequest) Reset() {
+	*x = RegisterRequest{}
+	mi := &file_game_auth_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterRequest) ProtoMessage() {}
+
+func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*RegisterRequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RegisterRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type RegisterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterResponse) Reset() {
+	*x = RegisterResponse{}
+	mi := &file_game_auth_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterResponse) ProtoMessage() {}
+
+func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*RegisterResponse) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RegisterResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *RegisterResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+type LoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginRequest) Reset() {
+	*x = LoginRequest{}
+	mi := &file_game_auth_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginRequest) ProtoMessage() {}
+
+func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*LoginRequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *LoginRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type LoginResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Base          *BaseResponse          `protobuf:"bytes,6,opt,name=base,proto3" json:"base,omitempty"` // Thêm Base cho khớp C#
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	Token         string                 `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"` // JWT Token để dùng cho các request sau
+	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ZoneList      *ZoneList              `protobuf:"bytes,5,opt,name=zone_list,json=zoneList,proto3" json:"zone_list,omitempty"` // Trả về danh sách server để user chọn
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginResponse) Reset() {
+	*x = LoginResponse{}
+	mi := &file_game_auth_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginResponse) ProtoMessage() {}
+
+func (x *LoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*LoginResponse) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *LoginResponse) GetBase() *BaseResponse {
+	if x != nil {
+		return x.Base
+	}
+	return nil
+}
+
+func (x *LoginResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *LoginResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *LoginResponse) GetZoneList() *ZoneList {
+	if x != nil {
+		return x.ZoneList
+	}
+	return nil
+}
+
+type ZoneList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Zones         []*Zone                `protobuf:"bytes,1,rep,name=zones,proto3" json:"zones,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ZoneList) Reset() {
+	*x = ZoneList{}
+	mi := &file_game_auth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ZoneList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZoneList) ProtoMessage() {}
+
+func (x *ZoneList) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*ZoneList) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ZoneList) GetZones() []*Zone {
+	if x != nil {
+		return x.Zones
+	}
+	return nil
+}
+
+type Zone struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ZoneId        int32                  `protobuf:"varint,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`                           // Nomal, Crowded, Maintenance
+	GatewayUrl    string                 `protobuf:"bytes,4,opt,name=gateway_url,json=gatewayUrl,proto3" json:"gateway_url,omitempty"` // Địa chỉ IP/Domain của Gateway tương ứng để client connect
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Zone) Reset() {
+	*x = Zone{}
+	mi := &file_game_auth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Zone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Zone) ProtoMessage() {}
+
+func (x *Zone) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*Zone) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Zone) GetZoneId() int32 {
+	if x != nil {
+		return x.ZoneId
+	}
+	return 0
+}
+
+func (x *Zone) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Zone) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *Zone) GetGatewayUrl() string {
+	if x != nil {
+		return x.GatewayUrl
+	}
+	return ""
+}
+
+type LogoutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutRequest) Reset() {
+	*x = LogoutRequest{}
+	mi := &file_game_auth_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutRequest) ProtoMessage() {}
+
+func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*LogoutRequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *LogoutRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type ForgetPasswordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ForgetPasswordRequest) Reset() {
+	*x = ForgetPasswordRequest{}
+	mi := &file_game_auth_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ForgetPasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ForgetPasswordRequest) ProtoMessage() {}
+
+func (x *ForgetPasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*ForgetPasswordRequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ForgetPasswordRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type ResetPasswordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Otp           string                 `protobuf:"bytes,2,opt,name=otp,proto3" json:"otp,omitempty"`
+	NewPassword   string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetPasswordRequest) Reset() {
+	*x = ResetPasswordRequest{}
+	mi := &file_game_auth_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetPasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetPasswordRequest) ProtoMessage() {}
+
+func (x *ResetPasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*ResetPasswordRequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ResetPasswordRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ResetPasswordRequest) GetOtp() string {
+	if x != nil {
+		return x.Otp
+	}
+	return ""
+}
+
+func (x *ResetPasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+type Enable2FAResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	Secret        string                 `protobuf:"bytes,3,opt,name=secret,proto3" json:"secret,omitempty"`               // Mã bí mật 2FA
+	QrCode        string                 `protobuf:"bytes,4,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"` // URL để hiển thị mã QR
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Enable2FAResponse) Reset() {
+	*x = Enable2FAResponse{}
+	mi := &file_game_auth_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Enable2FAResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Enable2FAResponse) ProtoMessage() {}
+
+func (x *Enable2FAResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*Enable2FAResponse) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *Enable2FAResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *Enable2FAResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *Enable2FAResponse) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+func (x *Enable2FAResponse) GetQrCode() string {
+	if x != nil {
+		return x.QrCode
+	}
+	return ""
+}
+
+type Verify2FARequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // Mã 6 số từ Google Authenticator hoặc Email
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Verify2FARequest) Reset() {
+	*x = Verify2FARequest{}
+	mi := &file_game_auth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Verify2FARequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Verify2FARequest) ProtoMessage() {}
+
+func (x *Verify2FARequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_auth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (*Verify2FARequest) Descriptor() ([]byte, []int) {
+	return file_game_auth_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Verify2FARequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+var File_game_auth_proto protoreflect.FileDescriptor
+
+const file_game_auth_proto_rawDesc = "" +
+	"\n" +
+	"\x0fgame_auth.proto\x12\x02pb\x1a\fcommon.proto\"_\n" +
+	"\x0fRegisterRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\"E\n" +
+	"\x10RegisterResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\"F\n" +
+	"\fLoginRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xc2\x01\n" +
+	"\rLoginResponse\x12$\n" +
+	"\x04base\x18\x06 \x01(\v2\x10.pb.BaseResponseR\x04base\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\x12\x14\n" +
+	"\x05token\x18\x03 \x01(\tR\x05token\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12)\n" +
+	"\tzone_list\x18\x05 \x01(\v2\f.pb.ZoneListR\bzoneList\"*\n" +
+	"\bZoneList\x12\x1e\n" +
+	"\x05zones\x18\x01 \x03(\v2\b.pb.ZoneR\x05zones\"l\n" +
+	"\x04Zone\x12\x17\n" +
+	"\azone_id\x18\x01 \x01(\x05R\x06zoneId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1f\n" +
+	"\vgateway_url\x18\x04 \x01(\tR\n" +
+	"gatewayUrl\"%\n" +
+	"\rLogoutRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"-\n" +
+	"\x15ForgetPasswordRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"a\n" +
+	"\x14ResetPasswordRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
+	"\x03otp\x18\x02 \x01(\tR\x03otp\x12!\n" +
+	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\"w\n" +
+	"\x11Enable2FAResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\x12\x16\n" +
+	"\x06secret\x18\x03 \x01(\tR\x06secret\x12\x17\n" +
+	"\aqr_code\x18\x04 \x01(\tR\x06qrCode\"&\n" +
+	"\x10Verify2FARequest\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code2\x87\x03\n" +
+	"\vAuthService\x125\n" +
+	"\bRegister\x12\x13.pb.RegisterRequest\x1a\x14.pb.RegisterResponse\x12,\n" +
+	"\x05Login\x12\x10.pb.LoginRequest\x1a\x11.pb.LoginResponse\x12-\n" +
+	"\x06Logout\x12\x11.pb.LogoutRequest\x1a\x10.pb.BaseResponse\x12=\n" +
+	"\x0eForgetPassword\x12\x19.pb.ForgetPasswordRequest\x1a\x10.pb.BaseResponse\x12;\n" +
+	"\rResetPassword\x12\x18.pb.ResetPasswordRequest\x1a\x10.pb.BaseResponse\x123\n" +
+	"\tEnable2FA\x12\x0f.pb.BaseRequest\x1a\x15.pb.Enable2FAResponse\x123\n" +
+	"\tVerify2FA\x12\x14.pb.Verify2FARequest\x1a\x10.pb.BaseResponseB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
+
+var (
+	file_game_auth_proto_rawDescOnce sync.Once
+	file_game_auth_proto_rawDescData []byte
+)
+
+func file_game_auth_proto_rawDescGZIP() []byte {
+	file_game_auth_proto_rawDescOnce.Do(func() {
+		file_game_auth_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_game_auth_proto_rawDesc), len(file_game_auth_proto_rawDesc)))
+	})
+	return file_game_auth_proto_rawDescData
+}
+
+var file_game_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_game_auth_proto_goTypes = []any{
+	(*RegisterRequest)(nil),       // 0: pb.RegisterRequest
+	(*RegisterResponse)(nil),      // 1: pb.RegisterResponse
+	(*LoginRequest)(nil),          // 2: pb.LoginRequest
+	(*LoginResponse)(nil),         // 3: pb.LoginResponse
+	(*ZoneList)(nil),              // 4: pb.ZoneList
+	(*Zone)(nil),                  // 5: pb.Zone
+	(*LogoutRequest)(nil),         // 6: pb.LogoutRequest
+	(*ForgetPasswordRequest)(nil), // 7: pb.ForgetPasswordRequest
+	(*ResetPasswordRequest)(nil),  // 8: pb.ResetPasswordRequest
+	(*Enable2FAResponse)(nil),     // 9: pb.Enable2FAResponse
+	(*Verify2FARequest)(nil),      // 10: pb.Verify2FARequest
+	(*BaseResponse)(nil),          // 11: pb.BaseResponse
+	(*BaseRequest)(nil),           // 12: pb.BaseRequest
+}
+var file_game_auth_proto_depIdxs = []int32{
+	11, // 0: pb.LoginResponse.base:type_name -> pb.BaseResponse
+	4,  // 1: pb.LoginResponse.zone_list:type_name -> pb.ZoneList
+	5,  // 2: pb.ZoneList.zones:type_name -> pb.Zone
+	0,  // 3: pb.AuthService.Register:input_type -> pb.RegisterRequest
+	2,  // 4: pb.AuthService.Login:input_type -> pb.LoginRequest
+	6,  // 5: pb.AuthService.Logout:input_type -> pb.LogoutRequest
+	7,  // 6: pb.AuthService.ForgetPassword:input_type -> pb.ForgetPasswordRequest
+	8,  // 7: pb.AuthService.ResetPassword:input_type -> pb.ResetPasswordRequest
+	12, // 8: pb.AuthService.Enable2FA:input_type -> pb.BaseRequest
+	10, // 9: pb.AuthService.Verify2FA:input_type -> pb.Verify2FARequest
+	1,  // 10: pb.AuthService.Register:output_type -> pb.RegisterResponse
+	3,  // 11: pb.AuthService.Login:output_type -> pb.LoginResponse
+	11, // 12: pb.AuthService.Logout:output_type -> pb.BaseResponse
+	11, // 13: pb.AuthService.ForgetPassword:output_type -> pb.BaseResponse
+	11, // 14: pb.AuthService.ResetPassword:output_type -> pb.BaseResponse
+	9,  // 15: pb.AuthService.Enable2FA:output_type -> pb.Enable2FAResponse
+	11, // 16: pb.AuthService.Verify2FA:output_type -> pb.BaseResponse
+	10, // [10:17] is the sub-list for method output_type
+	3,  // [3:10] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
+}
+
+func init() { file_game_auth_proto_init() }
+func file_game_auth_proto_init() {
+	if File_game_auth_proto != nil {
+		return
+	}
+	file_common_proto_init()
+	type x struct{}
+	out := protoimpl.TypeBuilder{
+		File: protoimpl.DescBuilder{
+			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_auth_proto_rawDesc), len(file_game_auth_proto_rawDesc)),
+			NumEnums:      0,
+			NumMessages:   11,
+			NumExtensions: 0,
+			NumServices:   1,
+		},
+		GoTypes:           file_game_auth_proto_goTypes,
+		DependencyIndexes: file_game_auth_proto_depIdxs,
+		MessageInfos:      file_game_auth_proto_msgTypes,
+	}.Build()
+	File_game_auth_proto = out.File
+	file_game_auth_proto_goTypes = nil
+	file_game_auth_proto_depIdxs = nil
+}

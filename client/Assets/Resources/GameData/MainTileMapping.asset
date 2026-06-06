@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a8dbf10e72f9d4ab4565059e8a4bd6, type: 3}
+  m_Name: MainTileMapping
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::GameClient.EditorTools.TileToIDMapping
+  buildingMappings:
+  - tile: {fileID: 11400000, guid: 0691b071c1982a74fb9ee11773b3293e, type: 2}
+    entityID: main_hall
+    defaultLevel: 1
+    defaultState: 0
+  itemMappings: []
+  groundMappings:
+  - tile: {fileID: 11400000, guid: 89f9daf79c2bb4c439d47bf0f6803125, type: 2}
+    entityID: grass_00
+    defaultLevel: 0
+    defaultState: 0
+  unbuildableTerrainTiles: []

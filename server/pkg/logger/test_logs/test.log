@@ -1,0 +1,16 @@
+2026-05-08T14:43:42.293+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-05-08T14:43:42.293+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-05-08T14:57:59.106+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-05-08T14:57:59.106+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-03T19:05:16.812+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-03T19:05:16.812+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-03T19:07:27.370+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-03T19:07:27.371+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-03T19:07:49.634+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-03T19:07:49.634+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-03T19:24:09.448+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-03T19:24:09.448+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-04T18:00:55.437+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-04T18:00:55.438+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-04T18:01:11.668+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-04T18:01:11.668+0700	[34mINFO[0m	logger/logger_test.go:32	test info message

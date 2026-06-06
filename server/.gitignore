@@ -1,0 +1,17 @@
+# Go Server Gitignore (Relative to server/ directory)
+
+/bin/
+/*.exe
+/*.exe~
+/*.dll
+/*.so
+/*.dylib
+/gateway
+/world-server
+/admin
+
+# Database & log files
+/logs/
+/*.log
+/db/data/
+/memory.json

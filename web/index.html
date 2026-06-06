@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Sect Origin | Nhất Đại Tông Môn</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Landing Page Section -->
+    <div id="landing-page">
+        <header class="hero">
+            <div class="hero-content">
+                <h1>The First Sect Origin</h1>
+                <p>Khám phá thế giới tu tiên huyền ảo, xây dựng tông môn của riêng bạn và trở thành đệ nhất thiên hạ.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" onclick="showLogin()">Chơi Ngay</button>
+                    <a href="#features" class="btn" style="color: white; border: 1px solid white; margin-left: 10px;">Khám Phá</a>
+                </div>
+            </div>
+        </header>
+
+        <section id="features" style="padding: 100px 20px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Tính Năng Đặc Sắc</h2>
+            <div class="grid-3" style="max-width: 1200px; margin: 0 auto;">
+                <div class="card">
+                    <img src="assets/sect_leader.png" style="width: 100%; border-radius: 10px; margin-bottom: 20px;" alt="Sect Leader">
+                    <h3>Xây Dựng Tông Môn</h3>
+                    <p>Quản lý tài nguyên, nâng cấp công trình và đào tạo đệ tử tài năng.</p>
+                </div>
+                <div class="card">
+                    <h3>Hệ Thống Gacha</h3>
+                    <p>Triệu hồi các anh hùng huyền thoại với sức mạnh vô song.</p>
+                </div>
+                <div class="card">
+                    <h3>Chiến Thuật Đỉnh Cao</h3>
+                    <p>Sắp xếp đội hình, khắc chế hệ tộc và chinh phục các thử thách.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Section (Hidden by default) -->
+    <div id="dashboard" class="dashboard-container" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-brand">SECT ORIGIN</div>
+            <nav>
+                <a href="#" class="nav-item active" onclick="showTab('overview')">Tổng Quan</a>
+                <a href="#" class="nav-item" onclick="showTab('recharge')">Nạp Thẻ</a>
+                <a href="#" class="nav-item" onclick="showTab('daily')"><i class="fas fa-calendar-check"></i> Điểm Danh</a>
+                <a href="#" class="nav-item" onclick="showTab('disciples')"><i class="fas fa-users"></i> Đệ Tử</a>
+                <a href="#" class="nav-item" onclick="showTab('account')"><i class="fas fa-user-cog"></i> Tài Khoản</a>
+            </nav>
+            <div style="margin-top: auto; padding: 20px;">
+                <button class="btn btn-primary" style="width: 100%;" onclick="logout()">Đăng Xuất</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <div id="tab-overview" class="tab-content">
+                <h2 style="margin-bottom: 30px;">Chào mừng, <span id="nickname-display">Chưởng Môn</span>! (<span id="username-display"></span>)</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Vàng</h3>
+                        <p id="gold-display" style="font-size: 2rem; color: var(--accent);">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Kim Cương</h3>
+                        <p id="diamond-display" style="font-size: 2rem; color: var(--cyan);">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Cấp Độ</h3>
+                        <p id="level-display" style="font-size: 2rem;">Level 1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recharge Tab -->
+            <div id="tab-recharge" class="tab-content" style="display: none;">
+                <h2>Nạp Thẻ Cào</h2>
+                <div class="card" style="max-width: 500px;">
+                    <div class="form-group">
+                        <label>Loại Thẻ</label>
+                        <select id="card-type">
+                            <option>Viettel</option>
+                            <option>Vinaphone</option>
+                            <option>Mobifone</option>
+                            <option>Zing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mệnh Giá</label>
+                        <select id="card-amount">
+                            <option value="10000">10,000 VNĐ</option>
+                            <option value="50000">50,000 VNĐ</option>
+                            <option value="100000">100,000 VNĐ</option>
+                            <option value="500000">500,000 VNĐ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã Thẻ</label>
+                        <input type="text" placeholder="Nhập mã thẻ">
+                    </div>
+                    <div class="form-group">
+                        <label>Số Seri</label>
+                        <input type="text" placeholder="Nhập số seri">
+                    </div>
+                    <button class="btn btn-primary" onclick="processRecharge()">Nạp Ngay</button>
+                </div>
+            </div>
+
+            <!-- Daily Tab -->
+            <div id="tab-daily" class="tab-content" style="display: none;">
+                <h2>Điểm Danh Hằng Ngày</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Điểm danh liên tục 7 ngày để nhận quà lớn!</p>
+                <div class="card">
+                    <div class="daily-grid">
+                        <div class="daily-day" onclick="claimDaily(1)">Ngày 1<span>+100 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(2)">Ngày 2<span>+500 Vàng</span></div>
+                        <div class="daily-day" onclick="claimDaily(3)">Ngày 3<span>+200 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(4)">Ngày 4<span>+50 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(5)">Ngày 5<span>+1000 Vàng</span></div>
+                        <div class="daily-day" onclick="claimDaily(6)">Ngày 6<span>+300 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(7)">Ngày 7<span>+1000 Kim Cương</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disciples Tab -->
+            <div id="tab-disciples" class="tab-content" style="display: none;">
+                <h2>Danh Sách Đệ Tử</h2>
+                <div id="disciples-list" class="grid-3">
+                    <!-- Sẽ được render bằng JS -->
+                </div>
+            </div>
+
+            <!-- Account Tab -->
+            <div id="tab-account" class="tab-content" style="display: none;">
+                <h2>Quản Lý Tài Khoản</h2>
+                <div class="card" style="max-width: 500px;">
+                    <h3>Đổi Mật Khẩu</h3>
+                    <div class="form-group">
+                        <label>Mật Khẩu Hiện Tại</label>
+                        <input type="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật Khẩu Mới</label>
+                        <input type="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Xác Nhận Mật Khẩu</label>
+                        <input type="password">
+                    </div>
+                    <button class="btn btn-primary">Cập Nhật</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 20px;">Đăng Nhập</h2>
+            <div class="form-group">
+                <label>Tên Đăng Nhập</label>
+                <input type="text" id="login-username">
+            </div>
+            <div class="form-group">
+                <label>Mật Khẩu</label>
+                <input type="password" id="login-password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="login()">Vào Game</button>
+            <p style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--text-muted);">Chưa có tài khoản? <a href="#" style="color: var(--accent);">Đăng ký ngay</a></p>
+        </div>
+    </div>
+
+    <!-- 18+ Popup -->
+    <div id="age-modal" class="modal" style="display: flex;">
+        <div class="modal-content" style="text-align: center;">
+            <h2 style="color: #ff4444; margin-bottom: 20px;">CẢNH BÁO 18+</h2>
+            <p style="margin-bottom: 30px; color: #fff;">Trò chơi có các yếu tố bạo lực và hình ảnh không dành cho người dưới 18 tuổi. Bạn đã đủ 18 tuổi chưa?</p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="acceptAge()">Tôi Đã 18+</button>
+                <button class="btn" style="flex: 1; background: #444; color: white;" onclick="window.location.href='https://google.com'">Rời Khỏi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Interaction Circle -->
+    <div id="floating-assistant" class="floating-circle" onclick="toggleAssistant()">
+        <i class="fas fa-comment-dots"></i>
+        <div id="assistant-bubble" class="bubble">Chào bạn! Tôi có thể giúp gì cho Chưởng Môn?</div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

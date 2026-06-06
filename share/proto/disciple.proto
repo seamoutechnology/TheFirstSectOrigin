@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message Disciple {
+  int64 id = 1;
+  string disciple_code = 2;
+  string name = 3;
+  string rarity = 4; // Đổi lại thành string cho khớp "UR", "SSR"...
+  int32 level = 5;
+  int32 star = 6;
+  int64 exp = 7;
+  int32 hp = 8;
+  int32 atk = 9;
+  int32 def = 10;
+  repeated string traits = 11;
+  repeated string skills = 12;
+}
+
+message Hero {
+  int64 id = 1;
+  string name = 2;
+  int32 level = 3;
+  string rarity = 4; // Đổi lại thành string
+  int64 power = 5;
+  int32 star = 6; // C# đang tìm .Star
+}
+
+message FormationSlot {
+  int32 position = 1;      // C# đang tìm .Position
+  int64 player_hero_id = 2; // C# đang tìm .PlayerHeroId
+  bool is_locked = 3;
+}
+
+message Formation {
+  string name = 1;
+  repeated FormationSlot slots = 2;
+}
+
+message GetDisciplesRequest {}
+message GetDisciplesResponse {
+  BaseResponse base = 1;
+  repeated Disciple disciples = 2;
+}
+
+message GetHeroesRequest {}
+message GetHeroesResponse {
+  BaseResponse base = 1;      // C# đang tìm .Base
+  repeated Hero heroes = 2;   // C# đang tìm .Heroes
+}
+
+message SetFormationRequest {
+  repeated FormationSlot slots = 1; // C# đang tìm .Slots trực tiếp ở Request
+}
+
+message SetFormationResponse {
+  BaseResponse base = 1;
+}
+
+message LevelUpDiscipleRequest {
+  int64 disciple_id = 1;
+  int32 consume_items_count = 2;
+}
+
+message LevelUpDiscipleResponse {
+  BaseResponse base = 1;
+  Disciple disciple = 2;
+}
+
+message LevelUpHeroRequest {
+  int64 hero_id = 1;
+}
+
+message LevelUpHeroResponse {
+  BaseResponse base = 1;
+  Hero hero = 2;
+}

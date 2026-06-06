@@ -1,0 +1,28 @@
+<panel name="AccountDashboard" width="600" height="800" background="0.1, 0.1, 0.1, 0.9" border="2" borderColor="0.9, 0.5, 0.1, 1">
+    <header height="60" background="0.2, 0.2, 0.2, 1">
+        <text content="QUẢN LÝ TÀI KHOẢN" size="24" color="1, 1, 1, 1" align="center"/>
+        <button name="btnClose" width="40" height="40" align="right" content="X" color="1, 0, 0, 1"/>
+    </header>
+
+    <content padding="20">
+        <!-- Phần thông tin fetch từ Web -->
+        <group name="userInfo" height="150">
+            <text name="txtUserName" content="Đang tải..." size="20" color="0.8, 0.8, 0.8, 1"/>
+            <text name="txtUserLevel" content="Cấp độ: --" size="18" color="0.6, 0.6, 0.6, 1"/>
+            <text name="txtSectName" content="Tông môn: --" size="18" color="0.6, 0.6, 0.6, 1"/>
+        </group>
+
+        <divider height="2" color="0.3, 0.3, 0.3, 1"/>
+
+        <!-- Phần tính năng -->
+        <group name="actions" spacing="10">
+            <button name="btnRedeem" width="full" height="50" content="NHẬP REDEEM CODE" background="0.9, 0.4, 0, 1"/>
+            <button name="btnHistory" width="full" height="50" content="LỊCH SỬ GIAO DỊCH" background="0.2, 0.5, 0.8, 1"/>
+            <button name="btnSupport" width="full" height="50" content="HỖ TRỢ KHÁCH HÀNG" background="0.2, 0.6, 0.2, 1"/>
+        </group>
+    </content>
+
+    <footer height="40">
+        <text content="Sect Origin v1.0.0" size="14" color="0.4, 0.4, 0.4, 1" align="center"/>
+    </footer>
+</panel>

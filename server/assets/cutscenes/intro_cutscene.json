@@ -1,0 +1,120 @@
+{
+    "cutsceneId": "intro_cutscene",
+    "entities": [
+        {
+            "id": "MockBird",
+            "prefabPath": "Primitive:Sphere",
+            "startPos": { "x": -10.0, "y": 10.0, "z": 0.0 }
+        },
+        {
+            "id": "MockCharacter",
+            "prefabPath": "Primitive:Capsule",
+            "startPos": { "x": -10.0, "y": 10.0, "z": 0.0 }
+        }
+    ],
+    "nodeLinks": [
+        { "baseNodeGuid": "entry_node", "portName": "Next", "targetNodeGuid": "move_bird_in" },
+        { "baseNodeGuid": "entry_node", "portName": "Next", "targetNodeGuid": "cam_move_1" },
+        
+        { "baseNodeGuid": "move_bird_in", "portName": "Next", "targetNodeGuid": "unparent_char" },
+        
+        { "baseNodeGuid": "unparent_char", "portName": "Next", "targetNodeGuid": "move_char_down" },
+        { "baseNodeGuid": "unparent_char", "portName": "Next", "targetNodeGuid": "move_bird_out" },
+        
+        { "baseNodeGuid": "move_char_down", "portName": "Next", "targetNodeGuid": "cam_shake_1" },
+        { "baseNodeGuid": "move_char_down", "portName": "Next", "targetNodeGuid": "sound_thud" },
+        
+        { "baseNodeGuid": "cam_shake_1", "portName": "Next", "targetNodeGuid": "wait_1" },
+        { "baseNodeGuid": "wait_1", "portName": "Next", "targetNodeGuid": "dialogue_1" },
+        { "baseNodeGuid": "dialogue_1", "portName": "Next", "targetNodeGuid": "dialogue_2" },
+        { "baseNodeGuid": "dialogue_2", "portName": "Next", "targetNodeGuid": "open_ui" }
+    ],
+    "nodes": [
+        {
+            "guid": "entry_node",
+            "type": 0,
+            "position": { "x": 100.0, "y": 100.0 }
+        },
+        {
+            "guid": "move_bird_in",
+            "type": 1,
+            "position": { "x": 300.0, "y": 50.0 },
+            "targetEntityId": "MockBird",
+            "targetPos": { "x": 0.0, "y": 5.0, "z": 0.0 },
+            "duration": 2.0,
+            "easeType": "InOutQuad"
+        },
+        {
+            "guid": "cam_move_1",
+            "type": 6,
+            "position": { "x": 300.0, "y": 200.0 },
+            "targetPos": { "x": 0.0, "y": 5.0, "z": -10.0 },
+            "duration": 2.0,
+            "easeType": "InOutQuad"
+        },
+        {
+            "guid": "unparent_char",
+            "type": 3,
+            "position": { "x": 550.0, "y": 50.0 },
+            "targetEntityId": "MockCharacter"
+        },
+        {
+            "guid": "move_char_down",
+            "type": 1,
+            "position": { "x": 750.0, "y": 0.0 },
+            "targetEntityId": "MockCharacter",
+            "targetPos": { "x": 0.0, "y": 0.0, "z": 0.0 },
+            "duration": 0.5,
+            "easeType": "InQuad"
+        },
+        {
+            "guid": "move_bird_out",
+            "type": 1,
+            "position": { "x": 750.0, "y": 150.0 },
+            "targetEntityId": "MockBird",
+            "targetPos": { "x": 15.0, "y": 12.0, "z": 0.0 },
+            "duration": 2.5,
+            "easeType": "InOutQuad"
+        },
+        {
+            "guid": "sound_thud",
+            "type": 8,
+            "position": { "x": 950.0, "y": 100.0 },
+            "audioKey": "SFX_UI_Click"
+        },
+        {
+            "guid": "cam_shake_1",
+            "type": 7,
+            "position": { "x": 950.0, "y": 0.0 },
+            "duration": 0.5,
+            "shakeStrength": 0.5,
+            "shakeVibrato": 10
+        },
+        {
+            "guid": "wait_1",
+            "type": 2,
+            "position": { "x": 1150.0, "y": 0.0 },
+            "duration": 1.0
+        },
+        {
+            "guid": "dialogue_1",
+            "type": 4,
+            "position": { "x": 1350.0, "y": 0.0 },
+            "dialogueTable": "GameTexts",
+            "dialogueKey": "DLG_INTRO_01"
+        },
+        {
+            "guid": "dialogue_2",
+            "type": 4,
+            "position": { "x": 1550.0, "y": 0.0 },
+            "dialogueTable": "GameTexts",
+            "dialogueKey": "DLG_INTRO_02"
+        },
+        {
+            "guid": "open_ui",
+            "type": 5,
+            "position": { "x": 1750.0, "y": 0.0 },
+            "panelName": "MainPanel"
+        }
+    ]
+}

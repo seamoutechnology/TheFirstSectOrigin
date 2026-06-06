@@ -1,0 +1,35 @@
+name: Go Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'server/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'server/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+
+    - name: Build Gateway
+      run: go build -v ./cmd/gateway
+
+    - name: Build Admin
+      run: go build -v ./cmd/admin
+
+    - name: Run Tests
+      run: go test -v ./...

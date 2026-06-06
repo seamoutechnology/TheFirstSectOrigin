@@ -1,0 +1,19 @@
+<Layout name="ResponsiveLayout">
+    <!-- Panel nền chiếm toàn bộ màn hình (Stretch) -->
+    <Panel name="Background" anchorMin="0,0" anchorMax="1,1" position="0,0" size="0,0" color="#2C3E50">
+        
+        <!-- Header bám lên đỉnh màn hình -->
+        <Panel name="Header" anchorMin="0,1" anchorMax="1,1" pivot="0.5,1" position="0,0" size="0,100" style="HeaderBar">
+            <Text name="Title" content="HỆ THỐNG PHÂN TRANH" anchorMin="0.5,0.5" anchorMax="0.5,0.5" style="TitleText" />
+        </Panel>
+
+        <!-- Nút Back bám góc trên bên trái -->
+        <Button name="BtnBack" text="Quay lại" anchorMin="0,1" anchorMax="0,1" pivot="0,1" position="20,-20" size="150,60" style="SecondaryButton" />
+
+        <!-- Menu bám góc dưới bên phải -->
+        <Panel name="BottomMenu" anchorMin="1,0" anchorMax="1,0" pivot="1,0" position="-20,20" size="400,80">
+            <Button name="BtnConfirm" text="XÁC NHẬN" anchorMin="0,0" anchorMax="1,1" position="0,0" size="0,0" style="PrimaryButton" />
+        </Panel>
+
+    </Panel>
+</Layout>

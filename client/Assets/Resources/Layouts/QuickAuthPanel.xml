@@ -1,0 +1,14 @@
+<panel name="QuickAuthPanel" width="500" height="400" background="0, 0, 0, 0.7" border="2" borderColor="0.9, 0.5, 0.1, 1">
+    <content padding="60" spacing="30">
+        <!-- Text chào mừng -->
+        <text name="txtWelcome" content="Chào mừng đạo hữu trở lại,\n..." size="24" color="1, 1, 1, 1" align="center" style="bold"/>
+        
+        <spacer height="20"/>
+
+        <!-- Nút Vào Game chính -->
+        <button name="btnEnterGame" width="full" height="80" content="VÀO GAME" background="0.9, 0.4, 0, 1"/>
+        
+        <!-- Nút Đăng xuất -->
+        <button name="btnLogout" content="Đăng xuất / Đổi tài khoản" background="clear" color="0.6, 0.6, 0.6, 1" align="center"/>
+    </content>
+</panel>

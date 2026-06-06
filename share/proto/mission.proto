@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+// --- Mission System ---
+
+enum MissionType {
+  DAILY = 0;
+  MAIN = 1;
+  SIDE = 2;
+  SECT = 3; // Nhiệm vụ tông môn
+}
+
+enum MissionStatus {
+  LOCKED = 0;
+  AVAILABLE = 1;
+  IN_PROGRESS = 2;
+  COMPLETED = 3;
+  REWARDED = 4;
+}
+
+message Mission {
+  int32 mission_id = 1;
+  string title = 2;
+  string description = 3;
+  MissionType type = 4;
+  MissionStatus status = 5;
+  int32 current_progress = 6;
+  int32 target_progress = 7;
+  map<string, int32> rewards = 8; // item_code -> quantity
+}
+
+message GetMissionsRequest {
+  MissionType filter_type = 1;
+}
+
+message GetMissionsResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated Mission missions = 3;
+}
+
+message CompleteMissionRequest {
+  int32 mission_id = 1;
+}
+
+message CompleteMissionResponse {
+  int32 code = 1;
+  string message_id = 2;
+  map<string, int32> rewards = 3;
+}
+
+message CheckInDailyRequest {
+}
+
+message CheckInDailyResponse {
+  int32 code = 1;
+  string message_id = 2;
+}
+
+message ClaimMissionRewardRequest {
+  int32 mission_id = 1;
+}
+
+message ClaimMissionRewardResponse {
+  int32 code = 1;
+  string message_id = 2;
+}

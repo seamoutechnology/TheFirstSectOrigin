@@ -1,0 +1,19 @@
+{
+    "msg_success": "Thành công",
+    "msg_register_success": "Đăng ký tài khoản thành công",
+    "msg_login_success": "Đăng nhập thành công",
+    "msg_logout_success": "Đã đăng xuất khỏi hệ thống",
+    "msg_logout_failed": "Đăng xuất thất bại",
+    "msg_forget_password_sent": "Mã xác thực đã được gửi tới Email của bạn",
+    "msg_reset_password_success": "Đặt lại mật khẩu thành công",
+    "msg_2fa_verified": "Xác thực 2FA thành công",
+    "msg_create_player_success": "Khởi tạo nhân vật thành công",
+    "msg_alliance_joined": "Đã gia nhập liên minh tông môn",
+    "msg_levelup_success": "Thăng cấp thành công",
+    "msg_gacha_success": "Chiêu mộ đệ tử thành công",
+    "msg_equip_success": "Trang bị vật phẩm thành công",
+    "msg_craft_success": "Chế tạo vật phẩm hoàn tất",
+    "msg_mission_completed": "Đã hoàn thành nhiệm vụ và nhận thưởng",
+    "error_internal": "Lỗi hệ thống, vui lòng thử lại sau",
+    "error_unauthorized": "Phiên đăng nhập hết hạn hoặc không hợp lệ"
+}

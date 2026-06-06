@@ -1,0 +1,206 @@
+// UI State Management
+function showLogin() {
+    document.getElementById('login-modal').style.display = 'flex';
+}
+
+// Persistence Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const userId = localStorage.getItem('user_id');
+    const username = localStorage.getItem('username');
+    
+    if (userId && username) {
+        document.getElementById('username-display').innerText = username;
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'grid';
+        fetchProfile(userId);
+    }
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    let modal = document.getElementById('login-modal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+async function login() {
+    const user = document.getElementById('login-username').value;
+    const pass = document.getElementById('login-password').value;
+    
+    if (!user || !pass) {
+        alert('Vui lòng nhập tên đăng nhập và mật khẩu');
+        return;
+    }
+
+    try {
+        const resp = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: user, password: pass })
+        });
+
+        const result = await resp.json();
+        if (result.code === 0) {
+            localStorage.setItem('user_id', result.user_id);
+            localStorage.setItem('username', result.username);
+            
+            document.getElementById('username-display').innerText = result.username;
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'grid';
+            document.getElementById('login-modal').style.display = 'none';
+            
+            // Load profile data
+            fetchProfile(result.user_id);
+        } else {
+            alert(result.message || 'Đăng nhập thất bại');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Lỗi kết nối đến server');
+    }
+}
+
+async function fetchProfile(userId) {
+    try {
+        const resp = await fetch(`/api/profile?user_id=${userId}`);
+        const result = await resp.json();
+        if (result.code === 0) {
+            const data = result.data;
+            document.getElementById('nickname-display').innerText = data.nickname;
+            document.getElementById('gold-display').innerText = data.gold.toLocaleString();
+            document.getElementById('diamond-display').innerText = data.diamond.toLocaleString();
+            document.getElementById('level-display').innerText = `Level ${data.level}`;
+
+            // Hiển thị các ngày đã điểm danh
+            if (data.claimed_days) {
+                const dailyGrid = document.querySelector('.daily-grid');
+                if (dailyGrid) {
+                    const days = dailyGrid.querySelectorAll('.daily-day');
+                    // Reset trạng thái
+                    days.forEach(el => el.classList.remove('claimed'));
+                    
+                    // Đánh dấu đã nhận
+                    data.claimed_days.forEach(day => {
+                        if (days[day-1]) {
+                            days[day-1].classList.add('claimed');
+                            days[day-1].removeAttribute('onclick'); // Vô hiệu hóa click
+                        }
+                    });
+                }
+            }
+        }
+    } catch (err) {
+        console.error('Failed to fetch profile', err);
+    }
+}
+
+function logout() {
+    localStorage.clear();
+    document.getElementById('landing-page').style.display = 'block';
+    document.getElementById('dashboard').style.display = 'none';
+}
+
+function showTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    
+    // Deactivate all nav items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // Show selected tab
+    document.getElementById(`tab-${tabName}`).style.display = 'block';
+    
+    // Activate nav item
+    event.currentTarget.classList.add('active');
+}
+
+function processRecharge() {
+    const type = document.getElementById('card-type').value;
+    const amount = document.getElementById('card-amount').value;
+    alert(`Đang xử lý nạp thẻ ${type} mệnh giá ${amount} VNĐ...`);
+    setTimeout(() => {
+        alert('Gửi thẻ thành công! Vui lòng chờ hệ thống kiểm tra.');
+    }, 1000);
+}
+
+async function claimDaily(day) {
+    const el = event.currentTarget;
+    if (el.classList.contains('claimed')) return;
+
+    const userId = localStorage.getItem('user_id');
+    try {
+        const resp = await fetch('/api/claim-daily', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: parseInt(userId), day: day })
+        });
+
+        const result = await resp.json();
+        if (result.code === 0) {
+            el.classList.add('claimed');
+            alert(`Nhận quà thành công! +${result.added_gold} Vàng, +${result.added_diamond} Kim Cương`);
+            fetchProfile(userId); // Cập nhật lại số dư hiển thị
+        } else {
+            alert(result.message || 'Lỗi khi nhận quà');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Lỗi kết nối đến server');
+    }
+}
+
+// 18+ Logic
+function acceptAge() {
+    document.getElementById('age-modal').style.display = 'none';
+    localStorage.setItem('age_verified', 'true');
+}
+
+// Assistant Logic
+function toggleAssistant() {
+    const bubble = document.getElementById('assistant-bubble');
+    bubble.classList.toggle('show');
+}
+
+// Disciples Logic
+const mockDisciples = [
+    { name: 'Lâm Phàm', rarity: 'SSR', level: 50, img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=LamPham' },
+    { name: 'Tiêu Viêm', rarity: 'SR', level: 45, img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=TieuViem' },
+    { name: 'Hàn Lập', rarity: 'SR', level: 42, img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=HanLap' },
+    { name: 'Thạch Hạo', rarity: 'SSR', level: 55, img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ThachHao' }
+];
+
+function renderDisciples() {
+    const list = document.getElementById('disciples-list');
+    if (!list) return;
+    
+    list.innerHTML = mockDisciples.map(d => `
+        <div class="card disciple-card">
+            <img src="${d.img}" class="rarity-${d.rarity.toLowerCase()}">
+            <h3>${d.name} <span class="badge badge-${d.rarity.toLowerCase()}">${d.rarity}</span></h3>
+            <p>Cấp độ: ${d.level}</p>
+            <button class="btn btn-primary" style="margin-top: 10px; padding: 8px 20px;">Truyền Công</button>
+        </div>
+    `).join('');
+}
+
+// Update showTab to render disciples
+const originalShowTab = showTab;
+showTab = function(tabName) {
+    originalShowTab(tabName);
+    if (tabName === 'disciples') {
+        renderDisciples();
+    }
+}
+
+// Check age on load
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('age_verified') === 'true') {
+        document.getElementById('age-modal').style.display = 'none';
+    }
+    // ... các logic load profile khác
+});

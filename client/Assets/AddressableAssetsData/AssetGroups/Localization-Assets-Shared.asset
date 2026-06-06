@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: 694bcf19e10b5c949b6a077606194d20
+  m_SerializeEntries:
+  - m_GUID: 1e973c9f23aa1fd49a43190086660c0e
+    m_Address: Assets/Resources/Localization/Sound/SFX Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 305885ddfc24ae84eaa23e96c55a86a0
+    m_Address: Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59fab092d3d1bb3479afd498a6ecbf60
+    m_Address: Assets/Resources/Localization/Sound/Voiceline Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f7df58d3cbbb454e8d13c5f59a887ee
+    m_Address: Assets/Resources/Localization/Table/Server_Notice Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70a4cccc8798ddc4397f9ec8757200cd
+    m_Address: Assets/Resources/Localization/Table/Story_Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 713b36c46353dfd43b6855049df6fab8
+    m_Address: sfx_eagle_01
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    - Locale-vi-VN
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ae05fd13e83d0d489e1c24e94deb397
+    m_Address: Assets/Resources/Localization/Table/UI_System Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3a311264348b25498c65bce5db5b2b3
+    m_Address: Assets/Resources/Localization/Table/Hero_Data Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea25558a67f1a874b9ce14db534fdf34
+    m_Address: Assets/Resources/Localization/Table/Item_Equipment Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efbbfcc825db22f49839f196f21ae951
+    m_Address: Assets/Resources/Localization/Table/Skill_Description Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f34ceaabed53ad34f9587d2b5a37c371
+    m_Address: Assets/Resources/Localization/UI/UI Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: d726b90984105d64c953ec97e12ab452, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bba08e198a5a0ca4cba987004a09e148, type: 2}
+    - {fileID: 11400000, guid: 3c47a1533e0c924408ddd06a58ebdcca, type: 2}
