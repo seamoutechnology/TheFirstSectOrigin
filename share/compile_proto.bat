@@ -17,6 +17,6 @@ if not exist "%GO_OUT%" mkdir "%GO_OUT%"
 if not exist "%CSHARP_OUT%" mkdir "%CSHARP_OUT%"
 
 :: Lệnh compile
-protoc -I=%PROTO_DIR% --go_out=%GO_OUT% --go-grpc_out=%GO_OUT% --csharp_out=%CSHARP_OUT% %PROTO_DIR%\*.proto
+protoc -I=%PROTO_DIR% --go_out=%GO_OUT% --go-grpc_out=%GO_OUT% --csharp_out=%CSHARP_OUT% --grpc_out=%CSHARP_OUT% --plugin=protoc-gen-grpc=..\tools\Grpc.Tools.2.62.0\tools\windows_x64\grpc_csharp_plugin.exe %PROTO_DIR%\*.proto
 
 echo Done!

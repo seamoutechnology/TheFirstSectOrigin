@@ -10,18 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81402449d5f62414283bfac7ecf671d6, type: 3}
-  m_Name: MainHall_Visuals
+  m_Name: main_hall_visuals
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingVisualConfig
   buildingID: main_hall
   constructionVFXPrefab: {fileID: 0}
   workingVFXPrefab: {fileID: 0}
   levelVisuals:
   - level: 1
-    normalSprite: {fileID: -2901251797684614939, guid: b3548defeccd98c49a1f092a8cb950a6, type: 3}
-    ghostSprite: {fileID: -8240465641217246862, guid: e3f4dfca93f9a9640b0ac347f14e7172, type: 3}
-    buildingSprite: {fileID: -418684068398674442, guid: 9950b118db91bbf4f97940e3b6ab034b, type: 3}
-    upgradingSprite: {fileID: -1680227802826194303, guid: 64e342fb1fd48cd4b9afd9ac23205531, type: 3}
-    brokenSprite: {fileID: 8010340653987986000, guid: 0af3c20fa3434ac4e9160e0aadb604f3, type: 3}
-    lockedSprite: {fileID: -5805158537250167122, guid: d2dbe04464f12234f9f0ab3f1cadb6ee, type: 3}
+    normalSprite: {fileID: 21300000, guid: b3548defeccd98c49a1f092a8cb950a6, type: 3}
+    ghostSprite: {fileID: 21300000, guid: e3f4dfca93f9a9640b0ac347f14e7172, type: 3}
+    buildingSprite: {fileID: 21300000, guid: 9950b118db91bbf4f97940e3b6ab034b, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: 64e342fb1fd48cd4b9afd9ac23205531, type: 3}
+    brokenSprite: {fileID: 21300000, guid: 0af3c20fa3434ac4e9160e0aadb604f3, type: 3}
+    lockedSprite: {fileID: 21300000, guid: d2dbe04464f12234f9f0ab3f1cadb6ee, type: 3}
+    producingSprite: {fileID: 0}
+    readyToHarvestSprite: {fileID: 0}
+  - level: 3
+    normalSprite: {fileID: 21300000, guid: a48b7e3af07a21b4c93c35d6686d001d, type: 3}
+    ghostSprite: {fileID: 21300000, guid: bcc683367a22b1c4c80dad8d610ee4c0, type: 3}
+    buildingSprite: {fileID: 21300000, guid: 457ba8fd6859ea844963848d22b4771b, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: 1063063c8e342fe46a0ec1bc7fbbfe09, type: 3}
+    brokenSprite: {fileID: 21300000, guid: 280101ec5b26eff49baad4fd41ac1ab0, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 08b0e4a4c5d7460419a35136aae0d91e, type: 3}
     producingSprite: {fileID: 0}
     readyToHarvestSprite: {fileID: 0}

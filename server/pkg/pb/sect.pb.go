@@ -30,6 +30,7 @@ type Building struct {
 	LastCollectAt int64                  `protobuf:"varint,5,opt,name=last_collect_at,json=lastCollectAt,proto3" json:"last_collect_at,omitempty"`
 	PendingGold   int64                  `protobuf:"varint,6,opt,name=pending_gold,json=pendingGold,proto3" json:"pending_gold,omitempty"`
 	MaxLevel      int32                  `protobuf:"varint,7,opt,name=max_level,json=maxLevel,proto3" json:"max_level,omitempty"`
+	InstanceId    int64                  `protobuf:"varint,8,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,6 +110,13 @@ func (x *Building) GetPendingGold() int64 {
 func (x *Building) GetMaxLevel() int32 {
 	if x != nil {
 		return x.MaxLevel
+	}
+	return 0
+}
+
+func (x *Building) GetInstanceId() int64 {
+	if x != nil {
+		return x.InstanceId
 	}
 	return 0
 }
@@ -245,6 +253,7 @@ func (x *SectInfo) GetAlignment() *AlignmentInfo {
 type UpgradeBuildingRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BuildingCode  string                 `protobuf:"bytes,1,opt,name=building_code,json=buildingCode,proto3" json:"building_code,omitempty"`
+	InstanceId    int64                  `protobuf:"varint,2,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -286,9 +295,17 @@ func (x *UpgradeBuildingRequest) GetBuildingCode() string {
 	return ""
 }
 
+func (x *UpgradeBuildingRequest) GetInstanceId() int64 {
+	if x != nil {
+		return x.InstanceId
+	}
+	return 0
+}
+
 type CollectResourcesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BuildingCode  string                 `protobuf:"bytes,1,opt,name=building_code,json=buildingCode,proto3" json:"building_code,omitempty"` // Thêm mã công trình
+	InstanceId    int64                  `protobuf:"varint,2,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -328,6 +345,13 @@ func (x *CollectResourcesRequest) GetBuildingCode() string {
 		return x.BuildingCode
 	}
 	return ""
+}
+
+func (x *CollectResourcesRequest) GetInstanceId() int64 {
+	if x != nil {
+		return x.InstanceId
+	}
+	return 0
 }
 
 type SaveAdminMapRequest struct {
@@ -678,12 +702,212 @@ func (x *CollectResourcesResponse) GetResources() map[string]int64 {
 	return nil
 }
 
+type SavePlayerMapRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MapJsonData   string                 `protobuf:"bytes,1,opt,name=map_json_data,json=mapJsonData,proto3" json:"map_json_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SavePlayerMapRequest) Reset() {
+	*x = SavePlayerMapRequest{}
+	mi := &file_sect_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SavePlayerMapRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SavePlayerMapRequest) ProtoMessage() {}
+
+func (x *SavePlayerMapRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sect_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SavePlayerMapRequest.ProtoReflect.Descriptor instead.
+func (*SavePlayerMapRequest) Descriptor() ([]byte, []int) {
+	return file_sect_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SavePlayerMapRequest) GetMapJsonData() string {
+	if x != nil {
+		return x.MapJsonData
+	}
+	return ""
+}
+
+type SavePlayerMapResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Base          *BaseResponse          `protobuf:"bytes,1,opt,name=base,proto3" json:"base,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SavePlayerMapResponse) Reset() {
+	*x = SavePlayerMapResponse{}
+	mi := &file_sect_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SavePlayerMapResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SavePlayerMapResponse) ProtoMessage() {}
+
+func (x *SavePlayerMapResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sect_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SavePlayerMapResponse.ProtoReflect.Descriptor instead.
+func (*SavePlayerMapResponse) Descriptor() ([]byte, []int) {
+	return file_sect_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SavePlayerMapResponse) GetBase() *BaseResponse {
+	if x != nil {
+		return x.Base
+	}
+	return nil
+}
+
+type SpeedUpBuildingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BuildingCode  string                 `protobuf:"bytes,1,opt,name=building_code,json=buildingCode,proto3" json:"building_code,omitempty"`
+	InstanceId    int64                  `protobuf:"varint,2,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpeedUpBuildingRequest) Reset() {
+	*x = SpeedUpBuildingRequest{}
+	mi := &file_sect_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpeedUpBuildingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpeedUpBuildingRequest) ProtoMessage() {}
+
+func (x *SpeedUpBuildingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sect_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpeedUpBuildingRequest.ProtoReflect.Descriptor instead.
+func (*SpeedUpBuildingRequest) Descriptor() ([]byte, []int) {
+	return file_sect_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SpeedUpBuildingRequest) GetBuildingCode() string {
+	if x != nil {
+		return x.BuildingCode
+	}
+	return ""
+}
+
+func (x *SpeedUpBuildingRequest) GetInstanceId() int64 {
+	if x != nil {
+		return x.InstanceId
+	}
+	return 0
+}
+
+type SpeedUpBuildingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Base          *BaseResponse          `protobuf:"bytes,1,opt,name=base,proto3" json:"base,omitempty"`
+	Building      *Building              `protobuf:"bytes,2,opt,name=building,proto3" json:"building,omitempty"`
+	Player        *PlayerProfile         `protobuf:"bytes,3,opt,name=player,proto3" json:"player,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpeedUpBuildingResponse) Reset() {
+	*x = SpeedUpBuildingResponse{}
+	mi := &file_sect_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpeedUpBuildingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpeedUpBuildingResponse) ProtoMessage() {}
+
+func (x *SpeedUpBuildingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sect_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpeedUpBuildingResponse.ProtoReflect.Descriptor instead.
+func (*SpeedUpBuildingResponse) Descriptor() ([]byte, []int) {
+	return file_sect_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SpeedUpBuildingResponse) GetBase() *BaseResponse {
+	if x != nil {
+		return x.Base
+	}
+	return nil
+}
+
+func (x *SpeedUpBuildingResponse) GetBuilding() *Building {
+	if x != nil {
+		return x.Building
+	}
+	return nil
+}
+
+func (x *SpeedUpBuildingResponse) GetPlayer() *PlayerProfile {
+	if x != nil {
+		return x.Player
+	}
+	return nil
+}
+
 var File_sect_proto protoreflect.FileDescriptor
 
 const file_sect_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"sect.proto\x12\x02pb\x1a\fcommon.proto\x1a\fplayer.proto\"\xe7\x01\n" +
+	"sect.proto\x12\x02pb\x1a\fcommon.proto\x1a\fplayer.proto\"\x88\x02\n" +
 	"\bBuilding\x12#\n" +
 	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -691,7 +915,9 @@ const file_sect_proto_rawDesc = "" +
 	"\x0eupgrade_end_at\x18\x04 \x01(\x03R\fupgradeEndAt\x12&\n" +
 	"\x0flast_collect_at\x18\x05 \x01(\x03R\rlastCollectAt\x12!\n" +
 	"\fpending_gold\x18\x06 \x01(\x03R\vpendingGold\x12\x1b\n" +
-	"\tmax_level\x18\a \x01(\x05R\bmaxLevel\"u\n" +
+	"\tmax_level\x18\a \x01(\x05R\bmaxLevel\x12\x1f\n" +
+	"\vinstance_id\x18\b \x01(\x03R\n" +
+	"instanceId\"u\n" +
 	"\rAlignmentInfo\x12+\n" +
 	"\x11current_alignment\x18\x01 \x01(\x05R\x10currentAlignment\x12!\n" +
 	"\fkarma_points\x18\x02 \x01(\x05R\vkarmaPoints\x12\x14\n" +
@@ -700,11 +926,15 @@ const file_sect_proto_rawDesc = "" +
 	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\x12\x1b\n" +
 	"\tsect_name\x18\x02 \x01(\tR\bsectName\x12*\n" +
 	"\tbuildings\x18\x03 \x03(\v2\f.pb.BuildingR\tbuildings\x12/\n" +
-	"\talignment\x18\x04 \x01(\v2\x11.pb.AlignmentInfoR\talignment\"=\n" +
+	"\talignment\x18\x04 \x01(\v2\x11.pb.AlignmentInfoR\talignment\"^\n" +
 	"\x16UpgradeBuildingRequest\x12#\n" +
-	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\">\n" +
+	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\x12\x1f\n" +
+	"\vinstance_id\x18\x02 \x01(\x03R\n" +
+	"instanceId\"_\n" +
 	"\x17CollectResourcesRequest\x12#\n" +
-	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\"9\n" +
+	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\x12\x1f\n" +
+	"\vinstance_id\x18\x02 \x01(\x03R\n" +
+	"instanceId\"9\n" +
 	"\x13SaveAdminMapRequest\x12\"\n" +
 	"\rmap_json_data\x18\x01 \x01(\tR\vmapJsonData\"\x15\n" +
 	"\x13GetPlayerMapRequest\"c\n" +
@@ -727,7 +957,19 @@ const file_sect_proto_rawDesc = "" +
 	"\tresources\x18\x04 \x03(\v2+.pb.CollectResourcesResponse.ResourcesEntryR\tresources\x1a<\n" +
 	"\x0eResourcesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\":\n" +
+	"\x14SavePlayerMapRequest\x12\"\n" +
+	"\rmap_json_data\x18\x01 \x01(\tR\vmapJsonData\"=\n" +
+	"\x15SavePlayerMapResponse\x12$\n" +
+	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\"^\n" +
+	"\x16SpeedUpBuildingRequest\x12#\n" +
+	"\rbuilding_code\x18\x01 \x01(\tR\fbuildingCode\x12\x1f\n" +
+	"\vinstance_id\x18\x02 \x01(\x03R\n" +
+	"instanceId\"\x94\x01\n" +
+	"\x17SpeedUpBuildingResponse\x12$\n" +
+	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\x12(\n" +
+	"\bbuilding\x18\x02 \x01(\v2\f.pb.BuildingR\bbuilding\x12)\n" +
+	"\x06player\x18\x03 \x01(\v2\x11.pb.PlayerProfileR\x06playerB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
 
 var (
 	file_sect_proto_rawDescOnce sync.Once
@@ -741,7 +983,7 @@ func file_sect_proto_rawDescGZIP() []byte {
 	return file_sect_proto_rawDescData
 }
 
-var file_sect_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_sect_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_sect_proto_goTypes = []any{
 	(*Building)(nil),                 // 0: pb.Building
 	(*AlignmentInfo)(nil),            // 1: pb.AlignmentInfo
@@ -755,28 +997,36 @@ var file_sect_proto_goTypes = []any{
 	(*GetPlayerMapResponse)(nil),     // 9: pb.GetPlayerMapResponse
 	(*UpgradeBuildingResponse)(nil),  // 10: pb.UpgradeBuildingResponse
 	(*CollectResourcesResponse)(nil), // 11: pb.CollectResourcesResponse
-	nil,                              // 12: pb.CollectResourcesResponse.ResourcesEntry
-	(*BaseResponse)(nil),             // 13: pb.BaseResponse
-	(*PlayerProfile)(nil),            // 14: pb.PlayerProfile
+	(*SavePlayerMapRequest)(nil),     // 12: pb.SavePlayerMapRequest
+	(*SavePlayerMapResponse)(nil),    // 13: pb.SavePlayerMapResponse
+	(*SpeedUpBuildingRequest)(nil),   // 14: pb.SpeedUpBuildingRequest
+	(*SpeedUpBuildingResponse)(nil),  // 15: pb.SpeedUpBuildingResponse
+	nil,                              // 16: pb.CollectResourcesResponse.ResourcesEntry
+	(*BaseResponse)(nil),             // 17: pb.BaseResponse
+	(*PlayerProfile)(nil),            // 18: pb.PlayerProfile
 }
 var file_sect_proto_depIdxs = []int32{
-	13, // 0: pb.SectInfo.base:type_name -> pb.BaseResponse
+	17, // 0: pb.SectInfo.base:type_name -> pb.BaseResponse
 	0,  // 1: pb.SectInfo.buildings:type_name -> pb.Building
 	1,  // 2: pb.SectInfo.alignment:type_name -> pb.AlignmentInfo
-	13, // 3: pb.GetBaseResponse.base:type_name -> pb.BaseResponse
+	17, // 3: pb.GetBaseResponse.base:type_name -> pb.BaseResponse
 	0,  // 4: pb.GetBaseResponse.buildings:type_name -> pb.Building
-	13, // 5: pb.SaveAdminMapResponse.base:type_name -> pb.BaseResponse
-	13, // 6: pb.GetPlayerMapResponse.base:type_name -> pb.BaseResponse
-	13, // 7: pb.UpgradeBuildingResponse.base:type_name -> pb.BaseResponse
+	17, // 5: pb.SaveAdminMapResponse.base:type_name -> pb.BaseResponse
+	17, // 6: pb.GetPlayerMapResponse.base:type_name -> pb.BaseResponse
+	17, // 7: pb.UpgradeBuildingResponse.base:type_name -> pb.BaseResponse
 	0,  // 8: pb.UpgradeBuildingResponse.building:type_name -> pb.Building
-	13, // 9: pb.CollectResourcesResponse.base:type_name -> pb.BaseResponse
-	14, // 10: pb.CollectResourcesResponse.player:type_name -> pb.PlayerProfile
-	12, // 11: pb.CollectResourcesResponse.resources:type_name -> pb.CollectResourcesResponse.ResourcesEntry
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	17, // 9: pb.CollectResourcesResponse.base:type_name -> pb.BaseResponse
+	18, // 10: pb.CollectResourcesResponse.player:type_name -> pb.PlayerProfile
+	16, // 11: pb.CollectResourcesResponse.resources:type_name -> pb.CollectResourcesResponse.ResourcesEntry
+	17, // 12: pb.SavePlayerMapResponse.base:type_name -> pb.BaseResponse
+	17, // 13: pb.SpeedUpBuildingResponse.base:type_name -> pb.BaseResponse
+	0,  // 14: pb.SpeedUpBuildingResponse.building:type_name -> pb.Building
+	18, // 15: pb.SpeedUpBuildingResponse.player:type_name -> pb.PlayerProfile
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_sect_proto_init() }
@@ -792,7 +1042,7 @@ func file_sect_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sect_proto_rawDesc), len(file_sect_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

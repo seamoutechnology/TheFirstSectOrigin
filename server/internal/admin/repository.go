@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"encoding/json"
 	"fmt"
 	"sync"
 	"server/pkg/config"
@@ -19,7 +20,7 @@ type Repository interface {
 	DeleteAnnouncement(id int) error
 	GetActiveAnnouncements() ([]Announcement, error)
 	GetAllAnnouncements() ([]Announcement, error)
-	GetUserInfo(userID int64) (UserInfo, error)
+	GetUserInfo(zoneID int, userID int64) (UserInfo, error)
 	GetUsersPaginated(limit, offset int, search string) (UserListResponse, error)
 	GetUserInventory(zoneID int, userID int64) ([]UserItem, error)
 	AddUserItem(zoneID int, userID int64, itemCode string, quantity int) error
@@ -32,6 +33,24 @@ type Repository interface {
 	GetAllEffectConfigs() ([]EffectConfigData, error)
 	SaveEffectConfig(config EffectConfigData) error
 	DeleteEffectConfig(effectCode string) error
+
+	GetAllFeatureConfigs() ([]FeatureConfigData, error)
+	SaveFeatureConfig(config FeatureConfigData) error
+	DeleteFeatureConfig(featureCode string) error
+
+	GetAllMissionTemplates() ([]MissionTemplateData, error)
+	SaveMissionTemplate(config MissionTemplateData) error
+	DeleteMissionTemplate(missionID int32) error
+	GetAllStageConfigs() ([]StageConfigDB, error)
+	SyncStageConfigs(req []SyncStageReq) error
+	GetAllTraitConfigs() ([]TraitConfigDB, error)
+	SyncTraitConfigs(req []SyncTraitReq) error
+	GetAllHeroTemplates() ([]HeroTemplateDB, error)
+	SyncHeroTemplates(req []HeroTemplateDB) error
+	SyncBuildings(req []SyncBuildingReq) error
+	GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error)
+	RedeemGiftCode(playerID int64, code string) (string, error)
+	RechargePlayer(playerID int64, amount int64) (int64, int64, error)
 }
 
 type adminRepo struct {
@@ -72,11 +91,11 @@ func (r *adminRepo) getGameDB(zoneID int) (*sqlx.DB, error) {
 }
 
 type ZoneDB struct {
-	ID         int    `db:"id"`
-	Name       string `db:"name"`
-	GatewayURL string `db:"gateway_url"`
-	Status     string `db:"status"`
-	IsActive   bool   `db:"is_active"`
+	ID         int    `db:"id" json:"id"`
+	Name       string `db:"name" json:"name"`
+	GatewayURL string `db:"gateway_url" json:"gateway_url"`
+	Status     string `db:"status" json:"status"`
+	IsActive   bool   `db:"is_active" json:"is_active"`
 }
 
 type PlayerDB struct {
@@ -152,13 +171,17 @@ func (r *adminRepo) GetAllAnnouncements() ([]Announcement, error) {
 }
 
 
-func (r *adminRepo) GetUserInfo(userID int64) (UserInfo, error) {
+func (r *adminRepo) GetUserInfo(zoneID int, userID int64) (UserInfo, error) {
 	var info UserInfo
 	info.UserID = userID
 	_ = r.db.Get(&info.Email, "SELECT email FROM users WHERE id = $1", userID)
 	
-	db, _ := r.getGameDB(1)
-	_ = db.QueryRow("SELECT nickname, level, bind_coin FROM players WHERE user_id = $1", userID).Scan(&info.SectName, &info.Level, &info.Money)
+	db, err := r.getGameDB(zoneID)
+	if err != nil {
+		return info, err
+	}
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	_ = db.QueryRow("SELECT nickname, level, bind_coin FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID).Scan(&info.SectName, &info.Level, &info.Money)
 	
 	return info, nil
 }
@@ -249,8 +272,15 @@ func (r *adminRepo) GetUserInventory(zoneID int, userID int64) ([]UserItem, erro
 	if err != nil {
 		return nil, err
 	}
+	var playerID int64
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	err = db.Get(&playerID, "SELECT id FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID)
+	if err != nil {
+		return nil, fmt.Errorf("không tìm thấy nhân vật ở zone %d: %v", zoneID, err)
+	}
+
 	var items []UserItem
-	err = db.Select(&items, "SELECT id, user_id, item_code, quantity FROM user_items WHERE user_id = $1 ORDER BY id DESC", userID)
+	err = db.Select(&items, "SELECT id, player_id, item_code, quantity FROM user_items WHERE player_id = $1 ORDER BY id DESC", playerID)
 	return items, err
 }
 
@@ -259,15 +289,22 @@ func (r *adminRepo) AddUserItem(zoneID int, userID int64, itemCode string, quant
 	if err != nil {
 		return err
 	}
+	var playerID int64
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	err = db.Get(&playerID, "SELECT id FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID)
+	if err != nil {
+		return fmt.Errorf("không tìm thấy nhân vật ở zone %d: %v", zoneID, err)
+	}
+
 	var id int64
-	err = db.QueryRow("SELECT id FROM user_items WHERE user_id = $1 AND item_code = $2 LIMIT 1", userID, itemCode).Scan(&id)
+	err = db.QueryRow("SELECT id FROM user_items WHERE player_id = $1 AND item_code = $2 LIMIT 1", playerID, itemCode).Scan(&id)
 	
 	if err == nil {
 		_, err = db.Exec("UPDATE user_items SET quantity = quantity + $1 WHERE id = $2", quantity, id)
 		return err
 	}
 	
-	_, err = db.Exec("INSERT INTO user_items (user_id, item_code, quantity) VALUES ($1, $2, $3)", userID, itemCode, quantity)
+	_, err = db.Exec("INSERT INTO user_items (player_id, item_code, quantity) VALUES ($1, $2, $3)", playerID, itemCode, quantity)
 	return err
 }
 
@@ -324,7 +361,7 @@ func (r *adminRepo) DeleteItemConfig(itemCode string) error {
 
 func (r *adminRepo) GetAllEffectConfigs() ([]EffectConfigData, error) {
 	var list []EffectConfigData
-	query := "SELECT effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value FROM effect_configs ORDER BY effect_code ASC"
+	query := "SELECT effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value, source_stat FROM effect_configs ORDER BY effect_code ASC"
 	db, _ := r.getGameDB(1)
 	err := db.Select(&list, query)
 	return list, err
@@ -332,8 +369,8 @@ func (r *adminRepo) GetAllEffectConfigs() ([]EffectConfigData, error) {
 
 func (r *adminRepo) SaveEffectConfig(c EffectConfigData) error {
 	query := `
-		INSERT INTO effect_configs (effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		INSERT INTO effect_configs (effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value, source_stat)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		ON CONFLICT (effect_code) DO UPDATE SET
 			name_key = EXCLUDED.name_key,
 			desc_key = EXCLUDED.desc_key,
@@ -341,10 +378,11 @@ func (r *adminRepo) SaveEffectConfig(c EffectConfigData) error {
 			value_type = EXCLUDED.value_type,
 			min_value = EXCLUDED.min_value,
 			max_value = EXCLUDED.max_value,
+			source_stat = EXCLUDED.source_stat,
 			updated_at = CURRENT_TIMESTAMP
 	`
 	db, _ := r.getGameDB(1)
-	_, err := db.Exec(query, c.EffectCode, c.NameKey, c.DescKey, c.EffectType, c.ValueType, c.MinValue, c.MaxValue)
+	_, err := db.Exec(query, c.EffectCode, c.NameKey, c.DescKey, c.EffectType, c.ValueType, c.MinValue, c.MaxValue, c.SourceStat)
 	return err
 }
 
@@ -353,3 +391,468 @@ func (r *adminRepo) DeleteEffectConfig(effectCode string) error {
 	_, err := db.Exec("DELETE FROM effect_configs WHERE effect_code = $1", effectCode)
 	return err
 }
+
+func (r *adminRepo) GetAllFeatureConfigs() ([]FeatureConfigData, error) {
+	var list []FeatureConfigData
+	query := "SELECT feature_code, name_key, icon, required_player_level, required_mission_code, is_active FROM feature_configs ORDER BY feature_code ASC"
+	db, _ := r.getGameDB(1)
+	err := db.Select(&list, query)
+	return list, err
+}
+
+func (r *adminRepo) SaveFeatureConfig(c FeatureConfigData) error {
+	query := `
+		INSERT INTO feature_configs (feature_code, name_key, icon, required_player_level, required_mission_code, is_active)
+		VALUES ($1, $2, $3, $4, $5, $6)
+		ON CONFLICT (feature_code) DO UPDATE SET
+			name_key = EXCLUDED.name_key,
+			icon = EXCLUDED.icon,
+			required_player_level = EXCLUDED.required_player_level,
+			required_mission_code = EXCLUDED.required_mission_code,
+			is_active = EXCLUDED.is_active,
+			updated_at = CURRENT_TIMESTAMP
+	`
+	db, _ := r.getGameDB(1)
+	_, err := db.Exec(query, c.FeatureCode, c.NameKey, c.Icon, c.RequiredPlayerLevel, c.RequiredMissionCode, c.IsActive)
+	return err
+}
+
+func (r *adminRepo) DeleteFeatureConfig(featureCode string) error {
+	db, _ := r.getGameDB(1)
+	_, err := db.Exec("DELETE FROM feature_configs WHERE feature_code = $1", featureCode)
+	return err
+}
+
+func (r *adminRepo) GetAllMissionTemplates() ([]MissionTemplateData, error) {
+	var list []MissionTemplateData
+	query := "SELECT mission_id, title, description, type, target_type, target_param, target_progress, rewards FROM mission_templates ORDER BY mission_id ASC"
+	db, _ := r.getGameDB(1)
+	err := db.Select(&list, query)
+	return list, err
+}
+
+func (r *adminRepo) SaveMissionTemplate(c MissionTemplateData) error {
+	if c.Rewards == "" {
+		c.Rewards = "{}"
+	}
+	query := `
+		INSERT INTO mission_templates (mission_id, title, description, type, target_type, target_param, target_progress, rewards)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+		ON CONFLICT (mission_id) DO UPDATE SET
+			title = EXCLUDED.title,
+			description = EXCLUDED.description,
+			type = EXCLUDED.type,
+			target_type = EXCLUDED.target_type,
+			target_param = EXCLUDED.target_param,
+			target_progress = EXCLUDED.target_progress,
+			rewards = EXCLUDED.rewards,
+			updated_at = CURRENT_TIMESTAMP
+	`
+	db, _ := r.getGameDB(1)
+	_, err := db.Exec(query, c.MissionID, c.Title, c.Description, c.Type, c.TargetType, c.TargetParam, c.TargetProgress, c.Rewards)
+	return err
+}
+
+func (r *adminRepo) DeleteMissionTemplate(missionID int32) error {
+	db, _ := r.getGameDB(1)
+	_, err := db.Exec("DELETE FROM mission_templates WHERE mission_id = $1", missionID)
+	return err
+}
+
+func (r *adminRepo) SyncBuildings(req []SyncBuildingReq) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	// Thu thập danh sách các code đang hoạt động để làm whitelist
+	activeCodes := make([]string, 0, len(req))
+	for _, b := range req {
+		activeCodes = append(activeCodes, b.Code)
+	}
+
+	// 1. Xóa các công trình không còn tồn tại trong config khỏi bảng player_buildings trước (do khóa ngoại)
+	if len(activeCodes) > 0 {
+		queryDeletePlayerBuildings := `
+			DELETE FROM player_buildings 
+			WHERE building_code NOT IN (SELECT unnest($1::text[]))
+		`
+		_, err = tx.Exec(queryDeletePlayerBuildings, activeCodes)
+		if err != nil {
+			return fmt.Errorf("failed to delete removed buildings from player_buildings: %v", err)
+		}
+
+		// 2. Xóa khỏi bảng buildings
+		queryDeleteBuildings := `
+			DELETE FROM buildings 
+			WHERE code NOT IN (SELECT unnest($1::text[]))
+		`
+		_, err = tx.Exec(queryDeleteBuildings, activeCodes)
+		if err != nil {
+			return fmt.Errorf("failed to delete removed buildings from buildings table: %v", err)
+		}
+	} else {
+		// Nếu xuất mảng rỗng thì xóa toàn bộ
+		_, err = tx.Exec("DELETE FROM player_buildings")
+		if err != nil {
+			return err
+		}
+		_, err = tx.Exec("DELETE FROM buildings")
+		if err != nil {
+			return err
+		}
+	}
+
+	// 3. Insert/update các công trình hợp lệ và init cho người chơi
+	for _, b := range req {
+		queryBuilding := `
+			INSERT INTO buildings (code, name, max_level, description)
+			VALUES ($1, $2, $3, $4)
+			ON CONFLICT (code) DO UPDATE SET
+				name = EXCLUDED.name,
+				max_level = EXCLUDED.max_level,
+				description = EXCLUDED.description
+		`
+		_, err = tx.Exec(queryBuilding, b.Code, b.Name, b.MaxLevel, b.Desc)
+		if err != nil {
+			return fmt.Errorf("failed to sync building %s: %v", b.Code, err)
+		}
+
+		queryPlayerBuilding := `
+			INSERT INTO player_buildings (player_id, building_code, level)
+			SELECT id, $1, 1 FROM players
+			ON CONFLICT (player_id, building_code) DO NOTHING
+		`
+		_, err = tx.Exec(queryPlayerBuilding, b.Code)
+		if err != nil {
+			return fmt.Errorf("failed to init player building for %s: %v", b.Code, err)
+		}
+	}
+
+	return tx.Commit()
+}
+
+func (r *adminRepo) GetAllStageConfigs() ([]StageConfigDB, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return nil, err
+	}
+
+	var stages []StageConfigDB
+	err = db.Select(&stages, "SELECT stage_id, json_data, updated_at FROM stage_configs")
+	if err != nil {
+		return nil, err
+	}
+	return stages, nil
+}
+
+func (r *adminRepo) SyncStageConfigs(req []SyncStageReq) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	_, err = tx.Exec("DELETE FROM stage_configs")
+	if err != nil {
+		return err
+	}
+
+	for _, s := range req {
+		query := `
+			INSERT INTO stage_configs (stage_id, json_data, updated_at)
+			VALUES ($1, $2, CURRENT_TIMESTAMP)
+		`
+		_, err = tx.Exec(query, s.StageID, s.JSONData)
+		if err != nil {
+			return fmt.Errorf("failed to sync stage %s: %v", s.StageID, err)
+		}
+	}
+
+	return tx.Commit()
+}
+
+func (r *adminRepo) GetAllTraitConfigs() ([]TraitConfigDB, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return nil, err
+	}
+
+	var traits []TraitConfigDB
+	err = db.Select(&traits, "SELECT trait_code, weight, json_data, updated_at FROM trait_configs")
+	if err != nil {
+		return nil, err
+	}
+	return traits, nil
+}
+
+func (r *adminRepo) SyncTraitConfigs(req []SyncTraitReq) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	_, err = tx.Exec("DELETE FROM trait_configs")
+	if err != nil {
+		return err
+	}
+
+	for _, t := range req {
+		query := `
+			INSERT INTO trait_configs (trait_code, weight, json_data, updated_at)
+			VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+		`
+		_, err = tx.Exec(query, t.TraitCode, t.Weight, t.JSONData)
+		if err != nil {
+			return fmt.Errorf("failed to sync trait %s: %v", t.TraitCode, err)
+		}
+	}
+
+	return tx.Commit()
+}
+
+type PlayerInfoDB struct {
+	ID       int64  `db:"id"`
+	Nickname string `db:"nickname"`
+	Level    int    `db:"level"`
+	Gold     int64  `db:"gold"`
+	Diamond  int64  `db:"diamond"`
+}
+
+func (r *adminRepo) GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error) {
+	var player PlayerInfoDB
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return player, err
+	}
+	// Lấy người chơi đầu tiên thuộc về UserID này trong Database game
+	err = db.Get(&player, "SELECT id, nickname, level, gold, diamond FROM players WHERE user_id = $1 LIMIT 1", userID)
+	return player, err
+}
+
+func (r *adminRepo) RedeemGiftCode(playerID int64, code string) (string, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return "", err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return "", err
+	}
+	defer tx.Rollback()
+
+	// 1. Khóa và kiểm tra gift code
+	var giftCode struct {
+		Code           string `db:"code"`
+		RewardGold     int64  `db:"reward_gold"`
+		RewardDiamond  int64  `db:"reward_diamond"`
+		RewardItems    string `db:"reward_items"`
+		MaxUses        int    `db:"max_uses"`
+		UsedCount      int    `db:"used_count"`
+	}
+	err = tx.Get(&giftCode, "SELECT code, reward_gold, reward_diamond, reward_items, max_uses, used_count FROM gift_codes WHERE UPPER(code) = UPPER($1) FOR UPDATE", code)
+	if err != nil {
+		return "", fmt.Errorf("Mã quà tặng không hợp lệ hoặc không tồn tại")
+	}
+
+	if giftCode.UsedCount >= giftCode.MaxUses {
+		return "", fmt.Errorf("Mã quà tặng đã đạt giới hạn lượt sử dụng")
+	}
+
+	// 2. Kiểm tra xem người chơi đã sử dụng mã này chưa
+	var usageCount int
+	err = tx.Get(&usageCount, "SELECT COUNT(*) FROM gift_code_usages WHERE player_id = $1 AND code = $2", playerID, giftCode.Code)
+	if err != nil {
+		return "", err
+	}
+	if usageCount > 0 {
+		return "", fmt.Errorf("Bạn đã sử dụng mã quà tặng này rồi")
+	}
+
+	// 3. Ghi nhận lượt sử dụng
+	_, err = tx.Exec("INSERT INTO gift_code_usages (player_id, code) VALUES ($1, $2)", playerID, giftCode.Code)
+	if err != nil {
+		return "", err
+	}
+
+	// 4. Cập nhật số lượng sử dụng của mã
+	_, err = tx.Exec("UPDATE gift_codes SET used_count = used_count + 1 WHERE code = $1", giftCode.Code)
+	if err != nil {
+		return "", err
+	}
+
+	// 5. Cộng tài nguyên (Vàng, Qi/Kim Cương) cho người chơi
+	if giftCode.RewardGold > 0 || giftCode.RewardDiamond > 0 {
+		_, err = tx.Exec("UPDATE players SET gold = gold + $1, diamond = diamond + $2, updated_at = NOW() WHERE id = $3", giftCode.RewardGold, giftCode.RewardDiamond, playerID)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	// 6. Tặng vật phẩm trong túi đồ
+	var items []struct {
+		ItemCode string `json:"item_code"`
+		Quantity int    `json:"quantity"`
+	}
+	if giftCode.RewardItems != "" && giftCode.RewardItems != "[]" {
+		err = json.Unmarshal([]byte(giftCode.RewardItems), &items)
+		if err == nil {
+			for _, item := range items {
+				var currentQty int
+				err = tx.Get(&currentQty, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = $2", playerID, item.ItemCode)
+				if err == nil {
+					_, err = tx.Exec("UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", item.Quantity, playerID, item.ItemCode)
+				} else {
+					_, err = tx.Exec("INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '{}')", playerID, item.ItemCode, item.Quantity)
+				}
+				if err != nil {
+					return "", err
+				}
+			}
+		}
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return "", err
+	}
+
+	desc := ""
+	if giftCode.RewardGold > 0 {
+		desc += fmt.Sprintf("%d Vàng, ", giftCode.RewardGold)
+	}
+	if giftCode.RewardDiamond > 0 {
+		desc += fmt.Sprintf("%d Qi, ", giftCode.RewardDiamond)
+	}
+	if len(items) > 0 {
+		desc += fmt.Sprintf("%d vật phẩm túi đồ, ", len(items))
+	}
+	if len(desc) > 2 {
+		desc = desc[:len(desc)-2]
+	}
+	return desc, nil
+}
+
+func (r *adminRepo) RechargePlayer(playerID int64, amount int64) (int64, int64, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return 0, 0, err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return 0, 0, err
+	}
+	defer tx.Rollback()
+
+	// 1000đ nạp = 10 Gold + 1 Diamond
+	diamondReward := amount / 1000
+	goldReward := amount * 10
+
+	// 1. Lưu lịch sử nạp
+	_, err = tx.Exec("INSERT INTO recharge_history (player_id, amount, diamond_reward, gold_reward, status) VALUES ($1, $2, $3, $4, 'success')", playerID, amount, diamondReward, goldReward)
+	if err != nil {
+		return 0, 0, err
+	}
+
+	// 2. Cộng tiền vào bảng players
+	_, err = tx.Exec("UPDATE players SET gold = gold + $1, diamond = diamond + $2, updated_at = NOW() WHERE id = $3", goldReward, diamondReward, playerID)
+	if err != nil {
+		return 0, 0, err
+	}
+
+	// 3. Lấy chỉ số mới
+	var newGold, newDiamond int64
+	err = tx.QueryRow("SELECT gold, diamond FROM players WHERE id = $1", playerID).Scan(&newGold, &newDiamond)
+	if err != nil {
+		return 0, 0, err
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return 0, 0, err
+	}
+
+	return newGold, newDiamond, nil
+}
+
+type HeroTemplateDB struct {
+	Code        string `db:"code" json:"code"`
+	Name        string `db:"name" json:"name"`
+	Rarity      string `db:"rarity" json:"rarity"`
+	Element     string `db:"element" json:"element"`
+	Role        string `db:"role" json:"role"`
+	BaseHP      int32  `db:"base_hp" json:"base_hp"`
+	BaseATK     int32  `db:"base_atk" json:"base_atk"`
+	BaseDEF     int32  `db:"base_def" json:"base_def"`
+	BaseSpeed   int32  `db:"base_speed" json:"base_speed"`
+	GachaWeight int32  `db:"gacha_weight" json:"gacha_weight"`
+	IsActive    bool   `db:"is_active" json:"is_active"`
+}
+
+func (r *adminRepo) GetAllHeroTemplates() ([]HeroTemplateDB, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return nil, err
+	}
+
+	var heroes []HeroTemplateDB
+	err = db.Select(&heroes, "SELECT code, name, rarity, element, role, base_hp, base_atk, base_def, base_speed, gacha_weight, is_active FROM hero_templates ORDER BY code ASC")
+	if err != nil {
+		return nil, err
+	}
+	return heroes, nil
+}
+
+func (r *adminRepo) SyncHeroTemplates(req []HeroTemplateDB) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+
+	tx, err := db.Beginx()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	_, err = tx.Exec("DELETE FROM hero_templates")
+	if err != nil {
+		return err
+	}
+
+	for _, h := range req {
+		query := `
+			INSERT INTO hero_templates (code, name, rarity, element, role, base_hp, base_atk, base_def, base_speed, gacha_weight, is_active)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+		`
+		_, err = tx.Exec(query, h.Code, h.Name, h.Rarity, h.Element, h.Role, h.BaseHP, h.BaseATK, h.BaseDEF, h.BaseSpeed, h.GachaWeight, h.IsActive)
+		if err != nil {
+			return fmt.Errorf("failed to sync hero template %s: %v", h.Code, err)
+		}
+	}
+
+	return tx.Commit()
+}
+
+
+
+

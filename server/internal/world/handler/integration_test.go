@@ -5,17 +5,37 @@ import (
 	"testing"
 
 	"go.uber.org/zap"
-	pb "server/pkg/pb"
+	"google.golang.org/grpc/metadata"
+	"server/internal/world/repository"
 	"server/internal/world/service"
+	pb "server/pkg/pb"
 )
+
+type MockPlayerRepo struct {
+	repository.IPlayerRepository
+}
+
+func (m *MockPlayerRepo) FindByUserID(ctx context.Context, userID int64, serverID string) (*repository.Player, error) {
+	return &repository.Player{
+		ID:       1,
+		UserID:   userID,
+		ServerID: serverID,
+		Nickname: "TestPlayer",
+		Level:    10,
+		Gold:     1000,
+		Diamond:  100,
+	}, nil
+}
 
 func TestWorldHandler_Integration(t *testing.T) {
 	log := zap.NewNop()
-	svc := service.New(nil, "zone1") // Repo = nil cho đơn giản
+	repo := &MockPlayerRepo{}
+	svc := service.New(repo, "zone1")
 	h := New(svc, log)
 
 	t.Run("TestGetPlayerProfile", func(t *testing.T) {
-		resp, err := h.GetPlayerProfile(context.Background(), &pb.GetPlayerProfileRequest{})
+		ctx := metadata.NewIncomingContext(context.Background(), metadata.Pairs("user-id", "123"))
+		resp, err := h.GetPlayerProfile(ctx, &pb.GetPlayerProfileRequest{})
 		if err != nil {
 			t.Errorf("GetPlayerProfile failed: %v", err)
 		}

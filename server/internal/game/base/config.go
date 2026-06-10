@@ -28,7 +28,7 @@ const (
 
 var Database = map[string]BuildingConfig{
 	"MAIN_HALL": {
-		ID: "MAIN_HALL", SizeX: 4, SizeY: 4, EffectType: EffectUnlockTech,
+		ID: "MAIN_HALL", SizeX: 2, SizeY: 2, EffectType: EffectUnlockTech,
 	},
 	"GOLD_MINE": {
 		ID: "GOLD_MINE", SizeX: 2, SizeY: 2, EffectType: EffectResourceGen,

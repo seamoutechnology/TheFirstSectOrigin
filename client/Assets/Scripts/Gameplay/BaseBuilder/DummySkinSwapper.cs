@@ -39,7 +39,6 @@ namespace GameClient.Gameplay.BaseBuilder
             Debug.Log($"[DummySkinSwapper] Đã đổi bộ phận '{category}' thành '{label}'");
         }
 #else
-        [Header("Chưa cài package Unity 2D Animation - Tạm dùng Mock Swap")]
         [SerializeField] private SpriteRenderer hairRenderer;
         [SerializeField] private SpriteRenderer bodyRenderer;
         [SerializeField] private SpriteRenderer weaponRenderer;

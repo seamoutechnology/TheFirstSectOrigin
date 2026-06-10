@@ -27,9 +27,11 @@ service GatewayService {
   // --- Sect & Buildings & Map ---
   rpc GetSectInfo(GetProfileRequest) returns (SectInfo);
   rpc UpgradeBuilding(UpgradeBuildingRequest) returns (UpgradeBuildingResponse);
+  rpc SpeedUpBuilding(SpeedUpBuildingRequest) returns (SpeedUpBuildingResponse);
   rpc CollectResources(CollectResourcesRequest) returns (CollectResourcesResponse);
   rpc SaveAdminMap(SaveAdminMapRequest) returns (SaveAdminMapResponse);
   rpc GetPlayerMap(GetPlayerMapRequest) returns (GetPlayerMapResponse);
+  rpc SavePlayerMap(SavePlayerMapRequest) returns (SavePlayerMapResponse);
 
   // --- Heroes ---
   rpc GetHeroes(GetHeroesRequest) returns (GetHeroesResponse); 
@@ -45,6 +47,7 @@ service GatewayService {
   // --- Inventory & Items ---
   rpc GetInventory(GetProfileRequest) returns (Inventory);
   rpc EquipItem(EquipRequest) returns (EquipResponse);
+  rpc UseItem(UseItemRequest) returns (UseItemResponse);
 
   // --- Gacha ---
   rpc GetGachaBanners(GetGachaBannersRequest) returns (GetGachaBannersResponse);

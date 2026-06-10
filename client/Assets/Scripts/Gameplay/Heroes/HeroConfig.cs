@@ -34,5 +34,15 @@ namespace GameClient.Gameplay.Heroes
         public string rarity = "R"; // UR, SSR, SR, R
         public float basePower = 100f;
         
+        [Header("Server Synchronized Fields")]
+        public string code;
+        public string element = "FIRE";
+        public string role = "WARRIOR";
+        public int baseHp = 100;
+        public int baseAtk = 10;
+        public int baseDef = 5;
+        public int baseSpeed = 10;
+        public int gachaWeight = 100;
+        public bool isActive = true;
     }
 }

@@ -1,13 +1,16 @@
+using GameClient.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.UI.Core;
 using GameClient.Network.Pb;
+using GameClient.Managers;
 
 namespace GameClient.UI
 {
     public class HeroDetailPanel : BaseUIPanel
     {
         [Header("UI References")]
+        [SerializeField] private Image heroImage;
         [SerializeField] private Text heroNameText;
         [SerializeField] private Text levelText;
         [SerializeField] private Text powerText;
@@ -24,9 +27,13 @@ namespace GameClient.UI
             if (levelUpButton != null) levelUpButton.onClick.AddListener(OnLevelUpClicked);
         }
 
-        public void Setup(Hero hero)
+        public override void Setup(object data = null)
         {
-            _currentHero = hero;
+            base.Setup(data);
+            if (data is Hero hero)
+            {
+                _currentHero = hero;
+            }
             RefreshUI();
         }
 
@@ -44,6 +51,35 @@ namespace GameClient.UI
                 else if (_currentHero.Rarity == "SSR") rarityText.color = Color.yellow;
                 else if (_currentHero.Rarity == "SR") rarityText.color = new Color(0.5f, 0, 1f);
                 else rarityText.color = Color.blue;
+            }
+
+            if (heroImage != null)
+            {
+                var config = HeroDataManager.Instance.GetHeroConfigByCodeOrName(_currentHero.Name);
+                if (config != null && !string.IsNullOrEmpty(config.iconAddress))
+                {
+                    LoadAndSetAvatar(heroImage, config.iconAddress);
+                }
+                else
+                {
+                    LoadAndSetAvatar(heroImage, _currentHero.Name);
+                }
+            }
+        }
+
+        private async void LoadAndSetAvatar(Image img, string address)
+        {
+            try
+            {
+                var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);
+                if (sprite != null && img != null)
+                {
+                    img.sprite = sprite;
+                }
+            }
+            catch (System.Exception)
+            {
+                // Fallback
             }
         }
 

@@ -112,7 +112,7 @@ namespace GameClient.UI.Presenters
             PlayerPrefs.DeleteKey(GameConstants.PlayerPrefsKeys.LAST_ACCOUNT);
             PlayerPrefs.Save();
 
-            _uiManager.OpenPanel("LoginPanel");
+            _uiManager.GoToLogin();
             _view.Hide();
         }
 

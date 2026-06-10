@@ -31,6 +31,21 @@ namespace GameClient.Gameplay.BaseBuilder
 
             SetupTilemaps();
 
+            // Fallback: nếu mappingConfig chưa được gán trong Inspector (hoặc bị mất ref trong build)
+            // thì tự động load từ Resources
+            if (mappingConfig == null)
+            {
+                mappingConfig = Resources.Load<TileToIDMapping>("GameData/MainTileMapping");
+                if (mappingConfig != null)
+                {
+                    Debug.Log("[RuntimeMapRenderer] Đã tự động load TileToIDMapping từ Resources/GameData/MainTileMapping");
+                }
+                else
+                {
+                    Debug.LogError("[RuntimeMapRenderer] Không tìm thấy TileToIDMapping! Map nền sẽ không hiển thị.");
+                }
+            }
+
             itemsContainer = new GameObject("ItemsLayer");
             itemsContainer.transform.SetParent(transform);
         }
@@ -40,8 +55,8 @@ namespace GameClient.Gameplay.BaseBuilder
             GameObject gridObj = new GameObject("RuntimeGrid");
             gridObj.transform.SetParent(transform);
             grid = gridObj.AddComponent<Grid>();
-            grid.cellSize = new Vector3(1f, 1f, 0); // Sử dụng 1x1 cho lưới vuông
-            grid.cellLayout = GridLayout.CellLayout.Rectangle;
+            grid.cellSize = new Vector3(1f, 0.5f, 0); 
+            grid.cellLayout = GridLayout.CellLayout.Isometric;
             
 
             GameObject fogObj = new GameObject("FogTilemap");
@@ -60,58 +75,101 @@ namespace GameClient.Gameplay.BaseBuilder
 
             if (mapData == null) return;
 
+            Debug.Log($"[RuntimeMapRenderer][DEBUG] RenderMapLayers bắt đầu: gridW={mapData.gridWidth} gridH={mapData.gridHeight} groundLayers={mapData.groundLayers?.Count ?? 0} mappingConfig={mappingConfig != null}");
+
             BaseGridManager.Instance.LoadTerrainData(mapData.terrainData, mapData.gridWidth, mapData.gridHeight);
 
             if (mappingConfig == null)
             {
-                Debug.LogWarning("[RuntimeMapRenderer] ChÆ°a gÃ¡n TileToIDMapping Config, khÃ´ng thá»ƒ load hÃ¬nh áº£nh Ä‘áº¥t!");
+                Debug.LogError("[RuntimeMapRenderer][DEBUG] mappingConfig == NULL! Không thể render ground tiles. Kiểm tra Inspector hoặc Resources/GameData/MainTileMapping.");
+                return;
             }
 
-            if (mapData.groundLayers != null)
+            if (mapData.groundLayers == null || mapData.groundLayers.Count == 0)
             {
-                for (int i = 0; i < mapData.groundLayers.Count; i++)
+                if (mapData.groundTiles != null && mapData.groundTiles.Length > 0)
                 {
-                    var layerData = mapData.groundLayers[i];
-                    
-                    GameObject groundObj = new GameObject($"GroundTilemap_{layerData.layerName}");
-                    groundObj.transform.SetParent(grid.transform);
-                    Tilemap tMap = groundObj.AddComponent<Tilemap>();
-                    var tRender = groundObj.AddComponent<TilemapRenderer>();
-                    tRender.sortOrder = TilemapRenderer.SortOrder.TopRight;
-                    tRender.sortingOrder = -100 + i; // Layer cÃ ng sau thÃ¬ render cÃ ng cao (-100, -99, -98...)
-                    
-                    groundTilemaps.Add(tMap);
-
-                    for (int x = 0; x < mapData.gridWidth; x++)
+                    Debug.Log($"[RuntimeMapRenderer][DEBUG] groundLayers rỗng nhưng groundTiles có {mapData.groundTiles.Length} tiles. Tạo layer ảo từ groundTiles.");
+                    mapData.groundLayers = new List<ExportedGroundLayer>
                     {
-                        for (int y = 0; y < mapData.gridHeight; y++)
+                        new ExportedGroundLayer
                         {
-                            int idx = y * mapData.gridWidth + x;
-                            Vector3Int cellPos = new Vector3Int(x, y, 0);
+                            layerName = "DefaultGround",
+                            tiles = mapData.groundTiles
+                        }
+                    };
+                }
+                else
+                {
+                    Debug.LogError("[RuntimeMapRenderer][DEBUG] Cả groundLayers và groundTiles đều rỗng/null — không có gì để render!");
+                    return;
+                }
+            }
 
-                            if (layerData.tiles != null && idx < layerData.tiles.Length)
+            for (int i = 0; i < mapData.groundLayers.Count; i++)
+            {
+                var layerData = mapData.groundLayers[i];
+
+                int totalTiles = layerData.tiles?.Length ?? 0;
+                int nonNullTiles = 0;
+                if (layerData.tiles != null)
+                    foreach (var t in layerData.tiles) if (!string.IsNullOrEmpty(t)) nonNullTiles++;
+
+                Debug.Log($"[RuntimeMapRenderer][DEBUG] Layer [{i}] '{layerData.layerName}': tiles.Length={totalTiles} nonEmpty={nonNullTiles}");
+
+                GameObject groundObj = new GameObject($"GroundTilemap_{layerData.layerName}");
+                groundObj.transform.SetParent(grid.transform);
+                Tilemap tMap = groundObj.AddComponent<Tilemap>();
+                var tRender = groundObj.AddComponent<TilemapRenderer>();
+                tRender.sortOrder = TilemapRenderer.SortOrder.TopRight;
+                tRender.sortingOrder = -100 + i;
+                
+                // Sử dụng Sprite-Default shader để tránh bị tối/không hiển thị khi thiếu Light 2D
+                var defaultMaterial = Shader.Find("Sprites/Default") != null ? new Material(Shader.Find("Sprites/Default")) : null;
+                if (defaultMaterial != null)
+                {
+                    tRender.material = defaultMaterial;
+                }
+
+                groundTilemaps.Add(tMap);
+
+                int placedCount = 0;
+                int missingTileCount = 0;
+
+                for (int x = 0; x < mapData.gridWidth; x++)
+                {
+                    for (int y = 0; y < mapData.gridHeight; y++)
+                    {
+                        int idx = y * mapData.gridWidth + x;
+                        Vector3Int cellPos = new Vector3Int(x, y, 0);
+
+                        if (layerData.tiles != null && idx < layerData.tiles.Length)
+                        {
+                            string gID = layerData.tiles[idx];
+                            if (!string.IsNullOrEmpty(gID))
                             {
-                                string gID = layerData.tiles[idx];
-                                if (!string.IsNullOrEmpty(gID))
+                                TileBase gTile = mappingConfig.GetGroundTile(gID);
+                                if (gTile != null)
                                 {
-                                    TileBase gTile = mappingConfig.GetGroundTile(gID);
-                                    if (gTile != null)
+                                    tMap.SetTile(cellPos, gTile);
+                                    placedCount++;
+                                    if (x == 0 && y == 0)
                                     {
-                                        tMap.SetTile(cellPos, gTile);
-                                        if (x == 0 && y == 0)
-                                        {
-                                            Debug.Log($"[RuntimeMapRenderer] Đặt gạch đầu tiên thành công: {gID} tại (0,0)");
-                                        }
+                                        Debug.Log($"[RuntimeMapRenderer] Đặt gạch đầu tiên thành công: {gID} tại (0,0)");
                                     }
-                                    else
-                                    {
-                                        Debug.LogWarning($"[RuntimeMapRenderer] Không tìm thấy TileBase cho ID gạch: {gID}");
-                                    }
+                                }
+                                else
+                                {
+                                    missingTileCount++;
+                                    if (missingTileCount <= 3)
+                                        Debug.LogWarning($"[RuntimeMapRenderer][DEBUG] GetGroundTile('{gID}') trả về NULL — ID này không có trong mappingConfig!");
                                 }
                             }
                         }
                     }
                 }
+
+                Debug.Log($"[RuntimeMapRenderer][DEBUG] Layer [{i}] '{layerData.layerName}': đặt được {placedCount} tiles, thiếu mapping {missingTileCount} tiles");
             }
 
             if (mapData.items != null)

@@ -8,7 +8,7 @@ namespace GameClient.Editor.GMDashboard
     public class GMItemConfigTab
     {
         private EditorWindow window;
-        private string adminUrl = "http://localhost:8080/api/gm";
+        private string AdminUrl => GMDashboardConfig.GmApiUrl;
         
         private List<GMItemConfigData> configList = new List<GMItemConfigData>();
         private GMItemConfigData selectedConfig = null;
@@ -34,7 +34,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchAllEffects()
         {
-            string url = $"{adminUrl}/effect_configs";
+            string url = $"{AdminUrl}/effect_configs";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -68,11 +68,11 @@ namespace GameClient.Editor.GMDashboard
                 {
                     item_code = "new_item_" + Random.Range(1000, 9999),
                     name_key = "New Item",
-                    type = "weapon",
+                    type = "CONSUMABLE",
                     rarity = "common",
                     icon = "",
                     desc_key = "Description",
-                    max_stack = 1,
+                    max_stack = -1, // Thiết lập mặc định là không giới hạn
                     sources = "[]",
                     effects = "[]"
                 };
@@ -104,10 +104,12 @@ namespace GameClient.Editor.GMDashboard
                 GUILayout.Label("Edit Item: " + selectedConfig.item_code, EditorStyles.boldLabel);
                 rightScrollPos = EditorGUILayout.BeginScrollView(rightScrollPos);
 
+                bool isOnline = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
+
                 EditorGUILayout.Space();
                 selectedConfig.item_code = EditorGUILayout.TextField("Item Code (ID):", selectedConfig.item_code);
                 selectedConfig.name_key = EditorGUILayout.TextField("Name Key (i18n):", selectedConfig.name_key);
-                string[] itemTypes = { "weapon", "armor", "accessory", "consumable", "material", "quest", "misc" };
+                string[] itemTypes = { "CONSUMABLE", "EQUIPMENT", "MATERIAL", "SKIN_UNLOCKER", "FUNCTION_UNLOCKER", "VIP_LICENSE", "CURRENCY" };
                 int typeIdx = System.Array.IndexOf(itemTypes, selectedConfig.type);
                 if (typeIdx < 0) typeIdx = 0;
                 typeIdx = EditorGUILayout.Popup("Type:", typeIdx, itemTypes);
@@ -119,7 +121,7 @@ namespace GameClient.Editor.GMDashboard
                 rarityIdx = EditorGUILayout.Popup("Rarity:", rarityIdx, rarities);
                 selectedConfig.rarity = rarities[rarityIdx];
                 selectedConfig.icon = EditorGUILayout.TextField("Icon Path:", selectedConfig.icon);
-                selectedConfig.max_stack = EditorGUILayout.IntField("Max Stack:", selectedConfig.max_stack);
+                selectedConfig.max_stack = EditorGUILayout.IntField("Max Stack (-1 = Unlimited):", selectedConfig.max_stack);
                 
                 EditorGUILayout.LabelField("Description Key (i18n):");
                 selectedConfig.desc_key = EditorGUILayout.TextArea(selectedConfig.desc_key, GUILayout.Height(40));
@@ -172,12 +174,30 @@ namespace GameClient.Editor.GMDashboard
 
                 EditorGUILayout.Space();
                 GUILayout.BeginHorizontal();
+                GUI.enabled = isOnline;
                 GUI.backgroundColor = Color.green;
                 if (GUILayout.Button("Save to Database", GUILayout.Height(30)))
                 {
                     selectedConfig.effects = SerializeEffects();
                     SaveConfigToServer(selectedConfig);
                 }
+                
+                // Nút Clone Item
+                GUI.backgroundColor = new Color(0.2f, 0.6f, 1f); // Màu xanh dương nhạt cho nút Clone
+                if (GUILayout.Button("Clone Item", GUILayout.Height(30)))
+                {
+                    selectedConfig.effects = SerializeEffects();
+                    GMItemConfigData clone = CloneConfig(selectedConfig);
+                    clone.item_code = selectedConfig.item_code + "_copy";
+                    clone.name_key = selectedConfig.name_key + " (Copy)";
+                    
+                    // Chuyển đối tượng chỉnh sửa hiện tại sang bản copy vừa tạo
+                    selectedConfig = clone;
+                    ParseEffects(selectedConfig.effects);
+                    selectedIndex = -1; // Reset index để đánh dấu đây là item mới chưa lưu
+                    window.ShowNotification(new GUIContent("Đã nhân bản! Vui lòng đổi mã Item Code và bấm Save."));
+                }
+                
                 GUI.backgroundColor = Color.red;
                 if (GUILayout.Button("Delete Item", GUILayout.Height(30)))
                 {
@@ -187,6 +207,7 @@ namespace GameClient.Editor.GMDashboard
                     }
                 }
                 GUI.backgroundColor = Color.white;
+                GUI.enabled = true;
                 GUILayout.EndHorizontal();
 
                 EditorGUILayout.EndScrollView();
@@ -245,7 +266,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchAllConfigs()
         {
-            string url = $"{adminUrl}/item_configs";
+            string url = $"{AdminUrl}/item_configs";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -262,7 +283,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void SaveConfigToServer(GMItemConfigData config)
         {
-            string url = $"{adminUrl}/item_configs/save";
+            string url = $"{AdminUrl}/item_configs/save";
             string jsonBody = JsonUtility.ToJson(config);
             
             var req = new UnityWebRequest(url, "POST");
@@ -287,7 +308,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void DeleteConfigFromServer(string itemCode)
         {
-            string url = $"{adminUrl}/item_configs/delete?code={itemCode}";
+            string url = $"{AdminUrl}/item_configs/delete?code={itemCode}";
             var req = new UnityWebRequest(url, "DELETE");
             req.downloadHandler = new DownloadHandlerBuffer();
             

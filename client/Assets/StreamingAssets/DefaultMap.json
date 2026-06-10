@@ -1031,8 +1031,17 @@
     "buildings": [
         {
             "id": "main_hall",
-            "x": 4,
-            "y": 8,
+            "x": 3,
+            "y": 6,
+            "flipX": false,
+            "level": 1,
+            "state": 0,
+            "currentHP": 1000.0
+        },
+        {
+            "id": "farm",
+            "x": 7,
+            "y": 3,
             "flipX": false,
             "level": 1,
             "state": 0,
@@ -2065,6 +2074,7 @@
         0,
         0
     ],
+    "groundTiles": [],
     "groundLayers": [
         {
             "layerName": "TerrainTilemap",

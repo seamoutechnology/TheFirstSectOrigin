@@ -14,7 +14,7 @@ type Service interface {
 	GetAllZones() ([]ZoneDB, error)
 	GetActiveAnnouncements() ([]Announcement, error)
 	GetAllAnnouncements() ([]Announcement, error)
-	GetUserInfo(userID int64) (UserInfo, error)
+	GetUserInfo(zoneID int, userID int64) (UserInfo, error)
 	GetUsersPaginated(limit, offset int, search string) (UserListResponse, error)
 	GetUserInventory(zoneID int, userID int64) ([]UserItem, error)
 	AddUserItem(zoneID int, userID int64, itemCode string, quantity int) error
@@ -27,6 +27,24 @@ type Service interface {
 	GetAllEffectConfigs() ([]EffectConfigData, error)
 	SaveEffectConfig(config EffectConfigData) error
 	DeleteEffectConfig(effectCode string) error
+
+	GetAllFeatureConfigs() ([]FeatureConfigData, error)
+	SaveFeatureConfig(config FeatureConfigData) error
+	DeleteFeatureConfig(featureCode string) error
+
+	GetAllMissionTemplates() ([]MissionTemplateData, error)
+	SaveMissionTemplate(config MissionTemplateData) error
+	DeleteMissionTemplate(missionID int32) error
+	GetAllStageConfigs() ([]StageConfigDB, error)
+	SyncStageConfigs(req []SyncStageReq) error
+	GetAllTraitConfigs() ([]TraitConfigDB, error)
+	SyncTraitConfigs(req []SyncTraitReq) error
+	GetAllHeroTemplates() ([]HeroTemplateDB, error)
+	SyncHeroTemplates(req []HeroTemplateDB) error
+	SyncBuildings(req []SyncBuildingReq) error
+	GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error)
+	RedeemGiftCode(playerID int64, code string) (string, error)
+	RechargePlayer(playerID int64, amount int64) (int64, int64, error)
 }
 
 type adminService struct {
@@ -152,8 +170,8 @@ func (s *adminService) GetAllAnnouncements() ([]Announcement, error) {
 }
 
 
-func (s *adminService) GetUserInfo(userID int64) (UserInfo, error) {
-	return s.repo.GetUserInfo(userID)
+func (s *adminService) GetUserInfo(zoneID int, userID int64) (UserInfo, error) {
+	return s.repo.GetUserInfo(zoneID, userID)
 }
 
 func (s *adminService) GetUsersPaginated(limit, offset int, search string) (UserListResponse, error) {
@@ -197,3 +215,68 @@ func (s *adminService) SaveEffectConfig(config EffectConfigData) error {
 func (s *adminService) DeleteEffectConfig(effectCode string) error {
 	return s.repo.DeleteEffectConfig(effectCode)
 }
+
+func (s *adminService) GetAllFeatureConfigs() ([]FeatureConfigData, error) {
+	return s.repo.GetAllFeatureConfigs()
+}
+
+func (s *adminService) SaveFeatureConfig(config FeatureConfigData) error {
+	return s.repo.SaveFeatureConfig(config)
+}
+
+func (s *adminService) DeleteFeatureConfig(featureCode string) error {
+	return s.repo.DeleteFeatureConfig(featureCode)
+}
+
+func (s *adminService) GetAllMissionTemplates() ([]MissionTemplateData, error) {
+	return s.repo.GetAllMissionTemplates()
+}
+
+func (s *adminService) SaveMissionTemplate(config MissionTemplateData) error {
+	return s.repo.SaveMissionTemplate(config)
+}
+
+func (s *adminService) DeleteMissionTemplate(missionID int32) error {
+	return s.repo.DeleteMissionTemplate(missionID)
+}
+
+func (s *adminService) SyncBuildings(req []SyncBuildingReq) error {
+	return s.repo.SyncBuildings(req)
+}
+
+func (s *adminService) GetAllStageConfigs() ([]StageConfigDB, error) {
+	return s.repo.GetAllStageConfigs()
+}
+
+func (s *adminService) SyncStageConfigs(req []SyncStageReq) error {
+	return s.repo.SyncStageConfigs(req)
+}
+
+func (s *adminService) GetAllTraitConfigs() ([]TraitConfigDB, error) {
+	return s.repo.GetAllTraitConfigs()
+}
+
+func (s *adminService) SyncTraitConfigs(req []SyncTraitReq) error {
+	return s.repo.SyncTraitConfigs(req)
+}
+
+func (s *adminService) GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error) {
+	return s.repo.GetPlayerInfoByUserID(userID)
+}
+
+func (s *adminService) GetAllHeroTemplates() ([]HeroTemplateDB, error) {
+	return s.repo.GetAllHeroTemplates()
+}
+
+func (s *adminService) SyncHeroTemplates(req []HeroTemplateDB) error {
+	return s.repo.SyncHeroTemplates(req)
+}
+
+func (s *adminService) RedeemGiftCode(playerID int64, code string) (string, error) {
+	return s.repo.RedeemGiftCode(playerID, code)
+}
+
+func (s *adminService) RechargePlayer(playerID int64, amount int64) (int64, int64, error) {
+	return s.repo.RechargePlayer(playerID, amount)
+}
+

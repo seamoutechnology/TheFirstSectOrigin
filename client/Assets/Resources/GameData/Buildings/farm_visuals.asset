@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81402449d5f62414283bfac7ecf671d6, type: 3}
+  m_Name: farm_visuals
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingVisualConfig
+  buildingID: farm
+  constructionVFXPrefab: {fileID: 0}
+  workingVFXPrefab: {fileID: 0}
+  levelVisuals:
+  - level: 1
+    normalSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    ghostSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    buildingSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    brokenSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    lockedSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}
+    producingSprite: {fileID: 21300000, guid: d7338281582933844a18ac4838d0ffbe, type: 3}
+    readyToHarvestSprite: {fileID: 21300000, guid: 54f942bc5022cca4c883bee08fdab9b8, type: 3}

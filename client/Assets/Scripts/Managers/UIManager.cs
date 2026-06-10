@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameClient.Core;
 using UnityEngine;
+using DG.Tweening;
 using GameClient.Core.Interfaces;
 using GameClient.UI;
 using VContainer;
@@ -118,19 +119,349 @@ namespace GameClient
             }
         }
 
+        private async Task<bool> TryLoadConfirmPanelPrefabAsync(
+            string title, string content, string acceptText, string denyText, 
+            System.Action onAccept, System.Action onDeny)
+        {
+            GameObject go = null;
+            try
+            {
+                // 1. Thử tải bằng Addressables trước (vì prefab nằm ngoài thư mục Resources)
+                go = await ResourceManager.Instance.InstantiateAsync("UI_ConfirmPanel", canvasRoot);
+            }
+            catch (System.Exception) {}
+
+            // 2. Dự phòng: Thử tải bằng Resources truyền thống
+            if (go == null)
+            {
+                var confirmPrefab = Resources.Load<GameObject>("Prefabs/UI/UI_ConfirmPanel");
+                if (confirmPrefab != null)
+                {
+                    go = Instantiate(confirmPrefab, canvasRoot);
+                }
+            }
+
+            if (go != null)
+            {
+                go.transform.SetAsLastSibling();
+                var script = go.GetComponent<UI_ConfirmPanel>();
+                if (script != null)
+                {
+                    script.Setup(null);
+                    script.SetupDialog(title, content, acceptText, denyText, onAccept, onDeny);
+                    script.Show();
+                    return true;
+                }
+                else
+                {
+                    Destroy(go);
+                }
+            }
+            return false;
+        }
+
         public void ShowMessage(string title, string content, System.Action onConfirm = null)
         {
             Debug.Log($"[POPUP] {title}: {content}");
             
-            if (GameClient.Managers.ToastManager.Instance != null)
+            if (canvasRoot == null)
             {
-                GameClient.Managers.ToastManager.Instance.ShowNormalToast($"{title}: {content}");
+                if (onConfirm != null) onConfirm.Invoke();
+                return;
             }
-            
-            if (onConfirm != null)
+
+            _ = ShowMessageAsync(title, content, onConfirm);
+        }
+
+        private async Task ShowMessageAsync(string title, string content, System.Action onConfirm)
+        {
+            bool success = await TryLoadConfirmPanelPrefabAsync(title, content, "✓ OK", "", onConfirm, null);
+            if (success) return;
+
+            var root = new GameObject("UI_MessageDialogPopup");
+            root.transform.SetParent(canvasRoot, false);
+            root.transform.SetAsLastSibling();
+
+            var canvasGroup = root.AddComponent<CanvasGroup>();
+
+            var overlayGo = new GameObject("Overlay", typeof(UnityEngine.UI.Image));
+            overlayGo.transform.SetParent(root.transform, false);
+            var overlayImg = overlayGo.GetComponent<UnityEngine.UI.Image>();
+            overlayImg.color = new Color(0, 0, 0, 0.65f);
+            var overlayRect = overlayGo.GetComponent<RectTransform>();
+            overlayRect.anchorMin = Vector2.zero;
+            overlayRect.anchorMax = Vector2.one;
+            overlayRect.sizeDelta = Vector2.zero;
+
+            var panelGo = new GameObject("Panel", typeof(UnityEngine.UI.Image));
+            panelGo.transform.SetParent(root.transform, false);
+            var panelImg = panelGo.GetComponent<UnityEngine.UI.Image>();
+            panelImg.color = new Color(0.12f, 0.12f, 0.16f, 0.95f);
+            var panelRect = panelGo.GetComponent<RectTransform>();
+            panelRect.sizeDelta = new Vector2(400, 220);
+            panelRect.anchoredPosition = Vector2.zero;
+
+            var outline = panelGo.AddComponent<UnityEngine.UI.Outline>();
+            outline.effectColor = new Color(0.3f, 0.3f, 0.4f, 0.5f);
+            outline.effectDistance = new Vector2(1, -1);
+
+            var titleGo = new GameObject("Title", typeof(TMPro.TextMeshProUGUI));
+            titleGo.transform.SetParent(panelGo.transform, false);
+            var titleText = titleGo.GetComponent<TMPro.TextMeshProUGUI>();
+            titleText.text = title;
+            titleText.fontSize = 20;
+            titleText.alignment = TMPro.TextAlignmentOptions.Center;
+            titleText.color = new Color(0.9f, 0.8f, 0.6f);
+            var titleRect = titleGo.GetComponent<RectTransform>();
+            titleRect.anchorMin = new Vector2(0, 0.75f);
+            titleRect.anchorMax = new Vector2(1, 1);
+            titleRect.offsetMin = new Vector2(10, 0);
+            titleRect.offsetMax = new Vector2(-10, 0);
+
+            var contentGo = new GameObject("Content", typeof(TMPro.TextMeshProUGUI));
+            contentGo.transform.SetParent(panelGo.transform, false);
+            var contentText = contentGo.GetComponent<TMPro.TextMeshProUGUI>();
+            contentText.text = content;
+            contentText.fontSize = 16;
+            contentText.alignment = TMPro.TextAlignmentOptions.Center;
+            contentText.color = Color.white;
+            var contentRect = contentGo.GetComponent<RectTransform>();
+            contentRect.anchorMin = new Vector2(0, 0.3f);
+            contentRect.anchorMax = new Vector2(1, 0.75f);
+            contentRect.offsetMin = new Vector2(20, 0);
+            contentRect.offsetMax = new Vector2(-20, 0);
+
+            // Tận dụng prefab Button có sẵn trong Resources
+            var btnPrefab = Resources.Load<GameObject>("Prefabs/UI/Component/Button");
+            GameObject confirmBtnGo;
+
+            if (btnPrefab != null)
             {
-                onConfirm.Invoke();
+                confirmBtnGo = Instantiate(btnPrefab, panelGo.transform);
+                confirmBtnGo.name = "ConfirmButton";
             }
+            else
+            {
+                confirmBtnGo = new GameObject("ConfirmButton", typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
+                confirmBtnGo.transform.SetParent(panelGo.transform, false);
+                var confirmBtnImg = confirmBtnGo.GetComponent<UnityEngine.UI.Image>();
+                confirmBtnImg.color = new Color(0.2f, 0.5f, 0.8f);
+            }
+
+            var confirmBtnRect = confirmBtnGo.GetComponent<RectTransform>();
+            confirmBtnRect.anchorMin = new Vector2(0.3f, 0.08f);
+            confirmBtnRect.anchorMax = new Vector2(0.7f, 0.28f);
+            confirmBtnRect.offsetMin = Vector2.zero;
+            confirmBtnRect.offsetMax = Vector2.zero;
+
+            var confirmTextComp = confirmBtnGo.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            if (confirmTextComp == null)
+            {
+                var confirmTextGo = new GameObject("Text", typeof(TMPro.TextMeshProUGUI));
+                confirmTextGo.transform.SetParent(confirmBtnGo.transform, false);
+                confirmTextComp = confirmTextGo.GetComponent<TMPro.TextMeshProUGUI>();
+                var confirmTextRect = confirmTextGo.GetComponent<RectTransform>();
+                confirmTextRect.anchorMin = Vector2.zero;
+                confirmTextRect.anchorMax = Vector2.one;
+                confirmTextRect.sizeDelta = Vector2.zero;
+            }
+            confirmTextComp.text = "✓ OK";
+            confirmTextComp.fontSize = 14;
+            confirmTextComp.alignment = TMPro.TextAlignmentOptions.Center;
+            confirmTextComp.color = Color.white;
+
+            var confirmBtn = confirmBtnGo.GetComponent<UnityEngine.UI.Button>();
+            confirmBtn.onClick.AddListener(() => {
+                Destroy(root);
+                onConfirm?.Invoke();
+            });
+
+            canvasGroup.alpha = 0f;
+            canvasGroup.DOFade(1f, 0.2f).SetUpdate(true);
+        }
+
+        public void ShowConfirmDialog(
+            string titleKey, 
+            string contentFormat, 
+            string contentArg, 
+            string acceptKey, 
+            string denyKey, 
+            System.Action onAccept, 
+            System.Action onDeny = null)
+        {
+            if (canvasRoot == null)
+            {
+                onAccept?.Invoke();
+                return;
+            }
+
+            _ = ShowConfirmDialogAsync(titleKey, contentFormat, contentArg, acceptKey, denyKey, onAccept, onDeny);
+        }
+
+        private async Task ShowConfirmDialogAsync(
+            string titleKey, 
+            string contentFormat, 
+            string contentArg, 
+            string acceptKey, 
+            string denyKey, 
+            System.Action onAccept, 
+            System.Action onDeny = null)
+        {
+            string title = Managers.LocalizationManager.Instance.GetText(titleKey);
+            if (string.IsNullOrEmpty(title) || title.StartsWith("[")) title = titleKey;
+
+            string rawContent = Managers.LocalizationManager.Instance.GetText(contentFormat);
+            if (string.IsNullOrEmpty(rawContent) || rawContent.StartsWith("[")) rawContent = contentFormat;
+
+            string content = string.IsNullOrEmpty(contentArg) ? rawContent : string.Format(rawContent, contentArg);
+
+            string acceptText = Managers.LocalizationManager.Instance.GetText(acceptKey);
+            if (string.IsNullOrEmpty(acceptText) || acceptText.StartsWith("[")) acceptText = "✓ Đồng Ý";
+
+            string denyText = Managers.LocalizationManager.Instance.GetText(denyKey);
+            if (string.IsNullOrEmpty(denyText) || denyText.StartsWith("[")) denyText = "✗ Hủy";
+
+            bool success = await TryLoadConfirmPanelPrefabAsync(title, content, acceptText, denyText, onAccept, onDeny);
+            if (success) return;
+
+            // 2. Dự phòng tạo động
+            var root = new GameObject("UI_ConfirmDialogPopup");
+            root.transform.SetParent(canvasRoot, false);
+            root.transform.SetAsLastSibling();
+
+            var canvasGroup = root.AddComponent<CanvasGroup>();
+
+            var overlayGo = new GameObject("Overlay", typeof(UnityEngine.UI.Image));
+            overlayGo.transform.SetParent(root.transform, false);
+            var overlayImg = overlayGo.GetComponent<UnityEngine.UI.Image>();
+            overlayImg.color = new Color(0, 0, 0, 0.65f);
+            var overlayRect = overlayGo.GetComponent<RectTransform>();
+            overlayRect.anchorMin = Vector2.zero;
+            overlayRect.anchorMax = Vector2.one;
+            overlayRect.sizeDelta = Vector2.zero;
+
+            var panelGo = new GameObject("Panel", typeof(UnityEngine.UI.Image));
+            panelGo.transform.SetParent(root.transform, false);
+            var panelImg = panelGo.GetComponent<UnityEngine.UI.Image>();
+            panelImg.color = new Color(0.12f, 0.12f, 0.16f, 0.95f);
+            var panelRect = panelGo.GetComponent<RectTransform>();
+            panelRect.sizeDelta = new Vector2(400, 220);
+            panelRect.anchoredPosition = Vector2.zero;
+
+            var outline = panelGo.AddComponent<UnityEngine.UI.Outline>();
+            outline.effectColor = new Color(0.3f, 0.3f, 0.4f, 0.5f);
+            outline.effectDistance = new Vector2(1, -1);
+
+            var titleGo = new GameObject("Title", typeof(TMPro.TextMeshProUGUI));
+            titleGo.transform.SetParent(panelGo.transform, false);
+            var titleText = titleGo.GetComponent<TMPro.TextMeshProUGUI>();
+            titleText.text = title;
+            titleText.fontSize = 20;
+            titleText.alignment = TMPro.TextAlignmentOptions.Center;
+            titleText.color = new Color(0.9f, 0.8f, 0.6f);
+            var titleRect = titleGo.GetComponent<RectTransform>();
+            titleRect.anchorMin = new Vector2(0, 0.75f);
+            titleRect.anchorMax = new Vector2(1, 1);
+            titleRect.offsetMin = new Vector2(10, 0);
+            titleRect.offsetMax = new Vector2(-10, 0);
+
+            var contentGo = new GameObject("Content", typeof(TMPro.TextMeshProUGUI));
+            contentGo.transform.SetParent(panelGo.transform, false);
+            var contentText = contentGo.GetComponent<TMPro.TextMeshProUGUI>();
+            contentText.text = content;
+            contentText.fontSize = 16;
+            contentText.alignment = TMPro.TextAlignmentOptions.Center;
+            contentText.color = Color.white;
+            var contentRect = contentGo.GetComponent<RectTransform>();
+            contentRect.anchorMin = new Vector2(0, 0.3f);
+            contentRect.anchorMax = new Vector2(1, 0.75f);
+            contentRect.offsetMin = new Vector2(20, 0);
+            contentRect.offsetMax = new Vector2(-20, 0);
+
+            // Tận dụng prefab Button có sẵn trong Resources
+            var btnPrefab = Resources.Load<GameObject>("Prefabs/UI/Component/Button");
+            GameObject denyBtnGo;
+            GameObject acceptBtnGo;
+
+            if (btnPrefab != null)
+            {
+                denyBtnGo = Instantiate(btnPrefab, panelGo.transform);
+                denyBtnGo.name = "DenyButton";
+                
+                acceptBtnGo = Instantiate(btnPrefab, panelGo.transform);
+                acceptBtnGo.name = "AcceptButton";
+            }
+            else
+            {
+                denyBtnGo = new GameObject("DenyButton", typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
+                denyBtnGo.transform.SetParent(panelGo.transform, false);
+                var denyBtnImg = denyBtnGo.GetComponent<UnityEngine.UI.Image>();
+                denyBtnImg.color = new Color(0.35f, 0.35f, 0.38f);
+                
+                acceptBtnGo = new GameObject("AcceptButton", typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
+                acceptBtnGo.transform.SetParent(panelGo.transform, false);
+                var acceptBtnImg = acceptBtnGo.GetComponent<UnityEngine.UI.Image>();
+                acceptBtnImg.color = new Color(0.2f, 0.5f, 0.8f);
+            }
+
+            var denyBtnRect = denyBtnGo.GetComponent<RectTransform>();
+            denyBtnRect.anchorMin = new Vector2(0.1f, 0.08f);
+            denyBtnRect.anchorMax = new Vector2(0.45f, 0.28f);
+            denyBtnRect.offsetMin = Vector2.zero;
+            denyBtnRect.offsetMax = Vector2.zero;
+
+            var denyTextComp = denyBtnGo.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            if (denyTextComp == null)
+            {
+                var denyTextGo = new GameObject("Text", typeof(TMPro.TextMeshProUGUI));
+                denyTextGo.transform.SetParent(denyBtnGo.transform, false);
+                denyTextComp = denyTextGo.GetComponent<TMPro.TextMeshProUGUI>();
+                var denyTextRect = denyTextGo.GetComponent<RectTransform>();
+                denyTextRect.anchorMin = Vector2.zero;
+                denyTextRect.anchorMax = Vector2.one;
+                denyTextRect.sizeDelta = Vector2.zero;
+            }
+            denyTextComp.text = denyText;
+            denyTextComp.fontSize = 14;
+            denyTextComp.alignment = TMPro.TextAlignmentOptions.Center;
+            denyTextComp.color = Color.white;
+
+            var acceptBtnRect = acceptBtnGo.GetComponent<RectTransform>();
+            acceptBtnRect.anchorMin = new Vector2(0.55f, 0.08f);
+            acceptBtnRect.anchorMax = new Vector2(0.9f, 0.28f);
+            acceptBtnRect.offsetMin = Vector2.zero;
+            acceptBtnRect.offsetMax = Vector2.zero;
+
+            var acceptTextComp = acceptBtnGo.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            if (acceptTextComp == null)
+            {
+                var acceptTextGo = new GameObject("Text", typeof(TMPro.TextMeshProUGUI));
+                acceptTextGo.transform.SetParent(acceptBtnGo.transform, false);
+                acceptTextComp = acceptTextGo.GetComponent<TMPro.TextMeshProUGUI>();
+                var acceptTextRect = acceptTextGo.GetComponent<RectTransform>();
+                acceptTextRect.anchorMin = Vector2.zero;
+                acceptTextRect.anchorMax = Vector2.one;
+                acceptTextRect.sizeDelta = Vector2.zero;
+            }
+            acceptTextComp.text = acceptText;
+            acceptTextComp.fontSize = 14;
+            acceptTextComp.alignment = TMPro.TextAlignmentOptions.Center;
+            acceptTextComp.color = Color.white;
+
+            var denyBtn = denyBtnGo.GetComponent<UnityEngine.UI.Button>();
+            denyBtn.onClick.AddListener(() => {
+                Destroy(root);
+                onDeny?.Invoke();
+            });
+
+            var acceptBtn = acceptBtnGo.GetComponent<UnityEngine.UI.Button>();
+            acceptBtn.onClick.AddListener(() => {
+                Destroy(root);
+                onAccept?.Invoke();
+            });
+
+            canvasGroup.alpha = 0f;
+            canvasGroup.DOFade(1f, 0.2f).SetUpdate(true);
         }
 
         public async Task<IUIView> OpenPanelAsync(string addressableKey, object data = null, bool isLoadByPlatform = true)
@@ -188,6 +519,13 @@ namespace GameClient
                         _loadingPanels.Remove(addressableKey);
                         throw ex;
                     }
+                }
+
+                // Chống race-condition khi người chơi đã logout/GoToLogin trong lúc tải panel
+                if (!_loadingPanels.ContainsKey(addressableKey))
+                {
+                    if (uiInstance != null) Destroy(uiInstance);
+                    return null;
                 }
                 
                 if (uiInstance != null)
@@ -281,10 +619,17 @@ namespace GameClient
         
         public void GoToLogin()
         {
+            // Xoá danh sách loading để huỷ các tác vụ tải panel bất đồng bộ đang chờ
+            _loadingPanels.Clear();
+
             foreach (var panel in _cachedPanels.Values)
             {
                 var mb = panel as MonoBehaviour;
-                if (mb != null && mb.gameObject != null) Destroy(mb.gameObject);
+                if (mb != null && mb.gameObject != null) 
+                {
+                    panel.Hide(); // Ẩn ngay lập tức để tránh lộ UI thừa trong khi chuyển scene
+                    Destroy(mb.gameObject);
+                }
             }
             _cachedPanels.Clear();
             

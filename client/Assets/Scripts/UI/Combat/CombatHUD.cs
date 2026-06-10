@@ -2,25 +2,45 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameClient.Gameplay.Combat;
 using GameClient.Gameplay.Combat.Skills;
-using GameClient.UI; // Assume UIManager exists
+using GameClient.UI;
+using GameClient.UI.Core;
 using System.Collections.Generic;
 
 namespace GameClient.UI.Combat
 {
-    public class CombatHUD : MonoBehaviour
+    public class CombatHUD : BaseUIPanel
     {
+        [Header("Text references")]
         public Text txtTurnInfo;
+
+        [Header("Containers")]
         public Transform playerStatusContainer;
         public Transform enemyStatusContainer;
+        
+        [Header("Prefabs")]
+        [SerializeField] private GameObject characterItemPrefab;
+
+        [Header("Skills Panel")]
         public GameObject skillPanel;
 
         private CombatManager _combatManager;
         private List<SkillData> _availableSkills;
+        private Dictionary<CombatEntity, CombatHUDCharacterItem> _characterItems = new();
+
+        public override void Setup(object data = null)
+        {
+            base.Setup(data);
+            Initialize(CombatManager.Instance);
+        }
 
         public void Initialize(CombatManager combatManager)
         {
+            if (combatManager == null) return;
+            
             _combatManager = combatManager;
+            _combatManager.OnTurnStarted -= HandleTurnStarted;
             _combatManager.OnTurnStarted += HandleTurnStarted;
+            _combatManager.OnCombatEnded -= HandleCombatEnded;
             _combatManager.OnCombatEnded += HandleCombatEnded;
 
             _availableSkills = new List<SkillData>();
@@ -66,27 +86,67 @@ namespace GameClient.UI.Combat
             buffSkill.PrimaryFlatBonus = 30;
             _availableSkills.Add(buffSkill);
 
-            UpdateStatusUI();
+            BuildCharacterStatusUI();
             skillPanel.SetActive(false);
         }
 
-        private void OnDestroy()
+        protected override void OnCleanup()
         {
+            base.OnCleanup();
             if (_combatManager != null)
             {
                 _combatManager.OnTurnStarted -= HandleTurnStarted;
                 _combatManager.OnCombatEnded -= HandleCombatEnded;
             }
+            _characterItems.Clear();
         }
 
-        private void UpdateStatusUI()
+        private void BuildCharacterStatusUI()
         {
-            Debug.Log("[CombatHUD] Cập nhật UI Máu/MP...");
+            // Clear existing status items
+            foreach (Transform child in playerStatusContainer) Destroy(child.gameObject);
+            foreach (Transform child in enemyStatusContainer) Destroy(child.gameObject);
+            _characterItems.Clear();
+
+            if (_combatManager == null || characterItemPrefab == null) return;
+
+            // Instantiating Player character items
+            foreach (var hero in _combatManager.Players)
+            {
+                var go = Instantiate(characterItemPrefab, playerStatusContainer);
+                var item = go.GetComponent<CombatHUDCharacterItem>();
+                if (item != null)
+                {
+                    item.Bind(hero);
+                    _characterItems[hero] = item;
+                }
+            }
+
+            // Instantiating Enemy character items
+            foreach (var enemy in _combatManager.Enemies)
+            {
+                var go = Instantiate(characterItemPrefab, enemyStatusContainer);
+                var item = go.GetComponent<CombatHUDCharacterItem>();
+                if (item != null)
+                {
+                    item.Bind(enemy);
+                    _characterItems[enemy] = item;
+                }
+            }
         }
 
         private void HandleTurnStarted(CombatEntity entity)
         {
-            txtTurnInfo.text = $"Lượt của: {entity.entityName}";
+            if (txtTurnInfo != null)
+            {
+                txtTurnInfo.text = $"Lượt của: {entity.entityName}";
+            }
+
+            // Turn Highlight Indicator
+            foreach (var kvp in _characterItems)
+            {
+                kvp.Value.SetHighlight(kvp.Key == entity);
+            }
 
             if (entity.isPlayer)
             {
@@ -96,15 +156,21 @@ namespace GameClient.UI.Combat
             {
                 skillPanel.SetActive(false);
             }
-
-            UpdateStatusUI();
         }
 
         private void HandleCombatEnded()
         {
-            txtTurnInfo.text = "Trận chiến kết thúc!";
+            if (txtTurnInfo != null)
+            {
+                txtTurnInfo.text = "Trận chiến kết thúc!";
+            }
             skillPanel.SetActive(false);
-            UpdateStatusUI();
+            
+            // Turn off highlight indicator
+            foreach (var kvp in _characterItems)
+            {
+                kvp.Value.SetHighlight(false);
+            }
         }
 
         public void OnSkillSelected(int skillIndex)

@@ -49,6 +49,7 @@ message Item {
 
 message Inventory {
   repeated Item items = 1;
+  repeated ItemConfig configs = 2;
 }
 
 // --- Equipment ---
@@ -85,3 +86,16 @@ message CraftResponse {
   string message_id = 2;
   repeated Item gained_items = 3;
 }
+
+// --- Using Items ---
+
+message UseItemRequest {
+  int64 item_id = 1;      // Instance ID of the item in player inventory
+  int32 quantity = 2;     // Quantity to use
+}
+
+message UseItemResponse {
+  int32 code = 1;         // 0: Success, other: error code
+  string message_id = 2;  // Response message ID (for i18n)
+}
+

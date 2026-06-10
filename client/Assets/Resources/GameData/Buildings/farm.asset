@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32d0f9abead72b4199e571ede16553d, type: 3}
+  m_Name: farm
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingData
+  BuildingID: farm
+  BuildingNameKey: farm
+  BuildingDescKey: farm_desc
+  Type: 1
+  Category: 0
+  ReputationLimits:
+  - RequiredReputation: 0
+    MaxAllowed: 2
+  - RequiredReputation: 100
+    MaxAllowed: 3
+  SizeX: 2
+  SizeY: 2
+  PrefabAddress: 
+  VisualConfig: {fileID: 11400000, guid: 4e013df3afcdde5479586ee0b0d90ea0, type: 2}
+  DetailSubPanelAddress: 
+  LevelStats:
+  - Level: 1
+    RequiredReputation: 0
+    CostItems:
+    - ItemCode: 00000
+      Quantity: 100
+    - ItemCode: 00002
+      Quantity: 10
+    - ItemCode: 00003
+      Quantity: 10
+    BuildTimeSeconds: 30
+  - Level: 2
+    RequiredReputation: 0
+    CostItems:
+    - ItemCode: 00000
+      Quantity: 200
+    - ItemCode: 00002
+      Quantity: 20
+    - ItemCode: 00003
+      Quantity: 20
+    BuildTimeSeconds: 60
+  - Level: 3
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 120
+  - Level: 4
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 240
+  - Level: 5
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 480

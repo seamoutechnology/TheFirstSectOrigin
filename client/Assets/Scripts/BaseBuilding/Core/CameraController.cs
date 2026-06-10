@@ -74,38 +74,37 @@ namespace GameClient.BaseBuilding.Core
         {
             if (_cam == null) return;
 
-            bool isDown = false;
-            bool isPressed = false;
-            Vector3 currentMousePos = Vector3.zero;
+            var inputManager = GameClient.Managers.InputManager.Instance;
+            if (inputManager == null) return;
 
-            var mouse = UnityEngine.InputSystem.Mouse.current;
-            if (mouse != null)
+            // Chặn kéo camera khi đang kéo toà nhà trên Mobile
+            if (BuildingController.Instance != null && 
+                BuildingController.Instance.IsPlacing && 
+                BuildingController.Instance.IsPointerDownInsidePreview)
             {
-                if (mouse.rightButton.wasPressedThisFrame || mouse.middleButton.wasPressedThisFrame || mouse.leftButton.wasPressedThisFrame)
-                    isDown = true;
-                if (mouse.rightButton.isPressed || mouse.middleButton.isPressed || mouse.leftButton.isPressed)
-                    isPressed = true;
-                currentMousePos = mouse.position.ReadValue();
+                _isDragging = false;
+                return;
             }
+
+            Vector2 pointerPos = inputManager.GetPointerPosition();
+            bool isDown = inputManager.IsPointerPanDown();
+            bool isPressed = inputManager.IsPointerPanPressed();
 
             if (isDown)
             {
-                currentMousePos.z = -_cam.transform.position.z;
-                _lastMousePos = currentMousePos;
+                _lastMousePos = new Vector3(pointerPos.x, pointerPos.y, -_cam.transform.position.z);
                 _isDragging = true;
             }
             else if (isPressed && _isDragging)
             {
-                currentMousePos.z = -_cam.transform.position.z;
-                Vector3 delta = _cam.ScreenToWorldPoint(_lastMousePos) - _cam.ScreenToWorldPoint(currentMousePos);
+                Vector3 currentPos = new Vector3(pointerPos.x, pointerPos.y, -_cam.transform.position.z);
+                Vector3 delta = _cam.ScreenToWorldPoint(_lastMousePos) - _cam.ScreenToWorldPoint(currentPos);
                 
                 if (delta.sqrMagnitude > 0.000001f)
                 {
-                    Vector3 newPos = _cam.transform.position + delta;
-                    _cam.transform.position = newPos;
+                    _cam.transform.position += delta;
                 }
-                
-                _lastMousePos = currentMousePos;
+                _lastMousePos = currentPos;
             }
             else if (!isPressed && _isDragging)
             {
@@ -146,7 +145,13 @@ namespace GameClient.BaseBuilding.Core
         {
             Vector3 targetPos3D = new Vector3(targetPosition.x, targetPosition.y, _cam.transform.position.z);
             _cam.transform.DOMove(targetPos3D, duration).SetEase(Ease.OutCubic);
-            
+        }
+
+        public void FocusTo(Vector2 targetPosition, float targetZoom, float duration = 1f)
+        {
+            Vector3 targetPos3D = new Vector3(targetPosition.x, targetPosition.y, _cam.transform.position.z);
+            _cam.transform.DOMove(targetPos3D, duration).SetEase(Ease.OutCubic);
+            _cam.DOOrthoSize(targetZoom, duration).SetEase(Ease.OutCubic);
         }
     }
 }

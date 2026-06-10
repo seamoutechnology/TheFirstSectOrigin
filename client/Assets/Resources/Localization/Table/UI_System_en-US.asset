@@ -291,6 +291,162 @@ MonoBehaviour:
     m_Localized: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 8996909539356672
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8996955185967104
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9174730983305216
+    m_Localized: 'Upgrade time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9179693801238528
+    m_Localized: Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9180525552693248
+    m_Localized: Max level reached
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9181582475358208
+    m_Localized: Main Hall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9182657081208832
+    m_Localized: 'Ethereal Main Hall: Perched on the highest peak amidst perpetual
+      mist and rich spiritual energy. It serves as both the administrative hub and
+      the core of the sect''s spiritual array.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9199103047856128
+    m_Localized: Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9229031172698112
+    m_Localized: Register successfully!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9634828327284736
+    m_Localized: Farm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9718650465120256
+    m_Localized: Update success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9722690162880512
+    m_Localized: Max Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9722811839639552
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9920520865411072
+    m_Localized: 'Notice: {o}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9938452936880128
+    m_Localized: Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9940257951412224
+    m_Localized: World
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10032405560389632
+    m_Localized: Chamber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10032523021873152
+    m_Localized: A quiet sanctuary for cultivators to meditate and break through
+      realms. Upgrading this room increases the passive spiritual energy gathering
+      speed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10064986314076160
+    m_Localized: Production
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10064993826074624
+    m_Localized: Facility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065041896992768
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065068623097856
+    m_Localized: Scenery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065090894852096
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10113704664985600
+    m_Localized: Choose new position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245392921489408
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245503663697920
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245569652682752
+    m_Localized: Stow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245736153968640
+    m_Localized: Do you want to put it in the backpack?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10300925422563328
+    m_Localized: Master volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10301984601763840
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10302057888837632
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304074506006528
+    m_Localized: Toggle sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304195985633280
+    m_Localized: Toggle music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304249047773184
+    m_Localized: Toggle sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10307279960895488
+    m_Localized: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314167674957824
+    m_Localized: Princple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314172250943488
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314942543261696
+    m_Localized: Choose language
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -41,6 +41,12 @@ namespace GameClient.Network
             return await Client.UpgradeBuildingAsync(new UpgradeBuildingRequest { BuildingCode = buildingCode }, NetworkManager.DefaultCallOptions());
         }
 
+        public static async Task<SpeedUpBuildingResponse> SpeedUpBuildingAsync(string buildingCode)
+        {
+            AssertConnected();
+            return await Client.SpeedUpBuildingAsync(new SpeedUpBuildingRequest { BuildingCode = buildingCode }, NetworkManager.DefaultCallOptions());
+        }
+
         public static async Task<CollectResourcesResponse> CollectResourcesAsync(string buildingCode)
         {
             AssertConnected();

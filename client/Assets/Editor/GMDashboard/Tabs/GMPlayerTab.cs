@@ -8,7 +8,7 @@ namespace GameClient.Editor.GMDashboard
     public class GMPlayerTab
     {
         private EditorWindow window;
-        private string adminUrl = "http://localhost:8080/api/gm";
+        private string AdminUrl => GMDashboardConfig.GmApiUrl;
         
         // & Pagination State
         private List<GMUserListItem> userList = new List<GMUserListItem>();
@@ -29,14 +29,17 @@ namespace GameClient.Editor.GMDashboard
         // state
         private float leftPanelWidth = 400f;
         private bool isResizing = false;
-
+        
         // state
         private GMUserInfo currentUser;
         private List<GMUserItem> currentInventory = new List<GMUserItem>();
         
         // item Form
-        private string newItemCode = "iron_sword";
+        private string newItemCode = "gold";
         private int newItemQuantity = 1;
+        private List<GMItemConfigData> availableItemConfigs = new List<GMItemConfigData>();
+        private string[] itemOptions = new string[] { "gold (Vàng)", "qi (Linh Khí)", "diamond (Kim Cương)" };
+        private int selectedItemConfigIndex = 0;
 
         private Vector2 rightScrollPos;
 
@@ -49,11 +52,56 @@ namespace GameClient.Editor.GMDashboard
         {
             FetchUserList();
             FetchZoneList();
+            FetchAvailableItems();
+            // Auto re-fetch when server comes online
+            GMDashboardConfig.OnStatusChanged += OnServerStatusChanged;
+        }
+
+        public void OnDisable()
+        {
+            GMDashboardConfig.OnStatusChanged -= OnServerStatusChanged;
+        }
+
+        private void OnServerStatusChanged()
+        {
+            if (GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online)
+            {
+                // Refetch zones if the list is still empty
+                if (zoneList.Count == 0) FetchZoneList();
+                if (availableItemConfigs.Count == 0) FetchAvailableItems();
+            }
+        }
+
+        private void FetchAvailableItems()
+        {
+            string url = $"{AdminUrl}/item_configs";
+            var req = UnityWebRequest.Get(url);
+            var op = req.SendWebRequest();
+            
+            op.completed += (asyncOp) =>
+            {
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    var items = GMJsonHelper.FromJson<GMItemConfigData>(req.downloadHandler.text);
+                    availableItemConfigs = new List<GMItemConfigData>(items ?? new GMItemConfigData[0]);
+                    if (availableItemConfigs.Count > 0)
+                    {
+                        itemOptions = new string[availableItemConfigs.Count];
+                        for (int i = 0; i < availableItemConfigs.Count; i++)
+                        {
+                            itemOptions[i] = $"{availableItemConfigs[i].item_code} ({availableItemConfigs[i].name_key})";
+                        }
+                        newItemCode = availableItemConfigs[0].item_code;
+                    }
+                    window.Repaint();
+                }
+                req.Dispose();
+            };
         }
 
         private void FetchZoneList()
         {
-            string url = $"{adminUrl}/zones";
+            string url = $"{AdminUrl}/zones";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -131,17 +179,31 @@ namespace GameClient.Editor.GMDashboard
             GUILayout.BeginHorizontal();
             GUILayout.Label("Danh sách Người dùng", EditorStyles.boldLabel);
             
-            // selector
+            // Zone selector
             GUILayout.FlexibleSpace();
             GUILayout.Label("Zone:", GUILayout.Width(40));
-            int newZoneIndex = EditorGUILayout.Popup(selectedZoneIndex, zoneOptions, GUILayout.Width(150));
-            if (newZoneIndex != selectedZoneIndex)
+
+            if (zoneList.Count == 0)
             {
-                selectedZoneIndex = newZoneIndex;
-                if (currentUser != null)
+                // Server belum return zones — show fallback
+                GUI.color = new Color(1f, 0.8f, 0.4f);
+                GUILayout.Label("(chưa tải)", GUILayout.Width(80));
+                GUI.color = Color.white;
+                if (GUILayout.Button("↺", GUILayout.Width(26))) FetchZoneList();
+            }
+            else
+            {
+                int newZoneIndex = EditorGUILayout.Popup(selectedZoneIndex, zoneOptions, GUILayout.Width(130));
+                if (newZoneIndex != selectedZoneIndex)
                 {
-                    FetchUserInventory();
+                    selectedZoneIndex = newZoneIndex;
+                    if (currentUser != null)
+                    {
+                        FetchUserData(currentUser.user_id);
+                        FetchUserInventory();
+                    }
                 }
+                if (GUILayout.Button("↺", GUILayout.Width(26))) FetchZoneList();
             }
             GUILayout.EndHorizontal();
 
@@ -242,13 +304,29 @@ namespace GameClient.Editor.GMDashboard
             GUILayout.Label("Thêm Vật phẩm", EditorStyles.boldLabel);
             GUILayout.BeginHorizontal();
             GUILayout.Label("Mã đồ:", GUILayout.Width(80));
-            newItemCode = GUILayout.TextField(newItemCode, GUILayout.Width(150));
+
+            if (itemOptions != null && itemOptions.Length > 0)
+            {
+                selectedItemConfigIndex = EditorGUILayout.Popup(selectedItemConfigIndex, itemOptions, GUILayout.Width(180));
+                if (selectedItemConfigIndex >= 0 && selectedItemConfigIndex < availableItemConfigs.Count)
+                {
+                    newItemCode = availableItemConfigs[selectedItemConfigIndex].item_code;
+                }
+            }
+            else
+            {
+                newItemCode = GUILayout.TextField(newItemCode, GUILayout.Width(180));
+            }
+
             GUILayout.Label("SL:", GUILayout.Width(30));
             newItemQuantity = EditorGUILayout.IntField(newItemQuantity, GUILayout.Width(50));
+            bool playerOnline = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
+            GUI.enabled = playerOnline && currentUser != null;
             if (GUILayout.Button("Thêm", GUILayout.Width(80)))
             {
                 AddItemToUser();
             }
+            GUI.enabled = true;
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
 
@@ -274,10 +352,13 @@ namespace GameClient.Editor.GMDashboard
                     GUILayout.BeginHorizontal("box");
                     GUILayout.Label(item.item_code, GUILayout.Width(150));
                     GUILayout.Label("x" + item.quantity, GUILayout.Width(50));
+                    bool canDelete = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
+                    GUI.enabled = canDelete;
                     if (GUILayout.Button("Delete", GUILayout.Width(60)))
                     {
                         RemoveItemFromUser(item.id);
                     }
+                    GUI.enabled = true;
                     GUILayout.EndHorizontal();
                 }
             }
@@ -289,7 +370,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchUserList()
         {
-            string url = $"{adminUrl}/users/list?page={currentPage}&limit={limit}&search={searchKeyword}";
+            string url = $"{AdminUrl}/users/list?page={currentPage}&limit={limit}&search={searchKeyword}";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -315,7 +396,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchUserData(long userId)
         {
-            string url = $"{adminUrl}/user?id={userId}";
+            string url = $"{AdminUrl}/user?id={userId}&zone_id={CurrentZoneId}";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -331,7 +412,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchUserInventory(long userId)
         {
-            string url = $"{adminUrl}/inventory?id={userId}&zone_id={CurrentZoneId}";
+            string url = $"{AdminUrl}/inventory?id={userId}&zone_id={CurrentZoneId}";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -356,7 +437,7 @@ namespace GameClient.Editor.GMDashboard
         private void AddItemToUser()
         {
             if (currentUser == null) return;
-            string url = $"{adminUrl}/inventory/add?id={currentUser.user_id}&zone_id={CurrentZoneId}";
+            string url = $"{AdminUrl}/inventory/add?id={currentUser.user_id}&zone_id={CurrentZoneId}";
             string jsonBody = $"{{\"item_code\":\"{newItemCode}\", \"quantity\":{newItemQuantity}}}";
             
             var req = new UnityWebRequest(url, "POST");
@@ -381,7 +462,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void RemoveItemFromUser(long itemId)
         {
-            string url = $"{adminUrl}/inventory/remove?item_id={itemId}&zone_id={CurrentZoneId}";
+            string url = $"{AdminUrl}/inventory/remove?item_id={itemId}&zone_id={CurrentZoneId}";
             var req = new UnityWebRequest(url, "POST");
             req.downloadHandler = new DownloadHandlerBuffer();
             

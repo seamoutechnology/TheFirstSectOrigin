@@ -16,6 +16,7 @@ message Building {
   int64 last_collect_at = 5;
   int64 pending_gold = 6;
   int32 max_level = 7;
+  int64 instance_id = 8;
 }
 
 message AlignmentInfo {
@@ -34,10 +35,12 @@ message SectInfo {
 // --- Requests ---
 message UpgradeBuildingRequest {
   string building_code = 1;
+  int64 instance_id = 2;
 }
 
 message CollectResourcesRequest {
   string building_code = 1; // Thêm mã công trình
+  int64 instance_id = 2;
 }
 
 message SaveAdminMapRequest {
@@ -75,3 +78,23 @@ message CollectResourcesResponse {
   PlayerProfile player = 3;
   map<string, int64> resources = 4;
 }
+
+message SavePlayerMapRequest {
+  string map_json_data = 1;
+}
+
+message SavePlayerMapResponse {
+  BaseResponse base = 1;
+}
+
+message SpeedUpBuildingRequest {
+  string building_code = 1;
+  int64 instance_id = 2;
+}
+
+message SpeedUpBuildingResponse {
+  BaseResponse base = 1;
+  Building building = 2;
+  PlayerProfile player = 3;
+}
+

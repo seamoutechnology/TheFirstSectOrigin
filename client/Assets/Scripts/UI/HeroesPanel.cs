@@ -1,6 +1,9 @@
+using GameClient.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.UI.Core;
+using GameClient.Managers;
+using GameClient.Network.Pb;
 
 namespace GameClient.UI
 {
@@ -34,21 +37,48 @@ namespace GameClient.UI
             foreach (var h in heroes)
             {
                 var go = Instantiate(heroItemPrefab, heroListContainer);
-                var texts = go.GetComponentsInChildren<Text>();
-                texts[0].text = $"[{h.Rarity}]";
-                texts[1].text = h.Name;
-                texts[2].text = $"Lv.{h.Level} | {h.Star} Star";
+                go.SetActive(true);
 
-                if (h.Rarity == "UR") texts[0].color = Color.magenta;
-                else if (h.Rarity == "SSR") texts[0].color = Color.yellow;
-                else if (h.Rarity == "SR") texts[0].color = new Color(0.5f, 0, 1f);
-                else texts[0].color = Color.blue;
+                // Tìm component Image để hiển thị chân dung tướng
+                var img = go.GetComponent<Image>();
+                if (img == null) img = go.GetComponentInChildren<Image>();
+
+                if (img != null)
+                {
+                    // Lấy cấu hình tướng để lấy đường dẫn Avatar/Icon
+                    var config = HeroDataManager.Instance.GetHeroConfigByCodeOrName(h.Name);
+                    if (config != null && !string.IsNullOrEmpty(config.iconAddress))
+                    {
+                        LoadAndSetAvatar(img, config.iconAddress);
+                    }
+                    else
+                    {
+                        // Fallback: Thử tải theo mã tướng
+                        LoadAndSetAvatar(img, h.Name);
+                    }
+                }
 
                 var btn = go.GetComponent<Button>();
                 if (btn == null) btn = go.AddComponent<Button>();
                 
                 var heroRef = h; // Capture variable for closure
                 btn.onClick.AddListener(() => OnHeroClicked(heroRef));
+            }
+        }
+
+        private async void LoadAndSetAvatar(Image img, string address)
+        {
+            try
+            {
+                var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);
+                if (sprite != null && img != null)
+                {
+                    img.sprite = sprite;
+                }
+            }
+            catch (System.Exception)
+            {
+                // Bỏ qua hoặc gán ảnh mặc định nếu lỗi tải
             }
         }
 

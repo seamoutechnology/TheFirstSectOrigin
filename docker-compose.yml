@@ -1,6 +1,6 @@
 services:
   # ============================================================
-  # GLOBAL DATABASE - LÆ°u trá»¯ tÃ i khoáº£n ngÆ°á»i chÆ¡i
+  # GLOBAL DATABASE
   # ============================================================
   postgres_global:
     image: postgres:15-alpine
@@ -22,7 +22,7 @@ services:
       retries: 5
 
   # ============================================================
-  # GAME DATABASE - LÆ°u dá»¯ liá»‡u trong game tá»«ng Zone
+  # GAME DATABASE
   # ============================================================
   postgres_game:
     image: postgres:15-alpine
@@ -65,7 +65,7 @@ services:
       retries: 5
 
   # ============================================================
-  # GLOBAL LOGIN SERVER - XÃ¡c thá»±c & Cáº¥p token
+  # GLOBAL LOGIN SERVER 
   # ============================================================
   login_server:
     build:
@@ -130,7 +130,7 @@ services:
       - server
 
   # ============================================================
-  # WORLD SERVER (Zone 1) - ThÃ nh trÃ¬, Gacha, TÆ°á»›ng
+  # WORLD SERVER (Zone 1)
   # ============================================================
   world_server:
     build:
@@ -165,7 +165,7 @@ services:
       - server
 
   # ============================================================
-  # COMBAT SERVER (Zone 1) - Xá»­ lÃ½ tráº­n Ä‘áº¥u
+  # COMBAT SERVER (Zone 1)
   # ============================================================
   combat_server:
     build:

@@ -69,5 +69,41 @@ namespace GameClient.Managers
             Debug.LogWarning($"[HeroDataManager] Không tìm thấy Config cho HeroID: {heroId}");
             return null;
         }
+
+        public HeroConfig GetHeroConfigByName(string name)
+        {
+            foreach (var config in _heroConfigs.Values)
+            {
+                if (config.heroName == name)
+                {
+                    return config;
+                }
+            }
+            return null;
+        }
+
+        public HeroConfig GetHeroConfigByCode(string code)
+        {
+            foreach (var config in _heroConfigs.Values)
+            {
+                if (config.code == code)
+                {
+                    return config;
+                }
+            }
+            return null;
+        }
+
+        public HeroConfig GetHeroConfigByCodeOrName(string key)
+        {
+            foreach (var config in _heroConfigs.Values)
+            {
+                if (config.code == key || config.heroName == key)
+                {
+                    return config;
+                }
+            }
+            return null;
+        }
     }
 }

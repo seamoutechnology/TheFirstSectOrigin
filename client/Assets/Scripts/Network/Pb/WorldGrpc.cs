@@ -70,6 +70,10 @@ namespace GameClient.Network.Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.UpgradeBuildingResponse> __Marshaller_pb_UpgradeBuildingResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.UpgradeBuildingResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.SpeedUpBuildingRequest> __Marshaller_pb_SpeedUpBuildingRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.SpeedUpBuildingRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.SpeedUpBuildingResponse> __Marshaller_pb_SpeedUpBuildingResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.SpeedUpBuildingResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.CollectResourcesRequest> __Marshaller_pb_CollectResourcesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.CollectResourcesRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.CollectResourcesResponse> __Marshaller_pb_CollectResourcesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.CollectResourcesResponse.Parser));
@@ -81,6 +85,10 @@ namespace GameClient.Network.Pb {
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetPlayerMapRequest> __Marshaller_pb_GetPlayerMapRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetPlayerMapRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetPlayerMapResponse> __Marshaller_pb_GetPlayerMapResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetPlayerMapResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.SavePlayerMapRequest> __Marshaller_pb_SavePlayerMapRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.SavePlayerMapRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.SavePlayerMapResponse> __Marshaller_pb_SavePlayerMapResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.SavePlayerMapResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetHeroesRequest> __Marshaller_pb_GetHeroesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetHeroesRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -115,6 +123,10 @@ namespace GameClient.Network.Pb {
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.EquipRequest> __Marshaller_pb_EquipRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.EquipRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.EquipResponse> __Marshaller_pb_EquipResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.EquipResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.UseItemRequest> __Marshaller_pb_UseItemRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.UseItemRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.UseItemResponse> __Marshaller_pb_UseItemResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.UseItemResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetGachaBannersRequest> __Marshaller_pb_GetGachaBannersRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetGachaBannersRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -177,6 +189,14 @@ namespace GameClient.Network.Pb {
         __Marshaller_pb_UpgradeBuildingResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.SpeedUpBuildingRequest, global::GameClient.Network.Pb.SpeedUpBuildingResponse> __Method_SpeedUpBuilding = new grpc::Method<global::GameClient.Network.Pb.SpeedUpBuildingRequest, global::GameClient.Network.Pb.SpeedUpBuildingResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SpeedUpBuilding",
+        __Marshaller_pb_SpeedUpBuildingRequest,
+        __Marshaller_pb_SpeedUpBuildingResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GameClient.Network.Pb.CollectResourcesRequest, global::GameClient.Network.Pb.CollectResourcesResponse> __Method_CollectResources = new grpc::Method<global::GameClient.Network.Pb.CollectResourcesRequest, global::GameClient.Network.Pb.CollectResourcesResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -199,6 +219,14 @@ namespace GameClient.Network.Pb {
         "GetPlayerMap",
         __Marshaller_pb_GetPlayerMapRequest,
         __Marshaller_pb_GetPlayerMapResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.SavePlayerMapRequest, global::GameClient.Network.Pb.SavePlayerMapResponse> __Method_SavePlayerMap = new grpc::Method<global::GameClient.Network.Pb.SavePlayerMapRequest, global::GameClient.Network.Pb.SavePlayerMapResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SavePlayerMap",
+        __Marshaller_pb_SavePlayerMapRequest,
+        __Marshaller_pb_SavePlayerMapResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GameClient.Network.Pb.GetHeroesRequest, global::GameClient.Network.Pb.GetHeroesResponse> __Method_GetHeroes = new grpc::Method<global::GameClient.Network.Pb.GetHeroesRequest, global::GameClient.Network.Pb.GetHeroesResponse>(
@@ -271,6 +299,14 @@ namespace GameClient.Network.Pb {
         "EquipItem",
         __Marshaller_pb_EquipRequest,
         __Marshaller_pb_EquipResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.UseItemRequest, global::GameClient.Network.Pb.UseItemResponse> __Method_UseItem = new grpc::Method<global::GameClient.Network.Pb.UseItemRequest, global::GameClient.Network.Pb.UseItemResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UseItem",
+        __Marshaller_pb_UseItemRequest,
+        __Marshaller_pb_UseItemResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse> __Method_GetGachaBanners = new grpc::Method<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse>(
@@ -361,6 +397,12 @@ namespace GameClient.Network.Pb {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.SpeedUpBuildingResponse> SpeedUpBuilding(global::GameClient.Network.Pb.SpeedUpBuildingRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.CollectResourcesResponse> CollectResources(global::GameClient.Network.Pb.CollectResourcesRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -374,6 +416,12 @@ namespace GameClient.Network.Pb {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.GetPlayerMapResponse> GetPlayerMap(global::GameClient.Network.Pb.GetPlayerMapRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.SavePlayerMapResponse> SavePlayerMap(global::GameClient.Network.Pb.SavePlayerMapRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -446,6 +494,12 @@ namespace GameClient.Network.Pb {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.EquipResponse> EquipItem(global::GameClient.Network.Pb.EquipRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.UseItemResponse> UseItem(global::GameClient.Network.Pb.UseItemRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -714,6 +768,26 @@ namespace GameClient.Network.Pb {
         return CallInvoker.AsyncUnaryCall(__Method_UpgradeBuilding, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.SpeedUpBuildingResponse SpeedUpBuilding(global::GameClient.Network.Pb.SpeedUpBuildingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SpeedUpBuilding(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.SpeedUpBuildingResponse SpeedUpBuilding(global::GameClient.Network.Pb.SpeedUpBuildingRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SpeedUpBuilding, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.SpeedUpBuildingResponse> SpeedUpBuildingAsync(global::GameClient.Network.Pb.SpeedUpBuildingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SpeedUpBuildingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.SpeedUpBuildingResponse> SpeedUpBuildingAsync(global::GameClient.Network.Pb.SpeedUpBuildingRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SpeedUpBuilding, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::GameClient.Network.Pb.CollectResourcesResponse CollectResources(global::GameClient.Network.Pb.CollectResourcesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CollectResources(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -772,6 +846,26 @@ namespace GameClient.Network.Pb {
       public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetPlayerMapResponse> GetPlayerMapAsync(global::GameClient.Network.Pb.GetPlayerMapRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetPlayerMap, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.SavePlayerMapResponse SavePlayerMap(global::GameClient.Network.Pb.SavePlayerMapRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SavePlayerMap(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.SavePlayerMapResponse SavePlayerMap(global::GameClient.Network.Pb.SavePlayerMapRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SavePlayerMap, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.SavePlayerMapResponse> SavePlayerMapAsync(global::GameClient.Network.Pb.SavePlayerMapRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SavePlayerMapAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.SavePlayerMapResponse> SavePlayerMapAsync(global::GameClient.Network.Pb.SavePlayerMapRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SavePlayerMap, null, options, request);
       }
       /// <summary>
       /// --- Heroes ---
@@ -1037,6 +1131,26 @@ namespace GameClient.Network.Pb {
       {
         return CallInvoker.AsyncUnaryCall(__Method_EquipItem, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.UseItemResponse UseItem(global::GameClient.Network.Pb.UseItemRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UseItem(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.UseItemResponse UseItem(global::GameClient.Network.Pb.UseItemRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UseItem, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.UseItemResponse> UseItemAsync(global::GameClient.Network.Pb.UseItemRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UseItemAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.UseItemResponse> UseItemAsync(global::GameClient.Network.Pb.UseItemRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UseItem, null, options, request);
+      }
       /// <summary>
       /// --- Gacha ---
       /// </summary>
@@ -1173,9 +1287,11 @@ namespace GameClient.Network.Pb {
           .AddMethod(__Method_GetPlayerProfile, serviceImpl.GetPlayerProfile)
           .AddMethod(__Method_GetSectInfo, serviceImpl.GetSectInfo)
           .AddMethod(__Method_UpgradeBuilding, serviceImpl.UpgradeBuilding)
+          .AddMethod(__Method_SpeedUpBuilding, serviceImpl.SpeedUpBuilding)
           .AddMethod(__Method_CollectResources, serviceImpl.CollectResources)
           .AddMethod(__Method_SaveAdminMap, serviceImpl.SaveAdminMap)
           .AddMethod(__Method_GetPlayerMap, serviceImpl.GetPlayerMap)
+          .AddMethod(__Method_SavePlayerMap, serviceImpl.SavePlayerMap)
           .AddMethod(__Method_GetHeroes, serviceImpl.GetHeroes)
           .AddMethod(__Method_SetFormation, serviceImpl.SetFormation)
           .AddMethod(__Method_LevelUpDisciple, serviceImpl.LevelUpDisciple)
@@ -1185,6 +1301,7 @@ namespace GameClient.Network.Pb {
           .AddMethod(__Method_ValidatePvEResult, serviceImpl.ValidatePvEResult)
           .AddMethod(__Method_GetInventory, serviceImpl.GetInventory)
           .AddMethod(__Method_EquipItem, serviceImpl.EquipItem)
+          .AddMethod(__Method_UseItem, serviceImpl.UseItem)
           .AddMethod(__Method_GetGachaBanners, serviceImpl.GetGachaBanners)
           .AddMethod(__Method_DoGacha, serviceImpl.DoGacha)
           .AddMethod(__Method_GetMissions, serviceImpl.GetMissions).Build();
@@ -1203,9 +1320,11 @@ namespace GameClient.Network.Pb {
       serviceBinder.AddMethod(__Method_GetPlayerProfile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetPlayerProfileRequest, global::GameClient.Network.Pb.GetPlayerProfileResponse>(serviceImpl.GetPlayerProfile));
       serviceBinder.AddMethod(__Method_GetSectInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetProfileRequest, global::GameClient.Network.Pb.SectInfo>(serviceImpl.GetSectInfo));
       serviceBinder.AddMethod(__Method_UpgradeBuilding, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.UpgradeBuildingRequest, global::GameClient.Network.Pb.UpgradeBuildingResponse>(serviceImpl.UpgradeBuilding));
+      serviceBinder.AddMethod(__Method_SpeedUpBuilding, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.SpeedUpBuildingRequest, global::GameClient.Network.Pb.SpeedUpBuildingResponse>(serviceImpl.SpeedUpBuilding));
       serviceBinder.AddMethod(__Method_CollectResources, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.CollectResourcesRequest, global::GameClient.Network.Pb.CollectResourcesResponse>(serviceImpl.CollectResources));
       serviceBinder.AddMethod(__Method_SaveAdminMap, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.SaveAdminMapRequest, global::GameClient.Network.Pb.SaveAdminMapResponse>(serviceImpl.SaveAdminMap));
       serviceBinder.AddMethod(__Method_GetPlayerMap, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetPlayerMapRequest, global::GameClient.Network.Pb.GetPlayerMapResponse>(serviceImpl.GetPlayerMap));
+      serviceBinder.AddMethod(__Method_SavePlayerMap, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.SavePlayerMapRequest, global::GameClient.Network.Pb.SavePlayerMapResponse>(serviceImpl.SavePlayerMap));
       serviceBinder.AddMethod(__Method_GetHeroes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetHeroesRequest, global::GameClient.Network.Pb.GetHeroesResponse>(serviceImpl.GetHeroes));
       serviceBinder.AddMethod(__Method_SetFormation, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.SetFormationRequest, global::GameClient.Network.Pb.SetFormationResponse>(serviceImpl.SetFormation));
       serviceBinder.AddMethod(__Method_LevelUpDisciple, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.LevelUpDiscipleRequest, global::GameClient.Network.Pb.LevelUpDiscipleResponse>(serviceImpl.LevelUpDisciple));
@@ -1215,6 +1334,7 @@ namespace GameClient.Network.Pb {
       serviceBinder.AddMethod(__Method_ValidatePvEResult, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.ValidatePvEResultRequest, global::GameClient.Network.Pb.ValidatePvEResultResponse>(serviceImpl.ValidatePvEResult));
       serviceBinder.AddMethod(__Method_GetInventory, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetProfileRequest, global::GameClient.Network.Pb.Inventory>(serviceImpl.GetInventory));
       serviceBinder.AddMethod(__Method_EquipItem, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.EquipRequest, global::GameClient.Network.Pb.EquipResponse>(serviceImpl.EquipItem));
+      serviceBinder.AddMethod(__Method_UseItem, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.UseItemRequest, global::GameClient.Network.Pb.UseItemResponse>(serviceImpl.UseItem));
       serviceBinder.AddMethod(__Method_GetGachaBanners, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse>(serviceImpl.GetGachaBanners));
       serviceBinder.AddMethod(__Method_DoGacha, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.DoGachaRequest, global::GameClient.Network.Pb.DoGachaResponse>(serviceImpl.DoGacha));
       serviceBinder.AddMethod(__Method_GetMissions, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetMissionsRequest, global::GameClient.Network.Pb.GetMissionsResponse>(serviceImpl.GetMissions));

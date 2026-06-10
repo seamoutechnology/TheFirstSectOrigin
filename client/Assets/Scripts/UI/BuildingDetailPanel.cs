@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -19,11 +20,10 @@ namespace GameClient.UI
         [SerializeField] private Image imgBuildingIcon;
 
         [Header("Upgrade Cost Info")]
-        [SerializeField] private TMP_Text txtUpgradeCostGold;
-        [SerializeField] private TMP_Text txtUpgradeCostWood;
         [SerializeField] private TMP_Text txtUpgradeTime;
         [SerializeField] private GameObject costContainer;
         [SerializeField] private TMP_Text txtMaxLevelReached;
+        [SerializeField] private GameObject upgradeTimeContainer; // Container chứa text time và icon đồng hồ cát
 
         [Header("Dynamic Sub-Panel Configuration")]
         [SerializeField] private Transform subPanelContainer; // Vùng chứa Sub-Panel
@@ -64,7 +64,10 @@ namespace GameClient.UI
         {
             if (_currentBuilding == null || _currentBuilding.Data == null) return;
 
-            if (txtBuildingName != null) txtBuildingName.text = _currentBuilding.Data.BuildingNameKey;
+            string localizedName = LocalizationManager.Instance.GetText(_currentBuilding.Data.BuildingNameKey);
+            if (string.IsNullOrEmpty(localizedName) || localizedName.StartsWith("[")) localizedName = _currentBuilding.Data.BuildingNameKey;
+
+            if (txtBuildingName != null) txtBuildingName.text = localizedName;
             if (txtBuildingLevel != null) txtBuildingLevel.text = $"Lv.{_currentBuilding.CurrentLevel}";
             
             if (txtBuildingDesc != null)
@@ -128,8 +131,47 @@ namespace GameClient.UI
             }
         }
 
-        private void UpdateUpgradeRequirements()
+        [Header("Dynamic Upgrade Costs")]
+        [SerializeField] private HUDCurrencyItem costItemPrefab; // Drag HUDCurrencyItem prefab here
+        [SerializeField] private Transform costItemsContainer; // Grid / Horizontal Layout Group inside Cost Container or Cost Container itself
+
+        private List<HUDCurrencyItem> _spawnedCostItems = new List<HUDCurrencyItem>();
+
+        private async Task<int> GetCurrentItemQuantity(string itemCode)
         {
+            if (string.IsNullOrEmpty(itemCode)) return 0;
+            
+            // Get from player's inventory
+            try
+            {
+                var inventory = await GameClient.Network.Api.SectBuildingApi.GetInventoryAsync();
+                if (inventory != null && inventory.Items != null)
+                {
+                    foreach (var item in inventory.Items)
+                    {
+                        if (item.ItemCode == itemCode)
+                        {
+                            return (int)item.Quantity;
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[BuildingDetailPanel] Lỗi tải tài nguyên từ kho: {ex.Message}");
+            }
+            return 0;
+        }
+
+        private async void UpdateUpgradeRequirements()
+        {
+            // Clear old spawned items first
+            foreach (var item in _spawnedCostItems)
+            {
+                if (item != null) Destroy(item.gameObject);
+            }
+            _spawnedCostItems.Clear();
+
             int nextLevel = _currentBuilding.CurrentLevel + 1;
             var levelStatsList = _currentBuilding.Data.LevelStats;
             BuildingLevelStats nextLevelStats = levelStatsList.Find(s => s.Level == nextLevel);
@@ -137,22 +179,112 @@ namespace GameClient.UI
             if (nextLevelStats != null)
             {
                 if (costContainer != null) costContainer.SetActive(true);
+                if (upgradeTimeContainer != null) upgradeTimeContainer.SetActive(true);
+                else if (txtUpgradeTime != null && txtUpgradeTime.transform.parent != null) txtUpgradeTime.transform.parent.gameObject.SetActive(true);
+                
                 if (txtMaxLevelReached != null) txtMaxLevelReached.gameObject.SetActive(false);
-                if (btnUpgrade != null) btnUpgrade.interactable = true;
 
-                if (txtUpgradeCostGold != null) txtUpgradeCostGold.text = nextLevelStats.CostGold.ToString();
-                if (txtUpgradeCostWood != null) txtUpgradeCostWood.text = nextLevelStats.CostWood.ToString();
+                // Nút Nâng cấp bị vô hiệu hóa nếu công trình đang trong quá trình nâng cấp/xây dựng
+                bool isUpgrading = _currentBuilding.CurrentState == BuildingState.Building || _currentBuilding.CurrentState == BuildingState.Upgrading;
+                if (btnUpgrade != null)
+                {
+                    btnUpgrade.gameObject.SetActive(true);
+                    btnUpgrade.interactable = !isUpgrading;
+                }
+
                 if (txtUpgradeTime != null) txtUpgradeTime.text = $"{nextLevelStats.BuildTimeSeconds} giây";
+
+                Debug.Log($"[BuildingDetailPanel] Update requirements: Level={nextLevel}, CostItemsCount={nextLevelStats.CostItems?.Count ?? 0}, costItemPrefab={(costItemPrefab != null ? "Assigned" : "Null")}, costItemsContainer={(costItemsContainer != null ? "Assigned" : "Null")}");
+
+                // Hiển thị chi phí nâng cấp từ cấu hình CostItems
+                if (nextLevelStats.CostItems != null && costItemPrefab != null && costItemsContainer != null)
+                {
+                    foreach (var cost in nextLevelStats.CostItems)
+                    {
+                        if (string.IsNullOrEmpty(cost.ItemCode)) continue;
+
+                        HUDCurrencyItem newItem = Instantiate(costItemPrefab, costItemsContainer);
+                        newItem.gameObject.SetActive(true);
+                        newItem.itemCode = cost.ItemCode;
+                        _spawnedCostItems.Add(newItem);
+
+                        // Fetch inventory count
+                        int ownedQty = await GetCurrentItemQuantity(cost.ItemCode);
+
+                        // Load sprite from Addressable
+                        Sprite sprite = null;
+                        var config = ItemDataManager.Instance.GetItemConfig(cost.ItemCode);
+                        string iconKey = "";
+                        if (config != null && !string.IsNullOrEmpty(config.Icon))
+                        {
+                            iconKey = config.Icon;
+                        }
+                        else
+                        {
+                            if (cost.ItemCode == "00000" || cost.ItemCode == "coin") iconKey = "coin_icon";
+                            else if (cost.ItemCode == "00002" || cost.ItemCode == "stone" || cost.ItemCode == "stone_1") iconKey = "stone_1_icon";
+                            else if (cost.ItemCode == "00003" || cost.ItemCode == "wood" || cost.ItemCode == "wood_1") iconKey = "wood_1_icon";
+                            else if (cost.ItemCode == "gold") iconKey = "gold_icon";
+                            else iconKey = cost.ItemCode + "_icon";
+                        }
+
+                        try
+                        {
+                            sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(iconKey);
+                        }
+                        catch (System.Exception)
+                        {
+                            try
+                            {
+                                sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(cost.ItemCode);
+                            }
+                            catch (System.Exception) {}
+                        }
+
+                        string nameKey = "";
+                        if (config != null && !string.IsNullOrEmpty(config.NameKey))
+                        {
+                            nameKey = config.NameKey;
+                        }
+                        else
+                        {
+                            if (cost.ItemCode == "00000" || cost.ItemCode == "coin") nameKey = "coin";
+                            else if (cost.ItemCode == "00002" || cost.ItemCode == "stone" || cost.ItemCode == "stone_1") nameKey = "stone_1";
+                            else if (cost.ItemCode == "00003" || cost.ItemCode == "wood" || cost.ItemCode == "wood_1") nameKey = "wood_1";
+                            else if (cost.ItemCode == "gold") nameKey = "gold";
+                            else nameKey = cost.ItemCode;
+                        }
+                        
+                        newItem.UpdateData(0, sprite, nameKey); // Temp call to load icon & name
+
+                        // Set quantity text custom format: owned/required
+                        if (newItem.txtQuantity != null)
+                        {
+                            newItem.txtQuantity.text = $"{ownedQty}/{cost.Quantity}";
+                            if (ownedQty < cost.Quantity)
+                            {
+                                newItem.txtQuantity.color = Color.red;
+                            }
+                            else
+                            {
+                                newItem.txtQuantity.color = Color.white; // Or any default color
+                            }
+                        }
+                    }
+                }
             }
             else
             {
                 if (costContainer != null) costContainer.SetActive(false);
+                if (upgradeTimeContainer != null) upgradeTimeContainer.SetActive(false);
+                else if (txtUpgradeTime != null && txtUpgradeTime.transform.parent != null) txtUpgradeTime.transform.parent.gameObject.SetActive(false);
+                
                 if (txtMaxLevelReached != null)
                 {
                     txtMaxLevelReached.gameObject.SetActive(true);
                     txtMaxLevelReached.text = "Đã đạt cấp độ tối đa";
                 }
-                if (btnUpgrade != null) btnUpgrade.interactable = false;
+                if (btnUpgrade != null) btnUpgrade.gameObject.SetActive(false);
             }
         }
 
@@ -183,19 +315,25 @@ namespace GameClient.UI
 
             try
             {
-                string code = _currentBuilding.Data.BuildingID;
-                var resp = await SectBuildingApi.UpgradeBuildingAsync(code);
+                long instanceId = _currentBuilding.InstanceID;
+                var resp = await SectBuildingApi.UpgradeBuildingAsync(instanceId);
                 
-                if (resp != null)
+                if (resp != null && resp.Base != null && resp.Base.Code == 0)
                 {
-                    GameClient.UIManager.Instance.ShowMessage("Thành Công", $"Bắt đầu nâng cấp {_currentBuilding.Data.BuildingNameKey}!");
+                    string buildingName = LocalizationManager.Instance.GetText(_currentBuilding.Data.BuildingNameKey); if (string.IsNullOrEmpty(buildingName) || buildingName.StartsWith("[")) buildingName = _currentBuilding.Data.BuildingNameKey; int targetLevel = _currentBuilding.CurrentLevel + 1; string successTitle = LocalizationManager.Instance.GetText("UI_System", "ui_success_title") ?? "Thành Công"; string successMsgFormat = LocalizationManager.Instance.GetText("UI_System", "ui_building_upgrade_start_success") ?? "Đã bắt đầu nâng cấp {0} lên Cấp {1}!"; GameClient.UIManager.Instance.ShowMessage(successTitle, string.Format(successMsgFormat, buildingName, targetLevel));
                     
                     var baseResp = await SectBuildingApi.GetBaseAsync();
-                    if (baseResp != null)
+                    if (baseResp != null && baseResp.Base != null && baseResp.Base.Code == 0)
                     {
                         GameClient.GameManager.Instance.SetBuildings(baseResp.Buildings);
+                        BaseBuildingManager.Instance.SyncBuildingsWithServerData(baseResp.Buildings);
                     }
                     Hide();
+                }
+                else
+                {
+                    string errorMsg = resp?.Base?.Message ?? "Lỗi không xác định từ Server";
+                    GameClient.UIManager.Instance.ShowMessage("Lỗi Nâng Cấp", errorMsg);
                 }
             }
             catch (System.Exception ex)

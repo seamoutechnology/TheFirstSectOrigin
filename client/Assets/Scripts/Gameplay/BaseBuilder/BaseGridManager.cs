@@ -71,14 +71,25 @@ namespace GameClient.Gameplay.BaseBuilder
         public bool IsSpaceAvailable(int startX, int startY, int sizeX, int sizeY)
         {
             if (startX < 0 || startY < 0 || startX + sizeX > Width || startY + sizeY > Height)
+            {
+                Debug.LogWarning($"[BaseGrid] Vượt giới hạn bản đồ: startX={startX}, startY={startY}, size={sizeX}x{sizeY}, bản đồ={Width}x{Height}");
                 return false; // Ra ngoài bản đồ
+            }
 
             for (int x = startX; x < startX + sizeX; x++)
             {
                 for (int y = startY; y < startY + sizeY; y++)
                 {
-                    if (_unbuildableGrid[x, y]) return false; // Địa hình cấm xây
-                    if (_grid[x, y]) return false; // Đã có vật cản/công trình
+                    if (_unbuildableGrid[x, y])
+                    {
+                        Debug.LogWarning($"[BaseGrid] Ô ({x}, {y}) có địa hình cấm xây!");
+                        return false; // Địa hình cấm xây
+                    }
+                    if (_grid[x, y])
+                    {
+                        Debug.LogWarning($"[BaseGrid] Ô ({x}, {y}) đã bị chiếm dụng!");
+                        return false; // Đã có vật cản/công trình
+                    }
                 }
             }
 
@@ -99,17 +110,20 @@ namespace GameClient.Gameplay.BaseBuilder
             }
         }
 
-        public Vector3 GridToWorldPosition(int x, int y)
+        public Vector3 GridToWorldPosition(float x, float y)
         {
-            float worldX = x * TILE_WIDTH;
-            float worldY = y * TILE_HEIGHT;
+            // Công thức dịch chuyển Isometric chéo (X dịch ngang, Y dịch chéo lên)
+            float worldX = (x - y) * (TILE_WIDTH / 2f);
+            float worldY = (x + y) * (TILE_HEIGHT / 4f);
             return new Vector3(worldX, worldY, 0);
         }
 
         public Vector2Int WorldToGridPosition(Vector3 worldPos)
         {
-            int gridX = Mathf.RoundToInt(worldPos.x / TILE_WIDTH);
-            int gridY = Mathf.RoundToInt(worldPos.y / TILE_HEIGHT);
+            float xOverW = worldPos.x / (TILE_WIDTH / 2f);
+            float yOverH = worldPos.y / (TILE_HEIGHT / 4f);
+            int gridX = Mathf.FloorToInt((xOverW + yOverH) / 2f);
+            int gridY = Mathf.FloorToInt((yOverH - xOverW) / 2f);
             return new Vector2Int(gridX, gridY);
         }
     }

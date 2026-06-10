@@ -133,25 +133,7 @@ namespace GameClient.Managers
                     environmentObj.AddComponent<GameClient.BaseBuilding.Environment.SectEnvironmentManager>();
                     environmentObj.AddComponent<GameClient.BaseBuilding.Environment.CloudManager>();
                     var renderer = environmentObj.AddComponent<GameClient.Gameplay.BaseBuilder.RuntimeMapRenderer>();
-                    renderer.mappingConfig = Resources.Load<GameClient.Gameplay.BaseBuilder.TileToIDMapping>("GameData/MainTileMapping");
-                    
-                    var groundObj = new GameObject("BaseGround");
-                    groundObj.transform.position = new Vector3(0, 0, 10f); // Xa hơn Grid để lót ở dưới cùng
-                    groundObj.transform.rotation = Quaternion.identity;
-                    var groundSr = groundObj.AddComponent<SpriteRenderer>();
-                    
-                    Texture2D groundTex = new Texture2D(128, 128);
-                    Color[] groundColors = new Color[128 * 128];
-                    for (int i = 0; i < groundColors.Length; i++)
-                    {
-                        groundColors[i] = new Color(0.1f, 0.5f, 0.8f, 0.3f); 
-                    }
-                    groundTex.SetPixels(groundColors);
-                    groundTex.Apply();
-                    
-                    groundSr.sprite = Sprite.Create(groundTex, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f), 1f); // 1 pixel = 1 unit để có mặt đất rất rộng
-                    groundSr.sortingOrder = -1000; // Đảm bảo luôn nằm dưới cùng
-                    groundObj.transform.localScale = new Vector3(100f, 100f, 1f); // Kích thước cực to che kín map
+                     renderer.mappingConfig = Resources.Load<GameClient.Gameplay.BaseBuilder.TileToIDMapping>("GameData/MainTileMapping");
                 }
             }
         }

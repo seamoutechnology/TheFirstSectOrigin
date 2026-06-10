@@ -319,8 +319,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ui_submenu_item_avatar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 358872bbddc71924a98d206441dd9150, type: 2}
-  m_sharedMaterial: {fileID: -877287470168747451, guid: 358872bbddc71924a98d206441dd9150, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
+  m_sharedMaterial: {fileID: 1793625483471632398, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -653,8 +653,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ui_submenu_item_topup
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 358872bbddc71924a98d206441dd9150, type: 2}
-  m_sharedMaterial: {fileID: -877287470168747451, guid: 358872bbddc71924a98d206441dd9150, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
+  m_sharedMaterial: {fileID: 1793625483471632398, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -831,8 +831,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ui_submenu_item_signout
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 358872bbddc71924a98d206441dd9150, type: 2}
-  m_sharedMaterial: {fileID: -877287470168747451, guid: 358872bbddc71924a98d206441dd9150, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
+  m_sharedMaterial: {fileID: 1793625483471632398, guid: 3c9a05e3ca2deb341a19841d6fb7f264, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

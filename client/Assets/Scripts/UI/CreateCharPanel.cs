@@ -123,7 +123,7 @@ namespace GameClient.UI
             if (inputName == null || string.IsNullOrWhiteSpace(inputName.text))
             {
                 if (ToastManager.Instance != null)
-                    ToastManager.Instance.ShowNormalToast("Vui lòng nhập tên nhân vật!");
+                    ToastManager.Instance.ShowBigToast("Vui lòng nhập tên nhân vật!");
                 UIManager.Instance.ShowMessage("Lỗi", "Vui lòng nhập tên nhân vật!");
                 return;
             }
@@ -150,14 +150,14 @@ namespace GameClient.UI
                     }
                     string nickName = res.Profile != null ? res.Profile.Nickname : charName;
                     if (ToastManager.Instance != null)
-                        ToastManager.Instance.ShowNormalToast($"Chào mừng {nickName} gia nhập Tu Tiên Giới!");
+                        ToastManager.Instance.ShowBigToast($"Chào mừng {nickName} gia nhập Tu Tiên Giới!");
                     UIManager.Instance.ShowMessage("Hệ thống", $"Chào mừng {nickName} gia nhập Tu Tiên Giới!");
                 }
                 else
                 {
                     string errorMsg = res?.Base?.Message ?? "Lỗi không xác định";
                     if (ToastManager.Instance != null)
-                        ToastManager.Instance.ShowNormalToast($"Tạo nhân vật thất bại: {errorMsg}");
+                        ToastManager.Instance.ShowBigToast($"Tạo nhân vật thất bại: {errorMsg}");
                     UIManager.Instance.ShowMessage("Lỗi", $"Tạo nhân vật thất bại: {errorMsg}");
                     btnConfirm.interactable = true;
                 }
@@ -166,7 +166,7 @@ namespace GameClient.UI
             {
                 Debug.LogError($"[CreateChar] Lỗi gọi API CreatePlayer: {ex.Message}");
                 if (ToastManager.Instance != null)
-                    ToastManager.Instance.ShowNormalToast("Mất kết nối máy chủ hoặc có lỗi xảy ra!");
+                    ToastManager.Instance.ShowBigToast("Mất kết nối máy chủ hoặc có lỗi xảy ra!");
                 UIManager.Instance.ShowMessage("Lỗi", "Mất kết nối máy chủ hoặc có lỗi xảy ra!");
                 btnConfirm.interactable = true;
             }

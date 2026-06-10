@@ -17,7 +17,50 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: ea25558a67f1a874b9ce14db534fdf34, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 9634488261505024
+    m_Localized: Xu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9671969031811072
+    m_Localized: "Ti\u1EC1n t\u1EC7 c\u01A1 b\u1EA3n trong gi\u1EDBi tu ch\xE2n.
+      \u0110\u01B0\u1EE3c \u0111\xFAc t\u1EEB qu\u1EB7ng th\xF4 ch\u1EE9a linh kh\xED
+      m\u1ECFng manh, d\xF9ng \u0111\u1EC3 mua nhu y\u1EBFu ph\u1EA9m v\xE0 trang
+      b\u1ECB c\u1EA5p th\u1EA5p."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672662530617344
+    m_Localized: "Ti\u1EC1n t\u1EC7 trung c\u1EA5p trong gi\u1EDBi tu ch\xE2n. \u0110\u01B0\u1EE3c
+      tinh luy\u1EC7n t\u1EEB v\xE0ng r\xF2ng t\u1EF1 nhi\xEAn, c\xF3 gi\xE1 tr\u1ECB
+      cao, th\u01B0\u1EDDng d\xF9ng \u0111\u1EC3 b\u1ED3i d\u01B0\u1EE1ng m\xF4n
+      ph\xE1i ho\u1EB7c mua \u0111an d\u01B0\u1EE3c qu\xFD."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672741756825600
+    m_Localized: "V\xE0ng th\u1ECFi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674427636346880
+    m_Localized: "\u0110\xE1 I"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674470363721728
+    m_Localized: "V\u1EADt li\u1EC7u x\xE2y d\u1EF1ng c\u01A1 b\u1EA3n. Th\u01B0\u1EDDng
+      d\xF9ng \u0111\u1EC3 n\xE2ng c\u1EA5p c\xF4ng tr\xECnh t\xF4ng m\xF4n ho\u1EB7c
+      ch\u1EBF t\u1EA1o binh kh\xED th\xF4 s\u01A1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674857355374592
+    m_Localized: "G\u1ED7 I"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9675086527950848
+    m_Localized: "G\u1ED7 \u0111\u01B0\u1EE3c \u0111\u1ED1n h\u1EA1 t\u1EEB c\xE1c
+      khu r\u1EEBng l\xE2u n\u0103m. D\xF9ng \u0111\u1EC3 x\xE2y d\u1EF1ng ph\xF2ng
+      \u1ED1c, ch\u1EBF t\u1EA1o \u0111\u1ED3 n\u1ED9i th\u1EA5t ho\u1EB7c l\xE0m
+      c\u1EE7i nh\xF3m l\xF2 luy\u1EC7n \u0111an s\u01A1 c\u1EA5p."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

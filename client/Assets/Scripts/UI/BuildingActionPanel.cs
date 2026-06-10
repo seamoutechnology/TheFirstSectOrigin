@@ -13,21 +13,31 @@ namespace GameClient.UI
 {
     public class BuildingActionPanel : BaseUIPanel
     {
+        [System.Serializable]
+        public struct ActionConfig
+        {
+            public string localizationKey;
+            public Sprite sprite;
+        }
+
         [Header("UI Elements")]
         [SerializeField] private TMP_Text txtBuildingName;
         [SerializeField] private TMP_Text txtBuildingLevel;
         [SerializeField] private TMP_Text txtBuildingStatus;
-        
-        [Header("Buttons")]
-        [SerializeField] private Button btnInfo;
-        [SerializeField] private Button btnUpgrade;
-        [SerializeField] private Button btnHarvest;
-        [SerializeField] private Button btnSpeedUp;
-        [SerializeField] private Button btnRepair;
-        [SerializeField] private Button btnCancel;
-        [SerializeField] private Button btnMove;
-        [SerializeField] private Button btnDemolish;
-        [SerializeField] private Button btnClose;
+
+        [Header("Dynamic Button Settings")]
+        [SerializeField] private GameObject actionButtonPrefab;
+        [SerializeField] private ActionConfig infoConfig;
+        [SerializeField] private ActionConfig upgradeConfig;
+        [SerializeField] private ActionConfig harvestConfig;
+        [SerializeField] private ActionConfig speedUpConfig;
+        [SerializeField] private ActionConfig repairConfig;
+        [SerializeField] private ActionConfig cancelConfig;
+        [SerializeField] private ActionConfig moveConfig;
+        [SerializeField] private ActionConfig demolishConfig;
+        [SerializeField] private ActionConfig closeConfig;
+        [SerializeField] private ActionConfig confirmPlacementConfig;
+        [SerializeField] private ActionConfig cancelPlacementConfig;
 
         [Header("Radial Layout Settings")]
         [SerializeField] private bool useRadialLayout = true;
@@ -36,26 +46,15 @@ namespace GameClient.UI
         [SerializeField] private float panelScale = 1.4f; // Tăng tỷ lệ hiển thị của bảng lên 1.4 lần cho đỡ bé
 
         private BuildingInstance _currentBuilding;
+        private BuildingController _currentController;
+        private bool _isPlacementMode;
+        private readonly System.Collections.Generic.List<GameObject> _spawnedButtons = new();
+        private GameObject _closeButtonGo;
 
         protected override void Awake()
         {
             base.Awake();
-            
-            if (btnInfo != null) btnInfo.onClick.AddListener(OnInfoClicked);
-            if (btnUpgrade != null) btnUpgrade.onClick.AddListener(OnUpgradeClicked);
-            if (btnHarvest != null) btnHarvest.onClick.AddListener(OnHarvestClicked);
-            if (btnSpeedUp != null) btnSpeedUp.onClick.AddListener(OnSpeedUpClicked);
-            if (btnRepair != null) btnRepair.onClick.AddListener(OnRepairClicked);
-            if (btnCancel != null) btnCancel.onClick.AddListener(OnCancelClicked);
-            if (btnMove != null) btnMove.onClick.AddListener(OnMoveClicked);
-            if (btnDemolish != null) btnDemolish.onClick.AddListener(OnDemolishClicked);
-            if (btnClose != null) btnClose.onClick.AddListener(Hide);
         }
-
-        private Button _btnConfirmPlacement;
-        private Button _btnCancelPlacement;
-        private BuildingController _currentController;
-        private bool _isPlacementMode;
 
         public override void Setup(object data)
         {
@@ -133,44 +132,75 @@ namespace GameClient.UI
             }
         }
 
-        private void SetupPlacementButtons()
+        private void ClearSpawnedButtons()
         {
-            if (_btnConfirmPlacement != null) return;
+            foreach (var btn in _spawnedButtons)
+            {
+                if (btn != null) Destroy(btn);
+            }
+            _spawnedButtons.Clear();
+            _closeButtonGo = null;
+        }
 
-            Button templateBtn = btnUpgrade != null ? btnUpgrade : (btnInfo != null ? btnInfo : btnClose);
-            if (templateBtn == null) return;
+        private Button CreateButton(ActionConfig config, System.Action onClickAction)
+        {
+            if (actionButtonPrefab == null) return null;
 
-            // Confirm Button
-            var confirmGo = Instantiate(templateBtn.gameObject, transform);
-            confirmGo.name = "Btn_ConfirmPlacement";
-            _btnConfirmPlacement = confirmGo.GetComponent<Button>();
-            _btnConfirmPlacement.onClick.RemoveAllListeners();
-            _btnConfirmPlacement.onClick.AddListener(OnConfirmPlacementClicked);
-            confirmGo.SetActive(true); // Đảm bảo active
-            
-            string okText = LocalizationManager.Instance.GetText("ui_common_ok");
-            if (string.IsNullOrEmpty(okText) || okText.StartsWith("[")) okText = "✓ OK";
+            var go = Instantiate(actionButtonPrefab, transform);
+            var btn = go.GetComponent<Button>();
+            if (btn == null) btn = go.AddComponent<Button>();
 
-            var txt = confirmGo.GetComponentInChildren<TMP_Text>();
-            if (txt != null) txt.text = okText;
-            var img = confirmGo.GetComponent<Image>();
-            if (img != null) img.color = new Color(0.2f, 0.8f, 0.2f, 1f); // Xanh lục tươi
+            // Set Sprite for the Icon child
+            var iconTransform = go.transform.Find("Icon");
+            if (iconTransform != null)
+            {
+                var img = iconTransform.GetComponent<Image>();
+                if (img != null)
+                {
+                    img.sprite = config.sprite;
+                }
+            }
 
-            // Cancel Button
-            var cancelGo = Instantiate(templateBtn.gameObject, transform);
-            cancelGo.name = "Btn_CancelPlacement";
-            _btnCancelPlacement = cancelGo.GetComponent<Button>();
-            _btnCancelPlacement.onClick.RemoveAllListeners();
-            _btnCancelPlacement.onClick.AddListener(OnCancelPlacementClicked);
-            cancelGo.SetActive(true); // Đảm bảo active
+            // Set localized text
+            var textTransform = go.transform.Find("Text");
+            if (textTransform != null)
+            {
+                var txt = textTransform.GetComponent<TMP_Text>();
+                if (txt != null)
+                {
+                    string text = LocalizationManager.Instance.GetText(config.localizationKey);
+                    if (string.IsNullOrEmpty(text) || text.StartsWith("["))
+                    {
+                        text = GetFallbackText(config.localizationKey);
+                    }
+                    txt.text = text;
+                }
+            }
 
-            string cancelText = LocalizationManager.Instance.GetText("ui_common_cancel");
-            if (string.IsNullOrEmpty(cancelText) || cancelText.StartsWith("[")) cancelText = "✗ Hủy";
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() => onClickAction?.Invoke());
 
-            var txtCancel = cancelGo.GetComponentInChildren<TMP_Text>();
-            if (txtCancel != null) txtCancel.text = cancelText;
-            var imgCancel = cancelGo.GetComponent<Image>();
-            if (imgCancel != null) imgCancel.color = new Color(0.8f, 0.2f, 0.2f, 1f); // Đỏ tươi
+            _spawnedButtons.Add(go);
+            return btn;
+        }
+
+        private string GetFallbackText(string key)
+        {
+            switch (key)
+            {
+                case "ui_label_building_action_info": return "Thông Tin";
+                case "ui_label_building_action_upgrade": return "Nâng Cấp";
+                case "ui_label_building_action_harvest": return "Thu Hoạch";
+                case "ui_label_building_action_speedup": return "Tăng Tốc";
+                case "ui_label_building_action_repair": return "Sửa Chữa";
+                case "ui_label_building_action_cancel": return "Hủy";
+                case "ui_label_building_action_move": return "Di Chuyển";
+                case "ui_label_building_action_demolish": return "Cất Kho";
+                case "ui_label_building_action_close": return "Đóng";
+                case "ui_label_building_action_placement_confirm": return "✓ OK";
+                case "ui_label_building_action_placement_cancel": return "✗ Hủy";
+                default: return "";
+            }
         }
 
         private void OnConfirmPlacementClicked()
@@ -191,26 +221,30 @@ namespace GameClient.UI
 
         private void RefreshUI()
         {
+            ClearSpawnedButtons();
+
             if (_isPlacementMode)
             {
-                // Ẩn toàn bộ nút thường
-                Button[] normalButtons = { btnInfo, btnUpgrade, btnHarvest, btnSpeedUp, btnRepair, btnCancel, btnMove, btnDemolish, btnClose };
-                foreach (var btn in normalButtons)
+                var confirmBtn = CreateButton(confirmPlacementConfig, OnConfirmPlacementClicked);
+                if (confirmBtn != null)
                 {
-                    if (btn != null) btn.gameObject.SetActive(false);
+                    var img = confirmBtn.GetComponent<Image>();
+                    if (img != null && confirmPlacementConfig.sprite == null) img.color = new Color(0.2f, 0.8f, 0.2f, 1f);
                 }
 
-                SetupPlacementButtons();
-
-                if (_btnConfirmPlacement != null)
+                var cancelBtn = CreateButton(cancelPlacementConfig, OnCancelPlacementClicked);
+                if (cancelBtn != null)
                 {
-                    _btnConfirmPlacement.gameObject.SetActive(true);
-                    (_btnConfirmPlacement.transform as RectTransform).anchoredPosition = new Vector2(50, -85);
+                    var img = cancelBtn.GetComponent<Image>();
+                    if (img != null && cancelPlacementConfig.sprite == null) img.color = new Color(0.8f, 0.2f, 0.2f, 1f);
                 }
-                if (_btnCancelPlacement != null)
+
+                if (_spawnedButtons.Count >= 2)
                 {
-                    _btnCancelPlacement.gameObject.SetActive(true);
-                    (_btnCancelPlacement.transform as RectTransform).anchoredPosition = new Vector2(-50, -85);
+                    var rectConfirm = _spawnedButtons[0].transform as RectTransform;
+                    var rectCancel = _spawnedButtons[1].transform as RectTransform;
+                    if (rectConfirm != null) rectConfirm.anchoredPosition = new Vector2(65, -85);
+                    if (rectCancel != null) rectCancel.anchoredPosition = new Vector2(-65, -85);
                 }
 
                 string choosingPosText = LocalizationManager.Instance.GetText("ui_building_action_choosing_position");
@@ -225,13 +259,12 @@ namespace GameClient.UI
                 return;
             }
 
-            // Tắt nút đặt nhà nếu ở chế độ bình thường
-            if (_btnConfirmPlacement != null) _btnConfirmPlacement.gameObject.SetActive(false);
-            if (_btnCancelPlacement != null) _btnCancelPlacement.gameObject.SetActive(false);
-
             if (_currentBuilding == null || _currentBuilding.Data == null) return;
 
-            if (txtBuildingName != null) txtBuildingName.text = _currentBuilding.Data.BuildingNameKey;
+            string localizedName = LocalizationManager.Instance.GetText(_currentBuilding.Data.BuildingNameKey);
+            if (string.IsNullOrEmpty(localizedName) || localizedName.StartsWith("[")) localizedName = _currentBuilding.Data.BuildingNameKey;
+
+            if (txtBuildingName != null) txtBuildingName.text = localizedName;
             if (txtBuildingLevel != null) txtBuildingLevel.text = $"Lv.{_currentBuilding.CurrentLevel}";
             
             string statusStr = GetStatusString(_currentBuilding.CurrentState);
@@ -241,54 +274,70 @@ namespace GameClient.UI
             bool isProducer = _currentBuilding.Data is ProductionBuildingData;
             bool canHarvest = _currentBuilding.HasResourcesToHarvest();
 
-            if (btnHarvest != null)
+            // 1. Info Button
+            CreateButton(infoConfig, OnInfoClicked);
+
+            // 2. Upgrade Button
+            if (state == BuildingState.Normal || state == BuildingState.Producing || state == BuildingState.ReadyToHarvest)
             {
-                bool showHarvest = isProducer && (state == BuildingState.Producing || state == BuildingState.ReadyToHarvest);
-                btnHarvest.gameObject.SetActive(showHarvest);
-                btnHarvest.interactable = canHarvest;
+                var upBtn = CreateButton(upgradeConfig, OnUpgradeClicked);
+                if (upBtn != null)
+                {
+                    if (_currentBuilding.IsMaxLevel())
+                    {
+                        upBtn.interactable = false;
+                        var txt = upBtn.GetComponentInChildren<TMP_Text>();
+                        if (txt != null) txt.text = LocalizationManager.Instance.GetText("ui_building_max_level") ?? "Cực Hạn";
+                    }
+                }
             }
 
-            if (btnUpgrade != null)
+            // 3. Harvest Button
+            if (isProducer && (state == BuildingState.Producing || state == BuildingState.ReadyToHarvest))
             {
-                bool showUpgrade = (state == BuildingState.Normal || state == BuildingState.Producing || state == BuildingState.ReadyToHarvest);
-                btnUpgrade.gameObject.SetActive(showUpgrade);
-                btnUpgrade.interactable = true;
+                var harvestBtn = CreateButton(harvestConfig, OnHarvestClicked);
+                if (harvestBtn != null)
+                {
+                    harvestBtn.interactable = canHarvest;
+                }
             }
 
-            if (btnSpeedUp != null)
+            // 4. SpeedUp Button
+            if (state == BuildingState.Building || state == BuildingState.Upgrading)
             {
-                bool showSpeedUp = (state == BuildingState.Building || state == BuildingState.Upgrading);
-                btnSpeedUp.gameObject.SetActive(showSpeedUp);
+                CreateButton(speedUpConfig, OnSpeedUpClicked);
             }
 
-            if (btnRepair != null)
+            // 5. Repair Button
+            if (state == BuildingState.Broken)
             {
-                bool showRepair = (state == BuildingState.Broken);
-                btnRepair.gameObject.SetActive(showRepair);
+                CreateButton(repairConfig, OnRepairClicked);
             }
 
-            if (btnCancel != null)
+            // 6. Cancel Button
+            if (state == BuildingState.Building || state == BuildingState.Upgrading)
             {
-                bool showCancel = (state == BuildingState.Building || state == BuildingState.Upgrading);
-                btnCancel.gameObject.SetActive(showCancel);
+                CreateButton(cancelConfig, OnCancelClicked);
             }
 
-            if (btnMove != null)
+            // 7. Move Button
+            if (state == BuildingState.Normal || state == BuildingState.Producing || state == BuildingState.ReadyToHarvest)
             {
-                bool showMove = (state == BuildingState.Normal || state == BuildingState.Producing || state == BuildingState.ReadyToHarvest);
-                btnMove.gameObject.SetActive(showMove);
+                CreateButton(moveConfig, OnMoveClicked);
             }
 
-            if (btnDemolish != null)
+            // 8. Demolish Button
+            if (state == BuildingState.Normal || state == BuildingState.Broken || 
+                state == BuildingState.Producing || state == BuildingState.ReadyToHarvest)
             {
-                bool showDemolish = (state == BuildingState.Normal || state == BuildingState.Broken || 
-                                     state == BuildingState.Producing || state == BuildingState.ReadyToHarvest);
-                btnDemolish.gameObject.SetActive(showDemolish);
+                CreateButton(demolishConfig, OnDemolishClicked);
             }
 
-            if (btnInfo != null)
+            // 9. Close Button
+            var closeBtn = CreateButton(closeConfig, Hide);
+            if (closeBtn != null)
             {
-                btnInfo.gameObject.SetActive(true);
+                _closeButtonGo = closeBtn.gameObject;
             }
 
             if (useRadialLayout)
@@ -299,18 +348,23 @@ namespace GameClient.UI
 
         private void ApplyRadialLayout()
         {
-            var activeButtons = new System.Collections.Generic.List<RectTransform>();
-            Button[] allButtons = { btnInfo, btnUpgrade, btnHarvest, btnSpeedUp, btnRepair, btnCancel, btnMove, btnDemolish };
-
-            foreach (var btn in allButtons)
+            var radialButtons = new System.Collections.Generic.List<RectTransform>();
+            foreach (var go in _spawnedButtons)
             {
-                if (btn != null && btn.gameObject.activeSelf)
+                if (go == null) continue;
+                if (go == _closeButtonGo)
                 {
-                    activeButtons.Add(btn.transform as RectTransform);
+                    var closeRect = go.transform as RectTransform;
+                    if (closeRect != null)
+                    {
+                        closeRect.anchoredPosition = Vector2.zero; // Nút đóng ở giữa tâm
+                    }
+                    continue;
                 }
+                radialButtons.Add(go.transform as RectTransform);
             }
 
-            int count = activeButtons.Count;
+            int count = radialButtons.Count;
             if (count == 0) return;
 
             float angleStep = 360f / count;
@@ -323,7 +377,7 @@ namespace GameClient.UI
                 float x = Mathf.Cos(angleRad) * radialRadius;
                 float y = Mathf.Sin(angleRad) * radialRadius;
 
-                activeButtons[i].anchoredPosition = new Vector2(x, y);
+                radialButtons[i].anchoredPosition = new Vector2(x, y);
             }
         }
 
@@ -356,54 +410,84 @@ namespace GameClient.UI
         {
             if (_currentBuilding == null) return;
             
-            btnUpgrade.interactable = false;
-            
             try
             {
-                string code = _currentBuilding.Data.BuildingID;
-                if (string.IsNullOrEmpty(code))
+                long instanceId = _currentBuilding.InstanceID;
+                if (instanceId == 0)
                 {
                     GameClient.UIManager.Instance.ShowMessage("Lỗi", "Tòa nhà chưa được đồng bộ với Server!");
                     return;
                 }
 
-                var resp = await SectBuildingApi.UpgradeBuildingAsync(code);
+                var resp = await SectBuildingApi.UpgradeBuildingAsync(instanceId);
                 
-                if (resp != null)
+                if (resp != null && resp.Base != null && resp.Base.Code == 0)
                 {
-                    GameClient.UIManager.Instance.ShowMessage("Thành Công", $"Đã bắt đầu nâng cấp toà nhà {_currentBuilding.Data.BuildingNameKey}!");
-                    
-                    // Cập nhật cấp độ cho BuildingInstance hiện tại để hiển thị visual mới
-                    _currentBuilding.SetLevel(_currentBuilding.CurrentLevel + 1);
+                    string buildingName = GameClient.Managers.LocalizationManager.Instance.GetText(_currentBuilding.Data.BuildingNameKey); 
+                    if (string.IsNullOrEmpty(buildingName) || buildingName.StartsWith("[")) { buildingName = _currentBuilding.Data.BuildingNameKey; } 
+                    int targetLevel = _currentBuilding.CurrentLevel + 1; 
+                    string successTitle = GameClient.Managers.LocalizationManager.Instance.GetText("UI_System", "ui_success_title") ?? "Thành Công"; 
+                    string successFormat = GameClient.Managers.LocalizationManager.Instance.GetText("UI_System", "ui_building_upgrade_start_success") ?? "Đã bắt đầu nâng cấp toà nhà {0} lên Cấp {1}!"; 
+                    GameClient.UIManager.Instance.ShowMessage(successTitle, string.Format(successFormat, buildingName, targetLevel));
                     
                     var baseResp = await SectBuildingApi.GetBaseAsync();
-                    if (baseResp != null)
+                    if (baseResp != null && baseResp.Base != null && baseResp.Base.Code == 0)
                     {
                         GameClient.GameManager.Instance.SetBuildings(baseResp.Buildings);
+                        BaseBuildingManager.Instance.SyncBuildingsWithServerData(baseResp.Buildings);
                     }
                     Hide();
+                }
+                else
+                {
+                    string errorMsg = resp?.Base?.Message ?? "Lỗi không xác định từ Server";
+                    errorMsg = LocalizeUpgradeError(errorMsg);
+                    GameClient.UIManager.Instance.ShowMessage("Lỗi Nâng Cấp", errorMsg);
                 }
             }
             catch (System.Exception ex)
             {
                 GameClient.UIManager.Instance.ShowMessage("Lỗi Nâng Cấp", ex.Message);
             }
-            finally
-            {
-                if (btnUpgrade != null) btnUpgrade.interactable = true;
-            }
         }
+
+        private string LocalizeUpgradeError(string errorMsg)
+        {
+            if (string.IsNullOrEmpty(errorMsg)) return errorMsg;
+
+            string[] lines = errorMsg.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string trimmed = lines[i].Trim();
+                if (trimmed.StartsWith("- "))
+                {
+                    string rawLine = trimmed.Substring(2);
+                    int spaceIndex = rawLine.IndexOf(' ');
+                    if (spaceIndex > 0)
+                    {
+                        string itemCode = rawLine.Substring(0, spaceIndex);
+                        string remainder = rawLine.Substring(spaceIndex);
+
+                        string localizedName = GameClient.Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.ITEM_EQUIPMENT, itemCode);
+                        if (!string.IsNullOrEmpty(localizedName) && !localizedName.StartsWith("["))
+                        {
+                            lines[i] = $"- {localizedName}{remainder}";
+                        }
+                    }
+                }
+            }
+            return string.Join("\n", lines);
+        }
+
 
         private async void OnHarvestClicked()
         {
             if (_currentBuilding == null || !_currentBuilding.HasResourcesToHarvest()) return;
             
-            btnHarvest.interactable = false;
-            
             try
             {
-                string code = _currentBuilding.Data.BuildingID;
-                var resp = await SectBuildingApi.CollectResourcesAsync(code);
+                long instanceId = _currentBuilding.InstanceID;
+                var resp = await SectBuildingApi.CollectResourcesAsync(instanceId);
                 
                 if (resp != null)
                 {
@@ -421,15 +505,45 @@ namespace GameClient.UI
             {
                 GameClient.UIManager.Instance.ShowMessage("Lỗi Thu Hoạch", ex.Message);
             }
-            finally
-            {
-                if (btnHarvest != null) btnHarvest.interactable = true;
-            }
         }
 
-        private void OnSpeedUpClicked()
+        private async void OnSpeedUpClicked()
         {
-            GameClient.UIManager.Instance.ShowMessage("Tăng Tốc", $"Tính năng Tăng Tốc cho {_currentBuilding.Data.BuildingNameKey} đang phát triển!");
+            if (_currentBuilding == null) return;
+
+            try
+            {
+                long instanceId = _currentBuilding.InstanceID;
+                if (instanceId == 0) return;
+
+                var resp = await SectBuildingApi.SpeedUpBuildingAsync(instanceId);
+                if (resp != null && resp.Base != null && resp.Base.Code == 0)
+                {
+                    GameClient.UIManager.Instance.ShowMessage("Tăng Tốc Thành Công", "Đã tăng tốc nâng cấp toà nhà thành công!");
+                    
+                    var baseResp = await SectBuildingApi.GetBaseAsync();
+                    if (baseResp != null && baseResp.Base != null && baseResp.Base.Code == 0)
+                    {
+                        GameClient.GameManager.Instance.SetBuildings(baseResp.Buildings);
+                        BaseBuildingManager.Instance.SyncBuildingsWithServerData(baseResp.Buildings);
+                    }
+                    if (resp.Player != null)
+                    {
+                        GameClient.GameManager.Instance.SetPlayer(resp.Player);
+                    }
+                    Hide();
+                }
+                else
+                {
+                    string errorMsg = resp?.Base?.Message ?? "Lỗi không xác định từ Server";
+                    errorMsg = LocalizeUpgradeError(errorMsg);
+                    GameClient.UIManager.Instance.ShowMessage("Lỗi Tăng Tốc", errorMsg);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                GameClient.UIManager.Instance.ShowMessage("Lỗi Tăng Tốc", ex.Message);
+            }
         }
 
         private void OnRepairClicked()
@@ -462,11 +576,18 @@ namespace GameClient.UI
 
         private void OnDemolishClicked()
         {
-            GameClient.UIManager.Instance.ShowMessage(
-                "Tháo Dỡ", 
-                $"Bạn có chắc chắn muốn tháo dỡ {_currentBuilding.Data.BuildingNameKey} không?",
-                () => {
+            string buildingName = LocalizationManager.Instance.GetText(_currentBuilding.Data.BuildingNameKey);
+            if (string.IsNullOrEmpty(buildingName) || buildingName.StartsWith("[")) buildingName = _currentBuilding.Data.BuildingNameKey;
+
+            GameClient.UIManager.Instance.ShowConfirmDialog(
+                "ui_stow_title", 
+                "ui_stow_confirm", 
+                buildingName,
+                "ui_label_accept", 
+                "ui_label_deny",
+                async () => {
                     BaseBuildingManager.Instance.RemoveBuilding(_currentBuilding);
+                    await BaseBuildingManager.Instance.SaveLayoutToServer();
                     Hide();
                 }
             );

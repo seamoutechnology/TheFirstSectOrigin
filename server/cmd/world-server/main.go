@@ -61,6 +61,21 @@ func main() {
 
 	repo := worldRepo.NewPlayerRepository(db)
 	svc := worldSvc.New(repo, cfg.Server.ServerID)
+
+	// Load dynamic building configurations exported from Unity Client
+	if err := svc.LoadBuildingConfigs("configs/building_configs.json"); err != nil {
+		log.Warn("Failed to load building configs, using hardcoded fallbacks", zap.Error(err))
+	} else {
+		log.Info("Building configs loaded successfully from configs/building_configs.json")
+	}
+
+	// Load speed up configurations
+	if err := svc.LoadSpeedUpConfigs("configs/speedup_configs.json"); err != nil {
+		log.Warn("Failed to load speedup configs, using default values (free_under_seconds=0)", zap.Error(err))
+	} else {
+		log.Info("Speedup configs loaded successfully from configs/speedup_configs.json")
+	}
+
 	h := worldHandler.New(svc, log)
 
 	grpcServer := grpc.NewServer(

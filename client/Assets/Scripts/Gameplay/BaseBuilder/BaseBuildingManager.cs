@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using GameClient.Core;
 using GameClient.Managers;
+using GameClient.Network;
 
 namespace GameClient.Gameplay.BaseBuilder
 {
@@ -14,9 +15,31 @@ namespace GameClient.Gameplay.BaseBuilder
 
         public Dictionary<string, BuildingData> GetBuildingDatabase() => _buildingDatabase;
 
-        public BuildingInstance GetFirstBuilding(string buildingId)
+        public BuildingInstance GetFirstBuilding(
+            string buildingId)
         {
             return _activeBuildings.Find(b => b.Data != null && b.Data.BuildingID == buildingId);
+        }
+
+        public int GetBuildingCount(string buildingId)
+        {
+            int count = 0;
+            foreach (var b in _activeBuildings)
+            {
+                if (b != null && b.Data != null && b.Data.BuildingID == buildingId)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public BuildingInstance GetBuildingAt(int gridX, int gridY)
+        {
+            return _activeBuildings.Find(b => 
+                b != null && b.Data != null &&
+                gridX >= b.GridX && gridX < b.GridX + b.Data.SizeX &&
+                gridY >= b.GridY && gridY < b.GridY + b.Data.SizeY);
         }
 
         protected override void Awake()
@@ -32,6 +55,18 @@ namespace GameClient.Gameplay.BaseBuilder
             }
         }
 
+        public void ResetManager()
+        {
+            foreach (var b in _activeBuildings)
+            {
+                if (b != null)
+                {
+                    Destroy(b.gameObject);
+                }
+            }
+            _activeBuildings.Clear();
+        }
+
         public void LoadDatabase(List<BuildingData> dataList)
         {
             _buildingDatabase.Clear();
@@ -44,24 +79,13 @@ namespace GameClient.Gameplay.BaseBuilder
             }
         }
 
-        public async Task<bool> PlaceBuilding(string buildingId, int gridX, int gridY, int level = 1, BuildingState state = BuildingState.Normal, bool flipX = false)
+        public async Task<bool> PlaceBuilding(string buildingId, int gridX, int gridY, int level = 1, BuildingState state = BuildingState.Normal, bool flipX = false, long instanceId = 0)
         {
             if (!_buildingDatabase.TryGetValue(buildingId, out BuildingData data))
             {
                 Debug.LogWarning($"[BaseBuilding] Không tìm thấy dữ liệu nhà ID: {buildingId}. Sẽ dùng Mock Data.");
                 data = ScriptableObject.CreateInstance<BuildingData>();
                 data.BuildingID = buildingId;
-                
-                if (buildingId == "main_hall")
-                {
-                    data.SizeX = 4;
-                    data.SizeY = 4;
-                }
-                else
-                {
-                    data.SizeX = 2;
-                    data.SizeY = 2;
-                }
                 
                 var visualConfig = Resources.Load<BuildingVisualConfig>($"GameData/Buildings/{buildingId}_Visuals");
                 if (visualConfig != null)
@@ -88,8 +112,22 @@ namespace GameClient.Gameplay.BaseBuilder
             {
                 go = new GameObject("Building_" + buildingId);
                 
-                var collider = go.AddComponent<BoxCollider2D>();
-                collider.size = new Vector2(data.SizeX * BaseGridManager.TILE_WIDTH, data.SizeY * BaseGridManager.TILE_HEIGHT);
+                var oldCol = go.GetComponent<BoxCollider2D>();
+                if (oldCol != null) Destroy(oldCol);
+
+                var collider = go.GetComponent<PolygonCollider2D>();
+                if (collider == null)
+                {
+                    collider = go.AddComponent<PolygonCollider2D>();
+                }
+                float w = data.SizeX * BaseGridManager.TILE_WIDTH;
+                float h = data.SizeY * BaseGridManager.TILE_HEIGHT;
+                Vector2[] points = new Vector2[4];
+                points[0] = new Vector2(0, h / 2f);
+                points[1] = new Vector2(w / 2f, 0);
+                points[2] = new Vector2(0, -h / 2f);
+                points[3] = new Vector2(-w / 2f, 0);
+                collider.points = points;
                 
                 var sr = go.AddComponent<SpriteRenderer>();
                 sr.sortingOrder = 10000;
@@ -113,7 +151,7 @@ namespace GameClient.Gameplay.BaseBuilder
             }
             
             BuildingInstance instance = go.AddComponent<BuildingInstance>();
-            instance.Setup(data, gridX, gridY, level, state, flipX);
+            instance.Setup(data, gridX, gridY, level, state, flipX, instanceId);
             
             _activeBuildings.Add(instance);
             
@@ -158,6 +196,7 @@ namespace GameClient.Gameplay.BaseBuilder
             {
                 model.buildings.Add(new ExportedBuilding
                 {
+                    instance_id = b.InstanceID,
                     id = b.Data.BuildingID,
                     x = b.GridX,
                     y = b.GridY
@@ -198,16 +237,155 @@ namespace GameClient.Gameplay.BaseBuilder
                 BaseGridManager.Instance.ExpandGrid(model.gridWidth, model.gridHeight);
             }
 
-            if (RuntimeMapRenderer.Instance != null)
+            // Chỉ render map layers nếu model có chứa thông tin groundLayers hoặc groundTiles
+            if ((model.groundLayers != null && model.groundLayers.Count > 0) || (model.groundTiles != null && model.groundTiles.Length > 0))
             {
-                RuntimeMapRenderer.Instance.RenderMapLayers(model);
+                if (RuntimeMapRenderer.Instance != null)
+                {
+                    RuntimeMapRenderer.Instance.RenderMapLayers(model);
+                    int layerCount = model.groundLayers != null ? model.groundLayers.Count : 1;
+                    Debug.Log($"[BaseBuildingManager] RenderMapLayers OK — {layerCount} lớp, {model.gridWidth}x{model.gridHeight}");
+                }
+                else
+                {
+                    // Nếu gặp lỗi này: RuntimeMapRenderer chưa được khởi tạo khi ImportLayoutFromModel được gọi.
+                    // Kiểm tra LocalBaseBootstrap.Start() có await Task.Yield() sau SetupCamera() chưa.
+                    Debug.LogError("[BaseBuildingManager] RuntimeMapRenderer.Instance == null! Map nền sẽ TRẮNG. " +
+                                   "Kiểm tra SetupCamera() có chạy trước LoadBaseDataAsync() hay chưa.");
+                }
             }
 
             ClearAllBuildings();
 
             foreach (var b in model.buildings)
             {
-                await PlaceBuilding(b.id, b.x, b.y, b.level, b.state, b.flipX);
+                await PlaceBuilding(b.id, b.x, b.y, b.level, b.state, b.flipX, b.instance_id);
+            }
+        }
+
+        /// <summary>
+        /// Chỉ import vị trí buildings từ model, KHÔNG render lại ground/terrain tiles.
+        /// Dùng khi load data từ server (server map JSON không chứa groundLayers),
+        /// để tránh xóa mất tiles nền đã được render từ DefaultMap.
+        ///
+        /// FIX CHO LỖI: Trắng map sau khi nâng cấp nhà + tắt PlayMode + đăng nhập lại.
+        /// Nguyên nhân: ImportLayoutFromModel() gọi RenderMapLayers() nếu có groundLayers,
+        /// nhưng server JSON không có → vẫn clear buildings → map nền bị mất vì ClearOldLayers()
+        /// trong RenderMapLayers() không chạy nhưng buildings bị reset nên map rỗng.
+        /// </summary>
+        public async Task ImportBuildingsOnlyFromModel(BaseExportModel model)
+        {
+            if (model == null) return;
+
+            if (model.gridWidth > BaseGridManager.Instance.Width || model.gridHeight > BaseGridManager.Instance.Height)
+            {
+                BaseGridManager.Instance.ExpandGrid(model.gridWidth, model.gridHeight);
+            }
+
+            // ✅ KHÔNG gọi RenderMapLayers() → ground tiles được giữ nguyên
+            // ✅ KHÔNG gọi ClearAllBuildings() mà dùng ResetManager để tránh lỗi grid
+
+            // Xóa buildings cũ nhưng KHÔNG đụng vào tilemaps/ground
+            foreach (var b in _activeBuildings)
+            {
+                if (b != null)
+                {
+                    BaseGridManager.Instance.SetOccupied(b.GridX, b.GridY, b.Data.SizeX, b.Data.SizeY, false);
+                    Destroy(b.gameObject);
+                }
+            }
+            _activeBuildings.Clear();
+
+            // Đặt lại buildings từ model
+            foreach (var b in model.buildings)
+            {
+                await PlaceBuilding(b.id, b.x, b.y, b.level, b.state, b.flipX, b.instance_id);
+            }
+            
+            Debug.Log($"[BaseBuildingManager] ImportBuildingsOnlyFromModel: đã đặt {model.buildings.Count} công trình (giữ nguyên nền map).");
+        }
+
+        public async Task SaveLayoutToServer()
+        {
+            try
+            {
+                BaseExportModel model = new BaseExportModel
+                {
+                    gridWidth = BaseGridManager.Instance.Width,
+                    gridHeight = BaseGridManager.Instance.Height
+                };
+
+                foreach (var b in _activeBuildings)
+                {
+                    if (b == null || b.Data == null) continue;
+                    model.buildings.Add(new ExportedBuilding
+                    {
+                        instance_id = b.InstanceID,
+                        id = b.Data.BuildingID,
+                        x = b.GridX,
+                        y = b.GridY,
+                        level = b.CurrentLevel,
+                        state = b.CurrentState,
+                        flipX = b.FlipX
+                    });
+                }
+
+                string json = JsonUtility.ToJson(model);
+                var req = new GameClient.Network.Pb.SavePlayerMapRequest { MapJsonData = json };
+                var res = await NetworkManager.Instance.GatewayClient.SavePlayerMapAsync(req, NetworkManager.DefaultCallOptions());
+                if (res != null && res.Base != null && res.Base.Code == 0)
+                {
+                    Debug.Log("[BaseBuildingManager] Đã lưu map layout lên Server thành công!");
+                }
+                else
+                {
+                    Debug.LogWarning($"[BaseBuildingManager] Không thể lưu map lên Server: {res?.Base?.Message}");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[BaseBuildingManager] Lỗi kết nối khi lưu map lên Server: {ex.Message}");
+            }
+        }
+        public bool IsBuildingPlaced(long instanceId)
+        {
+            if (instanceId == 0) return false;
+            return _activeBuildings.Exists(ab => ab.InstanceID == instanceId);
+        }
+
+        public void SyncBuildingsWithServerData(IEnumerable<GameClient.Network.Pb.Building> serverBuildings)
+        {
+            if (serverBuildings == null) return;
+            var dict = new Dictionary<long, GameClient.Network.Pb.Building>();
+            foreach (var sb in serverBuildings)
+            {
+                dict[sb.InstanceId] = sb;
+            }
+
+            foreach (var active in _activeBuildings)
+            {
+                if (active != null && active.Data != null && dict.TryGetValue(active.InstanceID, out var sb))
+                {
+                    // Calculate state based on UpgradeEndAt
+                    BuildingState state = BuildingState.Normal;
+                    if (sb.UpgradeEndAt > 0)
+                    {
+                        var endOffset = System.DateTimeOffset.FromUnixTimeSeconds(sb.UpgradeEndAt);
+                        if (System.DateTimeOffset.UtcNow < endOffset)
+                        {
+                            state = BuildingState.Upgrading;
+                        }
+                    }
+                    else
+                    {
+                        if (active.Data is ProductionBuildingData)
+                        {
+                            state = active.HasResourcesToHarvest() ? BuildingState.ReadyToHarvest : BuildingState.Producing;
+                        }
+                    }
+                    
+                    active.SyncUpgradeState(sb.Level, sb.UpgradeEndAt, state);
+                }
             }
         }
         

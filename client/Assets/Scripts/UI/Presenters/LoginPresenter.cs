@@ -94,7 +94,7 @@ namespace GameClient.UI.Presenters
 
         private void HandleRegister()
         {
-            _uiManager.OpenPanel("RegisterPanel");
+            _uiManager.OpenPanel("RegisterPanel", null, false);
             _view.Hide();
         }
 

@@ -128,7 +128,41 @@ function processRecharge() {
     }, 1000);
 }
 
-async function claimDaily(day) {
+async // Existing functions ...
+
+// Change Password Function
+async function changePassword() {
+    const current = document.getElementById('current-password').value;
+    const newPwd = document.getElementById('new-password').value;
+    const confirm = document.getElementById('confirm-password').value;
+    if (!current || !newPwd || !confirm) {
+        alert('Vui lòng nhập toàn bộ thông tin');
+        return;
+    }
+    if (newPwd !== confirm) {
+        alert('Mật khẩu mới và xác nhận không khớp');
+        return;
+    }
+    const userId = localStorage.getItem('user_id');
+    try {
+        const resp = await fetch('/api/user/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: parseInt(userId), current_password: current, new_password: newPwd })
+        });
+        const result = await resp.json();
+        if (result.code === 0) {
+            alert('Đổi mật khẩu thành công');
+        } else {
+            alert(result.message || 'Đổi mật khẩu thất bại');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Lỗi kết nối đến server');
+    }
+}
+
+function claimDaily(day) {
     const el = event.currentTarget;
     if (el.classList.contains('claimed')) return;
 

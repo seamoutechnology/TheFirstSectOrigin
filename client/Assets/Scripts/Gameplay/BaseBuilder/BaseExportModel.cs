@@ -18,6 +18,7 @@ namespace GameClient.Gameplay.BaseBuilder
     [Serializable]
     public class ExportedBuilding
     {
+        public long instance_id; // Database Primary Key ID
         public string id;  // BuildingID
         public int x;      // Tọa độ X trên Grid
         public int y;      // Tọa độ Y trên Grid
@@ -57,6 +58,8 @@ namespace GameClient.Gameplay.BaseBuilder
         public List<ExportedBuilding> buildings = new List<ExportedBuilding>();
 
         public int[] terrainData;
+
+        public string[] groundTiles; // Flat array of tiles (e.g. from DefaultMap.json or legacy exports)
 
         public List<ExportedGroundLayer> groundLayers = new List<ExportedGroundLayer>();
     }

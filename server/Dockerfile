@@ -32,6 +32,7 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /app/bin /bin
 COPY --from=builder /app/assets /assets
+COPY --from=builder /app/configs /configs
 
 # CMD được ghi đè bởi docker-compose command
 CMD ["/bin/login-server"]
@@ -42,6 +43,7 @@ FROM alpine:3.19 AS sample
 RUN apk add --no-cache ca-certificates tzdata
 COPY --from=builder /app/bin /bin
 COPY --from=builder /app/assets /assets
+COPY --from=builder /app/configs /configs
 
 CMD ["/bin/login-server"]
 
@@ -51,5 +53,6 @@ FROM alpine:3.19 AS development
 RUN apk add --no-cache ca-certificates tzdata curl
 COPY --from=builder /app/bin /bin
 COPY --from=builder /app/assets /assets
+COPY --from=builder /app/configs /configs
 
 CMD ["/bin/login-server"]

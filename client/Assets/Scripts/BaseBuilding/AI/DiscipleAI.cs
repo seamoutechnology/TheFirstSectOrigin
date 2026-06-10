@@ -131,14 +131,101 @@ namespace GameClient.BaseBuilding.AI
 
         public void PlayAnimation(string animName)
         {
-            if (_animator != null)
+            // Kill any active tweens on the transform and sprite renderer to avoid conflicts
+            transform.DOKill();
+            var sr = GetComponentInChildren<SpriteRenderer>();
+            if (sr != null) sr.DOKill();
+
+            if (_animator != null && _animator.runtimeAnimatorController != null)
             {
                 _animator.CrossFade(animName, 0.2f);
-                Debug.Log($"[DiscipleAI] Đang phát animation: {animName}");
+                Debug.Log($"[DiscipleAI] Đang phát animation qua Animator: {animName}");
+                return;
             }
-            else
+
+            Debug.Log($"[DiscipleAI] Đang phát Tween-Animation cho Sprite tĩnh: {animName}");
+
+            // Reset default visual properties
+            transform.localScale = Vector3.one;
+            transform.localRotation = Quaternion.identity;
+            if (sr != null) sr.color = Color.white;
+
+            switch (animName.ToLower())
             {
-                Debug.Log($"[DiscipleAI] (No Animator) Đang phát animation (MOCK): {animName}");
+                case "idle":
+                    // Squash & Stretch nhịp thở nhẹ nhàng
+                    transform.DOScaleY(1.05f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    transform.DOScaleX(0.96f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    break;
+
+                case "run":
+                    // Chạy nghiêng người nhấp nhô liên tục
+                    transform.DOLocalRotate(new Vector3(0, 0, 8f), 0.2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+                    transform.DOScaleY(0.92f, 0.2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+                    break;
+
+                case "fly":
+                    // Trạng thái bay lơ lửng hình sóng Sine
+                    transform.DOLocalMoveY(transform.localPosition.y + 0.3f, 0.6f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    transform.DOLocalRotate(new Vector3(0, 0, 4f), 0.6f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    break;
+
+                case "meditate":
+                    // Thiền: Thu nhỏ nhẹ như đang tập trung tinh thần, nhấp nhô chậm
+                    transform.DOScale(0.9f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+                    if (sr != null) sr.DOFade(0.7f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+                    break;
+
+                case "work":
+                    // Làm việc: Gập người lên xuống giả lập cuốc/trồng trọt
+                    transform.DOLocalRotate(new Vector3(0, 0, 25f), 0.4f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+                    break;
+
+                case "crafting":
+                    // Luyện đan/Khí: Rung rinh nhẹ liên tục
+                    transform.DOShakePosition(10f, strength: new Vector3(0.04f, 0.04f, 0f), vibrato: 5, randomness: 90).SetLoops(-1);
+                    break;
+
+                case "combatidle":
+                    // Đứng thủ thế: Nhún người nhanh hơn Idle thường
+                    transform.DOScaleY(1.08f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    transform.DOScaleX(0.92f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+                    break;
+
+                case "attack":
+                case "skill1":
+                case "skill2":
+                    // Tấn công: Lao lên phía trước nhanh, nghiêng chém rồi giật về
+                    Vector3 moveDir = transform.localScale.x > 0 ? Vector3.right : Vector3.left;
+                    transform.DOPunchRotation(moveDir * 1.2f, 0.4f, vibrato: 2, elasticity: 0.5f);
+                    transform.DOPunchRotation(new Vector3(0, 0, -20f), 0.4f);
+                    break;
+
+                case "hit":
+                    // Bị đánh: Giật đỏ và rung lắc
+                    transform.DOShakePosition(0.3f, strength: new Vector3(0.4f, 0, 0), vibrato: 15);
+                    if (sr != null)
+                    {
+                        sr.DOColor(Color.red, 0.1f).OnComplete(() => sr.DOColor(Color.white, 0.15f));
+                    }
+                    break;
+
+                case "die":
+                    // Tử vong: Xoay nằm ngang và mờ dần (Fade out)
+                    transform.DOLocalRotate(new Vector3(0, 0, 90f), 0.4f).SetEase(Ease.OutBounce);
+                    transform.DOLocalMoveY(transform.localPosition.y - 0.5f, 0.4f);
+                    if (sr != null) sr.DOFade(0f, 1f).SetDelay(0.5f);
+                    break;
+
+                case "revive":
+                    // Hồi sinh: Từ nằm dọc quay lại bình thường, nhấp nháy sáng
+                    transform.DOLocalRotate(Vector3.zero, 0.5f);
+                    if (sr != null)
+                    {
+                        sr.color = new Color(0, 1, 0, 0); // Start transparent green
+                        sr.DOFade(1f, 0.5f).OnComplete(() => sr.DOColor(Color.white, 0.3f));
+                    }
+                    break;
             }
         }
     }

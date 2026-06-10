@@ -47,7 +47,14 @@ func main() {
 	http.HandleFunc("/api/profile", h.GetProfile)
 	http.HandleFunc("/api/claim-daily", h.ClaimDaily)
 	http.HandleFunc("/user/dashboard", h.UserDashboard)
+	http.HandleFunc("/api/user/redeem", h.UserRedeemGiftCode)
+	http.HandleFunc("/api/user/recharge", h.UserRecharge)
 
+	http.HandleFunc("/api/gm/ping", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"status":"ok"}`))
+	})
 	http.HandleFunc("/api/gm/zones", h.GMGetAllZones)
 	http.HandleFunc("/api/gm/users/list", h.GMGetUsersList)
 	http.HandleFunc("/api/gm/user", h.GMGetUserInfo)
@@ -57,10 +64,25 @@ func main() {
 	http.HandleFunc("/api/gm/item_configs", h.GMGetAllItemConfigs)
 	http.HandleFunc("/api/gm/item_configs/save", h.GMSaveItemConfig)
 	http.HandleFunc("/api/gm/item_configs/delete", h.GMDeleteItemConfig)
+	http.HandleFunc("/api/gm/buildings/sync", h.GMSyncBuildings)
+	http.HandleFunc("/api/gm/stages", h.GMGetAllStageConfigs)
+	http.HandleFunc("/api/gm/stages/sync", h.GMSyncStageConfigs)
+	http.HandleFunc("/api/gm/traits", h.GMGetAllTraitConfigs)
+	http.HandleFunc("/api/gm/traits/sync", h.GMSyncTraitConfigs)
+	http.HandleFunc("/api/gm/heroes", h.GMGetAllHeroTemplates)
+	http.HandleFunc("/api/gm/heroes/sync", h.GMSyncHeroTemplates)
 
 	http.HandleFunc("/api/gm/effect_configs", h.GMGetAllEffectConfigs)
 	http.HandleFunc("/api/gm/effect_configs/save", h.GMSaveEffectConfig)
 	http.HandleFunc("/api/gm/effect_configs/delete", h.GMDeleteEffectConfig)
+
+	http.HandleFunc("/api/gm/feature_configs", h.GMGetAllFeatureConfigs)
+	http.HandleFunc("/api/gm/feature_configs/save", h.GMSaveFeatureConfig)
+	http.HandleFunc("/api/gm/feature_configs/delete", h.GMDeleteFeatureConfig)
+
+	http.HandleFunc("/api/gm/mission_templates", h.GMGetAllMissionTemplates)
+	http.HandleFunc("/api/gm/mission_templates/save", h.GMSaveMissionTemplate)
+	http.HandleFunc("/api/gm/mission_templates/delete", h.GMDeleteMissionTemplate)
 
 	http.HandleFunc("/api/gm/notices", h.GMGetAnnouncements)
 	http.HandleFunc("/api/gm/notices/save", h.GMSaveAnnouncement)

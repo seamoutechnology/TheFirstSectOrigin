@@ -11,9 +11,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2a8dbf10e72f9d4ab4565059e8a4bd6, type: 3}
   m_Name: MainTileMapping
-  m_EditorClassIdentifier: Assembly-CSharp-Editor::GameClient.EditorTools.TileToIDMapping
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.TileToIDMapping
   buildingMappings:
-  - tile: {fileID: 11400000, guid: 0691b071c1982a74fb9ee11773b3293e, type: 2}
+  - tile: {fileID: 0}
+    entityID: main_hall
+    defaultLevel: 1
+    defaultState: 0
+  - tile: {fileID: 11400000, guid: 89f9daf79c2bb4c439d47bf0f6803125, type: 2}
     entityID: main_hall
     defaultLevel: 1
     defaultState: 0

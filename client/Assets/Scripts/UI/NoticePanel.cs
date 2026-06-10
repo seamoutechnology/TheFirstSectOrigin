@@ -187,6 +187,8 @@ namespace GameClient.UI
                     string imgUrl = blocks[i].Substring(0, endIdx);
                     if (!string.IsNullOrWhiteSpace(imgUrl))
                     {
+                        // Decode các ký tự Unicode Escape phổ biến trong JSON truyền từ Server xuống
+                        imgUrl = imgUrl.Replace("\\u0026", "&");
                         AddImageBlock(imgUrl);
                     }
 

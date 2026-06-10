@@ -17,7 +17,7 @@ namespace GameClient.Editor.GMDashboard
     public class GMUserItem
     {
         public long id;
-        public long user_id;
+        public long player_id;
         public string item_code;
         public int quantity;
     }
@@ -87,6 +87,7 @@ namespace GameClient.Editor.GMDashboard
         public string value_type;
         public float min_value;
         public float max_value;
+        public string source_stat;
     }
 
     // --- Server Models ---
@@ -98,6 +99,32 @@ namespace GameClient.Editor.GMDashboard
         public string gateway_url;
         public string status;
         public bool is_active;
+    }
+
+    // --- Feature Config Models ---
+    [System.Serializable]
+    public class GMFeatureConfigData
+    {
+        public string feature_code;
+        public string name_key;
+        public string icon;
+        public int required_player_level;
+        public string required_mission_code;
+        public bool is_active;
+    }
+
+    // --- Mission Template Models ---
+    [System.Serializable]
+    public class GMMissionTemplateData
+    {
+        public int mission_id;
+        public string title;
+        public string description;
+        public int type; // 0: DAILY, 1: MAIN, 2: SIDE, 3: SECT
+        public string target_type; // "player_level", "build_upgrade", "craft_item"
+        public string target_param;
+        public int target_progress;
+        public string rewards; // JSON string
     }
 
     // --- Helpers ---

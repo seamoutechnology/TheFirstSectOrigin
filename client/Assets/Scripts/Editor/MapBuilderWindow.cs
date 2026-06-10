@@ -68,6 +68,26 @@ namespace GameClient.EditorTools
             return g != null ? g.cellSize.y : 1f;
         }
 
+        private Vector3 GetBuildingWorldPos(int gx, int gy, int sizeX, int sizeY, float tileWidth, float tileHeight)
+        {
+            float centerX = gx + sizeX / 2f;
+            float centerY = gy + sizeY / 2f;
+            float worldX = (centerX - centerY) * (tileWidth / 2f);
+            float worldY = (centerX + centerY) * (tileHeight / 4f);
+            return new Vector3(worldX, worldY, 0);
+        }
+
+        private Vector2Int GetBuildingGridPos(Vector3 worldPos, int sizeX, int sizeY, float tileWidth, float tileHeight)
+        {
+            float xOverW = worldPos.x / (tileWidth / 2f);
+            float yOverH = worldPos.y / (tileHeight / 4f);
+            float centerX = (xOverW + yOverH) / 2f;
+            float centerY = (yOverH - xOverW) / 2f;
+            int gx = Mathf.RoundToInt(centerX - sizeX / 2f);
+            int gy = Mathf.RoundToInt(centerY - sizeY / 2f);
+            return new Vector2Int(gx, gy);
+        }
+
         private void OnSceneGUI(SceneView sceneView)
         {
             if (terrainTilemap == null || terrainTilemap.layoutGrid == null) return;
@@ -115,16 +135,10 @@ namespace GameClient.EditorTools
                             }
                         }
 
-                        float worldX = t.position.x;
-                        float worldY = t.position.y;
+                        Vector2Int gPos = GetBuildingGridPos(t.position, sizeX, sizeY, tileWidth, tileHeight);
+                        Vector3 targetPos = GetBuildingWorldPos(gPos.x, gPos.y, sizeX, sizeY, tileWidth, tileHeight);
+                        targetPos.z = t.position.z;
 
-                        int gx = Mathf.RoundToInt(worldX / tileWidth - sizeX / 2f);
-                        int gy = Mathf.RoundToInt(worldY / tileHeight - sizeY / 2f);
-
-                        float snapX = (gx + sizeX / 2f) * tileWidth;
-                        float snapY = (gy + sizeY / 2f) * tileHeight;
-
-                        Vector3 targetPos = new Vector3(snapX, snapY, t.position.z);
                         if (Vector3.Distance(t.position, targetPos) > 0.01f)
                         {
                             Undo.RecordObject(t, "Auto Snap to Grid");
@@ -231,6 +245,9 @@ namespace GameClient.EditorTools
 
         private void PlaceObjectInScene(string entityID, bool isBuilding)
         {
+            float tileWidth = GetTileWidth();
+            float tileHeight = GetTileHeight();
+
             if (objectsRoot == null)
             {
                 GameObject rootGo = GameObject.Find("MapObjects");
@@ -272,8 +289,20 @@ namespace GameClient.EditorTools
                     
                     int sizeX = bData != null ? bData.SizeX : 1;
                     int sizeY = bData != null ? bData.SizeY : 1;
-                    var col = instance.AddComponent<BoxCollider2D>();
-                    col.size = new Vector2(sizeX, sizeY);
+                    
+                    var col = instance.GetComponent<PolygonCollider2D>();
+                    if (col == null)
+                    {
+                        col = instance.AddComponent<PolygonCollider2D>();
+                    }
+                    float w = sizeX * tileWidth;
+                    float h = sizeY * tileHeight;
+                    Vector2[] points = new Vector2[4];
+                    points[0] = new Vector2(0, h / 2f);
+                    points[1] = new Vector2(w / 2f, 0);
+                    points[2] = new Vector2(0, -h / 2f);
+                    points[3] = new Vector2(-w / 2f, 0);
+                    col.points = points;
                 }
                 else
                 {
@@ -285,8 +314,19 @@ namespace GameClient.EditorTools
                             sr.sprite = t.sprite;
                         }
                     }
-                    var col = instance.AddComponent<BoxCollider2D>();
-                    col.size = new Vector2(1, 1);
+                    var col = instance.GetComponent<PolygonCollider2D>();
+                    if (col == null)
+                    {
+                        col = instance.AddComponent<PolygonCollider2D>();
+                    }
+                    float w = tileWidth;
+                    float h = tileHeight;
+                    Vector2[] points = new Vector2[4];
+                    points[0] = new Vector2(0, h / 2f);
+                    points[1] = new Vector2(w / 2f, 0);
+                    points[2] = new Vector2(0, -h / 2f);
+                    points[3] = new Vector2(-w / 2f, 0);
+                    col.points = points;
                 }
             }
 
@@ -313,15 +353,12 @@ namespace GameClient.EditorTools
                 }
             }
 
-            float tileWidth = GetTileWidth();
-            float tileHeight = GetTileHeight();
+            Vector2Int gPos = GetBuildingGridPos(spawnPos, snapSizeX, snapSizeY, tileWidth, tileHeight);
+            int gx = gPos.x;
+            int gy = gPos.y;
 
-            int gx = Mathf.RoundToInt(spawnPos.x / tileWidth - snapSizeX / 2f);
-            int gy = Mathf.RoundToInt(spawnPos.y / tileHeight - snapSizeY / 2f);
-
-            float snapX = (gx + snapSizeX / 2f) * tileWidth;
-            float snapY = (gy + snapSizeY / 2f) * tileHeight;
-            instance.transform.position = new Vector3(snapX, snapY, 0);
+            Vector3 targetPos = GetBuildingWorldPos(gx, gy, snapSizeX, snapSizeY, tileWidth, tileHeight);
+            instance.transform.position = new Vector3(targetPos.x, targetPos.y, 0);
 
             Selection.activeGameObject = instance;
             Undo.RegisterCreatedObjectUndo(instance, "Place Object");
@@ -354,17 +391,12 @@ namespace GameClient.EditorTools
                     }
                 }
 
-                float worldX = child.position.x;
-                float worldY = child.position.y;
-
-                int gx = Mathf.RoundToInt(worldX / tileWidth - sizeX / 2f);
-                int gy = Mathf.RoundToInt(worldY / tileHeight - sizeY / 2f);
-
-                float snapX = (gx + sizeX / 2f) * tileWidth;
-                float snapY = (gy + sizeY / 2f) * tileHeight;
+                Vector2Int gPos = GetBuildingGridPos(child.position, sizeX, sizeY, tileWidth, tileHeight);
+                Vector3 targetPos = GetBuildingWorldPos(gPos.x, gPos.y, sizeX, sizeY, tileWidth, tileHeight);
+                targetPos.z = child.position.z;
 
                 Undo.RecordObject(child, "Snap to Grid");
-                child.position = new Vector3(snapX, snapY, child.position.z);
+                child.position = targetPos;
                 snappedCount++;
             }
             Debug.Log($"<color=green>[MapBuilder]</color> Đã căn lưới thành công cho {snappedCount} đối tượng.");
@@ -392,6 +424,7 @@ namespace GameClient.EditorTools
             var mapData = CreateExportModel();
             string json = JsonUtility.ToJson(mapData, true);
             File.WriteAllText(MOCK_MAP_FILE, json);
+            File.WriteAllText("Assets/Resources/DefaultMap.json", json);
             AssetDatabase.Refresh();
             Debug.Log($"<color=green>[MapBuilder]</color> Xuất thành công DefaultMap.json! (Buildings: {mapData.buildings.Count}, Items: {mapData.items.Count})");
         }
@@ -407,6 +440,7 @@ namespace GameClient.EditorTools
             var mapData = CreateExportModel();
             string json = JsonUtility.ToJson(mapData, true);
             File.WriteAllText(MOCK_MAP_FILE, json);
+            File.WriteAllText("Assets/Resources/DefaultMap.json", json);
             AssetDatabase.Refresh();
 
             try
@@ -619,11 +653,9 @@ namespace GameClient.EditorTools
                             }
                         }
 
-                        float worldX = child.position.x;
-                        float worldY = child.position.y;
-
-                        int gx = Mathf.RoundToInt(worldX / tileWidth - sizeX / 2f);
-                        int gy = Mathf.RoundToInt(worldY / tileHeight - sizeY / 2f);
+                        Vector2Int gPos = GetBuildingGridPos(child.position, sizeX, sizeY, tileWidth, tileHeight);
+                        int gx = gPos.x;
+                        int gy = gPos.y;
 
                         mapData.buildings.Add(new ExportedBuilding
                         {
@@ -638,11 +670,9 @@ namespace GameClient.EditorTools
                     }
                     else
                     {
-                        float worldX = child.position.x;
-                        float worldY = child.position.y;
-
-                        int gx = Mathf.RoundToInt(worldX / tileWidth);
-                        int gy = Mathf.RoundToInt(worldY / tileHeight);
+                        Vector2Int gPos = GetBuildingGridPos(child.position, 1, 1, tileWidth, tileHeight);
+                        int gx = gPos.x;
+                        int gy = gPos.y;
 
                         mapData.items.Add(new ExportedItem
                         {

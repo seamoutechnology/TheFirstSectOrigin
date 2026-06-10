@@ -30,36 +30,55 @@ namespace GameClient.Network
 
         protected override void Awake()
         {
+            Debug.Log($"[NetworkManager] Awake called on instance ID: {this.GetInstanceID()}. Current Instance: {(Instance != null ? Instance.GetInstanceID().ToString() : "null")}");
             base.Awake();
+            if (Instance != this)
+            {
+                Debug.Log($"[NetworkManager] Duplicate instance ID: {this.GetInstanceID()} detected. Exiting Awake without connecting.");
+                return;
+            }
             ConnectToDefaultGateway();
         }
 
         private void OnApplicationQuit()
         {
+            Debug.Log($"[NetworkManager] OnApplicationQuit called on instance ID: {this.GetInstanceID()}");
             ShutdownGrpcChannel();
         }
 
         private void OnDestroy()
         {
-            ShutdownGrpcChannel();
+            Debug.Log($"[NetworkManager] OnDestroy called on instance ID: {this.GetInstanceID()}. Is current Instance: {(Instance == this)}");
+            // Chỉ giải phóng channel nếu instance này là instance chính thức đang hoạt động
+            if (Instance == this)
+            {
+                ShutdownGrpcChannel();
+            }
+            else
+            {
+                Debug.Log($"[NetworkManager] Skipping channel shutdown for duplicate instance ID: {this.GetInstanceID()}");
+            }
         }
 
         private void ShutdownGrpcChannel()
         {
+            Debug.Log($"[NetworkManager] ShutdownGrpcChannel called on instance ID: {this.GetInstanceID()}");
             if (_loginChannel != null)
             {
+                Debug.Log($"[NetworkManager] Disposing _loginChannel on instance ID: {this.GetInstanceID()}");
                 var ch = _loginChannel;
                 _loginChannel = null;
                 Task.Run(() => {
-                    try { ch.Dispose(); } catch (Exception) { }
+                    try { ch.Dispose(); } catch (Exception ex) { Debug.LogError($"[NetworkManager] Error disposing _loginChannel: {ex.Message}"); }
                 });
             }
             if (_gatewayChannel != null)
             {
+                Debug.Log($"[NetworkManager] Disposing _gatewayChannel on instance ID: {this.GetInstanceID()}");
                 var ch = _gatewayChannel;
                 _gatewayChannel = null;
                 Task.Run(() => {
-                    try { ch.Dispose(); } catch (Exception) { }
+                    try { ch.Dispose(); } catch (Exception ex) { Debug.LogError($"[NetworkManager] Error disposing _gatewayChannel: {ex.Message}"); }
                 });
             }
         }
@@ -127,8 +146,11 @@ namespace GameClient.Network
                     Credentials = ChannelCredentials.Insecure
                 });
                 
-                GatewayClient = new GatewayService.GatewayServiceClient(_gatewayChannel);
-                AuthClient = new AuthService.AuthServiceClient(_loginChannel);
+                var gatewayInvoker = new RateLimitingCallInvoker(_gatewayChannel.CreateCallInvoker(), this);
+                var loginInvoker = new RateLimitingCallInvoker(_loginChannel.CreateCallInvoker(), this);
+
+                GatewayClient = new GatewayService.GatewayServiceClient(gatewayInvoker);
+                AuthClient = new AuthService.AuthServiceClient(loginInvoker);
 
                 Debug.Log($"<color=green>[Network] Channel gRPC đã sẵn sàng tại {host}:{port}</color>");
                 
@@ -193,8 +215,69 @@ namespace GameClient.Network
             EventManager.Instance.Emit("ON_SERVER_RECONNECT_FAILED");
         }
 
+        // --- Rate Limiter State ---
+        private readonly Queue<float> _requestTimestamps = new Queue<float>();
+        private const int MAX_REQUESTS_PER_SECOND = 8; // Cho phép tối đa 8 requests mỗi giây
+        private float _lastToastTime = 0f;
+        private readonly Queue<Action> _mainThreadActions = new Queue<Action>();
+
+        private void Update()
+        {
+            lock (_mainThreadActions)
+            {
+                while (_mainThreadActions.Count > 0)
+                {
+                    var action = _mainThreadActions.Dequeue();
+                    try
+                    {
+                        action?.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"[NetworkManager] Lỗi thực thi main thread action: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        public bool CheckAndTrackRateLimit()
+        {
+            float now = Time.time;
+            while (_requestTimestamps.Count > 0 && now - _requestTimestamps.Peek() > 1.0f)
+            {
+                _requestTimestamps.Dequeue();
+            }
+
+            if (_requestTimestamps.Count >= MAX_REQUESTS_PER_SECOND)
+            {
+                Debug.LogWarning($"[RateLimit] Từ chối request do spam quá nhanh! ({_requestTimestamps.Count} req/s)");
+                if (now - _lastToastTime > 1.5f)
+                {
+                    _lastToastTime = now;
+                    lock (_mainThreadActions)
+                    {
+                        _mainThreadActions.Enqueue(() => {
+                            if (ToastManager.Instance != null)
+                            {
+                                ToastManager.Instance.ShowBigToast("Thao tác quá nhanh, vui lòng thử lại sau!", 1.5f);
+                            }
+                        });
+                    }
+                }
+                return false;
+            }
+
+            _requestTimestamps.Enqueue(now);
+            return true;
+        }
+
         public async Task<string> PostAsync(string url, object data)
         {
+            if (!CheckAndTrackRateLimit())
+            {
+                return null;
+            }
+
             if (url.StartsWith("/") && GameSettings.Instance != null)
             {
                 url = GameSettings.Instance.apiBaseUrl.TrimEnd('/') + url;
@@ -279,6 +362,157 @@ namespace GameClient.Network
             if (!string.IsNullOrEmpty(token)) headers.Add("authorization", $"{GameConstants.Network.BEARER_PREFIX}{token}");
             
             return new CallOptions(headers).WithDeadline(DateTime.UtcNow.AddSeconds(10));
+        }
+
+        private bool _isHandlingUnauthenticated = false;
+
+        public void HandleUnauthenticatedError(RpcException ex)
+        {
+            lock (_mainThreadActions)
+            {
+                _mainThreadActions.Enqueue(() =>
+                {
+                    if (_isHandlingUnauthenticated) return;
+                    _isHandlingUnauthenticated = true;
+
+                    Debug.LogWarning($"[Network] Nhận lỗi Unauthenticated từ Server: {ex.Status.Detail}");
+
+                    string msg = "Phiên đăng nhập đã hết hạn hoặc tài khoản được đăng nhập trên thiết bị khác. Vui lòng đăng nhập lại!";
+                    if (ex.Status.Detail.Contains("another device") || ex.Message.Contains("another device"))
+                    {
+                        msg = "Tài khoản của bạn đã được đăng nhập từ một thiết bị khác!";
+                    }
+
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.ShowMessage("Lỗi Xác Thực", msg, () =>
+                        {
+                            PerformForceLogout();
+                        });
+                    }
+                    else
+                    {
+                        PerformForceLogout();
+                    }
+                });
+            }
+        }
+
+        private void PerformForceLogout()
+        {
+            _isHandlingUnauthenticated = false;
+
+            // Xóa Session local
+            if (AccountManager.Instance != null)
+            {
+                AccountManager.Instance.Logout();
+            }
+
+            PlayerPrefs.DeleteKey(GameConstants.PlayerPrefsKeys.TOKEN);
+            PlayerPrefs.DeleteKey(GameConstants.PlayerPrefsKeys.LAST_ACCOUNT);
+            PlayerPrefs.Save();
+
+            EventManager.Instance.Emit(GameEvents.ON_LOGOUT);
+
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.GoToLogin();
+            }
+        }
+    }
+
+    // Custom CallInvoker to apply rate limiting transparently on all gRPC client requests
+    public class RateLimitingCallInvoker : CallInvoker
+    {
+        private readonly CallInvoker _invoker;
+        private readonly NetworkManager _manager;
+
+        public RateLimitingCallInvoker(CallInvoker invoker, NetworkManager manager)
+        {
+            _invoker = invoker;
+            _manager = manager;
+        }
+
+        public override TResponse BlockingUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+        {
+            if (!_manager.CheckAndTrackRateLimit())
+            {
+                throw new RpcException(new Status(StatusCode.ResourceExhausted, "Thao tác quá nhanh, vui lòng thử lại sau."));
+            }
+            try
+            {
+                return _invoker.BlockingUnaryCall(method, host, options, request);
+            }
+            catch (RpcException ex)
+            {
+                if (ex.StatusCode == StatusCode.Unauthenticated)
+                {
+                    _manager.HandleUnauthenticatedError(ex);
+                }
+                throw;
+            }
+        }
+
+        public override AsyncUnaryCall<TResponse> AsyncUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+        {
+            if (!_manager.CheckAndTrackRateLimit())
+            {
+                throw new RpcException(new Status(StatusCode.ResourceExhausted, "Thao tác quá nhanh, vui lòng thử lại sau."));
+            }
+            
+            var call = _invoker.AsyncUnaryCall(method, host, options, request);
+            var wrappedResponse = WrapResponseTask(call.ResponseAsync);
+            
+            return new AsyncUnaryCall<TResponse>(
+                wrappedResponse,
+                call.ResponseHeadersAsync,
+                call.GetStatus,
+                call.GetTrailers,
+                call.Dispose
+            );
+        }
+
+        private async Task<TResponse> WrapResponseTask<TResponse>(Task<TResponse> responseTask)
+        {
+            try
+            {
+                return await responseTask;
+            }
+            catch (RpcException ex)
+            {
+                if (ex.StatusCode == StatusCode.Unauthenticated)
+                {
+                    _manager.HandleUnauthenticatedError(ex);
+                }
+                throw;
+            }
+        }
+
+        public override AsyncServerStreamingCall<TResponse> AsyncServerStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+        {
+            if (!_manager.CheckAndTrackRateLimit())
+            {
+                throw new RpcException(new Status(StatusCode.ResourceExhausted, "Thao tác quá nhanh, vui lòng thử lại sau."));
+            }
+            return _invoker.AsyncServerStreamingCall(method, host, options, request);
+        }
+
+        public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)
+        {
+            if (!_manager.CheckAndTrackRateLimit())
+            {
+                throw new RpcException(new Status(StatusCode.ResourceExhausted, "Thao tác quá nhanh, vui lòng thử lại sau."));
+            }
+            return _invoker.AsyncClientStreamingCall(method, host, options);
+        }
+
+        public override AsyncDuplexStreamingCall<TRequest, TResponse> AsyncDuplexStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)
+        {
+            if (!_manager.CheckAndTrackRateLimit())
+            {
+                throw new RpcException(new Status(StatusCode.ResourceExhausted, "Thao tác quá nhanh, vui lòng thử lại sau."));
+            }
+            return _invoker.AsyncDuplexStreamingCall(method, host, options);
         }
     }
 }

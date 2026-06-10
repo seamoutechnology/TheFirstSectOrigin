@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using GameClient.Network;
 using GameClient.Network.Pb;
+using GameClient.UI;
+using GameClient.UI.Combat;
 
 namespace GameClient.Gameplay.Combat.States
 {
@@ -31,25 +33,39 @@ namespace GameClient.Gameplay.Combat.States
             req.CombatLogs.AddRange(manager.CombatLogs);
 
             var call = NetworkManager.Instance.GatewayClient.ValidatePvEResultAsync(req);
-            call.ResponseAsync.ContinueWith(task =>
+            
+            // Safe yielding on main thread to await gRPC call completion
+            var task = call.ResponseAsync;
+            while (!task.IsCompleted)
             {
-                if (task.IsFaulted)
+                yield return null;
+            }
+
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"[Combat] Lỗi kết nối Server: {task.Exception}");
+                // Fallback local response representation so that client does not get stuck
+                UIManager.Instance.OpenPanel("CombatResultPanel", new CombatResultPanel.LocalResultData
                 {
-                    Debug.LogError($"[Combat] Lỗi kết nối Server: {task.Exception}");
+                    IsVictory = allEnemiesDead,
+                    RewardExp = allEnemiesDead ? 100 : 0,
+                    RewardLinhThach = allEnemiesDead ? 50 : 0
+                });
+            }
+            else
+            {
+                var resp = task.Result;
+                if (resp.IsValid)
+                {
+                    Debug.Log($"<color=cyan>[Combat] Server xác nhận Hợp lệ! Thưởng: {resp.RewardExp} Exp, {resp.RewardLinhThach} LT.</color>");
                 }
                 else
                 {
-                    var resp = task.Result;
-                    if (resp.IsValid)
-                    {
-                        Debug.Log($"<color=cyan>[Combat] Server xác nhận Hợp lệ! Thưởng: {resp.RewardExp} Exp, {resp.RewardLinhThach} LT.</color>");
-                    }
-                    else
-                    {
-                        Debug.LogError($"[Combat] Server từ chối kết quả: {resp.Base.Message}");
-                    }
+                    Debug.LogError($"[Combat] Server từ chối kết quả: {resp.Base?.Message}");
                 }
-            });
+                
+                UIManager.Instance.OpenPanel("CombatResultPanel", resp);
+            }
 
             manager.OnCombatEnded?.Invoke();
             yield break;

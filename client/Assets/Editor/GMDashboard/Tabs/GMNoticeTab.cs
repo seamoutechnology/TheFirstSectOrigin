@@ -9,7 +9,7 @@ namespace GameClient.Editor.GMDashboard
     public class GMNoticeTab
     {
         private EditorWindow window;
-        private string adminUrl = "http://localhost:8080/api/gm";
+        private string AdminUrl => GMDashboardConfig.GmApiUrl;
         
         private List<GMAnnouncementData> noticeList = new List<GMAnnouncementData>();
         private GMAnnouncementData selectedNotice = null;
@@ -107,6 +107,8 @@ namespace GameClient.Editor.GMDashboard
 
                 GUILayout.Space(20);
                 GUILayout.BeginHorizontal();
+                bool noticeOnline = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
+                GUI.enabled = noticeOnline;
                 if (GUILayout.Button("LƯU THÔNG BÁO", GUILayout.Height(30), GUILayout.Width(150)))
                 {
                     SaveNotice(selectedNotice);
@@ -118,6 +120,7 @@ namespace GameClient.Editor.GMDashboard
                         DeleteNotice(selectedNotice);
                     }
                 }
+                GUI.enabled = true;
                 GUILayout.EndHorizontal();
             }
             else
@@ -147,7 +150,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchAllNotices()
         {
-            string url = adminUrl + "/notices";
+            string url = AdminUrl + "/notices";
             var request = UnityWebRequest.Get(url);
             
             request.SendWebRequest().completed += (asyncOp) =>
@@ -168,7 +171,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void SaveNotice(GMAnnouncementData notice)
         {
-            string url = adminUrl + "/notices/save";
+            string url = AdminUrl + "/notices/save";
             string json = JsonUtility.ToJson(notice);
             var request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
@@ -198,7 +201,7 @@ namespace GameClient.Editor.GMDashboard
                 return;
             }
 
-            string url = adminUrl + "/notices/delete";
+            string url = AdminUrl + "/notices/delete";
             string json = "{\"id\":" + notice.id + "}";
             var request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);

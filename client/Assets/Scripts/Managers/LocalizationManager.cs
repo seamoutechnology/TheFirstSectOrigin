@@ -17,6 +17,11 @@ namespace GameClient.Managers
             return GetText(defaultTable, key, args);
         }
 
+        public string GetText(string table, string key)
+        {
+            return GetText(table, key, System.Array.Empty<object>());
+        }
+
         public string GetText(string table, string key, params object[] args)
         {
             if (string.IsNullOrEmpty(key)) return "";

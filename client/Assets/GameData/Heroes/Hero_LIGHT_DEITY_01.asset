@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7369c1fe66ca2c4eba7f698b0f58694, type: 3}
+  m_Name: Hero_LIGHT_DEITY_01
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
+  heroId: 0
+  heroName: "Th\u1EA7n \xC1nh S\xE1ng"
+  description: 
+  MaxLifespan: 0
+  BaseLoyalty: 0
+  prefabAddress: 
+  iconAddress: 
+  rarity: UR
+  basePower: 0
+  code: LIGHT_DEITY_01
+  element: light
+  role: mage
+  baseHp: 2000
+  baseAtk: 350
+  baseDef: 100
+  baseSpeed: 150
+  gachaWeight: 10
+  isActive: 1

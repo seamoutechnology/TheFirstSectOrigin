@@ -25,9 +25,11 @@ const (
 	GatewayService_GetPlayerProfile_FullMethodName   = "/pb.GatewayService/GetPlayerProfile"
 	GatewayService_GetSectInfo_FullMethodName        = "/pb.GatewayService/GetSectInfo"
 	GatewayService_UpgradeBuilding_FullMethodName    = "/pb.GatewayService/UpgradeBuilding"
+	GatewayService_SpeedUpBuilding_FullMethodName    = "/pb.GatewayService/SpeedUpBuilding"
 	GatewayService_CollectResources_FullMethodName   = "/pb.GatewayService/CollectResources"
 	GatewayService_SaveAdminMap_FullMethodName       = "/pb.GatewayService/SaveAdminMap"
 	GatewayService_GetPlayerMap_FullMethodName       = "/pb.GatewayService/GetPlayerMap"
+	GatewayService_SavePlayerMap_FullMethodName      = "/pb.GatewayService/SavePlayerMap"
 	GatewayService_GetHeroes_FullMethodName          = "/pb.GatewayService/GetHeroes"
 	GatewayService_SetFormation_FullMethodName       = "/pb.GatewayService/SetFormation"
 	GatewayService_LevelUpDisciple_FullMethodName    = "/pb.GatewayService/LevelUpDisciple"
@@ -37,6 +39,7 @@ const (
 	GatewayService_ValidatePvEResult_FullMethodName  = "/pb.GatewayService/ValidatePvEResult"
 	GatewayService_GetInventory_FullMethodName       = "/pb.GatewayService/GetInventory"
 	GatewayService_EquipItem_FullMethodName          = "/pb.GatewayService/EquipItem"
+	GatewayService_UseItem_FullMethodName            = "/pb.GatewayService/UseItem"
 	GatewayService_GetGachaBanners_FullMethodName    = "/pb.GatewayService/GetGachaBanners"
 	GatewayService_DoGacha_FullMethodName            = "/pb.GatewayService/DoGacha"
 	GatewayService_GetMissions_FullMethodName        = "/pb.GatewayService/GetMissions"
@@ -55,9 +58,11 @@ type GatewayServiceClient interface {
 	// --- Sect & Buildings & Map ---
 	GetSectInfo(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*SectInfo, error)
 	UpgradeBuilding(ctx context.Context, in *UpgradeBuildingRequest, opts ...grpc.CallOption) (*UpgradeBuildingResponse, error)
+	SpeedUpBuilding(ctx context.Context, in *SpeedUpBuildingRequest, opts ...grpc.CallOption) (*SpeedUpBuildingResponse, error)
 	CollectResources(ctx context.Context, in *CollectResourcesRequest, opts ...grpc.CallOption) (*CollectResourcesResponse, error)
 	SaveAdminMap(ctx context.Context, in *SaveAdminMapRequest, opts ...grpc.CallOption) (*SaveAdminMapResponse, error)
 	GetPlayerMap(ctx context.Context, in *GetPlayerMapRequest, opts ...grpc.CallOption) (*GetPlayerMapResponse, error)
+	SavePlayerMap(ctx context.Context, in *SavePlayerMapRequest, opts ...grpc.CallOption) (*SavePlayerMapResponse, error)
 	// --- Heroes ---
 	GetHeroes(ctx context.Context, in *GetHeroesRequest, opts ...grpc.CallOption) (*GetHeroesResponse, error)
 	SetFormation(ctx context.Context, in *SetFormationRequest, opts ...grpc.CallOption) (*SetFormationResponse, error)
@@ -70,6 +75,7 @@ type GatewayServiceClient interface {
 	// --- Inventory & Items ---
 	GetInventory(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*Inventory, error)
 	EquipItem(ctx context.Context, in *EquipRequest, opts ...grpc.CallOption) (*EquipResponse, error)
+	UseItem(ctx context.Context, in *UseItemRequest, opts ...grpc.CallOption) (*UseItemResponse, error)
 	// --- Gacha ---
 	GetGachaBanners(ctx context.Context, in *GetGachaBannersRequest, opts ...grpc.CallOption) (*GetGachaBannersResponse, error)
 	DoGacha(ctx context.Context, in *DoGachaRequest, opts ...grpc.CallOption) (*DoGachaResponse, error)
@@ -145,6 +151,16 @@ func (c *gatewayServiceClient) UpgradeBuilding(ctx context.Context, in *UpgradeB
 	return out, nil
 }
 
+func (c *gatewayServiceClient) SpeedUpBuilding(ctx context.Context, in *SpeedUpBuildingRequest, opts ...grpc.CallOption) (*SpeedUpBuildingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SpeedUpBuildingResponse)
+	err := c.cc.Invoke(ctx, GatewayService_SpeedUpBuilding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gatewayServiceClient) CollectResources(ctx context.Context, in *CollectResourcesRequest, opts ...grpc.CallOption) (*CollectResourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CollectResourcesResponse)
@@ -169,6 +185,16 @@ func (c *gatewayServiceClient) GetPlayerMap(ctx context.Context, in *GetPlayerMa
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPlayerMapResponse)
 	err := c.cc.Invoke(ctx, GatewayService_GetPlayerMap_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gatewayServiceClient) SavePlayerMap(ctx context.Context, in *SavePlayerMapRequest, opts ...grpc.CallOption) (*SavePlayerMapResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SavePlayerMapResponse)
+	err := c.cc.Invoke(ctx, GatewayService_SavePlayerMap_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -265,6 +291,16 @@ func (c *gatewayServiceClient) EquipItem(ctx context.Context, in *EquipRequest, 
 	return out, nil
 }
 
+func (c *gatewayServiceClient) UseItem(ctx context.Context, in *UseItemRequest, opts ...grpc.CallOption) (*UseItemResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UseItemResponse)
+	err := c.cc.Invoke(ctx, GatewayService_UseItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gatewayServiceClient) GetGachaBanners(ctx context.Context, in *GetGachaBannersRequest, opts ...grpc.CallOption) (*GetGachaBannersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGachaBannersResponse)
@@ -308,9 +344,11 @@ type GatewayServiceServer interface {
 	// --- Sect & Buildings & Map ---
 	GetSectInfo(context.Context, *GetProfileRequest) (*SectInfo, error)
 	UpgradeBuilding(context.Context, *UpgradeBuildingRequest) (*UpgradeBuildingResponse, error)
+	SpeedUpBuilding(context.Context, *SpeedUpBuildingRequest) (*SpeedUpBuildingResponse, error)
 	CollectResources(context.Context, *CollectResourcesRequest) (*CollectResourcesResponse, error)
 	SaveAdminMap(context.Context, *SaveAdminMapRequest) (*SaveAdminMapResponse, error)
 	GetPlayerMap(context.Context, *GetPlayerMapRequest) (*GetPlayerMapResponse, error)
+	SavePlayerMap(context.Context, *SavePlayerMapRequest) (*SavePlayerMapResponse, error)
 	// --- Heroes ---
 	GetHeroes(context.Context, *GetHeroesRequest) (*GetHeroesResponse, error)
 	SetFormation(context.Context, *SetFormationRequest) (*SetFormationResponse, error)
@@ -323,6 +361,7 @@ type GatewayServiceServer interface {
 	// --- Inventory & Items ---
 	GetInventory(context.Context, *GetProfileRequest) (*Inventory, error)
 	EquipItem(context.Context, *EquipRequest) (*EquipResponse, error)
+	UseItem(context.Context, *UseItemRequest) (*UseItemResponse, error)
 	// --- Gacha ---
 	GetGachaBanners(context.Context, *GetGachaBannersRequest) (*GetGachaBannersResponse, error)
 	DoGacha(context.Context, *DoGachaRequest) (*DoGachaResponse, error)
@@ -356,6 +395,9 @@ func (UnimplementedGatewayServiceServer) GetSectInfo(context.Context, *GetProfil
 func (UnimplementedGatewayServiceServer) UpgradeBuilding(context.Context, *UpgradeBuildingRequest) (*UpgradeBuildingResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpgradeBuilding not implemented")
 }
+func (UnimplementedGatewayServiceServer) SpeedUpBuilding(context.Context, *SpeedUpBuildingRequest) (*SpeedUpBuildingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SpeedUpBuilding not implemented")
+}
 func (UnimplementedGatewayServiceServer) CollectResources(context.Context, *CollectResourcesRequest) (*CollectResourcesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CollectResources not implemented")
 }
@@ -364,6 +406,9 @@ func (UnimplementedGatewayServiceServer) SaveAdminMap(context.Context, *SaveAdmi
 }
 func (UnimplementedGatewayServiceServer) GetPlayerMap(context.Context, *GetPlayerMapRequest) (*GetPlayerMapResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPlayerMap not implemented")
+}
+func (UnimplementedGatewayServiceServer) SavePlayerMap(context.Context, *SavePlayerMapRequest) (*SavePlayerMapResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SavePlayerMap not implemented")
 }
 func (UnimplementedGatewayServiceServer) GetHeroes(context.Context, *GetHeroesRequest) (*GetHeroesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetHeroes not implemented")
@@ -391,6 +436,9 @@ func (UnimplementedGatewayServiceServer) GetInventory(context.Context, *GetProfi
 }
 func (UnimplementedGatewayServiceServer) EquipItem(context.Context, *EquipRequest) (*EquipResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method EquipItem not implemented")
+}
+func (UnimplementedGatewayServiceServer) UseItem(context.Context, *UseItemRequest) (*UseItemResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UseItem not implemented")
 }
 func (UnimplementedGatewayServiceServer) GetGachaBanners(context.Context, *GetGachaBannersRequest) (*GetGachaBannersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGachaBanners not implemented")
@@ -530,6 +578,24 @@ func _GatewayService_UpgradeBuilding_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GatewayService_SpeedUpBuilding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SpeedUpBuildingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).SpeedUpBuilding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_SpeedUpBuilding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).SpeedUpBuilding(ctx, req.(*SpeedUpBuildingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GatewayService_CollectResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CollectResourcesRequest)
 	if err := dec(in); err != nil {
@@ -580,6 +646,24 @@ func _GatewayService_GetPlayerMap_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GatewayServiceServer).GetPlayerMap(ctx, req.(*GetPlayerMapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GatewayService_SavePlayerMap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SavePlayerMapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).SavePlayerMap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_SavePlayerMap_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).SavePlayerMap(ctx, req.(*SavePlayerMapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -746,6 +830,24 @@ func _GatewayService_EquipItem_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GatewayService_UseItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UseItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).UseItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_UseItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).UseItem(ctx, req.(*UseItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GatewayService_GetGachaBanners_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGachaBannersRequest)
 	if err := dec(in); err != nil {
@@ -832,6 +934,10 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GatewayService_UpgradeBuilding_Handler,
 		},
 		{
+			MethodName: "SpeedUpBuilding",
+			Handler:    _GatewayService_SpeedUpBuilding_Handler,
+		},
+		{
 			MethodName: "CollectResources",
 			Handler:    _GatewayService_CollectResources_Handler,
 		},
@@ -842,6 +948,10 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerMap",
 			Handler:    _GatewayService_GetPlayerMap_Handler,
+		},
+		{
+			MethodName: "SavePlayerMap",
+			Handler:    _GatewayService_SavePlayerMap_Handler,
 		},
 		{
 			MethodName: "GetHeroes",
@@ -878,6 +988,10 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EquipItem",
 			Handler:    _GatewayService_EquipItem_Handler,
+		},
+		{
+			MethodName: "UseItem",
+			Handler:    _GatewayService_UseItem_Handler,
 		},
 		{
 			MethodName: "GetGachaBanners",

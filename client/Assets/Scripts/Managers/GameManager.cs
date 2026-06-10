@@ -34,7 +34,6 @@ namespace GameClient
             OnHeroesUpdated?.Invoke(PlayerHeroes);
         }
 
-        // nhớ clear khi logout ko là bug ráng chịu :v
         public void ClearData()
         {
             CurrentPlayer = null;

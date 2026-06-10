@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using GameClient.Core;
+    using GameClient.Core;
 using DG.Tweening;
 
 namespace GameClient.UI

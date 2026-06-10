@@ -17,7 +17,7 @@ namespace GameClient.UI
             }
             else
             {
-                UIManager.Instance.OpenPanel("LoginPanel");
+                UIManager.Instance.OpenPanel("LoginPanel", null, false);
             }
         }
     }

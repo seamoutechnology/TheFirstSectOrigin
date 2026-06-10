@@ -47,6 +47,40 @@ namespace GameClient.Editor.GMDashboard
 
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
+            // --- GM DASHBOARD CONNECTION ---
+            EditorGUILayout.LabelField("GM DASHBOARD", EditorStyles.boldLabel);
+
+            EditorGUILayout.BeginHorizontal();
+            string currentUrl = GMDashboardConfig.AdminUrl;
+            string newUrl = EditorGUILayout.TextField("Admin URL", currentUrl);
+            if (newUrl != currentUrl)
+            {
+                GMDashboardConfig.AdminUrl = newUrl;
+                GMDashboardConfig.ForceRefresh();
+            }
+
+            // Status badge
+            var statusBadge = GMDashboardConfig.Status switch
+            {
+                GMDashboardConfig.ConnectionStatus.Online   => (badge: "● ONLINE",   color: "#00e676"),
+                GMDashboardConfig.ConnectionStatus.Offline  => (badge: "● OFFLINE",  color: "#ff5252"),
+                GMDashboardConfig.ConnectionStatus.Checking => (badge: "◌ CHECKING", color: "#ffab40"),
+                _                                           => (badge: "◌ UNKNOWN",  color: "#90a4ae")
+            };
+            GUIStyle badgeStyle = new GUIStyle(EditorStyles.miniLabel) { richText = true };
+            GUILayout.Label($"<color={statusBadge.color}>{statusBadge.badge}</color>", badgeStyle, GUILayout.Width(90));
+            EditorGUILayout.EndHorizontal();
+
+            if (GUILayout.Button("Test Connection", GUILayout.Width(140)))
+            {
+                GMDashboardConfig.ForceRefresh();
+            }
+            EditorGUILayout.HelpBox(
+                "URL của Admin Server (gm-api). Tất cả các tab trong GM Dashboard đều dùng chung URL này.\n" +
+                "Mặc định: http://localhost:8080/api/gm",
+                MessageType.Info);
+            EditorGUILayout.Space(10);
+
             // --- PHẦN SERVER ---
             EditorGUILayout.LabelField("MẠNG & SERVER", EditorStyles.boldLabel);
             _settings.apiBaseUrl = EditorGUILayout.TextField("API Base URL", _settings.apiBaseUrl);

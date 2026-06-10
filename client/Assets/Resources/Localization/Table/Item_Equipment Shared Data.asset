@@ -14,7 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: Item_Equipment
   m_TableCollectionNameGuidString: ea25558a67f1a874b9ce14db534fdf34
-  m_Entries: []
+  m_Entries:
+  - m_Id: 9634488261505024
+    m_Key: coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9671969031811072
+    m_Key: coin_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672662530617344
+    m_Key: gold_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672741756825600
+    m_Key: gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674427636346880
+    m_Key: stone_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674470363721728
+    m_Key: stone_1_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674857355374592
+    m_Key: wood_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9675086527950848
+    m_Key: wood_1_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9722235491938304
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32d0f9abead72b4199e571ede16553d, type: 3}
+  m_Name: dorm
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingData
+  BuildingID: dorm
+  BuildingNameKey: dorm
+  BuildingDescKey: dorm_desc
+  Type: 3
+  Category: 1
+  ReputationLimits:
+  - RequiredReputation: 0
+    MaxAllowed: 1
+  - RequiredReputation: 100
+    MaxAllowed: 2
+  SizeX: 2
+  SizeY: 2
+  PrefabAddress: 
+  VisualConfig: {fileID: 11400000, guid: 707c8101fe8125a43ad7f5ac8b5d7c10, type: 2}
+  DetailSubPanelAddress: 
+  LevelStats:
+  - Level: 1
+    RequiredReputation: 0
+    CostItems:
+    - ItemCode: 00000
+      Quantity: 100
+    - ItemCode: 00002
+      Quantity: 10
+    - ItemCode: 00003
+      Quantity: 100
+    BuildTimeSeconds: 30

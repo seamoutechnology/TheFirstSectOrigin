@@ -10,6 +10,28 @@ namespace GameClient.Gameplay.BaseBuilder
         Decoration
     }
 
+    public enum BuildingCategory
+    {
+        Production, // Sản xuất
+        Facility,   // Cơ sở
+        Shop,       // Cửa Hiệu
+        Scenery     // Phong Cảnh
+    }
+
+    [System.Serializable]
+    public class ItemRequirement
+    {
+        public string ItemCode;
+        public int Quantity;
+    }
+
+    [System.Serializable]
+    public class ReputationLimit
+    {
+        public int RequiredReputation; // Cột mốc danh tiếng/uy danh
+        public int MaxAllowed;         // Số lượng tối đa được phép xây ở cột mốc này
+    }
+
     [System.Serializable]
     public class BuildingLevelStats
     {
@@ -18,8 +40,7 @@ namespace GameClient.Gameplay.BaseBuilder
         public int RequiredReputation; // Danh tiếng cần để xây cấp này
         
         [Header("Costs")]
-        public int CostGold;
-        public int CostWood;
+        public System.Collections.Generic.List<ItemRequirement> CostItems;
         public int BuildTimeSeconds;
     }
 
@@ -29,7 +50,35 @@ namespace GameClient.Gameplay.BaseBuilder
         [Header("Identity")]
         public string BuildingID;
         public string BuildingNameKey;
+        public string BuildingDescKey;
         public BuildingType Type;
+        public BuildingCategory Category = BuildingCategory.Facility;
+
+        [Header("Reputation Limits")]
+        public System.Collections.Generic.List<ReputationLimit> ReputationLimits = new System.Collections.Generic.List<ReputationLimit>();
+
+        public int GetMaxLimit(int currentReputation)
+        {
+            if (ReputationLimits == null || ReputationLimits.Count == 0) return -1; // -1 nghĩa là vô hạn
+
+            int maxAllowed = 0;
+            var sortedLimits = new System.Collections.Generic.List<ReputationLimit>(ReputationLimits);
+            sortedLimits.Sort((a, b) => a.RequiredReputation.CompareTo(b.RequiredReputation));
+
+            foreach (var limit in sortedLimits)
+            {
+                if (currentReputation >= limit.RequiredReputation)
+                {
+                    maxAllowed = limit.MaxAllowed;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return maxAllowed;
+        }
 
         [Header("Grid Size (Tiles)")]
         [Min(1)] public int SizeX = 2;

@@ -26,7 +26,7 @@ const file_world_proto_rawDesc = "" +
 	"\n" +
 	"\vworld.proto\x12\x02pb\x1a\fcommon.proto\x1a\fplayer.proto\x1a\n" +
 	"sect.proto\x1a\x0edisciple.proto\x1a\n" +
-	"item.proto\x1a\vgacha.proto\x1a\rmission.proto\x1a\fcombat.proto\x1a\fsystem.proto2\x83\v\n" +
+	"item.proto\x1a\vgacha.proto\x1a\rmission.proto\x1a\fcombat.proto\x1a\fsystem.proto2\xc9\f\n" +
 	"\x0eGatewayService\x12;\n" +
 	"\n" +
 	"GetVersion\x12\x15.pb.GetVersionRequest\x1a\x16.pb.GetVersionResponse\x122\n" +
@@ -34,10 +34,12 @@ const file_world_proto_rawDesc = "" +
 	"\fCreatePlayer\x12\x17.pb.CreatePlayerRequest\x1a\x18.pb.CreatePlayerResponse\x12M\n" +
 	"\x10GetPlayerProfile\x12\x1b.pb.GetPlayerProfileRequest\x1a\x1c.pb.GetPlayerProfileResponse\x122\n" +
 	"\vGetSectInfo\x12\x15.pb.GetProfileRequest\x1a\f.pb.SectInfo\x12J\n" +
-	"\x0fUpgradeBuilding\x12\x1a.pb.UpgradeBuildingRequest\x1a\x1b.pb.UpgradeBuildingResponse\x12M\n" +
+	"\x0fUpgradeBuilding\x12\x1a.pb.UpgradeBuildingRequest\x1a\x1b.pb.UpgradeBuildingResponse\x12J\n" +
+	"\x0fSpeedUpBuilding\x12\x1a.pb.SpeedUpBuildingRequest\x1a\x1b.pb.SpeedUpBuildingResponse\x12M\n" +
 	"\x10CollectResources\x12\x1b.pb.CollectResourcesRequest\x1a\x1c.pb.CollectResourcesResponse\x12A\n" +
 	"\fSaveAdminMap\x12\x17.pb.SaveAdminMapRequest\x1a\x18.pb.SaveAdminMapResponse\x12A\n" +
-	"\fGetPlayerMap\x12\x17.pb.GetPlayerMapRequest\x1a\x18.pb.GetPlayerMapResponse\x128\n" +
+	"\fGetPlayerMap\x12\x17.pb.GetPlayerMapRequest\x1a\x18.pb.GetPlayerMapResponse\x12D\n" +
+	"\rSavePlayerMap\x12\x18.pb.SavePlayerMapRequest\x1a\x19.pb.SavePlayerMapResponse\x128\n" +
 	"\tGetHeroes\x12\x14.pb.GetHeroesRequest\x1a\x15.pb.GetHeroesResponse\x12A\n" +
 	"\fSetFormation\x12\x17.pb.SetFormationRequest\x1a\x18.pb.SetFormationResponse\x12J\n" +
 	"\x0fLevelUpDisciple\x12\x1a.pb.LevelUpDiscipleRequest\x1a\x1b.pb.LevelUpDiscipleResponse\x12>\n" +
@@ -46,7 +48,8 @@ const file_world_proto_rawDesc = "" +
 	"\x12ClaimMissionReward\x12\x1d.pb.ClaimMissionRewardRequest\x1a\x1e.pb.ClaimMissionRewardResponse\x12P\n" +
 	"\x11ValidatePvEResult\x12\x1c.pb.ValidatePvEResultRequest\x1a\x1d.pb.ValidatePvEResultResponse\x124\n" +
 	"\fGetInventory\x12\x15.pb.GetProfileRequest\x1a\r.pb.Inventory\x120\n" +
-	"\tEquipItem\x12\x10.pb.EquipRequest\x1a\x11.pb.EquipResponse\x12J\n" +
+	"\tEquipItem\x12\x10.pb.EquipRequest\x1a\x11.pb.EquipResponse\x122\n" +
+	"\aUseItem\x12\x12.pb.UseItemRequest\x1a\x13.pb.UseItemResponse\x12J\n" +
 	"\x0fGetGachaBanners\x12\x1a.pb.GetGachaBannersRequest\x1a\x1b.pb.GetGachaBannersResponse\x122\n" +
 	"\aDoGacha\x12\x12.pb.DoGachaRequest\x1a\x13.pb.DoGachaResponse\x12>\n" +
 	"\vGetMissions\x12\x16.pb.GetMissionsRequest\x1a\x17.pb.GetMissionsResponse2\xf4\x01\n" +
@@ -63,47 +66,53 @@ var file_world_proto_goTypes = []any{
 	(*GetPlayerProfileRequest)(nil),    // 3: pb.GetPlayerProfileRequest
 	(*GetProfileRequest)(nil),          // 4: pb.GetProfileRequest
 	(*UpgradeBuildingRequest)(nil),     // 5: pb.UpgradeBuildingRequest
-	(*CollectResourcesRequest)(nil),    // 6: pb.CollectResourcesRequest
-	(*SaveAdminMapRequest)(nil),        // 7: pb.SaveAdminMapRequest
-	(*GetPlayerMapRequest)(nil),        // 8: pb.GetPlayerMapRequest
-	(*GetHeroesRequest)(nil),           // 9: pb.GetHeroesRequest
-	(*SetFormationRequest)(nil),        // 10: pb.SetFormationRequest
-	(*LevelUpDiscipleRequest)(nil),     // 11: pb.LevelUpDiscipleRequest
-	(*LevelUpHeroRequest)(nil),         // 12: pb.LevelUpHeroRequest
-	(*CheckInDailyRequest)(nil),        // 13: pb.CheckInDailyRequest
-	(*ClaimMissionRewardRequest)(nil),  // 14: pb.ClaimMissionRewardRequest
-	(*ValidatePvEResultRequest)(nil),   // 15: pb.ValidatePvEResultRequest
-	(*EquipRequest)(nil),               // 16: pb.EquipRequest
-	(*GetGachaBannersRequest)(nil),     // 17: pb.GetGachaBannersRequest
-	(*DoGachaRequest)(nil),             // 18: pb.DoGachaRequest
-	(*GetMissionsRequest)(nil),         // 19: pb.GetMissionsRequest
-	(*SectInfo)(nil),                   // 20: pb.SectInfo
-	(*EmptyRequest)(nil),               // 21: pb.EmptyRequest
-	(*GetCutsceneRequest)(nil),         // 22: pb.GetCutsceneRequest
-	(*SaveCutsceneRequest)(nil),        // 23: pb.SaveCutsceneRequest
-	(*GetVersionResponse)(nil),         // 24: pb.GetVersionResponse
-	(*GetBaseResponse)(nil),            // 25: pb.GetBaseResponse
-	(*CreatePlayerResponse)(nil),       // 26: pb.CreatePlayerResponse
-	(*GetPlayerProfileResponse)(nil),   // 27: pb.GetPlayerProfileResponse
-	(*UpgradeBuildingResponse)(nil),    // 28: pb.UpgradeBuildingResponse
-	(*CollectResourcesResponse)(nil),   // 29: pb.CollectResourcesResponse
-	(*SaveAdminMapResponse)(nil),       // 30: pb.SaveAdminMapResponse
-	(*GetPlayerMapResponse)(nil),       // 31: pb.GetPlayerMapResponse
-	(*GetHeroesResponse)(nil),          // 32: pb.GetHeroesResponse
-	(*SetFormationResponse)(nil),       // 33: pb.SetFormationResponse
-	(*LevelUpDiscipleResponse)(nil),    // 34: pb.LevelUpDiscipleResponse
-	(*LevelUpHeroResponse)(nil),        // 35: pb.LevelUpHeroResponse
-	(*CheckInDailyResponse)(nil),       // 36: pb.CheckInDailyResponse
-	(*ClaimMissionRewardResponse)(nil), // 37: pb.ClaimMissionRewardResponse
-	(*ValidatePvEResultResponse)(nil),  // 38: pb.ValidatePvEResultResponse
-	(*Inventory)(nil),                  // 39: pb.Inventory
-	(*EquipResponse)(nil),              // 40: pb.EquipResponse
-	(*GetGachaBannersResponse)(nil),    // 41: pb.GetGachaBannersResponse
-	(*DoGachaResponse)(nil),            // 42: pb.DoGachaResponse
-	(*GetMissionsResponse)(nil),        // 43: pb.GetMissionsResponse
-	(*BaseResponse)(nil),               // 44: pb.BaseResponse
-	(*ListCutscenesResponse)(nil),      // 45: pb.ListCutscenesResponse
-	(*CutsceneData)(nil),               // 46: pb.CutsceneData
+	(*SpeedUpBuildingRequest)(nil),     // 6: pb.SpeedUpBuildingRequest
+	(*CollectResourcesRequest)(nil),    // 7: pb.CollectResourcesRequest
+	(*SaveAdminMapRequest)(nil),        // 8: pb.SaveAdminMapRequest
+	(*GetPlayerMapRequest)(nil),        // 9: pb.GetPlayerMapRequest
+	(*SavePlayerMapRequest)(nil),       // 10: pb.SavePlayerMapRequest
+	(*GetHeroesRequest)(nil),           // 11: pb.GetHeroesRequest
+	(*SetFormationRequest)(nil),        // 12: pb.SetFormationRequest
+	(*LevelUpDiscipleRequest)(nil),     // 13: pb.LevelUpDiscipleRequest
+	(*LevelUpHeroRequest)(nil),         // 14: pb.LevelUpHeroRequest
+	(*CheckInDailyRequest)(nil),        // 15: pb.CheckInDailyRequest
+	(*ClaimMissionRewardRequest)(nil),  // 16: pb.ClaimMissionRewardRequest
+	(*ValidatePvEResultRequest)(nil),   // 17: pb.ValidatePvEResultRequest
+	(*EquipRequest)(nil),               // 18: pb.EquipRequest
+	(*UseItemRequest)(nil),             // 19: pb.UseItemRequest
+	(*GetGachaBannersRequest)(nil),     // 20: pb.GetGachaBannersRequest
+	(*DoGachaRequest)(nil),             // 21: pb.DoGachaRequest
+	(*GetMissionsRequest)(nil),         // 22: pb.GetMissionsRequest
+	(*SectInfo)(nil),                   // 23: pb.SectInfo
+	(*EmptyRequest)(nil),               // 24: pb.EmptyRequest
+	(*GetCutsceneRequest)(nil),         // 25: pb.GetCutsceneRequest
+	(*SaveCutsceneRequest)(nil),        // 26: pb.SaveCutsceneRequest
+	(*GetVersionResponse)(nil),         // 27: pb.GetVersionResponse
+	(*GetBaseResponse)(nil),            // 28: pb.GetBaseResponse
+	(*CreatePlayerResponse)(nil),       // 29: pb.CreatePlayerResponse
+	(*GetPlayerProfileResponse)(nil),   // 30: pb.GetPlayerProfileResponse
+	(*UpgradeBuildingResponse)(nil),    // 31: pb.UpgradeBuildingResponse
+	(*SpeedUpBuildingResponse)(nil),    // 32: pb.SpeedUpBuildingResponse
+	(*CollectResourcesResponse)(nil),   // 33: pb.CollectResourcesResponse
+	(*SaveAdminMapResponse)(nil),       // 34: pb.SaveAdminMapResponse
+	(*GetPlayerMapResponse)(nil),       // 35: pb.GetPlayerMapResponse
+	(*SavePlayerMapResponse)(nil),      // 36: pb.SavePlayerMapResponse
+	(*GetHeroesResponse)(nil),          // 37: pb.GetHeroesResponse
+	(*SetFormationResponse)(nil),       // 38: pb.SetFormationResponse
+	(*LevelUpDiscipleResponse)(nil),    // 39: pb.LevelUpDiscipleResponse
+	(*LevelUpHeroResponse)(nil),        // 40: pb.LevelUpHeroResponse
+	(*CheckInDailyResponse)(nil),       // 41: pb.CheckInDailyResponse
+	(*ClaimMissionRewardResponse)(nil), // 42: pb.ClaimMissionRewardResponse
+	(*ValidatePvEResultResponse)(nil),  // 43: pb.ValidatePvEResultResponse
+	(*Inventory)(nil),                  // 44: pb.Inventory
+	(*EquipResponse)(nil),              // 45: pb.EquipResponse
+	(*UseItemResponse)(nil),            // 46: pb.UseItemResponse
+	(*GetGachaBannersResponse)(nil),    // 47: pb.GetGachaBannersResponse
+	(*DoGachaResponse)(nil),            // 48: pb.DoGachaResponse
+	(*GetMissionsResponse)(nil),        // 49: pb.GetMissionsResponse
+	(*BaseResponse)(nil),               // 50: pb.BaseResponse
+	(*ListCutscenesResponse)(nil),      // 51: pb.ListCutscenesResponse
+	(*CutsceneData)(nil),               // 52: pb.CutsceneData
 }
 var file_world_proto_depIdxs = []int32{
 	0,  // 0: pb.GatewayService.GetVersion:input_type -> pb.GetVersionRequest
@@ -112,52 +121,58 @@ var file_world_proto_depIdxs = []int32{
 	3,  // 3: pb.GatewayService.GetPlayerProfile:input_type -> pb.GetPlayerProfileRequest
 	4,  // 4: pb.GatewayService.GetSectInfo:input_type -> pb.GetProfileRequest
 	5,  // 5: pb.GatewayService.UpgradeBuilding:input_type -> pb.UpgradeBuildingRequest
-	6,  // 6: pb.GatewayService.CollectResources:input_type -> pb.CollectResourcesRequest
-	7,  // 7: pb.GatewayService.SaveAdminMap:input_type -> pb.SaveAdminMapRequest
-	8,  // 8: pb.GatewayService.GetPlayerMap:input_type -> pb.GetPlayerMapRequest
-	9,  // 9: pb.GatewayService.GetHeroes:input_type -> pb.GetHeroesRequest
-	10, // 10: pb.GatewayService.SetFormation:input_type -> pb.SetFormationRequest
-	11, // 11: pb.GatewayService.LevelUpDisciple:input_type -> pb.LevelUpDiscipleRequest
-	12, // 12: pb.GatewayService.LevelUpHero:input_type -> pb.LevelUpHeroRequest
-	13, // 13: pb.GatewayService.CheckInDaily:input_type -> pb.CheckInDailyRequest
-	14, // 14: pb.GatewayService.ClaimMissionReward:input_type -> pb.ClaimMissionRewardRequest
-	15, // 15: pb.GatewayService.ValidatePvEResult:input_type -> pb.ValidatePvEResultRequest
-	4,  // 16: pb.GatewayService.GetInventory:input_type -> pb.GetProfileRequest
-	16, // 17: pb.GatewayService.EquipItem:input_type -> pb.EquipRequest
-	17, // 18: pb.GatewayService.GetGachaBanners:input_type -> pb.GetGachaBannersRequest
-	18, // 19: pb.GatewayService.DoGacha:input_type -> pb.DoGachaRequest
-	19, // 20: pb.GatewayService.GetMissions:input_type -> pb.GetMissionsRequest
-	20, // 21: pb.WorldService.InternalSyncSect:input_type -> pb.SectInfo
-	21, // 22: pb.WorldService.ListCutscenes:input_type -> pb.EmptyRequest
-	22, // 23: pb.WorldService.GetCutscene:input_type -> pb.GetCutsceneRequest
-	23, // 24: pb.WorldService.SaveCutscene:input_type -> pb.SaveCutsceneRequest
-	24, // 25: pb.GatewayService.GetVersion:output_type -> pb.GetVersionResponse
-	25, // 26: pb.GatewayService.GetBase:output_type -> pb.GetBaseResponse
-	26, // 27: pb.GatewayService.CreatePlayer:output_type -> pb.CreatePlayerResponse
-	27, // 28: pb.GatewayService.GetPlayerProfile:output_type -> pb.GetPlayerProfileResponse
-	20, // 29: pb.GatewayService.GetSectInfo:output_type -> pb.SectInfo
-	28, // 30: pb.GatewayService.UpgradeBuilding:output_type -> pb.UpgradeBuildingResponse
-	29, // 31: pb.GatewayService.CollectResources:output_type -> pb.CollectResourcesResponse
-	30, // 32: pb.GatewayService.SaveAdminMap:output_type -> pb.SaveAdminMapResponse
-	31, // 33: pb.GatewayService.GetPlayerMap:output_type -> pb.GetPlayerMapResponse
-	32, // 34: pb.GatewayService.GetHeroes:output_type -> pb.GetHeroesResponse
-	33, // 35: pb.GatewayService.SetFormation:output_type -> pb.SetFormationResponse
-	34, // 36: pb.GatewayService.LevelUpDisciple:output_type -> pb.LevelUpDiscipleResponse
-	35, // 37: pb.GatewayService.LevelUpHero:output_type -> pb.LevelUpHeroResponse
-	36, // 38: pb.GatewayService.CheckInDaily:output_type -> pb.CheckInDailyResponse
-	37, // 39: pb.GatewayService.ClaimMissionReward:output_type -> pb.ClaimMissionRewardResponse
-	38, // 40: pb.GatewayService.ValidatePvEResult:output_type -> pb.ValidatePvEResultResponse
-	39, // 41: pb.GatewayService.GetInventory:output_type -> pb.Inventory
-	40, // 42: pb.GatewayService.EquipItem:output_type -> pb.EquipResponse
-	41, // 43: pb.GatewayService.GetGachaBanners:output_type -> pb.GetGachaBannersResponse
-	42, // 44: pb.GatewayService.DoGacha:output_type -> pb.DoGachaResponse
-	43, // 45: pb.GatewayService.GetMissions:output_type -> pb.GetMissionsResponse
-	44, // 46: pb.WorldService.InternalSyncSect:output_type -> pb.BaseResponse
-	45, // 47: pb.WorldService.ListCutscenes:output_type -> pb.ListCutscenesResponse
-	46, // 48: pb.WorldService.GetCutscene:output_type -> pb.CutsceneData
-	44, // 49: pb.WorldService.SaveCutscene:output_type -> pb.BaseResponse
-	25, // [25:50] is the sub-list for method output_type
-	0,  // [0:25] is the sub-list for method input_type
+	6,  // 6: pb.GatewayService.SpeedUpBuilding:input_type -> pb.SpeedUpBuildingRequest
+	7,  // 7: pb.GatewayService.CollectResources:input_type -> pb.CollectResourcesRequest
+	8,  // 8: pb.GatewayService.SaveAdminMap:input_type -> pb.SaveAdminMapRequest
+	9,  // 9: pb.GatewayService.GetPlayerMap:input_type -> pb.GetPlayerMapRequest
+	10, // 10: pb.GatewayService.SavePlayerMap:input_type -> pb.SavePlayerMapRequest
+	11, // 11: pb.GatewayService.GetHeroes:input_type -> pb.GetHeroesRequest
+	12, // 12: pb.GatewayService.SetFormation:input_type -> pb.SetFormationRequest
+	13, // 13: pb.GatewayService.LevelUpDisciple:input_type -> pb.LevelUpDiscipleRequest
+	14, // 14: pb.GatewayService.LevelUpHero:input_type -> pb.LevelUpHeroRequest
+	15, // 15: pb.GatewayService.CheckInDaily:input_type -> pb.CheckInDailyRequest
+	16, // 16: pb.GatewayService.ClaimMissionReward:input_type -> pb.ClaimMissionRewardRequest
+	17, // 17: pb.GatewayService.ValidatePvEResult:input_type -> pb.ValidatePvEResultRequest
+	4,  // 18: pb.GatewayService.GetInventory:input_type -> pb.GetProfileRequest
+	18, // 19: pb.GatewayService.EquipItem:input_type -> pb.EquipRequest
+	19, // 20: pb.GatewayService.UseItem:input_type -> pb.UseItemRequest
+	20, // 21: pb.GatewayService.GetGachaBanners:input_type -> pb.GetGachaBannersRequest
+	21, // 22: pb.GatewayService.DoGacha:input_type -> pb.DoGachaRequest
+	22, // 23: pb.GatewayService.GetMissions:input_type -> pb.GetMissionsRequest
+	23, // 24: pb.WorldService.InternalSyncSect:input_type -> pb.SectInfo
+	24, // 25: pb.WorldService.ListCutscenes:input_type -> pb.EmptyRequest
+	25, // 26: pb.WorldService.GetCutscene:input_type -> pb.GetCutsceneRequest
+	26, // 27: pb.WorldService.SaveCutscene:input_type -> pb.SaveCutsceneRequest
+	27, // 28: pb.GatewayService.GetVersion:output_type -> pb.GetVersionResponse
+	28, // 29: pb.GatewayService.GetBase:output_type -> pb.GetBaseResponse
+	29, // 30: pb.GatewayService.CreatePlayer:output_type -> pb.CreatePlayerResponse
+	30, // 31: pb.GatewayService.GetPlayerProfile:output_type -> pb.GetPlayerProfileResponse
+	23, // 32: pb.GatewayService.GetSectInfo:output_type -> pb.SectInfo
+	31, // 33: pb.GatewayService.UpgradeBuilding:output_type -> pb.UpgradeBuildingResponse
+	32, // 34: pb.GatewayService.SpeedUpBuilding:output_type -> pb.SpeedUpBuildingResponse
+	33, // 35: pb.GatewayService.CollectResources:output_type -> pb.CollectResourcesResponse
+	34, // 36: pb.GatewayService.SaveAdminMap:output_type -> pb.SaveAdminMapResponse
+	35, // 37: pb.GatewayService.GetPlayerMap:output_type -> pb.GetPlayerMapResponse
+	36, // 38: pb.GatewayService.SavePlayerMap:output_type -> pb.SavePlayerMapResponse
+	37, // 39: pb.GatewayService.GetHeroes:output_type -> pb.GetHeroesResponse
+	38, // 40: pb.GatewayService.SetFormation:output_type -> pb.SetFormationResponse
+	39, // 41: pb.GatewayService.LevelUpDisciple:output_type -> pb.LevelUpDiscipleResponse
+	40, // 42: pb.GatewayService.LevelUpHero:output_type -> pb.LevelUpHeroResponse
+	41, // 43: pb.GatewayService.CheckInDaily:output_type -> pb.CheckInDailyResponse
+	42, // 44: pb.GatewayService.ClaimMissionReward:output_type -> pb.ClaimMissionRewardResponse
+	43, // 45: pb.GatewayService.ValidatePvEResult:output_type -> pb.ValidatePvEResultResponse
+	44, // 46: pb.GatewayService.GetInventory:output_type -> pb.Inventory
+	45, // 47: pb.GatewayService.EquipItem:output_type -> pb.EquipResponse
+	46, // 48: pb.GatewayService.UseItem:output_type -> pb.UseItemResponse
+	47, // 49: pb.GatewayService.GetGachaBanners:output_type -> pb.GetGachaBannersResponse
+	48, // 50: pb.GatewayService.DoGacha:output_type -> pb.DoGachaResponse
+	49, // 51: pb.GatewayService.GetMissions:output_type -> pb.GetMissionsResponse
+	50, // 52: pb.WorldService.InternalSyncSect:output_type -> pb.BaseResponse
+	51, // 53: pb.WorldService.ListCutscenes:output_type -> pb.ListCutscenesResponse
+	52, // 54: pb.WorldService.GetCutscene:output_type -> pb.CutsceneData
+	50, // 55: pb.WorldService.SaveCutscene:output_type -> pb.BaseResponse
+	28, // [28:56] is the sub-list for method output_type
+	0,  // [0:28] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

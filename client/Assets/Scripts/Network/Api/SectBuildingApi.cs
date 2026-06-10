@@ -12,14 +12,24 @@ namespace GameClient.Network.Api
             return await Client.GetBaseAsync(new GetBaseRequest(), NetworkManager.DefaultCallOptions());
         }
 
-        public static async Task<UpgradeBuildingResponse> UpgradeBuildingAsync(string buildingCode)
+        public static async Task<UpgradeBuildingResponse> UpgradeBuildingAsync(long instanceId)
         {
-            return await Client.UpgradeBuildingAsync(new UpgradeBuildingRequest { BuildingCode = buildingCode }, NetworkManager.DefaultCallOptions());
+            return await Client.UpgradeBuildingAsync(new UpgradeBuildingRequest { InstanceId = instanceId }, NetworkManager.DefaultCallOptions());
         }
 
-        public static async Task<CollectResourcesResponse> CollectResourcesAsync(string buildingCode)
+        public static async Task<CollectResourcesResponse> CollectResourcesAsync(long instanceId)
         {
-            return await Client.CollectResourcesAsync(new CollectResourcesRequest { BuildingCode = buildingCode }, NetworkManager.DefaultCallOptions());
+            return await Client.CollectResourcesAsync(new CollectResourcesRequest { InstanceId = instanceId }, NetworkManager.DefaultCallOptions());
+        }
+
+        public static async Task<SpeedUpBuildingResponse> SpeedUpBuildingAsync(long instanceId)
+        {
+            return await Client.SpeedUpBuildingAsync(new SpeedUpBuildingRequest { InstanceId = instanceId }, NetworkManager.DefaultCallOptions());
+        }
+
+        public static async Task<Inventory> GetInventoryAsync()
+        {
+            return await Client.GetInventoryAsync(new GetProfileRequest(), NetworkManager.DefaultCallOptions());
         }
     }
 }

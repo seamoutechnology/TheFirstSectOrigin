@@ -360,6 +360,7 @@ func (x *Item) GetStats() map[string]int32 {
 type Inventory struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Items         []*Item                `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Configs       []*ItemConfig          `protobuf:"bytes,2,rep,name=configs,proto3" json:"configs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -397,6 +398,13 @@ func (*Inventory) Descriptor() ([]byte, []int) {
 func (x *Inventory) GetItems() []*Item {
 	if x != nil {
 		return x.Items
+	}
+	return nil
+}
+
+func (x *Inventory) GetConfigs() []*ItemConfig {
+	if x != nil {
+		return x.Configs
 	}
 	return nil
 }
@@ -709,6 +717,110 @@ func (x *CraftResponse) GetGainedItems() []*Item {
 	return nil
 }
 
+type UseItemRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ItemId        int64                  `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"` // Instance ID of the item in player inventory
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`           // Quantity to use
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UseItemRequest) Reset() {
+	*x = UseItemRequest{}
+	mi := &file_item_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UseItemRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UseItemRequest) ProtoMessage() {}
+
+func (x *UseItemRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UseItemRequest.ProtoReflect.Descriptor instead.
+func (*UseItemRequest) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UseItemRequest) GetItemId() int64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *UseItemRequest) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+type UseItemResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`                           // 0: Success, other: error code
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"` // Response message ID (for i18n)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UseItemResponse) Reset() {
+	*x = UseItemResponse{}
+	mi := &file_item_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UseItemResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UseItemResponse) ProtoMessage() {}
+
+func (x *UseItemResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UseItemResponse.ProtoReflect.Descriptor instead.
+func (*UseItemResponse) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UseItemResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UseItemResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
 var File_item_proto protoreflect.FileDescriptor
 
 const file_item_proto_rawDesc = "" +
@@ -752,9 +864,10 @@ const file_item_proto_rawDesc = "" +
 	"\n" +
 	"StatsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"+\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"U\n" +
 	"\tInventory\x12\x1e\n" +
-	"\x05items\x18\x01 \x03(\v2\b.pb.ItemR\x05items\"\\\n" +
+	"\x05items\x18\x01 \x03(\v2\b.pb.ItemR\x05items\x12(\n" +
+	"\aconfigs\x18\x02 \x03(\v2\x0e.pb.ItemConfigR\aconfigs\"\\\n" +
 	"\fEquipRequest\x12\x1f\n" +
 	"\vdisciple_id\x18\x01 \x01(\x03R\n" +
 	"discipleId\x12\x17\n" +
@@ -781,7 +894,14 @@ const file_item_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x02 \x01(\tR\tmessageId\x12+\n" +
-	"\fgained_items\x18\x03 \x03(\v2\b.pb.ItemR\vgainedItemsB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
+	"\fgained_items\x18\x03 \x03(\v2\b.pb.ItemR\vgainedItems\"E\n" +
+	"\x0eUseItemRequest\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x03R\x06itemId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"D\n" +
+	"\x0fUseItemResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageIdB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -795,34 +915,37 @@ func file_item_proto_rawDescGZIP() []byte {
 	return file_item_proto_rawDescData
 }
 
-var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_item_proto_goTypes = []any{
-	(*ItemSource)(nil),    // 0: pb.ItemSource
-	(*ItemEffect)(nil),    // 1: pb.ItemEffect
-	(*ItemConfig)(nil),    // 2: pb.ItemConfig
-	(*Item)(nil),          // 3: pb.Item
-	(*Inventory)(nil),     // 4: pb.Inventory
-	(*EquipRequest)(nil),  // 5: pb.EquipRequest
-	(*EquipResponse)(nil), // 6: pb.EquipResponse
-	(*Recipe)(nil),        // 7: pb.Recipe
-	(*CraftRequest)(nil),  // 8: pb.CraftRequest
-	(*CraftResponse)(nil), // 9: pb.CraftResponse
-	nil,                   // 10: pb.Item.StatsEntry
-	nil,                   // 11: pb.Recipe.MaterialsEntry
+	(*ItemSource)(nil),      // 0: pb.ItemSource
+	(*ItemEffect)(nil),      // 1: pb.ItemEffect
+	(*ItemConfig)(nil),      // 2: pb.ItemConfig
+	(*Item)(nil),            // 3: pb.Item
+	(*Inventory)(nil),       // 4: pb.Inventory
+	(*EquipRequest)(nil),    // 5: pb.EquipRequest
+	(*EquipResponse)(nil),   // 6: pb.EquipResponse
+	(*Recipe)(nil),          // 7: pb.Recipe
+	(*CraftRequest)(nil),    // 8: pb.CraftRequest
+	(*CraftResponse)(nil),   // 9: pb.CraftResponse
+	(*UseItemRequest)(nil),  // 10: pb.UseItemRequest
+	(*UseItemResponse)(nil), // 11: pb.UseItemResponse
+	nil,                     // 12: pb.Item.StatsEntry
+	nil,                     // 13: pb.Recipe.MaterialsEntry
 }
 var file_item_proto_depIdxs = []int32{
 	0,  // 0: pb.ItemConfig.sources:type_name -> pb.ItemSource
 	1,  // 1: pb.ItemConfig.effects:type_name -> pb.ItemEffect
-	10, // 2: pb.Item.stats:type_name -> pb.Item.StatsEntry
+	12, // 2: pb.Item.stats:type_name -> pb.Item.StatsEntry
 	3,  // 3: pb.Inventory.items:type_name -> pb.Item
-	3,  // 4: pb.EquipResponse.equipped_item:type_name -> pb.Item
-	11, // 5: pb.Recipe.materials:type_name -> pb.Recipe.MaterialsEntry
-	3,  // 6: pb.CraftResponse.gained_items:type_name -> pb.Item
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	2,  // 4: pb.Inventory.configs:type_name -> pb.ItemConfig
+	3,  // 5: pb.EquipResponse.equipped_item:type_name -> pb.Item
+	13, // 6: pb.Recipe.materials:type_name -> pb.Recipe.MaterialsEntry
+	3,  // 7: pb.CraftResponse.gained_items:type_name -> pb.Item
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_item_proto_init() }
@@ -837,7 +960,7 @@ func file_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_item_proto_rawDesc), len(file_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

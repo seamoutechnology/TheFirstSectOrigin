@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using GameClient.Network;
 using GameClient.Core.Interfaces; // Sửa namespace chuẩn
 using System.Threading.Tasks;
+using GameClient.Core;
 using TMPro;
 
 namespace GameClient.UI
@@ -44,6 +45,12 @@ namespace GameClient.UI
             {
                 btnTopUp.onClick.RemoveAllListeners();
                 btnTopUp.onClick.AddListener(OnTopUpClicked);
+            }
+
+            if (btnRedeem != null)
+            {
+                btnRedeem.onClick.RemoveAllListeners();
+                btnRedeem.onClick.AddListener(OnRedeemClicked);
             }
 
             if (btnCopyAccountId != null)
@@ -100,10 +107,28 @@ namespace GameClient.UI
 
         private void OnTopUpClicked()
         {
-            Debug.Log("Mở giao diện nạp tiền...");
-            string noticeTitle = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_notice");
-            string devText = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_feature_dev");
-            UIManager.Instance.ShowMessage(noticeTitle, devText);
+            OpenUserDashboard();
+        }
+
+        private void OnRedeemClicked()
+        {
+            OpenUserDashboard();
+        }
+
+        private void OpenUserDashboard()
+        {
+            string token = Managers.AccountManager.Instance.CurrentToken;
+            if (string.IsNullOrEmpty(token))
+            {
+                UIManager.Instance.ShowMessage("Lỗi", "Bạn chưa đăng nhập!");
+                return;
+            }
+
+            string baseUrl = GameSettings.Instance != null ? GameSettings.Instance.apiBaseUrl : "http://localhost:8080";
+            string url = baseUrl.TrimEnd('/') + "/user/dashboard?token=" + System.Uri.EscapeDataString(token);
+            
+            Debug.Log("[Dashboard] Mở cổng tu luyện ngoài: " + url);
+            Application.OpenURL(url);
         }
 
         private void OnCopyAccountId()
@@ -112,7 +137,7 @@ namespace GameClient.UI
             {
                 GUIUtility.systemCopyBuffer = _currentAccountId;
                 string copiedMsg = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_copied") ?? "Đã sao chép: ";
-                UIManager.Instance.ShowMessage("Thông báo", copiedMsg + _currentAccountId);
+                UIManager.Instance.ShowMessage(Managers.LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_notice_toast"), copiedMsg + _currentAccountId);
             }
         }
 

@@ -135,7 +135,7 @@ namespace GameClient.Core
         private void OpenLoginUI()
         {
             Debug.Log("[Bootstrap] Đang mở LoginPanel...");
-            UIManager.Instance.OpenPanel("LoginPanel");
+            UIManager.Instance.OpenPanel("LoginPanel", null, false);
         }
 
         private async Task<bool> CheckAndDownloadUpdates()

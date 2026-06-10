@@ -9,6 +9,7 @@ namespace GameClient.Editor.GMDashboard
     {
         private EditorWindow window;
         private string adminUrl = "http://localhost:8080/api/gm";
+        private string AdminUrl => GMDashboardConfig.GmApiUrl;
         private List<GMEffectConfigData> effectList = new List<GMEffectConfigData>();
         private GMEffectConfigData currentEffect = null;
         private bool isEditing = false;
@@ -30,6 +31,7 @@ namespace GameClient.Editor.GMDashboard
             EditorGUILayout.Space();
 
             GUILayout.BeginHorizontal();
+            GUI.enabled = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
             if (GUILayout.Button("Lấy Dữ Liệu (Fetch All)", GUILayout.Height(30)))
             {
                 FetchAllEffects();
@@ -45,6 +47,7 @@ namespace GameClient.Editor.GMDashboard
                 };
                 isEditing = true;
             }
+            GUI.enabled = true;
             GUILayout.EndHorizontal();
 
             EditorGUILayout.Space();
@@ -103,13 +106,25 @@ namespace GameClient.Editor.GMDashboard
             currentEffect.name_key = EditorGUILayout.TextField("Tên (i18n key):", currentEffect.name_key);
             currentEffect.desc_key = EditorGUILayout.TextField("Mô tả (i18n key):", currentEffect.desc_key);
             
-            string[] effectTypes = { "hp", "mp", "atk", "def", "speed", "lifesteal", "crit_rate", "crit_dmg" };
+            string[] effectTypes = { 
+                "STAT_MODIFIER", 
+                "PRODUCTION_MODIFIER", 
+                "SECT_BUFF", 
+                "GAMEPLAY_MODIFIER" 
+            };
             int typeIdx = System.Array.IndexOf(effectTypes, currentEffect.effect_type);
             if (typeIdx < 0) typeIdx = 0;
             typeIdx = EditorGUILayout.Popup("Loại thuộc tính (Type):", typeIdx, effectTypes);
             currentEffect.effect_type = effectTypes[typeIdx];
 
-            string[] valueTypes = { "flat", "percent" };
+            string[] valueTypes = { 
+                "DIRECT_VALUE", 
+                "PERCENT_VALUE", 
+                "RANDOM_RANGE_DIRECT", 
+                "RANDOM_RANGE_PERCENT", 
+                "DEPENDENT_DIRECT", 
+                "DEPENDENT_PERCENT" 
+            };
             int valIdx = System.Array.IndexOf(valueTypes, currentEffect.value_type);
             if (valIdx < 0) valIdx = 0;
             valIdx = EditorGUILayout.Popup("Cách cộng (Value Type):", valIdx, valueTypes);
@@ -118,6 +133,15 @@ namespace GameClient.Editor.GMDashboard
             currentEffect.min_value = EditorGUILayout.FloatField("Min Value:", currentEffect.min_value);
             currentEffect.max_value = EditorGUILayout.FloatField("Max Value:", currentEffect.max_value);
 
+            if (currentEffect.value_type != null && currentEffect.value_type.StartsWith("DEPENDENT"))
+            {
+                currentEffect.source_stat = EditorGUILayout.TextField("Chỉ số phụ thuộc (Source Stat):", currentEffect.source_stat);
+            }
+            else
+            {
+                currentEffect.source_stat = "";
+            }
+
             GUI.enabled = true;
 
             EditorGUILayout.Space();
@@ -125,10 +149,12 @@ namespace GameClient.Editor.GMDashboard
             GUILayout.BeginHorizontal();
             if (isEditing)
             {
+                GUI.enabled = GMDashboardConfig.Status == GMDashboardConfig.ConnectionStatus.Online;
                 if (GUILayout.Button("Lưu (Save)", GUILayout.Height(30)))
                 {
                     SaveEffect();
                 }
+                GUI.enabled = true;
                 if (GUILayout.Button("Hủy (Cancel)", GUILayout.Height(30)))
                 {
                     isEditing = false;
@@ -159,7 +185,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchAllEffects()
         {
-            string url = $"{adminUrl}/effect_configs";
+            string url = $"{AdminUrl}/effect_configs";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -182,7 +208,7 @@ namespace GameClient.Editor.GMDashboard
                 return;
             }
 
-            string url = $"{adminUrl}/effect_configs/save";
+            string url = $"{AdminUrl}/effect_configs/save";
             string json = JsonUtility.ToJson(currentEffect);
             
             var req = new UnityWebRequest(url, "POST");
@@ -208,7 +234,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void DeleteEffect(string code)
         {
-            string url = $"{adminUrl}/effect_configs/delete?code={UnityWebRequest.EscapeURL(code)}";
+            string url = $"{AdminUrl}/effect_configs/delete?code={UnityWebRequest.EscapeURL(code)}";
             var req = new UnityWebRequest(url, "POST"); 
             req.downloadHandler = new DownloadHandlerBuffer();
             

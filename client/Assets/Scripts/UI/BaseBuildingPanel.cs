@@ -53,18 +53,18 @@ namespace GameClient.UI
                 var upgradeBtn = buttons[1];
 
                 collectBtn.interactable = b.PendingGold > 0 && b.UpgradeEndAt == 0;
-                collectBtn.onClick.AddListener(() => OnCollectClicked(b.BuildingCode));
+                collectBtn.onClick.AddListener(() => OnCollectClicked(b.InstanceId));
 
                 upgradeBtn.interactable = b.UpgradeEndAt == 0 && b.Level < b.MaxLevel;
-                upgradeBtn.onClick.AddListener(() => OnUpgradeClicked(b.BuildingCode));
+                upgradeBtn.onClick.AddListener(() => OnUpgradeClicked(b.InstanceId));
             }
         }
 
-        private async void OnCollectClicked(string code)
+        private async void OnCollectClicked(long instanceId)
         {
             try
             {
-                var resp = await SectBuildingApi.CollectResourcesAsync(code);
+                var resp = await SectBuildingApi.CollectResourcesAsync(instanceId);
                 if (resp.Base.Code == 0)
                 {
                     Log($"Thu thập thành công: {resp.GoldGained} vàng!");
@@ -82,11 +82,11 @@ namespace GameClient.UI
             catch (System.Exception ex) { LogError(ex.ToString()); }
         }
 
-        private async void OnUpgradeClicked(string code)
+        private async void OnUpgradeClicked(long instanceId)
         {
             try
             {
-                var resp = await SectBuildingApi.UpgradeBuildingAsync(code);
+                var resp = await SectBuildingApi.UpgradeBuildingAsync(instanceId);
                 if (resp.Base.Code == 0)
                 {
                     Log("Đã bắt đầu nâng cấp!");

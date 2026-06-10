@@ -46,6 +46,9 @@ namespace GameClient.Core
             public const string BGM_LOCAL_BASE = "BGM_LOCAL_BASE";
             public const string BGM_WORLD = "BGM_WORLD";
             public const string BGM_DUNGEON = "BGM_DUNGEON";
+            public const string SFX_BUILD_COMPLETE = "SFX_Build_Complete";
+            public const string SFX_BUILD_START = "SFX_Build_Start";
+            public const string SFX_BUILD_AMBIENT = "SFX_Build_Ambient";
         }
 
         public static class Locales

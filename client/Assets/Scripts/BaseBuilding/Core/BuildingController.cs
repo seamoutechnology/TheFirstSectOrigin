@@ -13,11 +13,24 @@ namespace GameClient.BaseBuilding.Core
         public Color validColor = new Color(0, 1, 0, 0.5f);
         public Color invalidColor = new Color(1, 0, 0, 0.5f);
 
+        public static BuildingController Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        public bool IsPlacing => _isPlacing;
+        public bool IsPointerDownInsidePreview => _isPointerDownInsidePreview;
+
         private bool _isPlacing;
         private int _currentWidth = 2;
         private int _currentHeight = 2;
         private string _prefabAddressToPlace;
         private string _buildingIdToPlace;
+        private long _instanceIdToPlace;
+        private int _levelToPlace;
+        private long _movingOriginalInstanceId;
 
         // Trạng thái phục vụ kéo thả & di chuyển nhà
         private bool _currentFlipX;
@@ -47,174 +60,173 @@ namespace GameClient.BaseBuilding.Core
             if (GameClient.Managers.InputManager.Instance != null)
             {
                 GameClient.Managers.InputManager.Instance.Unregister("RotateBuilding");
-            }
-        }
-
-        void Update()
-        {
-            if (GameClient.Managers.InputManager.Instance == null) return;
-            var inputManager = GameClient.Managers.InputManager.Instance;
-            Vector2 pointerPos = inputManager.GetPointerPosition();
-
-            // Theo dõi vị trí Pointer Down ban đầu
-            if (inputManager.IsPrimaryPointerDown())
-            {
-                _pointerDownPosition = pointerPos;
-            }
-
-            if (!_isPlacing)
-            {
-                if (inputManager.IsPrimaryPointerDown())
-                {
-                    Debug.Log($"[BuildingController] Nhấn chuột tại: {pointerPos}");
-
-                    if (UnityEngine.EventSystems.EventSystem.current != null && 
-                        UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                    {
-                        var pointerData = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
-                        pointerData.position = pointerPos;
-                        var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
-                        UnityEngine.EventSystems.EventSystem.current.RaycastAll(pointerData, results);
-                        
-                        bool blockedByRealUI = false;
-                        foreach (var result in results)
-                        {
-                            var parentCanvas = result.gameObject.GetComponentInParent<Canvas>();
-                            if (result.gameObject.layer == 5 || parentCanvas != null)
-                            {
-                                // Bỏ qua nếu Canvas ở chế độ WorldSpace (như nhãn tên toà nhà hiển thị trong map)
-                                if (parentCanvas != null && parentCanvas.renderMode == RenderMode.WorldSpace)
-                                {
-                                    continue;
-                                }
-
-                                var isBuildingObj = result.gameObject.GetComponent<BuildingInstance>() != null || 
-                                                    result.gameObject.GetComponentInParent<BuildingInstance>() != null;
-                                if (!isBuildingObj)
-                                {
-                                    blockedByRealUI = true;
-                                    Debug.Log($"[BuildingController] Bị chặn bởi UI thực sự: {result.gameObject.name} (Layer: {result.gameObject.layer})");
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (blockedByRealUI)
-                        {
-                            return;
-                        }
-                    }
-
-                    if (Camera.main != null)
-                    {
-                        Ray ray = Camera.main.ScreenPointToRay(pointerPos);
-                        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
-                        if (hit.collider != null)
-                        {
-                            Debug.Log($"[BuildingController] Raycast trúng: {hit.collider.gameObject.name} (Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)})");
-                            var building = hit.collider.GetComponent<BuildingInstance>();
-                            if (building == null)
-                            {
-                                building = hit.collider.GetComponentInParent<BuildingInstance>();
-                            }
-
-                            if (building != null)
-                            {
-                                Debug.Log($"[BuildingController] Tìm thấy BuildingInstance: {building.name}");
-                                if (building.CurrentState == BuildingState.ReadyToHarvest || building.HasResourcesToHarvest())
-                                {
-                                    building.CollectResourcesVisually();
-                                }
-
-                                if (UIManager.Instance != null)
-                                {
-                                    Debug.Log("[BuildingController] Gọi UIManager.OpenPanel(UI_BuildingActionPanel)");
-                                    UIManager.Instance.OpenPanel("UI_BuildingActionPanel", building, false);
-                                }
-                            }
-                            else
-                            {
-                                Debug.Log("[BuildingController] Đối tượng trúng không phải là BuildingInstance.");
-                                if (UIManager.Instance != null)
-                                {
-                                    UIManager.Instance.ClosePanel("UI_BuildingActionPanel");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("[BuildingController] Raycast không trúng collider nào.");
-                            if (UIManager.Instance != null)
-                            {
-                                UIManager.Instance.ClosePanel("UI_BuildingActionPanel");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("[BuildingController] Camera.main bị NULL!");
-                    }
-                }
-                return;
-            }
-
-            // --- BẮT ĐẦU PHẦN ĐẶT NHÀ (PLACING MODE) ---
-            
-            // Hiện Grid khi đặt nhà
-            GridManager.Instance.SetGridAlpha(1f);
-
-            var pointer = UnityEngine.InputSystem.Pointer.current;
-            bool isPressed = pointer != null && pointer.press.isPressed;
-            bool wasPressedThisFrame = pointer != null && pointer.press.wasPressedThisFrame;
-            bool wasReleasedThisFrame = pointer != null && pointer.press.wasReleasedThisFrame;
-
-            if (_isPreviewAttachedToMouse)
-            {
-                UpdatePreviewPosition(pointerPos);
-
-                // Click hoặc Thả ra để đặt toà nhà xuống map
-                if (wasPressedThisFrame || wasReleasedThisFrame)
-                {
-                    if (UnityEngine.EventSystems.EventSystem.current == null || 
-                        !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                    {
-                        _isPreviewAttachedToMouse = false;
-                        SetPreviewPosition(_previewGridPos);
-                        Debug.Log($"[BuildingController] Thả toà nhà bám chuột tại: {_previewGridPos}");
-                        
-                        if (UIManager.Instance != null)
-                        {
-                            UIManager.Instance.OpenPanel("UI_BuildingActionPanel", this, false);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Khi toà nhà đang ở trên map (chưa bám chuột)
-                if (wasPressedThisFrame)
-                {
-                    _isPointerDownInsidePreview = false;
-                    Ray ray = Camera.main.ScreenPointToRay(pointerPos);
-                    Plane groundPlane = new Plane(Vector3.forward, Vector3.zero);
-                    if (groundPlane.Raycast(ray, out float enter))
-                    {
-                        Vector3 clickWorldPos = ray.GetPoint(enter);
-                        Vector2Int clickGridPos = BaseGridManager.Instance.WorldToGridPosition(clickWorldPos);
-                        bool clickedInside = clickGridPos.x >= _previewGridPos.x && 
-                                             clickGridPos.x < _previewGridPos.x + _currentWidth && 
-                                             clickGridPos.y >= _previewGridPos.y && 
-                                             clickGridPos.y < _previewGridPos.y + _currentHeight;
-                        if (clickedInside)
-                        {
-                            _isDraggingPreview = false;
-                            _isPointerDownInsidePreview = true;
-                        }
-                    }
-                }
-
-                if (isPressed && _isPointerDownInsidePreview)
+                                                            }
+                                                        }
+                                                
+                                                        void Update()
+                                                        {
+                                                            if (GameClient.Managers.InputManager.Instance == null) return;
+                                                            var inputManager = GameClient.Managers.InputManager.Instance;
+                                                            Vector2 pointerPos = inputManager.GetPointerPosition();
+                                                
+                                                            // Theo dõi vị trí Pointer Down ban đầu
+                                                            if (inputManager.IsPrimaryPointerDown())
+                                                            {
+                                                                _pointerDownPosition = pointerPos;
+                                                            }
+                                                
+                                                            if (!_isPlacing)
+                                                            {
+                                                                if (inputManager.IsPrimaryPointerDown())
+                                                                {
+                                                                    Debug.Log($"[BuildingController] Nhấn chuột tại: {pointerPos}");
+                                                
+                                                                    // Chỉ chặn click nếu con trỏ đang nằm trên một phần tử UI TƯƠNG TÁC thực sự
+                                                                    // (Button, Toggle, Slider, InputField, Dropdown, ScrollRect)
+                                                                    // KHÔNG chặn khi chỉ nằm trên HUD text/image nền (raycastTarget mặc định = true)
+                                                                    if (UnityEngine.EventSystems.EventSystem.current != null)
+                                                                    {
+                                                                        var pointerData = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+                                                                        pointerData.position = pointerPos;
+                                                                        var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+                                                                        UnityEngine.EventSystems.EventSystem.current.RaycastAll(pointerData, results);
+                                                                        
+                                                                        bool blockedByRealUI = false;
+                                                                        foreach (var result in results)
+                                                                        {
+                                                                            var parentCanvas = result.gameObject.GetComponentInParent<Canvas>();
+                                                
+                                                                            // Bỏ qua Canvas WorldSpace (nhãn tên tòa nhà trong map)
+                                                                            if (parentCanvas != null && parentCanvas.renderMode == RenderMode.WorldSpace)
+                                                                                continue;
+                                                
+                                                                            // Chỉ block nếu phần tử UI có component tương tác thực sự
+                                                                            var selectable = result.gameObject.GetComponentInParent<UnityEngine.UI.Selectable>();
+                                                                            var scrollRect = result.gameObject.GetComponentInParent<UnityEngine.UI.ScrollRect>();
+                                                                            if ((selectable != null && selectable.interactable) || scrollRect != null)
+                                                                            {
+                                                                                blockedByRealUI = true;
+                                                                                Debug.Log($"[BuildingController] Bị chặn bởi UI tương tác: {result.gameObject.name}");
+                                                                                break;
+                                                                            }
+                                                
+                                                                            // Block nếu click trúng panel popup đang mở (có CanvasGroup chặn raycast, sortingOrder > 0)
+                                                                            var canvasGroup = result.gameObject.GetComponentInParent<CanvasGroup>();
+                                                                            if (canvasGroup != null && canvasGroup.blocksRaycasts && canvasGroup.interactable &&
+                                                                                parentCanvas != null && parentCanvas.sortingOrder > 0)
+                                                                            {
+                                                                                blockedByRealUI = true;
+                                                                                Debug.Log($"[BuildingController] Bị chặn bởi panel popup: {result.gameObject.name}");
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                
+                                                                        if (blockedByRealUI)
+                                                                        {
+                                                                            return;
+                                                                        }
+                                                                    }
+                                                
+                                                                    if (Camera.main != null)
+                                                                    {
+                                                                        Vector3 screenPos3D = new Vector3(pointerPos.x, pointerPos.y, Mathf.Abs(Camera.main.transform.position.z));
+                                                                        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos3D);
+                                                                        Vector2Int clickGridPos = BaseGridManager.Instance.WorldToGridPosition(worldPos);
+                                                
+                                                                        var building = BaseBuildingManager.Instance.GetBuildingAt(clickGridPos.x, clickGridPos.y);
+                                                
+                                                                        if (building != null)
+                                                                        {
+                                                                            Debug.Log($"[BuildingController] Tìm thấy BuildingInstance tại ô Grid ({clickGridPos.x}, {clickGridPos.y}): {building.name}");
+                                                                            
+                                                                            if (CameraController.Instance != null)
+                                                                            {
+                                                                                CameraController.Instance.FocusTo(building.transform.position, 6.0f, 0.5f);
+                                                                            }
+                                                
+                                                                            if (building.CurrentState == BuildingState.ReadyToHarvest || building.HasResourcesToHarvest())
+                                                                            {
+                                                                                building.CollectResourcesVisually();
+                                                                            }
+                                                
+                                                                            if (UIManager.Instance != null)
+                                                                            {
+                                                                                Debug.Log("[BuildingController] Gọi UIManager.OpenPanel(UI_BuildingActionPanel)");
+                                                                                UIManager.Instance.OpenPanel("UI_BuildingActionPanel", building, false);
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            Debug.Log($"[BuildingController] Không có building nào tại ô Grid ({clickGridPos.x}, {clickGridPos.y})");
+                                                                            if (UIManager.Instance != null)
+                                                                            {
+                                                                                UIManager.Instance.ClosePanel("UI_BuildingActionPanel");
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Debug.LogWarning("[BuildingController] Camera.main bị NULL!");
+                                                                    }
+                                                                }
+                                                                return;
+                                                            }
+                                                
+                                                            // --- BẮT ĐẦU PHẦN ĐẶT NHÀ (PLACING MODE) ---
+                                                            
+                                                            // Hiện Grid khi đặt nhà
+                                                            GridManager.Instance.SetGridAlpha(1f);
+                                                
+                                                            bool isPressed = inputManager.IsPrimaryPointerPressed();
+                                                            bool wasPressedThisFrame = inputManager.IsPrimaryPointerDown();
+                                                            bool wasReleasedThisFrame = inputManager.IsPrimaryPointerReleased();
+                                                
+                                                            if (_isPreviewAttachedToMouse)
+                                                            {
+                                                                UpdatePreviewPosition(pointerPos);
+                                                
+                                                                // Click hoặc Thả ra để đặt toà nhà xuống map
+                                                                if (wasPressedThisFrame || wasReleasedThisFrame)
+                                                                {
+                                                                    if (UnityEngine.EventSystems.EventSystem.current == null || 
+                                                                        !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                                                                    {
+                                                                        _isPreviewAttachedToMouse = false;
+                                                                        SetPreviewPosition(_previewGridPos);
+                                                                        Debug.Log($"[BuildingController] Thả toà nhà bám chuột tại: {_previewGridPos}");
+                                                                        
+                                                                        if (UIManager.Instance != null)
+                                                                        {
+                                                                            UIManager.Instance.OpenPanel("UI_BuildingActionPanel", this, false);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                // Khi toà nhà đang ở trên map (chưa bám chuột)
+                                                                if (wasPressedThisFrame)
+                                                                {
+                                                                    _isPointerDownInsidePreview = false;
+                                                                    Ray ray = Camera.main.ScreenPointToRay(pointerPos);
+                                                                    Plane groundPlane = new Plane(Vector3.forward, Vector3.zero);
+                                                                    if (groundPlane.Raycast(ray, out float enter))
+                                                                    {
+                                                                        Vector3 clickWorldPos = ray.GetPoint(enter);
+                                                                        Vector2Int clickGridPos = BaseGridManager.Instance.WorldToGridPosition(clickWorldPos);
+                                                                        bool clickedInside = clickGridPos.x >= _previewGridPos.x && 
+                                                                                             clickGridPos.x < _previewGridPos.x + _currentWidth && 
+                                                                                             clickGridPos.y >= _previewGridPos.y && 
+                                                                                             clickGridPos.y < _previewGridPos.y + _currentHeight;
+                                                                        if (clickedInside)
+                                                                        {
+                                                                            _isDraggingPreview = false;
+                                                                            _isPointerDownInsidePreview = true;
+                                                                        }
+                                                                    }
+                                                                }
+                                                
+                                                                if (isPressed && _isPointerDownInsidePreview)
                 {
                     float dragDist = Vector2.Distance(_pointerDownPosition, pointerPos);
                     if (!_isDraggingPreview && dragDist > 15f) // Kéo xa hơn 15px
@@ -290,7 +302,7 @@ namespace GameClient.BaseBuilding.Core
             }
         }
 
-        public void StartPlacement(string buildingId, string prefabAddress, int width, int height)
+        public void StartPlacement(string buildingId, string prefabAddress, int width, int height, long instanceId = 0, int level = 1)
         {
             _buildingIdToPlace = buildingId;
             _prefabAddressToPlace = prefabAddress;
@@ -298,10 +310,12 @@ namespace GameClient.BaseBuilding.Core
             _currentHeight = height;
             _isPlacing = true;
             _isMovingExisting = false;
+            _instanceIdToPlace = instanceId;
+            _levelToPlace = level;
             _currentFlipX = false;
             _hasGhostLoaded = false;
             _isDraggingPreview = false;
-            _isPreviewAttachedToMouse = true; // Xây mới thì dính chuột ngay
+            _isPreviewAttachedToMouse = !DeviceManager.Instance.IsMobile; // PC thì dính chuột ngay, Mobile thì không dính chuột (phải chạm kéo)
 
             if (previewRenderer != null)
             {
@@ -354,6 +368,11 @@ namespace GameClient.BaseBuilding.Core
                 startGrid = BaseGridManager.Instance.WorldToGridPosition(centerWorld);
             }
             SetPreviewPosition(startGrid);
+            if (CameraController.Instance != null)
+            {
+                Vector3 worldPos = BaseGridManager.Instance.GridToWorldPosition(startGrid.x, startGrid.y);
+                CameraController.Instance.FocusTo(worldPos, 6.0f, 0.5f);
+            }
         }
 
         public void StartMove(BuildingInstance building)
@@ -368,7 +387,7 @@ namespace GameClient.BaseBuilding.Core
             _isPlacing = true;
             _hasGhostLoaded = false;
             _isDraggingPreview = false;
-            _isPreviewAttachedToMouse = true; // Di chuyển thì lập tức bám theo chuột
+            _isPreviewAttachedToMouse = !DeviceManager.Instance.IsMobile; // Di chuyển thì PC bám theo chuột ngay, Mobile thì không
 
             _isMovingExisting = true;
             _movingBuildingId = building.Data.BuildingID;
@@ -376,6 +395,7 @@ namespace GameClient.BaseBuilding.Core
             _movingOriginalY = building.GridY;
             _movingOriginalLevel = building.CurrentLevel;
             _movingOriginalFlipX = building.FlipX;
+            _movingOriginalInstanceId = building.InstanceID;
 
             if (previewRenderer != null)
             {
@@ -419,6 +439,10 @@ namespace GameClient.BaseBuilding.Core
             }
 
             SetPreviewPosition(new Vector2Int(building.GridX, building.GridY));
+            if (CameraController.Instance != null)
+            {
+                CameraController.Instance.FocusTo(building.transform.position, 6.0f, 0.5f);
+            }
 
             // Xóa toà nhà cũ khỏi map
             BaseBuildingManager.Instance.RemoveBuilding(building);
@@ -458,9 +482,10 @@ namespace GameClient.BaseBuilding.Core
             
             if (previewRenderer != null)
             {
-                float worldX = (gridPos.x + _currentWidth / 2f) * BaseGridManager.TILE_WIDTH;
-                float worldY = (gridPos.y + _currentHeight / 2f) * BaseGridManager.TILE_HEIGHT;
-                previewRenderer.transform.position = new Vector3(worldX, worldY, -0.5f);
+                float centerX = gridPos.x + _currentWidth / 2f;
+                float centerY = gridPos.y + _currentHeight / 2f;
+                Vector3 worldPos = BaseGridManager.Instance.GridToWorldPosition(Mathf.FloorToInt(centerX), Mathf.FloorToInt(centerY));
+                previewRenderer.transform.position = new Vector3(worldPos.x, worldPos.y, -0.5f);
                 
                 if (BaseGridManager.Instance.IsSpaceAvailable(gridPos.x, gridPos.y, _currentWidth, _currentHeight))
                     previewRenderer.color = validColor;
@@ -486,15 +511,23 @@ namespace GameClient.BaseBuilding.Core
             if (BaseGridManager.Instance.IsSpaceAvailable(_previewGridPos.x, _previewGridPos.y, _currentWidth, _currentHeight))
             {
                 string bId = string.IsNullOrEmpty(_buildingIdToPlace) ? "UnknownBuilding" : _buildingIdToPlace;
-                int level = _isMovingExisting ? _movingOriginalLevel : 1;
+                
+                int level = _levelToPlace;
+                long instanceId = _instanceIdToPlace;
+                if (_isMovingExisting)
+                {
+                    level = _movingOriginalLevel;
+                    instanceId = _movingOriginalInstanceId;
+                }
                 
                 _isMovingExisting = false;
 
-                bool success = await BaseBuildingManager.Instance.PlaceBuilding(bId, _previewGridPos.x, _previewGridPos.y, level, BuildingState.Normal, _currentFlipX);
+                bool success = await BaseBuildingManager.Instance.PlaceBuilding(bId, _previewGridPos.x, _previewGridPos.y, level, BuildingState.Normal, _currentFlipX, instanceId);
                 
                 if (success)
                 {
                     Debug.Log($"[BuildingController] Đã đặt nhà {bId} tại {_previewGridPos.x}, {_previewGridPos.y} với lv {level}");
+                    await BaseBuildingManager.Instance.SaveLayoutToServer();
                     CancelPlacement();
                 }
                 else
@@ -539,7 +572,8 @@ namespace GameClient.BaseBuilding.Core
                         _movingOriginalY, 
                         _movingOriginalLevel, 
                         BuildingState.Normal, 
-                        _movingOriginalFlipX
+                        _movingOriginalFlipX,
+                        _movingOriginalInstanceId
                     );
                 }
             }

@@ -10,5 +10,4 @@ CREATE TABLE IF NOT EXISTS version_configs (
 );
 
 INSERT INTO version_configs (platform, client_version, addressable_version, catalog_url, update_desc)
-VALUES ('android', '1.0.0', '2026.05.07.01', 'http://cdn.sectorigin.com/android/catalog.json', 'Bản cập nhật đầu tiên')
 ON CONFLICT (platform) DO NOTHING;

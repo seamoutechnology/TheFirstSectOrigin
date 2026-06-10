@@ -15,8 +15,23 @@ MonoBehaviour:
   m_GroupName: Core_Essential
   m_GUID: 84d0b412c54c0cd47aa1fb2b9f3fc444
   m_SerializeEntries:
+  - m_GUID: 001061ae9aab0ca4e8f17887b2513cbf
+    m_Address: UI_InventoryItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0ca9b12791290f647938e55bab669666
     m_Address: UI_BuildingActionPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d9718eeed6f51b4ca7c7585e551b97e
+    m_Address: Prefabs/UI/BuildingProgressBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0de9140a8b9b3114aae103d68f91ce25
+    m_Address: Char_00
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -30,13 +45,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e2bbf764a67fd548836e65c4a569517
+    m_Address: SFX_Build_Start
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21778f492551edb478454a5569df0e2d
     m_Address: EntryPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 29712645ce76c2242904019feaf52af9
-    m_Address: Assets/AssetData/Sprites/Font/Mali-SemiBoldItalic SDF.asset
+  - m_GUID: 230fd631470033844a074275ca6df71f
+    m_Address: SFX_Build_Complete
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41078df0a63d2354bb35bf1e298fdd9a
+    m_Address: UI_HeroItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 498f86b7d2c83da43b24595357d78236
+    m_Address: MainGameHUDPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a421aac098647243a556f7af8273898
+    m_Address: UI_BuildingDetailPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -60,8 +95,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 726b6a14a88ef2140abb091ba682c4fc
+    m_Address: UI_BuildMenuPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 76bd3037a7d255b48aa8aada88e988e4
     m_Address: ServerButtonPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76f2d32d98cd5544aace37575e5b4247
+    m_Address: wood_1_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 787519642234753459ade929289a2e68
+    m_Address: coin_icon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -80,8 +130,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 877f6dff79632f0488685ec3eaa359c0
-    m_Address: Assets/AssetData/Sprites/Font/Mali-Regular SDF.asset
+  - m_GUID: 84820fa1d091bb0438f1887a709c9466
+    m_Address: UI_HeroesPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -105,11 +155,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a32de9f92d97b864bb28e7c65190ae0a
-    m_Address: Character/00
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b49e65abef9518a41a22211ecb616af7
     m_Address: CreateCharPanel
     m_ReadOnly: 0
@@ -125,13 +170,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6fe365ceca755b49b3fa25f4678ed1b
+    m_Address: HUDCurrencyItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7159767f259991449ab12f91dddfab3
+    m_Address: stone_1_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc83c9f120bf3a147aa5f596b31e9987
     m_Address: AccountDashboardPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd783d4f4209f5647bc0a508cf635385
+    m_Address: UI_ConfirmPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf5fd851f156d6c419903ba6d63215fe
+    m_Address: UI_InventoryPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1bf1a54c48e61841a1b0084d76e5e81
     m_Address: DungeonScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4c844745e344fd47aabb41f725fbd04
+    m_Address: gold_icon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -145,6 +215,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e536fa5227c233d49a3db1c5589a83cc
+    m_Address: UI_BuildingItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e56db37f85cbe394897b78ae0642ed02
     m_Address: Sprites/Touch/Touch_butter
     m_ReadOnly: 0
@@ -155,6 +230,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8a4894b60e88d84a9c98ebd4baba7a1
+    m_Address: UI_SettingPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f28d5f02061e1714c9378b682c1eade1
     m_Address: SFX_UI_Click
     m_ReadOnly: 0
@@ -162,6 +242,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f4602798da614654ab619f7f67fb0541
     m_Address: Assets/AssetData/Sprites/Menu/Btn_Click_On_01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f472677cba0ffa6479e349001fda5573
+    m_Address: SFX_Build_Ambient
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

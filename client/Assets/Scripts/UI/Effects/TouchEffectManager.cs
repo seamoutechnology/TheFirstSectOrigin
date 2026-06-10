@@ -9,7 +9,7 @@ namespace GameClient.UI.Effects
     public class TouchEffectManager : Singleton<TouchEffectManager>
     {
         [Header("Settings")]
-        public GameObject effectPrefab; // Prefab đã được bạn kéo thả 25 tấm ảnh vào
+        public GameObject effectPrefab; 
         public int poolSize = 10;
         public Canvas targetCanvas; // Canvas hiển thị hiệu ứng
 

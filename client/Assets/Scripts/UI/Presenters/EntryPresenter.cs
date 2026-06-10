@@ -31,7 +31,7 @@ namespace GameClient.UI.Presenters
 
         public void Initialize()
         {
-            string versionText = _localization.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_game_version") ?? "Phiên bản trò chơi:";
+            string versionText = _localization.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_game_version");
             _view.SetVersionText($"{versionText} {Application.version}");
 
             _view.OnNoticeClicked += () => { _uiManager.OpenPanel("NoticePanel", null, false); };
@@ -84,6 +84,9 @@ namespace GameClient.UI.Presenters
             GameContext.CurrentServerPort = _currentZone.port;
             GameContext.CurrentServerName = _currentZone.name;
             GameContext.HasCharacter = _currentZone.has_character;
+
+            // Đóng Panel khởi đầu khi vào game
+            _uiManager.ClosePanel("EntryPanel");
 
             if (MapManager.Instance != null)
             {

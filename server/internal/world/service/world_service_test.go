@@ -29,12 +29,31 @@ func (m *MockPlayerRepo) Create(ctx context.Context, userID int64, serverID stri
 	return p, nil
 }
 
+func (m *MockPlayerRepo) FindByNickname(ctx context.Context, nickname string, serverID string) (*repository.Player, error) {
+	for _, p := range m.Players {
+		if p.Nickname == nickname && p.ServerID == serverID {
+			return p, nil
+		}
+	}
+	return nil, repository.ErrNotFound
+}
+
 func (m *MockPlayerRepo) InitPlayerBuildings(ctx context.Context, playerID int64) error {
 	return nil
 }
 
 func (m *MockPlayerRepo) SetFormation(ctx context.Context, playerID int64, slots map[int32]int64) error {
 	return nil
+}
+
+func (m *MockPlayerRepo) AddHero(ctx context.Context, playerID int64, heroCode string) (*repository.PlayerHero, error) {
+	return &repository.PlayerHero{
+		ID:        1,
+		PlayerID:  playerID,
+		HeroCode:  heroCode,
+		Level:     1,
+		Star:      1,
+	}, nil
 }
 
 func (m *MockPlayerRepo) GetVersionConfig(ctx context.Context, platform string) (*repository.VersionConfig, error) {

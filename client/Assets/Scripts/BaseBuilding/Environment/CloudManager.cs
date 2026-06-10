@@ -107,7 +107,7 @@ namespace GameClient.BaseBuilding.Environment
                 tex.Apply();
                 
                 sr.sprite = Sprite.Create(tex, new Rect(0, 0, 128, 64), new Vector2(0.5f, 0.5f), 32f);
-                sr.sortingOrder = 1000; // Nổi trên các công trình
+                sr.sortingOrder = 20000; // Nổi trên các công trình
             }
 
             var cloudInfo = cloud.AddComponent<CloudInfo>();
@@ -118,6 +118,7 @@ namespace GameClient.BaseBuilding.Environment
             var srs = cloud.GetComponentsInChildren<SpriteRenderer>();
             foreach (var sr in srs)
             {
+                sr.sortingOrder = 20000; // Nổi trên các công trình và nằm dưới sương mù
                 Color c = sr.color;
                 c.a = Mathf.Min(c.a, 0.45f); // Giới hạn độ đục tối đa 45%
                 sr.color = c;

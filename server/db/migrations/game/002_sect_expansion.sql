@@ -46,9 +46,3 @@ CREATE TABLE IF NOT EXISTS player_inventory (
     UNIQUE (player_id, item_id)
 );
 
--- Chèn dữ liệu mẫu Trait
-INSERT INTO hero_traits (trait_code, name, description, buff_type, buff_value) VALUES 
-('hardworking', 'Cần Cù', 'Tăng tốc độ thu hoạch Linh Điền', 'farming', 15),
-('alchemist_genius', 'Đan Tâm', 'Tăng tỷ lệ luyện thành công Đan Dược', 'alchemy', 10),
-('lazy', 'Lười Biếng', 'Thích ngủ, giảm tốc độ làm việc nhưng bù lại hồi thể lực nhanh', 'stamina_regen', 20)
-ON CONFLICT (trait_code) DO NOTHING;

@@ -17,7 +17,44 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: ea25558a67f1a874b9ce14db534fdf34, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 9634488261505024
+    m_Localized: Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9671969031811072
+    m_Localized: The basic currency of the cultivation world. Minted from raw ore
+      with faint spiritual energy, used to buy basic supplies and low-tier gear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672662530617344
+    m_Localized: A mid-tier currency in the cultivation world. Smelted from pure
+      natural gold, it holds high value and is commonly used for sect development
+      or buying precious elixirs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9672741756825600
+    m_Localized: Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674427636346880
+    m_Localized: "Stone\t I"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674470363721728
+    m_Localized: A basic building material. Commonly used to upgrade sect structures
+      or craft rudimentary weapons.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9674857355374592
+    m_Localized: Wood I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9675086527950848
+    m_Localized: Timber harvested from ancient forests. Used for constructing rooms,
+      crafting furniture, or as fuel for low-level alchemy furnaces.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

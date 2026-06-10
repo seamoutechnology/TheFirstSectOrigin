@@ -9,11 +9,53 @@ import (
 
 func (h *WorldHandler) GetInventory(ctx context.Context, req *pb.GetProfileRequest) (*pb.Inventory, error) {
 	h.log.Info("GetInventory request")
-	// TODO: Thực hiện gọi service lấy dữ liệu từ DB
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		h.log.Warn("GetInventory: user-id not found in metadata context")
+		return &pb.Inventory{}, nil
+	}
+
+	h.log.Info("GetInventory: fetching items for user", zap.Int64("user_id", userID))
+	items, code, msg := h.svc.GetInventory(ctx, userID)
+	if code != 0 {
+		h.log.Error("Failed to get inventory", zap.String("msg", msg), zap.Int32("code", code))
+		return &pb.Inventory{}, nil
+	}
+
+	h.log.Info("GetInventory: found items count", zap.Int("count", len(items)))
+
+	pbItems := make([]*pb.Item, 0, len(items))
+	for _, item := range items {
+		pbItems = append(pbItems, &pb.Item{
+			Id:       item.ID,
+			ItemCode: item.ItemCode,
+			Quantity: item.Quantity,
+		})
+	}
+
+	allConfigs, err := h.svc.GetAllItemConfigs(ctx)
+	pbConfigs := make([]*pb.ItemConfig, 0)
+	if err == nil {
+		for _, cfg := range allConfigs {
+			pbConfigs = append(pbConfigs, &pb.ItemConfig{
+				ItemCode: cfg.ItemCode,
+				NameKey:  cfg.NameKey,
+				Type:     cfg.Type,
+				Rarity:   cfg.Rarity,
+				Icon:     cfg.Icon,
+				DescKey:  cfg.DescKey,
+				MaxStack: cfg.MaxStack,
+				Sources:  make([]*pb.ItemSource, 0),
+				Effects:  make([]*pb.ItemEffect, 0),
+			})
+		}
+	} else {
+		h.log.Error("Failed to get all item configs", zap.Error(err))
+	}
+
 	return &pb.Inventory{
-		Items: []*pb.Item{
-			{Id: 1, ItemCode: "iron_sword", Name: "Kiếm Sắt", Type: "equipment", Rarity: "common", Quantity: 1},
-		},
+		Items:   pbItems,
+		Configs: pbConfigs,
 	}, nil
 }
 
@@ -41,3 +83,18 @@ func (h *WorldHandler) CraftItem(ctx context.Context, req *pb.CraftRequest) (*pb
 		MessageId: "msg_craft_success",
 	}, nil
 }
+
+func (h *WorldHandler) UseItem(ctx context.Context, req *pb.UseItemRequest) (*pb.UseItemResponse, error) {
+	h.log.Info("UseItem request", zap.Int64("item_id", req.ItemId), zap.Int32("quantity", req.Quantity))
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.UseItemResponse{Code: 401, MessageId: "msg_err_unauthorized"}, nil
+	}
+
+	code, msg := h.svc.UseItem(ctx, userID, req)
+	return &pb.UseItemResponse{
+		Code:      code,
+		MessageId: msg,
+	}, nil
+}
+

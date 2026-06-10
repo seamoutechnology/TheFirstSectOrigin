@@ -28,18 +28,36 @@ namespace GameClient.UI
         private void OnDisconnected(object data)
         {
             ShowOverlay("Đang kết nối lại...");
+            if (ToastManager.Instance != null)
+            {
+                ToastManager.Instance.ShowBigToast("Mất kết nối máy chủ! Đang tiến hành kết nối lại...", 2f);
+            }
         }
 
         private void OnReconnected(object data)
         {
             HideOverlay();
+            if (ToastManager.Instance != null)
+            {
+                ToastManager.Instance.ShowBigToast("Đã kết nối lại thành công!", 1.5f);
+            }
         }
 
         private void OnFailed(object data)
         {
             ShowOverlay("Kết nối thất bại. Vui lòng đăng nhập lại!");
             
-            Invoke(nameof(GoToLogin), 3f);
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.ShowMessage("Mất Kết Nối", "Kết nối tới máy chủ thất bại sau nhiều lần thử. Vui lòng đăng nhập lại!", () =>
+                {
+                    GoToLogin();
+                });
+            }
+            else
+            {
+                Invoke(nameof(GoToLogin), 3f);
+            }
         }
 
         private void ShowOverlay(string message)

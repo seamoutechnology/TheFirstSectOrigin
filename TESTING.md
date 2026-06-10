@@ -66,5 +66,5 @@ public IEnumerator TestDiscipleSpawn() {
 
 Khi thêm một API mới (gRPC):
 1. Cập nhật `integration_test.go` trong `server/internal/world/handler/`.
-2. Thêm một `t.Run` mới để gọi thử API đó với dữ liệu mock.
+2. Thêm một `t.Run` mới để gọi thử API đó với dữ liệu.
 3. Đảm bảo Backend trả về đúng `message_id` như đã cam kết trong file `.proto`.

@@ -68,7 +68,7 @@ namespace GameClient.UI
                 if (profile == null)
                 {
                     Debug.LogWarning("[QuickAuth] Tự động đăng nhập thất bại. Yêu cầu nhập lại mật khẩu.");
-                    UIManager.Instance.OpenPanel("LoginPanel");
+                    UIManager.Instance.OpenPanel("LoginPanel", null, false);
                     this.Hide();
                     return;
                 }
@@ -100,7 +100,7 @@ namespace GameClient.UI
 
             AccountManager.Instance.Logout();
             
-            UIManager.Instance.OpenPanel("LoginPanel");
+            UIManager.Instance.OpenPanel("LoginPanel", null, false);
             this.Hide();
         }
 

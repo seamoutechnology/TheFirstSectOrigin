@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.Tilemaps;
 
 namespace GameClient.BaseBuilding.Grid
 {
@@ -41,46 +42,106 @@ namespace GameClient.BaseBuilding.Grid
             InitializeGrid();
         }
 
+        private TilemapRenderer _isoTilemapRenderer;
+
         private void Start()
         {
-            GenerateGridVisuals();
+            GenerateIsometricGridVisuals();
             SetGridAlpha(0f); // Ẩn lưới lúc đầu
         }
 
-        private void GenerateGridVisuals()
+        private void GenerateIsometricGridVisuals()
         {
-            if (gridLinePrefab == null || gridVisualsParent == null) return;
-
-            for (int x = 0; x <= gridWidth; x++)
+            // 1. Tạo Texture2D hình thoi 128x64 động trong bộ nhớ
+            int width = 128;
+            int height = 64;
+            Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            
+            for (int x = 0; x < width; x++)
             {
-                Vector2 pos = originPosition + new Vector2(x * cellSize, (gridHeight * cellSize) / 2f);
-                GameObject lineObj = Instantiate(gridLinePrefab, pos, Quaternion.identity, gridVisualsParent);
-                lineObj.transform.localScale = new Vector3(0.05f, gridHeight * cellSize, 1f); // 0.05 là bề ngang của nét vẽ
-                
-                var sr = lineObj.GetComponent<SpriteRenderer>();
-                if (sr != null) _gridLines.Add(sr);
+                for (int y = 0; y < height; y++)
+                {
+                    // Công thức vẽ viền thoi Isometric
+                    float val = Mathf.Abs((x - 63.5f) / 64f) + Mathf.Abs((y - 31.5f) / 32f);
+                    if (Mathf.Abs(val - 1.0f) < 0.025f)
+                    {
+                        tex.SetPixel(x, y, new Color(1f, 1f, 1f, 0.4f)); // Viền trắng mờ 40%
+                    }
+                    else
+                    {
+                        tex.SetPixel(x, y, Color.clear);
+                    }
+                }
+            }
+            tex.filterMode = FilterMode.Bilinear;
+            tex.Apply();
+
+            // 2. Tạo Sprite với PPU = 128
+            Sprite sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 128f);
+
+            // 3. Tạo Tile Asset động
+            Tile tile = ScriptableObject.CreateInstance<Tile>();
+            tile.sprite = sprite;
+
+            // 4. Tìm hoặc tự sinh GameObject GridOverlayTilemap dưới Grid
+            UnityEngine.Grid gridComponent = GetComponentInParent<UnityEngine.Grid>();
+            if (gridComponent == null)
+            {
+                gridComponent = FindFirstObjectByType<UnityEngine.Grid>();
             }
 
-            for (int y = 0; y <= gridHeight; y++)
+            if (gridComponent == null)
             {
-                Vector2 pos = originPosition + new Vector2((gridWidth * cellSize) / 2f, y * cellSize);
-                GameObject lineObj = Instantiate(gridLinePrefab, pos, Quaternion.identity, gridVisualsParent);
-                lineObj.transform.localScale = new Vector3(gridWidth * cellSize, 0.05f, 1f);
-                
-                var sr = lineObj.GetComponent<SpriteRenderer>();
-                if (sr != null) _gridLines.Add(sr);
+                Debug.LogError("[GridManager] Không tìm thấy Grid component!");
+                return;
+            }
+
+            Transform overlayTransform = gridComponent.transform.Find("GridOverlayTilemap");
+            GameObject overlayObj;
+            if (overlayTransform == null)
+            {
+                overlayObj = new GameObject("GridOverlayTilemap");
+                overlayObj.transform.SetParent(gridComponent.transform, false);
+            }
+            else
+            {
+                overlayObj = overlayTransform.gameObject;
+            }
+
+            Tilemap tilemap = overlayObj.GetComponent<Tilemap>();
+            if (tilemap == null) tilemap = overlayObj.AddComponent<Tilemap>();
+
+            _isoTilemapRenderer = overlayObj.GetComponent<TilemapRenderer>();
+            if (_isoTilemapRenderer == null) _isoTilemapRenderer = overlayObj.AddComponent<TilemapRenderer>();
+            
+            _isoTilemapRenderer.sortOrder = TilemapRenderer.SortOrder.TopRight;
+            _isoTilemapRenderer.sortingOrder = -50; // Vẽ đè lên trên đất, dưới chân nhà
+
+            var defaultMaterial = Shader.Find("Sprites/Default") != null ? new Material(Shader.Find("Sprites/Default")) : null;
+            if (defaultMaterial != null)
+            {
+                _isoTilemapRenderer.material = defaultMaterial;
+            }
+
+            // 5. Quét phủ toàn bộ lưới bản đồ tự động
+            tilemap.ClearAllTiles();
+            for (int x = 0; x < gridWidth; x++)
+            {
+                for (int y = 0; y < gridHeight; y++)
+                {
+                    tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                }
             }
         }
 
         public void SetGridAlpha(float targetAlpha)
         {
-            foreach (var line in _gridLines)
+            if (_isoTilemapRenderer != null)
             {
-                if (line != null)
-                {
-                    line.DOKill();
-                    line.DOFade(targetAlpha, 0.3f);
-                }
+                _isoTilemapRenderer.gameObject.SetActive(targetAlpha > 0f);
+                Color c = _isoTilemapRenderer.material.color;
+                c.a = targetAlpha;
+                _isoTilemapRenderer.material.color = c;
             }
         }
 

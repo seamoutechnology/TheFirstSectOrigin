@@ -291,6 +291,160 @@ MonoBehaviour:
     m_Key: ui_label_building_action_close
     m_Metadata:
       m_Items: []
+  - m_Id: 8996909539356672
+    m_Key: ui_label_building_action_placement_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8996955185967104
+    m_Key: ui_label_building_action_placement_cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9174730983305216
+    m_Key: ui_label_building_action_upgrade_time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9179693801238528
+    m_Key: 'ui_label_building_action_upgrade_cost
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9180525552693248
+    m_Key: ui_label_building_action_upgrade_max_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9181582475358208
+    m_Key: main_hall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9182657081208832
+    m_Key: main_hall_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9199103047856128
+    m_Key: ui_success_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9229031172698112
+    m_Key: ui_register_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9634828327284736
+    m_Key: farm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9718650465120256
+    m_Key: ui_building_upgrade_start_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9722690162880512
+    m_Key: ui_building_max_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9722811839639552
+    m_Key: ui_building_action_move_instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9920520865411072
+    m_Key: ui_notice_toast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9938452936880128
+    m_Key: ui_label_build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9940257951412224
+    m_Key: ui_label_world_map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10032405560389632
+    m_Key: dorm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10032523021873152
+    m_Key: dorm_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10064986314076160
+    m_Key: ui_build_tab_production
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10064993826074624
+    m_Key: ui_build_tab_facility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065041896992768
+    m_Key: ui_build_tab_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065068623097856
+    m_Key: ui_build_tab_scenery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10065090894852096
+    m_Key: ui_build_tab_inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10113704664985600
+    m_Key: ui_building_action_choosing_position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245392921489408
+    m_Key: ui_label_deny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245503663697920
+    m_Key: ui_label_accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245569652682752
+    m_Key: ui_stow_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10245736153968640
+    m_Key: ui_stow_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10300925422563328
+    m_Key: ui_label_slider_audio_master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10301984601763840
+    m_Key: ui_label_slider_audio_music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10302057888837632
+    m_Key: ui_label_slider_audio_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304074506006528
+    m_Key: ui_label_slider_toggle_sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304195985633280
+    m_Key: ui_label_slider_toggle_music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10304249047773184
+    m_Key: ui_label_slider_toggle_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10307279960895488
+    m_Key: ui_label_setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314167674957824
+    m_Key: ui_label_princple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314172250943488
+    m_Key: ui_label_inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314942543261696
+    m_Key: ui_label_choose_language
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1,4 +1,4 @@
-﻿-- Migration 001: Game DB Schema
+-- Migration 001: Game DB Schema
 -- Chạy một lần khi setup zone server lần đầu
 
 -- ============================================================
@@ -31,11 +31,6 @@ CREATE TABLE IF NOT EXISTS buildings (
 
 -- Seed dữ liệu công trình
 INSERT INTO buildings (code, name, max_level, description) VALUES
-    ('TOWN_HALL',  'Nhà Chính',        20, 'Nâng cấp để mở rộng thành trì'),
-    ('GOLD_MINE',  'Mỏ Vàng',          20, 'Sản sinh vàng theo thời gian'),
-    ('MANA_MINE',  'Mỏ Mana',          20, 'Sản sinh mảnh exp theo thời gian'),
-    ('ALTAR',      'Đài Triệu Hồi',    10, 'Nơi triệu hồi tướng'),
-    ('BLACKSMITH', 'Nhà Rèn',          10, 'Chế tạo và nâng sao trang bị')
 ON CONFLICT DO NOTHING;
 
 -- ============================================================
@@ -48,8 +43,7 @@ CREATE TABLE IF NOT EXISTS player_buildings (
     level            INT          NOT NULL DEFAULT 1,
     upgrade_end_at   TIMESTAMPTZ,              -- NULL = không nâng cấp
     last_collect_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    created_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    UNIQUE (player_id, building_code)
+    created_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 
 -- ============================================================
@@ -71,13 +65,6 @@ CREATE TABLE IF NOT EXISTS hero_templates (
 
 -- Seed một số tướng mẫu
 INSERT INTO hero_templates (code, name, rarity, element, role, base_hp, base_atk, base_def, base_speed, gacha_weight) VALUES
-    ('FIRE_WARRIOR_01',  'Lửa Chiến Binh',   'R',   'fire',  'warrior',  1200, 120, 80,  105, 500),
-    ('WATER_TANK_01',    'Thủy Hộ Thuẫn',    'R',   'water', 'tank',     2000, 80,  150, 90,  500),
-    ('WOOD_HEALER_01',   'Mộc Thánh Nữ',     'SR',  'wood',  'healer',   1500, 90,  100, 110, 150),
-    ('LIGHT_MAGE_01',    'Thánh Pháp Sư',    'SR',  'light', 'mage',     1100, 180, 60,  115, 150),
-    ('DARK_ASSASSIN_01', 'Hắc Sát Thần',     'SSR', 'dark',  'assassin', 1000, 250, 50,  140, 40),
-    ('FIRE_GENERAL_01',  'Hỏa Thần Tướng',   'SSR', 'fire',  'warrior',  1800, 220, 120, 125, 40),
-    ('LIGHT_DEITY_01',   'Thần Ánh Sáng',    'UR',  'light', 'mage',     2000, 350, 100, 150, 10)
 ON CONFLICT DO NOTHING;
 
 -- ============================================================
@@ -95,7 +82,6 @@ CREATE TABLE IF NOT EXISTS gacha_banners (
 
 -- Seed banner mặc định
 INSERT INTO gacha_banners (name, description, cost_diamond, pity_count, is_active) VALUES
-    ('Triệu Hồi Cơ Bản', 'Banner thường xuyên, tỷ lệ SSR 1.5%', 300, 80, TRUE)
 ON CONFLICT DO NOTHING;
 
 -- ============================================================

@@ -91,7 +91,7 @@ namespace GameClient.UI.Presenters
                         _localization.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_success_title") ?? "Thành công",
                         _localization.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_register_success") ?? "Đăng ký thành công!"
                     );
-                    _uiManager.OpenPanel("LoginPanel", user);
+                    _uiManager.OpenPanel("LoginPanel", user, false);
                     _view.Hide();
                 } 
                 else 
@@ -113,7 +113,7 @@ namespace GameClient.UI.Presenters
 
         private void HandleBack()
         {
-            _uiManager.OpenPanel("LoginPanel");
+            _uiManager.OpenPanel("LoginPanel", null, false);
             _view.Hide();
         }
 
