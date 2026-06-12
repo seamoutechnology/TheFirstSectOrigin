@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameClient.Managers;
 using GameClient.UI.Core;
 using GameClient.Core;
+using GameClient.Network.Pb;
 
 namespace GameClient.UI
 {
@@ -75,6 +76,18 @@ namespace GameClient.UI
             }
 
             UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+            // Đăng ký sự kiện cập nhật profile để tự động refresh tài nguyên lập tức
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPlayerUpdated -= HandlePlayerUpdated;
+                GameManager.Instance.OnPlayerUpdated += HandlePlayerUpdated;
+            }
+        }
+
+        private void HandlePlayerUpdated(PlayerProfile profile)
+        {
+            RefreshResources();
         }
 
         protected override void OnShow()
@@ -289,6 +302,10 @@ namespace GameClient.UI
         {
             base.OnCleanup();
             UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPlayerUpdated -= HandlePlayerUpdated;
+            }
         }
 
         private void OnLocaleChanged(UnityEngine.Localization.Locale locale)

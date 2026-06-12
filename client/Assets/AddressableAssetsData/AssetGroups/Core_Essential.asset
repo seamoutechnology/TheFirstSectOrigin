@@ -145,6 +145,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5bb2a9b45619e0b47b19a955e234d8b8
+    m_Address: CombatDefeatPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5e085f6aaec7c854d971d3ad5185ac07
     m_Address: UI_ItemTooltipPanel
     m_ReadOnly: 0

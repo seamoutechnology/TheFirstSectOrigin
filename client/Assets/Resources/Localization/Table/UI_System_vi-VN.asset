@@ -519,6 +519,10 @@ MonoBehaviour:
     m_Localized: "Tho\xE1t"
     m_Metadata:
       m_Items: []
+  - m_Id: 10876625284198400
+    m_Localized: "Th\u1EED l\u1EA1i"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

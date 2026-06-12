@@ -5,6 +5,7 @@ using GameClient.UI.Core;
 using GameClient.Network.Pb;
 using GameClient.Managers;
 using System.Collections.Generic;
+using GameClient.Network;
 using TMPro;
 
 namespace GameClient.UI
@@ -18,6 +19,7 @@ namespace GameClient.UI
         [SerializeField] private TMP_Text powerText;
         [SerializeField] private TMP_Text rarityText;
         [SerializeField] private TMP_Text traitText; // Hiển thị các thiên phú/traits
+        [SerializeField] private TMP_Text txtRequiredMaterials; // Hiển thị nguyên liệu nâng cấp cần
         [SerializeField] private Button levelUpButton;
         [SerializeField] private Button closeButton;
 
@@ -127,6 +129,9 @@ namespace GameClient.UI
                     txtBtn.text = lvlUpLabel;
                 }
             }
+
+            // 8. Cập nhật chi phí nâng cấp nguyên liệu
+            UpdateUpgradeCostUI();
         }
 
         private void SetupSkills(string heroCode)
@@ -215,11 +220,33 @@ namespace GameClient.UI
                 {
                     Debug.Log($"[HeroDetail] Cấp độ Tướng cập nhật: {response.Hero.Level}");
                     _currentHero = response.Hero; // Cập nhật data mới
+                    
+                    // Cập nhật thông tin trong danh sách tướng của GameManager
+                    if (GameManager.Instance.PlayerHeroes != null)
+                    {
+                        var heroInList = GameManager.Instance.PlayerHeroes.Find(h => h.Id == response.Hero.Id);
+                        if (heroInList != null)
+                        {
+                            int idx = GameManager.Instance.PlayerHeroes.IndexOf(heroInList);
+                            GameManager.Instance.PlayerHeroes[idx] = response.Hero;
+                            GameManager.Instance.SetHeroes(GameManager.Instance.PlayerHeroes);
+                        }
+                    }
+
+                    // Tải lại Profile người chơi để cập nhật lượng Vàng bị trừ lên UI chính
+                    var profileRes = await NetworkManager.Instance.GatewayClient.GetPlayerProfileAsync(new GetPlayerProfileRequest(), NetworkManager.DefaultCallOptions());
+                    if (profileRes != null && profileRes.Base != null && profileRes.Base.Code == 0 && profileRes.Profile != null)
+                    {
+                        GameManager.Instance.SetPlayer(profileRes.Profile);
+                    }
+
                     RefreshUI();
                 }
                 else
                 {
-                    Debug.LogWarning($"[HeroDetail] Nâng cấp thất bại: {response?.Base?.Message}");
+                    string errorMsg = response?.Base?.Message ?? "Lỗi không xác định từ máy chủ.";
+                    ToastManager.Instance?.ShowBigToast($"Nâng cấp thất bại: {errorMsg}");
+                    Debug.LogWarning($"[HeroDetail] Nâng cấp thất bại: {errorMsg}");
                 }
             }
             catch (System.Exception ex)
@@ -230,6 +257,87 @@ namespace GameClient.UI
             {
                 levelUpButton.interactable = true;
             }
+        }
+
+        private async void UpdateUpgradeCostUI()
+        {
+            if (_currentHero == null || txtRequiredMaterials == null) return;
+
+            int currentLvl = _currentHero.Level;
+            long goldCost = 0;
+            int woodCost = 0;
+            int stoneCost = 0;
+
+            // Tính toán chi phí dựa theo level hiện tại tương tự server
+            if (currentLvl < 10)
+            {
+                goldCost = currentLvl * 100;
+                woodCost = currentLvl * 10;
+                stoneCost = 0;
+            }
+            else if (currentLvl < 20)
+            {
+                goldCost = currentLvl * 250;
+                woodCost = currentLvl * 15;
+                stoneCost = (currentLvl - 9) * 5;
+            }
+            else if (currentLvl < 30)
+            {
+                goldCost = currentLvl * 500;
+                woodCost = currentLvl * 25;
+                stoneCost = (currentLvl - 9) * 10;
+            }
+            else
+            {
+                goldCost = currentLvl * 1000;
+                woodCost = currentLvl * 50;
+                stoneCost = (currentLvl - 9) * 20;
+            }
+
+            long ownedGold = 0;
+            if (GameManager.Instance.CurrentPlayer != null)
+            {
+                ownedGold = GameManager.Instance.CurrentPlayer.Gold;
+            }
+
+            int ownedWood = 0;
+            int ownedStone = 0;
+
+            try
+            {
+                var inv = await GameClient.Network.Api.SectBuildingApi.GetInventoryAsync();
+                if (inv != null && inv.Items != null)
+                {
+                    foreach (var item in inv.Items)
+                    {
+                        if (item.ItemCode == "00003") ownedWood = (int)item.Quantity;
+                        else if (item.ItemCode == "00002") ownedStone = (int)item.Quantity;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[HeroDetailPanel] Lỗi khi lấy túi đồ: {ex.Message}");
+            }
+
+            string goldColor = ownedGold >= goldCost ? "#FFFFFF" : "#FF5555";
+            string woodColor = ownedWood >= woodCost ? "#FFFFFF" : "#FF5555";
+            string stoneColor = ownedStone >= stoneCost ? "#FFFFFF" : "#FF5555";
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.AppendLine("<color=#FFA500><b>Nguyên liệu cần:</b></color>");
+            sb.AppendLine($"- Vàng: <color={goldColor}>{goldCost}</color> / {ownedGold}");
+            
+            if (woodCost > 0)
+            {
+                sb.AppendLine($"- Gỗ I: <color={woodColor}>{woodCost}</color> / {ownedWood}");
+            }
+            if (stoneCost > 0)
+            {
+                sb.AppendLine($"- Đá I: <color={stoneColor}>{stoneCost}</color> / {ownedStone}");
+            }
+
+            txtRequiredMaterials.text = sb.ToString();
         }
     }
 }

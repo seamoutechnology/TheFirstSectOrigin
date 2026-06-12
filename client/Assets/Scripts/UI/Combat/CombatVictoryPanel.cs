@@ -71,7 +71,8 @@ namespace GameClient.UI.Combat
             }
 
             txtExpReward.text = $"+{exp} EXP";
-            txtLinhThachReward.text = $"+{linhThach} Linh Thạch";
+            string goldLabel = UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN" ? "Vàng" : "Gold";
+            txtLinhThachReward.text = $"+{linhThach} {goldLabel}";
 
             // Render items from current stage drops
             PopulateStageItemDrops();
@@ -279,7 +280,7 @@ namespace GameClient.UI.Combat
                 {
                     EnemyId = stage.stageId,
                     IsVictory = true,
-                    PlayerPower = (int)GameManager.Instance.CurrentPlayer.Power,
+                    PlayerPower = Mathf.Max((int)GameManager.Instance.CurrentPlayer.Power, stage.recommendPower),
                     EnemyPower = stage.recommendPower,
                 };
 
@@ -293,17 +294,23 @@ namespace GameClient.UI.Combat
                         GameManager.Instance.SetPlayer(profileRes.Profile);
                     }
 
-                    string rewardMsg = $"Nhận +{res.RewardExp} EXP, +{res.RewardLinhThach} Linh Thạch";
+                    string goldLabelRaid = UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN" ? "Vàng" : "Gold";
+                    string rewardMsg = UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN"
+                        ? $"Nhận +{res.RewardExp} EXP, +{res.RewardLinhThach} {goldLabelRaid}"
+                        : $"Received +{res.RewardExp} EXP, +{res.RewardLinhThach} {goldLabelRaid}";
                     if (stage.rewards != null && stage.rewards.Count > 0)
                     {
-                        rewardMsg += "\n\nVật phẩm nhận được:";
+                        rewardMsg += UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN"
+                            ? "\n\nVật phẩm nhận được:"
+                            : "\n\nItems received:";
                         foreach (var reward in stage.rewards)
                         {
                             rewardMsg += $"\n• {reward.itemId} x{reward.amount}";
                         }
                     }
 
-                    UIManager.Instance.ShowMessage("Càn Quét Thành Công", rewardMsg);
+                    string successTitle = UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN" ? "Càn Quét Thành Công" : "Raid Successful";
+                    UIManager.Instance.ShowMessage(successTitle, rewardMsg);
                 }
                 else
                 {

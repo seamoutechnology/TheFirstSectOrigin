@@ -6,6 +6,7 @@ using GameClient.UI;
 using GameClient.UI.Core;
 using System.Collections.Generic;
 using System.Linq;
+using GameClient.Gameplay.Combat.States;
 
 namespace GameClient.UI.Combat
 {
@@ -25,10 +26,28 @@ namespace GameClient.UI.Combat
         public GameObject skillPanel;
         [SerializeField] private List<UI_SkillButton> skillSlots = new();
 
+        [Header("Debug/Utility Buttons")]
+        public Button btnSurrender;
+        public Button btnInstantWin;
+
         private CombatManager _combatManager;
         private List<SkillData> _availableSkills;
         private Dictionary<CombatEntity, CombatHUDCharacterItem> _characterItems = new();
         private Dictionary<string, int> _skillCooldownTracker = new();
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            
+            // Tự động tìm kiếm nếu chưa gán trong Inspector
+            if (btnSurrender == null) btnSurrender = transform.Find("btnSurrender")?.GetComponent<Button>();
+            if (btnSurrender == null) btnSurrender = transform.Find("Buttons/btnSurrender")?.GetComponent<Button>();
+            if (btnSurrender != null) btnSurrender.onClick.AddListener(OnSurrenderClicked);
+
+            if (btnInstantWin == null) btnInstantWin = transform.Find("btnInstantWin")?.GetComponent<Button>();
+            if (btnInstantWin == null) btnInstantWin = transform.Find("Buttons/btnInstantWin")?.GetComponent<Button>();
+            if (btnInstantWin != null) btnInstantWin.onClick.AddListener(OnInstantWinClicked);
+        }
 
         public override void Setup(object data = null)
         {
@@ -297,6 +316,28 @@ namespace GameClient.UI.Combat
                     UpdateSkillButtons();
                 }
             }
+        }
+
+        private void OnSurrenderClicked()
+        {
+            if (_combatManager == null) return;
+            Debug.Log("[CombatHUD] Surrendering, dealing lethal damage to players.");
+            foreach (var p in _combatManager.Players)
+            {
+                if (!p.IsDead) p.TakeDamage(999999, false);
+            }
+            _combatManager.StateMachine.ChangeState(new GameOverState());
+        }
+
+        private void OnInstantWinClicked()
+        {
+            if (_combatManager == null) return;
+            Debug.Log("[CombatHUD] Cheat instant win, dealing lethal damage to enemies.");
+            foreach (var e in _combatManager.Enemies)
+            {
+                if (!e.IsDead) e.TakeDamage(999999, false);
+            }
+            _combatManager.StateMachine.ChangeState(new GameOverState());
         }
     }
 }

@@ -77,6 +77,20 @@ namespace GameClient.Gameplay.Combat.States
                 if (resp.IsValid)
                 {
                     Debug.Log($"<color=cyan>[Combat] Server xác nhận Hợp lệ! Thưởng: {resp.RewardExp} Exp, {resp.RewardLinhThach} LT.</color>");
+                    
+                    // Tải lại profile để cập nhật Năng lượng và tài nguyên trên UI cục bộ
+                    var profileCall = NetworkManager.Instance.GatewayClient.GetPlayerProfileAsync(new GetPlayerProfileRequest(), NetworkManager.DefaultCallOptions());
+                    var profileTask = profileCall.ResponseAsync;
+                    while (!profileTask.IsCompleted)
+                    {
+                        yield return null;
+                    }
+
+                    if (!profileTask.IsFaulted && profileTask.Result != null && profileTask.Result.Base != null && profileTask.Result.Base.Code == 0 && profileTask.Result.Profile != null)
+                    {
+                        GameManager.Instance.SetPlayer(profileTask.Result.Profile);
+                        Debug.Log("[Combat] Đã đồng bộ thông tin nhân vật sau trận đấu thành công.");
+                    }
                 }
                 else
                 {

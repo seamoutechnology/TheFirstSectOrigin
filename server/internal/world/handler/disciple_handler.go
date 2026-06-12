@@ -84,12 +84,15 @@ func (h *WorldHandler) GetHeroes(ctx context.Context, req *pb.GetHeroesRequest) 
 			})
 		}
 
+		actualHP := hero.BaseHP + hero.Level*100
+		actualATK := hero.BaseATK + hero.Level*10
+		actualDEF := hero.BaseDEF + hero.Level*5
 		pbHeroes = append(pbHeroes, &pb.Hero{
 			Id:     hero.ID,
 			Name:   hero.Name,
 			Level:  hero.Level,
 			Rarity: hero.Rarity,
-			Power:  int64(hero.BaseATK*10 + hero.BaseHP + hero.BaseDEF*5),
+			Power:  int64(actualATK*10 + actualHP + actualDEF*5),
 			Star:   hero.Star,
 			Traits: traitsList,
 			Skills: pbSkills,
@@ -169,6 +172,9 @@ func (h *WorldHandler) LevelUpHero(ctx context.Context, req *pb.LevelUpHeroReque
 		})
 	}
 
+	actualHP := hero.BaseHP + hero.Level*100
+	actualATK := hero.BaseATK + hero.Level*10
+	actualDEF := hero.BaseDEF + hero.Level*5
 	return &pb.LevelUpHeroResponse{
 		Base: &pb.BaseResponse{Code: 0, Message: "msg_levelup_hero_success"},
 		Hero: &pb.Hero{
@@ -176,7 +182,7 @@ func (h *WorldHandler) LevelUpHero(ctx context.Context, req *pb.LevelUpHeroReque
 			Name:   hero.Name,
 			Level:  hero.Level,
 			Rarity: hero.Rarity,
-			Power:  int64(hero.BaseATK*10 + hero.BaseHP + hero.BaseDEF*5),
+			Power:  int64(actualATK*10 + actualHP + actualDEF*5),
 			Star:   hero.Star,
 			Traits: traitsList,
 			Skills: pbSkills,
