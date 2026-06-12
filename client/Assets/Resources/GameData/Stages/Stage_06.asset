@@ -29,7 +29,7 @@ MonoBehaviour:
     defense: 245
     speed: 81
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_06_2
     name: Quái thú F-6.2
     level: 16
@@ -38,7 +38,7 @@ MonoBehaviour:
     defense: 250
     speed: 82
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   rewards:
   - itemId: 00000
     amount: 300

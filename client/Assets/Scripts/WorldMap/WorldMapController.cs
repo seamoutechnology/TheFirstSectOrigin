@@ -11,6 +11,8 @@ namespace GameClient.WorldMap
 {
     public class WorldMapController : Singleton<WorldMapController>
     {
+        protected override bool DontDestroy => false;
+
         [Header("PVE Stages Configuration")]
         [Tooltip("Danh sách các ải PVE xếp theo thứ tự")]
         public List<StageData> stages = new List<StageData>();

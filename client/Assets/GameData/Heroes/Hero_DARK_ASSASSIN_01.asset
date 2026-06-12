@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hero_DARK_ASSASSIN_01
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 100
-  heroName: "Hắc Sát Thần"
+  heroName: "H\u1EAFc S\xE1t Th\u1EA7n"
   description: char_03_desc
   MaxLifespan: 100
   BaseLoyalty: 80

@@ -1082,4 +1082,96 @@ func (r *PlayerRepository) LevelUpHero(ctx context.Context, playerID int64, hero
 	return &h, nil
 }
 
+func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID int64, stageID string, isVictory bool, rewardExp int32, rewardLinhThach int32) (*Player, error) {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Get current player stamina
+	var stamina int32
+	var maxStamina int32
+	err = tx.QueryRow(ctx, "SELECT stamina, max_stamina FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&stamina, &maxStamina)
+	if err != nil {
+		return nil, err
+	}
+
+	// 2. Query stage config to get stamina cost (default to 5 if not found/empty) and reward drops
+	staminaCost := int32(5)
+	var jsonData string
+	var stageConf struct {
+		StaminaCost int32 `json:"staminaCost"`
+		Rewards     []struct {
+			ItemID string `json:"itemId"`
+			Amount int    `json:"amount"`
+		} `json:"rewards"`
+	}
+	err = tx.QueryRow(ctx, "SELECT json_data FROM stage_configs WHERE stage_id = $1", stageID).Scan(&jsonData)
+	if err == nil && jsonData != "" {
+		if json.Unmarshal([]byte(jsonData), &stageConf) == nil {
+			if stageConf.StaminaCost > 0 {
+				staminaCost = stageConf.StaminaCost
+			}
+		}
+	}
+
+	// 3. Deduct stamina (ensure we don't go below 0)
+	if stamina < staminaCost {
+		stamina = 0
+	} else {
+		stamina -= staminaCost
+	}
+
+	// 4. If victory, add rewards!
+	goldDelta := int64(0)
+	expDelta := int64(0)
+	if isVictory {
+		goldDelta = int64(rewardLinhThach)
+		expDelta = int64(rewardExp)
+
+		// Reward items
+		for _, reward := range stageConf.Rewards {
+			if reward.ItemID != "" && reward.Amount > 0 {
+				var exists bool
+				err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, reward.ItemID).Scan(&exists)
+				if err == nil {
+					if exists {
+						_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", reward.Amount, playerID, reward.ItemID)
+					} else {
+						_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, reward.ItemID, reward.Amount)
+					}
+				}
+			}
+		}
+	}
+
+	// 5. Update players table
+	q := `
+		UPDATE players
+		SET stamina = $2,
+		    gold = gold + $3,
+		    exp = exp + $4,
+		    updated_at = NOW()
+		WHERE id = $1
+		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+	`
+	p := &Player{}
+	err = tx.QueryRow(ctx, q, playerID, stamina, goldDelta, expDelta).Scan(
+		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	// 6. Commit transaction
+	if err := tx.Commit(ctx); err != nil {
+		return nil, err
+	}
+
+	return p, nil
+}
+
+
 

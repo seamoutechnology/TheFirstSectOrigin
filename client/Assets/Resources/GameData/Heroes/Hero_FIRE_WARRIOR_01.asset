@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 104
   heroName: "Lửa Chiến Binh"
-  description: char_01_desc
+  description: char_05_desc
   MaxLifespan: 100
   BaseLoyalty: 80
-  prefabAddress: char_01_img
-  iconAddress: avt_01_img
+  prefabAddress: char_05_img
+  iconAddress: avt_05_img
   rarity: R
   basePower: 100
   code: FIRE_WARRIOR_01

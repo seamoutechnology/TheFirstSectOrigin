@@ -17,7 +17,21 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b3a311264348b25498c65bce5db5b2b3, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 10001
+    m_Localized: "Th\u1EA7n \xC1nh S\xE1ng s\u1EDF h\u1EEFu s\u1EE9c m\u1EA1nh quang mang v\xF4 bi\xEAn, chuy\xEAn kh\u1EAFc ch\u1EBF b\xF3ng t\u1ED1i."
+  - m_Id: 10002
+    m_Localized: "Th\xE1nh Ph\xE1p S\u01B0 th\xF4ng tu\u1EC7 c\u1ED5 thu\u1EADt, \u0111i\u1EC1u khi\u1EC3n nguy\xEAn t\u1ED1 \xE1nh s\xE1ng l\xE0m ch\u1EE7 chi\u1EBFn tr\u01B0\u1EDDng."
+  - m_Id: 10003
+    m_Localized: "H\u1EAFc S\xE1t Th\u1EA7n tho\u1EAFt \u1EA9n tho\u1EAFt hi\u1EC7n trong b\xF3ng \u0111\xEAm, nh\u1EA5t k\xEDch t\u1EA5t s\xE1t m\u1EE5c ti\xEAu."
+  - m_Id: 10004
+    m_Localized: "H\u1EA3i Th\u1EA7n T\u01B0\u1EDBng d\u0169ng m\xE3nh thi\u1EC7n chi\u1EBFn, ti\xEAn phong ph\xE1 \u0111\u1ECBch v\u1EDBi lu\u1ED3ng th\u1EA7n h\u1EA3i."
+  - m_Id: 10005
+    m_Localized: "L\u1EEDa Chi\u1EBFn Binh mang huy\u1EBFt th\u1ED1ng h\u1ECFa di\u1EC7m c\u01B0\u1EDDng \u0111\u1EA1i, kh\xF4ng bao gi\u1EDD l\xF9i b\u01B0\u1EDBc."
+  - m_Id: 10006
+    m_Localized: "Th\u1EE7y H\u1ED9 Thu\u1EABn c\xF3 kh\u1EA3 n\u0103ng ph\xF2ng ng\u1EF1 ki\xEAn c\u1ED1 nh\u01B0 \u0111\u1EA1i d\u01B0\u01A1ng bao la."
+  - m_Id: 10007
+    m_Localized: "M\u1ED9c Tr\u1ECB Li\u1EC7u h\u1ED3i ph\u1EE5c sinh m\u1EC7nh l\u1EF1c v\xE0 ban ph\xFAc l\xE0nh t\u1EEB thi\xEAn nhi\xEAn."
   references:
     version: 2
     RefIds: []

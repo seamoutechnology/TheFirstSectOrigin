@@ -29,6 +29,17 @@ namespace GameClient
             }
 
             GameObject overlay = GameObject.Find("OverlayUI");
+            if (overlay == null)
+            {
+                var overlayPrefab = Resources.Load<GameObject>("Prefabs/UI/OverlayUI");
+                if (overlayPrefab != null)
+                {
+                    overlay = Instantiate(overlayPrefab);
+                    overlay.name = "OverlayUI";
+                    Debug.Log("[UIManager] Tự động load và khởi tạo OverlayUI từ Resources.");
+                }
+            }
+
             if (overlay != null)
             {
                 DontDestroyOnLoad(overlay);
@@ -466,6 +477,24 @@ namespace GameClient
 
         public async Task<IUIView> OpenPanelAsync(string addressableKey, object data = null, bool isLoadByPlatform = true)
         {
+            if (canvasRoot == null)
+            {
+                var canvas = GameObject.FindFirstObjectByType<Canvas>();
+                if (canvas != null)
+                {
+                    canvasRoot = canvas.transform;
+                    Debug.Log($"[UIManager] Auto-assigned canvasRoot to Canvas: {canvas.name}");
+                }
+                else
+                {
+                    var canvasGo = new GameObject("UICanvasFallback", typeof(Canvas), typeof(UnityEngine.UI.CanvasScaler), typeof(UnityEngine.UI.GraphicRaycaster));
+                    canvasRoot = canvasGo.transform;
+                    var c = canvasGo.GetComponent<Canvas>();
+                    c.renderMode = RenderMode.ScreenSpaceOverlay;
+                    Debug.LogWarning("[UIManager] canvasRoot is null and no Canvas found in scene! Created fallback UICanvasFallback.");
+                }
+            }
+
             try
             {
                 if (_cachedPanels.TryGetValue(addressableKey, out var existingPanel))

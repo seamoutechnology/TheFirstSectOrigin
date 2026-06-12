@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 102
   heroName: "Thần Ánh Sáng"
-  description: char_01_des
+  description: char_01_desc
   MaxLifespan: 100
   BaseLoyalty: 80
   prefabAddress: char_01_img

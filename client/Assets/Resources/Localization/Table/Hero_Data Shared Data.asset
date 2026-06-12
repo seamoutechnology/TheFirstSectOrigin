@@ -14,7 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: Hero_Data
   m_TableCollectionNameGuidString: b3a311264348b25498c65bce5db5b2b3
-  m_Entries: []
+  m_Entries:
+  - m_Id: 10001
+    m_Key: char_01_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10002
+    m_Key: char_02_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10003
+    m_Key: char_03_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10004
+    m_Key: char_04_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10005
+    m_Key: char_05_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10006
+    m_Key: char_06_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10007
+    m_Key: char_07_desc
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

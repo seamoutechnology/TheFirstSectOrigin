@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 106
   heroName: "Mộc Trị Liệu"
-  description: char_03_desc
+  description: char_07_desc
   MaxLifespan: 100
   BaseLoyalty: 80
-  prefabAddress: char_03_img
-  iconAddress: avt_03_img
+  prefabAddress: char_07_img
+  iconAddress: avt_07_img
   rarity: R
   basePower: 100
   code: WOOD_HEALER_01

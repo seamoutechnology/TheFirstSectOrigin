@@ -29,7 +29,7 @@ MonoBehaviour:
     defense: 125
     speed: 66
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_03_2
     name: "Qu\xE1i th\xFA F-3.2"
     level: 7
@@ -38,7 +38,7 @@ MonoBehaviour:
     defense: 130
     speed: 67
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_03_3
     name: "Qu\xE1i th\xFA F-3.3"
     level: 7
@@ -47,5 +47,5 @@ MonoBehaviour:
     defense: 135
     speed: 68
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   rewards: []

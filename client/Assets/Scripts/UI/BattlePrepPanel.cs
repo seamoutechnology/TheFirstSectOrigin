@@ -120,9 +120,17 @@ namespace GameClient.UI
             btnClose.onClick.AddListener(Hide);
             btnStartCombat.onClick.AddListener(OnStartCombatClicked);
 
-            if (btnQuickDeploy != null) btnQuickDeploy.onClick.AddListener(OnQuickDeployClicked);
-            if (btnAutoDeploy != null) btnAutoDeploy.onClick.AddListener(OnAutoDeployClicked);
-            if (btnRule != null) btnRule.onClick.AddListener(OnRuleClicked);
+            // Đảm bảo nút Start Combat và các nút khác luôn nằm trên cùng (được vẽ sau cùng) 
+            // để tránh bị chặn Raycast bởi Scroll View khi nó co giãn/mở rộng ở runtime.
+            if (btnStartCombat != null)
+            {
+                btnStartCombat.transform.SetAsLastSibling();
+                Debug.Log("[BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.");
+            }
+            if (btnClose != null) btnClose.transform.SetAsLastSibling();
+            if (btnQuickDeploy != null) { btnQuickDeploy.onClick.AddListener(OnQuickDeployClicked); btnQuickDeploy.transform.SetAsLastSibling(); }
+            if (btnAutoDeploy != null) { btnAutoDeploy.onClick.AddListener(OnAutoDeployClicked); btnAutoDeploy.transform.SetAsLastSibling(); }
+            if (btnRule != null) { btnRule.onClick.AddListener(OnRuleClicked); btnRule.transform.SetAsLastSibling(); }
 
             if (btnSortPower != null) btnSortPower.onClick.AddListener(() => SetSortTypeAndRefresh(HeroSortType.Power));
             if (btnSortLevel != null) btnSortLevel.onClick.AddListener(() => SetSortTypeAndRefresh(HeroSortType.Level));
@@ -593,7 +601,7 @@ namespace GameClient.UI
                 {
                     canvasGroup.alpha = 0.4f; // Semi-transparent to indicate placed
                 }
-                else if (GetFormationCount() >= 9)
+                else if (GetFormationCount() >= 5)
                 {
                     canvasGroup.alpha = 0.6f; // Indicate drag is locked
                 }
@@ -718,8 +726,8 @@ namespace GameClient.UI
                     }
                     else
                     {
-                        // Add new to board if under 9 limit
-                        if (GetFormationCount() < 9)
+                        // Add new to board if under 5 limit
+                        if (GetFormationCount() < 5)
                         {
                             _tempFormation[targetSlotIndex] = heroId;
                         }
@@ -870,11 +878,30 @@ namespace GameClient.UI
             int deployCount = 0;
             int heroIndex = 0;
             
+            // 1. Ưu tiên xếp tướng mạnh nhất vào ô được ban phước (_blessedSlotIndex) nếu ô đó thuộc activeSlots
+            if (_blessedSlotIndex != -1 && activeSlots.Contains(_blessedSlotIndex))
+            {
+                while (heroIndex < sortedHeroes.Count)
+                {
+                    var hero = sortedHeroes[heroIndex];
+                    heroIndex++;
+                    
+                    if (!deployedNames.Contains(hero.Name))
+                    {
+                        _tempFormation[_blessedSlotIndex] = hero.Id;
+                        deployedNames.Add(hero.Name);
+                        deployCount++;
+                        break;
+                    }
+                }
+            }
+
+            // 2. Xếp các tướng tiếp theo vào các ô active còn lại
             foreach (var activeSlot in activeSlots)
             {
-                if (deployCount >= 9) break;
+                if (deployCount >= 5) break;
+                if (activeSlot == _blessedSlotIndex) continue; // Đã xếp ở bước 1
 
-                // Tìm tướng tiếp theo chưa bị trùng tên
                 while (heroIndex < sortedHeroes.Count)
                 {
                     var hero = sortedHeroes[heroIndex];
@@ -898,6 +925,18 @@ namespace GameClient.UI
         private void OnStartCombatClicked()
         {
             Debug.Log($"[BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = {_tempFormation.Count}");
+            if (_stageData != null && GameManager.Instance.CurrentPlayer != null)
+            {
+                if (GameManager.Instance.CurrentPlayer.Stamina < _stageData.staminaCost)
+                {
+                    string msg = UnityEngine.Localization.Settings.LocalizationSettings.SelectedLocale?.Identifier.Code == "vi-VN"
+                        ? $"Không đủ Năng lượng! Cần {_stageData.staminaCost} Năng lượng để chiến đấu."
+                        : $"Not enough Stamina! Required {_stageData.staminaCost} Stamina to start combat.";
+                    ToastManager.Instance.ShowBigToast(msg);
+                    return;
+                }
+            }
+
             if (_tempFormation.Count == 0)
             {
                 Debug.LogWarning("[BattlePrepPanel] Start combat aborted: _tempFormation is empty! User must place heroes on grid slots.");
@@ -923,12 +962,27 @@ namespace GameClient.UI
                 CombatStartData.Formation = new Dictionary<int, long>(_tempFormation);
                 CombatStartData.BlessedSlotIndex = _blessedSlotIndex;
 
-                Debug.Log("[BattlePrepPanel] Invoking StartCombatDirectlyInScene...");
-                _ = StartCombatDirectlyInScene();
+                Debug.Log("[BattlePrepPanel] Loading Dungeon Map Scene...");
+                _ = LoadDungeonScene();
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"[BattlePrepPanel] Lỗi nghiêm trọng khi khởi chạy Combat trực tiếp: {ex}");
+                Debug.LogError($"[BattlePrepPanel] Lỗi nghiêm trọng khi khởi chạy Combat: {ex}");
+            }
+        }
+
+        private async System.Threading.Tasks.Task LoadDungeonScene()
+        {
+            try
+            {
+                Debug.Log("[BattlePrepPanel] Hiding Prep Panel and loading Dungeon scene via MapManager...");
+                Hide();
+                await MapManager.Instance.LoadMapAsync(MapType.Dungeon);
+                Debug.Log("[BattlePrepPanel] Dungeon scene loaded successfully.");
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[BattlePrepPanel] LoadDungeonScene failed: {ex}");
             }
         }
 
@@ -1154,10 +1208,18 @@ namespace GameClient.UI
                 CombatManager.Instance.StartCombat(players, enemies);
 
                 // 4. Quản lý UI: Đóng bảng Prep, Mở bảng HUD Combat
-                Debug.Log("[BattlePrepPanel] Closing Prep panel and opening CombatHUD panel.");
-                Hide();
-                UIManager.Instance.OpenPanel("CombatHUD");
-                Debug.Log("[BattlePrepPanel] Transition to CombatHUD complete.");
+                Debug.Log("[BattlePrepPanel] Opening CombatHUD panel...");
+                var hudPanel = await UIManager.Instance.OpenPanelAsync("CombatHUD");
+                if (hudPanel != null)
+                {
+                    Debug.Log("[BattlePrepPanel] CombatHUD panel opened successfully. Closing Prep panel.");
+                    Hide();
+                }
+                else
+                {
+                    Debug.LogError("[BattlePrepPanel] LỖI: Không thể mở CombatHUD panel! Giữ nguyên giao diện chuẩn bị.");
+                    ToastManager.Instance.ShowNormalToast("Không thể mở giao diện Combat HUD. Hãy kiểm tra cấu hình Addressables.");
+                }
             }
             catch (System.Exception ex)
             {

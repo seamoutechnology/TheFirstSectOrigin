@@ -1,0 +1,1558 @@
+30853: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+30854: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+30855: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+30856: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+30857: "Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs"
+30858: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+30859: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+30860: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+30861: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+30862: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+30863: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+30864: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+30865: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+30915: "Assets/Scripts/Network/Pb/Combat.cs"
+30916: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+30944: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+30945: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+30946: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+31764: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+31765: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+31766: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+31767: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+31768: "Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs"
+31769: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+31770: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+31771: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+31772: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+31773: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+31774: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+31775: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+31776: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+31826: "Assets/Scripts/Network/Pb/Combat.cs"
+31827: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+31855: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+31856: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+31857: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+32622: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+32623: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+32624: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+32625: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+32626: "Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs"
+32627: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+32628: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+32629: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+32630: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+32631: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+32632: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+32633: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+32634: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+32684: "Assets/Scripts/Network/Pb/Combat.cs"
+32685: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+32713: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+32714: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+32715: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+33649: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+33650: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+33651: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+33652: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+33653: "Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs"
+33654: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+33655: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+33656: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+33657: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+33658: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+33659: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+33660: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+33661: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+33711: "Assets/Scripts/Network/Pb/Combat.cs"
+33712: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+33740: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+33741: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+33742: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+61328:  0.3 kb	 0.0% Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset
+62940:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs
+62941:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs
+62942:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/CombatSceneController.cs
+63437:  0.1 kb	 0.0% Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs
+63439:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs
+63440:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/GameOverState.cs
+63441:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs
+63442:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs
+63443:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs
+63589:  0.1 kb	 0.0% Assets/Resources/Localization/Table/Battle_Combat.asset
+63830:  0.1 kb	 0.0% Assets/Scripts/UI/Combat/CombatResultPanel.cs
+63839:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/InitState.cs
+63840:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/States/ICombatState.cs
+63841:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs
+63842:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/CombatManager.cs
+64161:  0.1 kb	 0.0% Assets/Scripts/Network/Pb/CombatGrpc.cs
+64183:  0.1 kb	 0.0% Assets/Scripts/Gameplay/Combat/CombatEntity.cs
+64314:  0.1 kb	 0.0% Assets/Scripts/Network/Pb/Combat.cs
+64470:  0.1 kb	 0.0% Assets/Scripts/UI/Combat/CombatHUD.cs
+64558:  0.1 kb	 0.0% Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset
+64559:  0.1 kb	 0.0% Assets/Resources/Localization/Table/Battle_Combat_en-US.asset
+121260: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+121261: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+121262: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+121263: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+121264: "Assets/Scripts/Gameplay/Combat/FakeCombatSimulator.cs"
+121265: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+121266: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+121267: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+121268: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+121269: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+121270: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+121271: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+121272: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+121323: "Assets/Scripts/Network/Pb/Combat.cs"
+121324: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+121352: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+121353: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+121354: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+195107: Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) (NativeFormatImporter) -> (artifact id: '3d168c90cca43473041806ff2c7a4b4a') in 0.0351188 seconds
+195108: Start importing Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset using Guid(d0e185ce5cb6d5f4aacb7a360913889b) (NativeFormatImporter) -> (artifact id: '8d3eee5a3d8c91364c543d8859afa35a') in 0.0064879 seconds
+195109: Start importing Assets/Resources/Localization/Table/Battle_Combat_en-US.asset using Guid(53f1ecd2c1406474690c9a2b2f07c435) (NativeFormatImporter) -> (artifact id: '53048e3d49174de99bb3d8b90ecf9d08') in 0.0027614 seconds
+195797: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+195798: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+195799: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+195800: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+195801: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+195802: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+195803: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+195804: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+195805: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+195806: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+195807: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+195808: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+195859: "Assets/Scripts/Network/Pb/Combat.cs"
+195860: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+195888: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+195889: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+195890: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+196201: Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) (NativeFormatImporter) -> (artifact id: '3d168c90cca43473041806ff2c7a4b4a') in 0.0020715 seconds
+238165: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+238166: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+238167: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+238168: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+238169: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+238170: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+238171: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+238172: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+238173: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+238174: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+238175: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+238176: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+238227: "Assets/Scripts/Network/Pb/Combat.cs"
+238228: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+238256: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+238257: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+238258: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+238420: Start importing Assets/AssetData/Sprites/BG/Combat.png using Guid(dfd806f63f97cc1428a70d9885d24ef5) (TextureImporter) -> (artifact id: 'd3c9098f09f7b750a5e2cab67ab3372d') in 0.1952646 seconds
+238425: [Worker7] Start importing Assets/Resources/Localization/Table/Battle_Combat_en-US.asset using Guid(53f1ecd2c1406474690c9a2b2f07c435) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+238427: [Worker6] Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+238430: [Worker6] Start importing Assets/AssetData/Sprites/BG/Combat.png using Guid(dfd806f63f97cc1428a70d9885d24ef5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+238433: [Worker6] Start importing Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset using Guid(d0e185ce5cb6d5f4aacb7a360913889b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+238439: Start importing Assets/AssetData/Sprites/BG/Combat.png using Guid(dfd806f63f97cc1428a70d9885d24ef5) (TextureImporter) -> (artifact id: '390d5578aaaf684e1d3fc3fd0eff7238') in 0.1360035 seconds
+238443: [Worker6] Start importing Assets/AssetData/Sprites/BG/Combat.png using Guid(dfd806f63f97cc1428a70d9885d24ef5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+239200: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+239201: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+239202: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+239203: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+239204: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+239205: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+239206: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+239207: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+239208: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+239209: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+239210: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+239211: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+239262: "Assets/Scripts/Network/Pb/Combat.cs"
+239263: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+239291: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+239292: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+239293: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+239758: Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) (NativeFormatImporter) -> (artifact id: '34404bddd62cfcafc690d051b285e038') in 0.0357324 seconds
+239759: Start importing Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset using Guid(d0e185ce5cb6d5f4aacb7a360913889b) (NativeFormatImporter) -> (artifact id: 'd38e2940dab19f8f64bc82bc0fd2cebd') in 0.0042119 seconds
+239760: Start importing Assets/Resources/Localization/Table/Battle_Combat_en-US.asset using Guid(53f1ecd2c1406474690c9a2b2f07c435) (NativeFormatImporter) -> (artifact id: '625110a15bf50c09683d4cad92fc64cc') in 0.0025701 seconds
+241630: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+241631: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+241632: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+241633: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+241634: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+241635: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+241636: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+241637: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+241638: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+241639: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+241640: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+241641: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+241692: "Assets/Scripts/Network/Pb/Combat.cs"
+241693: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+241721: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+241722: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+241723: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+242390: [Worker7] Start importing Assets/Resources/Localization/Table/Battle_Combat_en-US.asset using Guid(53f1ecd2c1406474690c9a2b2f07c435) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+242393: [Worker6] Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+242396: [Worker7] Start importing Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset using Guid(d0e185ce5cb6d5f4aacb7a360913889b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+251936: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+251937: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+251938: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+251939: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+251940: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+251941: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+251942: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+251943: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+251944: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+251945: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+251946: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+251947: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+251998: "Assets/Scripts/Network/Pb/Combat.cs"
+251999: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+252027: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+252028: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+252029: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+256650: [Worker8] Start importing Assets/Resources/Localization/Table/Battle_Combat Shared Data.asset using Guid(305885ddfc24ae84eaa23e96c55a86a0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+256657: [Worker6] Start importing Assets/Resources/Localization/Table/Battle_Combat_en-US.asset using Guid(53f1ecd2c1406474690c9a2b2f07c435) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+256711: [Worker8] Start importing Assets/Resources/Localization/Table/Battle_Combat_vi-VN.asset using Guid(d0e185ce5cb6d5f4aacb7a360913889b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+256740: [Worker8] Start importing Assets/Scripts/Gameplay/Combat/CombatSceneController.cs using Guid(9c7badaaae70f6f489c3b2c986a1f33f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+256819: [Worker8] Start importing Assets/Scripts/Gameplay/Combat/States/GameOverState.cs using Guid(92ebfc46857954e45b2cb398f2d0aead) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+256834: [Worker6] Start importing Assets/AssetData/Sprites/BG/Combat.png using Guid(dfd806f63f97cc1428a70d9885d24ef5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) 
+284684: GameClient.UI.BattlePrepPanel/<OnStartCombatClicked>d__51:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:854)
+319868: GameClient.UI.BattlePrepPanel/<OnStartCombatClicked>d__51:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:900)
+320727: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+320728: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+320729: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+320730: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+320731: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+320732: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+320733: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+320734: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+320735: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+320736: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+320737: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+320738: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+320789: "Assets/Scripts/Network/Pb/Combat.cs"
+320790: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+320818: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+320819: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+320820: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+320909: Assets\Scripts\UI\BattlePrepPanel.cs(913,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320911: Assets\Scripts\UI\BattlePrepPanel.cs(913,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320913: Assets\Scripts\UI\BattlePrepPanel.cs(914,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320915: Assets\Scripts\UI\BattlePrepPanel.cs(914,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320917: Assets\Scripts\UI\BattlePrepPanel.cs(959,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320919: Assets\Scripts\UI\BattlePrepPanel.cs(959,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320921: Assets\Scripts\UI\BattlePrepPanel.cs(960,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320923: Assets\Scripts\UI\BattlePrepPanel.cs(1027,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320925: Assets\Scripts\UI\BattlePrepPanel.cs(1027,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320927: Assets\Scripts\UI\BattlePrepPanel.cs(1028,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320929: Assets\Scripts\UI\BattlePrepPanel.cs(1043,13): error CS0234: The type or namespace name 'CombatManager' does not exist in the namespace 'GameClient.Battle' (are you missing an assembly reference?)
+320934: Assets\Scripts\UI\BattlePrepPanel.cs(913,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320935: Assets\Scripts\UI\BattlePrepPanel.cs(913,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320936: Assets\Scripts\UI\BattlePrepPanel.cs(914,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320937: Assets\Scripts\UI\BattlePrepPanel.cs(914,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320938: Assets\Scripts\UI\BattlePrepPanel.cs(959,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320939: Assets\Scripts\UI\BattlePrepPanel.cs(959,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320940: Assets\Scripts\UI\BattlePrepPanel.cs(960,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320941: Assets\Scripts\UI\BattlePrepPanel.cs(1027,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320942: Assets\Scripts\UI\BattlePrepPanel.cs(1027,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320943: Assets\Scripts\UI\BattlePrepPanel.cs(1028,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320944: Assets\Scripts\UI\BattlePrepPanel.cs(1043,13): error CS0234: The type or namespace name 'CombatManager' does not exist in the namespace 'GameClient.Battle' (are you missing an assembly reference?)
+320946: Assets\Scripts\UI\BattlePrepPanel.cs(913,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320947: Assets\Scripts\UI\BattlePrepPanel.cs(913,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320948: Assets\Scripts\UI\BattlePrepPanel.cs(914,18): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320949: Assets\Scripts\UI\BattlePrepPanel.cs(914,51): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320950: Assets\Scripts\UI\BattlePrepPanel.cs(959,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320951: Assets\Scripts\UI\BattlePrepPanel.cs(959,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320952: Assets\Scripts\UI\BattlePrepPanel.cs(960,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320953: Assets\Scripts\UI\BattlePrepPanel.cs(1027,17): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320954: Assets\Scripts\UI\BattlePrepPanel.cs(1027,55): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320955: Assets\Scripts\UI\BattlePrepPanel.cs(1028,62): error CS0246: The type or namespace name 'CombatEntity' could not be found (are you missing a using directive or an assembly reference?)
+320956: Assets\Scripts\UI\BattlePrepPanel.cs(1043,13): error CS0234: The type or namespace name 'CombatManager' does not exist in the namespace 'GameClient.Battle' (are you missing an assembly reference?)
+321290: [CombatSceneController] StageData is null. Loading fallback Stage config.
+321297: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:67)
+321299: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 67)
+321301: <color=orange>[Combat] Blessed slot for this match is slot 0 on our side!</color>
+321308: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+321309: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+321310: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+321311: GameClient.Gameplay.Combat.CombatSceneController:LoadFallbackStage () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:94)
+321312: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:68)
+321314: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+321335: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+321336: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+321337: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+321338: GameClient.Gameplay.Combat.CombatSceneController:LoadFallbackStage () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:94)
+321339: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:68)
+321344:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x00a4e] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:239 
+321350: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 239)
+344775: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+345002: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+345009: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+345030: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+345051: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+345072: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+345093: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+345107: [BattlePrepPanel] Invoking StartCombatDirectlyInScene...
+345114: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+345128: [BattlePrepPanel] StartCombatDirectlyInScene begins.
+345135: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:958)
+345136: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345137: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345138: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345159: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:970)
+345160: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345161: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345162: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345183: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:974)
+345184: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345185: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345186: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345207: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1007)
+345208: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345209: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345210: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345231: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1011)
+345232: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345233: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345234: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345255: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1016)
+345256: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345257: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345258: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345291: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1017)
+345292: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345293: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345294: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345315: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1019)
+345316: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345317: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345318: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345339: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1030)
+345340: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345341: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345342: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345363: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1055)
+345364: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345365: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345366: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345387: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1007)
+345388: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345389: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345390: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345411: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1011)
+345412: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345413: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345414: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345435: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1016)
+345436: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345437: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345438: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345471: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1017)
+345472: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345473: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345474: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345495: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1019)
+345496: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345497: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345498: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345519: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1030)
+345520: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345521: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345522: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345543: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1055)
+345544: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345545: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345546: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345567: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1067)
+345568: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345569: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345570: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345591: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1103)
+345592: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345593: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345594: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345615: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1107)
+345616: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345617: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345618: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345639: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1112)
+345640: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345641: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345642: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345675: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1113)
+345676: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345677: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345678: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345699: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1115)
+345700: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345701: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345702: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345723: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1132)
+345724: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345725: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345726: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345740: [BattlePrepPanel] Spawning enemy entity [Battle_Combat/Quái thú F-1.1] completed. Stats: HP=1700, ATK=90
+345747: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1151)
+345748: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345749: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345750: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345764: [BattlePrepPanel] CombatManager.Instance is null. Creating new CombatManager GameObject in scene.
+345771: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1157)
+345772: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345773: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345774: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345788: [BattlePrepPanel] Starting combat via CombatManager.Instance. Players count: 2, Enemies count: 1
+345795: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1161)
+345796: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345797: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345798: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345812: [CombatStateMachine] Chuyển sang trạng thái: InitState
+345819: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:34)
+345823: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+345824: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+345825: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1162)
+345826: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345827: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345828: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345840: (Filename: Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs Line: 34)
+345842: [Combat] Bắt đầu trận chiến!
+345849: GameClient.Gameplay.Combat.States.InitState/<Enter>d__0:MoveNext () (at Assets/Scripts/Gameplay/Combat/States/InitState.cs:10)
+345853: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:36)
+345857: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+345858: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+345859: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1162)
+345860: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345861: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345862: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345874: (Filename: Assets/Scripts/Gameplay/Combat/States/InitState.cs Line: 10)
+345876: [BattlePrepPanel] Closing Prep panel and opening CombatHUD panel.
+345883: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1165)
+345884: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345885: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345886: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345900: UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=CombatHUD_PC
+345926: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1167)
+345927: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345928: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345929: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345943: [ResourceManager] Không thể Instantiate: CombatHUD_PC
+345958: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1167)
+345959: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+345960: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+345961: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+345975: UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=CombatHUD
+346001: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1167)
+346002: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+346003: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+346004: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+346018: [ResourceManager] Không thể Instantiate: CombatHUD
+346033: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1167)
+346034: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+346035: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+346036: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+346050: [UIManager] Không tìm thấy Addressable key: CombatHUD
+346061: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1167)
+346062: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+346063: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+346064: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+346078: [BattlePrepPanel] Transition to CombatHUD complete.
+346085: GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53:MoveNext () (at Assets/Scripts/UI/BattlePrepPanel.cs:1168)
+346086: System.Runtime.CompilerServices.AsyncTaskMethodBuilder:Start<GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53> (GameClient.UI.BattlePrepPanel/<StartCombatDirectlyInScene>d__53&)
+346087: GameClient.UI.BattlePrepPanel:StartCombatDirectlyInScene ()
+346088: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+348179: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+348406: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+348413: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+348434: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+348455: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+348476: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+348497: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+348518: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+348542: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+348569: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+348666: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+348869: [MapManager] Không tìm thấy CombatSceneController trong Scene Dungeon, đang tự động khởi tạo...
+348977: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 4 phe ta!</color>
+348984: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+348985: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+348986: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+348987: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+348989: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+349010: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:134)
+349011: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+349012: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+349013: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+349018:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x0038d] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:150 
+349024: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 150)
+349385: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'fea2b303e777f9e399c807b54c88f7c8') in 0.0182033 seconds
+349391: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349421: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'c752c78fd4569fb88834f6ed782a0d68') in 0.005997 seconds
+349425: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349428: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '010397c7ef69dac639636c67053902fc') in 0.0104841 seconds
+349432: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349436: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'd5885d8756b0e0475b95da80444f7a4b') in 0.0082458 seconds
+349440: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349443: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '21551ab28f418382d02a3a1c75770c67') in 0.0066537 seconds
+349448: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349451: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '93bd9805502e7e89f011bbc6138bc24b') in 0.010741 seconds
+349455: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349458: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '595b818efd33b4623872320cfe11b231') in 0.0059516 seconds
+349462: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349465: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '5f83690fb58efc3aabe39cfdf02b6091') in 0.0090009 seconds
+349469: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349472: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '84151fb7ac30fdd740420ee1ea2468b9') in 0.0057568 seconds
+349476: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349479: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'e28967e86d28448e3717413e7dbba773') in 0.0067475 seconds
+349483: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349486: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'f987047e73bebf7c622d303694901965') in 0.0065667 seconds
+349490: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+349493: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: '399e6a77f8807e0c167effb18005d740') in 0.0067142 seconds
+349497: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+351318: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+351545: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+351552: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+351573: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+351594: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+351615: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+351636: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+351657: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+351681: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+351708: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+351805: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 1 phe ta!</color>
+351812: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+351813: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+351814: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+351815: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+351817: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+351838: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:134)
+351839: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+351840: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+351841: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+351865:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x0038d] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:150 
+351871: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 150)
+352225: Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) (PrefabImporter) -> (artifact id: 'e2ebb28c97e474ce01d6776ae08b9b9f') in 0.032628 seconds
+352229: [Worker11] Start importing Assets/AssetData/UI/Component/CombatHUD.prefab using Guid(1f48b3ad1e92c0442b3642e2b0f4486a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) 
+353993: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+354220: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+354227: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+354248: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+354269: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+354290: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+354311: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+354332: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+354356: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+354383: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+354480: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 6 phe ta!</color>
+354487: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+354488: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+354489: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+354490: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+354492: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+354513: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:134)
+354514: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+354515: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+354516: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+354540:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x0038d] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:150 
+354546: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 150)
+356809: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+357036: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+357043: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+357064: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+357085: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+357106: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+357127: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+357148: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+357172: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+357199: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+357296: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 1 phe ta!</color>
+357303: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+357304: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357305: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357306: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357308: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+357310: [CombatSceneController] Starting Player team spawn. Formation count: 2
+357317: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+357318: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357319: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357320: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357322: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+357324: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+357331: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+357332: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357333: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357334: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357336: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+357357: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+357358: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357359: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357360: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357364: [CombatSceneController] Successfully instantiated player 'Thần Ánh Sáng' from Addressables.
+357371: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+357372: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357373: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357374: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357376: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+357378: [CombatSceneController] Created fallback 3D Capsule for 'Thần Ánh Sáng' at (-4.50, 1.20, 0.00)
+357385: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+357386: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357387: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357388: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357390: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+357392: <color=orange>[Combat] Tướng Thần Ánh Sáng được sinh ra ở ô buff 1 -> Nhận chúc phúc tăng 25% Công & Thủ!</color>
+357399: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:184)
+357400: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357401: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357402: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357404: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 184)
+357406: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 1. Prefab Address: 'char_02_img'
+357413: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+357414: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357415: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357416: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357418: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+357439: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+357440: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357441: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357442: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357446: [CombatSceneController] Successfully instantiated player 'Thánh Pháp Sư' from Addressables.
+357453: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+357454: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357455: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357456: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357458: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+357460: [CombatSceneController] Created fallback 3D Capsule for 'Thánh Pháp Sư' at (-3.30, 1.20, 0.00)
+357467: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+357468: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357469: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357470: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357472: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+357474: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+357481: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+357482: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357483: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357484: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357486: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 203)
+357488: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+357495: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:218)
+357496: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357497: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357498: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357500: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 218)
+357521: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:224)
+357522: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357523: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357524: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357528: [CombatSceneController] Successfully instantiated enemy 'Quái thú F-1.1' from Addressables.
+357535: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:225)
+357536: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357537: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357538: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357540: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 225)
+357542: [CombatSceneController] Created fallback 3D Cube for enemy 'Quái thú F-1.1' at (3.30, 0.00, 0.00)
+357549: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:247)
+357550: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357551: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357552: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357554: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 247)
+357556: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 2, Enemies: 1
+357563: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:266)
+357564: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+357565: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+357566: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+357568: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 266)
+357590:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x00d27] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:267 
+357596: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 267)
+359874: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+360101: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+360108: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+360129: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+360150: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+360171: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+360192: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+360213: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+360237: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+360264: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+360361: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 3 phe ta!</color>
+360368: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+360369: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360370: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360371: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360373: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+360375: [CombatSceneController] Starting Player team spawn. Formation count: 2
+360382: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+360383: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360384: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360385: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360387: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+360389: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+360396: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+360397: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360398: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360399: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360401: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+360422: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+360423: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360424: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360425: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360429: [CombatSceneController] Successfully instantiated player 'Thần Ánh Sáng' from Addressables.
+360436: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+360437: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360438: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360439: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360441: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+360443: [CombatSceneController] Created fallback 3D Capsule for 'Thần Ánh Sáng' at (-4.50, 1.20, 0.00)
+360450: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+360451: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360452: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360453: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360455: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+360457: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 1. Prefab Address: 'char_02_img'
+360464: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+360465: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360466: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360467: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360469: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+360490: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+360491: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360492: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360493: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360497: [CombatSceneController] Successfully instantiated player 'Thánh Pháp Sư' from Addressables.
+360504: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+360505: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360506: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360507: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360509: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+360511: [CombatSceneController] Created fallback 3D Capsule for 'Thánh Pháp Sư' at (-3.30, 1.20, 0.00)
+360518: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+360519: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360520: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360521: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360523: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+360525: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+360532: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+360533: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360534: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360535: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360537: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 203)
+360539: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+360546: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:218)
+360547: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360548: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360549: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360551: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 218)
+360572: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:224)
+360573: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360574: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360575: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360579: [CombatSceneController] Successfully instantiated enemy 'Quái thú F-1.1' from Addressables.
+360586: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:225)
+360587: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360588: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360589: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360591: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 225)
+360593: [CombatSceneController] Created fallback 3D Cube for enemy 'Quái thú F-1.1' at (3.30, 0.00, 0.00)
+360600: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:247)
+360601: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360602: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360603: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360605: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 247)
+360607: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 2, Enemies: 1
+360614: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:266)
+360615: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+360616: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+360617: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+360619: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 266)
+360641:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x00d27] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:267 
+360647: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 267)
+362910: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+363137: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 2
+363144: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+363165: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+363186: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+363207: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+363228: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+363249: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+363273: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+363300: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+363397: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 6 phe ta!</color>
+363404: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+363405: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363406: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363407: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363409: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+363411: [CombatSceneController] Starting Player team spawn. Formation count: 2
+363418: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+363419: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363420: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363421: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363423: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+363425: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+363432: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+363433: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363434: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363435: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363437: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+363458: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+363459: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363460: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363461: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363465: [CombatSceneController] Successfully instantiated player 'Thần Ánh Sáng' from Addressables.
+363472: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+363473: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363474: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363475: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363477: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+363479: [CombatSceneController] Created fallback 3D Capsule for 'Thần Ánh Sáng' at (-4.50, 1.20, 0.00)
+363486: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+363487: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363488: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363489: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363491: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+363493: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 1. Prefab Address: 'char_02_img'
+363500: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+363501: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363502: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363503: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363505: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+363526: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+363527: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363528: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363529: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363533: [CombatSceneController] Successfully instantiated player 'Thánh Pháp Sư' from Addressables.
+363540: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+363541: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363542: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363543: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363545: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+363547: [CombatSceneController] Created fallback 3D Capsule for 'Thánh Pháp Sư' at (-3.30, 1.20, 0.00)
+363554: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+363555: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363556: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363557: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363559: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+363561: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+363568: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+363569: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363570: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363571: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363573: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 203)
+363575: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+363582: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:218)
+363583: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363584: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363585: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363587: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 218)
+363608: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:224)
+363609: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363610: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363611: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363615: [CombatSceneController] Successfully instantiated enemy 'Quái thú F-1.1' from Addressables.
+363622: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:225)
+363623: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363624: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363625: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363627: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 225)
+363629: [CombatSceneController] Created fallback 3D Cube for enemy 'Quái thú F-1.1' at (3.30, 0.00, 0.00)
+363636: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:247)
+363637: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363638: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363639: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363641: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 247)
+363643: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 2, Enemies: 1
+363650: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:266)
+363651: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+363652: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+363653: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+363655: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 266)
+363677:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x00d27] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:267 
+363683: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 267)
+366645: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+366732: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 6
+366739: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+366760: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+366781: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366802: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366823: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366844: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366865: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366886: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+366907: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+366928: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+366952: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+366979: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+367076: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 9 phe ta!</color>
+367083: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+367084: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367085: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367086: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367088: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+367090: [CombatSceneController] Starting Player team spawn. Formation count: 6
+367097: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+367098: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367099: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367100: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367102: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+367104: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+367111: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367112: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367113: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367114: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367116: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367137: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+367138: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367139: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367140: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367144: [CombatSceneController] Successfully instantiated player 'Thần Ánh Sáng' from Addressables.
+367151: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+367152: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367153: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367154: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367156: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+367158: [CombatSceneController] Created fallback 3D Capsule for 'Thần Ánh Sáng' at (-4.50, 1.20, 0.00)
+367165: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367166: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367167: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367168: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367170: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367172: [CombatSceneController] Spawning player 'Hỏa Thần Tướng' at slot 1. Prefab Address: 'char_04_img'
+367179: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367180: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367181: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367182: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367184: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367205: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+367206: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367207: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367208: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367212: [CombatSceneController] Successfully instantiated player 'Hỏa Thần Tướng' from Addressables.
+367219: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+367220: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367221: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367222: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367224: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+367226: [CombatSceneController] Created fallback 3D Capsule for 'Hỏa Thần Tướng' at (-3.30, 1.20, 0.00)
+367233: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367234: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367235: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367236: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367238: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367240: [CombatSceneController] Spawning player 'Hắc Sát Thần' at slot 2. Prefab Address: 'char_03_img'
+367247: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367248: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367249: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367250: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367252: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367273: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+367274: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367275: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367276: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367280: [CombatSceneController] Successfully instantiated player 'Hắc Sát Thần' from Addressables.
+367287: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+367288: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367289: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367290: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367292: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+367294: [CombatSceneController] Created fallback 3D Capsule for 'Hắc Sát Thần' at (-2.10, 1.20, 0.00)
+367301: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367302: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367303: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367304: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367306: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367308: [CombatSceneController] Spawning player 'Thủy Hộ Thuẫn' at slot 3. Prefab Address: 'char_06_img'
+367315: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367316: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367317: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367318: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367320: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367341: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+367342: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367343: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367344: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367348: [CombatSceneController] Successfully instantiated player 'Thủy Hộ Thuẫn' from Addressables.
+367355: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+367356: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367357: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367358: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367360: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+367362: [CombatSceneController] Created fallback 3D Capsule for 'Thủy Hộ Thuẫn' at (-4.50, 0.00, 0.00)
+367369: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367370: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367371: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367372: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367374: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367376: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 4. Prefab Address: 'char_02_img'
+367383: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367384: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367385: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367386: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367388: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367409: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+367410: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367411: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367412: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367416: [CombatSceneController] Successfully instantiated player 'Thánh Pháp Sư' from Addressables.
+367423: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+367424: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367425: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367426: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367428: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+367430: [CombatSceneController] Created fallback 3D Capsule for 'Thánh Pháp Sư' at (-3.30, 0.00, 0.00)
+367437: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367438: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367439: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367440: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367442: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367452: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:136)
+367453: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367454: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367455: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367459: [CombatSceneController] Spawning player 'Mộc Thánh Nữ' at slot 5. Prefab Address: ''
+367466: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+367467: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367468: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367469: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367471: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+367473: [CombatSceneController] Created fallback 3D Capsule for 'Mộc Thánh Nữ' at (-2.10, 0.00, 0.00)
+367480: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+367481: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367482: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367483: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367485: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+367487: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+367494: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+367495: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367496: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367497: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367499: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 203)
+367501: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+367508: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:218)
+367509: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367510: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367511: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367513: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 218)
+367534: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:224)
+367535: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367536: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367537: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367541: [CombatSceneController] Successfully instantiated enemy 'Quái thú F-1.1' from Addressables.
+367548: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:225)
+367549: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367550: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367551: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367553: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 225)
+367555: [CombatSceneController] Created fallback 3D Cube for enemy 'Quái thú F-1.1' at (3.30, 0.00, 0.00)
+367562: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:247)
+367563: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367564: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367565: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367567: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 247)
+367569: [CombatSceneController] CombatManager.Instance is null. Creating new CombatManager GameObject in scene.
+367576: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:268)
+367577: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367578: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367579: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367581: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 268)
+367583: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 6, Enemies: 1
+367590: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:272)
+367591: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367592: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367593: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367595: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 272)
+367597: [CombatStateMachine] Chuyển sang trạng thái: InitState
+367604: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:34)
+367608: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+367609: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+367610: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:273)
+367611: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367612: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367613: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367615: (Filename: Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs Line: 34)
+367617: [Combat] Bắt đầu trận chiến!
+367624: GameClient.Gameplay.Combat.States.InitState/<Enter>d__0:MoveNext () (at Assets/Scripts/Gameplay/Combat/States/InitState.cs:10)
+367628: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:36)
+367632: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+367633: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+367634: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:273)
+367635: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367636: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367637: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367639: (Filename: Assets/Scripts/Gameplay/Combat/States/InitState.cs Line: 10)
+367641: [CombatSceneController] Opening CombatHUD panel...
+367648: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:276)
+367649: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367650: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367651: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367653: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 276)
+367655: UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=CombatHUD_PC
+367681: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:277)
+367682: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367683: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367684: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367688: [ResourceManager] Không thể Instantiate: CombatHUD_PC
+367703: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:277)
+367704: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367705: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367706: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367710: [CombatSceneController] InitializeCombat finished.
+367717: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:278)
+367718: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+367719: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+367720: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+367722: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 278)
+369709: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+370058: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 7
+370065: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+370086: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+370107: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370128: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370149: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370170: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370191: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370212: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370233: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+370254: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+370275: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+370299: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+370326: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+370423: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 7 phe ta!</color>
+370430: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+370431: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370432: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370433: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370435: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+370437: [CombatSceneController] Starting Player team spawn. Formation count: 7
+370444: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+370445: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370446: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370447: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370449: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+370451: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+370458: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370459: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370460: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370461: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370463: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370484: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370485: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370486: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370487: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370491: [CombatSceneController] Successfully instantiated player 'Thần Ánh Sáng' from Addressables.
+370498: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370499: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370500: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370501: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370503: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370505: [CombatSceneController] Created fallback 3D Capsule for 'Thần Ánh Sáng' at (-4.50, 1.20, 0.00)
+370512: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370513: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370514: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370515: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370517: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370519: [CombatSceneController] Spawning player 'Hỏa Thần Tướng' at slot 1. Prefab Address: 'char_04_img'
+370526: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370527: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370528: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370529: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370531: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370552: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370553: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370554: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370555: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370559: [CombatSceneController] Successfully instantiated player 'Hỏa Thần Tướng' from Addressables.
+370566: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370567: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370568: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370569: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370571: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370573: [CombatSceneController] Created fallback 3D Capsule for 'Hỏa Thần Tướng' at (-3.30, 1.20, 0.00)
+370580: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370581: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370582: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370583: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370585: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370587: [CombatSceneController] Spawning player 'Hắc Sát Thần' at slot 2. Prefab Address: 'char_03_img'
+370594: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370595: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370596: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370597: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370599: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370620: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370621: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370622: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370623: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370627: [CombatSceneController] Successfully instantiated player 'Hắc Sát Thần' from Addressables.
+370634: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370635: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370636: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370637: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370639: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370641: [CombatSceneController] Created fallback 3D Capsule for 'Hắc Sát Thần' at (-2.10, 1.20, 0.00)
+370648: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370649: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370650: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370651: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370653: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370655: [CombatSceneController] Spawning player 'Thủy Hộ Thuẫn' at slot 3. Prefab Address: 'char_06_img'
+370662: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370663: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370664: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370665: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370667: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370688: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370689: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370690: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370691: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370695: [CombatSceneController] Successfully instantiated player 'Thủy Hộ Thuẫn' from Addressables.
+370702: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370703: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370704: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370705: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370707: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370709: [CombatSceneController] Created fallback 3D Capsule for 'Thủy Hộ Thuẫn' at (-4.50, 0.00, 0.00)
+370716: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370717: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370718: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370719: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370721: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370723: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 4. Prefab Address: 'char_02_img'
+370730: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370731: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370732: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370733: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370735: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370756: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370757: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370758: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370759: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370763: [CombatSceneController] Successfully instantiated player 'Thánh Pháp Sư' from Addressables.
+370770: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370771: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370772: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370773: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370775: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370777: [CombatSceneController] Created fallback 3D Capsule for 'Thánh Pháp Sư' at (-3.30, 0.00, 0.00)
+370784: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370785: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370786: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370787: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370789: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370799: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:136)
+370800: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370801: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370802: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370806: [CombatSceneController] Spawning player 'Mộc Thánh Nữ' at slot 5. Prefab Address: ''
+370813: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370814: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370815: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370816: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370818: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370820: [CombatSceneController] Created fallback 3D Capsule for 'Mộc Thánh Nữ' at (-2.10, 0.00, 0.00)
+370827: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370828: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370829: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370830: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370832: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370834: [CombatSceneController] Spawning player 'Lửa Chiến Binh' at slot 6. Prefab Address: 'char_05_img'
+370841: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+370842: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370843: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370844: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370846: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+370867: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:145)
+370868: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370869: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370870: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370874: [CombatSceneController] Successfully instantiated player 'Lửa Chiến Binh' from Addressables.
+370881: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:146)
+370882: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370883: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370884: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370886: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 146)
+370888: [CombatSceneController] Created fallback 3D Capsule for 'Lửa Chiến Binh' at (-4.50, -1.20, 0.00)
+370895: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:162)
+370896: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370897: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370898: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370900: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 162)
+370902: <color=orange>[Combat] Tướng Lửa Chiến Binh được sinh ra ở ô buff 7 -> Nhận chúc phúc tăng 25% Công & Thủ!</color>
+370909: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:184)
+370910: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370911: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370912: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370914: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 184)
+370916: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+370923: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:203)
+370924: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370925: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370926: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370928: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 203)
+370930: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+370937: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:218)
+370938: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370939: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370940: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370942: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 218)
+370963: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:224)
+370964: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370965: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370966: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370970: [CombatSceneController] Successfully instantiated enemy 'Quái thú F-1.1' from Addressables.
+370977: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:225)
+370978: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370979: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370980: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370982: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 225)
+370984: [CombatSceneController] Created fallback 3D Cube for enemy 'Quái thú F-1.1' at (3.30, 0.00, 0.00)
+370991: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:247)
+370992: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+370993: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+370994: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+370996: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 247)
+370998: [CombatSceneController] CombatManager.Instance is null. Creating new CombatManager GameObject in scene.
+371005: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:268)
+371006: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371007: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371008: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371010: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 268)
+371012: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 7, Enemies: 1
+371019: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:272)
+371020: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371021: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371022: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371024: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 272)
+371026: [CombatStateMachine] Chuyển sang trạng thái: InitState
+371033: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:34)
+371037: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+371038: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+371039: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:273)
+371040: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371041: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371042: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371044: (Filename: Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs Line: 34)
+371046: [Combat] Bắt đầu trận chiến!
+371053: GameClient.Gameplay.Combat.States.InitState/<Enter>d__0:MoveNext () (at Assets/Scripts/Gameplay/Combat/States/InitState.cs:10)
+371057: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:36)
+371061: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:21)
+371062: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+371063: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:273)
+371064: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371065: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371066: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371068: (Filename: Assets/Scripts/Gameplay/Combat/States/InitState.cs Line: 10)
+371070: [CombatSceneController] Opening CombatHUD panel...
+371077: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:276)
+371078: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371079: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371080: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371082: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 276)
+371084: UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=CombatHUD_PC
+371110: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:277)
+371111: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371112: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371113: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371117: [ResourceManager] Không thể Instantiate: CombatHUD_PC
+371132: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:277)
+371133: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371134: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371135: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371139: [CombatSceneController] InitializeCombat finished.
+371146: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:278)
+371147: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+371148: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+371149: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+371151: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 278)
+375118: Assets\Scripts\Gameplay\Combat\States\PlayerTurnState.cs(30,17): error CS0128: A local variable or function named 'aliveEnemies' is already defined in this scope
+375729: "Assets/Scripts/Gameplay/Combat/CombatEntity.cs"
+375730: "Assets/Scripts/Gameplay/Combat/CombatManager.cs"
+375731: "Assets/Scripts/Gameplay/Combat/CombatSceneController.cs"
+375732: "Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs"
+375733: "Assets/Scripts/Gameplay/Combat/Skills/GenericSkillExecutor.cs"
+375734: "Assets/Scripts/Gameplay/Combat/Skills/SkillData.cs"
+375735: "Assets/Scripts/Gameplay/Combat/States/ActionExecutionState.cs"
+375736: "Assets/Scripts/Gameplay/Combat/States/EnemyTurnState.cs"
+375737: "Assets/Scripts/Gameplay/Combat/States/GameOverState.cs"
+375738: "Assets/Scripts/Gameplay/Combat/States/ICombatState.cs"
+375739: "Assets/Scripts/Gameplay/Combat/States/InitState.cs"
+375740: "Assets/Scripts/Gameplay/Combat/States/PlayerTurnState.cs"
+375791: "Assets/Scripts/Network/Pb/Combat.cs"
+375792: "Assets/Scripts/Network/Pb/CombatGrpc.cs"
+375820: "Assets/Scripts/UI/Combat/CombatHUD.cs"
+375821: "Assets/Scripts/UI/Combat/CombatHUDCharacterItem.cs"
+375822: "Assets/Scripts/UI/Combat/CombatResultPanel.cs"
+375911: Assets\Scripts\Gameplay\Combat\States\PlayerTurnState.cs(30,17): error CS0128: A local variable or function named 'aliveEnemies' is already defined in this scope
+375913: Assets\Scripts\Gameplay\Combat\States\PlayerTurnState.cs(30,17): error CS0128: A local variable or function named 'aliveEnemies' is already defined in this scope
+384351: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+384578: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 5
+384585: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+384606: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+384627: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+384648: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+384669: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+384690: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+384711: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+384732: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+384753: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+384777: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+384804: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+384901: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 4 phe ta!</color>
+384908: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+384909: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+384910: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+384911: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+384913: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+384915: [CombatSceneController] Starting Player team spawn. Formation count: 5
+384922: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+384923: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+384924: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+384925: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+384927: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+384929: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+384936: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+384937: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+384938: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+384939: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+384941: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+384966: [CombatSceneController] Successfully loaded player 'Thần Ánh Sáng' visual.
+384973: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+384983: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+384985: [CombatSceneController] Spawning player 'Hỏa Thần Tướng' at slot 1. Prefab Address: 'char_04_img'
+384992: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+385002: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+385004: [CombatSceneController] Successfully loaded player 'Hỏa Thần Tướng' visual.
+385011: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+385021: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+385023: [CombatSceneController] Spawning player 'Hắc Sát Thần' at slot 2. Prefab Address: 'char_03_img'
+385030: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+385040: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+385042: [CombatSceneController] Successfully loaded player 'Hắc Sát Thần' visual.
+385049: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+385059: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+385061: [CombatSceneController] Spawning player 'Thủy Hộ Thuẫn' at slot 3. Prefab Address: 'char_06_img'
+385068: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+385078: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+385080: [CombatSceneController] Successfully loaded player 'Thủy Hộ Thuẫn' visual.
+385087: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+385097: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+385099: <color=orange>[Combat] Tướng Thủy Hộ Thuẫn được sinh ra ở ô buff 4 -> Nhận chúc phúc tăng 25% Công & Thủ!</color>
+385106: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:208)
+385116: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 208)
+385118: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 4. Prefab Address: 'char_02_img'
+385125: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+385135: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+385198: [CombatSceneController] Successfully loaded player 'Thánh Pháp Sư' visual.
+385205: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+385215: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+385217: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+385224: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:227)
+385234: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 227)
+385236: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'MonsterPrefab'
+385243: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:242)
+385253: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 242)
+385274: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:261)
+385286: [CombatSceneController] Successfully loaded enemy 'Quái thú F-1.1' visual.
+385293: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:263)
+385303: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 263)
+385311: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:286)
+385321: [Assets/Scripts/Gameplay/Combat/CombatSceneController.cs line 286]
+385324:   at GameClient.Gameplay.Combat.CombatSceneController.InitializeCombat () [0x00fcc] in C:\Project\TheFirstSectOrigin\client\Assets\Scripts\Gameplay\Combat\CombatSceneController.cs:287 
+385330: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 287)
+387516: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.
+387837: [BattlePrepPanel] OnStartCombatClicked triggered. _tempFormation.Count = 5
+387844: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:908)
+387865: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:918)
+387886: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+387907: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+387928: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+387949: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+387970: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:923)
+387991: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:929)
+388012: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:934)
+388036: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+388063: GameClient.UI.BattlePrepPanel:OnStartCombatClicked () (at Assets/Scripts/UI/BattlePrepPanel.cs:935)
+388160: <color=orange>[Combat] Vòng sáng chúc phúc trận này xuất hiện ở vị trí ô số 7 phe ta!</color>
+388167: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:111)
+388168: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+388169: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+388170: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+388172: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 111)
+388174: [CombatSceneController] Starting Player team spawn. Formation count: 5
+388181: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:114)
+388182: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+388183: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+388184: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+388186: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 114)
+388188: [CombatSceneController] Spawning player 'Thần Ánh Sáng' at slot 0. Prefab Address: 'char_01_img'
+388195: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+388196: System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5> (GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5&)
+388197: GameClient.Gameplay.Combat.CombatSceneController:InitializeCombat ()
+388198: GameClient.Gameplay.Combat.CombatSceneController:Start () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:72)
+388200: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+388225: [CombatSceneController] Successfully loaded player 'Thần Ánh Sáng' visual.
+388232: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+388242: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+388244: [CombatSceneController] Spawning player 'Hỏa Thần Tướng' at slot 1. Prefab Address: 'char_04_img'
+388251: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+388261: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+388263: [CombatSceneController] Successfully loaded player 'Hỏa Thần Tướng' visual.
+388270: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+388280: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+388282: [CombatSceneController] Spawning player 'Hắc Sát Thần' at slot 2. Prefab Address: 'char_03_img'
+388289: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+388299: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+388301: [CombatSceneController] Successfully loaded player 'Hắc Sát Thần' visual.
+388308: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+388318: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+388320: [CombatSceneController] Spawning player 'Thủy Hộ Thuẫn' at slot 3. Prefab Address: 'char_06_img'
+388327: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+388337: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+388339: [CombatSceneController] Successfully loaded player 'Thủy Hộ Thuẫn' visual.
+388346: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+388356: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+388358: [CombatSceneController] Spawning player 'Thánh Pháp Sư' at slot 4. Prefab Address: 'char_02_img'
+388365: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:140)
+388375: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 140)
+388438: [CombatSceneController] Successfully loaded player 'Thánh Pháp Sư' visual.
+388445: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:160)
+388455: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 160)
+388457: [CombatSceneController] Starting Enemy spawn. Configured count: 1
+388464: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:227)
+388474: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 227)
+388476: [CombatSceneController] Spawning enemy 'Quái thú F-1.1' at slot 4. Address: 'char_mon_01'
+388483: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:242)
+388493: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 242)
+388513: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:254)
+388525: [CombatSceneController] Successfully loaded enemy 'Quái thú F-1.1' visual.
+388532: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:263)
+388542: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 263)
+388544: [CombatSceneController] CombatManager.Instance is null. Creating new CombatManager GameObject in scene.
+388551: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:315)
+388561: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 315)
+388563: [CombatSceneController] All spawned. Starting combat via CombatManager. Players: 5, Enemies: 1
+388570: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:319)
+388580: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 319)
+388582: [CombatStateMachine] Chuyển sang trạng thái: InitState
+388589: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__7:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:36)
+388593: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:23)
+388594: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+388595: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:320)
+388605: (Filename: Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs Line: 36)
+388607: [Combat] Bắt đầu trận chiến!
+388614: GameClient.Gameplay.Combat.States.InitState/<Enter>d__0:MoveNext () (at Assets/Scripts/Gameplay/Combat/States/InitState.cs:10)
+388618: GameClient.Gameplay.Combat.CombatStateMachine/<ChangeStateRoutine>d__7:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:38)
+388622: GameClient.Gameplay.Combat.CombatStateMachine:ChangeState (GameClient.Gameplay.Combat.States.ICombatState) (at Assets/Scripts/Gameplay/Combat/CombatStateMachine.cs:23)
+388623: GameClient.Gameplay.Combat.CombatManager:StartCombat (System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>,System.Collections.Generic.List`1<GameClient.Gameplay.Combat.CombatEntity>) (at Assets/Scripts/Gameplay/Combat/CombatManager.cs:61)
+388624: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:320)
+388634: (Filename: Assets/Scripts/Gameplay/Combat/States/InitState.cs Line: 10)
+388636: [CombatSceneController] Opening CombatHUD panel...
+388643: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:323)
+388653: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 323)
+388655: UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=CombatHUD_PC
+388681: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:324)
+388693: [ResourceManager] Không thể Instantiate: CombatHUD_PC
+388708: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:324)
+388720: [CombatSceneController] InitializeCombat finished.
+388727: GameClient.Gameplay.Combat.CombatSceneController/<InitializeCombat>d__5:MoveNext () (at Assets/Scripts/Gameplay/Combat/CombatSceneController.cs:325)
+388737: (Filename: Assets/Scripts/Gameplay/Combat/CombatSceneController.cs Line: 325)
+390751: [BattlePrepPanel] Brought btnStartCombat to front using SetAsLastSibling.

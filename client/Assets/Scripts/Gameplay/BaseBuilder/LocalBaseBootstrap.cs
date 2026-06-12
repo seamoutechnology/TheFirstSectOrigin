@@ -45,26 +45,13 @@ namespace GameClient.Gameplay.BaseBuilder
             }
 
             var player = GameManager.Instance.CurrentPlayer;
-            
+
             if (player == null || string.IsNullOrEmpty(player.Nickname))
             {
-                Debug.Log("[LocalBase] Người chơi chưa có tên. Chạy Cutscene tạo nhân vật...");
-                
-                string cutsceneId = "intro_cutscene";
-                bool success = await CutsceneSyncManager.Instance.DownloadCutsceneAsync(cutsceneId);
-                
-                if (success)
+                Debug.Log("[LocalBase] Người chơi chưa có tên. Mở bảng tạo nhân vật CreateCharPanel...");
+                if (UIManager.Instance != null)
                 {
-                    string jsonContent = CutsceneSyncManager.Instance.GetCutsceneJson(cutsceneId);
-                    
-                    var introObj = new GameObject("JsonCutscene_Runner");
-                    var jsonCutscene = introObj.AddComponent<GameClient.Cutscenes.JsonCutscene>();
-                    jsonCutscene.Initialize(jsonContent);
-                    jsonCutscene.Play();
-                }
-                else
-                {
-                    Debug.LogError("[LocalBase] Không thể tải Cutscene!");
+                    UIManager.Instance.OpenPanel("CreateCharPanel");
                 }
             }
             else

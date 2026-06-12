@@ -50,6 +50,7 @@ type IPlayerRepository interface {
 	CreatePlayerMission(ctx context.Context, playerID int64, missionID int32, status int32) error
 	ClaimMissionRewardDB(ctx context.Context, playerID int64, missionID int32, rewards map[string]int32) error
 	GetSkillConfigs(ctx context.Context) ([]*SkillConfig, error)
+	ProcessPvECombatResult(ctx context.Context, playerID int64, stageID string, isVictory bool, rewardExp int32, rewardLinhThach int32) (*Player, error)
 }
 
 type SkillConfig struct {

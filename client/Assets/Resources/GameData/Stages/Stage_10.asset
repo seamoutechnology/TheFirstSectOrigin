@@ -29,7 +29,7 @@ MonoBehaviour:
     defense: 405
     speed: 101
     isBoss: 1
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_10_2
     name: Quái thú F-10.2
     level: 28
@@ -38,7 +38,7 @@ MonoBehaviour:
     defense: 410
     speed: 102
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_10_3
     name: Quái thú F-10.3
     level: 28
@@ -47,7 +47,7 @@ MonoBehaviour:
     defense: 415
     speed: 103
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_10_4
     name: Quái thú F-10.4
     level: 28
@@ -56,7 +56,7 @@ MonoBehaviour:
     defense: 420
     speed: 104
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_10_5
     name: Quái thú F-10.5
     level: 28
@@ -65,7 +65,7 @@ MonoBehaviour:
     defense: 425
     speed: 105
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   rewards:
   - itemId: 00000
     amount: 500

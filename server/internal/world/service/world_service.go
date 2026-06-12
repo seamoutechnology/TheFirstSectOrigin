@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 
 	"server/internal/world/repository"
@@ -114,6 +115,13 @@ func (s *WorldService) LoadSpeedUpConfigs(filePath string) error {
 
 
 func (s *WorldService) CreatePlayer(ctx context.Context, userID int64, nickname string) (*repository.Player, int32, string) {
+	nickname = strings.TrimSpace(nickname)
+	if nickname == "" {
+		return nil, ErrCodeAlreadyExist, "tên nhân vật không được để trống"
+	}
+	if len(nickname) < 2 || len(nickname) > 20 {
+		return nil, ErrCodeAlreadyExist, "tên nhân vật phải từ 2 đến 20 ký tự"
+	}
 	if _, err := s.repo.FindByUserID(ctx, userID, s.serverID); !errors.Is(err, repository.ErrNotFound) {
 		return nil, ErrCodeAlreadyExist, "nhân vật đã tồn tại trong server này"
 	}
@@ -1071,5 +1079,24 @@ func (s *WorldService) LevelUpHero(ctx context.Context, userID int64, heroID int
 
 	return hero, ErrCodeSuccess, ""
 }
+
+func (s *WorldService) ProcessPvECombatResult(ctx context.Context, userID int64, req *pb.ValidatePvEResultRequest) (*repository.Player, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, code, msg
+	}
+
+	// Default reward values if victory
+	rewardExp := int32(100)
+	rewardLinhThach := int32(50)
+
+	updatedPlayer, err := s.repo.ProcessPvECombatResult(ctx, player.ID, req.EnemyId, req.IsVictory, rewardExp, rewardLinhThach)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+
+	return updatedPlayer, ErrCodeSuccess, ""
+}
+
 
 

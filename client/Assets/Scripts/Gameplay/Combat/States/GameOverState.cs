@@ -57,12 +57,19 @@ namespace GameClient.Gameplay.Combat.States
             {
                 Debug.LogError($"[Combat] Lỗi kết nối Server: {task.Exception}");
                 // Fallback local response representation so that client does not get stuck
-                UIManager.Instance.OpenPanel("CombatResultPanel", new CombatResultPanel.LocalResultData
+                if (allEnemiesDead)
                 {
-                    IsVictory = allEnemiesDead,
-                    RewardExp = allEnemiesDead ? 100 : 0,
-                    RewardLinhThach = allEnemiesDead ? 50 : 0
-                });
+                    UIManager.Instance.OpenPanel("CombatVictoryPanel", new CombatResultPanel.LocalResultData
+                    {
+                        IsVictory = true,
+                        RewardExp = 100,
+                        RewardLinhThach = 50
+                    });
+                }
+                else
+                {
+                    UIManager.Instance.OpenPanel("CombatDefeatPanel");
+                }
             }
             else
             {
@@ -76,7 +83,14 @@ namespace GameClient.Gameplay.Combat.States
                     Debug.LogError($"[Combat] Server từ chối kết quả: {resp.Base?.Message}");
                 }
                 
-                UIManager.Instance.OpenPanel("CombatResultPanel", resp);
+                if (allEnemiesDead)
+                {
+                    UIManager.Instance.OpenPanel("CombatVictoryPanel", resp);
+                }
+                else
+                {
+                    UIManager.Instance.OpenPanel("CombatDefeatPanel", resp);
+                }
             }
 
             manager.OnCombatEnded?.Invoke();

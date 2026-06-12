@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hero_LIGHT_MAGE_01
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 103
-  heroName: "Thánh Pháp Sư"
+  heroName: "Th\xE1nh Ph\xE1p S\u01B0"
   description: char_02_desc
   MaxLifespan: 100
   BaseLoyalty: 80

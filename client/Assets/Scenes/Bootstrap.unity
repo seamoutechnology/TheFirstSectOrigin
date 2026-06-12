@@ -770,6 +770,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4313630769799282132, guid: da6799533b7521945aea4e655cb971a4, type: 3}
+      propertyPath: m_fontSize
+      value: 35.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7153670128941440772, guid: da6799533b7521945aea4e655cb971a4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1311,9 +1315,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6265848085581111099, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -433
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265848085581111099, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407569531770831150, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -454
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407569531770831150, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -127
+      objectReference: {fileID: 0}
     - target: {fileID: 7143011852139803445, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
       propertyPath: m_Name
       value: OverlayUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686693268665562017, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686693268665562017, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.5221004
       objectReference: {fileID: 0}
     - target: {fileID: 8380313934542869697, guid: 802f94967109eb740ab488b92b5012bd, type: 3}
       propertyPath: m_AnchorMax.y

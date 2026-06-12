@@ -32,6 +32,8 @@ func (h *WorldHandler) GetPlayerProfile(ctx context.Context, req *pb.GetPlayerPr
 			Level:      int32(player.Level),
 			Gold:       player.Gold,
 			Diamond:    player.Diamond,
+			Stamina:    player.Stamina,
+			MaxStamina: player.MaxStamina,
 		},
 	}, nil
 }
@@ -61,6 +63,39 @@ func (h *WorldHandler) CreatePlayer(ctx context.Context, req *pb.CreatePlayerReq
 			Level:      int32(player.Level),
 			Gold:       player.Gold,
 			Diamond:    player.Diamond,
+			Stamina:    player.Stamina,
+			MaxStamina: player.MaxStamina,
 		},
 	}, nil
 }
+
+func (h *WorldHandler) ValidatePvEResult(ctx context.Context, req *pb.ValidatePvEResultRequest) (*pb.ValidatePvEResultResponse, error) {
+	h.log.Info("WorldHandler ValidatePvEResult request", zap.String("enemy", req.EnemyId), zap.Bool("is_victory", req.IsVictory))
+
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.ValidatePvEResultResponse{
+			Base: &pb.BaseResponse{Code: 401, Message: "msg_unauthorized"},
+		}, nil
+	}
+
+	_, code, msg := h.svc.ProcessPvECombatResult(ctx, userID, req)
+	if code != 0 {
+		return &pb.ValidatePvEResultResponse{
+			Base: &pb.BaseResponse{Code: code, Message: msg},
+		}, nil
+	}
+
+	resp := &pb.ValidatePvEResultResponse{
+		Base:    &pb.BaseResponse{Code: 0, Message: "msg_success"},
+		IsValid: true,
+	}
+
+	if req.IsVictory {
+		resp.RewardExp = 100
+		resp.RewardLinhThach = 50
+	}
+
+	return resp, nil
+}
+

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 105
   heroName: "Thủy Hộ Thuẫn"
-  description: char_02_desc
+  description: char_06_desc
   MaxLifespan: 100
   BaseLoyalty: 80
-  prefabAddress: char_02_img
-  iconAddress: avt_02_img
+  prefabAddress: char_06_img
+  iconAddress: avt_06_img
   rarity: R
   basePower: 100
   code: WATER_TANK_01

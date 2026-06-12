@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Hero_WOOD_HEALER_01
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 106
-  heroName: "Mộc Trị Liệu"
-  description: char_03_desc
+  heroName: "M\u1ED9c Th\xE1nh N\u1EEF"
+  description: char_07_desc
   MaxLifespan: 100
   BaseLoyalty: 80
-  prefabAddress: char_03_img
-  iconAddress: avt_03_img
-  rarity: R
+  prefabAddress: char_07_img
+  iconAddress: avt_07_img
+  rarity: SR
   basePower: 100
   code: WOOD_HEALER_01
   element: wood
   role: healer
-  baseHp: 1000
+  baseHp: 1500
   baseAtk: 90
-  baseDef: 70
-  baseSpeed: 100
-  gachaWeight: 500
+  baseDef: 100
+  baseSpeed: 110
+  gachaWeight: 150
   isActive: 1

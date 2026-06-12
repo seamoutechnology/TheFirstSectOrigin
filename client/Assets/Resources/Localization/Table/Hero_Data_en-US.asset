@@ -17,7 +17,21 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b3a311264348b25498c65bce5db5b2b3, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 10001
+    m_Localized: "Light Deity holds boundless light power, specializing in dispelling darkness."
+  - m_Id: 10002
+    m_Localized: "Light Mage is wise in ancient arts, controlling light elements to dominate the battlefield."
+  - m_Id: 10003
+    m_Localized: "Dark Assassin flickers in the shadows, executing targets with a single strike."
+  - m_Id: 10004
+    m_Localized: "Fire General is fierce and battle-hardened, pioneering to crush enemies with divine flame."
+  - m_Id: 10005
+    m_Localized: "Fire Warrior carries powerful flame lineage, never backing down."
+  - m_Id: 10006
+    m_Localized: "Water Tank has a rock-solid defense like the vast ocean."
+  - m_Id: 10007
+    m_Localized: "Wood Healer restores life force and bestows blessings from nature."
   references:
     version: 2
     RefIds: []

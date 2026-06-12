@@ -199,7 +199,7 @@ func (h *WorldHandler) SavePlayerMap(ctx context.Context, req *pb.SavePlayerMapR
 	if err != nil {
 		h.log.Error("Error saving player map", zap.Error(err))
 		return &pb.SavePlayerMapResponse{
-			Base: &pb.BaseResponse{Code: 500, Message: "Database error"},
+			Base: &pb.BaseResponse{Code: 500, Message: err.Error()},
 		}, nil
 	}
 

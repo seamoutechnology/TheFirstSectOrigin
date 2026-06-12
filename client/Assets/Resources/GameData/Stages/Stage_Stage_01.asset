@@ -29,5 +29,5 @@ MonoBehaviour:
     defense: 45
     speed: 56
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   rewards: []

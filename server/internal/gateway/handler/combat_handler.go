@@ -4,6 +4,7 @@ import (
 	"context"
 
 	pb "server/pkg/pb"
+	"go.uber.org/zap"
 )
 
 func (h *GatewayHandler) ValidatePvEResult(ctx context.Context, req *pb.ValidatePvEResultRequest) (*pb.ValidatePvEResultResponse, error) {
@@ -21,5 +22,23 @@ func (h *GatewayHandler) ValidatePvEResult(ctx context.Context, req *pb.Validate
 		}, nil
 	}
 
-	return h.combat.ValidatePvEResult(ctx, req)
+	// 1. Validate result on combat server
+	resp, err := h.combat.ValidatePvEResult(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+
+	// 2. If validation succeeded (meaning it's valid victory or valid defeat),
+	// forward the call to world server to deduct stamina and add rewards.
+	if resp.IsValid {
+		worldResp, worldErr := h.world.ValidatePvEResult(ctx, req)
+		if worldErr != nil {
+			h.log.Error("Failed to deduct stamina and reward player on world server", zap.Error(worldErr))
+			return resp, nil
+		}
+		return worldResp, nil
+	}
+
+	return resp, nil
 }
+

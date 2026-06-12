@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.Heroes.HeroConfig
   heroId: 101
   heroName: "Hỏa Thần Tướng"
-  description: char_01_desc
+  description: char_04_desc
   MaxLifespan: 100
   BaseLoyalty: 80
-  prefabAddress: char_01_img
-  iconAddress: avt_01_img
+  prefabAddress: char_04_img
+  iconAddress: avt_04_img
   rarity: SSR
   basePower: 100
   code: FIRE_GENERAL_01

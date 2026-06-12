@@ -27,6 +27,8 @@ namespace GameClient
             }
         }
 
+        protected virtual bool DontDestroy => true;
+
         protected virtual void Awake()
         {
             if (_instance != null && _instance != this)
@@ -49,7 +51,10 @@ namespace GameClient
                 transform.SetParent(null);
             }
             
-            DontDestroyOnLoad(gameObject);
+            if (DontDestroy)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
 }

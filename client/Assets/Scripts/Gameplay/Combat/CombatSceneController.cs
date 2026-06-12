@@ -10,53 +10,111 @@ namespace GameClient.Gameplay.Combat
 {
     public class CombatSceneController : MonoBehaviour
     {
-        [Header("Spawn Points")]
-        [SerializeField] private Transform[] playerSpawnPoints;
-        [SerializeField] private Transform[] enemySpawnPoints;
+        [Header("Spawn Containers")]
+        [SerializeField] private Transform playerSpawnContainer;
+        [SerializeField] private Transform enemySpawnContainer;
+
+        private Transform[] playerSpawnPoints;
+        private Transform[] enemySpawnPoints;
 
         private void Awake()
         {
-            // Tự động tạo các điểm Spawn nếu không được thiết lập trong Inspector
-            if (playerSpawnPoints == null || playerSpawnPoints.Length == 0)
+            // 1. Setup Player Spawn Points
+            if (playerSpawnContainer == null)
             {
-                var playerRoot = new GameObject("PlayerSpawnPoints").transform;
-                playerRoot.SetParent(transform);
+                var playerRoot = transform.Find("PlayerSpawnPoints");
+                if (playerRoot != null)
+                {
+                    playerSpawnContainer = playerRoot;
+                }
+                else
+                {
+                    var newGo = new GameObject("PlayerSpawnPoints");
+                    newGo.transform.SetParent(transform);
+                    newGo.transform.position = transform.position;
+                    newGo.transform.rotation = Quaternion.identity;
+                    newGo.transform.localScale = Vector3.one;
+                    playerSpawnContainer = newGo.transform;
+                }
+            }
+
+            if (playerSpawnContainer.childCount > 0)
+            {
                 var points = new List<Transform>();
-                
+                foreach (Transform child in playerSpawnContainer)
+                {
+                    points.Add(child);
+                }
+                playerSpawnPoints = points.ToArray();
+                Debug.Log($"[CombatSceneController] Found {playerSpawnPoints.Length} player spawn points in playerSpawnContainer.");
+            }
+            else
+            {
+                var points = new List<Transform>();
                 // Tạo lưới 3x3 cho phe ta (9 ô)
                 for (int r = 0; r < 3; r++)
                 {
                     for (int c = 0; c < 3; c++)
                     {
                         var p = new GameObject($"P_Row{r}_Col{c}").transform;
-                        p.SetParent(playerRoot);
+                        p.SetParent(playerSpawnContainer);
                         p.localPosition = new Vector3(-4.5f + c * 1.2f, 1.2f - r * 1.2f, 0f);
                         p.localRotation = Quaternion.identity;
+                        p.localScale = Vector3.one;
                         points.Add(p);
                     }
                 }
                 playerSpawnPoints = points.ToArray();
+                Debug.Log("[CombatSceneController] Created programmatic 3x3 player spawn points in playerSpawnContainer.");
             }
 
-            if (enemySpawnPoints == null || enemySpawnPoints.Length == 0)
+            // 2. Setup Enemy Spawn Points
+            if (enemySpawnContainer == null)
             {
-                var enemyRoot = new GameObject("EnemySpawnPoints").transform;
-                enemyRoot.SetParent(transform);
+                var enemyRoot = transform.Find("EnemySpawnPoints");
+                if (enemyRoot != null)
+                {
+                    enemySpawnContainer = enemyRoot;
+                }
+                else
+                {
+                    var newGo = new GameObject("EnemySpawnPoints");
+                    newGo.transform.SetParent(transform);
+                    newGo.transform.position = transform.position;
+                    newGo.transform.rotation = Quaternion.identity;
+                    newGo.transform.localScale = Vector3.one;
+                    enemySpawnContainer = newGo.transform;
+                }
+            }
+
+            if (enemySpawnContainer.childCount > 0)
+            {
                 var points = new List<Transform>();
-                
+                foreach (Transform child in enemySpawnContainer)
+                {
+                    points.Add(child);
+                }
+                enemySpawnPoints = points.ToArray();
+                Debug.Log($"[CombatSceneController] Found {enemySpawnPoints.Length} enemy spawn points in enemySpawnContainer.");
+            }
+            else
+            {
+                var points = new List<Transform>();
                 // Tạo lưới 3x3 cho phe địch (9 ô)
                 for (int r = 0; r < 3; r++)
                 {
                     for (int c = 0; c < 3; c++)
                     {
                         var e = new GameObject($"E_Row{r}_Col{c}").transform;
-                        e.SetParent(enemyRoot);
+                        e.SetParent(enemySpawnContainer);
                         e.localPosition = new Vector3(2.1f + c * 1.2f, 1.2f - r * 1.2f, 0f);
                         e.localRotation = Quaternion.Euler(0f, 180f, 0f); // Quay mặt sang trái
+                        e.localScale = Vector3.one;
                         points.Add(e);
                     }
                 }
                 enemySpawnPoints = points.ToArray();
+                Debug.Log("[CombatSceneController] Created programmatic 3x3 enemy spawn points in enemySpawnContainer.");
             }
         }
 
@@ -101,6 +159,17 @@ namespace GameClient.Gameplay.Combat
 
         private async void InitializeCombat()
         {
+            // Cấu hình Camera chính hội tụ vào vị trí đấu (CombatController)
+            var mainCam = Camera.main;
+            if (mainCam != null)
+            {
+                mainCam.orthographic = true;
+                mainCam.orthographicSize = 5f;
+                mainCam.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+                mainCam.transform.rotation = Quaternion.identity;
+                Debug.Log($"[CombatSceneController] Centered Camera at {mainCam.transform.position}");
+            }
+
             var stage = CombatStartData.CurrentStage;
             List<CombatEntity> players = new List<CombatEntity>();
             List<CombatEntity> enemies = new List<CombatEntity>();
@@ -111,6 +180,7 @@ namespace GameClient.Gameplay.Combat
             Debug.Log(announcement);
 
             // 1. Spawning Player Team (Tướng phe ta theo đúng vị trí lưới 9 ô)
+            Debug.Log($"[CombatSceneController] Starting Player team spawn. Formation count: {(CombatStartData.Formation != null ? CombatStartData.Formation.Count.ToString() : "NULL")}");
             if (CombatStartData.Formation != null)
             {
                 foreach (var kv in CombatStartData.Formation)
@@ -118,33 +188,109 @@ namespace GameClient.Gameplay.Combat
                     int slotIndex = kv.Key;
                     long heroId = kv.Value;
 
-                    if (slotIndex < 0 || slotIndex >= playerSpawnPoints.Length) continue;
+                    if (slotIndex < 0 || slotIndex >= playerSpawnPoints.Length)
+                    {
+                        Debug.LogError($"[CombatSceneController] Slot index {slotIndex} out of spawn points bounds (Max: {playerSpawnPoints.Length})");
+                        continue;
+                    }
 
                     var heroInstance = GameManager.Instance.PlayerHeroes.Find(h => h.Id == heroId);
-                    if (heroInstance == null) continue;
+                    if (heroInstance == null)
+                    {
+                        Debug.LogError($"[CombatSceneController] Cannot find player hero with ID {heroId} in GameManager.");
+                        continue;
+                    }
 
                     var config = HeroDataManager.Instance.GetHeroConfigByName(heroInstance.Name);
                     if (config == null) config = HeroDataManager.Instance.GetHeroConfig(heroInstance.Id);
 
-                    GameObject go;
-                    if (config != null && !string.IsNullOrEmpty(config.prefabAddress))
+                    GameObject go = null;
+                    string prefabAddr = (config != null) ? config.prefabAddress : "";
+                    Debug.Log($"[CombatSceneController] Spawning player '{heroInstance.Name}' at slot {slotIndex}. Prefab Address: '{prefabAddr}'");
+
+                    var slotItem = playerSpawnPoints[slotIndex].GetComponent<UI_FormationSlotItem>();
+                    if (slotItem != null)
                     {
-                        try
+                        go = playerSpawnPoints[slotIndex].gameObject;
+                        if (!string.IsNullOrEmpty(prefabAddr) && !prefabAddr.Contains(" "))
                         {
-                            go = await Addressables.InstantiateAsync(config.prefabAddress, playerSpawnPoints[slotIndex].position, playerSpawnPoints[slotIndex].rotation).Task;
+                            try
+                            {
+                                var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
+                                slotItem.SetHeroVisual(sprite, sprite != null);
+                                slotItem.SetTextBgActive(true);
+                                slotItem.SetStatusText(heroInstance.Name);
+                                Debug.Log($"[CombatSceneController] Successfully set player '{heroInstance.Name}' visual on UI Slot.");
+                            }
+                            catch (System.Exception ex)
+                            {
+                                Debug.LogWarning($"[CombatSceneController] Failed loading Addressable for '{heroInstance.Name}' on UI Slot: {ex.Message}.");
+                                slotItem.SetHeroVisual(null, false);
+                                slotItem.SetTextBgActive(true);
+                                slotItem.SetStatusText(heroInstance.Name);
+                            }
                         }
-                        catch (System.Exception)
+                        else
                         {
-                            go = new GameObject($"Hero_{heroInstance.Name}");
-                            go.transform.position = playerSpawnPoints[slotIndex].position;
-                            go.transform.rotation = playerSpawnPoints[slotIndex].rotation;
+                            slotItem.SetHeroVisual(null, false);
+                            slotItem.SetTextBgActive(true);
+                            slotItem.SetStatusText(heroInstance.Name);
                         }
                     }
                     else
                     {
-                        go = new GameObject($"Hero_{heroInstance.Name}");
-                        go.transform.position = playerSpawnPoints[slotIndex].position;
-                        go.transform.rotation = playerSpawnPoints[slotIndex].rotation;
+                        if (!string.IsNullOrEmpty(prefabAddr) && !prefabAddr.Contains(" "))
+                        {
+                            try
+                            {
+                                if (prefabAddr.EndsWith("_img") || prefabAddr.Contains("char_"))
+                                {
+                                    go = new GameObject($"Hero_{heroInstance.Name}");
+                                    go.transform.SetParent(playerSpawnPoints[slotIndex]);
+                                    go.transform.localPosition = Vector3.zero;
+                                    go.transform.localRotation = Quaternion.identity;
+                                    go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                    
+                                    var sr = go.AddComponent<SpriteRenderer>();
+                                    var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
+                                    sr.sprite = sprite;
+                                    sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                                }
+                                else
+                                {
+                                    go = await Addressables.InstantiateAsync(config.prefabAddress, playerSpawnPoints[slotIndex].position, playerSpawnPoints[slotIndex].rotation).Task;
+                                    go.transform.SetParent(playerSpawnPoints[slotIndex]);
+                                }
+                                Debug.Log($"[CombatSceneController] Successfully loaded player '{heroInstance.Name}' visual.");
+                            }
+                            catch (System.Exception ex)
+                            {
+                                Debug.LogWarning($"[CombatSceneController] Failed loading Addressable for '{heroInstance.Name}': {ex.Message}. Using fallback.");
+                                if (go != null) Destroy(go);
+                                go = null;
+                            }
+                        }
+
+                        if (go == null)
+                        {
+                            // Dùng hình trụ Capsule 3D để hiển thị nếu lỗi tải mô hình nhân vật
+                            go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                            go.name = $"Hero_{heroInstance.Name}_Fallback";
+                            go.transform.SetParent(playerSpawnPoints[slotIndex]);
+                            go.transform.localPosition = Vector3.zero;
+                            go.transform.localRotation = Quaternion.identity;
+                            go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                            
+                            var sr = go.AddComponent<SpriteRenderer>();
+                            sr.sortingOrder = 10;
+                            try
+                            {
+                                var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
+                                sr.sprite = sprite;
+                            }
+                            catch {}
+                            Debug.LogWarning($"[CombatSceneController] Created fallback for '{heroInstance.Name}' at {go.transform.position}");
+                        }
                     }
 
                     CombatEntity entity = go.GetComponent<CombatEntity>();
@@ -185,39 +331,113 @@ namespace GameClient.Gameplay.Combat
             else enemySlots = new int[] { 0, 2, 4, 6, 8 }; // Hình chữ X
 
             // 2. Spawning Enemies (Phe địch tối đa 5 con xếp trên lưới 3x3)
+            Debug.Log($"[CombatSceneController] Starting Enemy spawn. Configured count: {stage.enemiesConfig.Count}");
             for (int i = 0; i < stage.enemiesConfig.Count; i++)
             {
                 if (i >= enemySlots.Length) break;
                 int targetSlot = enemySlots[i];
-                if (targetSlot >= enemySpawnPoints.Length) break;
+                if (targetSlot >= enemySpawnPoints.Length)
+                {
+                    Debug.LogError($"[CombatSceneController] Enemy slot {targetSlot} out of spawn points bounds (Max: {enemySpawnPoints.Length})");
+                    break;
+                }
 
                 var config = stage.enemiesConfig[i];
                 GameObject go = null;
                 Vector3 spawnPos = enemySpawnPoints[targetSlot].position;
                 Quaternion spawnRot = enemySpawnPoints[targetSlot].rotation;
+                Debug.Log($"[CombatSceneController] Spawning enemy '{config.name}' at slot {targetSlot}. Address: '{config.prefabAddress}'");
 
-                if (!string.IsNullOrEmpty(config.prefabAddress))
+                var slotItem = enemySpawnPoints[targetSlot].GetComponent<UI_FormationSlotItem>();
+                if (slotItem != null)
                 {
-                    try
+                    go = enemySpawnPoints[targetSlot].gameObject;
+                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" "))
                     {
-                        go = await Addressables.InstantiateAsync(config.prefabAddress, spawnPos, spawnRot).Task;
+                        try
+                        {
+                            var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                            slotItem.SetHeroVisual(sprite, sprite != null);
+                            slotItem.SetTextBgActive(true);
+                            slotItem.SetStatusText(config.name);
+                            Debug.Log($"[CombatSceneController] Successfully set enemy '{config.name}' visual on UI Slot.");
+                        }
+                        catch (System.Exception ex)
+                        {
+                            Debug.LogWarning($"[CombatSceneController] Failed loading Addressable for enemy '{config.name}' on UI Slot: {ex.Message}.");
+                            slotItem.SetHeroVisual(null, false);
+                            slotItem.SetTextBgActive(true);
+                            slotItem.SetStatusText(config.name);
+                        }
                     }
-                    catch (System.Exception)
+                    else
                     {
-                        go = null;
+                        slotItem.SetHeroVisual(null, false);
+                        slotItem.SetTextBgActive(true);
+                        slotItem.SetStatusText(config.name);
                     }
                 }
-
-                if (go == null && config.prefabVisual != null)
+                else
                 {
-                    go = Instantiate(config.prefabVisual, spawnPos, spawnRot);
-                }
+                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" "))
+                    {
+                        try
+                        {
+                            if (config.prefabAddress.EndsWith("_img") || config.prefabAddress.Contains("char_") || config.prefabAddress.Contains("enemy_"))
+                            {
+                                go = new GameObject($"Enemy_{config.name}");
+                                go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                                go.transform.localPosition = Vector3.zero;
+                                go.transform.localRotation = Quaternion.identity; // Trực thuộc transform con đã xoay 180
+                                go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                
+                                var sr = go.AddComponent<SpriteRenderer>();
+                                var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                sr.sprite = sprite;
+                                sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                            }
+                            else
+                            {
+                                go = await Addressables.InstantiateAsync(config.prefabAddress, spawnPos, spawnRot).Task;
+                                go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                            }
+                            Debug.Log($"[CombatSceneController] Successfully loaded enemy '{config.name}' visual.");
+                        }
+                        catch (System.Exception ex)
+                        {
+                            Debug.LogWarning($"[CombatSceneController] Failed loading Addressable for enemy '{config.name}': {ex.Message}. Using fallback.");
+                            if (go != null) Destroy(go);
+                            go = null;
+                        }
+                    }
 
-                if (go == null)
-                {
-                    go = new GameObject($"Enemy_{config.name}");
-                    go.transform.position = spawnPos;
-                    go.transform.rotation = spawnRot;
+                    if (go == null && config.prefabVisual != null)
+                    {
+                        Debug.Log($"[CombatSceneController] Instantiating config.prefabVisual for enemy '{config.name}'.");
+                        go = Instantiate(config.prefabVisual, spawnPos, spawnRot);
+                        go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                    }
+
+                    if (go == null)
+                    {
+                        // Dùng hình lập phương Cube 3D để hiển thị nếu lỗi tải mô hình quái vật
+                        go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        go.name = $"Enemy_{config.name}_Fallback";
+                        go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                        go.transform.localPosition = Vector3.zero;
+                        go.transform.localRotation = Quaternion.identity;
+                        go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                        
+                        var sr = go.AddComponent<SpriteRenderer>();
+                        sr.sortingOrder = 10;
+                        try
+                        {
+                            var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                            sr.sprite = sprite;
+                        }
+                        catch {}
+                        Debug.LogWarning($"[CombatSceneController] Created fallback for enemy '{config.name}' at {go.transform.position}");
+                    }
                 }
 
                 CombatEntity entity = go.GetComponent<CombatEntity>();
@@ -236,10 +456,20 @@ namespace GameClient.Gameplay.Combat
             }
 
             // 3. Khởi chạy Combat Manager
+            if (CombatManager.Instance == null)
+            {
+                Debug.Log("[CombatSceneController] CombatManager.Instance is null. Creating new CombatManager GameObject in scene.");
+                var managerObj = new GameObject("CombatManager");
+                managerObj.AddComponent<CombatManager>();
+            }
+            CombatManager.Instance.EnemyID = stage != null ? stage.stageId : "Stage_Fallback";
+            Debug.Log($"[CombatSceneController] All spawned. Starting combat via CombatManager. Stage: {CombatManager.Instance.EnemyID}, Players: {players.Count}, Enemies: {enemies.Count}");
             CombatManager.Instance.StartCombat(players, enemies);
 
             // 4. Mở HUD Combat
+            Debug.Log("[CombatSceneController] Opening CombatHUD panel...");
             UIManager.Instance.OpenPanel("CombatHUD");
+            Debug.Log("[CombatSceneController] InitializeCombat finished.");
         }
     }
 }

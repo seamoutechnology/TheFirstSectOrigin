@@ -5,13 +5,14 @@ using GameClient.Gameplay.Combat.Skills;
 using GameClient.UI;
 using GameClient.UI.Core;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameClient.UI.Combat
 {
     public class CombatHUD : BaseUIPanel
     {
         [Header("Text references")]
-        public Text txtTurnInfo;
+        public TMPro.TMP_Text txtTurnInfo;
 
         [Header("Containers")]
         public Transform playerStatusContainer;
@@ -87,7 +88,7 @@ namespace GameClient.UI.Combat
             _availableSkills.Add(buffSkill);
 
             BuildCharacterStatusUI();
-            skillPanel.SetActive(false);
+            skillPanel.SetActive(true);
         }
 
         protected override void OnCleanup()
@@ -148,14 +149,8 @@ namespace GameClient.UI.Combat
                 kvp.Value.SetHighlight(kvp.Key == entity);
             }
 
-            if (entity.isPlayer)
-            {
-                skillPanel.SetActive(true);
-            }
-            else
-            {
-                skillPanel.SetActive(false);
-            }
+            // Skill panel stays active so the player can cast Sect Master skills anytime
+            skillPanel.SetActive(true);
         }
 
         private void HandleCombatEnded()
@@ -182,17 +177,16 @@ namespace GameClient.UI.Combat
                 CombatEntity target = null;
                 if (!skill.IsSupport)
                 {
-                    target = _combatManager.Enemies.Find(e => !e.IsDead);
+                    target = _combatManager.Enemies.FirstOrDefault(e => !e.IsDead);
                 }
                 else
                 {
-                    target = _combatManager.CurrentActiveEntity;
+                    target = _combatManager.Players.FirstOrDefault(p => !p.IsDead);
                 }
 
                 if (target != null || skill.IsAoE || skill.IsSupport)
                 {
-                    skillPanel.SetActive(false);
-                    _combatManager.ExecuteAction(skill, target);
+                    _combatManager.CastPlayerSkillInstantly(skill, target);
                 }
             }
         }

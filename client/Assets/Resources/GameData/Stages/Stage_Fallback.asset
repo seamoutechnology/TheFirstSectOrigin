@@ -28,7 +28,7 @@ MonoBehaviour:
     defense: 6
     speed: 12
     isBoss: 0
-    prefabAddress: SlimePrefab
+    prefabAddress: char_mon_01
   rewards:
   - itemId: 00000
     amount: 20

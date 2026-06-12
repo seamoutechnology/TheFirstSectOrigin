@@ -120,5 +120,16 @@ namespace GameClient.Gameplay.Combat
             SelectedTarget = target;
             StateMachine.ChangeState(new ActionExecutionState());
         }
+
+        public void CastPlayerSkillInstantly(SkillData skill, CombatEntity target)
+        {
+            var caster = Players.FirstOrDefault(p => !p.IsDead);
+            if (caster == null) caster = CurrentActiveEntity;
+            if (caster == null) return;
+
+            StartCoroutine(GenericSkillExecutor.Execute(skill, caster, target, (log) => {
+                CombatLogs.Add(log);
+            }));
+        }
     }
 }

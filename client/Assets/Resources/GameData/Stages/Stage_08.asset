@@ -29,7 +29,7 @@ MonoBehaviour:
     defense: 325
     speed: 91
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_08_2
     name: Quái thú F-8.2
     level: 22
@@ -38,7 +38,7 @@ MonoBehaviour:
     defense: 330
     speed: 92
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_08_3
     name: Quái thú F-8.3
     level: 22
@@ -47,7 +47,7 @@ MonoBehaviour:
     defense: 335
     speed: 93
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   - monsterId: monster_08_4
     name: Quái thú F-8.4
     level: 22
@@ -56,7 +56,7 @@ MonoBehaviour:
     defense: 340
     speed: 94
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: char_mon_01
   rewards:
   - itemId: 00000
     amount: 400

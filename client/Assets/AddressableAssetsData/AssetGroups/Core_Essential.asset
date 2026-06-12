@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10e2f2feb8a5560438ebe64207818e04
+    m_Address: char_06_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1a6ea4c1333e4864eb14cb274d22a437
     m_Address: char_01_img
     m_ReadOnly: 0
@@ -60,6 +65,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f48b3ad1e92c0442b3642e2b0f4486a
+    m_Address: CombatHUD
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21778f492551edb478454a5569df0e2d
     m_Address: EntryPanel
     m_ReadOnly: 0
@@ -70,6 +80,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26d5fdf003de90a4594cac7769988cc9
+    m_Address: char_04_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2717cd2dd7feca449a263ea91492e785
+    m_Address: avt_05_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 32fd20720bee7a849a3468058840a6dd
     m_Address: avt_03_img
     m_ReadOnly: 0
@@ -77,6 +97,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 41078df0a63d2354bb35bf1e298fdd9a
     m_Address: UI_HeroItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42d5141f1a2b0b24295c9927825e5bc6
+    m_Address: CharacterHUDItem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -100,8 +125,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 570448cd006760d48988ce9cfdbe0807
+    m_Address: avt_04_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5963ebdcc6441ed4fbe80b12a543a92e
     m_Address: stamina_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a74bb6a922f9284fab8ee74020b78b5
+    m_Address: char_07_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -200,6 +235,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f02f6fea7b2ed41b888e74d2fa4203
+    m_Address: avt_07_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b373b029f3f67314bbf8b749fd3ddf00
     m_Address: BGM_WORLD
     m_ReadOnly: 0
@@ -255,8 +295,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e113edc5fc8e17247a27b8eb91138dcf
+    m_Address: BGM_DUNGEON
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e294d13bd57df224780f38781104d65c
     m_Address: SFX_UI_Type
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3405e1dd6d248c4b8328a94a1b1c884
+    m_Address: char_05_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -302,6 +352,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8986f50a64cffa41b5e5d32dd0f33ab
     m_Address: BGM_LOBBY
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcd1b13b0c661e243937c2895971caf8
+    m_Address: avt_06_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

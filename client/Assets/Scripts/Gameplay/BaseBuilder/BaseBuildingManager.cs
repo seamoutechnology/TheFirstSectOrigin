@@ -307,6 +307,11 @@ namespace GameClient.Gameplay.BaseBuilder
 
         public async Task SaveLayoutToServer()
         {
+            if (!GameContext.HasCharacter)
+            {
+                Debug.LogWarning("[BaseBuildingManager] Chưa tạo nhân vật, bỏ qua lưu map.");
+                return;
+            }
             try
             {
                 BaseExportModel model = new BaseExportModel
