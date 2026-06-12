@@ -23,6 +23,24 @@ namespace GameClient.UI
         protected override void OnShow()
         {
             base.OnShow();
+            _ = LoadHeroesAsync();
+        }
+
+        private async System.Threading.Tasks.Task LoadHeroesAsync()
+        {
+            try
+            {
+                var response = await GameClient.Network.Api.DiscipleApi.GetHeroesAsync();
+                if (response != null && response.Base != null && response.Base.Code == 0)
+                {
+                    GameManager.Instance.SetHeroes(response.Heroes);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[HeroesPanel] Lỗi khi tải danh sách đệ tử: {ex.Message}");
+            }
+
             RefreshUI();
         }
 
@@ -39,35 +57,56 @@ namespace GameClient.UI
                 var go = Instantiate(heroItemPrefab, heroListContainer);
                 go.SetActive(true);
 
-                // Tìm component Image để hiển thị chân dung tướng
-                var img = go.GetComponent<Image>();
-                if (img == null) img = go.GetComponentInChildren<Image>();
-
-                if (img != null)
+                // Reset Z coordinate và scale để tránh bị lệch trục Z trôi ra sau background của Canvas
+                var rect = go.GetComponent<RectTransform>();
+                if (rect != null)
                 {
-                    // Lấy cấu hình tướng để lấy đường dẫn Avatar/Icon
-                    var config = HeroDataManager.Instance.GetHeroConfigByCodeOrName(h.Name);
-                    if (config != null && !string.IsNullOrEmpty(config.iconAddress))
-                    {
-                        LoadAndSetAvatar(img, config.iconAddress);
-                    }
-                    else
-                    {
-                        // Fallback: Thử tải theo mã tướng
-                        LoadAndSetAvatar(img, h.Name);
-                    }
+                    rect.localPosition = new Vector3(rect.localPosition.x, rect.localPosition.y, 0f);
+                    rect.localScale = Vector3.one;
                 }
 
-                var btn = go.GetComponent<Button>();
-                if (btn == null) btn = go.AddComponent<Button>();
-                
                 var heroRef = h; // Capture variable for closure
-                btn.onClick.AddListener(() => OnHeroClicked(heroRef));
+
+                // Thử lấy script UI_HeroItem để điền đầy đủ dữ liệu
+                var heroItemScript = go.GetComponent<UI_HeroItem>();
+                if (heroItemScript == null) heroItemScript = go.GetComponentInChildren<UI_HeroItem>();
+
+                if (heroItemScript != null)
+                {
+                    heroItemScript.Setup(heroRef, () => OnHeroClicked(heroRef));
+                }
+                else
+                {
+                    // Fallback nếu prefab chưa có script UI_HeroItem được gán
+                    var img = go.GetComponent<Image>();
+                    if (img == null) img = go.GetComponentInChildren<Image>();
+
+                    if (img != null)
+                    {
+                        var config = HeroDataManager.Instance.GetHeroConfigByCodeOrName(h.Name);
+                        if (config != null && !string.IsNullOrEmpty(config.iconAddress))
+                        {
+                            LoadAndSetAvatar(img, config.iconAddress);
+                        }
+                        else
+                        {
+                            LoadAndSetAvatar(img, h.Name);
+                        }
+                    }
+
+                    var btn = go.GetComponent<Button>();
+                    if (btn == null) btn = go.AddComponent<Button>();
+                    btn.onClick.AddListener(() => OnHeroClicked(heroRef));
+                }
             }
         }
 
         private async void LoadAndSetAvatar(Image img, string address)
         {
+            if (string.IsNullOrEmpty(address) || address.Contains(" "))
+            {
+                return;
+            }
             try
             {
                 var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);

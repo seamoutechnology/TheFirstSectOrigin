@@ -33,6 +33,7 @@ message ItemConfig {
   int32 max_stack = 7;      
   repeated ItemSource sources = 8; 
   repeated ItemEffect effects = 9;  // Hiệu ứng dạng List
+  int32 required_level = 10;
 }
 
 // --- Item Instance (Động) ---

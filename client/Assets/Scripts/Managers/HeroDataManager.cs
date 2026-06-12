@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using GameClient.Gameplay.Heroes;
+using System.Linq;
 
 namespace GameClient.Managers
 {
@@ -27,7 +28,7 @@ namespace GameClient.Managers
                 var handle = Addressables.LoadAssetsAsync<HeroConfig>("HeroConfig", null);
                 await handle.Task;
 
-                if (handle.Status == AsyncOperationStatus.Succeeded)
+                if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null && handle.Result.Any())
                 {
                     _heroConfigs.Clear();
                     foreach (var config in handle.Result)
@@ -36,10 +37,12 @@ namespace GameClient.Managers
                         Debug.Log($"[HeroDataManager] Loaded Hero: {config.heroId} - {config.heroName}");
                     }
                     _isLoaded = true;
+                    Debug.Log($"[HeroDataManager] Loaded {handle.Result.Count()} heroes from Addressables.");
                 }
                 else
                 {
-                    Debug.LogError("[HeroDataManager] Failed to load Hero configs from Addressables.");
+                    Debug.LogWarning("[HeroDataManager] Addressables loading failed or returned empty, falling back to Resources.");
+                    throw new System.Exception("Addressables load failed");
                 }
             }
             catch (System.Exception ex)
@@ -57,6 +60,10 @@ namespace GameClient.Managers
                     _isLoaded = true;
                     Debug.Log($"[HeroDataManager] Fallback Loaded {configs.Length} Heroes from Resources.");
                 }
+                else
+                {
+                    Debug.LogError("[HeroDataManager] Failed to load Hero configs from both Addressables and Resources.");
+                }
             }
         }
 
@@ -72,9 +79,11 @@ namespace GameClient.Managers
 
         public HeroConfig GetHeroConfigByName(string name)
         {
+            if (string.IsNullOrEmpty(name)) return null;
+            string normalizedName = name.Normalize(System.Text.NormalizationForm.FormC);
             foreach (var config in _heroConfigs.Values)
             {
-                if (config.heroName == name)
+                if (config.heroName != null && config.heroName.Normalize(System.Text.NormalizationForm.FormC) == normalizedName)
                 {
                     return config;
                 }

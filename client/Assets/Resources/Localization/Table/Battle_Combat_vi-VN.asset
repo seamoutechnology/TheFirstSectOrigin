@@ -17,7 +17,107 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 305885ddfc24ae84eaa23e96c55a86a0, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 10001
+    m_Localized: "\u0110\xE3 ch\u1ECDn v\u1ECB tr\xED {0}. K\xE9o ho\u1EB7c nh\u1EA5p t\u01B0\u1EDBng \u0111\u1EC3 x\u1EBFp v\xE0o \xF4 n\xE0y."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10002
+    m_Localized: "Vui l\xF2ng ch\u1ECDn m\u1ED9t \xF4 v\u1ECB tr\xED \u0111\u1ED9i h\xECnh tr\u01B0\u1EDBc!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10003
+    m_Localized: "V\u1ECB tr\xED \u0111\xE3 ch\u1ECDn kh\xF4ng thu\u1ED9c s\u01A1 \u0111\u1ED3 tr\u1EADn h\xECnh hi\u1EC7n t\u1EA1i!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10004
+    m_Localized: "V\u1ECB tr\xED n\xE0y kh\xF4ng thu\u1ED9c s\u01A1 \u0111\u1ED3 tr\u1EADn h\xECnh hi\u1EC7n t\u1EA1i!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10005
+    m_Localized: "\u0110\xE3 ho\xE1n \u0111\u1ED5i v\u1ECB tr\xED!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10006
+    m_Localized: "\u0110\u1ED9i h\xECnh t\u1ED1i \u0111a 9 t\u01B0\u1EDBng!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10007
+    m_Localized: "\u0110\xE3 x\u1EBFp t\u01B0\u1EDBng th\xE0nh c\xF4ng!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10008
+    m_Localized: "\u0110\xE3 g\u1EE1 {0} kh\u1ECFi \u0111\u1ED9i h\xECnh do ngo\xE0i s\u01A1 \u0111\u1ED3 m\u1EDBi!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10009
+    m_Localized: "\u0110\xE3 l\u01B0u \u0111\u1ED9i h\xECnh l\xEAn m\xE1y ch\u1EE7 th\xE0nh c\xF4ng!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10010
+    m_Localized: "Kh\xF4ng th\u1EC3 l\u01B0u \u0111\u1ED9i h\xECnh!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10011
+    m_Localized: "\u0110\u1ED9i h\xECnh tr\u1EADn chi\u1EBFn kh\xF4ng \u0111\u01B0\u1EE3c tr\u1ED1ng!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10012
+    m_Localized: "Tr\u1EADn h\xECnh: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10013
+    m_Localized: "Kh\xF3a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10014
+    m_Localized: "C\xE1t T\u01B0\u1EDDng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10015
+    m_Localized: "Tr\u1ED1ng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10016
+    m_Localized: "[C\xE1t] {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10017
+    m_Localized: "<color=orange>[Combat] V\xF2ng s\xE1ng ch\xFAc ph\xFAc tr\u1EADn n\xE0y xu\u1EA5t hi\u1EC7n \u1EDF v\u1ECB tr\xED \xF4 s\u1ED1 {0} phe ta!</color>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10018
+    m_Localized: "<color=orange>[Combat] T\u01B0\u1EDBng {0} \u0111\u01B0\u1EE3c sinh ra \u1EDF \xF4 buff {1} -> Nh\u1EADn ch\xFAc ph\xFAc t\u0103ng 25% C\xF4ng & Th\u1EE7!</color>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10019
+    m_Localized: "\u0110\u1ED9i h\xECnh \u0111\xE3 \u0111\u1EE7 9 t\u01B0\u1EDBng! K\xE9o t\u01B0\u1EDBng xu\u1ED1ng \u0111\u1EC3 thay th\u1EBF."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10020
+    m_Localized: "Chi\u1EBFn l\u1EF1c: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10021
+    m_Localized: "S\u1EAFp x\u1EBFp theo: Chi\u1EBFn l\u1EF1c"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10022
+    m_Localized: "S\u1EAFp x\u1EBFp theo: C\u1EA3nh gi\u1EDBi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10023
+    m_Localized: "S\u1EAFp x\u1EBFp theo: Ph\u1EA9m"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10024
+    m_Localized: "\u0110\xE3 t\u1EF1 \u0111\u1ED9ng x\u1EBFp \u0111\u1ED9i h\xECnh t\u1ED1i \u01B0u!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10025
+    m_Localized: "\u0110\xE3 n\u1EA1p l\u1EA1i \u0111\u1ED9i h\xECnh \u0111\xE3 l\u01B0u!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f1013fef712ff48bf094dd837c7e49, type: 3}
+  m_Name: Stage_10
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
+  stageId: Stage_10
+  stageName: Ải 10: Đại Chiến Ma Vương
+  description: Trận chiến vượt ải 10 tông môn.
+  recommendPower: 50000
+  staminaCost: 5
+  requiredStageId: Stage_09
+  combatSceneName: Dungeon
+  mapIcon: {fileID: 0}
+  enemiesConfig:
+  - monsterId: monster_10_1
+    name: BOSS: Tà Hỏa Ma Vương
+    level: 28
+    maxHP: 15200
+    attack: 810
+    defense: 405
+    speed: 101
+    isBoss: 1
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_10_2
+    name: Quái thú F-10.2
+    level: 28
+    maxHP: 15400
+    attack: 820
+    defense: 410
+    speed: 102
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_10_3
+    name: Quái thú F-10.3
+    level: 28
+    maxHP: 15600
+    attack: 830
+    defense: 415
+    speed: 103
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_10_4
+    name: Quái thú F-10.4
+    level: 28
+    maxHP: 15800
+    attack: 840
+    defense: 420
+    speed: 104
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_10_5
+    name: Quái thú F-10.5
+    level: 28
+    maxHP: 16000
+    attack: 850
+    defense: 425
+    speed: 105
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  rewards:
+  - itemId: 00000
+    amount: 500
+  - itemId: 00002
+    amount: 50
+  - itemId: 00003
+    amount: 50

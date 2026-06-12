@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using GameClient.Network;
 using GameClient.Network.Api;
 using GameClient.UI.Core;
+using GameClient.Core;
+using GameClient.Managers;
 using Grpc.Core;
 
 namespace GameClient.UI
@@ -74,7 +76,11 @@ namespace GameClient.UI
         {
             if (player == null) return;
             nicknameText.text = player.Nickname;
-            levelText.text = $"Lv. {player.Level}";
+            
+            string levelLabel = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_level");
+            if (string.IsNullOrEmpty(levelLabel) || levelLabel.StartsWith("[")) levelLabel = "Lv.";
+            levelText.text = $"{levelLabel} {player.Level}";
+            
             goldText.text = player.Gold.ToString("N0");
             diamondText.text = player.Diamond.ToString("N0");
             staminaText.text = $"{player.Stamina}/{player.MaxStamina}";

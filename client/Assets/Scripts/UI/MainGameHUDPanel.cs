@@ -81,8 +81,8 @@ namespace GameClient.UI
         {
             base.OnShow();
             
-            // Mặc định ban đầu hiển thị đầy đủ các loại tài nguyên chính (Vàng và Xu)
-            SetupHUD(new string[] { "00001", "00000", "00002", "00003"});
+            // Mặc định ban đầu hiển thị đầy đủ các loại tài nguyên chính (Vàng thỏi, Thể Lực, Đá, Gỗ, Xu)
+            SetupHUD(new string[] { "stamina", "00000", "00001", "00002", "00003"});
         }
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace GameClient.UI
             }
         }
 
-        private void OnWorldMapClicked()
+        private async void OnWorldMapClicked()
         {
-            if (UIManager.Instance != null)
+            if (MapManager.Instance != null)
             {
-                UIManager.Instance.ShowMessage("World Map", "Tính năng World Map đang được phát triển!");
+                await MapManager.Instance.LoadMapAsync(MapType.WorldMap);
             }
         }
 
@@ -180,7 +180,10 @@ namespace GameClient.UI
             // Khởi tạo mặc định số lượng cho các chỉ số và vật phẩm tài nguyên cơ bản
             currentResourceAmounts["gold"] = player != null ? (int)player.Gold : 0;
             currentResourceAmounts["qi"] = player != null ? (int)player.Diamond : 0;
-            currentResourceAmounts["00000"] = 0;
+            currentResourceAmounts["00001"] = player != null ? (int)player.Gold : 0; // Vàng thỏi là 00001
+            currentResourceAmounts["00000"] = player != null ? (int)player.Diamond : 0; // Xu/Diamond là 00000
+            currentResourceAmounts["stamina"] = player != null ? (int)player.Stamina : 0; // Thể Lực lưu theo key 'stamina'
+            currentResourceAmounts["max_stamina"] = player != null ? (int)player.MaxStamina : 100;
             currentResourceAmounts["00002"] = 0;
             currentResourceAmounts["00003"] = 0;
 
@@ -236,9 +239,10 @@ namespace GameClient.UI
                 else
                 {
                     if (item.itemCode == "00000" || item.itemCode == "coin") iconKey = "coin_icon";
+                    else if (item.itemCode == "00001" || item.itemCode == "gold") iconKey = "gold_icon";
                     else if (item.itemCode == "00002" || item.itemCode == "stone" || item.itemCode == "stone_1") iconKey = "stone_1_icon";
                     else if (item.itemCode == "00003" || item.itemCode == "wood" || item.itemCode == "wood_1") iconKey = "wood_1_icon";
-                    else if (item.itemCode == "gold") iconKey = "gold_icon";
+                    else if (item.itemCode == "stamina") iconKey = "stamina_icon";
                     else iconKey = item.itemCode + "_icon";
                 }
 
@@ -266,12 +270,18 @@ namespace GameClient.UI
                     
                     // Tránh cho lỗi
                     if (item.itemCode == "00000" || item.itemCode == "coin") nameKey = "coin";
+                    else if (item.itemCode == "00001" || item.itemCode == "gold") nameKey = "gold";
                     else if (item.itemCode == "00002" || item.itemCode == "stone" || item.itemCode == "stone_1") nameKey = "stone_1";
                     else if (item.itemCode == "00003" || item.itemCode == "wood" || item.itemCode == "wood_1") nameKey = "wood_1";
-                    else if (item.itemCode == "gold") nameKey = "gold";
+                    else if (item.itemCode == "stamina") nameKey = "stamina";
                     else nameKey = item.itemCode;
                 }
-                item.UpdateData(quantity, sprite, nameKey);
+                int maxQty = -1;
+                if (item.itemCode == "stamina")
+                {
+                    currentResourceAmounts.TryGetValue("max_stamina", out maxQty);
+                }
+                item.UpdateData(quantity, sprite, nameKey, maxQty);
             }
         }
 

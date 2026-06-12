@@ -17,6 +17,18 @@ namespace GameClient.Gameplay.Combat.States
             if (allEnemiesDead)
             {
                 Debug.Log("<color=green>[Combat] CHIẾN THẮNG! Gửi kết quả lên server...</color>");
+                if (CombatStartData.CurrentStage != null && !string.IsNullOrEmpty(CombatStartData.CurrentStage.stageId))
+                {
+                    string completed = PlayerPrefs.GetString("CompletedStages", "");
+                    var completedList = completed.Split(',').Where(s => !string.IsNullOrEmpty(s)).ToList();
+                    if (!completedList.Contains(CombatStartData.CurrentStage.stageId))
+                    {
+                        completedList.Add(CombatStartData.CurrentStage.stageId);
+                        PlayerPrefs.SetString("CompletedStages", string.Join(",", completedList));
+                        PlayerPrefs.Save();
+                        Debug.Log($"[Combat] Đã lưu tiến trình vượt ải: {CombatStartData.CurrentStage.stageId}");
+                    }
+                }
             }
             else
             {

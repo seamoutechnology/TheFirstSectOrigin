@@ -70,6 +70,10 @@ namespace GameClient.UI.Presenters
             _currentZone = zone;
             _view.SetServerInfo(zone.name, zone.is_online, null, null, null);
             _view.SetEnterButtonInteractable(zone.is_online);
+            if (zone != null)
+            {
+                GameContext.CurrentServerId = zone.id;
+            }
         }
 
         private void HandleEnterGame()
@@ -83,6 +87,7 @@ namespace GameClient.UI.Presenters
             GameContext.CurrentServerHost = _currentZone.host;
             GameContext.CurrentServerPort = _currentZone.port;
             GameContext.CurrentServerName = _currentZone.name;
+            GameContext.CurrentServerId = _currentZone.id;
             GameContext.HasCharacter = _currentZone.has_character;
 
             // Đóng Panel khởi đầu khi vào game

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f1013fef712ff48bf094dd837c7e49, type: 3}
+  m_Name: Stage_05
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
+  stageId: Stage_05
+  stageName: Ải 5: Cổ Lâm Sâu Thẳm
+  description: Trận chiến vượt ải 5 tông môn.
+  recommendPower: 25000
+  staminaCost: 5
+  requiredStageId: Stage_04
+  combatSceneName: Dungeon
+  mapIcon: {fileID: 0}
+  enemiesConfig:
+  - monsterId: monster_05_1
+    name: Quái thú F-5.1
+    level: 13
+    maxHP: 7700
+    attack: 410
+    defense: 205
+    speed: 76
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_05_2
+    name: Quái thú F-5.2
+    level: 13
+    maxHP: 7900
+    attack: 420
+    defense: 210
+    speed: 77
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_05_3
+    name: Quái thú F-5.3
+    level: 13
+    maxHP: 8100
+    attack: 430
+    defense: 215
+    speed: 78
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_05_4
+    name: Quái thú F-5.4
+    level: 13
+    maxHP: 8300
+    attack: 440
+    defense: 220
+    speed: 79
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_05_5
+    name: Quái thú F-5.5
+    level: 13
+    maxHP: 8500
+    attack: 450
+    defense: 225
+    speed: 80
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  rewards:
+  - itemId: 00000
+    amount: 250
+  - itemId: 00002
+    amount: 25
+  - itemId: 00003
+    amount: 25

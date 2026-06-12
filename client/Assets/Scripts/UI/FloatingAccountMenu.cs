@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.Managers;
+using GameClient.Core;
 using DG.Tweening;
 
 namespace GameClient.UI
@@ -60,13 +61,13 @@ namespace GameClient.UI
         public void ToggleMenu()
         {
             /*
-            bool isLoggedIn = !string.IsNullOrEmpty(AccountManager.Instance.CurrentToken);
-            if (!isLoggedIn)
-            {
-                UIManager.Instance.OpenPanel("LoginPanel");
-                return;
-            }
-            */
+             bool isLoggedIn = !string.IsNullOrEmpty(AccountManager.Instance.CurrentToken);
+             if (!isLoggedIn)
+             {
+                 UIManager.Instance.OpenPanel("LoginPanel");
+                 return;
+             }
+             */
 
             _isExpanded = !_isExpanded;
             
@@ -156,7 +157,25 @@ namespace GameClient.UI
         private void OnTopUpClicked()
         {
             Debug.Log("[FloatingMenu] Nạp tiền...");
-            UIManager.Instance.ShowMessage("Thông báo", "Tính năng nạp tiền đang phát triển!");
+            string token = AccountManager.Instance.CurrentToken;
+            if (string.IsNullOrEmpty(token))
+            {
+                UIManager.Instance.ShowMessage("Lỗi", "Bạn chưa đăng nhập!");
+                return;
+            }
+
+            int zoneId = GameContext.CurrentServerId;
+            if (zoneId <= 0)
+            {
+                zoneId = 1;
+            }
+
+            string baseUrl = GameSettings.Instance != null ? GameSettings.Instance.apiBaseUrl : "http://localhost:8080";
+            string url = baseUrl.TrimEnd('/') + "/user/dashboard?token=" + System.Uri.EscapeDataString(token) + "&zone_id=" + zoneId;
+            
+            Debug.Log("[Dashboard] Mở cổng tu luyện ngoài từ FloatingMenu: " + url);
+            Application.OpenURL(url);
+            
             ToggleMenu(); // Đóng menu
         }
 

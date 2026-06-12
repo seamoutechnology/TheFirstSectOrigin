@@ -48,7 +48,99 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9722235491938304
-    m_Key: New Entry
+    m_Key: hp1_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10406306903715840
+    m_Key: hp1_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000001
+    m_Key: recruit_ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000002
+    m_Key: recruit_ticket_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000003
+    m_Key: shop_reset_ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000004
+    m_Key: shop_reset_ticket_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000005
+    m_Key: iron_ore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000006
+    m_Key: iron_ore_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000007
+    m_Key: herb_spirit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000008
+    m_Key: herb_spirit_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000009
+    m_Key: break_pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000010
+    m_Key: break_pill_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000011
+    m_Key: stamina_potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000012
+    m_Key: stamina_potion_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000013
+    m_Key: speed_hourglass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000014
+    m_Key: speed_hourglass_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000015
+    m_Key: guild_coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000016
+    m_Key: guild_coin_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000017
+    m_Key: artifact_shard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000018
+    m_Key: artifact_shard_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000019
+    m_Key: EXP_pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000020
+    m_Key: EXP_pill_des
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000021
+    m_Key: stamina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000022
+    m_Key: stamina_des
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -40,6 +40,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f528ad687ef2e54d83d4896804b58b6
+    m_Address: UI_BattlePrepPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a6ea4c1333e4864eb14cb274d22a437
+    m_Address: char_01_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d84907943c431d438a93ac5d62af24e
     m_Address: ZoneSelectPanel
     m_ReadOnly: 0
@@ -57,6 +67,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 230fd631470033844a074275ca6df71f
     m_Address: SFX_Build_Complete
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32fd20720bee7a849a3468058840a6dd
+    m_Address: avt_03_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -82,6 +97,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4dbc55fc251c1de449152e1641444eeb
     m_Address: WorldMapScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5963ebdcc6441ed4fbe80b12a543a92e
+    m_Address: stamina_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e085f6aaec7c854d971d3ad5185ac07
+    m_Address: UI_ItemTooltipPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61a4874bab310024997cde45f90f3553
+    m_Address: char_02_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -140,6 +170,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97d404f2d012d5042a7700c36f913742
+    m_Address: HeroItemPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98516d28ca5384a4fbb2f73021f9c7c5
     m_Address: LoginPanel
     m_ReadOnly: 0
@@ -152,6 +187,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3111dcf3c0eabe4697c4a9d338f55d6
     m_Address: NoticePanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7dd94b5a4413344bbbc9c85299e4149
+    m_Address: char_03_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8f5e20b428c5dc42a2e31203a9b626b
+    m_Address: avt_02_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b373b029f3f67314bbf8b749fd3ddf00
+    m_Address: BGM_WORLD
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -195,13 +245,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d1bf1a54c48e61841a1b0084d76e5e81
-    m_Address: DungeonScene
+  - m_GUID: d4c844745e344fd47aabb41f725fbd04
+    m_Address: gold_icon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d4c844745e344fd47aabb41f725fbd04
-    m_Address: gold_icon
+  - m_GUID: d8acdb35aa9eb9b489ecc2c2f9bff182
+    m_Address: avt_01_img
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

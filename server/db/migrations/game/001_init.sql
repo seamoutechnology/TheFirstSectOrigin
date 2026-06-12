@@ -31,6 +31,10 @@ CREATE TABLE IF NOT EXISTS buildings (
 
 -- Seed dữ liệu công trình
 INSERT INTO buildings (code, name, max_level, description) VALUES
+('dorm', 'dorm', 1, 'dorm_desc'),
+('farm', 'farm', 5, 'farm_desc'),
+('main_hall', 'main_hall', 5, 'main_hall_desc'),
+('summon_hall', 'summon_hall', 5, 'summon_hall_desc')
 ON CONFLICT DO NOTHING;
 
 -- ============================================================

@@ -41,6 +41,18 @@ namespace GameClient.Editor.GMDashboard
         private string[] itemOptions = new string[] { "gold (Vàng)", "qi (Linh Khí)", "diamond (Kim Cương)" };
         private int selectedItemConfigIndex = 0;
 
+        // hero Form
+        private string newHeroCode = "FIRE_WARRIOR_01";
+        private List<GMHeroTemplateData> availableHeroConfigs = new List<GMHeroTemplateData>();
+        private string[] heroOptions = new string[] { "FIRE_WARRIOR_01", "WATER_TANK_01", "WOOD_HEALER_01" };
+        private int selectedHeroConfigIndex = 0;
+
+        // Custom traits configuration for GM add
+        private string inputCustomTraits = ""; // Phân tách bằng dấu phẩy, vd: hardworking,cold
+        private List<GMTraitConfigData> availableTraitConfigs = new List<GMTraitConfigData>();
+        private string[] traitOptions = new string[0];
+        private bool[] selectedTraits; 
+
         private Vector2 rightScrollPos;
 
         public GMPlayerTab(EditorWindow window)
@@ -53,6 +65,8 @@ namespace GameClient.Editor.GMDashboard
             FetchUserList();
             FetchZoneList();
             FetchAvailableItems();
+            FetchAvailableHeroes();
+            FetchAvailableTraits();
             // Auto re-fetch when server comes online
             GMDashboardConfig.OnStatusChanged += OnServerStatusChanged;
         }
@@ -69,6 +83,8 @@ namespace GameClient.Editor.GMDashboard
                 // Refetch zones if the list is still empty
                 if (zoneList.Count == 0) FetchZoneList();
                 if (availableItemConfigs.Count == 0) FetchAvailableItems();
+                if (availableHeroConfigs.Count == 0) FetchAvailableHeroes();
+                if (availableTraitConfigs.Count == 0) FetchAvailableTraits();
             }
         }
 
@@ -92,6 +108,60 @@ namespace GameClient.Editor.GMDashboard
                             itemOptions[i] = $"{availableItemConfigs[i].item_code} ({availableItemConfigs[i].name_key})";
                         }
                         newItemCode = availableItemConfigs[0].item_code;
+                    }
+                    window.Repaint();
+                }
+                req.Dispose();
+            };
+        }
+
+        private void FetchAvailableHeroes()
+        {
+            string url = $"{AdminUrl}/heroes";
+            var req = UnityWebRequest.Get(url);
+            var op = req.SendWebRequest();
+            
+            op.completed += (asyncOp) =>
+            {
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    var heroes = GMJsonHelper.FromJson<GMHeroTemplateData>(req.downloadHandler.text);
+                    availableHeroConfigs = new List<GMHeroTemplateData>(heroes ?? new GMHeroTemplateData[0]);
+                    if (availableHeroConfigs.Count > 0)
+                    {
+                        heroOptions = new string[availableHeroConfigs.Count];
+                        for (int i = 0; i < availableHeroConfigs.Count; i++)
+                        {
+                            heroOptions[i] = $"{availableHeroConfigs[i].code} ({availableHeroConfigs[i].name})";
+                        }
+                        newHeroCode = availableHeroConfigs[0].code;
+                    }
+                    window.Repaint();
+                }
+                req.Dispose();
+            };
+        }
+
+        private void FetchAvailableTraits()
+        {
+            string url = $"{AdminUrl}/trait_configs";
+            var req = UnityWebRequest.Get(url);
+            var op = req.SendWebRequest();
+            
+            op.completed += (asyncOp) =>
+            {
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    var traits = GMJsonHelper.FromJson<GMTraitConfigData>(req.downloadHandler.text);
+                    availableTraitConfigs = new List<GMTraitConfigData>(traits ?? new GMTraitConfigData[0]);
+                    if (availableTraitConfigs.Count > 0)
+                    {
+                        traitOptions = new string[availableTraitConfigs.Count];
+                        selectedTraits = new bool[availableTraitConfigs.Count];
+                        for (int i = 0; i < availableTraitConfigs.Count; i++)
+                        {
+                            traitOptions[i] = availableTraitConfigs[i].trait_code;
+                        }
                     }
                     window.Repaint();
                 }
@@ -197,6 +267,7 @@ namespace GameClient.Editor.GMDashboard
                 if (newZoneIndex != selectedZoneIndex)
                 {
                     selectedZoneIndex = newZoneIndex;
+                    FetchUserList();
                     if (currentUser != null)
                     {
                         FetchUserData(currentUser.user_id);
@@ -300,6 +371,29 @@ namespace GameClient.Editor.GMDashboard
 
             EditorGUILayout.Space();
 
+            // Hiển thị danh sách đệ tử
+            GUILayout.BeginVertical("box");
+            GUILayout.Label("Danh sách Đệ tử đang có:", EditorStyles.boldLabel);
+            if (currentUser.disciples == null || currentUser.disciples.Count == 0)
+            {
+                GUILayout.Label("Chưa có đệ tử nào.", EditorStyles.miniLabel);
+            }
+            else
+            {
+                foreach (var d in currentUser.disciples)
+                {
+                    GUILayout.BeginHorizontal("box");
+                    GUILayout.Label($"{d.name} ({d.hero_code})", GUILayout.Width(180));
+                    GUILayout.Label($"[{d.rarity}]", GUILayout.Width(50));
+                    GUILayout.Label($"Lv.{d.level}", GUILayout.Width(50));
+                    GUILayout.Label($"Star.{d.star}", GUILayout.Width(50));
+                    GUILayout.EndHorizontal();
+                }
+            }
+            GUILayout.EndVertical();
+
+            EditorGUILayout.Space();
+
             GUILayout.BeginVertical("box");
             GUILayout.Label("Thêm Vật phẩm", EditorStyles.boldLabel);
             GUILayout.BeginHorizontal();
@@ -328,6 +422,64 @@ namespace GameClient.Editor.GMDashboard
             }
             GUI.enabled = true;
             GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
+            EditorGUILayout.Space();
+
+            // Thêm Đệ tử Section
+            GUILayout.BeginVertical("box");
+            GUILayout.Label("Thêm Đệ tử (Add Hero)", EditorStyles.boldLabel);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Chọn Tướng:", GUILayout.Width(80));
+
+            if (heroOptions != null && heroOptions.Length > 0)
+            {
+                selectedHeroConfigIndex = EditorGUILayout.Popup(selectedHeroConfigIndex, heroOptions, GUILayout.Width(180));
+                if (selectedHeroConfigIndex >= 0 && selectedHeroConfigIndex < availableHeroConfigs.Count)
+                {
+                    newHeroCode = availableHeroConfigs[selectedHeroConfigIndex].code;
+                }
+            }
+            else
+            {
+                newHeroCode = GUILayout.TextField(newHeroCode, GUILayout.Width(180));
+            }
+
+            GUI.enabled = playerOnline && currentUser != null;
+            if (GUILayout.Button("Thêm Tướng", GUILayout.Width(100)))
+            {
+                AddHeroToUser();
+            }
+            GUI.enabled = true;
+            GUILayout.EndHorizontal();
+
+            // Hiển thị lựa chọn Traits từ DB cấu hình
+            if (traitOptions != null && traitOptions.Length > 0)
+            {
+                EditorGUILayout.Space();
+                GUILayout.Label("Chọn Đặc Điểm (Traits):", EditorStyles.miniBoldLabel);
+                
+                int columns = 3;
+                int rows = Mathf.CeilToInt((float)traitOptions.Length / columns);
+                for (int r = 0; r < rows; r++)
+                {
+                    GUILayout.BeginHorizontal();
+                    for (int c = 0; c < columns; c++)
+                    {
+                        int index = r * columns + c;
+                        if (index < traitOptions.Length)
+                        {
+                            selectedTraits[index] = GUILayout.Toggle(selectedTraits[index], traitOptions[index], GUILayout.Width(130));
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                }
+            }
+
+            EditorGUILayout.Space();
+            GUILayout.Label("Đặc điểm tự viết (ngăn cách bằng dấu phẩy):", EditorStyles.miniLabel);
+            inputCustomTraits = GUILayout.TextField(inputCustomTraits);
+
             GUILayout.EndVertical();
 
             EditorGUILayout.Space();
@@ -370,7 +522,7 @@ namespace GameClient.Editor.GMDashboard
 
         private void FetchUserList()
         {
-            string url = $"{AdminUrl}/users/list?page={currentPage}&limit={limit}&search={searchKeyword}";
+            string url = $"{AdminUrl}/users/list?page={currentPage}&limit={limit}&search={searchKeyword}&zone_id={CurrentZoneId}";
             var req = UnityWebRequest.Get(url);
             var op = req.SendWebRequest();
             
@@ -457,6 +609,74 @@ namespace GameClient.Editor.GMDashboard
                 {
                     Debug.LogError($"[GM API] AddItemToUser failed: {req.error}\n{req.downloadHandler.text}");
                 }
+                req.Dispose();
+            };
+        }
+
+        private void AddHeroToUser()
+        {
+            if (currentUser == null) return;
+
+            List<string> selectedTraitsList = new List<string>();
+            if (traitOptions != null && selectedTraits != null)
+            {
+                for (int i = 0; i < traitOptions.Length; i++)
+                {
+                    if (selectedTraits[i])
+                    {
+                        selectedTraitsList.Add(traitOptions[i]);
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(inputCustomTraits))
+            {
+                string[] parts = inputCustomTraits.Split(',');
+                foreach (var part in parts)
+                {
+                    string trimmed = part.Trim();
+                    if (!string.IsNullOrEmpty(trimmed) && !selectedTraitsList.Contains(trimmed))
+                    {
+                        selectedTraitsList.Add(trimmed);
+                    }
+                }
+            }
+
+            // Xây dựng JSON body
+            string traitsJsonArray = "[]";
+            if (selectedTraitsList.Count > 0)
+            {
+                string[] quoted = new string[selectedTraitsList.Count];
+                for (int i = 0; i < selectedTraitsList.Count; i++)
+                {
+                    quoted[i] = $"\"{selectedTraitsList[i]}\"";
+                }
+                traitsJsonArray = "[" + string.Join(",", quoted) + "]";
+            }
+
+            string url = $"{AdminUrl}/user/add-hero?id={currentUser.user_id}&zone_id={CurrentZoneId}";
+            string jsonBody = $"{{\"hero_code\":\"{newHeroCode}\", \"traits\":{traitsJsonArray}}}";
+            
+            var req = new UnityWebRequest(url, "POST");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonBody);
+            req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
+
+            var op = req.SendWebRequest();
+            op.completed += (asyncOp) =>
+            {
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    EditorUtility.DisplayDialog("Thành công", $"Đã thêm tướng {newHeroCode} vào tài khoản {currentUser.user_id} thành công!", "OK");
+                    FetchUserData(currentUser.user_id); // Tải lại thông tin user để cập nhật danh sách đệ tử
+                }
+                else
+                {
+                    Debug.LogError($"[GM API] AddHeroToUser failed: {req.error}\n{req.downloadHandler.text}");
+                    EditorUtility.DisplayDialog("Lỗi", $"Thêm tướng thất bại: {req.downloadHandler.text}", "OK");
+                }
+                req.Dispose();
             };
         }
 

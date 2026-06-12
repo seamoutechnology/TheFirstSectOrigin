@@ -42,6 +42,7 @@ namespace GameClient.Editor.GMDashboard
                     effect_code = "new_effect",
                     name_key = "New Effect",
                     desc_key = "Description",
+                    icon = "",
                     effect_type = "hp",
                     value_type = "flat"
                 };
@@ -105,6 +106,7 @@ namespace GameClient.Editor.GMDashboard
             currentEffect.effect_code = EditorGUILayout.TextField("Mã Hiệu ứng (Code):", currentEffect.effect_code);
             currentEffect.name_key = EditorGUILayout.TextField("Tên (i18n key):", currentEffect.name_key);
             currentEffect.desc_key = EditorGUILayout.TextField("Mô tả (i18n key):", currentEffect.desc_key);
+            currentEffect.icon = EditorGUILayout.TextField("Đường dẫn Icon (Icon Key/Path):", currentEffect.icon);
             
             string[] effectTypes = { 
                 "STAT_MODIFIER", 

@@ -55,6 +55,102 @@ MonoBehaviour:
       crafting furniture, or as fuel for low-level alchemy furnaces.
     m_Metadata:
       m_Items: []
+  - m_Id: 9722235491938304
+    m_Localized: HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10406306903715840
+    m_Localized: Max HP increase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000001
+    m_Localized: Recruit Ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000002
+    m_Localized: Used to summon new disciples at the Immortal Pavilion.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000003
+    m_Localized: Shop Refresh Ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000004
+    m_Localized: Instantly refreshes the item list in the Merchant Guild.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000005
+    m_Localized: Iron Ore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000006
+    m_Localized: Unrefined iron ore, used for smelting metals and forging defensive gear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000007
+    m_Localized: Spirit Herb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000008
+    m_Localized: Herbs that absorb worldly essence, a key ingredient for basic alchemy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000009
+    m_Localized: Breakthrough Pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000010
+    m_Localized: Safely helps disciples break through to new cultivation realms.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000011
+    m_Localized: Stamina Elixir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000012
+    m_Localized: Instantly restores 50 journey stamina.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000013
+    m_Localized: Speed Hourglass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000014
+    m_Localized: Reduces building construction or research time by 1 hour.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000015
+    m_Localized: Sect Token
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000016
+    m_Localized: Currency for trading between guild members inside sect events.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000017
+    m_Localized: Artifact Shard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000018
+    m_Localized: Gather enough fragments to forge an ancient spiritual artifact.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000019
+    m_Localized: Cultivation Pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000020
+    m_Localized: Instantly grants EXP points to the selected disciple.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000021
+    m_Localized: Stamina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2000022
+    m_Localized: Stamina used for adventure stages and other actions.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -19,11 +19,18 @@ namespace GameClient.UI
         /// <summary>
         /// Cập nhật hiển thị số lượng, icon và tên được dịch hóa cho tài nguyên
         /// </summary>
-        public void UpdateData(int quantity, Sprite iconSprite = null, string nameKey = "")
+        public void UpdateData(int quantity, Sprite iconSprite = null, string nameKey = "", int maxQuantity = -1)
         {
             if (txtQuantity != null)
             {
-                txtQuantity.text = quantity.ToString();
+                if (maxQuantity > 0)
+                {
+                    txtQuantity.text = $"{quantity}/{maxQuantity}";
+                }
+                else
+                {
+                    txtQuantity.text = quantity.ToString();
+                }
             }
 
             if (imgIcon != null && iconSprite != null)

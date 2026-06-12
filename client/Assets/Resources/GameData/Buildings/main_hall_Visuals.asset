@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: main_hall_visuals
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingVisualConfig
   buildingID: main_hall
-  constructionVFXPrefab: {fileID: 0}
+  constructionVFXPrefab: {fileID: 8055626195559770800, guid: 4a4172096b0830f40b8a99247b62f92a, type: 3}
   workingVFXPrefab: {fileID: 0}
   levelVisuals:
   - level: 1
-    normalSprite: {fileID: 21300000, guid: b3548defeccd98c49a1f092a8cb950a6, type: 3}
-    ghostSprite: {fileID: 21300000, guid: e3f4dfca93f9a9640b0ac347f14e7172, type: 3}
-    buildingSprite: {fileID: 21300000, guid: 9950b118db91bbf4f97940e3b6ab034b, type: 3}
-    upgradingSprite: {fileID: 21300000, guid: 64e342fb1fd48cd4b9afd9ac23205531, type: 3}
-    brokenSprite: {fileID: 21300000, guid: 0af3c20fa3434ac4e9160e0aadb604f3, type: 3}
-    lockedSprite: {fileID: 21300000, guid: d2dbe04464f12234f9f0ab3f1cadb6ee, type: 3}
+    normalSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
+    ghostSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
+    buildingSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
+    brokenSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 03a7ae805f96cac4c9c9554739438ece, type: 3}
     producingSprite: {fileID: 0}
     readyToHarvestSprite: {fileID: 0}
   - level: 3

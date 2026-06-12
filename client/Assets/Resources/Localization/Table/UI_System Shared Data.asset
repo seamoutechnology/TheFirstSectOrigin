@@ -445,6 +445,74 @@ MonoBehaviour:
     m_Key: ui_label_choose_language
     m_Metadata:
       m_Items: []
+  - m_Id: 10485400186089472
+    m_Key: summon_hall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10485405483495424
+    m_Key: summon_hall_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000100
+    m_Key: ui_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000101
+    m_Key: ui_traits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000102
+    m_Key: ui_item_type
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000103
+    m_Key: ui_item_req_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000104
+    m_Key: ui_item_owned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000105
+    m_Key: ui_item_type_consumable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000106
+    m_Key: ui_item_type_equipment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000107
+    m_Key: ui_item_type_currency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000108
+    m_Key: ui_item_type_skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000109
+    m_Key: ui_item_type_default
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796489318821888
+    m_Key: ui_quick_team_preset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796572982603776
+    m_Key: ui_quick_team_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796663902531584
+    m_Key: ui_start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796901581156352
+    m_Key: ui_rule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10801336931807232
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

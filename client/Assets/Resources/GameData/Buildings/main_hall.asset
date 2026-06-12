@@ -20,7 +20,7 @@ MonoBehaviour:
   ReputationLimits:
   - RequiredReputation: 0
     MaxAllowed: 1
-  SizeX: 2
+  SizeX: 3
   SizeY: 2
   PrefabAddress: 
   VisualConfig: {fileID: 11400000, guid: b6be25c70eff5bc41a001e8919103407, type: 2}

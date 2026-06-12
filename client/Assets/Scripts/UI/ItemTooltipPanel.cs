@@ -18,16 +18,6 @@ namespace GameClient.UI
         [SerializeField] private TMP_Text txtOwnedQuantity;
         [SerializeField] private Image imgItemIcon;
         [SerializeField] private Image imgBackgroundFrame; // Khung màu tương ứng với phẩm chất (Rarity)
-        [SerializeField] private Button btnCloseArea; // Nút vô hình phủ toàn màn hình để click ra ngoài là tắt popup
-
-        protected override void OnInit()
-        {
-            base.OnInit();
-            if (btnCloseArea != null)
-            {
-                btnCloseArea.onClick.AddListener(Hide);
-            }
-        }
 
         public override void Setup(object data)
         {
@@ -65,20 +55,28 @@ namespace GameClient.UI
                     return;
                 }
 
-                // 2. Cập nhật thông tin và dịch thuật qua LocalizationManager
-                if (txtItemName != null) txtItemName.text = LocalizationManager.Instance.GetText(config.NameKey);
-                if (txtDescription != null) txtDescription.text = LocalizationManager.Instance.GetText(config.DescKey);
-                if (txtItemType != null) txtItemType.text = $"Loại: {TranslateItemType(config.Type)}";
+                // 2. Cập nhật thông tin và dịch thuật qua LocalizationManager từ bảng ITEM_EQUIPMENT
+                if (txtItemName != null) txtItemName.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.NameKey);
+                if (txtDescription != null) txtDescription.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.DescKey);
+                if (txtItemType != null)
+                {
+                    string localizedType = TranslateItemType(config.Type);
+                    txtItemType.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_type", localizedType);
+                }
                 
-                // Mặc định cấp dùng
-                if (txtRequiredLevel != null) txtRequiredLevel.text = "Cấp dùng: Tông Môn Cấp 1"; 
+                // Cấp dùng từ cấu hình
+                if (txtRequiredLevel != null)
+                {
+                    int reqLvl = config.RequiredLevel > 0 ? (int)config.RequiredLevel : 1;
+                    txtRequiredLevel.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_req_level", reqLvl);
+                }
 
                 // 3. Hiển thị số lượng sở hữu thực tế của người chơi từ Inventory
                 if (!hasCustomQuantity)
                 {
                     ownedCount = GetOwnedQuantity(itemCode);
                 }
-                if (txtOwnedQuantity != null) txtOwnedQuantity.text = $"Sở hữu: <color=#00FF00>{ownedCount}</color>";
+                if (txtOwnedQuantity != null) txtOwnedQuantity.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_owned", ownedCount);
 
                 // 4. Load ảnh icon vật phẩm từ Addressable
                 LoadIconAsync(config, itemCode);
@@ -127,14 +125,27 @@ namespace GameClient.UI
 
         private string TranslateItemType(string rawType)
         {
+            string key = "ui_item_type_default";
             switch (rawType.ToUpper())
             {
-                case "CONSUMABLE": return "Đạo Cụ";
-                case "EQUIPMENT": return "Trang Bị";
-                case "CURRENCY": return "Tiền Tệ";
-                case "SKIN_UNLOCKER": return "Ngoại Trang";
-                default: return "Vật Phẩm";
+                case "CONSUMABLE": key = "ui_item_type_consumable"; break;
+                case "EQUIPMENT": key = "ui_item_type_equipment"; break;
+                case "CURRENCY": key = "ui_item_type_currency"; break;
+                case "SKIN_UNLOCKER": key = "ui_item_type_skin"; break;
             }
+            string localized = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, key);
+            if (string.IsNullOrEmpty(localized) || localized.StartsWith("["))
+            {
+                switch (rawType.ToUpper())
+                {
+                    case "CONSUMABLE": return "Đạo Cụ";
+                    case "EQUIPMENT": return "Trang Bị";
+                    case "CURRENCY": return "Tiền Tệ";
+                    case "SKIN_UNLOCKER": return "Ngoại Trang";
+                    default: return "Vật Phẩm";
+                }
+            }
+            return localized;
         }
 
         private void ApplyRarityColor(string rarity)
@@ -156,6 +167,34 @@ namespace GameClient.UI
                 default: // Trắng/Lục
                     txtItemName.color = Color.white;
                     break;
+            }
+        }
+
+        private float _openTime;
+
+        protected override void OnShow()
+        {
+            base.OnShow();
+            _openTime = Time.time;
+        }
+
+        private void Update()
+        {
+            if (Time.time - _openTime < 0.15f) return;
+
+            if (InputManager.Instance != null && InputManager.Instance.IsPrimaryPointerDown())
+            {
+                Vector2 pointerPos = InputManager.Instance.GetPointerPosition();
+                RectTransform rectTransform = transform as RectTransform;
+                if (rectTransform != null)
+                {
+                    var canvas = GetComponentInParent<Canvas>();
+                    var cam = (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : Camera.main;
+                    if (!RectTransformUtility.RectangleContainsScreenPoint(rectTransform, pointerPos, cam))
+                    {
+                        Hide();
+                    }
+                }
             }
         }
     }

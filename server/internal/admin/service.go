@@ -15,7 +15,7 @@ type Service interface {
 	GetActiveAnnouncements() ([]Announcement, error)
 	GetAllAnnouncements() ([]Announcement, error)
 	GetUserInfo(zoneID int, userID int64) (UserInfo, error)
-	GetUsersPaginated(limit, offset int, search string) (UserListResponse, error)
+	GetUsersPaginated(zoneID int, limit, offset int, search string) (UserListResponse, error)
 	GetUserInventory(zoneID int, userID int64) ([]UserItem, error)
 	AddUserItem(zoneID int, userID int64, itemCode string, quantity int) error
 	RemoveUserItem(zoneID int, itemID int64) error
@@ -42,9 +42,12 @@ type Service interface {
 	GetAllHeroTemplates() ([]HeroTemplateDB, error)
 	SyncHeroTemplates(req []HeroTemplateDB) error
 	SyncBuildings(req []SyncBuildingReq) error
-	GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error)
-	RedeemGiftCode(playerID int64, code string) (string, error)
-	RechargePlayer(playerID int64, amount int64) (int64, int64, error)
+	GetPlayerInfoByUserID(userID int64, zoneID int) (PlayerInfoDB, error)
+	RedeemGiftCode(zoneID int, playerID int64, code string) (string, error)
+	RechargePlayer(zoneID int, playerID int64, amount int64) (int64, int64, error)
+	GMAddHero(zoneID int, userID int64, heroCode string) error
+	GMAddHeroWithTraits(zoneID int, userID int64, heroCode string, traits []string) error
+	CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error
 }
 
 type adminService struct {
@@ -135,6 +138,7 @@ func (s *adminService) GetZoneData(tabID string, userID int64) (DataResponse, er
 		}
 
 		allZones = append(allZones, ZoneResponse{
+			ID:              z.ID,
 			Name:            z.Name,
 			Host:            host,
 			Port:            port,
@@ -174,8 +178,8 @@ func (s *adminService) GetUserInfo(zoneID int, userID int64) (UserInfo, error) {
 	return s.repo.GetUserInfo(zoneID, userID)
 }
 
-func (s *adminService) GetUsersPaginated(limit, offset int, search string) (UserListResponse, error) {
-	return s.repo.GetUsersPaginated(limit, offset, search)
+func (s *adminService) GetUsersPaginated(zoneID int, limit, offset int, search string) (UserListResponse, error) {
+	return s.repo.GetUsersPaginated(zoneID, limit, offset, search)
 }
 
 func (s *adminService) GetUserInventory(zoneID int, userID int64) ([]UserItem, error) {
@@ -260,8 +264,8 @@ func (s *adminService) SyncTraitConfigs(req []SyncTraitReq) error {
 	return s.repo.SyncTraitConfigs(req)
 }
 
-func (s *adminService) GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error) {
-	return s.repo.GetPlayerInfoByUserID(userID)
+func (s *adminService) GetPlayerInfoByUserID(userID int64, zoneID int) (PlayerInfoDB, error) {
+	return s.repo.GetPlayerInfoByUserID(userID, zoneID)
 }
 
 func (s *adminService) GetAllHeroTemplates() ([]HeroTemplateDB, error) {
@@ -272,11 +276,23 @@ func (s *adminService) SyncHeroTemplates(req []HeroTemplateDB) error {
 	return s.repo.SyncHeroTemplates(req)
 }
 
-func (s *adminService) RedeemGiftCode(playerID int64, code string) (string, error) {
-	return s.repo.RedeemGiftCode(playerID, code)
+func (s *adminService) RedeemGiftCode(zoneID int, playerID int64, code string) (string, error) {
+	return s.repo.RedeemGiftCode(zoneID, playerID, code)
 }
 
-func (s *adminService) RechargePlayer(playerID int64, amount int64) (int64, int64, error) {
-	return s.repo.RechargePlayer(playerID, amount)
+func (s *adminService) RechargePlayer(zoneID int, playerID int64, amount int64) (int64, int64, error) {
+	return s.repo.RechargePlayer(zoneID, playerID, amount)
+}
+
+func (s *adminService) GMAddHero(zoneID int, userID int64, heroCode string) error {
+	return s.repo.GMAddHero(zoneID, userID, heroCode)
+}
+
+func (s *adminService) GMAddHeroWithTraits(zoneID int, userID int64, heroCode string, traits []string) error {
+	return s.repo.GMAddHeroWithTraits(zoneID, userID, heroCode, traits)
+}
+
+func (s *adminService) CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error {
+	return s.repo.CreateGiftCode(code, rewardGold, rewardDiamond, rewardItems, maxUses)
 }
 

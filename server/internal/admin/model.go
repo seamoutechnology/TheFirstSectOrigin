@@ -49,6 +49,7 @@ type MetaResponse struct {
 }
 
 type ZoneResponse struct {
+	ID              int    `json:"id"`
 	Name            string `json:"name"`
 	Host            string `json:"host"`
 	Port            int    `json:"port"`
@@ -77,12 +78,22 @@ type UserListResponse struct {
 	Data  []UserListItem `json:"data"`
 }
 
+type UserHeroInfo struct {
+	ID       int64  `json:"id"`
+	HeroCode string `json:"hero_code"`
+	Name     string `json:"name"`
+	Rarity   string `json:"rarity"`
+	Level    int    `json:"level"`
+	Star     int    `json:"star"`
+}
+
 type UserInfo struct {
-	UserID    int64  `json:"user_id"`
-	Email     string `json:"email"`
-	SectName  string `json:"sect_name"`
-	Level     int    `json:"level"`
-	Money     int    `json:"money"`
+	UserID    int64          `json:"user_id"`
+	Email     string         `json:"email"`
+	SectName  string         `json:"sect_name"`
+	Level     int            `json:"level"`
+	Money     int            `json:"money"`
+	Disciples []UserHeroInfo `json:"disciples"`
 }
 
 type UserItem struct {
@@ -98,21 +109,23 @@ type AddItemRequest struct {
 }
 
 type ItemConfigData struct {
-	ItemCode    string `json:"item_code" db:"item_code"`
-	NameKey     string `json:"name_key" db:"name_key"`
-	Type        string `json:"type" db:"type"`
-	Rarity      string `json:"rarity" db:"rarity"`
-	Icon        string `json:"icon" db:"icon"`
-	DescKey     string `json:"desc_key" db:"desc_key"`
-	MaxStack    int    `json:"max_stack" db:"max_stack"`
-	Sources     string `json:"sources" db:"sources"` // JSONB array of ItemSource
-	Effects     string `json:"effects" db:"effects"` // JSONB array of ItemEffect
+	ItemCode      string `json:"item_code" db:"item_code"`
+	NameKey       string `json:"name_key" db:"name_key"`
+	Type          string `json:"type" db:"type"`
+	Rarity        string `json:"rarity" db:"rarity"`
+	Icon          string `json:"icon" db:"icon"`
+	DescKey       string `json:"desc_key" db:"desc_key"`
+	MaxStack      int    `json:"max_stack" db:"max_stack"`
+	Sources       string `json:"sources" db:"sources"` // JSONB array of ItemSource
+	Effects       string `json:"effects" db:"effects"` // JSONB array of ItemEffect
+	RequiredLevel int    `json:"required_level" db:"required_level"`
 }
 
 type EffectConfigData struct {
 	EffectCode string  `json:"effect_code" db:"effect_code"`
 	NameKey    string  `json:"name_key" db:"name_key"`
 	DescKey    string  `json:"desc_key" db:"desc_key"`
+	Icon       string  `json:"icon" db:"icon"`
 	EffectType string  `json:"effect_type" db:"effect_type"`
 	ValueType  string  `json:"value_type" db:"value_type"` // 'flat' or 'percent'
 	MinValue   float64 `json:"min_value" db:"min_value"`

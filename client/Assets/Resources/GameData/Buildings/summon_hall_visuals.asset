@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81402449d5f62414283bfac7ecf671d6, type: 3}
+  m_Name: summon_hall_visuals
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingVisualConfig
+  buildingID: summon_hall
+  constructionVFXPrefab: {fileID: 8055626195559770800, guid: 4a4172096b0830f40b8a99247b62f92a, type: 3}
+  workingVFXPrefab: {fileID: 0}
+  levelVisuals:
+  - level: 1
+    normalSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    ghostSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    buildingSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    brokenSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    producingSprite: {fileID: 0}
+    readyToHarvestSprite: {fileID: 0}
+  - level: 3
+    normalSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    ghostSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    buildingSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    upgradingSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    brokenSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 249b11a86afb75f4b8510750a11e4086, type: 3}
+    producingSprite: {fileID: 0}
+    readyToHarvestSprite: {fileID: 0}

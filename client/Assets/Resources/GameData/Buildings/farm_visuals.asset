@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: farm_visuals
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingVisualConfig
   buildingID: farm
-  constructionVFXPrefab: {fileID: 0}
+  constructionVFXPrefab: {fileID: 8055626195559770800, guid: 4a4172096b0830f40b8a99247b62f92a, type: 3}
   workingVFXPrefab: {fileID: 0}
   levelVisuals:
   - level: 1

@@ -7,6 +7,7 @@ namespace GameClient.Managers
         public static string CurrentServerHost { get; set; }
         public static int CurrentServerPort { get; set; }
         public static string CurrentServerName { get; set; }
+        public static int CurrentServerId { get; set; }
         
         public static bool HasCharacter { get; set; } = false;
 
@@ -29,6 +30,7 @@ namespace GameClient.Managers
             CurrentServerHost = string.Empty;
             CurrentServerPort = 0;
             CurrentServerName = string.Empty;
+            CurrentServerId = 1;
             HasCharacter = false;
             SectReputation = 0;
             SectAlignment = 0;

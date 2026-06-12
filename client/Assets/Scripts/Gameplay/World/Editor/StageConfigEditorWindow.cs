@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine.Networking;
 using GameClient.Gameplay.World;
 
@@ -42,6 +43,11 @@ namespace GameClient.Editor
             if (GUILayout.Button("Pull from Server", GUILayout.Height(30)))
             {
                 PullFromServer();
+            }
+
+            if (GUILayout.Button("Load Local Assets", GUILayout.Height(30)))
+            {
+                LoadFromLocalAssets();
             }
 
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
@@ -100,6 +106,7 @@ namespace GameClient.Editor
             stage.recommendPower = EditorGUILayout.IntField("Recommend Power", stage.recommendPower);
             stage.staminaCost = EditorGUILayout.IntField("Stamina Cost", stage.staminaCost);
             stage.combatSceneName = EditorGUILayout.TextField("Combat Scene Name", stage.combatSceneName);
+            stage.requiredStageId = EditorGUILayout.TextField("Required Stage ID", stage.requiredStageId);
 
             EditorGUILayout.Space();
             GUILayout.Label("Enemies (Monsters)", EditorStyles.boldLabel);
@@ -172,6 +179,71 @@ namespace GameClient.Editor
             };
         }
 
+        private void LoadFromLocalAssets()
+        {
+            if (!Directory.Exists(STAGES_FOLDER_PATH))
+            {
+                Debug.LogWarning($"[StageConfigEditorWindow] Directory does not exist: {STAGES_FOLDER_PATH}");
+                return;
+            }
+
+            string[] files = Directory.GetFiles(STAGES_FOLDER_PATH, "Stage_*.asset");
+            _serverStages.Clear();
+            foreach (var file in files)
+            {
+                string filename = Path.GetFileName(file);
+                // Bỏ qua các file trống, file fallback và file trùng lặp
+                if (filename == "Stage_.asset" || filename == "Stage_Fallback.asset") continue;
+                if (filename.StartsWith("Stage_Stage_", System.StringComparison.OrdinalIgnoreCase)) continue;
+                
+                StageData asset = AssetDatabase.LoadAssetAtPath<StageData>(file);
+                if (asset != null)
+                {
+                    // Tránh nạp trùng Stage ID
+                    if (_serverStages.Any(s => s.stageId == asset.stageId))
+                    {
+                        continue;
+                    }
+
+                    var rep = new StageDataRepresentation
+                    {
+                        stageId = asset.stageId,
+                        stageName = asset.stageName,
+                        description = asset.description,
+                        recommendPower = asset.recommendPower,
+                        staminaCost = asset.staminaCost,
+                        combatSceneName = asset.combatSceneName,
+                        requiredStageId = asset.requiredStageId,
+                        enemiesConfig = new List<MonsterConfigRepresentation>()
+                    };
+
+                    if (asset.enemiesConfig != null)
+                    {
+                        foreach (var m in asset.enemiesConfig)
+                        {
+                            rep.enemiesConfig.Add(new MonsterConfigRepresentation
+                            {
+                                monsterId = m.monsterId,
+                                name = m.name,
+                                level = m.level,
+                                maxHP = m.maxHP,
+                                attack = m.attack,
+                                defense = m.defense,
+                                speed = m.speed,
+                                isBoss = m.isBoss,
+                                prefabAddress = m.prefabAddress
+                            });
+                        }
+                    }
+                    _serverStages.Add(rep);
+                }
+            }
+            // Sắp xếp danh sách local sau khi load để gọn gàng
+            _serverStages = _serverStages.OrderBy(s => s.stageId).ToList();
+            Repaint();
+            Debug.Log($"[StageConfigEditorWindow] Loaded {_serverStages.Count} PVE stages from local assets into memory.");
+        }
+
         private void CreateNewLocalStage()
         {
             string newId = $"stage_{_serverStages.Count + 1}";
@@ -197,7 +269,12 @@ namespace GameClient.Editor
 
             foreach (var stageRep in _serverStages)
             {
-                string assetPath = $"{STAGES_FOLDER_PATH}/Stage_{stageRep.stageId}.asset";
+                string fileName = stageRep.stageId;
+                if (!fileName.StartsWith("Stage_", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    fileName = "Stage_" + fileName;
+                }
+                string assetPath = $"{STAGES_FOLDER_PATH}/{fileName}.asset";
                 StageData asset = AssetDatabase.LoadAssetAtPath<StageData>(assetPath);
                 bool isNew = asset == null;
 
@@ -212,6 +289,7 @@ namespace GameClient.Editor
                 asset.recommendPower = stageRep.recommendPower;
                 asset.staminaCost = stageRep.staminaCost;
                 asset.combatSceneName = stageRep.combatSceneName;
+                asset.requiredStageId = stageRep.requiredStageId;
 
                 asset.enemiesConfig = new List<MonsterConfig>();
                 foreach (var monsterRep in stageRep.enemiesConfig)
@@ -320,6 +398,7 @@ namespace GameClient.Editor
             public int recommendPower;
             public int staminaCost;
             public string combatSceneName;
+            public string requiredStageId;
             public List<MonsterConfigRepresentation> enemiesConfig;
         }
 

@@ -375,6 +375,9 @@ func (s *WorldService) GetHeroes(ctx context.Context, userID int64) ([]*reposito
 	if code != ErrCodeSuccess {
 		return nil, code, msg
 	}
+	
+	// Auto-seeding removed to support clean custom GM add hero flow
+
 	heroes, err := s.repo.GetPlayerHeroes(ctx, player.ID)
 	if err != nil {
 		return nil, ErrCodeInternal, err.Error()
@@ -1049,6 +1052,24 @@ func (s *WorldService) TriggerMissionUpdate(ctx context.Context, playerID int64,
 
 		_ = s.repo.UpdatePlayerMissionProgress(ctx, playerID, t.MissionID, currProgress, int32(status))
 	}
+}
+
+func (s *WorldService) GetSkillConfigs(ctx context.Context) ([]*repository.SkillConfig, error) {
+	return s.repo.GetSkillConfigs(ctx)
+}
+
+func (s *WorldService) LevelUpHero(ctx context.Context, userID int64, heroID int64) (*repository.PlayerHero, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, code, msg
+	}
+
+	hero, err := s.repo.LevelUpHero(ctx, player.ID, heroID)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+
+	return hero, ErrCodeSuccess, ""
 }
 
 

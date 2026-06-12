@@ -28,17 +28,20 @@ namespace GameClient.Managers
             if (string.IsNullOrEmpty(table)) table = defaultTable;
 
             string translated = "";
+            bool isFallback = false;
             try 
             {
                 translated = LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
             }
             catch
             {
-                return $"[{table}/{key}]";
+                isFallback = true;
             }
 
-            if (string.IsNullOrEmpty(translated))
+            if (string.IsNullOrEmpty(translated) || translated.Contains("No translation found") || isFallback)
+            {
                 return $"[{table}/{key}]";
+            }
 
             try {
                 return args.Length > 0 ? string.Format(translated, args) : translated;

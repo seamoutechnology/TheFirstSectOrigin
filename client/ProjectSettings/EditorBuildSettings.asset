@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/World/WorldMap.unity
     guid: 4dbc55fc251c1de449152e1641444eeb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/World/Dungeon.unity
     guid: d1bf1a54c48e61841a1b0084d76e5e81
   - enabled: 1

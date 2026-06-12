@@ -12,6 +12,8 @@ namespace GameClient.Gameplay.World
         public string description;
         public int recommendPower;
         public int staminaCost = 5;
+        [Tooltip("Stage ID yêu cầu phải hoàn thành để mở khóa ải này. Để trống nếu là ải đầu.")]
+        public string requiredStageId;
 
         [Header("Map & Scene Settings")]
         public string combatSceneName = "Dungeon"; // Scene loaded when fighting

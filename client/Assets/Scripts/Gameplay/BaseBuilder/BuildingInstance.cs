@@ -116,9 +116,9 @@ namespace GameClient.Gameplay.BaseBuilder
             if (col == null || BaseGridManager.Instance == null || Data == null) return;
 
             Vector3 worldBottom = BaseGridManager.Instance.GridToWorldPosition(GridX, GridY);
-            Vector3 worldTop = BaseGridManager.Instance.GridToWorldPosition(GridX + Data.SizeX, GridY + Data.SizeY);
-            Vector3 worldLeft = BaseGridManager.Instance.GridToWorldPosition(GridX, GridY + Data.SizeY);
-            Vector3 worldRight = BaseGridManager.Instance.GridToWorldPosition(GridX + Data.SizeX, GridY);
+            Vector3 worldTop = BaseGridManager.Instance.GridToWorldPosition(GridX + CurrentSizeX, GridY + CurrentSizeY);
+            Vector3 worldLeft = BaseGridManager.Instance.GridToWorldPosition(GridX, GridY + CurrentSizeY);
+            Vector3 worldRight = BaseGridManager.Instance.GridToWorldPosition(GridX + CurrentSizeX, GridY);
             Vector3 worldCenter = (worldBottom + worldTop) / 2f;
 
             float scaleX = transform.localScale.x != 0 ? transform.localScale.x : 1f;
@@ -172,8 +172,8 @@ namespace GameClient.Gameplay.BaseBuilder
         {
             if (BaseGridManager.Instance != null && Data != null)
             {
-                float centerX = GridX + Data.SizeX / 2f;
-                float centerY = GridY + Data.SizeY / 2f;
+                float centerX = GridX + CurrentSizeX / 2f;
+                float centerY = GridY + CurrentSizeY / 2f;
                 Vector3 worldPos = BaseGridManager.Instance.GridToWorldPosition(centerX, centerY);
                 transform.position = new Vector3(worldPos.x, worldPos.y, 0);
                 

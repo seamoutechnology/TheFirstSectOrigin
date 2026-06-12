@@ -58,6 +58,8 @@ func main() {
 	http.HandleFunc("/api/gm/zones", h.GMGetAllZones)
 	http.HandleFunc("/api/gm/users/list", h.GMGetUsersList)
 	http.HandleFunc("/api/gm/user", h.GMGetUserInfo)
+	http.HandleFunc("/api/gm/user/add-hero", h.GMAddHero)
+	http.HandleFunc("/api/gm/gift_code/create", h.GMCreateGiftCode)
 	http.HandleFunc("/api/gm/inventory", h.GMGetUserInventory)
 	http.HandleFunc("/api/gm/inventory/add", h.GMAddUserItem)
 	http.HandleFunc("/api/gm/inventory/remove", h.GMRemoveUserItem)

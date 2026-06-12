@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"time"
@@ -56,6 +57,8 @@ type PlayerHero struct {
 	BaseATK   int32
 	BaseDEF   int32
 	BaseSpeed int32
+	Traits    string // JSON bytes of string array
+	Skills    string // JSON bytes of learned skills
 }
 
 type HeroTemplate struct {
@@ -308,7 +311,7 @@ func (r *PlayerRepository) DeletePlayerBuilding(ctx context.Context, playerID in
 func (r *PlayerRepository) GetPlayerHeroes(ctx context.Context, playerID int64) ([]*PlayerHero, error) {
 	q := `
 		SELECT ph.id, ph.player_id, ph.hero_code, ht.name, ht.rarity, ht.element, ht.role,
-		       ph.level, ph.star, ph.exp, ht.base_hp, ht.base_atk, ht.base_def, ht.base_speed
+		       ph.level, ph.star, ph.exp, ht.base_hp, ht.base_atk, ht.base_def, ht.base_speed, ph.traits, ph.skills
 		FROM player_heroes ph
 		JOIN hero_templates ht ON ht.code = ph.hero_code
 		WHERE ph.player_id = $1
@@ -323,10 +326,14 @@ func (r *PlayerRepository) GetPlayerHeroes(ctx context.Context, playerID int64) 
 	var result []*PlayerHero
 	for rows.Next() {
 		h := &PlayerHero{}
+		var traitsBytes []byte
+		var skillsBytes []byte
 		if err := rows.Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Name, &h.Rarity, &h.Element, &h.Role,
-			&h.Level, &h.Star, &h.Exp, &h.BaseHP, &h.BaseATK, &h.BaseDEF, &h.BaseSpeed); err != nil {
+			&h.Level, &h.Star, &h.Exp, &h.BaseHP, &h.BaseATK, &h.BaseDEF, &h.BaseSpeed, &traitsBytes, &skillsBytes); err != nil {
 			return nil, err
 		}
+		h.Traits = string(traitsBytes)
+		h.Skills = string(skillsBytes)
 		result = append(result, h)
 	}
 	return result, nil
@@ -334,11 +341,24 @@ func (r *PlayerRepository) GetPlayerHeroes(ctx context.Context, playerID int64) 
 
 func (r *PlayerRepository) AddHero(ctx context.Context, playerID int64, heroCode string) (*PlayerHero, error) {
 	q := `
-		INSERT INTO player_heroes (player_id, hero_code) VALUES ($1, $2)
-		RETURNING id, player_id, hero_code, level, star, exp
+		INSERT INTO player_heroes (player_id, hero_code, traits, skills) 
+		VALUES ($1, $2, '[]'::jsonb, 
+			CASE 
+				WHEN $2 = 'DARK_ASSASSIN_01' THEN '[{"skill_code": "skill_shadow_strike", "level": 1}]'::jsonb
+				WHEN $2 IN ('FIRE_GENERAL_01', 'LIGHT_MAGE_01') THEN '[{"skill_code": "skill_fireball", "level": 1}]'::jsonb
+				WHEN $2 = 'WATER_TANK_01' THEN '[{"skill_code": "skill_shield", "level": 1}]'::jsonb
+				WHEN $2 = 'WOOD_HEALER_01' THEN '[{"skill_code": "skill_heal", "level": 1}]'::jsonb
+				ELSE '[{"skill_code": "skill_slash", "level": 1}]'::jsonb
+			END
+		)
+		RETURNING id, player_id, hero_code, level, star, exp, traits, skills
 	`
 	h := &PlayerHero{PlayerID: playerID, HeroCode: heroCode}
-	err := r.db.QueryRow(ctx, q, playerID, heroCode).Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Level, &h.Star, &h.Exp)
+	var traitsBytes []byte
+	var skillsBytes []byte
+	err := r.db.QueryRow(ctx, q, playerID, heroCode).Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Level, &h.Star, &h.Exp, &traitsBytes, &skillsBytes)
+	h.Traits = string(traitsBytes)
+	h.Skills = string(skillsBytes)
 	return h, err
 }
 
@@ -636,8 +656,8 @@ func (r *PlayerRepository) GetPlayerItemInstance(ctx context.Context, playerID i
 func (r *PlayerRepository) GetItemConfig(ctx context.Context, itemCode string) (*RepoItemConfig, error) {
 	cfg := &RepoItemConfig{}
 	var sourcesBytes, effectsBytes []byte
-	err := r.db.QueryRow(ctx, "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects FROM item_configs WHERE item_code = $1", itemCode).Scan(
-		&cfg.ItemCode, &cfg.NameKey, &cfg.Type, &cfg.Rarity, &cfg.Icon, &cfg.DescKey, &cfg.MaxStack, &sourcesBytes, &effectsBytes)
+	err := r.db.QueryRow(ctx, "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects, required_level FROM item_configs WHERE item_code = $1", itemCode).Scan(
+		&cfg.ItemCode, &cfg.NameKey, &cfg.Type, &cfg.Rarity, &cfg.Icon, &cfg.DescKey, &cfg.MaxStack, &sourcesBytes, &effectsBytes, &cfg.RequiredLevel)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, ErrNotFound
@@ -650,7 +670,7 @@ func (r *PlayerRepository) GetItemConfig(ctx context.Context, itemCode string) (
 }
 
 func (r *PlayerRepository) GetAllItemConfigs(ctx context.Context) ([]*RepoItemConfig, error) {
-	rows, err := r.db.Query(ctx, "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects FROM item_configs")
+	rows, err := r.db.Query(ctx, "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects, required_level FROM item_configs")
 	if err != nil {
 		return nil, err
 	}
@@ -660,7 +680,7 @@ func (r *PlayerRepository) GetAllItemConfigs(ctx context.Context) ([]*RepoItemCo
 	for rows.Next() {
 		cfg := &RepoItemConfig{}
 		var sourcesBytes, effectsBytes []byte
-		err := rows.Scan(&cfg.ItemCode, &cfg.NameKey, &cfg.Type, &cfg.Rarity, &cfg.Icon, &cfg.DescKey, &cfg.MaxStack, &sourcesBytes, &effectsBytes)
+		err := rows.Scan(&cfg.ItemCode, &cfg.NameKey, &cfg.Type, &cfg.Rarity, &cfg.Icon, &cfg.DescKey, &cfg.MaxStack, &sourcesBytes, &effectsBytes, &cfg.RequiredLevel)
 		if err != nil {
 			return nil, err
 		}
@@ -873,6 +893,193 @@ func (r *PlayerRepository) ClaimMissionRewardDB(ctx context.Context, playerID in
 	}
 
 	return tx.Commit(ctx)
+}
+
+func (r *PlayerRepository) GetSkillConfigs(ctx context.Context) ([]*SkillConfig, error) {
+	rows, err := r.db.Query(ctx, "SELECT skill_code, name, damage_multiplier, cooldown, effect_type FROM skills")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var result []*SkillConfig
+	for rows.Next() {
+		sc := &SkillConfig{}
+		if err := rows.Scan(&sc.SkillCode, &sc.Name, &sc.DamageMultiplier, &sc.Cooldown, &sc.EffectType); err != nil {
+			return nil, err
+		}
+		result = append(result, sc)
+	}
+	return result, rows.Err()
+}
+
+func (r *PlayerRepository) LevelUpHero(ctx context.Context, playerID int64, heroID int64) (*PlayerHero, error) {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Fetch hero info
+	var h PlayerHero
+	var traitsBytes, skillsBytes []byte
+	err = tx.QueryRow(ctx, `
+		SELECT ph.id, ph.player_id, ph.hero_code, ht.name, ht.rarity, ht.element, ht.role,
+		       ph.level, ph.star, ph.exp, ht.base_hp, ht.base_atk, ht.base_def, ht.base_speed, ph.traits, ph.skills
+		FROM player_heroes ph
+		JOIN hero_templates ht ON ht.code = ph.hero_code
+		WHERE ph.id = $1 AND ph.player_id = $2
+	`, heroID, playerID).Scan(
+		&h.ID, &h.PlayerID, &h.HeroCode, &h.Name, &h.Rarity, &h.Element, &h.Role,
+		&h.Level, &h.Star, &h.Exp, &h.BaseHP, &h.BaseATK, &h.BaseDEF, &h.BaseSpeed, &traitsBytes, &skillsBytes,
+	)
+	if err != nil {
+		return nil, err
+	}
+	h.Traits = string(traitsBytes)
+	h.Skills = string(skillsBytes)
+
+	// 2. Define cost based on current level (tier-based)
+	var goldCost int64
+	var woodCost int32
+	var stoneCost int32
+
+	currentLvl := h.Level
+	if currentLvl < 10 {
+		// Tier 1: 1-9
+		goldCost = int64(currentLvl * 100)
+		woodCost = currentLvl * 10
+		stoneCost = 0
+	} else if currentLvl < 20 {
+		// Tier 2: 10-19
+		goldCost = int64(currentLvl * 250)
+		woodCost = currentLvl * 15
+		stoneCost = (currentLvl - 9) * 5
+	} else if currentLvl < 30 {
+		// Tier 3: 20-29
+		goldCost = int64(currentLvl * 500)
+		woodCost = currentLvl * 25
+		stoneCost = (currentLvl - 9) * 10
+	} else {
+		// Tier 4: 30+
+		goldCost = int64(currentLvl * 1000)
+		woodCost = currentLvl * 50
+		stoneCost = (currentLvl - 9) * 20
+	}
+
+	// 3. Verify player gold
+	var playerGold int64
+	err = tx.QueryRow(ctx, "SELECT gold FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&playerGold)
+	if err != nil {
+		return nil, err
+	}
+	if playerGold < goldCost {
+		return nil, fmt.Errorf("không đủ vàng (cần %d)", goldCost)
+	}
+
+	// 4. Verify player items (wood_1, stone_1)
+	if woodCost > 0 {
+		var woodQty int32
+		err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00003' FOR UPDATE", playerID).Scan(&woodQty)
+		if err != nil {
+			if errors.Is(err, pgx.ErrNoRows) {
+				return nil, errors.New("không đủ Gỗ I")
+			}
+			return nil, err
+		}
+		if woodQty < woodCost {
+			return nil, fmt.Errorf("không đủ Gỗ I (cần %d)", woodCost)
+		}
+	}
+
+	if stoneCost > 0 {
+		var stoneQty int32
+		err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00002' FOR UPDATE", playerID).Scan(&stoneQty)
+		if err != nil {
+			if errors.Is(err, pgx.ErrNoRows) {
+				return nil, errors.New("không đủ Đá I")
+			}
+			return nil, err
+		}
+		if stoneQty < stoneCost {
+			return nil, fmt.Errorf("không đủ Đá I (cần %d)", stoneCost)
+		}
+	}
+
+	// 5. Deduct gold
+	_, err = tx.Exec(ctx, "UPDATE players SET gold = gold - $1 WHERE id = $2", goldCost, playerID)
+	if err != nil {
+		return nil, err
+	}
+
+	// 6. Deduct materials
+	if woodCost > 0 {
+		_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = '00003'", woodCost, playerID)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if stoneCost > 0 {
+		_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = '00002'", stoneCost, playerID)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// 7. Update hero level
+	nextLvl := currentLvl + 1
+	
+	// Auto unlock skills based on new level
+	var defaultSkills []string
+	switch h.HeroCode {
+	case "DARK_ASSASSIN_01":
+		defaultSkills = []string{"skill_shadow_strike", "skill_slash", "skill_blood_claw"}
+	case "FIRE_GENERAL_01":
+		defaultSkills = []string{"skill_fireball", "skill_shield", "skill_meteor"}
+	case "FIRE_WARRIOR_01":
+		defaultSkills = []string{"skill_slash", "skill_shield", "skill_blade_tempest"}
+	case "LIGHT_DEITY_01":
+		defaultSkills = []string{"skill_slash", "skill_heal", "skill_divine_light"}
+	case "LIGHT_MAGE_01":
+		defaultSkills = []string{"skill_fireball", "skill_shield", "skill_lightning_storm"}
+	case "WATER_TANK_01":
+		defaultSkills = []string{"skill_shield", "skill_slash", "skill_frozen_armor"}
+	case "WOOD_HEALER_01":
+		defaultSkills = []string{"skill_heal", "skill_shield", "skill_holy_revive"}
+	default:
+		defaultSkills = []string{"skill_slash", "skill_shield", "skill_slash"}
+	}
+
+	var learnedSkills []map[string]interface{}
+	if len(defaultSkills) > 0 && nextLvl >= 1 {
+		learnedSkills = append(learnedSkills, map[string]interface{}{"skill_code": defaultSkills[0], "level": int32(1)})
+	}
+	if len(defaultSkills) > 1 && nextLvl >= 10 {
+		learnedSkills = append(learnedSkills, map[string]interface{}{"skill_code": defaultSkills[1], "level": int32(1)})
+	}
+	if len(defaultSkills) > 2 && nextLvl >= 30 {
+		learnedSkills = append(learnedSkills, map[string]interface{}{"skill_code": defaultSkills[2], "level": int32(1)})
+	}
+
+	skillsJSONBytes, _ := json.Marshal(learnedSkills)
+	newSkillsJSON := string(skillsJSONBytes)
+
+	err = tx.QueryRow(ctx, `
+		UPDATE player_heroes SET level = $1, skills = $2
+		WHERE id = $3 AND player_id = $4
+		RETURNING level, skills
+	`, nextLvl, newSkillsJSON, heroID, playerID).Scan(&h.Level, &skillsBytes)
+	if err != nil {
+		return nil, err
+	}
+	h.Skills = string(skillsBytes)
+
+	err = tx.Commit(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &h, nil
 }
 
 

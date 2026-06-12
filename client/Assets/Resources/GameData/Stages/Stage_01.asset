@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f1013fef712ff48bf094dd837c7e49, type: 3}
+  m_Name: Stage_01
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
+  stageId: Stage_01
+  stageName: Ải 1: Tân Thủ Nhập Môn
+  description: Trận chiến vượt ải 1 tông môn.
+  recommendPower: 5000
+  staminaCost: 5
+  requiredStageId: 
+  combatSceneName: Dungeon
+  mapIcon: {fileID: 0}
+  enemiesConfig:
+  - monsterId: monster_01_1
+    name: Quái thú F-1.1
+    level: 1
+    maxHP: 1700
+    attack: 90
+    defense: 45
+    speed: 56
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  rewards:
+  - itemId: 00000
+    amount: 50
+  - itemId: 00002
+    amount: 5
+  - itemId: 00003
+    amount: 5

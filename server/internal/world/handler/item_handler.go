@@ -38,15 +38,16 @@ func (h *WorldHandler) GetInventory(ctx context.Context, req *pb.GetProfileReque
 	if err == nil {
 		for _, cfg := range allConfigs {
 			pbConfigs = append(pbConfigs, &pb.ItemConfig{
-				ItemCode: cfg.ItemCode,
-				NameKey:  cfg.NameKey,
-				Type:     cfg.Type,
-				Rarity:   cfg.Rarity,
-				Icon:     cfg.Icon,
-				DescKey:  cfg.DescKey,
-				MaxStack: cfg.MaxStack,
-				Sources:  make([]*pb.ItemSource, 0),
-				Effects:  make([]*pb.ItemEffect, 0),
+				ItemCode:      cfg.ItemCode,
+				NameKey:       cfg.NameKey,
+				Type:          cfg.Type,
+				Rarity:        cfg.Rarity,
+				Icon:          cfg.Icon,
+				DescKey:       cfg.DescKey,
+				MaxStack:      cfg.MaxStack,
+				RequiredLevel: cfg.RequiredLevel,
+				Sources:       make([]*pb.ItemSource, 0),
+				Effects:       make([]*pb.ItemEffect, 0),
 			})
 		}
 	} else {

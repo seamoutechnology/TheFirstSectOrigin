@@ -2,8 +2,10 @@ package handler
 
 import (
 	"context"
+	"encoding/json"
 
 	"go.uber.org/zap"
+	"server/internal/world/repository"
 	pb "server/pkg/pb"
 )
 
@@ -18,6 +20,88 @@ func (h *WorldHandler) GetDisciples(ctx context.Context, req *pb.GetDisciplesReq
 	}, nil
 }
 
+func (h *WorldHandler) GetHeroes(ctx context.Context, req *pb.GetHeroesRequest) (*pb.GetHeroesResponse, error) {
+	h.log.Info("GetHeroes request")
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.GetHeroesResponse{Base: &pb.BaseResponse{Code: 401, Message: "msg_unauthorized"}}, nil
+	}
+
+	heroes, code, msg := h.svc.GetHeroes(ctx, userID)
+	if code != 0 {
+		return &pb.GetHeroesResponse{Base: &pb.BaseResponse{Code: code, Message: msg}}, nil
+	}
+
+	// Fetch all skill configs from DB
+	configs, err := h.svc.GetSkillConfigs(ctx)
+	configMap := make(map[string]*repository.SkillConfig)
+	if err == nil {
+		for _, cfg := range configs {
+			configMap[cfg.SkillCode] = cfg
+		}
+	} else {
+		h.log.Error("Failed to fetch skill configs", zap.Error(err))
+	}
+
+	type LearnedSkill struct {
+		SkillCode string `json:"skill_code"`
+		Level     int32  `json:"level"`
+	}
+
+	pbHeroes := make([]*pb.Hero, 0, len(heroes))
+	for _, hero := range heroes {
+		var traitsList []string
+		if hero.Traits != "" {
+			_ = json.Unmarshal([]byte(hero.Traits), &traitsList)
+		}
+
+		var learnedSkills []LearnedSkill
+		if hero.Skills != "" && hero.Skills != "[]" {
+			_ = json.Unmarshal([]byte(hero.Skills), &learnedSkills)
+		}
+
+		pbSkills := make([]*pb.HeroSkill, 0, len(learnedSkills))
+		for _, ls := range learnedSkills {
+			skillName := ls.SkillCode
+			var dmgMult float32 = 1.0
+			var cooldown int32 = 0
+			var effType string = "damage"
+
+			if cfg, found := configMap[ls.SkillCode]; found {
+				skillName = cfg.Name
+				dmgMult = float32(cfg.DamageMultiplier)
+				cooldown = cfg.Cooldown
+				effType = cfg.EffectType
+			}
+
+			pbSkills = append(pbSkills, &pb.HeroSkill{
+				SkillCode:        ls.SkillCode,
+				Name:             skillName,
+				DamageMultiplier: dmgMult,
+				Cooldown:         cooldown,
+				EffectType:       effType,
+				Level:            ls.Level,
+			})
+		}
+
+		pbHeroes = append(pbHeroes, &pb.Hero{
+			Id:     hero.ID,
+			Name:   hero.Name,
+			Level:  hero.Level,
+			Rarity: hero.Rarity,
+			Power:  int64(hero.BaseATK*10 + hero.BaseHP + hero.BaseDEF*5),
+			Star:   hero.Star,
+			Traits: traitsList,
+			Skills: pbSkills,
+		})
+	}
+
+	return &pb.GetHeroesResponse{
+		Base:   &pb.BaseResponse{Code: 0, Message: "msg_success"},
+		Heroes: pbHeroes,
+	}, nil
+}
+
 func (h *WorldHandler) LevelUpDisciple(ctx context.Context, req *pb.LevelUpDiscipleRequest) (*pb.LevelUpDiscipleResponse, error) {
 	h.log.Info("LevelUpDisciple request", zap.Int64("id", req.DiscipleId))
 	
@@ -28,9 +112,74 @@ func (h *WorldHandler) LevelUpDisciple(ctx context.Context, req *pb.LevelUpDisci
 
 func (h *WorldHandler) LevelUpHero(ctx context.Context, req *pb.LevelUpHeroRequest) (*pb.LevelUpHeroResponse, error) {
 	h.log.Info("LevelUpHero request", zap.Int64("id", req.HeroId))
-	
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.LevelUpHeroResponse{Base: &pb.BaseResponse{Code: 401, Message: "msg_unauthorized"}}, nil
+	}
+
+	hero, code, msg := h.svc.LevelUpHero(ctx, userID, req.HeroId)
+	if code != 0 {
+		return &pb.LevelUpHeroResponse{Base: &pb.BaseResponse{Code: code, Message: msg}}, nil
+	}
+
+	// Fetch all skill configs from DB to build the pb.Hero response
+	configs, err := h.svc.GetSkillConfigs(ctx)
+	configMap := make(map[string]*repository.SkillConfig)
+	if err == nil {
+		for _, cfg := range configs {
+			configMap[cfg.SkillCode] = cfg
+		}
+	}
+
+	var traitsList []string
+	if hero.Traits != "" {
+		_ = json.Unmarshal([]byte(hero.Traits), &traitsList)
+	}
+
+	type LearnedSkill struct {
+		SkillCode string `json:"skill_code"`
+		Level     int32  `json:"level"`
+	}
+	var learnedSkills []LearnedSkill
+	if hero.Skills != "" && hero.Skills != "[]" {
+		_ = json.Unmarshal([]byte(hero.Skills), &learnedSkills)
+	}
+
+	pbSkills := make([]*pb.HeroSkill, 0, len(learnedSkills))
+	for _, ls := range learnedSkills {
+		skillName := ls.SkillCode
+		var dmgMult float32 = 1.0
+		var cooldown int32 = 0
+		var effType string = "damage"
+
+		if cfg, found := configMap[ls.SkillCode]; found {
+			skillName = cfg.Name
+			dmgMult = float32(cfg.DamageMultiplier)
+			cooldown = cfg.Cooldown
+			effType = cfg.EffectType
+		}
+
+		pbSkills = append(pbSkills, &pb.HeroSkill{
+			SkillCode:        ls.SkillCode,
+			Name:             skillName,
+			DamageMultiplier: dmgMult,
+			Cooldown:         cooldown,
+			EffectType:       effType,
+			Level:            ls.Level,
+		})
+	}
+
 	return &pb.LevelUpHeroResponse{
 		Base: &pb.BaseResponse{Code: 0, Message: "msg_levelup_hero_success"},
-		Hero: &pb.Hero{Id: req.HeroId, Name: "Hero Upgraded", Level: 2, Rarity: "SSR", Power: 1000},
+		Hero: &pb.Hero{
+			Id:     hero.ID,
+			Name:   hero.Name,
+			Level:  hero.Level,
+			Rarity: hero.Rarity,
+			Power:  int64(hero.BaseATK*10 + hero.BaseHP + hero.BaseDEF*5),
+			Star:   hero.Star,
+			Traits: traitsList,
+			Skills: pbSkills,
+		},
 	}, nil
 }

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f1013fef712ff48bf094dd837c7e49, type: 3}
+  m_Name: Stage_Stage_09
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
+  stageId: Stage_09
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 9 t\xF4ng m\xF4n."
+  recommendPower: 45000
+  staminaCost: 5
+  requiredStageId: Stage_08
+  combatSceneName: Dungeon
+  mapIcon: {fileID: 0}
+  enemiesConfig:
+  - monsterId: monster_09_1
+    name: "Qu\xE1i th\xFA F-9.1"
+    level: 25
+    maxHP: 13700
+    attack: 730
+    defense: 365
+    speed: 96
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_09_2
+    name: "Qu\xE1i th\xFA F-9.2"
+    level: 25
+    maxHP: 13900
+    attack: 740
+    defense: 370
+    speed: 97
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_09_3
+    name: "Qu\xE1i th\xFA F-9.3"
+    level: 25
+    maxHP: 14100
+    attack: 750
+    defense: 375
+    speed: 98
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_09_4
+    name: "Qu\xE1i th\xFA F-9.4"
+    level: 25
+    maxHP: 14300
+    attack: 760
+    defense: 380
+    speed: 99
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  - monsterId: monster_09_5
+    name: "Qu\xE1i th\xFA F-9.5"
+    level: 25
+    maxHP: 14500
+    attack: 770
+    defense: 385
+    speed: 100
+    isBoss: 0
+    prefabAddress: MonsterPrefab
+  rewards: []

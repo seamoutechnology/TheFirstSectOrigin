@@ -19,6 +19,7 @@ type IPlayerRepository interface {
 	DeletePlayerBuilding(ctx context.Context, playerID int64, instanceID int64) error
 	GetPlayerHeroes(ctx context.Context, playerID int64) ([]*PlayerHero, error)
 	AddHero(ctx context.Context, playerID int64, heroCode string) (*PlayerHero, error)
+	LevelUpHero(ctx context.Context, playerID int64, heroID int64) (*PlayerHero, error)
 	GetActiveBanners(ctx context.Context) ([]*GachaBanner, error)
 	GetGachaHeroPool(ctx context.Context) ([]*HeroTemplate, error)
 	GetOrCreatePity(ctx context.Context, playerID int64, bannerID int32) (int32, error)
@@ -48,6 +49,15 @@ type IPlayerRepository interface {
 	UpdatePlayerMissionProgress(ctx context.Context, playerID int64, missionID int32, progress int32, status int32) error
 	CreatePlayerMission(ctx context.Context, playerID int64, missionID int32, status int32) error
 	ClaimMissionRewardDB(ctx context.Context, playerID int64, missionID int32, rewards map[string]int32) error
+	GetSkillConfigs(ctx context.Context) ([]*SkillConfig, error)
+}
+
+type SkillConfig struct {
+	SkillCode        string  `json:"skill_code"`
+	Name             string  `json:"name"`
+	DamageMultiplier float64 `json:"damage_multiplier"`
+	Cooldown         int32   `json:"cooldown"`
+	EffectType       string  `json:"effect_type"`
 }
 
 type UserItem struct {
@@ -59,14 +69,15 @@ type UserItem struct {
 }
 
 type RepoItemConfig struct {
-	ItemCode string
-	NameKey  string
-	Type     string
-	Rarity   string
-	Icon     string
-	DescKey  string
-	MaxStack int32
-	Sources  string
-	Effects  string
+	ItemCode      string
+	NameKey       string
+	Type          string
+	Rarity        string
+	Icon          string
+	DescKey       string
+	MaxStack      int32
+	Sources       string
+	Effects       string
+	RequiredLevel int32
 }
 

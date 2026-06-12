@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32d0f9abead72b4199e571ede16553d, type: 3}
+  m_Name: summon_hall
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingData
+  BuildingID: summon_hall
+  BuildingNameKey: summon_hall
+  BuildingDescKey: summon_hall_desc
+  Type: 3
+  Category: 1
+  ReputationLimits:
+  - RequiredReputation: 0
+    MaxAllowed: 1
+  SizeX: 3
+  SizeY: 3
+  PrefabAddress: 
+  VisualConfig: {fileID: 11400000, guid: e3c7dd3d518dea74a82d7b806b68d80c, type: 2}
+  DetailSubPanelAddress: 
+  LevelStats:
+  - Level: 1
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 0
+  - Level: 2
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 30
+  - Level: 3
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 60
+  - Level: 4
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 120
+  - Level: 5
+    RequiredReputation: 0
+    CostItems: []
+    BuildTimeSeconds: 240

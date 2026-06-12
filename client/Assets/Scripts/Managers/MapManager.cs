@@ -65,6 +65,11 @@ namespace GameClient.Managers
             CurrentMap = mapType;
             Debug.Log($"[MapManager] Đã load xong Map: {mapType}");
             
+            if (GameClient.UI.SceneTransitionManager.Instance != null)
+            {
+                await GameClient.UI.SceneTransitionManager.Instance.ExitTransitionAsync();
+            }
+            
             if (AudioManager.Instance != null)
             {
                 switch (mapType)
@@ -134,6 +139,27 @@ namespace GameClient.Managers
                     environmentObj.AddComponent<GameClient.BaseBuilding.Environment.CloudManager>();
                     var renderer = environmentObj.AddComponent<GameClient.Gameplay.BaseBuilder.RuntimeMapRenderer>();
                      renderer.mappingConfig = Resources.Load<GameClient.Gameplay.BaseBuilder.TileToIDMapping>("GameData/MainTileMapping");
+                }
+            }
+            else if (mapType == MapType.Dungeon)
+            {
+                if (GameObject.FindFirstObjectByType<GameClient.Gameplay.Combat.CombatSceneController>() == null)
+                {
+                    Debug.Log("[MapManager] Không tìm thấy CombatSceneController trong Scene Dungeon, đang tự động khởi tạo...");
+                    var combatCtrlObj = new GameObject("CombatController");
+                    combatCtrlObj.AddComponent<GameClient.Gameplay.Combat.CombatSceneController>();
+
+                    // Cấu hình Main Camera cho Combat
+                    var mainCam = Camera.main;
+                    if (mainCam != null)
+                    {
+                        mainCam.orthographic = true;
+                        mainCam.orthographicSize = 5f;
+                        mainCam.transform.position = new Vector3(0, 0, -10);
+                        mainCam.transform.rotation = Quaternion.identity;
+                        mainCam.clearFlags = CameraClearFlags.SolidColor;
+                        mainCam.backgroundColor = new Color(0.15f, 0.15f, 0.15f); // Background tối
+                    }
                 }
             }
         }

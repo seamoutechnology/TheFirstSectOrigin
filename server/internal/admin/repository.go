@@ -21,7 +21,7 @@ type Repository interface {
 	GetActiveAnnouncements() ([]Announcement, error)
 	GetAllAnnouncements() ([]Announcement, error)
 	GetUserInfo(zoneID int, userID int64) (UserInfo, error)
-	GetUsersPaginated(limit, offset int, search string) (UserListResponse, error)
+	GetUsersPaginated(zoneID int, limit, offset int, search string) (UserListResponse, error)
 	GetUserInventory(zoneID int, userID int64) ([]UserItem, error)
 	AddUserItem(zoneID int, userID int64, itemCode string, quantity int) error
 	RemoveUserItem(zoneID int, itemID int64) error
@@ -48,9 +48,12 @@ type Repository interface {
 	GetAllHeroTemplates() ([]HeroTemplateDB, error)
 	SyncHeroTemplates(req []HeroTemplateDB) error
 	SyncBuildings(req []SyncBuildingReq) error
-	GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error)
-	RedeemGiftCode(playerID int64, code string) (string, error)
-	RechargePlayer(playerID int64, amount int64) (int64, int64, error)
+	GetPlayerInfoByUserID(userID int64, zoneID int) (PlayerInfoDB, error)
+	RedeemGiftCode(zoneID int, playerID int64, code string) (string, error)
+	RechargePlayer(zoneID int, playerID int64, amount int64) (int64, int64, error)
+	GMAddHero(zoneID int, userID int64, heroCode string) error
+	GMAddHeroWithTraits(zoneID int, userID int64, heroCode string, traits []string) error
+	CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error
 }
 
 type adminRepo struct {
@@ -174,6 +177,7 @@ func (r *adminRepo) GetAllAnnouncements() ([]Announcement, error) {
 func (r *adminRepo) GetUserInfo(zoneID int, userID int64) (UserInfo, error) {
 	var info UserInfo
 	info.UserID = userID
+	info.Disciples = make([]UserHeroInfo, 0)
 	_ = r.db.Get(&info.Email, "SELECT email FROM users WHERE id = $1", userID)
 	
 	db, err := r.getGameDB(zoneID)
@@ -181,12 +185,34 @@ func (r *adminRepo) GetUserInfo(zoneID int, userID int64) (UserInfo, error) {
 		return info, err
 	}
 	serverID := fmt.Sprintf("zone%d", zoneID)
-	_ = db.QueryRow("SELECT nickname, level, bind_coin FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID).Scan(&info.SectName, &info.Level, &info.Money)
+	var playerID int64
+	err = db.QueryRow("SELECT id, nickname, level, gold FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID).Scan(&playerID, &info.SectName, &info.Level, &info.Money)
+	if err != nil {
+		// Return the info as is, but log or handle the error
+		return info, nil
+	}
+	
+	rows, err := db.Query(`
+		SELECT ph.id, ph.hero_code, ht.name, ht.rarity, ph.level, ph.star
+		FROM player_heroes ph
+		JOIN hero_templates ht ON ht.code = ph.hero_code
+		WHERE ph.player_id = $1
+		ORDER BY ph.level DESC, ht.rarity DESC
+	`, playerID)
+	if err == nil {
+		defer rows.Close()
+		for rows.Next() {
+			var h UserHeroInfo
+			if err := rows.Scan(&h.ID, &h.HeroCode, &h.Name, &h.Rarity, &h.Level, &h.Star); err == nil {
+				info.Disciples = append(info.Disciples, h)
+			}
+		}
+	}
 	
 	return info, nil
 }
 
-func (r *adminRepo) GetUsersPaginated(limit, offset int, search string) (UserListResponse, error) {
+func (r *adminRepo) GetUsersPaginated(zoneID int, limit, offset int, search string) (UserListResponse, error) {
 	var resp UserListResponse
 	resp.Data = make([]UserListItem, 0)
 
@@ -228,11 +254,15 @@ func (r *adminRepo) GetUsersPaginated(limit, offset int, search string) (UserLis
 		userIDs = append(userIDs, u.ID)
 	}
 	
-	query, args, err := sqlx.In("SELECT user_id, nickname, level FROM players WHERE user_id IN (?)", userIDs)
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	query, args, err := sqlx.In("SELECT user_id, nickname, level FROM players WHERE user_id IN (?) AND server_id = ?", userIDs, serverID)
 	if err != nil {
 		return resp, err
 	}
-	db, _ := r.getGameDB(1)
+	db, err := r.getGameDB(zoneID)
+	if err != nil {
+		return resp, err
+	}
 	query = db.Rebind(query)
 
 	var players []struct {
@@ -320,7 +350,7 @@ func (r *adminRepo) RemoveUserItem(zoneID int, itemID int64) error {
 
 func (r *adminRepo) GetAllItemConfigs() ([]ItemConfigData, error) {
 	var list []ItemConfigData
-	query := "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects FROM item_configs ORDER BY item_code ASC"
+	query := "SELECT item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects, required_level FROM item_configs ORDER BY item_code ASC"
 	db, _ := r.getGameDB(1)
 	err := db.Select(&list, query)
 	return list, err
@@ -334,8 +364,8 @@ func (r *adminRepo) SaveItemConfig(c ItemConfigData) error {
 		c.Effects = "[]"
 	}
 	query := `
-		INSERT INTO item_configs (item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		INSERT INTO item_configs (item_code, name_key, type, rarity, icon, desc_key, max_stack, sources, effects, required_level)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 		ON CONFLICT (item_code) DO UPDATE SET
 			name_key = EXCLUDED.name_key,
 			type = EXCLUDED.type,
@@ -345,10 +375,11 @@ func (r *adminRepo) SaveItemConfig(c ItemConfigData) error {
 			max_stack = EXCLUDED.max_stack,
 			sources = EXCLUDED.sources,
 			effects = EXCLUDED.effects,
+			required_level = EXCLUDED.required_level,
 			updated_at = CURRENT_TIMESTAMP
 	`
 	db, _ := r.getGameDB(1)
-	_, err := db.Exec(query, c.ItemCode, c.NameKey, c.Type, c.Rarity, c.Icon, c.DescKey, c.MaxStack, c.Sources, c.Effects)
+	_, err := db.Exec(query, c.ItemCode, c.NameKey, c.Type, c.Rarity, c.Icon, c.DescKey, c.MaxStack, c.Sources, c.Effects, c.RequiredLevel)
 	return err
 }
 
@@ -361,7 +392,7 @@ func (r *adminRepo) DeleteItemConfig(itemCode string) error {
 
 func (r *adminRepo) GetAllEffectConfigs() ([]EffectConfigData, error) {
 	var list []EffectConfigData
-	query := "SELECT effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value, source_stat FROM effect_configs ORDER BY effect_code ASC"
+	query := "SELECT effect_code, name_key, desc_key, icon, effect_type, value_type, min_value, max_value, source_stat FROM effect_configs ORDER BY effect_code ASC"
 	db, _ := r.getGameDB(1)
 	err := db.Select(&list, query)
 	return list, err
@@ -369,11 +400,12 @@ func (r *adminRepo) GetAllEffectConfigs() ([]EffectConfigData, error) {
 
 func (r *adminRepo) SaveEffectConfig(c EffectConfigData) error {
 	query := `
-		INSERT INTO effect_configs (effect_code, name_key, desc_key, effect_type, value_type, min_value, max_value, source_stat)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+		INSERT INTO effect_configs (effect_code, name_key, desc_key, icon, effect_type, value_type, min_value, max_value, source_stat)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 		ON CONFLICT (effect_code) DO UPDATE SET
 			name_key = EXCLUDED.name_key,
 			desc_key = EXCLUDED.desc_key,
+			icon = EXCLUDED.icon,
 			effect_type = EXCLUDED.effect_type,
 			value_type = EXCLUDED.value_type,
 			min_value = EXCLUDED.min_value,
@@ -382,7 +414,7 @@ func (r *adminRepo) SaveEffectConfig(c EffectConfigData) error {
 			updated_at = CURRENT_TIMESTAMP
 	`
 	db, _ := r.getGameDB(1)
-	_, err := db.Exec(query, c.EffectCode, c.NameKey, c.DescKey, c.EffectType, c.ValueType, c.MinValue, c.MaxValue, c.SourceStat)
+	_, err := db.Exec(query, c.EffectCode, c.NameKey, c.DescKey, c.Icon, c.EffectType, c.ValueType, c.MinValue, c.MaxValue, c.SourceStat)
 	return err
 }
 
@@ -636,19 +668,37 @@ type PlayerInfoDB struct {
 	Diamond  int64  `db:"diamond"`
 }
 
-func (r *adminRepo) GetPlayerInfoByUserID(userID int64) (PlayerInfoDB, error) {
+func (r *adminRepo) GetPlayerInfoByUserID(userID int64, zoneID int) (PlayerInfoDB, error) {
 	var player PlayerInfoDB
-	db, err := r.getGameDB(1)
+	db, err := r.getGameDB(zoneID)
 	if err != nil {
 		return player, err
 	}
-	// Lấy người chơi đầu tiên thuộc về UserID này trong Database game
-	err = db.Get(&player, "SELECT id, nickname, level, gold, diamond FROM players WHERE user_id = $1 LIMIT 1", userID)
-	return player, err
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	// Lấy người chơi đầu tiên thuộc về UserID này và server_id trong Database game
+	err = db.Get(&player, "SELECT id, nickname, level, gold, diamond FROM players WHERE user_id = $1 AND server_id = $2 LIMIT 1", userID, serverID)
+	if err != nil {
+		return player, err
+	}
+
+	// Đồng bộ thông số hiển thị từ user_items (nếu có) để khớp với Client
+	var itemGold int64
+	err = db.Get(&itemGold, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00001'", player.ID)
+	if err == nil {
+		player.Gold = itemGold
+	}
+
+	var itemDiamond int64
+	err = db.Get(&itemDiamond, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00000'", player.ID)
+	if err == nil {
+		player.Diamond = itemDiamond
+	}
+
+	return player, nil
 }
 
-func (r *adminRepo) RedeemGiftCode(playerID int64, code string) (string, error) {
-	db, err := r.getGameDB(1)
+func (r *adminRepo) RedeemGiftCode(zoneID int, playerID int64, code string) (string, error) {
+	db, err := r.getGameDB(zoneID)
 	if err != nil {
 		return "", err
 	}
@@ -705,6 +755,38 @@ func (r *adminRepo) RedeemGiftCode(playerID int64, code string) (string, error) 
 		if err != nil {
 			return "", err
 		}
+
+		if giftCode.RewardGold > 0 {
+			var hasGoldItem bool
+			err = tx.Get(&hasGoldItem, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = '00001')", playerID)
+			if err != nil {
+				return "", err
+			}
+			if hasGoldItem {
+				_, err = tx.Exec("UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = '00001'", giftCode.RewardGold, playerID)
+			} else {
+				_, err = tx.Exec("INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, '00001', $2, '[]')", playerID, giftCode.RewardGold)
+			}
+			if err != nil {
+				return "", err
+			}
+		}
+
+		if giftCode.RewardDiamond > 0 {
+			var hasXuItem bool
+			err = tx.Get(&hasXuItem, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = '00000')", playerID)
+			if err != nil {
+				return "", err
+			}
+			if hasXuItem {
+				_, err = tx.Exec("UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = '00000'", giftCode.RewardDiamond, playerID)
+			} else {
+				_, err = tx.Exec("INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, '00000', $2, '[]')", playerID, giftCode.RewardDiamond)
+			}
+			if err != nil {
+				return "", err
+			}
+		}
 	}
 
 	// 6. Tặng vật phẩm trong túi đồ
@@ -740,7 +822,7 @@ func (r *adminRepo) RedeemGiftCode(playerID int64, code string) (string, error) 
 		desc += fmt.Sprintf("%d Vàng, ", giftCode.RewardGold)
 	}
 	if giftCode.RewardDiamond > 0 {
-		desc += fmt.Sprintf("%d Qi, ", giftCode.RewardDiamond)
+		desc += fmt.Sprintf("%d Xu, ", giftCode.RewardDiamond)
 	}
 	if len(items) > 0 {
 		desc += fmt.Sprintf("%d vật phẩm túi đồ, ", len(items))
@@ -751,8 +833,8 @@ func (r *adminRepo) RedeemGiftCode(playerID int64, code string) (string, error) 
 	return desc, nil
 }
 
-func (r *adminRepo) RechargePlayer(playerID int64, amount int64) (int64, int64, error) {
-	db, err := r.getGameDB(1)
+func (r *adminRepo) RechargePlayer(zoneID int, playerID int64, amount int64) (int64, int64, error) {
+	db, err := r.getGameDB(zoneID)
 	if err != nil {
 		return 0, 0, err
 	}
@@ -775,6 +857,37 @@ func (r *adminRepo) RechargePlayer(playerID int64, amount int64) (int64, int64, 
 
 	// 2. Cộng tiền vào bảng players
 	_, err = tx.Exec("UPDATE players SET gold = gold + $1, diamond = diamond + $2, updated_at = NOW() WHERE id = $3", goldReward, diamondReward, playerID)
+	if err != nil {
+		return 0, 0, err
+	}
+
+	// Đồng bộ vào user_items
+	// Vàng thỏi: 00001
+	var hasGoldItem bool
+	err = tx.Get(&hasGoldItem, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = '00001')", playerID)
+	if err != nil {
+		return 0, 0, err
+	}
+	if hasGoldItem {
+		_, err = tx.Exec("UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = '00001'", goldReward, playerID)
+	} else {
+		_, err = tx.Exec("INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, '00001', $2, '[]')", playerID, goldReward)
+	}
+	if err != nil {
+		return 0, 0, err
+	}
+
+	// Xu/Diamond: 00000
+	var hasXuItem bool
+	err = tx.Get(&hasXuItem, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = '00000')", playerID)
+	if err != nil {
+		return 0, 0, err
+	}
+	if hasXuItem {
+		_, err = tx.Exec("UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = '00000'", diamondReward, playerID)
+	} else {
+		_, err = tx.Exec("INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, '00000', $2, '[]')", playerID, diamondReward)
+	}
 	if err != nil {
 		return 0, 0, err
 	}
@@ -834,15 +947,22 @@ func (r *adminRepo) SyncHeroTemplates(req []HeroTemplateDB) error {
 	}
 	defer tx.Rollback()
 
-	_, err = tx.Exec("DELETE FROM hero_templates")
-	if err != nil {
-		return err
-	}
-
+	// Insert or update all hero templates in req
 	for _, h := range req {
 		query := `
 			INSERT INTO hero_templates (code, name, rarity, element, role, base_hp, base_atk, base_def, base_speed, gacha_weight, is_active)
 			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+			ON CONFLICT (code) DO UPDATE SET
+				name = EXCLUDED.name,
+				rarity = EXCLUDED.rarity,
+				element = EXCLUDED.element,
+				role = EXCLUDED.role,
+				base_hp = EXCLUDED.base_hp,
+				base_atk = EXCLUDED.base_atk,
+				base_def = EXCLUDED.base_def,
+				base_speed = EXCLUDED.base_speed,
+				gacha_weight = EXCLUDED.gacha_weight,
+				is_active = EXCLUDED.is_active
 		`
 		_, err = tx.Exec(query, h.Code, h.Name, h.Rarity, h.Element, h.Role, h.BaseHP, h.BaseATK, h.BaseDEF, h.BaseSpeed, h.GachaWeight, h.IsActive)
 		if err != nil {
@@ -850,7 +970,98 @@ func (r *adminRepo) SyncHeroTemplates(req []HeroTemplateDB) error {
 		}
 	}
 
+	// Delete templates not present in req AND not referenced by any player_heroes
+	if len(req) > 0 {
+		var keepCodes []string
+		for _, h := range req {
+			keepCodes = append(keepCodes, h.Code)
+		}
+		query, args, err := sqlx.In(`
+			DELETE FROM hero_templates 
+			WHERE code NOT IN (?) 
+			  AND code NOT IN (SELECT DISTINCT hero_code FROM player_heroes)
+		`, keepCodes)
+		if err == nil {
+			query = tx.Rebind(query)
+			_, err = tx.Exec(query, args...)
+			if err != nil {
+				return fmt.Errorf("failed to delete obsolete unreferenced hero templates: %v", err)
+			}
+		}
+	} else {
+		_, err = tx.Exec(`
+			DELETE FROM hero_templates 
+			WHERE code NOT IN (SELECT DISTINCT hero_code FROM player_heroes)
+		`)
+		if err != nil {
+			return fmt.Errorf("failed to delete unreferenced hero templates: %v", err)
+		}
+	}
+
 	return tx.Commit()
+}
+
+func (r *adminRepo) GMAddHero(zoneID int, userID int64, heroCode string) error {
+	db, err := r.getGameDB(zoneID)
+	if err != nil {
+		return err
+	}
+	var playerID int64
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	err = db.Get(&playerID, "SELECT id FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID)
+	if err != nil {
+		return fmt.Errorf("không tìm thấy nhân vật ở zone %d: %v", zoneID, err)
+	}
+
+	_, err = db.Exec("INSERT INTO player_heroes (player_id, hero_code, traits) VALUES ($1, $2, '[]'::jsonb)", playerID, heroCode)
+	return err
+}
+
+func (r *adminRepo) GMAddHeroWithTraits(zoneID int, userID int64, heroCode string, traits []string) error {
+	db, err := r.getGameDB(zoneID)
+	if err != nil {
+		return err
+	}
+	var playerID int64
+	serverID := fmt.Sprintf("zone%d", zoneID)
+	err = db.Get(&playerID, "SELECT id FROM players WHERE user_id = $1 AND server_id = $2", userID, serverID)
+	if err != nil {
+		return fmt.Errorf("không tìm thấy nhân vật ở zone %d: %v", zoneID, err)
+	}
+
+	traitsJSON := "[]"
+	if len(traits) > 0 {
+		importJSON, err := json.Marshal(traits)
+		if err == nil {
+			traitsJSON = string(importJSON)
+		}
+	}
+
+	_, err = db.Exec("INSERT INTO player_heroes (player_id, hero_code, traits) VALUES ($1, $2, $3::jsonb)", playerID, heroCode, traitsJSON)
+	return err
+}
+
+func (r *adminRepo) CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error {
+	db, err := r.getGameDB(1) // Default zone DB holds the gift codes
+	if err != nil {
+		return err
+	}
+
+	if rewardItems == "" {
+		rewardItems = "[]"
+	}
+
+	q := `
+		INSERT INTO gift_codes (code, reward_gold, reward_diamond, reward_items, max_uses, used_count)
+		VALUES ($1, $2, $3, $4::jsonb, $5, 0)
+		ON CONFLICT (code) DO UPDATE 
+		SET reward_gold = EXCLUDED.reward_gold,
+		    reward_diamond = EXCLUDED.reward_diamond,
+		    reward_items = EXCLUDED.reward_items,
+		    max_uses = EXCLUDED.max_uses
+	`
+	_, err = db.Exec(q, code, rewardGold, rewardDiamond, rewardItems, maxUses)
+	return err
 }
 
 

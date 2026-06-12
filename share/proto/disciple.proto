@@ -22,6 +22,16 @@ message Disciple {
   repeated string skills = 12;
 }
 
+message HeroSkill {
+  string skill_code = 1;
+  string name = 2;
+  float damage_multiplier = 3;
+  int32 cooldown = 4;
+  string effect_type = 5;
+  int32 level = 6;
+  bool is_locked = 7;
+}
+
 message Hero {
   int64 id = 1;
   string name = 2;
@@ -29,6 +39,8 @@ message Hero {
   string rarity = 4; // Đổi lại thành string
   int64 power = 5;
   int32 star = 6; // C# đang tìm .Star
+  repeated string traits = 7;
+  repeated HeroSkill skills = 8;
 }
 
 message FormationSlot {

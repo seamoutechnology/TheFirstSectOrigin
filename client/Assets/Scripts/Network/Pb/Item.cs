@@ -28,37 +28,38 @@ namespace GameClient.Network.Pb {
             "EQoJbGFiZWxfa2V5GAEgASgJEhIKCmlubmVyX2xpbmsYAiABKAkSEgoKc3Rh",
             "cnRfdGltZRgDIAEoAxIQCghlbmRfdGltZRgEIAEoAyJWCgpJdGVtRWZmZWN0",
             "EhMKC2VmZmVjdF9jb2RlGAEgASgJEg0KBXZhbHVlGAIgASgCEhEKCW1pbl92",
-            "YWx1ZRgDIAEoAhIRCgltYXhfdmFsdWUYBCABKAIixAEKCkl0ZW1Db25maWcS",
+            "YWx1ZRgDIAEoAhIRCgltYXhfdmFsdWUYBCABKAIi3AEKCkl0ZW1Db25maWcS",
             "EQoJaXRlbV9jb2RlGAEgASgJEhAKCG5hbWVfa2V5GAIgASgJEgwKBHR5cGUY",
             "AyABKAkSDgoGcmFyaXR5GAQgASgJEgwKBGljb24YBSABKAkSEAoIZGVzY19r",
             "ZXkYBiABKAkSEQoJbWF4X3N0YWNrGAcgASgFEh8KB3NvdXJjZXMYCCADKAsy",
             "Di5wYi5JdGVtU291cmNlEh8KB2VmZmVjdHMYCSADKAsyDi5wYi5JdGVtRWZm",
-            "ZWN0IrUBCgRJdGVtEgoKAmlkGAEgASgDEhEKCWl0ZW1fY29kZRgCIAEoCRIM",
-            "CgRuYW1lGAMgASgJEgwKBHR5cGUYBCABKAkSDgoGcmFyaXR5GAUgASgJEhAK",
-            "CHF1YW50aXR5GAYgASgFEiIKBXN0YXRzGAcgAygLMhMucGIuSXRlbS5TdGF0",
-            "c0VudHJ5GiwKClN0YXRzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIg",
-            "ASgFOgI4ASJFCglJbnZlbnRvcnkSFwoFaXRlbXMYASADKAsyCC5wYi5JdGVt",
-            "Eh8KB2NvbmZpZ3MYAiADKAsyDi5wYi5JdGVtQ29uZmlnIkIKDEVxdWlwUmVx",
-            "dWVzdBITCgtkaXNjaXBsZV9pZBgBIAEoAxIPCgdpdGVtX2lkGAIgASgDEgwK",
-            "BHNsb3QYAyABKAkiUgoNRXF1aXBSZXNwb25zZRIMCgRjb2RlGAEgASgFEhIK",
-            "Cm1lc3NhZ2VfaWQYAiABKAkSHwoNZXF1aXBwZWRfaXRlbRgDIAEoCzIILnBi",
-            "Lkl0ZW0iwgEKBlJlY2lwZRIRCglyZWNpcGVfaWQYASABKAkSGAoQcmVzdWx0",
-            "X2l0ZW1fY29kZRgCIAEoCRIsCgltYXRlcmlhbHMYAyADKAsyGS5wYi5SZWNp",
-            "cGUuTWF0ZXJpYWxzRW50cnkSFAoMc3VjY2Vzc19yYXRlGAQgASgFEhUKDWNy",
-            "YWZ0aW5nX3RpbWUYBSABKAUaMAoOTWF0ZXJpYWxzRW50cnkSCwoDa2V5GAEg",
-            "ASgJEg0KBXZhbHVlGAIgASgFOgI4ASIwCgxDcmFmdFJlcXVlc3QSEQoJcmVj",
-            "aXBlX2lkGAEgASgJEg0KBWNvdW50GAIgASgFIlEKDUNyYWZ0UmVzcG9uc2US",
-            "DAoEY29kZRgBIAEoBRISCgptZXNzYWdlX2lkGAIgASgJEh4KDGdhaW5lZF9p",
-            "dGVtcxgDIAMoCzIILnBiLkl0ZW0iMwoOVXNlSXRlbVJlcXVlc3QSDwoHaXRl",
-            "bV9pZBgBIAEoAxIQCghxdWFudGl0eRgCIAEoBSIzCg9Vc2VJdGVtUmVzcG9u",
-            "c2USDAoEY29kZRgBIAEoBRISCgptZXNzYWdlX2lkGAIgASgJQipaEHNlcnZl",
-            "ci9wa2cvcGI7cGKqAhVHYW1lQ2xpZW50Lk5ldHdvcmsuUGJiBnByb3RvMw=="));
+            "ZWN0EhYKDnJlcXVpcmVkX2xldmVsGAogASgFIrUBCgRJdGVtEgoKAmlkGAEg",
+            "ASgDEhEKCWl0ZW1fY29kZRgCIAEoCRIMCgRuYW1lGAMgASgJEgwKBHR5cGUY",
+            "BCABKAkSDgoGcmFyaXR5GAUgASgJEhAKCHF1YW50aXR5GAYgASgFEiIKBXN0",
+            "YXRzGAcgAygLMhMucGIuSXRlbS5TdGF0c0VudHJ5GiwKClN0YXRzRW50cnkS",
+            "CwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgFOgI4ASJFCglJbnZlbnRvcnkS",
+            "FwoFaXRlbXMYASADKAsyCC5wYi5JdGVtEh8KB2NvbmZpZ3MYAiADKAsyDi5w",
+            "Yi5JdGVtQ29uZmlnIkIKDEVxdWlwUmVxdWVzdBITCgtkaXNjaXBsZV9pZBgB",
+            "IAEoAxIPCgdpdGVtX2lkGAIgASgDEgwKBHNsb3QYAyABKAkiUgoNRXF1aXBS",
+            "ZXNwb25zZRIMCgRjb2RlGAEgASgFEhIKCm1lc3NhZ2VfaWQYAiABKAkSHwoN",
+            "ZXF1aXBwZWRfaXRlbRgDIAEoCzIILnBiLkl0ZW0iwgEKBlJlY2lwZRIRCgly",
+            "ZWNpcGVfaWQYASABKAkSGAoQcmVzdWx0X2l0ZW1fY29kZRgCIAEoCRIsCglt",
+            "YXRlcmlhbHMYAyADKAsyGS5wYi5SZWNpcGUuTWF0ZXJpYWxzRW50cnkSFAoM",
+            "c3VjY2Vzc19yYXRlGAQgASgFEhUKDWNyYWZ0aW5nX3RpbWUYBSABKAUaMAoO",
+            "TWF0ZXJpYWxzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgFOgI4",
+            "ASIwCgxDcmFmdFJlcXVlc3QSEQoJcmVjaXBlX2lkGAEgASgJEg0KBWNvdW50",
+            "GAIgASgFIlEKDUNyYWZ0UmVzcG9uc2USDAoEY29kZRgBIAEoBRISCgptZXNz",
+            "YWdlX2lkGAIgASgJEh4KDGdhaW5lZF9pdGVtcxgDIAMoCzIILnBiLkl0ZW0i",
+            "MwoOVXNlSXRlbVJlcXVlc3QSDwoHaXRlbV9pZBgBIAEoAxIQCghxdWFudGl0",
+            "eRgCIAEoBSIzCg9Vc2VJdGVtUmVzcG9uc2USDAoEY29kZRgBIAEoBRISCgpt",
+            "ZXNzYWdlX2lkGAIgASgJQipaEHNlcnZlci9wa2cvcGI7cGKqAhVHYW1lQ2xp",
+            "ZW50Lk5ldHdvcmsuUGJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::GameClient.Network.Pb.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.ItemSource), global::GameClient.Network.Pb.ItemSource.Parser, new[]{ "LabelKey", "InnerLink", "StartTime", "EndTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.ItemEffect), global::GameClient.Network.Pb.ItemEffect.Parser, new[]{ "EffectCode", "Value", "MinValue", "MaxValue" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.ItemConfig), global::GameClient.Network.Pb.ItemConfig.Parser, new[]{ "ItemCode", "NameKey", "Type", "Rarity", "Icon", "DescKey", "MaxStack", "Sources", "Effects" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.ItemConfig), global::GameClient.Network.Pb.ItemConfig.Parser, new[]{ "ItemCode", "NameKey", "Type", "Rarity", "Icon", "DescKey", "MaxStack", "Sources", "Effects", "RequiredLevel" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Item), global::GameClient.Network.Pb.Item.Parser, new[]{ "Id", "ItemCode", "Name", "Type", "Rarity", "Quantity", "Stats" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Inventory), global::GameClient.Network.Pb.Inventory.Parser, new[]{ "Items", "Configs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.EquipRequest), global::GameClient.Network.Pb.EquipRequest.Parser, new[]{ "DiscipleId", "ItemId", "Slot" }, null, null, null, null),
@@ -754,6 +755,7 @@ namespace GameClient.Network.Pb {
       maxStack_ = other.maxStack_;
       sources_ = other.sources_.Clone();
       effects_ = other.effects_.Clone();
+      requiredLevel_ = other.requiredLevel_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -878,6 +880,18 @@ namespace GameClient.Network.Pb {
       get { return effects_; }
     }
 
+    /// <summary>Field number for the "required_level" field.</summary>
+    public const int RequiredLevelFieldNumber = 10;
+    private int requiredLevel_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RequiredLevel {
+      get { return requiredLevel_; }
+      set {
+        requiredLevel_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -902,6 +916,7 @@ namespace GameClient.Network.Pb {
       if (MaxStack != other.MaxStack) return false;
       if(!sources_.Equals(other.sources_)) return false;
       if(!effects_.Equals(other.effects_)) return false;
+      if (RequiredLevel != other.RequiredLevel) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -918,6 +933,7 @@ namespace GameClient.Network.Pb {
       if (MaxStack != 0) hash ^= MaxStack.GetHashCode();
       hash ^= sources_.GetHashCode();
       hash ^= effects_.GetHashCode();
+      if (RequiredLevel != 0) hash ^= RequiredLevel.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -966,6 +982,10 @@ namespace GameClient.Network.Pb {
       }
       sources_.WriteTo(output, _repeated_sources_codec);
       effects_.WriteTo(output, _repeated_effects_codec);
+      if (RequiredLevel != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(RequiredLevel);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1006,6 +1026,10 @@ namespace GameClient.Network.Pb {
       }
       sources_.WriteTo(ref output, _repeated_sources_codec);
       effects_.WriteTo(ref output, _repeated_effects_codec);
+      if (RequiredLevel != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(RequiredLevel);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1039,6 +1063,9 @@ namespace GameClient.Network.Pb {
       }
       size += sources_.CalculateSize(_repeated_sources_codec);
       size += effects_.CalculateSize(_repeated_effects_codec);
+      if (RequiredLevel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RequiredLevel);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1074,6 +1101,9 @@ namespace GameClient.Network.Pb {
       }
       sources_.Add(other.sources_);
       effects_.Add(other.effects_);
+      if (other.RequiredLevel != 0) {
+        RequiredLevel = other.RequiredLevel;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1129,6 +1159,10 @@ namespace GameClient.Network.Pb {
             effects_.AddEntriesFrom(input, _repeated_effects_codec);
             break;
           }
+          case 80: {
+            RequiredLevel = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -1182,6 +1216,10 @@ namespace GameClient.Network.Pb {
           }
           case 74: {
             effects_.AddEntriesFrom(ref input, _repeated_effects_codec);
+            break;
+          }
+          case 80: {
+            RequiredLevel = input.ReadInt32();
             break;
           }
         }

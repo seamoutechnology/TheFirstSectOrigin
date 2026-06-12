@@ -332,6 +332,7 @@ namespace GameClient.UI
         [System.Serializable]
         public class ZoneData
         {
+            public int id;
             public string name;
             public string host;
             public int port;

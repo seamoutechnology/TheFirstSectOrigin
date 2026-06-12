@@ -168,6 +168,7 @@ type ItemConfig struct {
 	MaxStack      int32                  `protobuf:"varint,7,opt,name=max_stack,json=maxStack,proto3" json:"max_stack,omitempty"`
 	Sources       []*ItemSource          `protobuf:"bytes,8,rep,name=sources,proto3" json:"sources,omitempty"`
 	Effects       []*ItemEffect          `protobuf:"bytes,9,rep,name=effects,proto3" json:"effects,omitempty"` // Hiệu ứng dạng List
+	RequiredLevel int32                  `protobuf:"varint,10,opt,name=required_level,json=requiredLevel,proto3" json:"required_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -263,6 +264,13 @@ func (x *ItemConfig) GetEffects() []*ItemEffect {
 		return x.Effects
 	}
 	return nil
+}
+
+func (x *ItemConfig) GetRequiredLevel() int32 {
+	if x != nil {
+		return x.RequiredLevel
+	}
+	return 0
 }
 
 type Item struct {
@@ -841,7 +849,7 @@ const file_item_proto_rawDesc = "" +
 	"effectCode\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x02R\x05value\x12\x1b\n" +
 	"\tmin_value\x18\x03 \x01(\x02R\bminValue\x12\x1b\n" +
-	"\tmax_value\x18\x04 \x01(\x02R\bmaxValue\"\x90\x02\n" +
+	"\tmax_value\x18\x04 \x01(\x02R\bmaxValue\"\xb7\x02\n" +
 	"\n" +
 	"ItemConfig\x12\x1b\n" +
 	"\titem_code\x18\x01 \x01(\tR\bitemCode\x12\x19\n" +
@@ -852,7 +860,9 @@ const file_item_proto_rawDesc = "" +
 	"\bdesc_key\x18\x06 \x01(\tR\adescKey\x12\x1b\n" +
 	"\tmax_stack\x18\a \x01(\x05R\bmaxStack\x12(\n" +
 	"\asources\x18\b \x03(\v2\x0e.pb.ItemSourceR\asources\x12(\n" +
-	"\aeffects\x18\t \x03(\v2\x0e.pb.ItemEffectR\aeffects\"\xf4\x01\n" +
+	"\aeffects\x18\t \x03(\v2\x0e.pb.ItemEffectR\aeffects\x12%\n" +
+	"\x0erequired_level\x18\n" +
+	" \x01(\x05R\rrequiredLevel\"\xf4\x01\n" +
 	"\x04Item\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\titem_code\x18\x02 \x01(\tR\bitemCode\x12\x12\n" +

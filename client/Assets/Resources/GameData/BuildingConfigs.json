@@ -102,8 +102,49 @@
             "buildingNameKey": "main_hall",
             "buildingDescKey": "main_hall_desc",
             "type": "MainHall",
-            "sizeX": 2,
+            "sizeX": 3,
             "sizeY": 2,
+            "prefabAddress": "",
+            "levelStats": [
+                {
+                    "level": 1,
+                    "requiredReputation": 0,
+                    "buildTimeSeconds": 0,
+                    "costItems": []
+                },
+                {
+                    "level": 2,
+                    "requiredReputation": 0,
+                    "buildTimeSeconds": 30,
+                    "costItems": []
+                },
+                {
+                    "level": 3,
+                    "requiredReputation": 0,
+                    "buildTimeSeconds": 60,
+                    "costItems": []
+                },
+                {
+                    "level": 4,
+                    "requiredReputation": 0,
+                    "buildTimeSeconds": 120,
+                    "costItems": []
+                },
+                {
+                    "level": 5,
+                    "requiredReputation": 0,
+                    "buildTimeSeconds": 240,
+                    "costItems": []
+                }
+            ]
+        },
+        {
+            "buildingID": "summon_hall",
+            "buildingNameKey": "summon_hall",
+            "buildingDescKey": "summon_hall_desc",
+            "type": "Decoration",
+            "sizeX": 3,
+            "sizeY": 3,
             "prefabAddress": "",
             "levelStats": [
                 {

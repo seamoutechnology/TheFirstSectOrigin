@@ -456,6 +456,16 @@ namespace GameClient.UI
             if (item != null)
             {
                 // Sử dụng kéo thả từ BuildItem component
+                if (item.imgPreview != null && buildingData.VisualConfig != null)
+                {
+                    var visual = buildingData.VisualConfig.GetVisualsForLevel(1);
+                    if (visual != null && visual.normalSprite != null)
+                    {
+                        item.imgPreview.sprite = visual.normalSprite;
+                        item.imgPreview.preserveAspect = true;
+                    }
+                }
+
                 if (item.txtName != null)
                 {
                     string statusText = "";
@@ -466,6 +476,12 @@ namespace GameClient.UI
                     
                     string localizedName = LocalizationManager.Instance.GetText(buildingData.BuildingNameKey);
                     if (string.IsNullOrEmpty(localizedName) || localizedName.StartsWith("[")) localizedName = buildingData.BuildingNameKey;
+
+                    var localizeEvent = item.txtName.GetComponent<UnityEngine.Localization.Components.LocalizeStringEvent>();
+                    if (localizeEvent != null)
+                    {
+                        localizeEvent.enabled = false;
+                    }
 
                     item.txtName.text = localizedName + statusText;
                 }

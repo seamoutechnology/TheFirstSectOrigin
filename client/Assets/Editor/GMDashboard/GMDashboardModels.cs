@@ -4,6 +4,17 @@ namespace GameClient.Editor.GMDashboard
 {
     // --- Player Models ---
     [System.Serializable]
+    public class GMUserHeroInfo
+    {
+        public long id;
+        public string hero_code;
+        public string name;
+        public string rarity;
+        public int level;
+        public int star;
+    }
+
+    [System.Serializable]
     public class GMUserInfo
     {
         public long user_id;
@@ -11,6 +22,14 @@ namespace GameClient.Editor.GMDashboard
         public string sect_name;
         public int level;
         public int money;
+        public System.Collections.Generic.List<GMUserHeroInfo> disciples;
+    }
+
+    [System.Serializable]
+    public class GMHeroTemplateData
+    {
+        public string code;
+        public string name;
     }
 
     [System.Serializable]
@@ -83,6 +102,7 @@ namespace GameClient.Editor.GMDashboard
         public string effect_code;
         public string name_key;
         public string desc_key;
+        public string icon;
         public string effect_type;
         public string value_type;
         public float min_value;
@@ -126,7 +146,13 @@ namespace GameClient.Editor.GMDashboard
         public int target_progress;
         public string rewards; // JSON string
     }
-
+    [System.Serializable]
+    public class GMTraitConfigData
+    {
+        public string trait_code;
+        public int weight;
+        public string json_data;
+    }
     // --- Helpers ---
     public static class GMJsonHelper
     {

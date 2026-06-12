@@ -153,6 +153,98 @@ func (x *Disciple) GetSkills() []string {
 	return nil
 }
 
+type HeroSkill struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	SkillCode        string                 `protobuf:"bytes,1,opt,name=skill_code,json=skillCode,proto3" json:"skill_code,omitempty"`
+	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DamageMultiplier float32                `protobuf:"fixed32,3,opt,name=damage_multiplier,json=damageMultiplier,proto3" json:"damage_multiplier,omitempty"`
+	Cooldown         int32                  `protobuf:"varint,4,opt,name=cooldown,proto3" json:"cooldown,omitempty"`
+	EffectType       string                 `protobuf:"bytes,5,opt,name=effect_type,json=effectType,proto3" json:"effect_type,omitempty"`
+	Level            int32                  `protobuf:"varint,6,opt,name=level,proto3" json:"level,omitempty"`
+	IsLocked         bool                   `protobuf:"varint,7,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *HeroSkill) Reset() {
+	*x = HeroSkill{}
+	mi := &file_disciple_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HeroSkill) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HeroSkill) ProtoMessage() {}
+
+func (x *HeroSkill) ProtoReflect() protoreflect.Message {
+	mi := &file_disciple_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HeroSkill.ProtoReflect.Descriptor instead.
+func (*HeroSkill) Descriptor() ([]byte, []int) {
+	return file_disciple_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *HeroSkill) GetSkillCode() string {
+	if x != nil {
+		return x.SkillCode
+	}
+	return ""
+}
+
+func (x *HeroSkill) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *HeroSkill) GetDamageMultiplier() float32 {
+	if x != nil {
+		return x.DamageMultiplier
+	}
+	return 0
+}
+
+func (x *HeroSkill) GetCooldown() int32 {
+	if x != nil {
+		return x.Cooldown
+	}
+	return 0
+}
+
+func (x *HeroSkill) GetEffectType() string {
+	if x != nil {
+		return x.EffectType
+	}
+	return ""
+}
+
+func (x *HeroSkill) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *HeroSkill) GetIsLocked() bool {
+	if x != nil {
+		return x.IsLocked
+	}
+	return false
+}
+
 type Hero struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -161,13 +253,15 @@ type Hero struct {
 	Rarity        string                 `protobuf:"bytes,4,opt,name=rarity,proto3" json:"rarity,omitempty"` // Đổi lại thành string
 	Power         int64                  `protobuf:"varint,5,opt,name=power,proto3" json:"power,omitempty"`
 	Star          int32                  `protobuf:"varint,6,opt,name=star,proto3" json:"star,omitempty"` // C# đang tìm .Star
+	Traits        []string               `protobuf:"bytes,7,rep,name=traits,proto3" json:"traits,omitempty"`
+	Skills        []*HeroSkill           `protobuf:"bytes,8,rep,name=skills,proto3" json:"skills,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Hero) Reset() {
 	*x = Hero{}
-	mi := &file_disciple_proto_msgTypes[1]
+	mi := &file_disciple_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -179,7 +273,7 @@ func (x *Hero) String() string {
 func (*Hero) ProtoMessage() {}
 
 func (x *Hero) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[1]
+	mi := &file_disciple_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -192,7 +286,7 @@ func (x *Hero) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Hero.ProtoReflect.Descriptor instead.
 func (*Hero) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{1}
+	return file_disciple_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Hero) GetId() int64 {
@@ -237,6 +331,20 @@ func (x *Hero) GetStar() int32 {
 	return 0
 }
 
+func (x *Hero) GetTraits() []string {
+	if x != nil {
+		return x.Traits
+	}
+	return nil
+}
+
+func (x *Hero) GetSkills() []*HeroSkill {
+	if x != nil {
+		return x.Skills
+	}
+	return nil
+}
+
 type FormationSlot struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Position      int32                  `protobuf:"varint,1,opt,name=position,proto3" json:"position,omitempty"`                               // C# đang tìm .Position
@@ -248,7 +356,7 @@ type FormationSlot struct {
 
 func (x *FormationSlot) Reset() {
 	*x = FormationSlot{}
-	mi := &file_disciple_proto_msgTypes[2]
+	mi := &file_disciple_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -260,7 +368,7 @@ func (x *FormationSlot) String() string {
 func (*FormationSlot) ProtoMessage() {}
 
 func (x *FormationSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[2]
+	mi := &file_disciple_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -273,7 +381,7 @@ func (x *FormationSlot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FormationSlot.ProtoReflect.Descriptor instead.
 func (*FormationSlot) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{2}
+	return file_disciple_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FormationSlot) GetPosition() int32 {
@@ -307,7 +415,7 @@ type Formation struct {
 
 func (x *Formation) Reset() {
 	*x = Formation{}
-	mi := &file_disciple_proto_msgTypes[3]
+	mi := &file_disciple_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -319,7 +427,7 @@ func (x *Formation) String() string {
 func (*Formation) ProtoMessage() {}
 
 func (x *Formation) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[3]
+	mi := &file_disciple_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -332,7 +440,7 @@ func (x *Formation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Formation.ProtoReflect.Descriptor instead.
 func (*Formation) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{3}
+	return file_disciple_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Formation) GetName() string {
@@ -357,7 +465,7 @@ type GetDisciplesRequest struct {
 
 func (x *GetDisciplesRequest) Reset() {
 	*x = GetDisciplesRequest{}
-	mi := &file_disciple_proto_msgTypes[4]
+	mi := &file_disciple_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -369,7 +477,7 @@ func (x *GetDisciplesRequest) String() string {
 func (*GetDisciplesRequest) ProtoMessage() {}
 
 func (x *GetDisciplesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[4]
+	mi := &file_disciple_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -382,7 +490,7 @@ func (x *GetDisciplesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDisciplesRequest.ProtoReflect.Descriptor instead.
 func (*GetDisciplesRequest) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{4}
+	return file_disciple_proto_rawDescGZIP(), []int{5}
 }
 
 type GetDisciplesResponse struct {
@@ -395,7 +503,7 @@ type GetDisciplesResponse struct {
 
 func (x *GetDisciplesResponse) Reset() {
 	*x = GetDisciplesResponse{}
-	mi := &file_disciple_proto_msgTypes[5]
+	mi := &file_disciple_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -407,7 +515,7 @@ func (x *GetDisciplesResponse) String() string {
 func (*GetDisciplesResponse) ProtoMessage() {}
 
 func (x *GetDisciplesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[5]
+	mi := &file_disciple_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -420,7 +528,7 @@ func (x *GetDisciplesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDisciplesResponse.ProtoReflect.Descriptor instead.
 func (*GetDisciplesResponse) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{5}
+	return file_disciple_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetDisciplesResponse) GetBase() *BaseResponse {
@@ -445,7 +553,7 @@ type GetHeroesRequest struct {
 
 func (x *GetHeroesRequest) Reset() {
 	*x = GetHeroesRequest{}
-	mi := &file_disciple_proto_msgTypes[6]
+	mi := &file_disciple_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -457,7 +565,7 @@ func (x *GetHeroesRequest) String() string {
 func (*GetHeroesRequest) ProtoMessage() {}
 
 func (x *GetHeroesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[6]
+	mi := &file_disciple_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -470,7 +578,7 @@ func (x *GetHeroesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHeroesRequest.ProtoReflect.Descriptor instead.
 func (*GetHeroesRequest) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{6}
+	return file_disciple_proto_rawDescGZIP(), []int{7}
 }
 
 type GetHeroesResponse struct {
@@ -483,7 +591,7 @@ type GetHeroesResponse struct {
 
 func (x *GetHeroesResponse) Reset() {
 	*x = GetHeroesResponse{}
-	mi := &file_disciple_proto_msgTypes[7]
+	mi := &file_disciple_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -495,7 +603,7 @@ func (x *GetHeroesResponse) String() string {
 func (*GetHeroesResponse) ProtoMessage() {}
 
 func (x *GetHeroesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[7]
+	mi := &file_disciple_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -508,7 +616,7 @@ func (x *GetHeroesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHeroesResponse.ProtoReflect.Descriptor instead.
 func (*GetHeroesResponse) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{7}
+	return file_disciple_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetHeroesResponse) GetBase() *BaseResponse {
@@ -534,7 +642,7 @@ type SetFormationRequest struct {
 
 func (x *SetFormationRequest) Reset() {
 	*x = SetFormationRequest{}
-	mi := &file_disciple_proto_msgTypes[8]
+	mi := &file_disciple_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -546,7 +654,7 @@ func (x *SetFormationRequest) String() string {
 func (*SetFormationRequest) ProtoMessage() {}
 
 func (x *SetFormationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[8]
+	mi := &file_disciple_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -559,7 +667,7 @@ func (x *SetFormationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetFormationRequest.ProtoReflect.Descriptor instead.
 func (*SetFormationRequest) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{8}
+	return file_disciple_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SetFormationRequest) GetSlots() []*FormationSlot {
@@ -578,7 +686,7 @@ type SetFormationResponse struct {
 
 func (x *SetFormationResponse) Reset() {
 	*x = SetFormationResponse{}
-	mi := &file_disciple_proto_msgTypes[9]
+	mi := &file_disciple_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -590,7 +698,7 @@ func (x *SetFormationResponse) String() string {
 func (*SetFormationResponse) ProtoMessage() {}
 
 func (x *SetFormationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[9]
+	mi := &file_disciple_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -603,7 +711,7 @@ func (x *SetFormationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetFormationResponse.ProtoReflect.Descriptor instead.
 func (*SetFormationResponse) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{9}
+	return file_disciple_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SetFormationResponse) GetBase() *BaseResponse {
@@ -623,7 +731,7 @@ type LevelUpDiscipleRequest struct {
 
 func (x *LevelUpDiscipleRequest) Reset() {
 	*x = LevelUpDiscipleRequest{}
-	mi := &file_disciple_proto_msgTypes[10]
+	mi := &file_disciple_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -635,7 +743,7 @@ func (x *LevelUpDiscipleRequest) String() string {
 func (*LevelUpDiscipleRequest) ProtoMessage() {}
 
 func (x *LevelUpDiscipleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[10]
+	mi := &file_disciple_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -648,7 +756,7 @@ func (x *LevelUpDiscipleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LevelUpDiscipleRequest.ProtoReflect.Descriptor instead.
 func (*LevelUpDiscipleRequest) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{10}
+	return file_disciple_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *LevelUpDiscipleRequest) GetDiscipleId() int64 {
@@ -675,7 +783,7 @@ type LevelUpDiscipleResponse struct {
 
 func (x *LevelUpDiscipleResponse) Reset() {
 	*x = LevelUpDiscipleResponse{}
-	mi := &file_disciple_proto_msgTypes[11]
+	mi := &file_disciple_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -687,7 +795,7 @@ func (x *LevelUpDiscipleResponse) String() string {
 func (*LevelUpDiscipleResponse) ProtoMessage() {}
 
 func (x *LevelUpDiscipleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[11]
+	mi := &file_disciple_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -700,7 +808,7 @@ func (x *LevelUpDiscipleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LevelUpDiscipleResponse.ProtoReflect.Descriptor instead.
 func (*LevelUpDiscipleResponse) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{11}
+	return file_disciple_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LevelUpDiscipleResponse) GetBase() *BaseResponse {
@@ -726,7 +834,7 @@ type LevelUpHeroRequest struct {
 
 func (x *LevelUpHeroRequest) Reset() {
 	*x = LevelUpHeroRequest{}
-	mi := &file_disciple_proto_msgTypes[12]
+	mi := &file_disciple_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -738,7 +846,7 @@ func (x *LevelUpHeroRequest) String() string {
 func (*LevelUpHeroRequest) ProtoMessage() {}
 
 func (x *LevelUpHeroRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[12]
+	mi := &file_disciple_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -751,7 +859,7 @@ func (x *LevelUpHeroRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LevelUpHeroRequest.ProtoReflect.Descriptor instead.
 func (*LevelUpHeroRequest) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{12}
+	return file_disciple_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *LevelUpHeroRequest) GetHeroId() int64 {
@@ -771,7 +879,7 @@ type LevelUpHeroResponse struct {
 
 func (x *LevelUpHeroResponse) Reset() {
 	*x = LevelUpHeroResponse{}
-	mi := &file_disciple_proto_msgTypes[13]
+	mi := &file_disciple_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -783,7 +891,7 @@ func (x *LevelUpHeroResponse) String() string {
 func (*LevelUpHeroResponse) ProtoMessage() {}
 
 func (x *LevelUpHeroResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_disciple_proto_msgTypes[13]
+	mi := &file_disciple_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -796,7 +904,7 @@ func (x *LevelUpHeroResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LevelUpHeroResponse.ProtoReflect.Descriptor instead.
 func (*LevelUpHeroResponse) Descriptor() ([]byte, []int) {
-	return file_disciple_proto_rawDescGZIP(), []int{13}
+	return file_disciple_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *LevelUpHeroResponse) GetBase() *BaseResponse {
@@ -831,14 +939,26 @@ const file_disciple_proto_rawDesc = "" +
 	"\x03def\x18\n" +
 	" \x01(\x05R\x03def\x12\x16\n" +
 	"\x06traits\x18\v \x03(\tR\x06traits\x12\x16\n" +
-	"\x06skills\x18\f \x03(\tR\x06skills\"\x82\x01\n" +
+	"\x06skills\x18\f \x03(\tR\x06skills\"\xdb\x01\n" +
+	"\tHeroSkill\x12\x1d\n" +
+	"\n" +
+	"skill_code\x18\x01 \x01(\tR\tskillCode\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12+\n" +
+	"\x11damage_multiplier\x18\x03 \x01(\x02R\x10damageMultiplier\x12\x1a\n" +
+	"\bcooldown\x18\x04 \x01(\x05R\bcooldown\x12\x1f\n" +
+	"\veffect_type\x18\x05 \x01(\tR\n" +
+	"effectType\x12\x14\n" +
+	"\x05level\x18\x06 \x01(\x05R\x05level\x12\x1b\n" +
+	"\tis_locked\x18\a \x01(\bR\bisLocked\"\xc1\x01\n" +
 	"\x04Hero\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05level\x18\x03 \x01(\x05R\x05level\x12\x16\n" +
 	"\x06rarity\x18\x04 \x01(\tR\x06rarity\x12\x14\n" +
 	"\x05power\x18\x05 \x01(\x03R\x05power\x12\x12\n" +
-	"\x04star\x18\x06 \x01(\x05R\x04star\"n\n" +
+	"\x04star\x18\x06 \x01(\x05R\x04star\x12\x16\n" +
+	"\x06traits\x18\a \x03(\tR\x06traits\x12%\n" +
+	"\x06skills\x18\b \x03(\v2\r.pb.HeroSkillR\x06skills\"n\n" +
 	"\rFormationSlot\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12$\n" +
 	"\x0eplayer_hero_id\x18\x02 \x01(\x03R\fplayerHeroId\x12\x1b\n" +
@@ -883,41 +1003,43 @@ func file_disciple_proto_rawDescGZIP() []byte {
 	return file_disciple_proto_rawDescData
 }
 
-var file_disciple_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_disciple_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_disciple_proto_goTypes = []any{
 	(*Disciple)(nil),                // 0: pb.Disciple
-	(*Hero)(nil),                    // 1: pb.Hero
-	(*FormationSlot)(nil),           // 2: pb.FormationSlot
-	(*Formation)(nil),               // 3: pb.Formation
-	(*GetDisciplesRequest)(nil),     // 4: pb.GetDisciplesRequest
-	(*GetDisciplesResponse)(nil),    // 5: pb.GetDisciplesResponse
-	(*GetHeroesRequest)(nil),        // 6: pb.GetHeroesRequest
-	(*GetHeroesResponse)(nil),       // 7: pb.GetHeroesResponse
-	(*SetFormationRequest)(nil),     // 8: pb.SetFormationRequest
-	(*SetFormationResponse)(nil),    // 9: pb.SetFormationResponse
-	(*LevelUpDiscipleRequest)(nil),  // 10: pb.LevelUpDiscipleRequest
-	(*LevelUpDiscipleResponse)(nil), // 11: pb.LevelUpDiscipleResponse
-	(*LevelUpHeroRequest)(nil),      // 12: pb.LevelUpHeroRequest
-	(*LevelUpHeroResponse)(nil),     // 13: pb.LevelUpHeroResponse
-	(*BaseResponse)(nil),            // 14: pb.BaseResponse
+	(*HeroSkill)(nil),               // 1: pb.HeroSkill
+	(*Hero)(nil),                    // 2: pb.Hero
+	(*FormationSlot)(nil),           // 3: pb.FormationSlot
+	(*Formation)(nil),               // 4: pb.Formation
+	(*GetDisciplesRequest)(nil),     // 5: pb.GetDisciplesRequest
+	(*GetDisciplesResponse)(nil),    // 6: pb.GetDisciplesResponse
+	(*GetHeroesRequest)(nil),        // 7: pb.GetHeroesRequest
+	(*GetHeroesResponse)(nil),       // 8: pb.GetHeroesResponse
+	(*SetFormationRequest)(nil),     // 9: pb.SetFormationRequest
+	(*SetFormationResponse)(nil),    // 10: pb.SetFormationResponse
+	(*LevelUpDiscipleRequest)(nil),  // 11: pb.LevelUpDiscipleRequest
+	(*LevelUpDiscipleResponse)(nil), // 12: pb.LevelUpDiscipleResponse
+	(*LevelUpHeroRequest)(nil),      // 13: pb.LevelUpHeroRequest
+	(*LevelUpHeroResponse)(nil),     // 14: pb.LevelUpHeroResponse
+	(*BaseResponse)(nil),            // 15: pb.BaseResponse
 }
 var file_disciple_proto_depIdxs = []int32{
-	2,  // 0: pb.Formation.slots:type_name -> pb.FormationSlot
-	14, // 1: pb.GetDisciplesResponse.base:type_name -> pb.BaseResponse
-	0,  // 2: pb.GetDisciplesResponse.disciples:type_name -> pb.Disciple
-	14, // 3: pb.GetHeroesResponse.base:type_name -> pb.BaseResponse
-	1,  // 4: pb.GetHeroesResponse.heroes:type_name -> pb.Hero
-	2,  // 5: pb.SetFormationRequest.slots:type_name -> pb.FormationSlot
-	14, // 6: pb.SetFormationResponse.base:type_name -> pb.BaseResponse
-	14, // 7: pb.LevelUpDiscipleResponse.base:type_name -> pb.BaseResponse
-	0,  // 8: pb.LevelUpDiscipleResponse.disciple:type_name -> pb.Disciple
-	14, // 9: pb.LevelUpHeroResponse.base:type_name -> pb.BaseResponse
-	1,  // 10: pb.LevelUpHeroResponse.hero:type_name -> pb.Hero
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	1,  // 0: pb.Hero.skills:type_name -> pb.HeroSkill
+	3,  // 1: pb.Formation.slots:type_name -> pb.FormationSlot
+	15, // 2: pb.GetDisciplesResponse.base:type_name -> pb.BaseResponse
+	0,  // 3: pb.GetDisciplesResponse.disciples:type_name -> pb.Disciple
+	15, // 4: pb.GetHeroesResponse.base:type_name -> pb.BaseResponse
+	2,  // 5: pb.GetHeroesResponse.heroes:type_name -> pb.Hero
+	3,  // 6: pb.SetFormationRequest.slots:type_name -> pb.FormationSlot
+	15, // 7: pb.SetFormationResponse.base:type_name -> pb.BaseResponse
+	15, // 8: pb.LevelUpDiscipleResponse.base:type_name -> pb.BaseResponse
+	0,  // 9: pb.LevelUpDiscipleResponse.disciple:type_name -> pb.Disciple
+	15, // 10: pb.LevelUpHeroResponse.base:type_name -> pb.BaseResponse
+	2,  // 11: pb.LevelUpHeroResponse.hero:type_name -> pb.Hero
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_disciple_proto_init() }
@@ -932,7 +1054,7 @@ func file_disciple_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_disciple_proto_rawDesc), len(file_disciple_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

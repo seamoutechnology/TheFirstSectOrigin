@@ -17,7 +17,107 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 305885ddfc24ae84eaa23e96c55a86a0, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 10001
+    m_Localized: "Selected slot {0}. Drag or click hero to assign to this slot."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10002
+    m_Localized: "Please select a formation slot first!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10003
+    m_Localized: "Selected slot is not active in the current formation!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10004
+    m_Localized: "This slot is not active in the current formation!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10005
+    m_Localized: "Swapped positions!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10006
+    m_Localized: "Maximum 9 heroes allowed in formation!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10007
+    m_Localized: "Hero placed successfully!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10008
+    m_Localized: "Removed {0} from formation due to new layout restrictions!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10009
+    m_Localized: "Successfully saved formation to server!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10010
+    m_Localized: "Failed to save formation!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10011
+    m_Localized: "Battle formation cannot be empty!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10012
+    m_Localized: "Formation: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10013
+    m_Localized: "Locked"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10014
+    m_Localized: "Blessed"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10015
+    m_Localized: "Empty"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10016
+    m_Localized: "[Blessed] {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10017
+    m_Localized: "<color=orange>[Combat] Blessed slot for this match is slot {0} on our side!</color>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10018
+    m_Localized: "<color=orange>[Combat] Hero {0} spawned in blessed slot {1} -> Receives 25% ATK & DEF boost!</color>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10019
+    m_Localized: "Formation already has 9 heroes! Drag hero down to replace."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10020
+    m_Localized: "CP: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10021
+    m_Localized: "Sort by: Combat Power"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10022
+    m_Localized: "Sort by: Realm"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10023
+    m_Localized: "Sort by: Rarity"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10024
+    m_Localized: "Auto-deployed optimized formation!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10025
+    m_Localized: "Loaded saved formation!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,8 +1,10 @@
 package admin
 
 import (
+	_ "embed"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,6 +16,12 @@ import (
 	_ "github.com/lib/pq"
 	"go.uber.org/zap"
 )
+
+//go:embed user_dashboard.html
+var userDashboardHTML string
+
+var userDashboardTempl = template.Must(template.New("user_dashboard").Parse(userDashboardHTML))
+
 
 func writeJSON(w http.ResponseWriter, status int, v interface{}) {
 	data, err := json.Marshal(v)
@@ -99,7 +107,13 @@ func (h *AdminHandler) UserDashboard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID)
+	zoneStr := r.URL.Query().Get("zone_id")
+	zoneID, _ := strconv.Atoi(zoneStr)
+	if zoneID <= 0 {
+		zoneID = 1
+	}
+
+	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID, zoneID)
 	hasCharacter := "true"
 	nickname := "Chưa tạo"
 	level := 0
@@ -115,442 +129,32 @@ func (h *AdminHandler) UserDashboard(w http.ResponseWriter, r *http.Request) {
 		diamond = player.Diamond
 	}
 
+	zones, errZones := h.svc.GetAllZones()
+	var zonesList []map[string]interface{}
+	if errZones == nil {
+		for _, z := range zones {
+			zonesList = append(zonesList, map[string]interface{}{
+				"ID":   z.ID,
+				"Name": z.Name,
+			})
+		}
+	}
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write([]byte(`
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sect Origin - Cổng Tu Luyện</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0b0c10;
-            --container-bg: rgba(31, 40, 51, 0.65);
-            --accent-color: #66fcf1;
-            --accent-hover: #45f3e7;
-            --text-color: #c5c6c7;
-            --heading-color: #ffffff;
-            --gold-color: #f39c12;
-            --qi-color: #9b59b6;
-            --border-radius: 16px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        body {
-            background: radial-gradient(circle at center, #1f2833 0%, #0b0c10 100%);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .dashboard-container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--container-bg);
-            border: 1px solid rgba(102, 252, 241, 0.25);
-            backdrop-filter: blur(12px);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .dashboard-container:hover {
-            transform: translateY(-2px);
-            border-color: rgba(102, 252, 241, 0.5);
-        }
-
-        h1 {
-            color: var(--heading-color);
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
-        }
-
-        .profile-card {
-            background: rgba(11, 12, 16, 0.8);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .profile-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-
-        .profile-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .label {
-            color: #858688;
-        }
-
-        .value {
-            font-weight: 600;
-            color: var(--heading-color);
-        }
-
-        .value.accent {
-            color: var(--accent-color);
-        }
-
-        .value.gold {
-            color: var(--gold-color);
-        }
-
-        .value.qi {
-            color: var(--qi-color);
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #858688;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .tab-btn.active {
-            color: var(--accent-color);
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-color);
-            box-shadow: 0 0 8px var(--accent-color);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #858688;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 14px;
-            background: rgba(11, 12, 16, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--heading-color);
-            font-size: 15px;
-            transition: border-color 0.2s;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent-color);
-            border: none;
-            border-radius: 8px;
-            color: #0b0c10;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.2);
-        }
-
-        .btn-submit:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
-            transform: translateY(-1px);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        .btn-submit:disabled {
-            background: #4a5568;
-            color: #a0aec0;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .recharge-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .recharge-card {
-            background: rgba(11, 12, 16, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .recharge-card:hover {
-            border-color: rgba(102, 252, 241, 0.3);
-            background: rgba(11, 12, 16, 0.9);
-        }
-
-        .recharge-card.selected {
-            border-color: var(--accent-color);
-            background: rgba(102, 252, 241, 0.05);
-            box-shadow: 0 0 10px rgba(102, 252, 241, 0.1);
-        }
-
-        .recharge-amount {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--heading-color);
-            margin-bottom: 5px;
-        }
-
-        .recharge-reward {
-            font-size: 12px;
-            color: var(--accent-color);
-        }
-
-        #result-box {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            display: none;
-            text-align: center;
-        }
-
-        .result-success {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            border: 1px solid rgba(46, 204, 113, 0.3);
-        }
-
-        .result-error {
-            background: rgba(231, 76, 60, 0.15);
-            color: #e74c3c;
-            border: 1px solid rgba(231, 76, 60, 0.3);
-        }
-    </style>
-</head>
-<body>
-    <div class="dashboard-container">
-        <h1>CỔNG TU LUYỆN</h1>
-        
-        <div class="profile-card">
-            <div class="profile-row">
-                <span class="label">Tên Nhân Vật:</span>
-                <span id="player-nickname" class="value accent">` + nickname + `</span>
-            </div>
-            <div class="profile-row">
-                <span class="label">Cấp Độ:</span>
-                <span id="player-level" class="value">` + fmt.Sprintf("%d", level) + `</span>
-            </div>
-            <div class="profile-row">
-                <span class="label">Vàng Tích Lũy:</span>
-                <span id="player-gold" class="value gold">` + fmt.Sprintf("%d", gold) + ` Vàng</span>
-            </div>
-            <div class="profile-row">
-                <span class="label">Linh Lực Qi (Diamond):</span>
-                <span id="player-diamond" class="value qi">` + fmt.Sprintf("%d", diamond) + ` Qi</span>
-            </div>
-        </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('redeem')">Đổi GiftCode</button>
-            <button class="tab-btn" onclick="switchTab('recharge')">Nạp Linh Thạch</button>
-        </div>
-
-        <!-- Redeem Tab -->
-        <div id="tab-redeem" class="tab-content active">
-            <div class="form-group">
-                <label for="giftcode-input">Nhập mã GiftCode:</label>
-                <input type="text" id="giftcode-input" class="input-field" placeholder="Ví dụ: SECT666" style="text-transform: uppercase;">
-            </div>
-            <button id="btn-redeem" class="btn-submit" onclick="submitRedeem()">XÁC NHẬN ĐỔI MÃ</button>
-        </div>
-
-        <!-- Recharge Tab -->
-        <div id="tab-recharge" class="tab-content">
-            <label>Chọn mốc nạp tệ:</label>
-            <div class="recharge-grid">
-                <div class="recharge-card" onclick="selectRecharge(this, 10000)">
-                    <div class="recharge-amount">10.000đ</div>
-                    <div class="recharge-reward">+10 Qi / +100k Vàng</div>
-                </div>
-                <div class="recharge-card" onclick="selectRecharge(this, 50000)">
-                    <div class="recharge-amount">50.000đ</div>
-                    <div class="recharge-reward">+50 Qi / +500k Vàng</div>
-                </div>
-                <div class="recharge-card" onclick="selectRecharge(this, 100000)">
-                    <div class="recharge-amount">100.000đ</div>
-                    <div class="recharge-reward">+100 Qi / +1M Vàng</div>
-                </div>
-                <div class="recharge-card" onclick="selectRecharge(this, 200000)">
-                    <div class="recharge-amount">200.000đ</div>
-                    <div class="recharge-reward">+200 Qi / +2M Vàng</div>
-                </div>
-            </div>
-            <button id="btn-recharge" class="btn-submit" onclick="submitRecharge()" disabled>XÁC NHẬN NẠP TIỀN</button>
-        </div>
-
-        <div id="result-box"></div>
-    </div>
-
-    <script>
-        const token = "` + token + `";
-        const hasChar = ` + hasCharacter + `;
-        let selectedAmount = 0;
-
-        if (!hasChar) {
-            document.getElementById("btn-redeem").disabled = true;
-            document.getElementById("btn-recharge").disabled = true;
-            showResult("Bạn chưa tạo nhân vật trong game. Vui lòng vào game tạo nhân vật trước!", false);
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            event.currentTarget.classList.add('active');
-            document.getElementById('tab-' + tab).classList.add('active');
-            
-            // clear result box
-            const resBox = document.getElementById("result-box");
-            resBox.style.display = "none";
-        }
-
-        function selectRecharge(element, amount) {
-            if (!hasChar) return;
-            document.querySelectorAll('.recharge-card').forEach(card => card.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedAmount = amount;
-            document.getElementById("btn-recharge").disabled = false;
-        }
-
-        function showResult(message, isSuccess) {
-            const resBox = document.getElementById("result-box");
-            resBox.className = isSuccess ? "result-success" : "result-error";
-            resBox.innerText = message;
-            resBox.style.display = "block";
-        }
-
-        async function submitRedeem() {
-            const input = document.getElementById("giftcode-input");
-            const code = input.value.trim();
-            if (!code) {
-                showResult("Vui lòng nhập mã GiftCode!", false);
-                return;
-            }
-
-            const btn = document.getElementById("btn-redeem");
-            btn.disabled = true;
-
-            try {
-                const response = await fetch("/api/user/redeem?token=" + encodeURIComponent(token), {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ code: code })
-                });
-                const res = await response.json();
-                if (res.code === 0) {
-                    showResult(res.message, true);
-                    input.value = "";
-                    updateStats(res.gold, res.diamond);
-                } else {
-                    showResult(res.message || "Đổi mã thất bại", false);
-                }
-            } catch (err) {
-                showResult("Lỗi kết nối tới máy chủ", false);
-            } finally {
-                btn.disabled = false;
-            }
-        }
-
-        async function submitRecharge() {
-            if (selectedAmount <= 0) return;
-
-            const btn = document.getElementById("btn-recharge");
-            btn.disabled = true;
-
-            try {
-                const response = await fetch("/api/user/recharge?token=" + encodeURIComponent(token), {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ amount: selectedAmount })
-                });
-                const res = await response.json();
-                if (res.code === 0) {
-                    showResult(res.message, true);
-                    updateStats(res.gold, res.diamond);
-                } else {
-                    showResult(res.message || "Nạp tiền thất bại", false);
-                }
-            } catch (err) {
-                showResult("Lỗi kết nối tới máy chủ", false);
-            } finally {
-                btn.disabled = false;
-            }
-        }
-
-        function updateStats(gold, diamond) {
-            document.getElementById("player-gold").innerText = gold + " Vàng";
-            document.getElementById("player-diamond").innerText = diamond + " Qi";
-        }
-    </script>
-</body>
-</html>
-	`))
+	data := map[string]interface{}{
+		"Nickname":     nickname,
+		"Level":        level,
+		"Gold":         gold,
+		"Diamond":      diamond,
+		"Token":        token,
+		"ZoneID":       zoneID,
+		"HasCharacter": hasCharacter,
+		"Zones":        zonesList,
+	}
+	if err := userDashboardTempl.Execute(w, data); err != nil {
+		h.log.Error("Failed to execute user dashboard template", zap.Error(err))
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
 }
 
 func (h *AdminHandler) UserRedeemGiftCode(w http.ResponseWriter, r *http.Request) {
@@ -601,19 +205,25 @@ func (h *AdminHandler) UserRedeemGiftCode(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID)
+	zoneStr := r.URL.Query().Get("zone_id")
+	zoneID, _ := strconv.Atoi(zoneStr)
+	if zoneID <= 0 {
+		zoneID = 1
+	}
+
+	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID, zoneID)
 	if err != nil {
 		writeJSON(w, http.StatusNotFound, map[string]interface{}{"code": 404, "message": "Không tìm thấy nhân vật của tài khoản này"})
 		return
 	}
 
-	rewardDesc, err := h.svc.RedeemGiftCode(player.ID, code)
+	rewardDesc, err := h.svc.RedeemGiftCode(zoneID, player.ID, code)
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]interface{}{"code": 400, "message": err.Error()})
 		return
 	}
 
-	updatedPlayer, _ := h.svc.GetPlayerInfoByUserID(claims.UserID)
+	updatedPlayer, _ := h.svc.GetPlayerInfoByUserID(claims.UserID, zoneID)
 
 	writeJSON(w, http.StatusOK, map[string]interface{}{
 		"code":    0,
@@ -670,13 +280,19 @@ func (h *AdminHandler) UserRecharge(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID)
+	zoneStr := r.URL.Query().Get("zone_id")
+	zoneID, _ := strconv.Atoi(zoneStr)
+	if zoneID <= 0 {
+		zoneID = 1
+	}
+
+	player, err := h.svc.GetPlayerInfoByUserID(claims.UserID, zoneID)
 	if err != nil {
 		writeJSON(w, http.StatusNotFound, map[string]interface{}{"code": 404, "message": "Không tìm thấy nhân vật của tài khoản này"})
 		return
 	}
 
-	newGold, newDiamond, err := h.svc.RechargePlayer(player.ID, req.Amount)
+	newGold, newDiamond, err := h.svc.RechargePlayer(zoneID, player.ID, req.Amount)
 	if err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]interface{}{"code": 500, "message": err.Error()})
 		return
@@ -687,7 +303,7 @@ func (h *AdminHandler) UserRecharge(w http.ResponseWriter, r *http.Request) {
 
 	writeJSON(w, http.StatusOK, map[string]interface{}{
 		"code":    0,
-		"message": fmt.Sprintf("Nạp tiền thành công! Bạn nhận được +%d Vàng và +%d Qi.", goldReward, diamondReward),
+		"message": fmt.Sprintf("Nạp tiền thành công! Bạn nhận được +%d Vàng và +%d Xu.", goldReward, diamondReward),
 		"gold":    newGold,
 		"diamond": newDiamond,
 	})
@@ -827,6 +443,7 @@ func (h *AdminHandler) GMGetUsersList(w http.ResponseWriter, r *http.Request) {
 	pageStr := r.URL.Query().Get("page")
 	limitStr := r.URL.Query().Get("limit")
 	search := r.URL.Query().Get("search")
+	zoneStr := r.URL.Query().Get("zone_id")
 
 	page, _ := strconv.Atoi(pageStr)
 	if page < 1 {
@@ -838,9 +455,14 @@ func (h *AdminHandler) GMGetUsersList(w http.ResponseWriter, r *http.Request) {
 		limit = 20
 	}
 
+	zoneID, err := strconv.Atoi(zoneStr)
+	if err != nil || zoneID <= 0 {
+		zoneID = 1 // default
+	}
+
 	offset := (page - 1) * limit
 
-	resp, err := h.svc.GetUsersPaginated(limit, offset, search)
+	resp, err := h.svc.GetUsersPaginated(zoneID, limit, offset, search)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -912,6 +534,88 @@ func (h *AdminHandler) GMAddUserItem(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
+}
+
+func (h *AdminHandler) GMAddHero(w http.ResponseWriter, r *http.Request) {
+	idStr := r.URL.Query().Get("id")
+	userID, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		http.Error(w, "Invalid User ID", http.StatusBadRequest)
+		return
+	}
+
+	zoneStr := r.URL.Query().Get("zone_id")
+	zoneID, err := strconv.Atoi(zoneStr)
+	if err != nil || zoneID <= 0 {
+		zoneID = 1 // default
+	}
+
+	var req struct {
+		HeroCode string   `json:"hero_code"`
+		Traits   []string `json:"traits"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid Body", http.StatusBadRequest)
+		return
+	}
+
+	if len(req.Traits) > 0 {
+		err = h.svc.GMAddHeroWithTraits(zoneID, userID, req.HeroCode, req.Traits)
+	} else {
+		err = h.svc.GMAddHero(zoneID, userID, req.HeroCode)
+	}
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *AdminHandler) GMCreateGiftCode(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		Code          string `json:"code"`
+		RewardGold    int64  `json:"reward_gold"`
+		RewardDiamond int64  `json:"reward_diamond"`
+		RewardItems   string `json:"reward_items"`
+		MaxUses       int    `json:"max_uses"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	code := strings.TrimSpace(req.Code)
+	if code == "" {
+		http.Error(w, "Mã code không được để trống", http.StatusBadRequest)
+		return
+	}
+
+	if req.MaxUses <= 0 {
+		req.MaxUses = 1
+	}
+
+	err := h.svc.CreateGiftCode(code, req.RewardGold, req.RewardDiamond, req.RewardItems, req.MaxUses)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"message":"Tạo GiftCode thành công"}`))
 }
 
 func (h *AdminHandler) GMRemoveUserItem(w http.ResponseWriter, r *http.Request) {

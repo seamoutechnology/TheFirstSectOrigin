@@ -451,6 +451,66 @@ MonoBehaviour:
     m_Localized: "Ch\u1ECDn ng\xF4n ng\u1EEF"
     m_Metadata:
       m_Items: []
+  - m_Id: 10485400186089472
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000100
+    m_Localized: "C\u1EA5p"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000101
+    m_Localized: "Thi\xEAn ph\xFA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000102
+    m_Localized: "Lo\u1EA1i: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000103
+    m_Localized: "C\u1EA5p d\xF9ng: T\xF4ng M\xF4n C\u1EA5p {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000104
+    m_Localized: "S\u1EDF h\u1EEFu: <color=#00FF00>{0}</color>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000105
+    m_Localized: "\u0110\u1EA1o C\u1EE5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000106
+    m_Localized: "Trang B\u1ECB"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000107
+    m_Localized: "Ti\u1EC1n T\u1EC7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000108
+    m_Localized: "Ngo\u1EA1i Trang"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000109
+    m_Localized: "V\u1EADt Ph\u1EA9m"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796489318821888
+    m_Localized: "\u0110\u1ED9i h\xECnh nhanh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796572982603776
+    m_Localized: "H\u1EA1 tr\u1EADn nhanh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796663902531584
+    m_Localized: "B\u1EAFt \u0111\u1EA7u"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10796901581156352
+    m_Localized: "Lu\u1EADt"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

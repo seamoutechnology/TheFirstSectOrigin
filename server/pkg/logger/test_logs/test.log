@@ -40,3 +40,11 @@
 2026-06-11T02:06:16.160+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
 2026-06-11T05:16:24.795+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
 2026-06-11T05:16:24.796+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-11T06:15:06.503+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-11T06:15:06.503+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-11T06:15:16.385+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-11T06:15:16.385+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-11T06:15:21.633+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-11T06:15:21.633+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-06-11T06:15:29.290+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-06-11T06:15:29.291+0700	[34mINFO[0m	logger/logger_test.go:32	test info message

@@ -29,31 +29,37 @@ namespace GameClient.Network.Pb {
             "GAMgASgJEg4KBnJhcml0eRgEIAEoCRINCgVsZXZlbBgFIAEoBRIMCgRzdGFy",
             "GAYgASgFEgsKA2V4cBgHIAEoAxIKCgJocBgIIAEoBRILCgNhdGsYCSABKAUS",
             "CwoDZGVmGAogASgFEg4KBnRyYWl0cxgLIAMoCRIOCgZza2lsbHMYDCADKAki",
-            "XAoESGVybxIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEg0KBWxldmVsGAMg",
-            "ASgFEg4KBnJhcml0eRgEIAEoCRINCgVwb3dlchgFIAEoAxIMCgRzdGFyGAYg",
-            "ASgFIkwKDUZvcm1hdGlvblNsb3QSEAoIcG9zaXRpb24YASABKAUSFgoOcGxh",
-            "eWVyX2hlcm9faWQYAiABKAMSEQoJaXNfbG9ja2VkGAMgASgIIjsKCUZvcm1h",
-            "dGlvbhIMCgRuYW1lGAEgASgJEiAKBXNsb3RzGAIgAygLMhEucGIuRm9ybWF0",
-            "aW9uU2xvdCIVChNHZXREaXNjaXBsZXNSZXF1ZXN0IlcKFEdldERpc2NpcGxl",
-            "c1Jlc3BvbnNlEh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USHwoJ",
-            "ZGlzY2lwbGVzGAIgAygLMgwucGIuRGlzY2lwbGUiEgoQR2V0SGVyb2VzUmVx",
-            "dWVzdCJNChFHZXRIZXJvZXNSZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIu",
-            "QmFzZVJlc3BvbnNlEhgKBmhlcm9lcxgCIAMoCzIILnBiLkhlcm8iNwoTU2V0",
-            "Rm9ybWF0aW9uUmVxdWVzdBIgCgVzbG90cxgBIAMoCzIRLnBiLkZvcm1hdGlv",
-            "blNsb3QiNgoUU2V0Rm9ybWF0aW9uUmVzcG9uc2USHgoEYmFzZRgBIAEoCzIQ",
-            "LnBiLkJhc2VSZXNwb25zZSJKChZMZXZlbFVwRGlzY2lwbGVSZXF1ZXN0EhMK",
-            "C2Rpc2NpcGxlX2lkGAEgASgDEhsKE2NvbnN1bWVfaXRlbXNfY291bnQYAiAB",
-            "KAUiWQoXTGV2ZWxVcERpc2NpcGxlUmVzcG9uc2USHgoEYmFzZRgBIAEoCzIQ",
-            "LnBiLkJhc2VSZXNwb25zZRIeCghkaXNjaXBsZRgCIAEoCzIMLnBiLkRpc2Np",
-            "cGxlIiUKEkxldmVsVXBIZXJvUmVxdWVzdBIPCgdoZXJvX2lkGAEgASgDIk0K",
-            "E0xldmVsVXBIZXJvUmVzcG9uc2USHgoEYmFzZRgBIAEoCzIQLnBiLkJhc2VS",
-            "ZXNwb25zZRIWCgRoZXJvGAIgASgLMggucGIuSGVyb0IqWhBzZXJ2ZXIvcGtn",
-            "L3BiO3BiqgIVR2FtZUNsaWVudC5OZXR3b3JrLlBiYgZwcm90bzM="));
+            "kQEKCUhlcm9Ta2lsbBISCgpza2lsbF9jb2RlGAEgASgJEgwKBG5hbWUYAiAB",
+            "KAkSGQoRZGFtYWdlX211bHRpcGxpZXIYAyABKAISEAoIY29vbGRvd24YBCAB",
+            "KAUSEwoLZWZmZWN0X3R5cGUYBSABKAkSDQoFbGV2ZWwYBiABKAUSEQoJaXNf",
+            "bG9ja2VkGAcgASgIIosBCgRIZXJvEgoKAmlkGAEgASgDEgwKBG5hbWUYAiAB",
+            "KAkSDQoFbGV2ZWwYAyABKAUSDgoGcmFyaXR5GAQgASgJEg0KBXBvd2VyGAUg",
+            "ASgDEgwKBHN0YXIYBiABKAUSDgoGdHJhaXRzGAcgAygJEh0KBnNraWxscxgI",
+            "IAMoCzINLnBiLkhlcm9Ta2lsbCJMCg1Gb3JtYXRpb25TbG90EhAKCHBvc2l0",
+            "aW9uGAEgASgFEhYKDnBsYXllcl9oZXJvX2lkGAIgASgDEhEKCWlzX2xvY2tl",
+            "ZBgDIAEoCCI7CglGb3JtYXRpb24SDAoEbmFtZRgBIAEoCRIgCgVzbG90cxgC",
+            "IAMoCzIRLnBiLkZvcm1hdGlvblNsb3QiFQoTR2V0RGlzY2lwbGVzUmVxdWVz",
+            "dCJXChRHZXREaXNjaXBsZXNSZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIu",
+            "QmFzZVJlc3BvbnNlEh8KCWRpc2NpcGxlcxgCIAMoCzIMLnBiLkRpc2NpcGxl",
+            "IhIKEEdldEhlcm9lc1JlcXVlc3QiTQoRR2V0SGVyb2VzUmVzcG9uc2USHgoE",
+            "YmFzZRgBIAEoCzIQLnBiLkJhc2VSZXNwb25zZRIYCgZoZXJvZXMYAiADKAsy",
+            "CC5wYi5IZXJvIjcKE1NldEZvcm1hdGlvblJlcXVlc3QSIAoFc2xvdHMYASAD",
+            "KAsyES5wYi5Gb3JtYXRpb25TbG90IjYKFFNldEZvcm1hdGlvblJlc3BvbnNl",
+            "Eh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2UiSgoWTGV2ZWxVcERp",
+            "c2NpcGxlUmVxdWVzdBITCgtkaXNjaXBsZV9pZBgBIAEoAxIbChNjb25zdW1l",
+            "X2l0ZW1zX2NvdW50GAIgASgFIlkKF0xldmVsVXBEaXNjaXBsZVJlc3BvbnNl",
+            "Eh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USHgoIZGlzY2lwbGUY",
+            "AiABKAsyDC5wYi5EaXNjaXBsZSIlChJMZXZlbFVwSGVyb1JlcXVlc3QSDwoH",
+            "aGVyb19pZBgBIAEoAyJNChNMZXZlbFVwSGVyb1Jlc3BvbnNlEh4KBGJhc2UY",
+            "ASABKAsyEC5wYi5CYXNlUmVzcG9uc2USFgoEaGVybxgCIAEoCzIILnBiLkhl",
+            "cm9CKloQc2VydmVyL3BrZy9wYjtwYqoCFUdhbWVDbGllbnQuTmV0d29yay5Q",
+            "YmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::GameClient.Network.Pb.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Disciple), global::GameClient.Network.Pb.Disciple.Parser, new[]{ "Id", "DiscipleCode", "Name", "Rarity", "Level", "Star", "Exp", "Hp", "Atk", "Def", "Traits", "Skills" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Hero), global::GameClient.Network.Pb.Hero.Parser, new[]{ "Id", "Name", "Level", "Rarity", "Power", "Star" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.HeroSkill), global::GameClient.Network.Pb.HeroSkill.Parser, new[]{ "SkillCode", "Name", "DamageMultiplier", "Cooldown", "EffectType", "Level", "IsLocked" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Hero), global::GameClient.Network.Pb.Hero.Parser, new[]{ "Id", "Name", "Level", "Rarity", "Power", "Star", "Traits", "Skills" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.FormationSlot), global::GameClient.Network.Pb.FormationSlot.Parser, new[]{ "Position", "PlayerHeroId", "IsLocked" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Formation), global::GameClient.Network.Pb.Formation.Parser, new[]{ "Name", "Slots" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetDisciplesRequest), global::GameClient.Network.Pb.GetDisciplesRequest.Parser, null, null, null, null, null),
@@ -659,6 +665,426 @@ namespace GameClient.Network.Pb {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class HeroSkill : pb::IMessage<HeroSkill>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<HeroSkill> _parser = new pb::MessageParser<HeroSkill>(() => new HeroSkill());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<HeroSkill> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HeroSkill() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HeroSkill(HeroSkill other) : this() {
+      skillCode_ = other.skillCode_;
+      name_ = other.name_;
+      damageMultiplier_ = other.damageMultiplier_;
+      cooldown_ = other.cooldown_;
+      effectType_ = other.effectType_;
+      level_ = other.level_;
+      isLocked_ = other.isLocked_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HeroSkill Clone() {
+      return new HeroSkill(this);
+    }
+
+    /// <summary>Field number for the "skill_code" field.</summary>
+    public const int SkillCodeFieldNumber = 1;
+    private string skillCode_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SkillCode {
+      get { return skillCode_; }
+      set {
+        skillCode_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "damage_multiplier" field.</summary>
+    public const int DamageMultiplierFieldNumber = 3;
+    private float damageMultiplier_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float DamageMultiplier {
+      get { return damageMultiplier_; }
+      set {
+        damageMultiplier_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cooldown" field.</summary>
+    public const int CooldownFieldNumber = 4;
+    private int cooldown_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Cooldown {
+      get { return cooldown_; }
+      set {
+        cooldown_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "effect_type" field.</summary>
+    public const int EffectTypeFieldNumber = 5;
+    private string effectType_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string EffectType {
+      get { return effectType_; }
+      set {
+        effectType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 6;
+    private int level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Level {
+      get { return level_; }
+      set {
+        level_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_locked" field.</summary>
+    public const int IsLockedFieldNumber = 7;
+    private bool isLocked_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsLocked {
+      get { return isLocked_; }
+      set {
+        isLocked_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as HeroSkill);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(HeroSkill other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SkillCode != other.SkillCode) return false;
+      if (Name != other.Name) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(DamageMultiplier, other.DamageMultiplier)) return false;
+      if (Cooldown != other.Cooldown) return false;
+      if (EffectType != other.EffectType) return false;
+      if (Level != other.Level) return false;
+      if (IsLocked != other.IsLocked) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SkillCode.Length != 0) hash ^= SkillCode.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (DamageMultiplier != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(DamageMultiplier);
+      if (Cooldown != 0) hash ^= Cooldown.GetHashCode();
+      if (EffectType.Length != 0) hash ^= EffectType.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
+      if (IsLocked != false) hash ^= IsLocked.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (SkillCode.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SkillCode);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (DamageMultiplier != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(DamageMultiplier);
+      }
+      if (Cooldown != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Cooldown);
+      }
+      if (EffectType.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(EffectType);
+      }
+      if (Level != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Level);
+      }
+      if (IsLocked != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsLocked);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SkillCode.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SkillCode);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (DamageMultiplier != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(DamageMultiplier);
+      }
+      if (Cooldown != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Cooldown);
+      }
+      if (EffectType.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(EffectType);
+      }
+      if (Level != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Level);
+      }
+      if (IsLocked != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsLocked);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (SkillCode.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SkillCode);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (DamageMultiplier != 0F) {
+        size += 1 + 4;
+      }
+      if (Cooldown != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cooldown);
+      }
+      if (EffectType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(EffectType);
+      }
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
+      }
+      if (IsLocked != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(HeroSkill other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SkillCode.Length != 0) {
+        SkillCode = other.SkillCode;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.DamageMultiplier != 0F) {
+        DamageMultiplier = other.DamageMultiplier;
+      }
+      if (other.Cooldown != 0) {
+        Cooldown = other.Cooldown;
+      }
+      if (other.EffectType.Length != 0) {
+        EffectType = other.EffectType;
+      }
+      if (other.Level != 0) {
+        Level = other.Level;
+      }
+      if (other.IsLocked != false) {
+        IsLocked = other.IsLocked;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            SkillCode = input.ReadString();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 29: {
+            DamageMultiplier = input.ReadFloat();
+            break;
+          }
+          case 32: {
+            Cooldown = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            EffectType = input.ReadString();
+            break;
+          }
+          case 48: {
+            Level = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            IsLocked = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            SkillCode = input.ReadString();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 29: {
+            DamageMultiplier = input.ReadFloat();
+            break;
+          }
+          case 32: {
+            Cooldown = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            EffectType = input.ReadString();
+            break;
+          }
+          case 48: {
+            Level = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            IsLocked = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Hero : pb::IMessage<Hero>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -673,7 +1099,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[1]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -699,6 +1125,8 @@ namespace GameClient.Network.Pb {
       rarity_ = other.rarity_;
       power_ = other.power_;
       star_ = other.star_;
+      traits_ = other.traits_.Clone();
+      skills_ = other.skills_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -786,6 +1214,28 @@ namespace GameClient.Network.Pb {
       }
     }
 
+    /// <summary>Field number for the "traits" field.</summary>
+    public const int TraitsFieldNumber = 7;
+    private static readonly pb::FieldCodec<string> _repeated_traits_codec
+        = pb::FieldCodec.ForString(58);
+    private readonly pbc::RepeatedField<string> traits_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> Traits {
+      get { return traits_; }
+    }
+
+    /// <summary>Field number for the "skills" field.</summary>
+    public const int SkillsFieldNumber = 8;
+    private static readonly pb::FieldCodec<global::GameClient.Network.Pb.HeroSkill> _repeated_skills_codec
+        = pb::FieldCodec.ForMessage(66, global::GameClient.Network.Pb.HeroSkill.Parser);
+    private readonly pbc::RepeatedField<global::GameClient.Network.Pb.HeroSkill> skills_ = new pbc::RepeatedField<global::GameClient.Network.Pb.HeroSkill>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::GameClient.Network.Pb.HeroSkill> Skills {
+      get { return skills_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -807,6 +1257,8 @@ namespace GameClient.Network.Pb {
       if (Rarity != other.Rarity) return false;
       if (Power != other.Power) return false;
       if (Star != other.Star) return false;
+      if(!traits_.Equals(other.traits_)) return false;
+      if(!skills_.Equals(other.skills_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -820,6 +1272,8 @@ namespace GameClient.Network.Pb {
       if (Rarity.Length != 0) hash ^= Rarity.GetHashCode();
       if (Power != 0L) hash ^= Power.GetHashCode();
       if (Star != 0) hash ^= Star.GetHashCode();
+      hash ^= traits_.GetHashCode();
+      hash ^= skills_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -862,6 +1316,8 @@ namespace GameClient.Network.Pb {
         output.WriteRawTag(48);
         output.WriteInt32(Star);
       }
+      traits_.WriteTo(output, _repeated_traits_codec);
+      skills_.WriteTo(output, _repeated_skills_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -896,6 +1352,8 @@ namespace GameClient.Network.Pb {
         output.WriteRawTag(48);
         output.WriteInt32(Star);
       }
+      traits_.WriteTo(ref output, _repeated_traits_codec);
+      skills_.WriteTo(ref output, _repeated_skills_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -924,6 +1382,8 @@ namespace GameClient.Network.Pb {
       if (Star != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Star);
       }
+      size += traits_.CalculateSize(_repeated_traits_codec);
+      size += skills_.CalculateSize(_repeated_skills_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -954,6 +1414,8 @@ namespace GameClient.Network.Pb {
       if (other.Star != 0) {
         Star = other.Star;
       }
+      traits_.Add(other.traits_);
+      skills_.Add(other.skills_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -995,6 +1457,14 @@ namespace GameClient.Network.Pb {
           }
           case 48: {
             Star = input.ReadInt32();
+            break;
+          }
+          case 58: {
+            traits_.AddEntriesFrom(input, _repeated_traits_codec);
+            break;
+          }
+          case 66: {
+            skills_.AddEntriesFrom(input, _repeated_skills_codec);
             break;
           }
         }
@@ -1040,6 +1510,14 @@ namespace GameClient.Network.Pb {
             Star = input.ReadInt32();
             break;
           }
+          case 58: {
+            traits_.AddEntriesFrom(ref input, _repeated_traits_codec);
+            break;
+          }
+          case 66: {
+            skills_.AddEntriesFrom(ref input, _repeated_skills_codec);
+            break;
+          }
         }
       }
     }
@@ -1062,7 +1540,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[2]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1340,7 +1818,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[3]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1564,7 +2042,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[4]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1725,7 +2203,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[5]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1958,7 +2436,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[6]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2119,7 +2597,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[7]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2358,7 +2836,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[8]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2548,7 +3026,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[9]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2755,7 +3233,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[10]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2990,7 +3468,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[11]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3243,7 +3721,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[12]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3441,7 +3919,7 @@ namespace GameClient.Network.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[13]; }
+      get { return global::GameClient.Network.Pb.DiscipleReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -124,8 +124,14 @@ namespace GameClient.UI
                 return;
             }
 
+            int zoneId = Managers.GameContext.CurrentServerId;
+            if (zoneId <= 0)
+            {
+                zoneId = 1;
+            }
+
             string baseUrl = GameSettings.Instance != null ? GameSettings.Instance.apiBaseUrl : "http://localhost:8080";
-            string url = baseUrl.TrimEnd('/') + "/user/dashboard?token=" + System.Uri.EscapeDataString(token);
+            string url = baseUrl.TrimEnd('/') + "/user/dashboard?token=" + System.Uri.EscapeDataString(token) + "&zone_id=" + zoneId;
             
             Debug.Log("[Dashboard] Mở cổng tu luyện ngoài: " + url);
             Application.OpenURL(url);

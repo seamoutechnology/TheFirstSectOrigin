@@ -19,6 +19,106 @@ MonoBehaviour:
     m_Key: New Entry
     m_Metadata:
       m_Items: []
+  - m_Id: 10001
+    m_Key: combat_prep_select_slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10002
+    m_Key: combat_prep_select_slot_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10003
+    m_Key: combat_prep_slot_not_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10004
+    m_Key: combat_prep_target_not_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10005
+    m_Key: combat_prep_swap_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10006
+    m_Key: combat_prep_max_heroes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10007
+    m_Key: combat_prep_place_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10008
+    m_Key: combat_prep_evict_hero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10009
+    m_Key: combat_prep_save_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10010
+    m_Key: combat_prep_save_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10011
+    m_Key: combat_prep_empty_formation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10012
+    m_Key: combat_prep_formation_label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10013
+    m_Key: combat_prep_slot_locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10014
+    m_Key: combat_prep_slot_blessed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10015
+    m_Key: combat_prep_slot_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10016
+    m_Key: combat_blessed_indicator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10017
+    m_Key: combat_log_blessed_announcement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10018
+    m_Key: combat_log_blessed_applied
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10019
+    m_Key: combat_max_heroes_drag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10020
+    m_Key: combat_prep_team_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10021
+    m_Key: combat_prep_sort_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10022
+    m_Key: combat_prep_sort_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10023
+    m_Key: combat_prep_sort_rarity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10024
+    m_Key: combat_prep_auto_deploy_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10025
+    m_Key: combat_prep_quick_deploy_success
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
