@@ -95,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27f6fb8df1d0a9f429df5fa6369dd67a
+    m_Address: UI_HeroDetailPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 32fd20720bee7a849a3468058840a6dd
     m_Address: avt_03_img
     m_ReadOnly: 0

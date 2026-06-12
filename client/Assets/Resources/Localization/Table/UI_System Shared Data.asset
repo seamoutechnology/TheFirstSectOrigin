@@ -521,6 +521,10 @@ MonoBehaviour:
     m_Key: ui_label_retry
     m_Metadata:
       m_Items: []
+  - m_Id: 10881809695600640
+    m_Key: ui_level_up
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

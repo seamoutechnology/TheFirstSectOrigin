@@ -523,6 +523,10 @@ MonoBehaviour:
     m_Localized: "Th\u1EED l\u1EA1i"
     m_Metadata:
       m_Items: []
+  - m_Id: 10881809695600640
+    m_Localized: "N\xE2ng c\u1EA5p"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
