@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7d728b767bb0fbd498362f6644487616
+guid: 8130b8f16ca2a2d42bfea4ebf49a9400
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5388073460102796375
-    second: char_mon_01_0
+      213: -2270893984873088725
+    second: ligth_icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: char_mon_01_0
+      name: ligth_icon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 229
-        height: 131
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9abecda3cb7b935b0800000000000000
-      internalID: -5388073460102796375
+      spriteID: b297115d3f92c70e0800000000000000
+      internalID: -2270893984873088725
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      char_mon_01_0: -5388073460102796375
+      ligth_icon_0: -2270893984873088725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

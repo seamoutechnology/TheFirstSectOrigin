@@ -306,7 +306,7 @@ namespace GameClient.UI
             // Để tránh lỗi LogError từ ResourceManager, ta chuyển hướng sang avatar đại diện của quái vật.
             if (address.Contains("Prefab") || address.Contains("prefab"))
             {
-                address = "avt_03_img"; // Dùng avatar mặc định cho quái vật
+                address = "avt_mon_01"; // Dùng avatar mặc định cho quái vật
             }
 
             if (string.IsNullOrEmpty(address) || address.Contains(" ") || address == monster.name)

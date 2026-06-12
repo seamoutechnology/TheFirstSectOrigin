@@ -50,6 +50,20 @@ namespace GameClient.UI
             {
                 imgHero.sprite = sprite;
                 imgHero.enabled = show && sprite != null;
+                if (sprite != null)
+                {
+                    imgHero.preserveAspect = true;
+                }
+            }
+        }
+
+        public void SetFlipped(bool flipped)
+        {
+            if (imgHero != null)
+            {
+                var scale = imgHero.transform.localScale;
+                scale.x = flipped ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+                imgHero.transform.localScale = scale;
             }
         }
 

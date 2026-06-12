@@ -511,6 +511,14 @@ MonoBehaviour:
     m_Localized: "Lu\u1EADt"
     m_Metadata:
       m_Items: []
+  - m_Id: 10801336931807232
+    m_Localized: "Chinh ph\u1EA1t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871273679450112
+    m_Localized: "Tho\xE1t"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

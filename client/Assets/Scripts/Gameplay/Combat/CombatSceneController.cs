@@ -38,11 +38,16 @@ namespace GameClient.Gameplay.Combat
                 }
             }
 
+            bool isPlayerUI = playerSpawnContainer.GetComponentInParent<Canvas>() != null;
             if (playerSpawnContainer.childCount > 0)
             {
                 var points = new List<Transform>();
                 foreach (Transform child in playerSpawnContainer)
                 {
+                    if (isPlayerUI && child.GetComponent<RectTransform>() == null)
+                    {
+                        child.gameObject.AddComponent<RectTransform>();
+                    }
                     points.Add(child);
                 }
                 playerSpawnPoints = points.ToArray();
@@ -56,7 +61,15 @@ namespace GameClient.Gameplay.Combat
                 {
                     for (int c = 0; c < 3; c++)
                     {
-                        var p = new GameObject($"P_Row{r}_Col{c}").transform;
+                        Transform p;
+                        if (isPlayerUI)
+                        {
+                            p = new GameObject($"P_Row{r}_Col{c}", typeof(RectTransform)).transform;
+                        }
+                        else
+                        {
+                            p = new GameObject($"P_Row{r}_Col{c}").transform;
+                        }
                         p.SetParent(playerSpawnContainer);
                         p.localPosition = new Vector3(-4.5f + c * 1.2f, 1.2f - r * 1.2f, 0f);
                         p.localRotation = Quaternion.identity;
@@ -87,11 +100,17 @@ namespace GameClient.Gameplay.Combat
                 }
             }
 
+            bool isEnemyUI = enemySpawnContainer.GetComponentInParent<Canvas>() != null;
             if (enemySpawnContainer.childCount > 0)
             {
                 var points = new List<Transform>();
                 foreach (Transform child in enemySpawnContainer)
                 {
+                    if (isEnemyUI && child.GetComponent<RectTransform>() == null)
+                    {
+                        child.gameObject.AddComponent<RectTransform>();
+                    }
+                    child.localRotation = Quaternion.identity; // Giữ nguyên hướng mặt tự nhiên (hướng sang trái)
                     points.Add(child);
                 }
                 enemySpawnPoints = points.ToArray();
@@ -105,10 +124,18 @@ namespace GameClient.Gameplay.Combat
                 {
                     for (int c = 0; c < 3; c++)
                     {
-                        var e = new GameObject($"E_Row{r}_Col{c}").transform;
+                        Transform e;
+                        if (isEnemyUI)
+                        {
+                            e = new GameObject($"E_Row{r}_Col{c}", typeof(RectTransform)).transform;
+                        }
+                        else
+                        {
+                            e = new GameObject($"E_Row{r}_Col{c}").transform;
+                        }
                         e.SetParent(enemySpawnContainer);
                         e.localPosition = new Vector3(2.1f + c * 1.2f, 1.2f - r * 1.2f, 0f);
-                        e.localRotation = Quaternion.Euler(0f, 180f, 0f); // Quay mặt sang trái
+                        e.localRotation = Quaternion.identity; // Giữ nguyên hướng mặt tự nhiên (hướng sang trái)
                         e.localScale = Vector3.one;
                         points.Add(e);
                     }
@@ -218,6 +245,7 @@ namespace GameClient.Gameplay.Combat
                             {
                                 var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
                                 slotItem.SetHeroVisual(sprite, sprite != null);
+                                slotItem.SetFlipped(true); // Quay mặt sang phải (hướng đối thủ)
                                 slotItem.SetTextBgActive(true);
                                 slotItem.SetStatusText(heroInstance.Name);
                                 Debug.Log($"[CombatSceneController] Successfully set player '{heroInstance.Name}' visual on UI Slot.");
@@ -245,16 +273,36 @@ namespace GameClient.Gameplay.Combat
                             {
                                 if (prefabAddr.EndsWith("_img") || prefabAddr.Contains("char_"))
                                 {
-                                    go = new GameObject($"Hero_{heroInstance.Name}");
-                                    go.transform.SetParent(playerSpawnPoints[slotIndex]);
-                                    go.transform.localPosition = Vector3.zero;
-                                    go.transform.localRotation = Quaternion.identity;
-                                    go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
-                                    
-                                    var sr = go.AddComponent<SpriteRenderer>();
-                                    var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
-                                    sr.sprite = sprite;
-                                    sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                                    bool isUI = playerSpawnPoints[slotIndex].GetComponentInParent<Canvas>() != null;
+                                    if (isUI)
+                                    {
+                                        go = new GameObject($"Hero_{heroInstance.Name}", typeof(RectTransform));
+                                        go.transform.SetParent(playerSpawnPoints[slotIndex], false);
+                                        var rect = go.GetComponent<RectTransform>();
+                                        rect.anchoredPosition = Vector2.zero;
+                                        rect.localRotation = Quaternion.identity;
+                                        go.transform.localScale = new Vector3(-1f, 1f, 1f); // Flip horizontally so it looks right
+                                        var parentRect = playerSpawnPoints[slotIndex].GetComponent<RectTransform>();
+                                        rect.sizeDelta = parentRect != null ? parentRect.sizeDelta : new Vector2(120f, 120f);
+                                        
+                                        var img = go.AddComponent<UnityEngine.UI.Image>();
+                                        img.preserveAspect = true;
+                                        var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
+                                        img.sprite = sprite;
+                                    }
+                                    else
+                                    {
+                                        go = new GameObject($"Hero_{heroInstance.Name}");
+                                        go.transform.SetParent(playerSpawnPoints[slotIndex]);
+                                        go.transform.localPosition = Vector3.zero;
+                                        go.transform.localRotation = Quaternion.identity;
+                                        go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                        
+                                        var sr = go.AddComponent<SpriteRenderer>();
+                                        var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
+                                        sr.sprite = sprite;
+                                        sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                                    }
                                 }
                                 else
                                 {
@@ -358,6 +406,7 @@ namespace GameClient.Gameplay.Combat
                         {
                             var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
                             slotItem.SetHeroVisual(sprite, sprite != null);
+                            slotItem.SetFlipped(false); // Quay mặt sang trái (hướng ta)
                             slotItem.SetTextBgActive(true);
                             slotItem.SetStatusText(config.name);
                             Debug.Log($"[CombatSceneController] Successfully set enemy '{config.name}' visual on UI Slot.");
@@ -385,16 +434,35 @@ namespace GameClient.Gameplay.Combat
                         {
                             if (config.prefabAddress.EndsWith("_img") || config.prefabAddress.Contains("char_") || config.prefabAddress.Contains("enemy_"))
                             {
-                                go = new GameObject($"Enemy_{config.name}");
-                                go.transform.SetParent(enemySpawnPoints[targetSlot]);
-                                go.transform.localPosition = Vector3.zero;
-                                go.transform.localRotation = Quaternion.identity; // Trực thuộc transform con đã xoay 180
-                                go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
-                                
-                                var sr = go.AddComponent<SpriteRenderer>();
-                                var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
-                                sr.sprite = sprite;
-                                sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                                bool isUI = enemySpawnPoints[targetSlot].GetComponentInParent<Canvas>() != null;
+                                if (isUI)
+                                {
+                                    go = new GameObject($"Enemy_{config.name}", typeof(RectTransform));
+                                    go.transform.SetParent(enemySpawnPoints[targetSlot], false);
+                                    var rect = go.GetComponent<RectTransform>();
+                                    rect.anchoredPosition = Vector2.zero;
+                                    rect.localRotation = Quaternion.identity;
+                                    var parentRect = enemySpawnPoints[targetSlot].GetComponent<RectTransform>();
+                                    rect.sizeDelta = parentRect != null ? parentRect.sizeDelta : new Vector2(120f, 120f);
+                                    
+                                    var img = go.AddComponent<UnityEngine.UI.Image>();
+                                    img.preserveAspect = true;
+                                    var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                    img.sprite = sprite;
+                                }
+                                else
+                                {
+                                    go = new GameObject($"Enemy_{config.name}");
+                                    go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                                    go.transform.localPosition = Vector3.zero;
+                                    go.transform.localRotation = Quaternion.identity; // Trực thuộc transform con đã xoay 180
+                                    go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                    
+                                    var sr = go.AddComponent<SpriteRenderer>();
+                                    var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                    sr.sprite = sprite;
+                                    sr.sortingOrder = 10; // Đảm bảo hiển thị trên nền
+                                }
                             }
                             else
                             {

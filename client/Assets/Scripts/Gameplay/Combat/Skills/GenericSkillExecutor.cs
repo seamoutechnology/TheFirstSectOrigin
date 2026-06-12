@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using GameClient.Network.Pb; // Proto buffer namespace
+using DG.Tweening;
 
 namespace GameClient.Gameplay.Combat.Skills
 {
@@ -10,6 +11,24 @@ namespace GameClient.Gameplay.Combat.Skills
         public static IEnumerator Execute(SkillData data, CombatEntity caster, CombatEntity target, System.Action<CombatActionLog> onLogGenerated)
         {
             Debug.Log($"<color=cyan>[Combat]</color> {caster.entityName} thi triển {data.SkillName}!");
+
+            // 1. Hiệu ứng di chuyển tấn công (Slide Forward & Back)
+            if (caster != null)
+            {
+                Vector3 originalPos = caster.transform.localPosition;
+                // Nếu là Support thì nhún lên trên, nếu là Attack thì trượt về phía đối thủ
+                Vector3 offset = data.IsSupport 
+                    ? new Vector3(0f, 40f, 0f) 
+                    : (caster.isPlayer ? new Vector3(80f, 0f, 0f) : new Vector3(-80f, 0f, 0f));
+                
+                Sequence attackSeq = DOTween.Sequence();
+                attackSeq.Append(caster.transform.DOLocalMove(originalPos + offset, 0.2f).SetEase(Ease.OutQuad));
+                attackSeq.AppendInterval(0.1f);
+                attackSeq.Append(caster.transform.DOLocalMove(originalPos, 0.2f).SetEase(Ease.InQuad));
+            }
+
+            // Đợi chuyển động lao lên thực hiện xong trước khi tác động hiệu ứng
+            yield return new WaitForSeconds(0.2f);
 
             if (data.IsAoE)
             {
@@ -30,12 +49,24 @@ namespace GameClient.Gameplay.Combat.Skills
                 ApplyEffect(data, caster, target, onLogGenerated);
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.4f);
         }
 
         private static void ApplyEffect(SkillData data, CombatEntity caster, CombatEntity target, System.Action<CombatActionLog> onLogGenerated)
         {
             if (target == null || target.IsDead) return;
+
+            // Hiệu ứng nhận đòn: Rung lắc (shake) và Chớp màu (Flash color)
+            target.transform.DOComplete();
+            target.transform.DOShakePosition(0.25f, strength: 15f, vibrato: 12);
+            
+            var img = target.GetComponentInChildren<UnityEngine.UI.Image>();
+            if (img != null)
+            {
+                Color flashColor = data.IsSupport ? Color.green : Color.red;
+                Color originalColor = img.color;
+                img.DOColor(flashColor, 0.1f).OnComplete(() => img.DOColor(originalColor, 0.15f));
+            }
 
             int damageDealt = 0;
             int hpHealed = 0;

@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"strings"
+	"time"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -58,10 +59,14 @@ func AuthInterceptor(jwtMgr *jwtutil.Manager, rdb IRedisClient, log *zap.Logger)
 		activeToken, err := rdb.Get(ctx, sessionKey).Result()
 		if err != nil {
 			if err == redis.Nil {
-				return nil, status.Error(codes.Unauthenticated, "session not found or expired")
+				// Tự động tái sinh session trong Redis nếu JWT còn hạn và hợp lệ
+				// để tránh việc server reset làm người chơi bị văng ra/lỗi session.
+				_ = rdb.Set(ctx, sessionKey, tokenStr, 72*time.Hour).Err()
+				activeToken = tokenStr
+			} else {
+				log.Error("Redis error in auth middleware", zap.Error(err))
+				return nil, status.Error(codes.Internal, "internal session error")
 			}
-			log.Error("Redis error in auth middleware", zap.Error(err))
-			return nil, status.Error(codes.Internal, "internal session error")
 		}
 
 		if activeToken != tokenStr {

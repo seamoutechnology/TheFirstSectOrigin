@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1805fcea3362609499af76e525748167
+    m_Address: CombatVictoryPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1a6ea4c1333e4864eb14cb274d22a437
     m_Address: char_01_img
     m_ReadOnly: 0
@@ -185,6 +190,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d728b767bb0fbd498362f6644487616
+    m_Address: char_mon_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 835477bde22de6249b2e8125e42494da
     m_Address: Assets/AssetData/Sprites/Menu/Btn_Click_Highlight_01.png
     m_ReadOnly: 0
@@ -307,6 +317,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e3405e1dd6d248c4b8328a94a1b1c884
     m_Address: char_05_img
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e39cb1a1aed3927469398539edbe378c
+    m_Address: avt_mon_01
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

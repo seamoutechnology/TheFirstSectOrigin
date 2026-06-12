@@ -510,7 +510,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10801336931807232
-    m_Key: New Entry
+    m_Key: ui_label_raid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871273679450112
+    m_Key: ui_label_exit
     m_Metadata:
       m_Items: []
   m_Metadata:

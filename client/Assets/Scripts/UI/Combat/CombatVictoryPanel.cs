@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
+using GameClient.Core;
 using GameClient.UI.Core;
 using GameClient.Managers;
 using GameClient.Network.Pb;
@@ -99,13 +100,7 @@ namespace GameClient.UI.Combat
                 if (rewardItemPrefab != null)
                 {
                     GameObject itemGo = Instantiate(rewardItemPrefab, rewardsGridParent);
-                    // Customize text/icon if the prefab has TMP_Text or Image
-                    var text = itemGo.GetComponentInChildren<TMP_Text>();
-                    if (text != null)
-                    {
-                        // E.g. "Item_01 x5"
-                        text.text = $"{reward.itemId} x{reward.amount}";
-                    }
+                    LoadItemVisualsAsync(itemGo, reward.itemId, reward.amount);
                 }
                 else
                 {
@@ -117,6 +112,126 @@ namespace GameClient.UI.Combat
                     text.fontSize = 20;
                     text.color = Color.yellow;
                     text.alignment = TextAlignmentOptions.Center;
+                    
+                    // Cố gắng dịch tên kể cả khi dùng fallback text
+                    TranslateFallbackText(text, reward.itemId, reward.amount);
+                }
+            }
+        }
+
+        private async void TranslateFallbackText(TextMeshProUGUI text, string itemCode, int amount)
+        {
+            var config = ItemDataManager.Instance.GetItemConfig(itemCode);
+            string displayName = itemCode;
+            if (config != null)
+            {
+                string localizedName = LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.ITEM_EQUIPMENT, config.NameKey);
+                if (!string.IsNullOrEmpty(localizedName) && !localizedName.StartsWith("["))
+                {
+                    displayName = localizedName;
+                }
+            }
+            if (text != null)
+            {
+                text.text = $"• {displayName} x{amount}";
+            }
+        }
+
+        private async void LoadItemVisualsAsync(GameObject itemGo, string itemCode, int amount)
+        {
+            var config = ItemDataManager.Instance.GetItemConfig(itemCode);
+            string displayName = itemCode;
+            if (config != null)
+            {
+                string localizedName = LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.ITEM_EQUIPMENT, config.NameKey);
+                if (!string.IsNullOrEmpty(localizedName) && !localizedName.StartsWith("["))
+                {
+                    displayName = localizedName;
+                }
+            }
+
+            // 1. Tìm và gán Text (Tên & Số lượng)
+            var txts = itemGo.GetComponentsInChildren<TMP_Text>(true);
+            if (txts.Length > 0)
+            {
+                if (txts.Length == 1)
+                {
+                    txts[0].text = $"{displayName}\nx{amount}";
+                }
+                else
+                {
+                    TMP_Text txtName = null;
+                    TMP_Text txtQty = null;
+                    foreach (var t in txts)
+                    {
+                        string nameLower = t.name.ToLower();
+                        if (nameLower.Contains("name") || nameLower.Contains("title")) txtName = t;
+                        else if (nameLower.Contains("qty") || nameLower.Contains("quantity") || nameLower.Contains("count") || nameLower.Contains("amount")) txtQty = t;
+                    }
+                    if (txtName != null) txtName.text = displayName;
+                    if (txtQty != null) txtQty.text = $"x{amount}";
+
+                    if (txtName == null && txtQty == null)
+                    {
+                        txts[0].text = displayName;
+                        if (txts.Length > 1) txts[1].text = $"x{amount}";
+                    }
+                }
+            }
+
+            // 2. Tìm và gán Icon từ Addressable
+            Image imgIcon = null;
+            foreach (var img in itemGo.GetComponentsInChildren<Image>(true))
+            {
+                string nameLower = img.gameObject.name.ToLower();
+                if (nameLower.Contains("icon") || nameLower.Contains("avatar") || nameLower.Contains("thumb"))
+                {
+                    imgIcon = img;
+                    break;
+                }
+            }
+            // Nếu không tìm thấy bằng tên, lấy đại component Image đầu tiên mà không phải Background
+            if (imgIcon == null)
+            {
+                var imgs = itemGo.GetComponentsInChildren<Image>(true);
+                if (imgs.Length > 1) imgIcon = imgs[1]; // Thường index 0 là background panel của item slot
+                else if (imgs.Length == 1) imgIcon = imgs[0];
+            }
+
+            if (imgIcon != null)
+            {
+                Sprite sprite = null;
+                string iconKey = "";
+                if (config != null && !string.IsNullOrEmpty(config.Icon))
+                {
+                    iconKey = config.Icon;
+                }
+                else
+                {
+                    if (itemCode == "00000" || itemCode == "coin") iconKey = "coin_icon";
+                    else if (itemCode == "00002" || itemCode == "stone" || itemCode == "stone_1") iconKey = "stone_1_icon";
+                    else if (itemCode == "00003" || itemCode == "wood" || itemCode == "wood_1") iconKey = "wood_1_icon";
+                    else if (itemCode == "gold") iconKey = "gold_icon";
+                    else iconKey = itemCode + "_icon";
+                }
+
+                try
+                {
+                    sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(iconKey);
+                }
+                catch (System.Exception)
+                {
+                    try
+                    {
+                        sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(itemCode);
+                    }
+                    catch (System.Exception) {}
+                }
+
+                if (sprite != null)
+                {
+                    imgIcon.sprite = sprite;
+                    imgIcon.preserveAspect = true;
                 }
             }
         }

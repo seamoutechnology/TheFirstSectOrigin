@@ -44,7 +44,7 @@ namespace GameClient.Gameplay.Combat.States
             };
             req.CombatLogs.AddRange(manager.CombatLogs);
 
-            var call = NetworkManager.Instance.GatewayClient.ValidatePvEResultAsync(req);
+            var call = NetworkManager.Instance.GatewayClient.ValidatePvEResultAsync(req, NetworkManager.DefaultCallOptions());
             
             // Safe yielding on main thread to await gRPC call completion
             var task = call.ResponseAsync;
