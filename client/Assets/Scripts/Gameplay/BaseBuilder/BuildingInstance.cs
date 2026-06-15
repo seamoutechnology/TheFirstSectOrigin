@@ -29,6 +29,10 @@ namespace GameClient.Gameplay.BaseBuilder
             GridY = y;
             CurrentLevel = level;
             CurrentState = state;
+            if (Data is ProductionBuildingData && CurrentState == BuildingState.Normal)
+            {
+                CurrentState = BuildingState.Producing;
+            }
             FlipX = flipX;
             
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -378,6 +382,11 @@ namespace GameClient.Gameplay.BaseBuilder
         {
             if (Data is ProductionBuildingData prodData)
             {
+                if (CurrentState == BuildingState.Normal)
+                {
+                    SetState(BuildingState.Producing);
+                }
+
                 if (CurrentState == BuildingState.Producing || CurrentState == BuildingState.ReadyToHarvest)
                 {
                     if (_currentStorage < prodData.MaxCapacity)

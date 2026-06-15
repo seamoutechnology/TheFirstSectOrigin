@@ -92,6 +92,14 @@ namespace GameClient.BaseBuilding.Core
 
             if (isDown)
             {
+                // Chặn kéo camera map nếu đang bấm/kéo trên UI (nút floating menu, slider...)
+                if (UnityEngine.EventSystems.EventSystem.current != null && 
+                    UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                {
+                    _isDragging = false;
+                    return;
+                }
+
                 _lastMousePos = new Vector3(pointerPos.x, pointerPos.y, -_cam.transform.position.z);
                 _isDragging = true;
             }

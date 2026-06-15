@@ -525,6 +525,70 @@ MonoBehaviour:
     m_Key: ui_level_up
     m_Metadata:
       m_Items: []
+  - m_Id: 516436266934018
+    m_Key: ui_btn_leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838282897239830
+    m_Key: ui_btn_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 460835511645782
+    m_Key: ui_title_leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 941157582117633
+    m_Key: ui_col_rank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 125462634384577
+    m_Key: ui_col_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435281132117550
+    m_Key: ui_col_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67752242256555
+    m_Key: ui_title_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690999783108121
+    m_Key: ui_shop_buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 657579937422663
+    m_Key: ui_shop_recruit_ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 429058293598548
+    m_Key: ui_shop_stamina_potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 705313782016029
+    m_Key: ui_shop_speed_hourglass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 236077714868434
+    m_Key: ui_shop_not_enough_gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 677295398024566
+    m_Key: ui_shop_not_enough_xu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 98077233246426
+    m_Key: ui_shop_buy_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 981960290092268
+    m_Key: ui_shop_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143253569155264
+    m_Key: ui_shop_success
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

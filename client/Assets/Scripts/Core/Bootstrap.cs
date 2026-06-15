@@ -35,9 +35,6 @@ namespace GameClient.Core
             await CheckUpdatesAsync();
             await OptimizeGraphicsAsync();
             
-            statusText.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, GameConstants.Locales.WARN_18_PLUS);
-            await Task.Delay(2500);
-            
             bool autoLoginSuccess = await TryAutoLoginProcessAsync();
             if (autoLoginSuccess)
             {

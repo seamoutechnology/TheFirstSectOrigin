@@ -17,6 +17,7 @@ namespace GameClient.UI
         [SerializeField] private Text goldText;
         [SerializeField] private Text diamondText;
         [SerializeField] private Text staminaText;
+        [SerializeField] private Image avatarImage;
 
         [Header("Menu Buttons")]
         [SerializeField] private Button baseBuildingButton;
@@ -57,14 +58,18 @@ namespace GameClient.UI
             {
                 var baseTask = SectBuildingApi.GetBaseAsync();
                 var heroesTask = DiscipleApi.GetHeroesAsync();
+                var stagesTask = SectBuildingApi.GetCompletedStagesAsync();
 
-                await System.Threading.Tasks.Task.WhenAll(baseTask, heroesTask);
+                await System.Threading.Tasks.Task.WhenAll(baseTask, heroesTask, stagesTask);
 
                 if (baseTask.Result.Base.Code == 0)
                     GameManager.Instance.SetBuildings(baseTask.Result.Buildings);
 
                 if (heroesTask.Result.Base.Code == 0)
                     GameManager.Instance.SetHeroes(heroesTask.Result.Heroes);
+
+                if (stagesTask.Result.Base.Code == 0)
+                    GameManager.Instance.SetCompletedStages(stagesTask.Result.StageIds);
             }
             catch (RpcException ex)
             {
@@ -81,9 +86,35 @@ namespace GameClient.UI
             if (string.IsNullOrEmpty(levelLabel) || levelLabel.StartsWith("[")) levelLabel = "Lv.";
             levelText.text = $"{levelLabel} {player.Level}";
             
-            goldText.text = player.Gold.ToString("N0");
-            diamondText.text = player.Diamond.ToString("N0");
-            staminaText.text = $"{player.Stamina}/{player.MaxStamina}";
+            goldText.text = GameClient.Utils.NumberUtils.FormatNumber(player.Gold);
+            diamondText.text = GameClient.Utils.NumberUtils.FormatNumber(player.Diamond);
+            staminaText.text = $"{GameClient.Utils.NumberUtils.FormatNumber(player.Stamina)}/{GameClient.Utils.NumberUtils.FormatNumber(player.MaxStamina)}";
+
+            if (avatarImage != null)
+            {
+                string avatarAddress = string.IsNullOrEmpty(player.Avatar) ? "Icon_Button_Avatar" : player.Avatar;
+                LoadAndSetAvatar(avatarImage, avatarAddress);
+            }
+        }
+
+        private async void LoadAndSetAvatar(Image img, string address)
+        {
+            if (string.IsNullOrEmpty(address) || address.Contains(" "))
+            {
+                return;
+            }
+            try
+            {
+                var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);
+                if (sprite != null && img != null)
+                {
+                    img.sprite = sprite;
+                }
+            }
+            catch (System.Exception)
+            {
+                // Fallback
+            }
         }
     }
 }

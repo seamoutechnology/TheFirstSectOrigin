@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Stage_06
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_06
-  stageName: Ải 6: Thú Vương Phẫn Nộ
-  description: Trận chiến vượt ải 6 tông môn.
-  recommendPower: 30000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 6 t\xF4ng m\xF4n."
+  recommendPower: 850
   staminaCost: 5
   requiredStageId: Stage_05
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_06_1
-    name: Quái thú F-6.1
-    level: 16
-    maxHP: 9200
-    attack: 490
-    defense: 245
-    speed: 81
+    name: mons_01
+    level: 6
+    maxHP: 620
+    attack: 62
+    defense: 31
+    speed: 17
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_06_2
-    name: Quái thú F-6.2
-    level: 16
-    maxHP: 9400
-    attack: 500
-    defense: 250
-    speed: 82
+    name: mons_01
+    level: 6
+    maxHP: 640
+    attack: 64
+    defense: 32
+    speed: 18
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 300

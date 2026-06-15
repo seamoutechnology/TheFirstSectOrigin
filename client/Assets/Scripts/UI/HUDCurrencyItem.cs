@@ -25,11 +25,11 @@ namespace GameClient.UI
             {
                 if (maxQuantity > 0)
                 {
-                    txtQuantity.text = $"{quantity}/{maxQuantity}";
+                    txtQuantity.text = $"{GameClient.Utils.NumberUtils.FormatNumber(quantity)}/{GameClient.Utils.NumberUtils.FormatNumber(maxQuantity)}";
                 }
                 else
                 {
-                    txtQuantity.text = quantity.ToString();
+                    txtQuantity.text = GameClient.Utils.NumberUtils.FormatNumber(quantity);
                 }
             }
 
@@ -38,17 +38,9 @@ namespace GameClient.UI
                 imgIcon.sprite = iconSprite;
             }
 
-            if (txtName != null && !string.IsNullOrEmpty(nameKey))
+            if (txtName != null)
             {
-                // Lấy tên vật phẩm từ bảng Item_Equipment của Server
-                string localizedName = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, nameKey);
-                
-                // Fallback nếu không dịch được
-                if (string.IsNullOrEmpty(localizedName) || localizedName.StartsWith("["))
-                {
-                    localizedName = itemCode;
-                }
-                txtName.text = localizedName;
+                txtName.gameObject.SetActive(false);
             }
         }
     }

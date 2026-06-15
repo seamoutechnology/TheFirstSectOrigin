@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 6653022077102335603}
   - component: {fileID: 8814347285191289595}
   - component: {fileID: 3614576166600147543}
+  - component: {fileID: 5201421006816141207}
   m_Layer: 5
   m_Name: quantity
   m_TagString: Untagged
@@ -176,8 +177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 35}
+  m_AnchoredPosition: {x: -9.0999, y: -98.4}
+  m_SizeDelta: {x: 69.0759, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8814347285191289595
 CanvasRenderer:
@@ -234,10 +235,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.85
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -273,12 +274,26 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -27.227905, y: 0, z: -26.529785, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5201421006816141207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803972713897912988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4e48027ec4c2740b6029feb624efa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameClient.UI.UIThemeText
+  themeData: {fileID: 11400000, guid: a6b83f7ab7b8cb741bf57f1580bb4101, type: 2}
+  styleType: 3
 --- !u!1 &6408957893043875962
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,8 +598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: 55}
-  m_SizeDelta: {x: 70, y: 40}
+  m_AnchoredPosition: {x: 46.947365, y: -43.4}
+  m_SizeDelta: {x: 108.3984, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &853306448250938593
 CanvasRenderer:

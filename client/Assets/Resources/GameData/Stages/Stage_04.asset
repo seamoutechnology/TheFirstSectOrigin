@@ -13,50 +13,50 @@ MonoBehaviour:
   m_Name: Stage_04
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_04
-  stageName: Ải 4: Khảo Nghiệm Tông Môn
-  description: Trận chiến vượt ải 4 tông môn.
-  recommendPower: 20000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 4 t\xF4ng m\xF4n."
+  recommendPower: 550
   staminaCost: 5
   requiredStageId: Stage_03
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_04_1
-    name: Quái thú F-4.1
-    level: 10
-    maxHP: 6200
-    attack: 330
-    defense: 165
-    speed: 71
+    name: mons_01
+    level: 4
+    maxHP: 420
+    attack: 42
+    defense: 21
+    speed: 15
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_04_2
-    name: Quái thú F-4.2
-    level: 10
-    maxHP: 6400
-    attack: 340
-    defense: 170
-    speed: 72
+    name: mons_01
+    level: 4
+    maxHP: 440
+    attack: 44
+    defense: 22
+    speed: 16
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_04_3
-    name: Quái thú F-4.3
-    level: 10
-    maxHP: 6600
-    attack: 350
-    defense: 175
-    speed: 73
+    name: mons_01
+    level: 4
+    maxHP: 460
+    attack: 46
+    defense: 23
+    speed: 17
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_04_4
-    name: Quái thú F-4.4
-    level: 10
-    maxHP: 6800
-    attack: 360
-    defense: 180
-    speed: 74
+    name: mons_01
+    level: 4
+    maxHP: 480
+    attack: 48
+    defense: 24
+    speed: 18
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 200

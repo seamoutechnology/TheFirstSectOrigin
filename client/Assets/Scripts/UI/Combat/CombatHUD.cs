@@ -26,9 +26,7 @@ namespace GameClient.UI.Combat
         public GameObject skillPanel;
         [SerializeField] private List<UI_SkillButton> skillSlots = new();
 
-        [Header("Debug/Utility Buttons")]
-        public Button btnSurrender;
-        public Button btnInstantWin;
+
 
         private CombatManager _combatManager;
         private List<SkillData> _availableSkills;
@@ -39,14 +37,7 @@ namespace GameClient.UI.Combat
         {
             base.OnStart();
             
-            // Tự động tìm kiếm nếu chưa gán trong Inspector
-            if (btnSurrender == null) btnSurrender = transform.Find("btnSurrender")?.GetComponent<Button>();
-            if (btnSurrender == null) btnSurrender = transform.Find("Buttons/btnSurrender")?.GetComponent<Button>();
-            if (btnSurrender != null) btnSurrender.onClick.AddListener(OnSurrenderClicked);
 
-            if (btnInstantWin == null) btnInstantWin = transform.Find("btnInstantWin")?.GetComponent<Button>();
-            if (btnInstantWin == null) btnInstantWin = transform.Find("Buttons/btnInstantWin")?.GetComponent<Button>();
-            if (btnInstantWin != null) btnInstantWin.onClick.AddListener(OnInstantWinClicked);
         }
 
         public override void Setup(object data = null)
@@ -228,6 +219,13 @@ namespace GameClient.UI.Combat
                     _skillCooldownTracker.TryGetValue(skill.SkillID, out cooldown);
                     
                     skillSlots[i].Setup(skill.SkillName, cooldown);
+                    
+                    int index = i;
+                    if (skillSlots[i].Button != null)
+                    {
+                        skillSlots[i].Button.onClick.RemoveAllListeners();
+                        skillSlots[i].Button.onClick.AddListener(() => OnSkillSelected(index));
+                    }
                 }
                 return;
             }
@@ -244,6 +242,13 @@ namespace GameClient.UI.Combat
                     _skillCooldownTracker.TryGetValue(skill.SkillID, out cooldown);
                     
                     skillBtns[i].Setup(skill.SkillName, cooldown);
+                    
+                    int index = i;
+                    if (skillBtns[i].Button != null)
+                    {
+                        skillBtns[i].Button.onClick.RemoveAllListeners();
+                        skillBtns[i].Button.onClick.AddListener(() => OnSkillSelected(index));
+                    }
                 }
                 return;
             }
@@ -254,6 +259,7 @@ namespace GameClient.UI.Combat
             {
                 if (i >= buttons.Length) break;
                 var btn = buttons[i];
+
                 var skill = _availableSkills[i];
                 int cooldown = 0;
                 _skillCooldownTracker.TryGetValue(skill.SkillID, out cooldown);
@@ -276,6 +282,10 @@ namespace GameClient.UI.Combat
                         txt.text = skill.SkillName;
                     }
                 }
+
+                int index = i;
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnSkillSelected(index));
             }
         }
 
@@ -318,26 +328,5 @@ namespace GameClient.UI.Combat
             }
         }
 
-        private void OnSurrenderClicked()
-        {
-            if (_combatManager == null) return;
-            Debug.Log("[CombatHUD] Surrendering, dealing lethal damage to players.");
-            foreach (var p in _combatManager.Players)
-            {
-                if (!p.IsDead) p.TakeDamage(999999, false);
-            }
-            _combatManager.StateMachine.ChangeState(new GameOverState());
-        }
-
-        private void OnInstantWinClicked()
-        {
-            if (_combatManager == null) return;
-            Debug.Log("[CombatHUD] Cheat instant win, dealing lethal damage to enemies.");
-            foreach (var e in _combatManager.Enemies)
-            {
-                if (!e.IsDead) e.TakeDamage(999999, false);
-            }
-            _combatManager.StateMachine.ChangeState(new GameOverState());
-        }
     }
 }

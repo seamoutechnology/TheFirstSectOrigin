@@ -70,21 +70,7 @@ namespace GameClient.Managers
 
         private void CheckPlayTimeWarning()
         {
-            if (!_hasWarned180Mins && GetTodayPlayTimeMinutes() >= 180)
-            {
-                _hasWarned180Mins = true;
-                string warnText = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, GameConstants.Locales.WARN_180_MINS);
-                if (string.IsNullOrEmpty(warnText)) warnText = "You have played for 180 minutes. Please take a rest for your health.";
-                
-                if (UIManager.Instance != null)
-                {
-                    UIManager.Instance.ShowMessage("18+ Warning", warnText);
-                }
-                else
-                {
-                    Debug.LogWarning("[180 Mins Warning] " + warnText);
-                }
-            }
+            // Disabled: Remove all 18+ warnings per user request
         }
 
         private void OnApplicationQuit()

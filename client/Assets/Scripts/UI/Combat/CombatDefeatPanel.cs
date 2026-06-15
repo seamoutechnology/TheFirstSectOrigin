@@ -15,7 +15,15 @@ namespace GameClient.UI.Combat
         {
             base.OnInit();
 
-            // Auto-detect btnRetry
+            // Try detecting using ButtonGroup child indices first (Retry is 1st, Exit is 2nd)
+            var btnGroup = transform.Find("ButtonGroup");
+            if (btnGroup != null && btnGroup.childCount >= 2)
+            {
+                if (btnRetry == null) btnRetry = btnGroup.GetChild(0).GetComponent<Button>();
+                if (btnExit == null) btnExit = btnGroup.GetChild(1).GetComponent<Button>();
+            }
+
+            // Auto-detect btnRetry fallbacks
             if (btnRetry == null) btnRetry = transform.Find("btnRetry")?.GetComponent<Button>();
             if (btnRetry == null) btnRetry = transform.Find("Buttons/btnRetry")?.GetComponent<Button>();
             if (btnRetry == null)
@@ -30,8 +38,24 @@ namespace GameClient.UI.Combat
                     }
                 }
             }
+            if (btnRetry == null)
+            {
+                foreach (var b in GetComponentsInChildren<Button>(true))
+                {
+                    var textComp = b.GetComponentInChildren<TMPro.TMP_Text>();
+                    if (textComp != null)
+                    {
+                        string txtLower = textComp.text.ToLower();
+                        if (txtLower.Contains("retry") || txtLower.Contains("lại") || txtLower.Contains("lai") || txtLower.Contains("thử"))
+                        {
+                            btnRetry = b;
+                            break;
+                        }
+                    }
+                }
+            }
 
-            // Auto-detect btnExit
+            // Auto-detect btnExit fallbacks
             if (btnExit == null) btnExit = transform.Find("btnExit")?.GetComponent<Button>();
             if (btnExit == null) btnExit = transform.Find("Buttons/btnExit")?.GetComponent<Button>();
             if (btnExit == null)
@@ -43,6 +67,22 @@ namespace GameClient.UI.Combat
                     {
                         btnExit = b;
                         break;
+                    }
+                }
+            }
+            if (btnExit == null)
+            {
+                foreach (var b in GetComponentsInChildren<Button>(true))
+                {
+                    var textComp = b.GetComponentInChildren<TMPro.TMP_Text>();
+                    if (textComp != null)
+                    {
+                        string txtLower = textComp.text.ToLower();
+                        if (txtLower.Contains("exit") || txtLower.Contains("quit") || txtLower.Contains("thoát") || txtLower.Contains("thoat") || txtLower.Contains("rời") || txtLower.Contains("roi"))
+                        {
+                            btnExit = b;
+                            break;
+                        }
                     }
                 }
             }

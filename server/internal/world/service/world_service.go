@@ -43,8 +43,11 @@ type BuildingLevelJSON struct {
 }
 
 type BuildingDataJSON struct {
-	BuildingID string              `json:"buildingID"`
-	LevelStats []BuildingLevelJSON `json:"levelStats"`
+	BuildingID              string              `json:"buildingID"`
+	ProducedResource        string              `json:"producedResource,omitempty"`
+	ProductionRatePerSecond float64             `json:"productionRatePerSecond,omitempty"`
+	MaxCapacity             int                 `json:"maxCapacity,omitempty"`
+	LevelStats              []BuildingLevelJSON `json:"levelStats"`
 }
 
 type BuildingConfigsJSON struct {
@@ -55,10 +58,18 @@ type SpeedUpConfig struct {
 	FreeUnderSeconds int64 `json:"free_under_seconds"`
 }
 
+type BuildingMeta struct {
+	BuildingID              string
+	ProducedResource        string
+	ProductionRatePerSecond float64
+	MaxCapacity             int
+}
+
 type WorldService struct {
 	repo            repository.IPlayerRepository
 	serverID        string
 	buildingConfigs map[string]map[int]BuildingLevelJSON
+	buildingMeta    map[string]BuildingMeta
 	speedUpConfig   SpeedUpConfig
 }
 
@@ -67,6 +78,7 @@ func New(repo repository.IPlayerRepository, serverID string) *WorldService {
 		repo:            repo,
 		serverID:        serverID,
 		buildingConfigs: make(map[string]map[int]BuildingLevelJSON),
+		buildingMeta:    make(map[string]BuildingMeta),
 		speedUpConfig:   SpeedUpConfig{FreeUnderSeconds: 0}, // default
 	}
 }
@@ -85,15 +97,23 @@ func (s *WorldService) LoadBuildingConfigs(filePath string) error {
 	}
 
 	newConfigs := make(map[string]map[int]BuildingLevelJSON)
+	newMeta := make(map[string]BuildingMeta)
 	for _, b := range data.Buildings {
 		levels := make(map[int]BuildingLevelJSON)
 		for _, lvl := range b.LevelStats {
 			levels[lvl.Level] = lvl
 		}
 		newConfigs[b.BuildingID] = levels
+		newMeta[b.BuildingID] = BuildingMeta{
+			BuildingID:              b.BuildingID,
+			ProducedResource:        b.ProducedResource,
+			ProductionRatePerSecond: b.ProductionRatePerSecond,
+			MaxCapacity:             b.MaxCapacity,
+		}
 	}
 
 	s.buildingConfigs = newConfigs
+	s.buildingMeta = newMeta
 	return nil
 }
 
@@ -356,25 +376,68 @@ func (s *WorldService) SpeedUpBuilding(ctx context.Context, userID int64, instan
 	return building, updatedPlayer, ErrCodeSuccess, ""
 }
 
-func (s *WorldService) CollectResources(ctx context.Context, userID int64, instanceID int64) (int64, *repository.Player, int32, string) {
+func (s *WorldService) CollectResources(ctx context.Context, userID int64, instanceID int64) (int64, map[string]int64, *repository.Player, int32, string) {
 	player, code, msg := s.GetPlayerProfile(ctx, userID)
 	if code != ErrCodeSuccess {
-		return 0, nil, code, msg
+		return 0, nil, nil, code, msg
+	}
+
+	buildings, err := s.repo.GetPlayerBuildings(ctx, player.ID)
+	if err != nil {
+		return 0, nil, nil, ErrCodeInternal, err.Error()
+	}
+
+	var b *repository.PlayerBuilding
+	for _, building := range buildings {
+		if building.ID == instanceID {
+			b = building
+			break
+		}
+	}
+	if b == nil {
+		return 0, nil, nil, ErrCodeNotFound, "không tìm thấy công trình"
+	}
+
+	meta, hasMeta := s.buildingMeta[b.BuildingCode]
+	if hasMeta && meta.ProducedResource != "" {
+		elapsedHours := time.Since(b.LastCollectAt).Hours()
+		if elapsedHours > 12 {
+			elapsedHours = 12
+		}
+
+		ratePerHour := meta.ProductionRatePerSecond * 3600 * float64(b.Level)
+		amount := int64(ratePerHour * elapsedHours)
+		maxCapacity := int64(meta.MaxCapacity * int(b.Level))
+		if amount > maxCapacity {
+			amount = maxCapacity
+		}
+
+		if amount <= 0 {
+			return 0, nil, player, ErrCodeSuccess, "chưa có tài nguyên để thu thập"
+		}
+
+		err = s.repo.CollectResource(ctx, player.ID, instanceID, meta.ProducedResource, amount)
+		if err != nil {
+			return 0, nil, nil, ErrCodeInternal, err.Error()
+		}
+
+		updatedPlayer, _, _ := s.GetPlayerProfile(ctx, userID)
+		return 0, map[string]int64{meta.ProducedResource: amount}, updatedPlayer, ErrCodeSuccess, ""
 	}
 
 	goldGained, err := s.repo.CollectGold(ctx, player.ID, instanceID)
 	if err != nil {
-		return 0, nil, ErrCodeInternal, err.Error()
+		return 0, nil, nil, ErrCodeInternal, err.Error()
 	}
 	if goldGained <= 0 {
-		return 0, player, ErrCodeSuccess, "chưa có vàng để thu thập"
+		return 0, nil, player, ErrCodeSuccess, "chưa có vàng để thu thập"
 	}
 
 	updatedPlayer, err := s.repo.UpdateResources(ctx, player.ID, goldGained, 0)
 	if err != nil {
-		return 0, nil, ErrCodeInternal, err.Error()
+		return 0, nil, nil, ErrCodeInternal, err.Error()
 	}
-	return goldGained, updatedPlayer, ErrCodeSuccess, ""
+	return goldGained, map[string]int64{"gold": goldGained}, updatedPlayer, ErrCodeSuccess, ""
 }
 
 
@@ -438,9 +501,33 @@ func (s *WorldService) DoGacha(ctx context.Context, userID int64, bannerID int32
 		return nil, nil, ErrCodeNotFound, "banner không tồn tại hoặc đã kết thúc"
 	}
 
-	totalCost := int64(banner.CostDiamond) * int64(count)
-	if player.Diamond < totalCost {
-		return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ kim cương (cần %d)", totalCost)
+	var updatedPlayer *repository.Player
+	if banner.CostItem != "" {
+		requiredQty := int32(count) // 1 vật phẩm mỗi lượt
+		err = s.repo.DeductUserItems(ctx, player.ID, map[string]int32{banner.CostItem: requiredQty})
+		if err != nil {
+			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ vật phẩm yêu cầu để quay (cần %d)", requiredQty)
+		}
+		// Vẫn load lại profile sau khi trừ item
+		updatedPlayer, _, _ = s.GetPlayerProfile(ctx, userID)
+	} else if banner.CostGold > 0 {
+		totalGoldCost := int64(banner.CostGold) * int64(count)
+		if player.Gold < totalGoldCost {
+			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ Vàng (cần %d)", totalGoldCost)
+		}
+		updatedPlayer, err = s.repo.UpdateResources(ctx, player.ID, -totalGoldCost, 0)
+		if err != nil {
+			return nil, nil, ErrCodeInternal, err.Error()
+		}
+	} else {
+		totalCost := int64(banner.CostDiamond) * int64(count)
+		if player.Diamond < totalCost {
+			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ kim cương (cần %d)", totalCost)
+		}
+		updatedPlayer, err = s.repo.UpdateResources(ctx, player.ID, 0, -totalCost)
+		if err != nil {
+			return nil, nil, ErrCodeInternal, err.Error()
+		}
 	}
 
 	pool, err := s.repo.GetGachaHeroPool(ctx)
@@ -483,10 +570,6 @@ func (s *WorldService) DoGacha(ctx context.Context, userID int64, bannerID int32
 	}
 
 	_ = s.repo.UpdatePity(ctx, player.ID, bannerID, pityCount)
-	updatedPlayer, err := s.repo.UpdateResources(ctx, player.ID, 0, -totalCost)
-	if err != nil {
-		return nil, nil, ErrCodeInternal, err.Error()
-	}
 
 	return results, updatedPlayer, ErrCodeSuccess, ""
 }
@@ -1096,6 +1179,27 @@ func (s *WorldService) ProcessPvECombatResult(ctx context.Context, userID int64,
 	}
 
 	return updatedPlayer, ErrCodeSuccess, ""
+}
+
+func (s *WorldService) GetCompletedStages(ctx context.Context, userID int64) ([]string, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, code, msg
+	}
+
+	stages, err := s.repo.GetCompletedStages(ctx, player.ID)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+	return stages, ErrCodeSuccess, ""
+}
+
+func (s *WorldService) GetLeaderboard(ctx context.Context, leaderboardType string) ([]*repository.LeaderboardRecord, int32, string) {
+	records, err := s.repo.GetLeaderboard(ctx, leaderboardType)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+	return records, ErrCodeSuccess, ""
 }
 
 

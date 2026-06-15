@@ -99,3 +99,37 @@ func (h *WorldHandler) ValidatePvEResult(ctx context.Context, req *pb.ValidatePv
 	return resp, nil
 }
 
+func (h *WorldHandler) GetCompletedStages(ctx context.Context, req *pb.GetCompletedStagesRequest) (*pb.GetCompletedStagesResponse, error) {
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.GetCompletedStagesResponse{Base: &pb.BaseResponse{Code: 401, Message: "msg_unauthorized"}}, nil
+	}
+	stages, code, msg := h.svc.GetCompletedStages(ctx, userID)
+	if code != 0 {
+		return &pb.GetCompletedStagesResponse{Base: &pb.BaseResponse{Code: code, Message: msg}}, nil
+	}
+	return &pb.GetCompletedStagesResponse{
+		Base:     &pb.BaseResponse{Code: 0, Message: "msg_success"},
+		StageIds: stages,
+	}, nil
+}
+
+func (h *WorldHandler) GetLeaderboard(ctx context.Context, req *pb.GetLeaderboardRequest) (*pb.GetLeaderboardResponse, error) {
+	records, code, msg := h.svc.GetLeaderboard(ctx, req.Type)
+	if code != 0 {
+		return &pb.GetLeaderboardResponse{Base: &pb.BaseResponse{Code: code, Message: msg}}, nil
+	}
+	var pbEntries []*pb.LeaderboardEntry
+	for _, r := range records {
+		pbEntries = append(pbEntries, &pb.LeaderboardEntry{
+			Rank:     r.Rank,
+			Nickname: r.Nickname,
+			Value:    r.Value,
+		})
+	}
+	return &pb.GetLeaderboardResponse{
+		Base:    &pb.BaseResponse{Code: 0, Message: "msg_success"},
+		Entries: pbEntries,
+	}, nil
+}
+

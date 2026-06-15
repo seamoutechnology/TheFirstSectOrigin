@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -517,6 +517,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10881809695600640
     m_Localized: Level up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 516436266934018
+    m_Localized: Leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838282897239830
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 460835511645782
+    m_Localized: POWER LEADERBOARD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 941157582117633
+    m_Localized: Rank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 125462634384577
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435281132117550
+    m_Localized: Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67752242256555
+    m_Localized: GENERAL SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690999783108121
+    m_Localized: Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 657579937422663
+    m_Localized: Recruit Ticket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 429058293598548
+    m_Localized: Stamina Potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 705313782016029
+    m_Localized: Speed Hourglass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 236077714868434
+    m_Localized: Not enough Gold!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 677295398024566
+    m_Localized: Not enough Xu!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 98077233246426
+    m_Localized: Purchased successfully!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 981960290092268
+    m_Localized: Failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143253569155264
+    m_Localized: Success
     m_Metadata:
       m_Items: []
   references:

@@ -305,7 +305,17 @@ namespace GameClient.UI.Combat
                             : "\n\nItems received:";
                         foreach (var reward in stage.rewards)
                         {
-                            rewardMsg += $"\n• {reward.itemId} x{reward.amount}";
+                            string itemName = reward.itemId;
+                            var itemConfig = ItemDataManager.Instance.GetItemConfig(reward.itemId);
+                            if (itemConfig != null && !string.IsNullOrEmpty(itemConfig.NameKey))
+                            {
+                                string localizedItemName = LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.ITEM_EQUIPMENT, itemConfig.NameKey);
+                                if (!string.IsNullOrEmpty(localizedItemName) && !localizedItemName.StartsWith("["))
+                                {
+                                    itemName = localizedItemName;
+                                }
+                            }
+                            rewardMsg += $"\n• {itemName} x{reward.amount}";
                         }
                     }
 

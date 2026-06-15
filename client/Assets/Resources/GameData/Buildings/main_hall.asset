@@ -14,35 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.BaseBuilder.BuildingData
   BuildingID: main_hall
   BuildingNameKey: main_hall
-  BuildingDescKey: main_hall_desc
+  BuildingDescKey: 
   Type: 0
   Category: 1
-  ReputationLimits:
-  - RequiredReputation: 0
-    MaxAllowed: 1
+  ReputationLimits: []
   SizeX: 3
   SizeY: 2
   PrefabAddress: 
   VisualConfig: {fileID: 11400000, guid: b6be25c70eff5bc41a001e8919103407, type: 2}
   DetailSubPanelAddress: 
-  LevelStats:
-  - Level: 1
-    RequiredReputation: 0
-    CostItems: []
-    BuildTimeSeconds: 0
-  - Level: 2
-    RequiredReputation: 0
-    CostItems: []
-    BuildTimeSeconds: 30
-  - Level: 3
-    RequiredReputation: 0
-    CostItems: []
-    BuildTimeSeconds: 60
-  - Level: 4
-    RequiredReputation: 0
-    CostItems: []
-    BuildTimeSeconds: 120
-  - Level: 5
-    RequiredReputation: 0
-    CostItems: []
-    BuildTimeSeconds: 240
+  LevelStats: []

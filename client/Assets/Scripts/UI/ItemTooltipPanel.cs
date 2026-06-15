@@ -76,7 +76,28 @@ namespace GameClient.UI
                 {
                     ownedCount = GetOwnedQuantity(itemCode);
                 }
-                if (txtOwnedQuantity != null) txtOwnedQuantity.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_owned", ownedCount);
+                
+                string desc = txtDescription != null ? LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.DescKey) : "";
+                string ownedText = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_owned", ownedCount);
+                
+                if (txtDescription != null)
+                {
+                    txtDescription.alignment = TextAlignmentOptions.TopLeft;
+                    txtDescription.text = $"{desc}\n\n<color=#00FF00>{ownedText}</color>";
+                    txtDescription.ForceMeshUpdate();
+                    
+                    // Tự động giãn chiều cao RectTransform theo nội dung chữ
+                    var rt = txtDescription.rectTransform;
+                    if (rt != null)
+                    {
+                        rt.sizeDelta = new Vector2(rt.sizeDelta.x, txtDescription.preferredHeight);
+                    }
+                }
+                
+                if (txtOwnedQuantity != null)
+                {
+                    txtOwnedQuantity.gameObject.SetActive(false);
+                }
 
                 // 4. Load ảnh icon vật phẩm từ Addressable
                 LoadIconAsync(config, itemCode);

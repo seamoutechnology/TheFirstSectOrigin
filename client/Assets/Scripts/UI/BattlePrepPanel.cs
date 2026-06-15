@@ -102,6 +102,7 @@ namespace GameClient.UI
                 if (formationSlotPrefab != null && formationGridRoot != null)
                 {
                     var go = Instantiate(formationSlotPrefab, formationGridRoot);
+                    go.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
                     var slotItem = go.GetComponent<UI_FormationSlotItem>();
                     if (slotItem == null) slotItem = go.AddComponent<UI_FormationSlotItem>();
                     
@@ -299,6 +300,8 @@ namespace GameClient.UI
 
         private async void SetEnemyAvatarOnSlot(UI_FormationSlotItem slotItem, MonsterConfig monster)
         {
+            if (slotItem == null) return;
+
             // Thử tải sprite đại diện cho quái vật từ địa chỉ prefabAddress
             string address = !string.IsNullOrEmpty(monster.prefabAddress) ? monster.prefabAddress : "";
             
@@ -309,30 +312,37 @@ namespace GameClient.UI
                 address = "avt_mon_01"; // Dùng avatar mặc định cho quái vật
             }
 
-            if (string.IsNullOrEmpty(address) || address.Contains(" ") || address == monster.name)
+            Sprite sprite = null;
+            if (!string.IsNullOrEmpty(address) && !address.Contains(" ") && address != monster.name)
             {
-                if (slotItem != null)
+                try
                 {
-                    slotItem.SetHeroVisual(null, false);
+                    sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);
                 }
-                return;
+                catch (System.Exception) {}
             }
 
-            try
+            // Fallback 1: Thử tải char_mon_01
+            if (sprite == null)
             {
-                Sprite sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(address);
-                if (slotItem != null)
+                try
                 {
-                    slotItem.SetHeroVisual(sprite, sprite != null);
+                    sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("char_mon_01");
                 }
+                catch (System.Exception) {}
             }
-            catch (System.Exception)
+
+            // Fallback 2: Thử tải avt_mon_01
+            if (sprite == null)
             {
-                if (slotItem != null)
+                try
                 {
-                    slotItem.SetHeroVisual(null, false);
+                    sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("avt_mon_01");
                 }
+                catch (System.Exception) {}
             }
+
+            slotItem.SetHeroVisual(sprite, sprite != null);
         }
 
         private void LoadCurrentFormation()
@@ -1151,7 +1161,7 @@ namespace GameClient.UI
                     GameObject go = null;
                     string enemyPrefabAddr = config.prefabAddress;
                     Debug.Log($"[BattlePrepPanel] Enemy Addressable prefab address: '{enemyPrefabAddr}'");
-                    if (!string.IsNullOrEmpty(enemyPrefabAddr) && !enemyPrefabAddr.Contains(" "))
+                    if (!string.IsNullOrEmpty(enemyPrefabAddr) && !enemyPrefabAddr.Contains(" ") && enemyPrefabAddr != "MonsterPrefab")
                     {
                         try
                         {
@@ -1175,10 +1185,35 @@ namespace GameClient.UI
 
                     if (go == null)
                     {
-                        Debug.LogWarning($"[BattlePrepPanel] Enemy instantiating failed for '{config.name}'. Creating fallback dummy GameObject.");
+                        Debug.LogWarning($"[BattlePrepPanel] Enemy instantiating failed for '{config.name}'. Creating fallback dummy GameObject with SpriteRenderer.");
                         go = new GameObject($"Enemy_{config.name}");
                         go.transform.position = spawnPos;
                         go.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                        go.transform.localScale = new Vector3(10f, 10f, 1f);
+                        
+                        var sr = go.AddComponent<SpriteRenderer>();
+                        sr.sortingOrder = 10;
+                        
+                        if (!string.IsNullOrEmpty(enemyPrefabAddr) && enemyPrefabAddr != "MonsterPrefab")
+                        {
+                            try
+                            {
+                                var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(enemyPrefabAddr);
+                                if (sprite != null)
+                                {
+                                    sr.sprite = sprite;
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                try
+                                {
+                                    var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("char_mon_01");
+                                    sr.sprite = sprite;
+                                }
+                                catch {}
+                            }
+                        }
                     }
 
                     CombatEntity entity = go.GetComponent<CombatEntity>();

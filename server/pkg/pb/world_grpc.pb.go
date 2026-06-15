@@ -43,6 +43,8 @@ const (
 	GatewayService_GetGachaBanners_FullMethodName    = "/pb.GatewayService/GetGachaBanners"
 	GatewayService_DoGacha_FullMethodName            = "/pb.GatewayService/DoGacha"
 	GatewayService_GetMissions_FullMethodName        = "/pb.GatewayService/GetMissions"
+	GatewayService_GetCompletedStages_FullMethodName = "/pb.GatewayService/GetCompletedStages"
+	GatewayService_GetLeaderboard_FullMethodName     = "/pb.GatewayService/GetLeaderboard"
 )
 
 // GatewayServiceClient is the client API for GatewayService service.
@@ -81,6 +83,9 @@ type GatewayServiceClient interface {
 	DoGacha(ctx context.Context, in *DoGachaRequest, opts ...grpc.CallOption) (*DoGachaResponse, error)
 	// --- Missions ---
 	GetMissions(ctx context.Context, in *GetMissionsRequest, opts ...grpc.CallOption) (*GetMissionsResponse, error)
+	// --- Leaderboards & Stages ---
+	GetCompletedStages(ctx context.Context, in *GetCompletedStagesRequest, opts ...grpc.CallOption) (*GetCompletedStagesResponse, error)
+	GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error)
 }
 
 type gatewayServiceClient struct {
@@ -331,6 +336,26 @@ func (c *gatewayServiceClient) GetMissions(ctx context.Context, in *GetMissionsR
 	return out, nil
 }
 
+func (c *gatewayServiceClient) GetCompletedStages(ctx context.Context, in *GetCompletedStagesRequest, opts ...grpc.CallOption) (*GetCompletedStagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCompletedStagesResponse)
+	err := c.cc.Invoke(ctx, GatewayService_GetCompletedStages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gatewayServiceClient) GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLeaderboardResponse)
+	err := c.cc.Invoke(ctx, GatewayService_GetLeaderboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GatewayServiceServer is the server API for GatewayService service.
 // All implementations must embed UnimplementedGatewayServiceServer
 // for forward compatibility.
@@ -367,6 +392,9 @@ type GatewayServiceServer interface {
 	DoGacha(context.Context, *DoGachaRequest) (*DoGachaResponse, error)
 	// --- Missions ---
 	GetMissions(context.Context, *GetMissionsRequest) (*GetMissionsResponse, error)
+	// --- Leaderboards & Stages ---
+	GetCompletedStages(context.Context, *GetCompletedStagesRequest) (*GetCompletedStagesResponse, error)
+	GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error)
 	mustEmbedUnimplementedGatewayServiceServer()
 }
 
@@ -448,6 +476,12 @@ func (UnimplementedGatewayServiceServer) DoGacha(context.Context, *DoGachaReques
 }
 func (UnimplementedGatewayServiceServer) GetMissions(context.Context, *GetMissionsRequest) (*GetMissionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMissions not implemented")
+}
+func (UnimplementedGatewayServiceServer) GetCompletedStages(context.Context, *GetCompletedStagesRequest) (*GetCompletedStagesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCompletedStages not implemented")
+}
+func (UnimplementedGatewayServiceServer) GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLeaderboard not implemented")
 }
 func (UnimplementedGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {}
 func (UnimplementedGatewayServiceServer) testEmbeddedByValue()                        {}
@@ -902,6 +936,42 @@ func _GatewayService_GetMissions_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GatewayService_GetCompletedStages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCompletedStagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).GetCompletedStages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_GetCompletedStages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).GetCompletedStages(ctx, req.(*GetCompletedStagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GatewayService_GetLeaderboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeaderboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).GetLeaderboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_GetLeaderboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).GetLeaderboard(ctx, req.(*GetLeaderboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GatewayService_ServiceDesc is the grpc.ServiceDesc for GatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1004,6 +1074,14 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMissions",
 			Handler:    _GatewayService_GetMissions_Handler,
+		},
+		{
+			MethodName: "GetCompletedStages",
+			Handler:    _GatewayService_GetCompletedStages_Handler,
+		},
+		{
+			MethodName: "GetLeaderboard",
+			Handler:    _GatewayService_GetLeaderboard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

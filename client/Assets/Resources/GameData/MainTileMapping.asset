@@ -21,6 +21,14 @@ MonoBehaviour:
     entityID: main_hall
     defaultLevel: 1
     defaultState: 0
+  - tile: {fileID: 11400000, guid: 89f9daf79c2bb4c439d47bf0f6803125, type: 2}
+    entityID: main_hall
+    defaultLevel: 1
+    defaultState: 0
+  - tile: {fileID: 11400000, guid: 89f9daf79c2bb4c439d47bf0f6803125, type: 2}
+    entityID: main_hall
+    defaultLevel: 1
+    defaultState: 0
   itemMappings: []
   groundMappings:
   - tile: {fileID: 11400000, guid: 89f9daf79c2bb4c439d47bf0f6803125, type: 2}

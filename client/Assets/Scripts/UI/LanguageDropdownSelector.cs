@@ -44,6 +44,10 @@ namespace GameClient.UI
                     displayName = locale.Identifier.CultureInfo.NativeName;
                     if (!string.IsNullOrEmpty(displayName))
                     {
+                        if (displayName.Contains("("))
+                        {
+                            displayName = displayName.Split('(')[0].Trim();
+                        }
                         displayName = char.ToUpper(displayName[0]) + displayName.Substring(1);
                     }
                 }

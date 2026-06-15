@@ -69,8 +69,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000035436424}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0.00027353107}
+  m_SizeDelta: {x: 0, y: 714}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2791342152581508567
 GameObject:
@@ -144,10 +144,10 @@ RectTransform:
   - {fileID: 4796682551093410796}
   m_Father: {fileID: 8336072858612901196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05, y: 0.1}
-  m_AnchorMax: {x: 0.95, y: 0.95}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 21.5}
+  m_SizeDelta: {x: 1350, y: 731}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1537137080832393164
 CanvasRenderer:
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
   m_Content: {fileID: 4568406415300100412}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -341,16 +341,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 85
+    m_Right: 85
+    m_Top: 85
+    m_Bottom: 85
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 120}
-  m_Spacing: {x: 50, y: 50}
-  m_Constraint: 1
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 150, y: 100}
+  m_Constraint: 0
   m_ConstraintCount: 7
 --- !u!1 &6655917610368795460
 GameObject:
@@ -387,10 +387,10 @@ RectTransform:
   - {fileID: 4788207041921312132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1500, y: 860}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &4216203520594552464
 CanvasGroup:
@@ -452,10 +452,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8336072858612901196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.95, y: 0.85}
-  m_AnchorMax: {x: 1.05, y: 1.1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 675, y: 516}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &171116554608882420
 CanvasRenderer:
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8015185542049260577}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99995494
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -40,7 +40,20 @@ namespace GameClient.UI
                     var banner = resp.Banners[0];
                     _currentBannerId = banner.BannerId;
                     bannerNameText.text = banner.Name;
-                    costText.text = $"{banner.CostDiamond} Kim Cương / Lượt";
+                    
+                    if (!string.IsNullOrEmpty(banner.CostItem))
+                    {
+                        costText.text = $"1x [Vật Phẩm {banner.CostItem}] / Lượt";
+                    }
+                    else if (banner.CostGold > 0)
+                    {
+                        costText.text = $"{banner.CostGold} Vàng / Lượt";
+                    }
+                    else
+                    {
+                        costText.text = $"{banner.CostDiamond} Kim Cương / Lượt";
+                    }
+
                     statusText.text = banner.Description;
                     SetButtonsActive(true);
                 }

@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Stage_01
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_01
-  stageName: Ải 1: Tân Thủ Nhập Môn
-  description: Trận chiến vượt ải 1 tông môn.
-  recommendPower: 5000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 1 t\xF4ng m\xF4n."
+  recommendPower: 100
   staminaCost: 5
   requiredStageId: 
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_01_1
-    name: Quái thú F-1.1
+    name: mons_01
     level: 1
-    maxHP: 1700
-    attack: 90
-    defense: 45
-    speed: 56
+    maxHP: 1200
+    attack: 100
+    defense: 6
+    speed: 12
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 50

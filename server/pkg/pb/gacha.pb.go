@@ -28,6 +28,8 @@ type GachaBanner struct {
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	CostDiamond   int32                  `protobuf:"varint,4,opt,name=cost_diamond,json=costDiamond,proto3" json:"cost_diamond,omitempty"` // C# đang tìm .CostDiamond
 	EndTime       string                 `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	CostItem      string                 `protobuf:"bytes,6,opt,name=cost_item,json=costItem,proto3" json:"cost_item,omitempty"`  // Mã vật phẩm yêu cầu (nếu có)
+	CostGold      int32                  `protobuf:"varint,7,opt,name=cost_gold,json=costGold,proto3" json:"cost_gold,omitempty"` // Lượng vàng yêu cầu (nếu có)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -95,6 +97,20 @@ func (x *GachaBanner) GetEndTime() string {
 		return x.EndTime
 	}
 	return ""
+}
+
+func (x *GachaBanner) GetCostItem() string {
+	if x != nil {
+		return x.CostItem
+	}
+	return ""
+}
+
+func (x *GachaBanner) GetCostGold() int32 {
+	if x != nil {
+		return x.CostGold
+	}
+	return 0
 }
 
 type GetGachaBannersRequest struct {
@@ -301,13 +317,15 @@ var File_gacha_proto protoreflect.FileDescriptor
 
 const file_gacha_proto_rawDesc = "" +
 	"\n" +
-	"\vgacha.proto\x12\x02pb\x1a\fcommon.proto\x1a\x0edisciple.proto\x1a\fplayer.proto\"\x9e\x01\n" +
+	"\vgacha.proto\x12\x02pb\x1a\fcommon.proto\x1a\x0edisciple.proto\x1a\fplayer.proto\"\xd8\x01\n" +
 	"\vGachaBanner\x12\x1b\n" +
 	"\tbanner_id\x18\x01 \x01(\x05R\bbannerId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12!\n" +
 	"\fcost_diamond\x18\x04 \x01(\x05R\vcostDiamond\x12\x19\n" +
-	"\bend_time\x18\x05 \x01(\tR\aendTime\"\x18\n" +
+	"\bend_time\x18\x05 \x01(\tR\aendTime\x12\x1b\n" +
+	"\tcost_item\x18\x06 \x01(\tR\bcostItem\x12\x1b\n" +
+	"\tcost_gold\x18\a \x01(\x05R\bcostGold\"\x18\n" +
 	"\x16GetGachaBannersRequest\"j\n" +
 	"\x17GetGachaBannersResponse\x12$\n" +
 	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\x12)\n" +

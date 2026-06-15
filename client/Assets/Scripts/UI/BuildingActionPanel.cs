@@ -367,17 +367,30 @@ namespace GameClient.UI
             int count = radialButtons.Count;
             if (count == 0) return;
 
-            float angleStep = 360f / count;
-
-            for (int i = 0; i < count; i++)
+            if (count == 1)
             {
-                float angleDeg = startAngleDegrees + i * angleStep;
-                float angleRad = angleDeg * Mathf.Deg2Rad;
-
+                float angleRad = 270f * Mathf.Deg2Rad; // Nằm thẳng đứng bên dưới
                 float x = Mathf.Cos(angleRad) * radialRadius;
                 float y = Mathf.Sin(angleRad) * radialRadius;
+                radialButtons[0].anchoredPosition = new Vector2(x, y);
+            }
+            else
+            {
+                // Phân bổ đều các nút trong cung 180 độ bên dưới (từ 180 độ bên trái sang 360 độ bên phải)
+                float startAngle = 180f;
+                float sweepAngle = 180f;
+                float angleStep = sweepAngle / (count - 1);
 
-                radialButtons[i].anchoredPosition = new Vector2(x, y);
+                for (int i = 0; i < count; i++)
+                {
+                    float angleDeg = startAngle + i * angleStep;
+                    float angleRad = angleDeg * Mathf.Deg2Rad;
+
+                    float x = Mathf.Cos(angleRad) * radialRadius;
+                    float y = Mathf.Sin(angleRad) * radialRadius;
+
+                    radialButtons[i].anchoredPosition = new Vector2(x, y);
+                }
             }
         }
 
@@ -491,7 +504,26 @@ namespace GameClient.UI
                 
                 if (resp != null)
                 {
-                    GameClient.UIManager.Instance.ShowMessage("Thu Hoạch Thành Công", $"Nhận được {resp.GoldGained} Vàng!");
+                    string message = "";
+                    if (resp.Resources != null && resp.Resources.Count > 0)
+                    {
+                        var itemsList = new System.Collections.Generic.List<string>();
+                        foreach (var kvp in resp.Resources)
+                        {
+                            string name = kvp.Key;
+                            if (name == "herb_spirit") name = "Linh Thảo";
+                            else if (name == "iron_ore") name = "Quặng Sắt";
+                            else if (name == "00003") name = "Gỗ I";
+                            else if (name == "00002") name = "Đá I";
+                            itemsList.Add($"+{kvp.Value} {name}");
+                        }
+                        message = "Nhận được: " + string.Join(", ", itemsList);
+                    }
+                    else
+                    {
+                        message = $"Nhận được {resp.GoldGained} Vàng!";
+                    }
+                    GameClient.UIManager.Instance.ShowMessage("Thu Hoạch Thành Công", message);
                     
                     var baseResp = await SectBuildingApi.GetBaseAsync();
                     if (baseResp != null)

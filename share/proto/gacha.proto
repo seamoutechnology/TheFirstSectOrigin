@@ -15,6 +15,8 @@ message GachaBanner {
   string description = 3;
   int32 cost_diamond = 4;  // C# đang tìm .CostDiamond
   string end_time = 5;
+  string cost_item = 6;    // Mã vật phẩm yêu cầu (nếu có)
+  int32 cost_gold = 7;     // Lượng vàng yêu cầu (nếu có)
 }
 
 message GetGachaBannersRequest {}

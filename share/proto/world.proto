@@ -11,6 +11,7 @@ import "gacha.proto";
 import "mission.proto";
 import "combat.proto";
 import "system.proto";
+import "leaderboard.proto";
 
 option go_package = "server/pkg/pb;pb";
 option csharp_namespace = "GameClient.Network.Pb";
@@ -55,6 +56,10 @@ service GatewayService {
 
   // --- Missions ---
   rpc GetMissions(GetMissionsRequest) returns (GetMissionsResponse);
+
+  // --- Leaderboards & Stages ---
+  rpc GetCompletedStages(GetCompletedStagesRequest) returns (GetCompletedStagesResponse);
+  rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
 }
 
 service WorldService {

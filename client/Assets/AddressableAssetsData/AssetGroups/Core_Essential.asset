@@ -205,6 +205,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f5538bfe75f57c428853f39e3232094
+    m_Address: BGM_DUGEON
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 835477bde22de6249b2e8125e42494da
     m_Address: Assets/AssetData/Sprites/Menu/Btn_Click_Highlight_01.png
     m_ReadOnly: 0
@@ -242,6 +247,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3111dcf3c0eabe4697c4a9d338f55d6
     m_Address: NoticePanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6b83f7ab7b8cb741bf57f1580bb4101
+    m_Address: ThemeData
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -312,11 +322,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8acdb35aa9eb9b489ecc2c2f9bff182
     m_Address: avt_01_img
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e113edc5fc8e17247a27b8eb91138dcf
-    m_Address: BGM_DUNGEON
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

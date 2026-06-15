@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message GetCompletedStagesRequest {}
+
+message GetCompletedStagesResponse {
+  BaseResponse base = 1;
+  repeated string stage_ids = 2;
+}
+
+message LeaderboardEntry {
+  int64 rank = 1;
+  string nickname = 2;
+  int64 value = 3;
+}
+
+message GetLeaderboardRequest {
+  string type = 1; // "power" or "stage"
+}
+
+message GetLeaderboardResponse {
+  BaseResponse base = 1;
+  repeated LeaderboardEntry entries = 2;
+}

@@ -55,6 +55,20 @@ namespace GameClient.UI
             _presenter.SetView(this);
         }
 
+        private void Awake()
+        {
+            if (serverListRoot != null)
+            {
+                var fitter = serverListRoot.GetComponent<ContentSizeFitter>();
+                if (fitter == null)
+                {
+                    fitter = serverListRoot.gameObject.AddComponent<ContentSizeFitter>();
+                }
+                fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+                fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            }
+        }
+
         private void Start()
         {
             if (btnCloseTopLeft != null)

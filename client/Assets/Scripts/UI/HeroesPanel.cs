@@ -123,7 +123,7 @@ namespace GameClient.UI
 
         private void OnHeroClicked(GameClient.Network.Pb.Hero hero)
         {
-            UIManager.Instance.OpenPanel("HeroDetailPanel", hero);
+            UIManager.Instance.OpenPanel("UI_HeroDetailPanel", hero, false);
         }
     }
 }

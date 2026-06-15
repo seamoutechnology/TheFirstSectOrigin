@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Stage_02
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_02
-  stageName: Ải 2: Yêu Thú Rình Rập
-  description: Trận chiến vượt ải 2 tông môn.
-  recommendPower: 10000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 2 t\xF4ng m\xF4n."
+  recommendPower: 250
   staminaCost: 5
   requiredStageId: Stage_01
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_02_1
-    name: Quái thú F-2.1
-    level: 4
-    maxHP: 3200
-    attack: 170
-    defense: 85
-    speed: 61
+    name: "Qu\xE1i th\xFA F-2.1"
+    level: 2
+    maxHP: 2200
+    attack: 22
+    defense: 11
+    speed: 13
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_02_2
-    name: Quái thú F-2.2
-    level: 4
-    maxHP: 3400
-    attack: 180
-    defense: 90
-    speed: 62
+    name: mons_01
+    level: 2
+    maxHP: 2400
+    attack: 24
+    defense: 12
+    speed: 14
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 100

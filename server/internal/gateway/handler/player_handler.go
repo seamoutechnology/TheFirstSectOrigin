@@ -12,3 +12,11 @@ func (h *GatewayHandler) CreatePlayer(ctx context.Context, req *pb.CreatePlayerR
 func (h *GatewayHandler) GetPlayerProfile(ctx context.Context, req *pb.GetPlayerProfileRequest) (*pb.GetPlayerProfileResponse, error) {
 	return h.world.GetPlayerProfile(ctx, req)
 }
+
+func (h *GatewayHandler) GetCompletedStages(ctx context.Context, req *pb.GetCompletedStagesRequest) (*pb.GetCompletedStagesResponse, error) {
+	return h.world.GetCompletedStages(ctx, req)
+}
+
+func (h *GatewayHandler) GetLeaderboard(ctx context.Context, req *pb.GetLeaderboardRequest) (*pb.GetLeaderboardResponse, error) {
+	return h.world.GetLeaderboard(ctx, req)
+}

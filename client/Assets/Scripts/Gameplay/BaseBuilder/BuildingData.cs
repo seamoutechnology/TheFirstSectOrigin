@@ -59,6 +59,8 @@ namespace GameClient.Gameplay.BaseBuilder
 
         public int GetMaxLimit(int currentReputation)
         {
+            if (Type == BuildingType.MainHall) return 1; // Nhà Chính chỉ được phép xây tối đa 1
+
             if (ReputationLimits == null || ReputationLimits.Count == 0) return -1; // -1 nghĩa là vô hạn
 
             int maxAllowed = 0;

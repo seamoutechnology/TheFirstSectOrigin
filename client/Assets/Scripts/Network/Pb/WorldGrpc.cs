@@ -139,6 +139,14 @@ namespace GameClient.Network.Pb {
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetMissionsRequest> __Marshaller_pb_GetMissionsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetMissionsRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetMissionsResponse> __Marshaller_pb_GetMissionsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetMissionsResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetCompletedStagesRequest> __Marshaller_pb_GetCompletedStagesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetCompletedStagesRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetCompletedStagesResponse> __Marshaller_pb_GetCompletedStagesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetCompletedStagesResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetLeaderboardRequest> __Marshaller_pb_GetLeaderboardRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetLeaderboardRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetLeaderboardResponse> __Marshaller_pb_GetLeaderboardResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetLeaderboardResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GameClient.Network.Pb.GetVersionRequest, global::GameClient.Network.Pb.GetVersionResponse> __Method_GetVersion = new grpc::Method<global::GameClient.Network.Pb.GetVersionRequest, global::GameClient.Network.Pb.GetVersionResponse>(
@@ -331,6 +339,22 @@ namespace GameClient.Network.Pb {
         "GetMissions",
         __Marshaller_pb_GetMissionsRequest,
         __Marshaller_pb_GetMissionsResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.GetCompletedStagesRequest, global::GameClient.Network.Pb.GetCompletedStagesResponse> __Method_GetCompletedStages = new grpc::Method<global::GameClient.Network.Pb.GetCompletedStagesRequest, global::GameClient.Network.Pb.GetCompletedStagesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetCompletedStages",
+        __Marshaller_pb_GetCompletedStagesRequest,
+        __Marshaller_pb_GetCompletedStagesResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.GetLeaderboardRequest, global::GameClient.Network.Pb.GetLeaderboardResponse> __Method_GetLeaderboard = new grpc::Method<global::GameClient.Network.Pb.GetLeaderboardRequest, global::GameClient.Network.Pb.GetLeaderboardResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetLeaderboard",
+        __Marshaller_pb_GetLeaderboardRequest,
+        __Marshaller_pb_GetLeaderboardResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -530,6 +554,24 @@ namespace GameClient.Network.Pb {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.GetMissionsResponse> GetMissions(global::GameClient.Network.Pb.GetMissionsRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// --- Leaderboards &amp; Stages ---
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.GetCompletedStagesResponse> GetCompletedStages(global::GameClient.Network.Pb.GetCompletedStagesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.GetLeaderboardResponse> GetLeaderboard(global::GameClient.Network.Pb.GetLeaderboardRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1267,6 +1309,74 @@ namespace GameClient.Network.Pb {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetMissions, null, options, request);
       }
+      /// <summary>
+      /// --- Leaderboards &amp; Stages ---
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetCompletedStagesResponse GetCompletedStages(global::GameClient.Network.Pb.GetCompletedStagesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetCompletedStages(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// --- Leaderboards &amp; Stages ---
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetCompletedStagesResponse GetCompletedStages(global::GameClient.Network.Pb.GetCompletedStagesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetCompletedStages, null, options, request);
+      }
+      /// <summary>
+      /// --- Leaderboards &amp; Stages ---
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetCompletedStagesResponse> GetCompletedStagesAsync(global::GameClient.Network.Pb.GetCompletedStagesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetCompletedStagesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// --- Leaderboards &amp; Stages ---
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetCompletedStagesResponse> GetCompletedStagesAsync(global::GameClient.Network.Pb.GetCompletedStagesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetCompletedStages, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetLeaderboardResponse GetLeaderboard(global::GameClient.Network.Pb.GetLeaderboardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetLeaderboard(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetLeaderboardResponse GetLeaderboard(global::GameClient.Network.Pb.GetLeaderboardRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetLeaderboard, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetLeaderboardResponse> GetLeaderboardAsync(global::GameClient.Network.Pb.GetLeaderboardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetLeaderboardAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetLeaderboardResponse> GetLeaderboardAsync(global::GameClient.Network.Pb.GetLeaderboardRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetLeaderboard, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override GatewayServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -1304,7 +1414,9 @@ namespace GameClient.Network.Pb {
           .AddMethod(__Method_UseItem, serviceImpl.UseItem)
           .AddMethod(__Method_GetGachaBanners, serviceImpl.GetGachaBanners)
           .AddMethod(__Method_DoGacha, serviceImpl.DoGacha)
-          .AddMethod(__Method_GetMissions, serviceImpl.GetMissions).Build();
+          .AddMethod(__Method_GetMissions, serviceImpl.GetMissions)
+          .AddMethod(__Method_GetCompletedStages, serviceImpl.GetCompletedStages)
+          .AddMethod(__Method_GetLeaderboard, serviceImpl.GetLeaderboard).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -1338,6 +1450,8 @@ namespace GameClient.Network.Pb {
       serviceBinder.AddMethod(__Method_GetGachaBanners, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse>(serviceImpl.GetGachaBanners));
       serviceBinder.AddMethod(__Method_DoGacha, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.DoGachaRequest, global::GameClient.Network.Pb.DoGachaResponse>(serviceImpl.DoGacha));
       serviceBinder.AddMethod(__Method_GetMissions, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetMissionsRequest, global::GameClient.Network.Pb.GetMissionsResponse>(serviceImpl.GetMissions));
+      serviceBinder.AddMethod(__Method_GetCompletedStages, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetCompletedStagesRequest, global::GameClient.Network.Pb.GetCompletedStagesResponse>(serviceImpl.GetCompletedStages));
+      serviceBinder.AddMethod(__Method_GetLeaderboard, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetLeaderboardRequest, global::GameClient.Network.Pb.GetLeaderboardResponse>(serviceImpl.GetLeaderboard));
     }
 
   }

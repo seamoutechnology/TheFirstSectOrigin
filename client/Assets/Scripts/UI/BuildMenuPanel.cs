@@ -448,6 +448,12 @@ namespace GameClient.UI
                 !BaseBuildingManager.Instance.IsBuildingPlaced(b.InstanceId));
             bool isOwned = dbBuilding != null;
 
+            int ownedCount = 0;
+            foreach (var b in GameManager.Instance.PlayerBuildings)
+            {
+                if (b.BuildingCode == buildingData.BuildingID) ownedCount++;
+            }
+
             // Tính toán giới hạn số lượng công trình
             int placedCount = BaseBuildingManager.Instance.GetBuildingCount(buildingData.BuildingID);
             int maxAllowed = buildingData.GetMaxLimit(GameContext.SectReputation);
@@ -471,7 +477,7 @@ namespace GameClient.UI
                     string statusText = "";
                     if (_activeTab == 4 && isOwned)
                     {
-                        statusText = $" (Cấp {dbBuilding.Level} - Sẵn sàng)";
+                        statusText = $" ({ownedCount - placedCount})";
                     }
                     
                     string localizedName = LocalizationManager.Instance.GetText(buildingData.BuildingNameKey);
@@ -547,7 +553,7 @@ namespace GameClient.UI
                     string statusText = "";
                     if (_activeTab == 4 && isOwned)
                     {
-                        statusText = $" (Cấp {dbBuilding.Level} - Sẵn sàng)";
+                        statusText = $" ({ownedCount - placedCount})";
                     }
                     
                     // Lấy ngôn ngữ dịch cho tên công trình nếu có

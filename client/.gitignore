@@ -40,3 +40,6 @@
 # Nuget package files
 /NuGet/
 /packages/
+!/Packages/
+!/Packages/**
+/Packages/nuget-packages/InstalledPackages/

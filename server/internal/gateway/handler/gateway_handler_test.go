@@ -26,6 +26,18 @@ func (m *MockWorldClient) CreatePlayer(ctx context.Context, in *pb.CreatePlayerR
 	}, nil
 }
 
+func (m *MockWorldClient) GetCompletedStages(ctx context.Context, in *pb.GetCompletedStagesRequest, opts ...grpc.CallOption) (*pb.GetCompletedStagesResponse, error) {
+	return &pb.GetCompletedStagesResponse{
+		Base: &pb.BaseResponse{Code: 0, Message: "msg_success_mock"},
+	}, nil
+}
+
+func (m *MockWorldClient) GetLeaderboard(ctx context.Context, in *pb.GetLeaderboardRequest, opts ...grpc.CallOption) (*pb.GetLeaderboardResponse, error) {
+	return &pb.GetLeaderboardResponse{
+		Base: &pb.BaseResponse{Code: 0, Message: "msg_success_mock"},
+	}, nil
+}
+
 func (m *MockWorldClient) Close() {}
 
 type MockCombatClient struct {

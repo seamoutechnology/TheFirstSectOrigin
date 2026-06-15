@@ -72,6 +72,11 @@ async function fetchProfile(userId) {
             document.getElementById('diamond-display').innerText = data.diamond.toLocaleString();
             document.getElementById('level-display').innerText = `Level ${data.level}`;
 
+            const avatarDisplay = document.getElementById('avatar-display');
+            if (avatarDisplay) {
+                avatarDisplay.src = data.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(data.nickname || 'ChuongMon')}`;
+            }
+
             // Hiển thị các ngày đã điểm danh
             if (data.claimed_days) {
                 const dailyGrid = document.querySelector('.daily-grid');
@@ -188,11 +193,7 @@ function claimDaily(day) {
     }
 }
 
-// 18+ Logic
-function acceptAge() {
-    document.getElementById('age-modal').style.display = 'none';
-    localStorage.setItem('age_verified', 'true');
-}
+
 
 // Assistant Logic
 function toggleAssistant() {

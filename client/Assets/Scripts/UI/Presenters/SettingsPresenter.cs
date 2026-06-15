@@ -32,7 +32,7 @@ namespace GameClient.UI.Presenters
             var settings = _settingsManager.CurrentSettings;
 
             _view.InitializeSliders(settings.MasterVolume, settings.MusicVolume, settings.SfxVolume);
-            _view.InitializeToggles(settings.MasterMute, settings.MusicMute, settings.SfxMute);
+            _view.InitializeToggles(!settings.MasterMute, !settings.MusicMute, !settings.SfxMute);
 
             _view.OnMasterVolumeChanged += HandleMasterVolumeChanged;
             _view.OnMusicVolumeChanged += HandleMusicVolumeChanged;
@@ -78,21 +78,21 @@ namespace GameClient.UI.Presenters
             ApplyAndSave();
         }
 
-        private void HandleMasterMuteChanged(bool on)
+        private void HandleMasterMuteChanged(bool enabled)
         {
-            _settingsManager.CurrentSettings.MasterMute = on;
+            _settingsManager.CurrentSettings.MasterMute = !enabled;
             ApplyAndSave();
         }
 
-        private void HandleMusicMuteChanged(bool on)
+        private void HandleMusicMuteChanged(bool enabled)
         {
-            _settingsManager.CurrentSettings.MusicMute = on;
+            _settingsManager.CurrentSettings.MusicMute = !enabled;
             ApplyAndSave();
         }
 
-        private void HandleSFXMuteChanged(bool on)
+        private void HandleSFXMuteChanged(bool enabled)
         {
-            _settingsManager.CurrentSettings.SfxMute = on;
+            _settingsManager.CurrentSettings.SfxMute = !enabled;
             ApplyAndSave();
         }
 

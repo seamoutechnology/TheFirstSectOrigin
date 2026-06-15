@@ -10,16 +10,24 @@ namespace GameClient
         public List<Building> PlayerBuildings { get; private set; } = new();
         public List<Hero>     PlayerHeroes    { get; private set; } = new();
         public List<FormationSlot> Formation  { get; private set; } = new();
+        public HashSet<string> CompletedStages { get; private set; } = new();
 
         public System.Action<PlayerProfile>   OnPlayerUpdated;
         public System.Action<List<Building>>  OnBaseUpdated;
         public System.Action<List<Hero>>      OnHeroesUpdated;
+        public System.Action                  OnCompletedStagesUpdated;
 
 
         public void SetPlayer(PlayerProfile player)
         {
             CurrentPlayer = player;
             OnPlayerUpdated?.Invoke(player);
+        }
+
+        public void SetCompletedStages(IEnumerable<string> stageIds)
+        {
+            CompletedStages = new HashSet<string>(stageIds);
+            OnCompletedStagesUpdated?.Invoke();
         }
 
         public void SetBuildings(IEnumerable<Building> buildings)

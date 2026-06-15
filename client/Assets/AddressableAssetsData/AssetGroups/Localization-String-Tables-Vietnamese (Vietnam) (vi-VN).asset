@@ -20,7 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-vi-VN
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 47ca7142da2e81d4f8c798397949064d
     m_Address: Story_Dialogue_vi-VN

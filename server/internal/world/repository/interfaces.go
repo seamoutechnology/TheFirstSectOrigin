@@ -51,6 +51,15 @@ type IPlayerRepository interface {
 	ClaimMissionRewardDB(ctx context.Context, playerID int64, missionID int32, rewards map[string]int32) error
 	GetSkillConfigs(ctx context.Context) ([]*SkillConfig, error)
 	ProcessPvECombatResult(ctx context.Context, playerID int64, stageID string, isVictory bool, rewardExp int32, rewardLinhThach int32) (*Player, error)
+	GetCompletedStages(ctx context.Context, playerID int64) ([]string, error)
+	GetLeaderboard(ctx context.Context, leaderboardType string) ([]*LeaderboardRecord, error)
+	CollectResource(ctx context.Context, playerID int64, instanceID int64, itemCode string, amount int64) error
+}
+
+type LeaderboardRecord struct {
+	Rank     int64
+	Nickname string
+	Value    int64
 }
 
 type SkillConfig struct {

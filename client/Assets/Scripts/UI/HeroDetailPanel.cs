@@ -30,6 +30,7 @@ namespace GameClient.UI
         [SerializeField] private TMP_Text[] skillDescTexts;     // Mô tả skill
 
         private Hero _currentHero;
+        private string _traitsTextCached = "";
 
         protected override void OnStart()
         {
@@ -85,6 +86,7 @@ namespace GameClient.UI
             }
 
             // 5. Thiên phú / Traits (Dịch bằng bảng Hero_Data)
+            _traitsTextCached = "";
             if (traitText != null)
             {
                 var translatedTraits = new List<string>();
@@ -99,7 +101,8 @@ namespace GameClient.UI
                 }
                 string traitsLabel = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_traits");
                 if (string.IsNullOrEmpty(traitsLabel) || traitsLabel.StartsWith("[")) traitsLabel = "Thiên phú";
-                traitText.text = $"{traitsLabel}: " + (translatedTraits.Count > 0 ? string.Join(", ", translatedTraits) : "Không");
+                _traitsTextCached = $"{traitsLabel}: " + (translatedTraits.Count > 0 ? string.Join(", ", translatedTraits) : "Không");
+                traitText.text = _traitsTextCached;
             }
 
             // 6. Ảnh chân dung
@@ -326,18 +329,26 @@ namespace GameClient.UI
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.AppendLine("<color=#FFA500><b>Nguyên liệu cần:</b></color>");
-            sb.AppendLine($"- Vàng: <color={goldColor}>{goldCost}</color> / {ownedGold}");
+            sb.AppendLine($"- Vàng: <color={goldColor}>{ownedGold}</color> / {goldCost}");
             
             if (woodCost > 0)
             {
-                sb.AppendLine($"- Gỗ I: <color={woodColor}>{woodCost}</color> / {ownedWood}");
+                sb.AppendLine($"- Gỗ I: <color={woodColor}>{ownedWood}</color> / {woodCost}");
             }
             if (stoneCost > 0)
             {
-                sb.AppendLine($"- Đá I: <color={stoneColor}>{stoneCost}</color> / {ownedStone}");
+                sb.AppendLine($"- Đá I: <color={stoneColor}>{ownedStone}</color> / {stoneCost}");
             }
 
-            txtRequiredMaterials.text = sb.ToString();
+            string materialsText = sb.ToString();
+            if (traitText != null)
+            {
+                traitText.text = $"{_traitsTextCached}\n\n{materialsText}";
+            }
+            if (txtRequiredMaterials != null)
+            {
+                txtRequiredMaterials.gameObject.SetActive(false);
+            }
         }
     }
 }

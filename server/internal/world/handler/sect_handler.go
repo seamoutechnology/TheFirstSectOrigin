@@ -125,7 +125,7 @@ func (h *WorldHandler) CollectResources(ctx context.Context, req *pb.CollectReso
 		return &pb.CollectResourcesResponse{Base: errBase("msg_unauthorized")}, nil
 	}
 
-	goldGained, player, code, msg := h.svc.CollectResources(ctx, userID, req.InstanceId)
+	goldGained, resources, player, code, msg := h.svc.CollectResources(ctx, userID, req.InstanceId)
 	if code != 0 {
 		return &pb.CollectResourcesResponse{
 			Base: &pb.BaseResponse{Code: code, Message: msg},
@@ -143,6 +143,7 @@ func (h *WorldHandler) CollectResources(ctx context.Context, req *pb.CollectReso
 			Diamond:    player.Diamond,
 			Stamina:    player.Stamina,
 			MaxStamina: player.MaxStamina,
+			Power:      player.Power,
 		}
 	}
 
@@ -150,7 +151,7 @@ func (h *WorldHandler) CollectResources(ctx context.Context, req *pb.CollectReso
 		Base: &pb.BaseResponse{Code: 0, Message: "msg_collect_resources_success"},
 		GoldGained: goldGained,
 		Player: pbPlayer,
-		Resources: map[string]int64{"gold": goldGained},
+		Resources: resources,
 	}, nil
 }
 

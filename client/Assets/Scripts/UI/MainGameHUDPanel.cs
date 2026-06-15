@@ -23,6 +23,8 @@ namespace GameClient.UI
         public Button btnDisciples;
         public Button btnWorldMap;
         public Button btnSettings;
+        public Button btnLeaderboard;
+        public Button btnShop;
 
         // Quản lý các ô tài nguyên đang được hiển thị
         private List<HUDCurrencyItem> activeHUDItems = new List<HUDCurrencyItem>();
@@ -43,6 +45,8 @@ namespace GameClient.UI
             if (btnDisciples == null) btnDisciples = FindButtonByName("Princlple") ?? FindButtonByName("Princple") ?? FindButtonByName("Disciples") ?? FindButtonByName("Hero");
             if (btnWorldMap == null) btnWorldMap = FindButtonByName("World Map") ?? FindButtonByName("WorldMap");
             if (btnSettings == null) btnSettings = FindButtonByName("Settings") ?? FindButtonByName("Setting");
+            if (btnLeaderboard == null) btnLeaderboard = FindButtonByName("Leaderboard") ?? FindButtonByName("Rank") ?? FindButtonByName("XepHang");
+            if (btnShop == null) btnShop = FindButtonByName("Shop") ?? FindButtonByName("Store") ?? FindButtonByName("CuaHang");
 
             if (btnBuildMenu != null)
             {
@@ -67,6 +71,16 @@ namespace GameClient.UI
             if (btnSettings != null)
             {
                 btnSettings.onClick.AddListener(OnSettingsClicked);
+            }
+
+            if (btnLeaderboard != null)
+            {
+                btnLeaderboard.onClick.AddListener(OnLeaderboardClicked);
+            }
+
+            if (btnShop != null)
+            {
+                btnShop.onClick.AddListener(OnShopClicked);
             }
 
             // Ẩn prefab gốc nếu nó đang nằm trong Scene
@@ -94,8 +108,7 @@ namespace GameClient.UI
         {
             base.OnShow();
             
-            // Mặc định ban đầu hiển thị đầy đủ các loại tài nguyên chính (Vàng thỏi, Thể Lực, Đá, Gỗ, Xu)
-            SetupHUD(new string[] { "stamina", "00000", "00001", "00002", "00003"});
+            SetupHUD(new string[] { "stamina", "00001", "00000" });
         }
 
         /// <summary>
@@ -142,6 +155,25 @@ namespace GameClient.UI
                 }
             }
             activeHUDItems.Clear();
+
+            // Destroy any leftover children in the container to clean up static layout placeholders,
+            // except the template/prefab itself if it is located inside the container.
+            if (currencyContainer != null)
+            {
+                var toDestroy = new List<GameObject>();
+                foreach (Transform child in currencyContainer)
+                {
+                    if (currencyItemPrefab != null && child.gameObject == currencyItemPrefab.gameObject)
+                    {
+                        continue;
+                    }
+                    toDestroy.Add(child.gameObject);
+                }
+                foreach (var go in toDestroy)
+                {
+                    Destroy(go);
+                }
+            }
         }
 
         private void OnBuildMenuClicked()
@@ -185,6 +217,22 @@ namespace GameClient.UI
             }
         }
 
+        private void OnLeaderboardClicked()
+        {
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.OpenPanel("UI_LeaderboardPanel", null, false);
+            }
+        }
+
+        private void OnShopClicked()
+        {
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.OpenPanel("UI_ShopPanel", null, false);
+            }
+        }
+
         public async void RefreshResources()
         {
             var player = GameManager.Instance.CurrentPlayer;
@@ -216,6 +264,12 @@ namespace GameClient.UI
                         foreach (var item in inventory.Items)
                         {
                             if (item == null) continue;
+
+                            // Tránh việc ghi đè các chỉ số tiền tệ/thể lực chính bằng các vật phẩm ảo trùng tên trong user_items
+                            if (item.ItemCode == "stamina" || item.ItemCode == "00000" || item.ItemCode == "00001" || item.ItemCode == "gold" || item.ItemCode == "qi" || item.ItemCode == "coin")
+                            {
+                                continue;
+                            }
 
                             // Lưu số lượng theo ItemCode gốc nhận từ Server
                             currentResourceAmounts[item.ItemCode] = (int)item.Quantity;

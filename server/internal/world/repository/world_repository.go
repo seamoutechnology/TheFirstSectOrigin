@@ -27,6 +27,7 @@ type Player struct {
 	Stamina      int32
 	MaxStamina   int32
 	LastStaminaAt time.Time
+	Power        int64
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
@@ -82,6 +83,8 @@ type GachaBanner struct {
 	PityCount   int32
 	IsActive    bool
 	EndAt       *time.Time
+	CostItem    string
+	CostGold    int32
 }
 
 type VersionConfig struct {
@@ -105,25 +108,25 @@ func (r *PlayerRepository) Create(ctx context.Context, userID int64, serverID st
 	q := `
 		INSERT INTO players (user_id, server_id, nickname)
 		VALUES ($1, $2, $3)
-		RETURNING id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+		RETURNING id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
 	err := r.db.QueryRow(ctx, q, userID, serverID, nickname).Scan(
 		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
-		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
 	return p, err
 }
 
 func (r *PlayerRepository) FindByNickname(ctx context.Context, nickname string, serverID string) (*Player, error) {
 	q := `
-		SELECT id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+		SELECT id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 		FROM players WHERE LOWER(nickname) = LOWER($1) AND server_id = $2
 	`
 	p := &Player{}
 	err := r.db.QueryRow(ctx, q, nickname, serverID).Scan(
 		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
-		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrNotFound
@@ -133,13 +136,13 @@ func (r *PlayerRepository) FindByNickname(ctx context.Context, nickname string, 
 
 func (r *PlayerRepository) FindByUserID(ctx context.Context, userID int64, serverID string) (*Player, error) {
 	q := `
-		SELECT id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+		SELECT id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 		FROM players WHERE user_id = $1 AND server_id = $2
 	`
 	p := &Player{}
 	err := r.db.QueryRow(ctx, q, userID, serverID).Scan(
 		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
-		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrNotFound
@@ -154,12 +157,12 @@ func (r *PlayerRepository) UpdateResources(ctx context.Context, playerID int64, 
 		    diamond = diamond + $3,
 		    updated_at = NOW()
 		WHERE id = $1
-		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
 	err := r.db.QueryRow(ctx, q, playerID, goldDelta, diamondDelta).Scan(
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
-		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
 	return p, err
 }
@@ -239,10 +242,10 @@ func (r *PlayerRepository) SpeedUpBuilding(ctx context.Context, playerID int64, 
 	deductQuery := `
 		UPDATE players SET diamond = diamond - $2
 		WHERE id = $1 AND diamond >= $2
-		RETURNING id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at
+		RETURNING id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power
 	`
 	err := r.db.QueryRow(ctx, deductQuery, playerID, diamondCost).Scan(
-		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond, &p.Stamina, &p.MaxStamina, &p.LastStaminaAt,
+		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond, &p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power,
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -359,11 +362,14 @@ func (r *PlayerRepository) AddHero(ctx context.Context, playerID int64, heroCode
 	err := r.db.QueryRow(ctx, q, playerID, heroCode).Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Level, &h.Star, &h.Exp, &traitsBytes, &skillsBytes)
 	h.Traits = string(traitsBytes)
 	h.Skills = string(skillsBytes)
+	if err == nil {
+		_ = r.UpdatePlayerPower(ctx, playerID)
+	}
 	return h, err
 }
 
 func (r *PlayerRepository) GetActiveBanners(ctx context.Context) ([]*GachaBanner, error) {
-	q := `SELECT id, name, description, cost_diamond, pity_count, is_active, end_at FROM gacha_banners WHERE is_active = TRUE`
+	q := `SELECT id, name, description, cost_diamond, pity_count, is_active, end_at, cost_item, cost_gold FROM gacha_banners WHERE is_active = TRUE`
 	rows, err := r.db.Query(ctx, q)
 	if err != nil {
 		return nil, err
@@ -373,7 +379,7 @@ func (r *PlayerRepository) GetActiveBanners(ctx context.Context) ([]*GachaBanner
 	var result []*GachaBanner
 	for rows.Next() {
 		b := &GachaBanner{}
-		if err := rows.Scan(&b.ID, &b.Name, &b.Description, &b.CostDiamond, &b.PityCount, &b.IsActive, &b.EndAt); err != nil {
+		if err := rows.Scan(&b.ID, &b.Name, &b.Description, &b.CostDiamond, &b.PityCount, &b.IsActive, &b.EndAt, &b.CostItem, &b.CostGold); err != nil {
 			return nil, err
 		}
 		result = append(result, b)
@@ -1079,6 +1085,8 @@ func (r *PlayerRepository) LevelUpHero(ctx context.Context, playerID int64, hero
 		return nil, err
 	}
 
+	_ = r.UpdatePlayerPower(ctx, playerID)
+
 	return &h, nil
 }
 
@@ -1108,7 +1116,37 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 		} `json:"rewards"`
 	}
 	err = tx.QueryRow(ctx, "SELECT json_data FROM stage_configs WHERE stage_id = $1", stageID).Scan(&jsonData)
-	if err == nil && jsonData != "" {
+	if err != nil || jsonData == "" {
+		// Fallback stage rewards in JSON if database is missing configuration
+		fallbackRewards := map[string]string{
+			"stage_01": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":50},{"itemId":"00002","amount":5},{"itemId":"00003","amount":5}]}`,
+			"stage_02": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":100},{"itemId":"00002","amount":10},{"itemId":"00003","amount":10}]}`,
+			"stage_03": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":150},{"itemId":"00002","amount":15},{"itemId":"00003","amount":15}]}`,
+			"stage_04": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":200},{"itemId":"00002","amount":20},{"itemId":"00003","amount":20}]}`,
+			"stage_05": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":250},{"itemId":"00002","amount":25},{"itemId":"00003","amount":25}]}`,
+			"stage_06": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":300},{"itemId":"00002","amount":30},{"itemId":"00003","amount":30}]}`,
+			"stage_07": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":350},{"itemId":"00002","amount":35},{"itemId":"00003","amount":35}]}`,
+			"stage_08": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":400},{"itemId":"00002","amount":40},{"itemId":"00003","amount":40}]}`,
+			"stage_09": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":450},{"itemId":"00002","amount":45},{"itemId":"00003","amount":45}]}`,
+			"stage_10": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":500},{"itemId":"00002","amount":50},{"itemId":"00003","amount":50}]}`,
+			"Stage_Fallback": `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":20}]}`,
+		}
+
+		lowerStageID := strings.ToLower(stageID)
+		if val, found := fallbackRewards[stageID]; found {
+			jsonData = val
+		} else if val, found := fallbackRewards[lowerStageID]; found {
+			jsonData = val
+		} else {
+			// Chung cho các ải khác
+			jsonData = `{"staminaCost":5,"rewards":[{"itemId":"00000","amount":10},{"itemId":"00002","amount":5},{"itemId":"00003","amount":5}]}`
+		}
+		
+		// Lưu vào DB luôn để lần sau truy vấn nhanh
+		_, _ = tx.Exec(ctx, "INSERT INTO stage_configs (stage_id, json_data) VALUES ($1, $2) ON CONFLICT (stage_id) DO NOTHING", stageID, jsonData)
+	}
+
+	if jsonData != "" {
 		if json.Unmarshal([]byte(jsonData), &stageConf) == nil {
 			if stageConf.StaminaCost > 0 {
 				staminaCost = stageConf.StaminaCost
@@ -1130,17 +1168,27 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 		goldDelta = int64(rewardLinhThach)
 		expDelta = int64(rewardExp)
 
+		// Record stage progress on server DB!
+		_, err = tx.Exec(ctx, "INSERT INTO player_stages (player_id, stage_id) VALUES ($1, $2) ON CONFLICT (player_id, stage_id) DO NOTHING", playerID, stageID)
+		if err != nil {
+			return nil, err
+		}
+
 		// Reward items
 		for _, reward := range stageConf.Rewards {
 			if reward.ItemID != "" && reward.Amount > 0 {
 				var exists bool
 				err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, reward.ItemID).Scan(&exists)
-				if err == nil {
-					if exists {
-						_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", reward.Amount, playerID, reward.ItemID)
-					} else {
-						_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, reward.ItemID, reward.Amount)
-					}
+				if err != nil {
+					return nil, err
+				}
+				if exists {
+					_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", reward.Amount, playerID, reward.ItemID)
+				} else {
+					_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, reward.ItemID, reward.Amount)
+				}
+				if err != nil {
+					return nil, err
 				}
 			}
 		}
@@ -1154,12 +1202,12 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 		    exp = exp + $4,
 		    updated_at = NOW()
 		WHERE id = $1
-		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, created_at, updated_at
+		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
 	err = tx.QueryRow(ctx, q, playerID, stamina, goldDelta, expDelta).Scan(
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
-		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.CreatedAt, &p.UpdatedAt,
+		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
 	if err != nil {
 		return nil, err
@@ -1171,6 +1219,100 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 	}
 
 	return p, nil
+}
+
+func (r *PlayerRepository) GetCompletedStages(ctx context.Context, playerID int64) ([]string, error) {
+	q := `SELECT stage_id FROM player_stages WHERE player_id = $1`
+	rows, err := r.db.Query(ctx, q, playerID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var stages []string
+	for rows.Next() {
+		var stageID string
+		if err := rows.Scan(&stageID); err != nil {
+			return nil, err
+		}
+		stages = append(stages, stageID)
+	}
+	return stages, nil
+}
+
+func (r *PlayerRepository) GetLeaderboard(ctx context.Context, leaderboardType string) ([]*LeaderboardRecord, error) {
+	var q string
+	if leaderboardType == "power" {
+		q = `
+			SELECT ROW_NUMBER() OVER(ORDER BY power DESC) AS rank, nickname, power AS value
+			FROM players
+			ORDER BY power DESC
+			LIMIT 50
+		`
+	} else {
+		q = `
+			SELECT ROW_NUMBER() OVER(ORDER BY COUNT(ps.stage_id) DESC) AS rank, p.nickname, COUNT(ps.stage_id) AS value
+			FROM players p
+			LEFT JOIN player_stages ps ON ps.player_id = p.id
+			GROUP BY p.id, p.nickname
+			ORDER BY value DESC
+			LIMIT 50
+		`
+	}
+	rows, err := r.db.Query(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var records []*LeaderboardRecord
+	for rows.Next() {
+		rec := &LeaderboardRecord{}
+		if err := rows.Scan(&rec.Rank, &rec.Nickname, &rec.Value); err != nil {
+			return nil, err
+		}
+		records = append(records, rec)
+	}
+	return records, nil
+}
+
+func (r *PlayerRepository) UpdatePlayerPower(ctx context.Context, playerID int64) error {
+	q := `
+		UPDATE players p
+		SET power = COALESCE((
+			SELECT SUM((ht.base_atk + ph.level * 10) * 10 + (ht.base_hp + ph.level * 100) + (ht.base_def + ph.level * 5) * 5)
+			FROM player_heroes ph
+			JOIN hero_templates ht ON ht.code = ph.hero_code
+			WHERE ph.player_id = p.id
+		), 0)
+		WHERE p.id = $1
+	`
+	_, err := r.db.Exec(ctx, q, playerID)
+	return err
+}
+
+func (r *PlayerRepository) CollectResource(ctx context.Context, playerID int64, instanceID int64, itemCode string, amount int64) error {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	_, err = tx.Exec(ctx, "UPDATE player_buildings SET last_collect_at = NOW() WHERE player_id = $1 AND id = $2", playerID, instanceID)
+	if err != nil {
+		return err
+	}
+
+	var exists bool
+	err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, itemCode).Scan(&exists)
+	if err != nil {
+		return err
+	}
+
+	if exists {
+		_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", amount, playerID, itemCode)
+	} else {
+		_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, itemCode, amount)
+	}
+	return tx.Commit(ctx)
 }
 
 

@@ -13,41 +13,41 @@ MonoBehaviour:
   m_Name: Stage_07
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_07
-  stageName: Ải 7: Bí Cảnh Chi Môn
-  description: Trận chiến vượt ải 7 tông môn.
-  recommendPower: 35000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 7 t\xF4ng m\xF4n."
+  recommendPower: 1000
   staminaCost: 5
   requiredStageId: Stage_06
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_07_1
-    name: Quái thú F-7.1
-    level: 19
-    maxHP: 10700
-    attack: 570
-    defense: 285
-    speed: 86
+    name: mons_01
+    level: 7
+    maxHP: 720
+    attack: 72
+    defense: 36
+    speed: 18
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_07_2
-    name: Quái thú F-7.2
-    level: 19
-    maxHP: 10900
-    attack: 580
-    defense: 290
-    speed: 87
+    name: mons_01
+    level: 7
+    maxHP: 740
+    attack: 74
+    defense: 37
+    speed: 19
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_07_3
-    name: Quái thú F-7.3
-    level: 19
-    maxHP: 11100
-    attack: 590
-    defense: 295
-    speed: 88
+    name: mons_01
+    level: 7
+    maxHP: 760
+    attack: 76
+    defense: 38
+    speed: 20
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 350

@@ -38,10 +38,18 @@ namespace GameClient.Gameplay.BaseBuilder
                     GameManager.Instance.SetPlayer(profileRes.Profile);
                     GameContext.HasCharacter = true;
                 }
+
+                // Tải danh sách các ải đã vượt từ server khi khởi động game
+                var stagesRes = await GameClient.Network.Api.SectBuildingApi.GetCompletedStagesAsync();
+                if (stagesRes != null && stagesRes.Base != null && stagesRes.Base.Code == 0)
+                {
+                    GameManager.Instance.SetCompletedStages(stagesRes.StageIds);
+                    Debug.Log($"[LocalBase] Đã đồng bộ {stagesRes.StageIds.Count} ải đã vượt từ server.");
+                }
             }
             catch (System.Exception ex)
             {
-                Debug.LogWarning($"[LocalBase] Không thể lấy thông tin nhân vật: {ex.Message}");
+                Debug.LogWarning($"[LocalBase] Không thể lấy thông tin nhân vật hoặc tiến trình ải: {ex.Message}");
             }
 
             var player = GameManager.Instance.CurrentPlayer;

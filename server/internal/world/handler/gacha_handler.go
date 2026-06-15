@@ -23,6 +23,8 @@ func (h *WorldHandler) GetGachaBanners(ctx context.Context, req *pb.GetGachaBann
 			Description: b.Description,
 			CostDiamond: b.CostDiamond,
 			EndTime:     b.EndAt.Format("2006-01-02 15:04:05"),
+			CostItem:    b.CostItem,
+			CostGold:    b.CostGold,
 		})
 	}
 

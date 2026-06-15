@@ -81,6 +81,7 @@ namespace GameClient.UI
                 if (vis != null && vis.normalSprite != null)
                 {
                     imgBuildingIcon.sprite = vis.normalSprite;
+                    imgBuildingIcon.preserveAspect = true;
                 }
             }
 

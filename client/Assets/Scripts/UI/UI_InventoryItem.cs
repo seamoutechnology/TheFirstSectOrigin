@@ -36,7 +36,7 @@ namespace GameClient.UI
 
             if (txtQuantity != null)
             {
-                txtQuantity.text = quantity.ToString();
+                txtQuantity.text = GameClient.Utils.NumberUtils.FormatNumber(quantity);
             }
 
             // Lấy config của vật phẩm để biết Rarity và Icon

@@ -31,5 +31,15 @@ namespace GameClient.Network.Api
         {
             return await Client.GetInventoryAsync(new GetProfileRequest(), NetworkManager.DefaultCallOptions());
         }
+
+        public static async Task<GetCompletedStagesResponse> GetCompletedStagesAsync()
+        {
+            return await Client.GetCompletedStagesAsync(new GetCompletedStagesRequest(), NetworkManager.DefaultCallOptions());
+        }
+
+        public static async Task<GetLeaderboardResponse> GetLeaderboardAsync(string type)
+        {
+            return await Client.GetLeaderboardAsync(new GetLeaderboardRequest { Type = type }, NetworkManager.DefaultCallOptions());
+        }
     }
 }

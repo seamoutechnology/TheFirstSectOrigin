@@ -23,18 +23,7 @@ namespace GameClient.UI
         private Hero _hero;
         private Action _onClick;
 
-        private void Start()
-        {
-            if (btnSelect == null)
-            {
-                btnSelect = GetComponent<Button>();
-            }
-            if (btnSelect != null)
-            {
-                btnSelect.onClick.RemoveAllListeners();
-                btnSelect.onClick.AddListener(() => _onClick?.Invoke());
-            }
-        }
+
 
         public async void Setup(Hero hero, Action onClick)
         {
@@ -47,6 +36,26 @@ namespace GameClient.UI
 
             _hero = hero;
             _onClick = onClick;
+
+            // Đảm bảo tìm thấy nút và đăng ký sự kiện click ngay trong Setup
+            if (btnSelect == null)
+            {
+                btnSelect = GetComponent<Button>();
+            }
+            if (btnSelect == null)
+            {
+                btnSelect = GetComponentInChildren<Button>();
+            }
+            if (btnSelect == null)
+            {
+                btnSelect = gameObject.AddComponent<Button>();
+                Debug.Log("[UI_HeroItem] Tự động thêm component Button cho vật phẩm tướng vì prefab không có.");
+            }
+            if (btnSelect != null)
+            {
+                btnSelect.onClick.RemoveAllListeners();
+                btnSelect.onClick.AddListener(() => _onClick?.Invoke());
+            }
 
             // Thiết lập tên (Dịch bằng bảng Hero_Data)
             var config = HeroDataManager.Instance.GetHeroConfigByCodeOrName(hero.Name);

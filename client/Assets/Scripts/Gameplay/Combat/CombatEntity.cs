@@ -20,6 +20,8 @@ namespace GameClient.Gameplay.Combat
 
         public bool IsDead => currentHP <= 0;
 
+        public List<GameClient.Network.Pb.HeroSkill> skills = new();
+
         public Action<int, bool> OnTakeDamage; // amount, isCrit
         public Action OnDie;
         public Action<int> OnHealed;

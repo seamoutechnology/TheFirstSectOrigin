@@ -13,59 +13,59 @@ MonoBehaviour:
   m_Name: Stage_10
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_10
-  stageName: Ải 10: Đại Chiến Ma Vương
-  description: Trận chiến vượt ải 10 tông môn.
-  recommendPower: 50000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 10 t\xF4ng m\xF4n."
+  recommendPower: 1450
   staminaCost: 5
   requiredStageId: Stage_09
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_10_1
-    name: BOSS: Tà Hỏa Ma Vương
-    level: 28
-    maxHP: 15200
-    attack: 810
-    defense: 405
-    speed: 101
+    name: mons_01
+    level: 12
+    maxHP: 2000
+    attack: 180
+    defense: 80
+    speed: 21
     isBoss: 1
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_10_2
-    name: Quái thú F-10.2
-    level: 28
-    maxHP: 15400
-    attack: 820
-    defense: 410
-    speed: 102
+    name: mons_01
+    level: 10
+    maxHP: 1040
+    attack: 104
+    defense: 52
+    speed: 22
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_10_3
-    name: Quái thú F-10.3
-    level: 28
-    maxHP: 15600
-    attack: 830
-    defense: 415
-    speed: 103
+    name: mons_01
+    level: 10
+    maxHP: 1060
+    attack: 106
+    defense: 53
+    speed: 23
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_10_4
-    name: Quái thú F-10.4
-    level: 28
-    maxHP: 15800
-    attack: 840
-    defense: 420
-    speed: 104
+    name: mons_01
+    level: 10
+    maxHP: 1080
+    attack: 108
+    defense: 54
+    speed: 24
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_10_5
-    name: Quái thú F-10.5
-    level: 28
-    maxHP: 16000
-    attack: 850
-    defense: 425
-    speed: 105
+    name: "Qu\xE1i th\xFA F-10.5"
+    level: 10
+    maxHP: 1100
+    attack: 110
+    defense: 55
+    speed: 25
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 500

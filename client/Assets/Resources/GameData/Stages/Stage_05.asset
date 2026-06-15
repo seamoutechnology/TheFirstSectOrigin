@@ -13,59 +13,59 @@ MonoBehaviour:
   m_Name: Stage_05
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_05
-  stageName: Ải 5: Cổ Lâm Sâu Thẳm
-  description: Trận chiến vượt ải 5 tông môn.
-  recommendPower: 25000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 5 t\xF4ng m\xF4n."
+  recommendPower: 700
   staminaCost: 5
   requiredStageId: Stage_04
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_05_1
-    name: Quái thú F-5.1
-    level: 13
-    maxHP: 7700
-    attack: 410
-    defense: 205
-    speed: 76
+    name: mons_01
+    level: 5
+    maxHP: 520
+    attack: 52
+    defense: 26
+    speed: 16
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_05_2
-    name: Quái thú F-5.2
-    level: 13
-    maxHP: 7900
-    attack: 420
-    defense: 210
-    speed: 77
+    name: mons_01
+    level: 5
+    maxHP: 540
+    attack: 54
+    defense: 27
+    speed: 17
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_05_3
-    name: Quái thú F-5.3
-    level: 13
-    maxHP: 8100
-    attack: 430
-    defense: 215
-    speed: 78
+    name: mons_01
+    level: 5
+    maxHP: 560
+    attack: 56
+    defense: 28
+    speed: 18
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_05_4
-    name: Quái thú F-5.4
-    level: 13
-    maxHP: 8300
-    attack: 440
-    defense: 220
-    speed: 79
+    name: mons_01
+    level: 5
+    maxHP: 580
+    attack: 58
+    defense: 29
+    speed: 19
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_05_5
-    name: Quái thú F-5.5
-    level: 13
-    maxHP: 8500
-    attack: 450
-    defense: 225
-    speed: 80
+    name: "Qu\xE1i th\xFA F-5.5"
+    level: 5
+    maxHP: 600
+    attack: 60
+    defense: 30
+    speed: 20
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 250

@@ -102,13 +102,11 @@ namespace GameClient.WorldMap
                 if (stage == null) continue;
 
                 // Kiểm tra xem ải đã được mở khóa chưa
-                bool isUnlocked = true;
-                if (!string.IsNullOrEmpty(stage.requiredStageId))
-                {
-                    string completed = PlayerPrefs.GetString("CompletedStages", "");
-                    var completedList = completed.Split(',').Where(s => !string.IsNullOrEmpty(s)).ToList();
-                    isUnlocked = completedList.Contains(stage.requiredStageId);
-                }
+                 bool isUnlocked = true;
+                 if (!string.IsNullOrEmpty(stage.requiredStageId))
+                 {
+                     isUnlocked = GameManager.Instance != null && GameManager.Instance.CompletedStages.Contains(stage.requiredStageId);
+                 }
 
                 GameObject btnObj;
                 if (stageButtonPrefab != null)
@@ -178,8 +176,6 @@ namespace GameClient.WorldMap
             if (stages == null || stages.Count == 0 || stagesScrollRect == null) yield break;
 
             int latestUnlockedIndex = 0;
-            string completed = PlayerPrefs.GetString("CompletedStages", "");
-            var completedList = completed.Split(',').Where(s => !string.IsNullOrEmpty(s)).ToList();
 
             for (int i = 0; i < stages.Count; i++)
             {
@@ -189,7 +185,7 @@ namespace GameClient.WorldMap
                 bool isUnlocked = true;
                 if (!string.IsNullOrEmpty(stage.requiredStageId))
                 {
-                    isUnlocked = completedList.Contains(stage.requiredStageId);
+                    isUnlocked = GameManager.Instance != null && GameManager.Instance.CompletedStages.Contains(stage.requiredStageId);
                 }
 
                 if (isUnlocked)

@@ -62,7 +62,10 @@
         <main class="main-content">
             <!-- Overview Tab -->
             <div id="tab-overview" class="tab-content">
-                <h2 style="margin-bottom: 30px;">Chào mừng, <span id="nickname-display">Chưởng Môn</span>! (<span id="username-display"></span>)</h2>
+                <div style="display: flex; align-items: center; margin-bottom: 30px;">
+                    <img id="avatar-display" src="" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--accent); margin-right: 15px; background: #222;" alt="Avatar" />
+                    <h2>Chào mừng, <span id="nickname-display">Chưởng Môn</span>! (<span id="username-display"></span>)</h2>
+                </div>
                 <div class="grid-3">
                     <div class="card">
                         <h3>Vàng</h3>
@@ -178,17 +181,7 @@
         </div>
     </div>
 
-    <!-- 18+ Popup -->
-    <div id="age-modal" class="modal" style="display: flex;">
-        <div class="modal-content" style="text-align: center;">
-            <h2 style="color: #ff4444; margin-bottom: 20px;">CẢNH BÁO 18+</h2>
-            <p style="margin-bottom: 30px; color: #fff;">Trò chơi có các yếu tố bạo lực và hình ảnh không dành cho người dưới 18 tuổi. Bạn đã đủ 18 tuổi chưa?</p>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" style="flex: 1;" onclick="acceptAge()">Tôi Đã 18+</button>
-                <button class="btn" style="flex: 1; background: #444; color: white;" onclick="window.location.href='https://google.com'">Rời Khỏi</button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Floating Interaction Circle -->
     <div id="floating-assistant" class="floating-circle" onclick="toggleAssistant()">

@@ -48,6 +48,14 @@ namespace GameClient.Gameplay.Combat
                     {
                         child.gameObject.AddComponent<RectTransform>();
                     }
+                    if (child.name == "P_Row0_Col0")
+                    {
+                        child.localScale = new Vector3(3.6f, 3.6f, 3.6f);
+                    }
+                    else
+                    {
+                        child.localScale = new Vector3(3f, 3f, 3f);
+                    }
                     points.Add(child);
                 }
                 playerSpawnPoints = points.ToArray();
@@ -73,7 +81,14 @@ namespace GameClient.Gameplay.Combat
                         p.SetParent(playerSpawnContainer);
                         p.localPosition = new Vector3(-4.5f + c * 1.2f, 1.2f - r * 1.2f, 0f);
                         p.localRotation = Quaternion.identity;
-                        p.localScale = Vector3.one;
+                        if (r == 0 && c == 0)
+                        {
+                            p.localScale = new Vector3(3.6f, 3.6f, 3.6f);
+                        }
+                        else
+                        {
+                            p.localScale = new Vector3(3f, 3f, 3f);
+                        }
                         points.Add(p);
                     }
                 }
@@ -111,6 +126,7 @@ namespace GameClient.Gameplay.Combat
                         child.gameObject.AddComponent<RectTransform>();
                     }
                     child.localRotation = Quaternion.identity; // Giữ nguyên hướng mặt tự nhiên (hướng sang trái)
+                    child.localScale = new Vector3(3f, 3f, 3f);
                     points.Add(child);
                 }
                 enemySpawnPoints = points.ToArray();
@@ -136,7 +152,7 @@ namespace GameClient.Gameplay.Combat
                         e.SetParent(enemySpawnContainer);
                         e.localPosition = new Vector3(2.1f + c * 1.2f, 1.2f - r * 1.2f, 0f);
                         e.localRotation = Quaternion.identity; // Giữ nguyên hướng mặt tự nhiên (hướng sang trái)
-                        e.localScale = Vector3.one;
+                        e.localScale = new Vector3(3f, 3f, 3f);
                         points.Add(e);
                     }
                 }
@@ -296,7 +312,10 @@ namespace GameClient.Gameplay.Combat
                                         go.transform.SetParent(playerSpawnPoints[slotIndex]);
                                         go.transform.localPosition = Vector3.zero;
                                         go.transform.localRotation = Quaternion.identity;
-                                        go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                        var pScale = playerSpawnPoints[slotIndex].localScale;
+                                        float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
+                                        float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
+                                        go.transform.localScale = new Vector3(sx, sy, 1f);
                                         
                                         var sr = go.AddComponent<SpriteRenderer>();
                                         var sprite = await Addressables.LoadAssetAsync<Sprite>(prefabAddr).Task;
@@ -327,7 +346,10 @@ namespace GameClient.Gameplay.Combat
                             go.transform.SetParent(playerSpawnPoints[slotIndex]);
                             go.transform.localPosition = Vector3.zero;
                             go.transform.localRotation = Quaternion.identity;
-                            go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                            var pScale = playerSpawnPoints[slotIndex].localScale;
+                            float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
+                            float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
+                            go.transform.localScale = new Vector3(sx, sy, 1f);
                             
                             var sr = go.AddComponent<SpriteRenderer>();
                             sr.sortingOrder = 10;
@@ -346,6 +368,10 @@ namespace GameClient.Gameplay.Combat
 
                     entity.isPlayer = true;
                     entity.entityName = heroInstance.Name;
+                    if (heroInstance.Skills != null)
+                    {
+                        entity.skills.AddRange(heroInstance.Skills);
+                    }
                     
                     // Chỉ số gốc dựa vào cấp độ
                     entity.maxHP = 1000 + (heroInstance.Level * 100);
@@ -400,7 +426,7 @@ namespace GameClient.Gameplay.Combat
                 if (slotItem != null)
                 {
                     go = enemySpawnPoints[targetSlot].gameObject;
-                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" "))
+                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" ") && config.prefabAddress != "MonsterPrefab")
                     {
                         try
                         {
@@ -428,7 +454,7 @@ namespace GameClient.Gameplay.Combat
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" "))
+                    if (!string.IsNullOrEmpty(config.prefabAddress) && !config.prefabAddress.Contains(" ") && config.prefabAddress != "MonsterPrefab")
                     {
                         try
                         {
@@ -456,7 +482,10 @@ namespace GameClient.Gameplay.Combat
                                     go.transform.SetParent(enemySpawnPoints[targetSlot]);
                                     go.transform.localPosition = Vector3.zero;
                                     go.transform.localRotation = Quaternion.identity; // Trực thuộc transform con đã xoay 180
-                                    go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                                    var pScale = enemySpawnPoints[targetSlot].localScale;
+                                    float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
+                                    float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
+                                    go.transform.localScale = new Vector3(sx, sy, 1f);
                                     
                                     var sr = go.AddComponent<SpriteRenderer>();
                                     var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
@@ -488,22 +517,36 @@ namespace GameClient.Gameplay.Combat
 
                     if (go == null)
                     {
-                        // Dùng hình lập phương Cube 3D để hiển thị nếu lỗi tải mô hình quái vật
-                        go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        go.name = $"Enemy_{config.name}_Fallback";
+                        // Tạo GameObject rỗng làm cha để chứa SpriteRenderer, tránh xung đột với MeshRenderer của Cube
+                        go = new GameObject($"Enemy_{config.name}_Fallback");
                         go.transform.SetParent(enemySpawnPoints[targetSlot]);
                         go.transform.localPosition = Vector3.zero;
                         go.transform.localRotation = Quaternion.identity;
-                        go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                        var pScale = enemySpawnPoints[targetSlot].localScale;
+                        float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
+                        float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
+                        go.transform.localScale = new Vector3(sx, sy, 1f);
                         
                         var sr = go.AddComponent<SpriteRenderer>();
                         sr.sortingOrder = 10;
                         try
                         {
-                            var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
-                            sr.sprite = sprite;
+                            if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
+                            {
+                                var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                sr.sprite = sprite;
+                            }
                         }
                         catch {}
+
+                        // Nếu không tải được sprite nào, tạo một Cube 3D con làm hiển thị hình khối tạm thời
+                        if (sr.sprite == null)
+                        {
+                            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            cube.transform.SetParent(go.transform, false);
+                            cube.transform.localPosition = Vector3.zero;
+                            cube.transform.localScale = Vector3.one;
+                        }
                         Debug.LogWarning($"[CombatSceneController] Created fallback for enemy '{config.name}' at {go.transform.position}");
                     }
                 }

@@ -25,21 +25,22 @@ namespace GameClient.Network.Pb {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgtnYWNoYS5wcm90bxICcGIaDGNvbW1vbi5wcm90bxoOZGlzY2lwbGUucHJv",
-            "dG8aDHBsYXllci5wcm90byJrCgtHYWNoYUJhbm5lchIRCgliYW5uZXJfaWQY",
-            "ASABKAUSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIUCgxj",
-            "b3N0X2RpYW1vbmQYBCABKAUSEAoIZW5kX3RpbWUYBSABKAkiGAoWR2V0R2Fj",
-            "aGFCYW5uZXJzUmVxdWVzdCJbChdHZXRHYWNoYUJhbm5lcnNSZXNwb25zZRIe",
-            "CgRiYXNlGAEgASgLMhAucGIuQmFzZVJlc3BvbnNlEiAKB2Jhbm5lcnMYAiAD",
-            "KAsyDy5wYi5HYWNoYUJhbm5lciIyCg5Eb0dhY2hhUmVxdWVzdBIRCgliYW5u",
-            "ZXJfaWQYASABKAUSDQoFY291bnQYAiABKAUidAoPRG9HYWNoYVJlc3BvbnNl",
-            "Eh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USJwoMcGxheWVyX2Fm",
-            "dGVyGAIgASgLMhEucGIuUGxheWVyUHJvZmlsZRIYCgZoZXJvZXMYAyADKAsy",
-            "CC5wYi5IZXJvQipaEHNlcnZlci9wa2cvcGI7cGKqAhVHYW1lQ2xpZW50Lk5l",
-            "dHdvcmsuUGJiBnByb3RvMw=="));
+            "dG8aDHBsYXllci5wcm90byKRAQoLR2FjaGFCYW5uZXISEQoJYmFubmVyX2lk",
+            "GAEgASgFEgwKBG5hbWUYAiABKAkSEwoLZGVzY3JpcHRpb24YAyABKAkSFAoM",
+            "Y29zdF9kaWFtb25kGAQgASgFEhAKCGVuZF90aW1lGAUgASgJEhEKCWNvc3Rf",
+            "aXRlbRgGIAEoCRIRCgljb3N0X2dvbGQYByABKAUiGAoWR2V0R2FjaGFCYW5u",
+            "ZXJzUmVxdWVzdCJbChdHZXRHYWNoYUJhbm5lcnNSZXNwb25zZRIeCgRiYXNl",
+            "GAEgASgLMhAucGIuQmFzZVJlc3BvbnNlEiAKB2Jhbm5lcnMYAiADKAsyDy5w",
+            "Yi5HYWNoYUJhbm5lciIyCg5Eb0dhY2hhUmVxdWVzdBIRCgliYW5uZXJfaWQY",
+            "ASABKAUSDQoFY291bnQYAiABKAUidAoPRG9HYWNoYVJlc3BvbnNlEh4KBGJh",
+            "c2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USJwoMcGxheWVyX2FmdGVyGAIg",
+            "ASgLMhEucGIuUGxheWVyUHJvZmlsZRIYCgZoZXJvZXMYAyADKAsyCC5wYi5I",
+            "ZXJvQipaEHNlcnZlci9wa2cvcGI7cGKqAhVHYW1lQ2xpZW50Lk5ldHdvcmsu",
+            "UGJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::GameClient.Network.Pb.CommonReflection.Descriptor, global::GameClient.Network.Pb.DiscipleReflection.Descriptor, global::GameClient.Network.Pb.PlayerReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GachaBanner), global::GameClient.Network.Pb.GachaBanner.Parser, new[]{ "BannerId", "Name", "Description", "CostDiamond", "EndTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GachaBanner), global::GameClient.Network.Pb.GachaBanner.Parser, new[]{ "BannerId", "Name", "Description", "CostDiamond", "EndTime", "CostItem", "CostGold" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetGachaBannersRequest), global::GameClient.Network.Pb.GetGachaBannersRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetGachaBannersResponse), global::GameClient.Network.Pb.GetGachaBannersResponse.Parser, new[]{ "Base", "Banners" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.DoGachaRequest), global::GameClient.Network.Pb.DoGachaRequest.Parser, new[]{ "BannerId", "Count" }, null, null, null, null),
@@ -90,6 +91,8 @@ namespace GameClient.Network.Pb {
       description_ = other.description_;
       costDiamond_ = other.costDiamond_;
       endTime_ = other.endTime_;
+      costItem_ = other.costItem_;
+      costGold_ = other.costGold_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -165,6 +168,36 @@ namespace GameClient.Network.Pb {
       }
     }
 
+    /// <summary>Field number for the "cost_item" field.</summary>
+    public const int CostItemFieldNumber = 6;
+    private string costItem_ = "";
+    /// <summary>
+    /// Mã vật phẩm yêu cầu (nếu có)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string CostItem {
+      get { return costItem_; }
+      set {
+        costItem_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "cost_gold" field.</summary>
+    public const int CostGoldFieldNumber = 7;
+    private int costGold_;
+    /// <summary>
+    /// Lượng vàng yêu cầu (nếu có)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CostGold {
+      get { return costGold_; }
+      set {
+        costGold_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -185,6 +218,8 @@ namespace GameClient.Network.Pb {
       if (Description != other.Description) return false;
       if (CostDiamond != other.CostDiamond) return false;
       if (EndTime != other.EndTime) return false;
+      if (CostItem != other.CostItem) return false;
+      if (CostGold != other.CostGold) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -197,6 +232,8 @@ namespace GameClient.Network.Pb {
       if (Description.Length != 0) hash ^= Description.GetHashCode();
       if (CostDiamond != 0) hash ^= CostDiamond.GetHashCode();
       if (EndTime.Length != 0) hash ^= EndTime.GetHashCode();
+      if (CostItem.Length != 0) hash ^= CostItem.GetHashCode();
+      if (CostGold != 0) hash ^= CostGold.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -235,6 +272,14 @@ namespace GameClient.Network.Pb {
         output.WriteRawTag(42);
         output.WriteString(EndTime);
       }
+      if (CostItem.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(CostItem);
+      }
+      if (CostGold != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(CostGold);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -265,6 +310,14 @@ namespace GameClient.Network.Pb {
         output.WriteRawTag(42);
         output.WriteString(EndTime);
       }
+      if (CostItem.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(CostItem);
+      }
+      if (CostGold != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(CostGold);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -289,6 +342,12 @@ namespace GameClient.Network.Pb {
       }
       if (EndTime.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(EndTime);
+      }
+      if (CostItem.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CostItem);
+      }
+      if (CostGold != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CostGold);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -316,6 +375,12 @@ namespace GameClient.Network.Pb {
       }
       if (other.EndTime.Length != 0) {
         EndTime = other.EndTime;
+      }
+      if (other.CostItem.Length != 0) {
+        CostItem = other.CostItem;
+      }
+      if (other.CostGold != 0) {
+        CostGold = other.CostGold;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -356,6 +421,14 @@ namespace GameClient.Network.Pb {
             EndTime = input.ReadString();
             break;
           }
+          case 50: {
+            CostItem = input.ReadString();
+            break;
+          }
+          case 56: {
+            CostGold = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -393,6 +466,14 @@ namespace GameClient.Network.Pb {
           }
           case 42: {
             EndTime = input.ReadString();
+            break;
+          }
+          case 50: {
+            CostItem = input.ReadString();
+            break;
+          }
+          case 56: {
+            CostGold = input.ReadInt32();
             break;
           }
         }

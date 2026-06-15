@@ -13,50 +13,50 @@ MonoBehaviour:
   m_Name: Stage_08
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_08
-  stageName: Ải 8: Lôi Đình Ngập Trời
-  description: Trận chiến vượt ải 8 tông môn.
-  recommendPower: 40000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 8 t\xF4ng m\xF4n."
+  recommendPower: 1150
   staminaCost: 5
   requiredStageId: Stage_07
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_08_1
-    name: Quái thú F-8.1
-    level: 22
-    maxHP: 12200
-    attack: 650
-    defense: 325
-    speed: 91
+    name: mons_01
+    level: 8
+    maxHP: 820
+    attack: 82
+    defense: 41
+    speed: 19
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_08_2
-    name: Quái thú F-8.2
-    level: 22
-    maxHP: 12400
-    attack: 660
-    defense: 330
-    speed: 92
+    name: mons_01
+    level: 8
+    maxHP: 840
+    attack: 84
+    defense: 42
+    speed: 20
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_08_3
-    name: Quái thú F-8.3
-    level: 22
-    maxHP: 12600
-    attack: 670
-    defense: 335
-    speed: 93
+    name: mons_01
+    level: 8
+    maxHP: 860
+    attack: 86
+    defense: 43
+    speed: 21
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_08_4
-    name: Quái thú F-8.4
-    level: 22
-    maxHP: 12800
-    attack: 680
-    defense: 340
-    speed: 94
+    name: mons_01
+    level: 8
+    maxHP: 880
+    attack: 88
+    defense: 44
+    speed: 22
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 400

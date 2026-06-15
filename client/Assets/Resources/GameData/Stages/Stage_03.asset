@@ -13,41 +13,41 @@ MonoBehaviour:
   m_Name: Stage_03
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Gameplay.World.StageData
   stageId: Stage_03
-  stageName: Ải 3: Linh Khí Rối Loạn
-  description: Trận chiến vượt ải 3 tông môn.
-  recommendPower: 15000
+  stageName: 
+  description: "Tr\u1EADn chi\u1EBFn v\u01B0\u1EE3t \u1EA3i 3 t\xF4ng m\xF4n."
+  recommendPower: 400
   staminaCost: 5
   requiredStageId: Stage_02
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
   - monsterId: monster_03_1
-    name: Quái thú F-3.1
-    level: 7
-    maxHP: 4700
-    attack: 250
-    defense: 125
-    speed: 66
+    name: mons_01
+    level: 3
+    maxHP: 320
+    attack: 32
+    defense: 16
+    speed: 14
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_03_2
-    name: Quái thú F-3.2
-    level: 7
-    maxHP: 4900
-    attack: 260
-    defense: 130
-    speed: 67
+    name: mons_01
+    level: 3
+    maxHP: 340
+    attack: 34
+    defense: 17
+    speed: 15
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   - monsterId: monster_03_3
-    name: Quái thú F-3.3
-    level: 7
-    maxHP: 5100
-    attack: 270
-    defense: 135
-    speed: 68
+    name: mons_01
+    level: 3
+    maxHP: 360
+    attack: 36
+    defense: 18
+    speed: 16
     isBoss: 0
-    prefabAddress: char_mon_01
+    prefabAddress: MonsterPrefab
   rewards:
   - itemId: 00000
     amount: 150
