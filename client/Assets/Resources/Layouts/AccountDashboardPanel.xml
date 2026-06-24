@@ -23,6 +23,6 @@
     </content>
 
     <footer height="40">
-        <text content="Sect Origin v1.0.0" size="14" color="0.4, 0.4, 0.4, 1" align="center"/>
+        <text content="The First Sect Origin v1.0.0" size="14" color="0.4, 0.4, 0.4, 1" align="center"/>
     </footer>
 </panel>

@@ -40,6 +40,9 @@ const (
 	GatewayService_GetInventory_FullMethodName       = "/pb.GatewayService/GetInventory"
 	GatewayService_EquipItem_FullMethodName          = "/pb.GatewayService/EquipItem"
 	GatewayService_UseItem_FullMethodName            = "/pb.GatewayService/UseItem"
+	GatewayService_BuyShopItem_FullMethodName        = "/pb.GatewayService/BuyShopItem"
+	GatewayService_GetShop_FullMethodName            = "/pb.GatewayService/GetShop"
+	GatewayService_RefreshShop_FullMethodName        = "/pb.GatewayService/RefreshShop"
 	GatewayService_GetGachaBanners_FullMethodName    = "/pb.GatewayService/GetGachaBanners"
 	GatewayService_DoGacha_FullMethodName            = "/pb.GatewayService/DoGacha"
 	GatewayService_GetMissions_FullMethodName        = "/pb.GatewayService/GetMissions"
@@ -78,6 +81,9 @@ type GatewayServiceClient interface {
 	GetInventory(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*Inventory, error)
 	EquipItem(ctx context.Context, in *EquipRequest, opts ...grpc.CallOption) (*EquipResponse, error)
 	UseItem(ctx context.Context, in *UseItemRequest, opts ...grpc.CallOption) (*UseItemResponse, error)
+	BuyShopItem(ctx context.Context, in *BuyShopItemRequest, opts ...grpc.CallOption) (*BuyShopItemResponse, error)
+	GetShop(ctx context.Context, in *GetShopRequest, opts ...grpc.CallOption) (*GetShopResponse, error)
+	RefreshShop(ctx context.Context, in *RefreshShopRequest, opts ...grpc.CallOption) (*RefreshShopResponse, error)
 	// --- Gacha ---
 	GetGachaBanners(ctx context.Context, in *GetGachaBannersRequest, opts ...grpc.CallOption) (*GetGachaBannersResponse, error)
 	DoGacha(ctx context.Context, in *DoGachaRequest, opts ...grpc.CallOption) (*DoGachaResponse, error)
@@ -306,6 +312,36 @@ func (c *gatewayServiceClient) UseItem(ctx context.Context, in *UseItemRequest, 
 	return out, nil
 }
 
+func (c *gatewayServiceClient) BuyShopItem(ctx context.Context, in *BuyShopItemRequest, opts ...grpc.CallOption) (*BuyShopItemResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuyShopItemResponse)
+	err := c.cc.Invoke(ctx, GatewayService_BuyShopItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gatewayServiceClient) GetShop(ctx context.Context, in *GetShopRequest, opts ...grpc.CallOption) (*GetShopResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShopResponse)
+	err := c.cc.Invoke(ctx, GatewayService_GetShop_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gatewayServiceClient) RefreshShop(ctx context.Context, in *RefreshShopRequest, opts ...grpc.CallOption) (*RefreshShopResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefreshShopResponse)
+	err := c.cc.Invoke(ctx, GatewayService_RefreshShop_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gatewayServiceClient) GetGachaBanners(ctx context.Context, in *GetGachaBannersRequest, opts ...grpc.CallOption) (*GetGachaBannersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGachaBannersResponse)
@@ -387,6 +423,9 @@ type GatewayServiceServer interface {
 	GetInventory(context.Context, *GetProfileRequest) (*Inventory, error)
 	EquipItem(context.Context, *EquipRequest) (*EquipResponse, error)
 	UseItem(context.Context, *UseItemRequest) (*UseItemResponse, error)
+	BuyShopItem(context.Context, *BuyShopItemRequest) (*BuyShopItemResponse, error)
+	GetShop(context.Context, *GetShopRequest) (*GetShopResponse, error)
+	RefreshShop(context.Context, *RefreshShopRequest) (*RefreshShopResponse, error)
 	// --- Gacha ---
 	GetGachaBanners(context.Context, *GetGachaBannersRequest) (*GetGachaBannersResponse, error)
 	DoGacha(context.Context, *DoGachaRequest) (*DoGachaResponse, error)
@@ -467,6 +506,15 @@ func (UnimplementedGatewayServiceServer) EquipItem(context.Context, *EquipReques
 }
 func (UnimplementedGatewayServiceServer) UseItem(context.Context, *UseItemRequest) (*UseItemResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UseItem not implemented")
+}
+func (UnimplementedGatewayServiceServer) BuyShopItem(context.Context, *BuyShopItemRequest) (*BuyShopItemResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuyShopItem not implemented")
+}
+func (UnimplementedGatewayServiceServer) GetShop(context.Context, *GetShopRequest) (*GetShopResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetShop not implemented")
+}
+func (UnimplementedGatewayServiceServer) RefreshShop(context.Context, *RefreshShopRequest) (*RefreshShopResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RefreshShop not implemented")
 }
 func (UnimplementedGatewayServiceServer) GetGachaBanners(context.Context, *GetGachaBannersRequest) (*GetGachaBannersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGachaBanners not implemented")
@@ -882,6 +930,60 @@ func _GatewayService_UseItem_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GatewayService_BuyShopItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyShopItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).BuyShopItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_BuyShopItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).BuyShopItem(ctx, req.(*BuyShopItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GatewayService_GetShop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).GetShop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_GetShop_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).GetShop(ctx, req.(*GetShopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GatewayService_RefreshShop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshShopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).RefreshShop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GatewayService_RefreshShop_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).RefreshShop(ctx, req.(*RefreshShopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GatewayService_GetGachaBanners_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGachaBannersRequest)
 	if err := dec(in); err != nil {
@@ -1062,6 +1164,18 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UseItem",
 			Handler:    _GatewayService_UseItem_Handler,
+		},
+		{
+			MethodName: "BuyShopItem",
+			Handler:    _GatewayService_BuyShopItem_Handler,
+		},
+		{
+			MethodName: "GetShop",
+			Handler:    _GatewayService_GetShop_Handler,
+		},
+		{
+			MethodName: "RefreshShop",
+			Handler:    _GatewayService_RefreshShop_Handler,
 		},
 		{
 			MethodName: "GetGachaBanners",

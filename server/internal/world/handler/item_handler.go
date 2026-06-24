@@ -99,3 +99,52 @@ func (h *WorldHandler) UseItem(ctx context.Context, req *pb.UseItemRequest) (*pb
 	}, nil
 }
 
+func (h *WorldHandler) BuyShopItem(ctx context.Context, req *pb.BuyShopItemRequest) (*pb.BuyShopItemResponse, error) {
+	h.log.Info("BuyShopItem request", zap.Int64("instance_id", req.InstanceId), zap.Int32("quantity", req.Quantity))
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.BuyShopItemResponse{Code: 401, MessageId: "msg_err_unauthorized"}, nil
+	}
+
+	items, code, msg := h.svc.BuyShopItem(ctx, userID, req)
+	return &pb.BuyShopItemResponse{
+		Code:        code,
+		MessageId:   msg,
+		GainedItems: items,
+	}, nil
+}
+
+func (h *WorldHandler) GetShop(ctx context.Context, req *pb.GetShopRequest) (*pb.GetShopResponse, error) {
+	h.log.Info("GetShop request", zap.String("shop_type", req.ShopType))
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.GetShopResponse{Code: 401, MessageId: "msg_err_unauthorized"}, nil
+	}
+
+	items, nextRefresh, code, msg := h.svc.GetShop(ctx, userID, req.ShopType)
+	return &pb.GetShopResponse{
+		Code:          code,
+		MessageId:     msg,
+		Items:         items,
+		NextRefreshAt: nextRefresh,
+	}, nil
+}
+
+func (h *WorldHandler) RefreshShop(ctx context.Context, req *pb.RefreshShopRequest) (*pb.RefreshShopResponse, error) {
+	h.log.Info("RefreshShop request", zap.String("shop_type", req.ShopType))
+	userID, ok := h.getUserID(ctx)
+	if !ok {
+		return &pb.RefreshShopResponse{Code: 401, MessageId: "msg_err_unauthorized"}, nil
+	}
+
+	items, nextRefresh, code, msg := h.svc.RefreshShop(ctx, userID, req.ShopType)
+	return &pb.RefreshShopResponse{
+		Code:          code,
+		MessageId:     msg,
+		Items:         items,
+		NextRefreshAt: nextRefresh,
+	}, nil
+}
+
+
+

@@ -829,6 +829,486 @@ func (x *UseItemResponse) GetMessageId() string {
 	return ""
 }
 
+type ShopCost struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ItemCode      string                 `protobuf:"bytes,1,opt,name=item_code,json=itemCode,proto3" json:"item_code,omitempty"`
+	Amount        int32                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopCost) Reset() {
+	*x = ShopCost{}
+	mi := &file_item_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopCost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopCost) ProtoMessage() {}
+
+func (x *ShopCost) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopCost.ProtoReflect.Descriptor instead.
+func (*ShopCost) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ShopCost) GetItemCode() string {
+	if x != nil {
+		return x.ItemCode
+	}
+	return ""
+}
+
+func (x *ShopCost) GetAmount() int32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type ShopItemInstance struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Instance ID in player_shops
+	ShopItemId    string                 `protobuf:"bytes,2,opt,name=shop_item_id,json=shopItemId,proto3" json:"shop_item_id,omitempty"`
+	ItemCode      string                 `protobuf:"bytes,3,opt,name=item_code,json=itemCode,proto3" json:"item_code,omitempty"`
+	Amount        int32                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	FinalPrice    []*ShopCost            `protobuf:"bytes,5,rep,name=final_price,json=finalPrice,proto3" json:"final_price,omitempty"`
+	DiscountPct   int32                  `protobuf:"varint,6,opt,name=discount_pct,json=discountPct,proto3" json:"discount_pct,omitempty"`
+	IsBought      bool                   `protobuf:"varint,7,opt,name=is_bought,json=isBought,proto3" json:"is_bought,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopItemInstance) Reset() {
+	*x = ShopItemInstance{}
+	mi := &file_item_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopItemInstance) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopItemInstance) ProtoMessage() {}
+
+func (x *ShopItemInstance) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopItemInstance.ProtoReflect.Descriptor instead.
+func (*ShopItemInstance) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ShopItemInstance) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ShopItemInstance) GetShopItemId() string {
+	if x != nil {
+		return x.ShopItemId
+	}
+	return ""
+}
+
+func (x *ShopItemInstance) GetItemCode() string {
+	if x != nil {
+		return x.ItemCode
+	}
+	return ""
+}
+
+func (x *ShopItemInstance) GetAmount() int32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *ShopItemInstance) GetFinalPrice() []*ShopCost {
+	if x != nil {
+		return x.FinalPrice
+	}
+	return nil
+}
+
+func (x *ShopItemInstance) GetDiscountPct() int32 {
+	if x != nil {
+		return x.DiscountPct
+	}
+	return 0
+}
+
+func (x *ShopItemInstance) GetIsBought() bool {
+	if x != nil {
+		return x.IsBought
+	}
+	return false
+}
+
+type GetShopRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShopType      string                 `protobuf:"bytes,1,opt,name=shop_type,json=shopType,proto3" json:"shop_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetShopRequest) Reset() {
+	*x = GetShopRequest{}
+	mi := &file_item_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetShopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetShopRequest) ProtoMessage() {}
+
+func (x *GetShopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetShopRequest.ProtoReflect.Descriptor instead.
+func (*GetShopRequest) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetShopRequest) GetShopType() string {
+	if x != nil {
+		return x.ShopType
+	}
+	return ""
+}
+
+type GetShopResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	Items         []*ShopItemInstance    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	NextRefreshAt int64                  `protobuf:"varint,4,opt,name=next_refresh_at,json=nextRefreshAt,proto3" json:"next_refresh_at,omitempty"` // Unix timestamp
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetShopResponse) Reset() {
+	*x = GetShopResponse{}
+	mi := &file_item_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetShopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetShopResponse) ProtoMessage() {}
+
+func (x *GetShopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetShopResponse.ProtoReflect.Descriptor instead.
+func (*GetShopResponse) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetShopResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetShopResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *GetShopResponse) GetItems() []*ShopItemInstance {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *GetShopResponse) GetNextRefreshAt() int64 {
+	if x != nil {
+		return x.NextRefreshAt
+	}
+	return 0
+}
+
+type RefreshShopRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShopType      string                 `protobuf:"bytes,1,opt,name=shop_type,json=shopType,proto3" json:"shop_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshShopRequest) Reset() {
+	*x = RefreshShopRequest{}
+	mi := &file_item_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshShopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshShopRequest) ProtoMessage() {}
+
+func (x *RefreshShopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshShopRequest.ProtoReflect.Descriptor instead.
+func (*RefreshShopRequest) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *RefreshShopRequest) GetShopType() string {
+	if x != nil {
+		return x.ShopType
+	}
+	return ""
+}
+
+type RefreshShopResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	Items         []*ShopItemInstance    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	NextRefreshAt int64                  `protobuf:"varint,4,opt,name=next_refresh_at,json=nextRefreshAt,proto3" json:"next_refresh_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshShopResponse) Reset() {
+	*x = RefreshShopResponse{}
+	mi := &file_item_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshShopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshShopResponse) ProtoMessage() {}
+
+func (x *RefreshShopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshShopResponse.ProtoReflect.Descriptor instead.
+func (*RefreshShopResponse) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *RefreshShopResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *RefreshShopResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *RefreshShopResponse) GetItems() []*ShopItemInstance {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *RefreshShopResponse) GetNextRefreshAt() int64 {
+	if x != nil {
+		return x.NextRefreshAt
+	}
+	return 0
+}
+
+type BuyShopItemRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	InstanceId    int64                  `protobuf:"varint,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"` // player_shops.id
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyShopItemRequest) Reset() {
+	*x = BuyShopItemRequest{}
+	mi := &file_item_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyShopItemRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyShopItemRequest) ProtoMessage() {}
+
+func (x *BuyShopItemRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyShopItemRequest.ProtoReflect.Descriptor instead.
+func (*BuyShopItemRequest) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *BuyShopItemRequest) GetInstanceId() int64 {
+	if x != nil {
+		return x.InstanceId
+	}
+	return 0
+}
+
+func (x *BuyShopItemRequest) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+type BuyShopItemResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	GainedItems   []*Item                `protobuf:"bytes,3,rep,name=gained_items,json=gainedItems,proto3" json:"gained_items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyShopItemResponse) Reset() {
+	*x = BuyShopItemResponse{}
+	mi := &file_item_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyShopItemResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyShopItemResponse) ProtoMessage() {}
+
+func (x *BuyShopItemResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyShopItemResponse.ProtoReflect.Descriptor instead.
+func (*BuyShopItemResponse) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *BuyShopItemResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *BuyShopItemResponse) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *BuyShopItemResponse) GetGainedItems() []*Item {
+	if x != nil {
+		return x.GainedItems
+	}
+	return nil
+}
+
 var File_item_proto protoreflect.FileDescriptor
 
 const file_item_proto_rawDesc = "" +
@@ -911,7 +1391,45 @@ const file_item_proto_rawDesc = "" +
 	"\x0fUseItemResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\x02 \x01(\tR\tmessageIdB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
+	"message_id\x18\x02 \x01(\tR\tmessageId\"?\n" +
+	"\bShopCost\x12\x1b\n" +
+	"\titem_code\x18\x01 \x01(\tR\bitemCode\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x05R\x06amount\"\xe8\x01\n" +
+	"\x10ShopItemInstance\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
+	"\fshop_item_id\x18\x02 \x01(\tR\n" +
+	"shopItemId\x12\x1b\n" +
+	"\titem_code\x18\x03 \x01(\tR\bitemCode\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x05R\x06amount\x12-\n" +
+	"\vfinal_price\x18\x05 \x03(\v2\f.pb.ShopCostR\n" +
+	"finalPrice\x12!\n" +
+	"\fdiscount_pct\x18\x06 \x01(\x05R\vdiscountPct\x12\x1b\n" +
+	"\tis_bought\x18\a \x01(\bR\bisBought\"-\n" +
+	"\x0eGetShopRequest\x12\x1b\n" +
+	"\tshop_type\x18\x01 \x01(\tR\bshopType\"\x98\x01\n" +
+	"\x0fGetShopResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\x12*\n" +
+	"\x05items\x18\x03 \x03(\v2\x14.pb.ShopItemInstanceR\x05items\x12&\n" +
+	"\x0fnext_refresh_at\x18\x04 \x01(\x03R\rnextRefreshAt\"1\n" +
+	"\x12RefreshShopRequest\x12\x1b\n" +
+	"\tshop_type\x18\x01 \x01(\tR\bshopType\"\x9c\x01\n" +
+	"\x13RefreshShopResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\x12*\n" +
+	"\x05items\x18\x03 \x03(\v2\x14.pb.ShopItemInstanceR\x05items\x12&\n" +
+	"\x0fnext_refresh_at\x18\x04 \x01(\x03R\rnextRefreshAt\"Q\n" +
+	"\x12BuyShopItemRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\x03R\n" +
+	"instanceId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"u\n" +
+	"\x13BuyShopItemResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\x12+\n" +
+	"\fgained_items\x18\x03 \x03(\v2\b.pb.ItemR\vgainedItemsB*Z\x10server/pkg/pb;pb\xaa\x02\x15GameClient.Network.Pbb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -925,37 +1443,49 @@ func file_item_proto_rawDescGZIP() []byte {
 	return file_item_proto_rawDescData
 }
 
-var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_item_proto_goTypes = []any{
-	(*ItemSource)(nil),      // 0: pb.ItemSource
-	(*ItemEffect)(nil),      // 1: pb.ItemEffect
-	(*ItemConfig)(nil),      // 2: pb.ItemConfig
-	(*Item)(nil),            // 3: pb.Item
-	(*Inventory)(nil),       // 4: pb.Inventory
-	(*EquipRequest)(nil),    // 5: pb.EquipRequest
-	(*EquipResponse)(nil),   // 6: pb.EquipResponse
-	(*Recipe)(nil),          // 7: pb.Recipe
-	(*CraftRequest)(nil),    // 8: pb.CraftRequest
-	(*CraftResponse)(nil),   // 9: pb.CraftResponse
-	(*UseItemRequest)(nil),  // 10: pb.UseItemRequest
-	(*UseItemResponse)(nil), // 11: pb.UseItemResponse
-	nil,                     // 12: pb.Item.StatsEntry
-	nil,                     // 13: pb.Recipe.MaterialsEntry
+	(*ItemSource)(nil),          // 0: pb.ItemSource
+	(*ItemEffect)(nil),          // 1: pb.ItemEffect
+	(*ItemConfig)(nil),          // 2: pb.ItemConfig
+	(*Item)(nil),                // 3: pb.Item
+	(*Inventory)(nil),           // 4: pb.Inventory
+	(*EquipRequest)(nil),        // 5: pb.EquipRequest
+	(*EquipResponse)(nil),       // 6: pb.EquipResponse
+	(*Recipe)(nil),              // 7: pb.Recipe
+	(*CraftRequest)(nil),        // 8: pb.CraftRequest
+	(*CraftResponse)(nil),       // 9: pb.CraftResponse
+	(*UseItemRequest)(nil),      // 10: pb.UseItemRequest
+	(*UseItemResponse)(nil),     // 11: pb.UseItemResponse
+	(*ShopCost)(nil),            // 12: pb.ShopCost
+	(*ShopItemInstance)(nil),    // 13: pb.ShopItemInstance
+	(*GetShopRequest)(nil),      // 14: pb.GetShopRequest
+	(*GetShopResponse)(nil),     // 15: pb.GetShopResponse
+	(*RefreshShopRequest)(nil),  // 16: pb.RefreshShopRequest
+	(*RefreshShopResponse)(nil), // 17: pb.RefreshShopResponse
+	(*BuyShopItemRequest)(nil),  // 18: pb.BuyShopItemRequest
+	(*BuyShopItemResponse)(nil), // 19: pb.BuyShopItemResponse
+	nil,                         // 20: pb.Item.StatsEntry
+	nil,                         // 21: pb.Recipe.MaterialsEntry
 }
 var file_item_proto_depIdxs = []int32{
 	0,  // 0: pb.ItemConfig.sources:type_name -> pb.ItemSource
 	1,  // 1: pb.ItemConfig.effects:type_name -> pb.ItemEffect
-	12, // 2: pb.Item.stats:type_name -> pb.Item.StatsEntry
+	20, // 2: pb.Item.stats:type_name -> pb.Item.StatsEntry
 	3,  // 3: pb.Inventory.items:type_name -> pb.Item
 	2,  // 4: pb.Inventory.configs:type_name -> pb.ItemConfig
 	3,  // 5: pb.EquipResponse.equipped_item:type_name -> pb.Item
-	13, // 6: pb.Recipe.materials:type_name -> pb.Recipe.MaterialsEntry
+	21, // 6: pb.Recipe.materials:type_name -> pb.Recipe.MaterialsEntry
 	3,  // 7: pb.CraftResponse.gained_items:type_name -> pb.Item
-	8,  // [8:8] is the sub-list for method output_type
-	8,  // [8:8] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	12, // 8: pb.ShopItemInstance.final_price:type_name -> pb.ShopCost
+	13, // 9: pb.GetShopResponse.items:type_name -> pb.ShopItemInstance
+	13, // 10: pb.RefreshShopResponse.items:type_name -> pb.ShopItemInstance
+	3,  // 11: pb.BuyShopItemResponse.gained_items:type_name -> pb.Item
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_item_proto_init() }
@@ -970,7 +1500,7 @@ func file_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_item_proto_rawDesc), len(file_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

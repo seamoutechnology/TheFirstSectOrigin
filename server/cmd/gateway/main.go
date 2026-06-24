@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
-	"net/http"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -93,7 +94,25 @@ func main() {
 
 	h := gatewayHandler.New(worldClient, combatClient, log)
 
-	rateLimiter := middleware.NewRateLimiter(rate.Limit(20), 50)
+	rateLimitRPS := 20.0
+	rateLimitBurst := 50
+	rateLimitEnabled := true
+
+	if enabledStr := os.Getenv("RATE_LIMIT_ENABLED"); enabledStr != "" {
+		if enabled, err := strconv.ParseBool(enabledStr); err == nil {
+			rateLimitEnabled = enabled
+		}
+	}
+	if rpsStr := os.Getenv("RATE_LIMIT_RPS"); rpsStr != "" {
+		if rps, err := strconv.ParseFloat(rpsStr, 64); err == nil {
+			rateLimitRPS = rps
+		}
+	}
+	if burstStr := os.Getenv("RATE_LIMIT_BURST"); burstStr != "" {
+		if burst, err := strconv.Atoi(burstStr); err == nil {
+			rateLimitBurst = burst
+		}
+	}
 
 	metricsInterceptor := middleware.MetricsInterceptor()
 
@@ -119,14 +138,22 @@ func main() {
 		}
 	}()
 
+	var interceptors []grpc.UnaryServerInterceptor
+	interceptors = append(interceptors, loggingInterceptor(log))
+	interceptors = append(interceptors, metricsInterceptor)
+
+	if rateLimitEnabled {
+		log.Info("Rate limiter enabled", zap.Float64("rps", rateLimitRPS), zap.Int("burst", rateLimitBurst))
+		rateLimiter := middleware.NewRateLimiter(rate.Limit(rateLimitRPS), rateLimitBurst)
+		interceptors = append(interceptors, rateLimiter.UnaryInterceptor())
+	} else {
+		log.Info("Rate limiter is disabled")
+	}
+
+	interceptors = append(interceptors, middleware.AuthInterceptor(jwtMgr, redisClient, log))
+
 	grpcServer := grpc.NewServer(
-		grpc.ChainUnaryInterceptor(
-			metricsInterceptor,
-			rateLimiter.UnaryInterceptor(),
-			// block này test auth thôi, ae rảnh thì vứt đi nha
-			// test auth thôi, mốt rảnh xóa đi
-			middleware.AuthInterceptor(jwtMgr, redisClient, log),
-		),
+		grpc.ChainUnaryInterceptor(interceptors...),
 	)
 	pb.RegisterGatewayServiceServer(grpcServer, h)
 

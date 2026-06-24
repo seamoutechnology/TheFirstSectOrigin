@@ -24,6 +24,10 @@ type Service interface {
 	SaveItemConfig(config ItemConfigData) error
 	DeleteItemConfig(itemCode string) error
 
+	GetAllShopItems() ([]ShopItemData, error)
+	SaveShopItem(config ShopItemData) error
+	DeleteShopItem(shopItemID string) error
+
 	GetAllEffectConfigs() ([]EffectConfigData, error)
 	SaveEffectConfig(config EffectConfigData) error
 	DeleteEffectConfig(effectCode string) error
@@ -294,5 +298,17 @@ func (s *adminService) GMAddHeroWithTraits(zoneID int, userID int64, heroCode st
 
 func (s *adminService) CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error {
 	return s.repo.CreateGiftCode(code, rewardGold, rewardDiamond, rewardItems, maxUses)
+}
+
+func (s *adminService) GetAllShopItems() ([]ShopItemData, error) {
+	return s.repo.GetAllShopItems()
+}
+
+func (s *adminService) SaveShopItem(c ShopItemData) error {
+	return s.repo.SaveShopItem(c)
+}
+
+func (s *adminService) DeleteShopItem(shopItemID string) error {
+	return s.repo.DeleteShopItem(shopItemID)
 }
 

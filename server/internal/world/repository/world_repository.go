@@ -104,6 +104,37 @@ func NewPlayerRepository(db *pgxpool.Pool) *PlayerRepository {
 	return &PlayerRepository{db: db}
 }
 
+func (r *PlayerRepository) RecoverStamina(ctx context.Context, p *Player) {
+	if p == nil || p.Stamina >= p.MaxStamina {
+		return
+	}
+	now := time.Now()
+	elapsed := now.Sub(p.LastStaminaAt)
+	if elapsed < 5*time.Minute {
+		return
+	}
+
+	recovered := int32(elapsed.Seconds() / 300)
+	if recovered <= 0 {
+		return
+	}
+
+	newStamina := p.Stamina + recovered
+	var newLastStaminaAt time.Time
+	if newStamina >= p.MaxStamina {
+		newStamina = p.MaxStamina
+		newLastStaminaAt = now
+	} else {
+		newLastStaminaAt = p.LastStaminaAt.Add(time.Duration(recovered) * 5 * time.Minute)
+	}
+
+	_, err := r.db.Exec(ctx, "UPDATE players SET stamina = $1, last_stamina_at = $2 WHERE id = $3", newStamina, newLastStaminaAt, p.ID)
+	if err == nil {
+		p.Stamina = newStamina
+		p.LastStaminaAt = newLastStaminaAt
+	}
+}
+
 func (r *PlayerRepository) Create(ctx context.Context, userID int64, serverID string, nickname string) (*Player, error) {
 	q := `
 		INSERT INTO players (user_id, server_id, nickname)
@@ -131,6 +162,9 @@ func (r *PlayerRepository) FindByNickname(ctx context.Context, nickname string, 
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrNotFound
 	}
+	if err == nil {
+		r.RecoverStamina(ctx, p)
+	}
 	return p, err
 }
 
@@ -146,6 +180,9 @@ func (r *PlayerRepository) FindByUserID(ctx context.Context, userID int64, serve
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrNotFound
+	}
+	if err == nil {
+		r.RecoverStamina(ctx, p)
 	}
 	return p, err
 }
@@ -164,6 +201,9 @@ func (r *PlayerRepository) UpdateResources(ctx context.Context, playerID int64, 
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
 		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
+	if err == nil {
+		r.RecoverStamina(ctx, p)
+	}
 	return p, err
 }
 
@@ -442,6 +482,25 @@ func (r *PlayerRepository) SetFormation(ctx context.Context, playerID int64, slo
 		}
 	}
 	return tx.Commit(ctx)
+}
+
+func (r *PlayerRepository) GetFormation(ctx context.Context, playerID int64) (map[int32]int64, error) {
+	rows, err := r.db.Query(ctx, `SELECT position, player_hero_id FROM player_formations WHERE player_id = $1`, playerID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	slots := make(map[int32]int64)
+	for rows.Next() {
+		var pos int32
+		var heroID int64
+		if err := rows.Scan(&pos, &heroID); err != nil {
+			return nil, err
+		}
+		slots[pos] = heroID
+	}
+	return slots, nil
 }
 
 func (r *PlayerRepository) GetVersionConfig(ctx context.Context, platform string) (*VersionConfig, error) {
@@ -1100,9 +1159,28 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 	// 1. Get current player stamina
 	var stamina int32
 	var maxStamina int32
-	err = tx.QueryRow(ctx, "SELECT stamina, max_stamina FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&stamina, &maxStamina)
+	var lastStaminaAt time.Time
+	err = tx.QueryRow(ctx, "SELECT stamina, max_stamina, last_stamina_at FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&stamina, &maxStamina, &lastStaminaAt)
 	if err != nil {
 		return nil, err
+	}
+
+	// Calculate stamina recovery first
+	now := time.Now()
+	if stamina < maxStamina {
+		elapsed := now.Sub(lastStaminaAt)
+		if elapsed >= 5*time.Minute {
+			recovered := int32(elapsed.Seconds() / 300)
+			if recovered > 0 {
+				stamina += recovered
+				if stamina >= maxStamina {
+					stamina = maxStamina
+					lastStaminaAt = now
+				} else {
+					lastStaminaAt = lastStaminaAt.Add(time.Duration(recovered) * 5 * time.Minute)
+				}
+			}
+		}
 	}
 
 	// 2. Query stage config to get stamina cost (default to 5 if not found/empty) and reward drops
@@ -1158,6 +1236,9 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 	if stamina < staminaCost {
 		stamina = 0
 	} else {
+		if stamina == maxStamina {
+			lastStaminaAt = now
+		}
 		stamina -= staminaCost
 	}
 
@@ -1198,6 +1279,7 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 	q := `
 		UPDATE players
 		SET stamina = $2,
+		    last_stamina_at = $5,
 		    gold = gold + $3,
 		    exp = exp + $4,
 		    updated_at = NOW()
@@ -1205,7 +1287,7 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
-	err = tx.QueryRow(ctx, q, playerID, stamina, goldDelta, expDelta).Scan(
+	err = tx.QueryRow(ctx, q, playerID, stamina, goldDelta, expDelta, lastStaminaAt).Scan(
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
 		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
@@ -1314,6 +1396,305 @@ func (r *PlayerRepository) CollectResource(ctx context.Context, playerID int64, 
 	}
 	return tx.Commit(ctx)
 }
+
+func (r *PlayerRepository) GetShopItem(ctx context.Context, shopItemID string) (*ShopItem, error) {
+	q := "SELECT id, shop_item_id, shop_type, item_code, amount, original_price, is_discountable FROM shop_items WHERE shop_item_id = $1"
+	row := r.db.QueryRow(ctx, q, shopItemID)
+	item := &ShopItem{}
+	var priceBytes []byte
+	err := row.Scan(&item.ID, &item.ShopItemID, &item.ShopType, &item.ItemCode, &item.Amount, &priceBytes, &item.IsDiscountable)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrNotFound
+		}
+		return nil, err
+	}
+	item.OriginalPrice = string(priceBytes)
+	return item, nil
+}
+
+func (r *PlayerRepository) GetShopItemsByType(ctx context.Context, shopType string) ([]*ShopItem, error) {
+	q := "SELECT id, shop_item_id, shop_type, item_code, amount, original_price, is_discountable FROM shop_items WHERE shop_type = $1"
+	rows, err := r.db.Query(ctx, q, shopType)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var list []*ShopItem
+	for rows.Next() {
+		item := &ShopItem{}
+		var priceBytes []byte
+		err := rows.Scan(&item.ID, &item.ShopItemID, &item.ShopType, &item.ItemCode, &item.Amount, &priceBytes, &item.IsDiscountable)
+		if err != nil {
+			return nil, err
+		}
+		item.OriginalPrice = string(priceBytes)
+		list = append(list, item)
+	}
+	return list, nil
+}
+
+func (r *PlayerRepository) GetAllShopItems(ctx context.Context) ([]*ShopItem, error) {
+	q := "SELECT id, shop_item_id, shop_type, item_code, amount, original_price, is_discountable FROM shop_items"
+	rows, err := r.db.Query(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var list []*ShopItem
+	for rows.Next() {
+		item := &ShopItem{}
+		var priceBytes []byte
+		err := rows.Scan(&item.ID, &item.ShopItemID, &item.ShopType, &item.ItemCode, &item.Amount, &priceBytes, &item.IsDiscountable)
+		if err != nil {
+			return nil, err
+		}
+		item.OriginalPrice = string(priceBytes)
+		list = append(list, item)
+	}
+	return list, nil
+}
+
+func (r *PlayerRepository) InsertShopItem(ctx context.Context, item *ShopItem) error {
+	q := `
+		INSERT INTO shop_items (shop_item_id, shop_type, item_code, amount, original_price, is_discountable)
+		VALUES ($1, $2, $3, $4, $5, $6)
+		ON CONFLICT (shop_item_id) DO UPDATE
+		SET shop_type = EXCLUDED.shop_type,
+		    item_code = EXCLUDED.item_code,
+		    amount = EXCLUDED.amount,
+		    original_price = EXCLUDED.original_price,
+		    is_discountable = EXCLUDED.is_discountable
+	`
+	_, err := r.db.Exec(ctx, q, item.ShopItemID, item.ShopType, item.ItemCode, item.Amount, item.OriginalPrice, item.IsDiscountable)
+	return err
+}
+
+func (r *PlayerRepository) DeleteShopItem(ctx context.Context, shopItemID string) error {
+	q := "DELETE FROM shop_items WHERE shop_item_id = $1"
+	_, err := r.db.Exec(ctx, q, shopItemID)
+	return err
+}
+
+func (r *PlayerRepository) GetPlayerShopItems(ctx context.Context, playerID int64, shopType string) ([]*PlayerShopItemInstance, time.Time, error) {
+	// 1. Get next refresh time
+	var nextRefresh time.Time
+	err := r.db.QueryRow(ctx, "SELECT next_refresh_at FROM player_shop_resets WHERE player_id = $1 AND shop_type = $2", playerID, shopType).Scan(&nextRefresh)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, time.Time{}, nil // Triggers refresh
+		}
+		return nil, time.Time{}, err
+	}
+
+	// 2. Get active items
+	q := "SELECT id, player_id, shop_type, shop_item_id, item_code, amount, final_price, discount_pct, is_bought FROM player_shops WHERE player_id = $1 AND shop_type = $2"
+	rows, err := r.db.Query(ctx, q, playerID, shopType)
+	if err != nil {
+		return nil, nextRefresh, err
+	}
+	defer rows.Close()
+
+	var list []*PlayerShopItemInstance
+	for rows.Next() {
+		inst := &PlayerShopItemInstance{}
+		var priceBytes []byte
+		err := rows.Scan(&inst.ID, &inst.PlayerID, &inst.ShopType, &inst.ShopItemID, &inst.ItemCode, &inst.Amount, &priceBytes, &inst.DiscountPct, &inst.IsBought)
+		if err != nil {
+			return nil, nextRefresh, err
+		}
+		inst.FinalPrice = string(priceBytes)
+		list = append(list, inst)
+	}
+	return list, nextRefresh, nil
+}
+
+func (r *PlayerRepository) SavePlayerShopItems(ctx context.Context, playerID int64, shopType string, items []*PlayerShopItemInstance, nextRefresh time.Time) error {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// Clean up old items
+	_, err = tx.Exec(ctx, "DELETE FROM player_shops WHERE player_id = $1 AND shop_type = $2", playerID, shopType)
+	if err != nil {
+		return err
+	}
+
+	// Insert new items
+	for _, item := range items {
+		q := `
+			INSERT INTO player_shops (player_id, shop_type, shop_item_id, item_code, amount, final_price, discount_pct, is_bought)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+		`
+		_, err = tx.Exec(ctx, q, playerID, shopType, item.ShopItemID, item.ItemCode, item.Amount, item.FinalPrice, item.DiscountPct, item.IsBought)
+		if err != nil {
+			return err
+		}
+	}
+
+	// Update next refresh time
+	qReset := `
+		INSERT INTO player_shop_resets (player_id, shop_type, next_refresh_at)
+		VALUES ($1, $2, $3)
+		ON CONFLICT (player_id, shop_type) DO UPDATE
+		SET next_refresh_at = EXCLUDED.next_refresh_at
+	`
+	_, err = tx.Exec(ctx, qReset, playerID, shopType, nextRefresh)
+	if err != nil {
+		return err
+	}
+
+	return tx.Commit(ctx)
+}
+
+func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, playerID int64, instanceID int64, quantity int32) ([]*UserItem, error) {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Get player shop item instance details
+	var itemCode string
+	var amount int32
+	var finalPriceBytes []byte
+	var isBought bool
+	err = tx.QueryRow(ctx, "SELECT item_code, amount, final_price, is_bought FROM player_shops WHERE id = $1 AND player_id = $2 FOR UPDATE", instanceID, playerID).Scan(&itemCode, &amount, &finalPriceBytes, &isBought)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, errors.New("sản phẩm không tồn tại")
+		}
+		return nil, err
+	}
+
+	if isBought {
+		return nil, errors.New("sản phẩm đã được mua rồi")
+	}
+
+	var costs []ShopCost
+	if errJson := json.Unmarshal(finalPriceBytes, &costs); errJson != nil {
+		return nil, errJson
+	}
+
+	// 2. Lock & check currencies/items
+	for _, cost := range costs {
+		totalCost := int64(cost.Amount) * int64(quantity)
+		if cost.ItemCode == "gold" {
+			var currentGold int64
+			err = tx.QueryRow(ctx, "SELECT gold FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentGold)
+			if err != nil {
+				return nil, err
+			}
+			if currentGold < totalCost {
+				return nil, errors.New("không đủ vàng")
+			}
+			_, err = tx.Exec(ctx, "UPDATE players SET gold = gold - $1 WHERE id = $2", totalCost, playerID)
+			if err != nil {
+				return nil, err
+			}
+		} else if cost.ItemCode == "diamond" {
+			var currentDiamond int64
+			err = tx.QueryRow(ctx, "SELECT diamond FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentDiamond)
+			if err != nil {
+				return nil, err
+			}
+			if currentDiamond < totalCost {
+				return nil, errors.New("không đủ xu/kim cương")
+			}
+			_, err = tx.Exec(ctx, "UPDATE players SET diamond = diamond - $1 WHERE id = $2", totalCost, playerID)
+			if err != nil {
+				return nil, err
+			}
+		} else if cost.ItemCode == "stamina" {
+			var currentStamina int32
+			err = tx.QueryRow(ctx, "SELECT stamina FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentStamina)
+			if err != nil {
+				return nil, err
+			}
+			if int64(currentStamina) < totalCost {
+				return nil, errors.New("không đủ thể lực")
+			}
+			_, err = tx.Exec(ctx, "UPDATE players SET stamina = stamina - $1 WHERE id = $2", totalCost, playerID)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			// It is an inventory item! Check from user_items
+			var currentQty int32
+			err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = $2 FOR UPDATE", playerID, cost.ItemCode).Scan(&currentQty)
+			if err != nil {
+				if errors.Is(err, pgx.ErrNoRows) {
+					return nil, fmt.Errorf("không có vật phẩm %s trong túi", cost.ItemCode)
+				}
+				return nil, err
+			}
+			if int64(currentQty) < totalCost {
+				return nil, fmt.Errorf("không đủ vật phẩm %s", cost.ItemCode)
+			}
+
+			// Deduct items
+			if int64(currentQty) == totalCost {
+				_, err = tx.Exec(ctx, "DELETE FROM user_items WHERE player_id = $1 AND item_code = $2", playerID, cost.ItemCode)
+			} else {
+				_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = $3", totalCost, playerID, cost.ItemCode)
+			}
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	// 3. Mark as bought
+	_, err = tx.Exec(ctx, "UPDATE player_shops SET is_bought = TRUE WHERE id = $1", instanceID)
+	if err != nil {
+		return nil, err
+	}
+
+	// 4. Grant reward item to player
+	gainedQty := amount * quantity
+	var exists bool
+	err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, itemCode).Scan(&exists)
+	if err != nil {
+		return nil, err
+	}
+
+	if exists {
+		_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", gainedQty, playerID, itemCode)
+	} else {
+		_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, itemCode, gainedQty)
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	// Commit
+	err = tx.Commit(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// Retrieve user's full inventory of the gained item type to return updated quantities
+	var returnedItems []*UserItem
+	rows, err := r.db.Query(ctx, "SELECT id, player_id, item_code, quantity, stats FROM user_items WHERE player_id = $1", playerID)
+	if err == nil {
+		defer rows.Close()
+		for rows.Next() {
+			item := &UserItem{}
+			var statsBytes []byte
+			if errScan := rows.Scan(&item.ID, &item.PlayerID, &item.ItemCode, &item.Quantity, &statsBytes); errScan == nil {
+				item.Stats = string(statsBytes)
+				returnedItems = append(returnedItems, item)
+			}
+		}
+	}
+
+	return returnedItems, nil
+}
+
 
 
 

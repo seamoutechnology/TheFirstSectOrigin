@@ -100,3 +100,54 @@ message UseItemResponse {
   string message_id = 2;  // Response message ID (for i18n)
 }
 
+// --- Advanced Shop System ---
+
+message ShopCost {
+  string item_code = 1;
+  int32 amount = 2;
+}
+
+message ShopItemInstance {
+  int64 id = 1; // Instance ID in player_shops
+  string shop_item_id = 2;
+  string item_code = 3;
+  int32 amount = 4;
+  repeated ShopCost final_price = 5;
+  int32 discount_pct = 6;
+  bool is_bought = 7;
+}
+
+message GetShopRequest {
+  string shop_type = 1;
+}
+
+message GetShopResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated ShopItemInstance items = 3;
+  int64 next_refresh_at = 4; // Unix timestamp
+}
+
+message RefreshShopRequest {
+  string shop_type = 1;
+}
+
+message RefreshShopResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated ShopItemInstance items = 3;
+  int64 next_refresh_at = 4;
+}
+
+message BuyShopItemRequest {
+  int64 instance_id = 1; // player_shops.id
+  int32 quantity = 2;
+}
+
+message BuyShopItemResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated Item gained_items = 3;
+}
+
+

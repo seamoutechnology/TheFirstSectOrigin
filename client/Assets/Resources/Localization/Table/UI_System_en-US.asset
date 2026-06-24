@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -191,8 +191,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7031246170886144
-    m_Localized: 'Playtime: <color=yellow>{0} min\n<size=80%>(Warning: Playing over
-      180 mins affects health)'
+    m_Localized: 'Playtime: <color=yellow>{0} min'
     m_Metadata:
       m_Items: []
   - m_Id: 7031326038822912
@@ -220,11 +219,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7055658714664960
-    m_Localized: 'Account ID: {0}'
+    m_Localized: 'ID: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 7055701223936000
-    m_Localized: 'Account Role: {0}'
+    m_Localized: 'Role: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 7057148636303360

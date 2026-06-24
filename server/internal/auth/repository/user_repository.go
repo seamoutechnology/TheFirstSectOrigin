@@ -21,11 +21,15 @@ type User struct {
 }
 
 type Zone struct {
-	ID         int
-	Name       string
-	Status     string
-	GatewayURL string
-	IsActive   bool
+	ID          int
+	Name        string
+	Status      string
+	GatewayURL  string
+	IsActive    bool
+	CPUUsage    float64
+	RAMUsage    float64
+	PlayerCount int
+	MaxPlayers  int
 }
 
 var ErrNotFound = errors.New("record not found")
@@ -102,7 +106,7 @@ func NewZoneRepository(db *pgxpool.Pool) *ZoneRepository {
 }
 
 func (r *ZoneRepository) FindActive(ctx context.Context) ([]*Zone, error) {
-	query := `SELECT id, name, status, gateway_url FROM zones WHERE is_active = TRUE ORDER BY id`
+	query := `SELECT id, name, status, gateway_url, cpu_usage, ram_usage, player_count, max_players FROM zones WHERE is_active = TRUE ORDER BY id`
 	rows, err := r.db.Query(ctx, query)
 	if err != nil {
 		return nil, err
@@ -112,10 +116,29 @@ func (r *ZoneRepository) FindActive(ctx context.Context) ([]*Zone, error) {
 	var zones []*Zone
 	for rows.Next() {
 		z := &Zone{}
-		if err := rows.Scan(&z.ID, &z.Name, &z.Status, &z.GatewayURL); err != nil {
+		if err := rows.Scan(&z.ID, &z.Name, &z.Status, &z.GatewayURL, &z.CPUUsage, &z.RAMUsage, &z.PlayerCount, &z.MaxPlayers); err != nil {
 			return nil, err
 		}
 		zones = append(zones, z)
 	}
 	return zones, nil
+}
+
+func (r *ZoneRepository) UpdateMetrics(ctx context.Context, zoneID int, cpu, ram float64, players int) error {
+	query := `UPDATE zones SET cpu_usage = $2, ram_usage = $3, player_count = $4 WHERE id = $1`
+	_, err := r.db.Exec(ctx, query, zoneID, cpu, ram, players)
+	return err
+}
+
+func (r *ZoneRepository) CreateZone(ctx context.Context, name, status, gatewayURL string) error {
+	query := `INSERT INTO zones (name, status, gateway_url) VALUES ($1, $2, $3)`
+	_, err := r.db.Exec(ctx, query, name, status, gatewayURL)
+	return err
+}
+
+func (r *ZoneRepository) GetCount(ctx context.Context) (int, error) {
+	query := `SELECT COUNT(*) FROM zones WHERE is_active = TRUE`
+	var count int
+	err := r.db.QueryRow(ctx, query).Scan(&count)
+	return count, err
 }

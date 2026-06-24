@@ -1,0 +1,217 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Chương 2 này trình bày quá trình khảo sát hiện trạng và phân tích yêu cầu đối với hệ thống trò chơi trực tuyến "The First Sect Origin". Nội dung chương gồm các phần chính: khảo sát các hệ thống tương tự và đề xuất tính năng ở phần 2.1; xây dựng biểu đồ use case tổng quát và phân rã các chức năng cốt lõi ở phần 2.2; đặc tả chi tiết các use case quan trọng ở phần 2.3; và xác định các yêu cầu phi chức năng cùng các ràng buộc kỹ thuật ở phần 2.4.
+
+\section{Khảo sát hiện trạng}
+Trong quá trình phát triển các trò chơi trực tuyến nhiều người chơi, việc thiết kế hệ thống backend có hiệu năng cao và ổn định là yếu tố quyết định sự thành bại của sản phẩm. Để có cơ sở thiết kế hệ thống, đồ án tiến hành khảo sát và so sánh ba hướng tiếp cận phát triển backend phổ biến hiện nay:
+
+\begin{enumerate}
+    \item \textbf{Sử dụng máy chủ đơn khối (Monolithic Server) với Node.js hoặc Python}: Đây là giải pháp phổ biến cho các dự án nhỏ nhờ sự đơn giản trong triển khai và tài liệu phong phú. Tuy nhiên, kiến trúc đơn khối rất khó mở rộng quy mô khi số lượng người chơi tăng đột biến. Đồng thời, cơ chế xử lý Single-thread của Node.js hoặc Global Interpreter Lock (GIL) của Python gây ra nghẽn cổ chai nghiêm trọng đối với các tác vụ tính toán logic nặng như mô phỏng trận đấu thời gian thực hoặc sắp xếp bảng xếp hạng.
+    \item \textbf{Sử dụng các dịch vụ Cloud Backend thương mại (Photon Engine, PlayFab)}: Hướng tiếp cận này giúp rút ngắn đáng kể thời gian phát triển ban đầu thông qua các API tích hợp sẵn. Tuy nhiên, nhà phát triển phải đối mặt với chi phí vận hành tăng lũy tiến cực kỳ tốn kém theo số lượng người dùng. Bên cạnh đó, các dịch vụ này là hệ thống mã nguồn đóng, gây hạn chế lớn trong việc tùy biến sâu các thuật toán logic game đặc thù.
+    \item \textbf{Tự phát triển hệ thống dựa trên kiến trúc vi dịch vụ (Microservices) với Go}: Giải pháp này chia nhỏ hệ thống máy chủ thành các dịch vụ độc lập kết nối với nhau qua gRPC. Sử dụng ngôn ngữ Go mang lại hiệu năng thực thi tương đương mã máy và khả năng xử lý song song vượt trội qua Goroutine. Dù kiến trúc này đòi hỏi thời gian thiết kế hệ thống ban đầu phức tạp hơn, nhưng nó mang lại khả năng mở rộng linh hoạt và tối ưu chi phí vận hành.
+\end{enumerate}
+
+Dựa trên kết quả khảo sát và đối chiếu với mục tiêu xây dựng một trò chơi thẻ tướng chiến thuật trực tuyến có khả năng chịu tải tốt và dễ dàng mở rộng, đồ án lựa chọn hướng tiếp cận thứ ba: tự phát triển hệ thống backend theo kiến trúc vi dịch vụ sử dụng Go. Các tính năng cốt lõi cần phát triển bao gồm hệ thống đăng ký/đăng nhập xác thực bảo mật, quản lý tài nguyên và xây dựng tông môn, chiêu mộ và huấn luyện đệ tử, mô phỏng trận đấu chiến thuật tự động, cùng bảng xếp hạng thời gian thực.
+
+\section{Tổng quan chức năng}
+Hệ thống trò chơi "The First Sect Origin" bao gồm các nhóm chức năng chính được phân rã để đảm bảo tính module và hiệu năng vận hành.
+
+\subsection{Biểu đồ use case tổng quát}
+Hệ thống tương tác chính giữa hai tác nhân (Actor):
+\begin{itemize}
+    \item \textbf{Người chơi (Player)}: Tác nhân chính tham gia vào trò chơi, thực hiện các hành động đăng nhập, xây dựng tông môn, quản lý đệ tử, vượt ải và xem bảng xếp hạng.
+    \item \textbf{Hệ thống (System)}: Thực hiện các tác vụ tự động như kiểm tra điều kiện xây dựng, tính toán kết quả trận đấu và cập nhật bảng xếp hạng.
+\end{itemize}
+
+Biểu đồ use case tổng quát bao gồm các nhóm chức năng chính: Đăng nhập hệ thống, Quản lý tông môn, Quản lý đệ tử, Vượt ải chiến dịch, và Xem bảng xếp hạng.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.5cm, every node/.style={fill=white}]
+  % Stickman for Player
+  \draw[thick] (0,0) circle (0.25);
+  \draw[thick] (0,-0.25) -- (0,-1.0) coordinate (torso);
+  \draw[thick] (-0.5,-0.5) -- (0.5,-0.5);
+  \draw[thick] (torso) -- (-0.3,-1.6);
+  \draw[thick] (torso) -- (0.3,-1.6);
+  \node at (0,-1.9) {\textbf{Người chơi}};
+
+  % Use Cases
+  \node[draw, ellipse, minimum width=4cm, minimum height=1cm, align=center] (uc1) at (6, 1.5) {Đăng nhập hệ thống};
+  \node[draw, ellipse, minimum width=4cm, minimum height=1cm, align=center] (uc2) at (6, 0.5) {Quản lý tông môn};
+  \node[draw, ellipse, minimum width=4cm, minimum height=1cm, align=center] (uc3) at (6, -0.5) {Quản lý đệ tử};
+  \node[draw, ellipse, minimum width=4cm, minimum height=1cm, align=center] (uc4) at (6, -1.5) {Vượt ải chiến dịch};
+  \node[draw, ellipse, minimum width=4cm, minimum height=1cm, align=center] (uc5) at (6, -2.5) {Xem bảng xếp hạng};
+
+  % Connections
+  \draw[->, >=stealth, thick] (0.5, -0.5) -- (uc1.west);
+  \draw[->, >=stealth, thick] (0.5, -0.5) -- (uc2.west);
+  \draw[->, >=stealth, thick] (0.5, -0.5) -- (uc3.west);
+  \draw[->, >=stealth, thick] (0.5, -0.5) -- (uc4.west);
+  \draw[->, >=stealth, thick] (0.5, -0.5) -- (uc5.west);
+\end{tikzpicture}
+\caption{Biểu đồ use case tổng quát của hệ thống}
+\label{fig:usecase_general}
+\end{figure}
+
+\subsection{Biểu đồ use case phân rã các phân hệ chính}
+Dưới đây là biểu đồ phân rã của các nhóm chức năng cốt lõi:
+\begin{enumerate}
+    \item \textbf{Phân hệ xác thực}: Gồm các use case đăng ký tài khoản, đăng nhập hệ thống, xác thực qua mã thông báo JWT \cite{rfc7519} và tự động điều phối phân vùng máy chủ khi quá tải (Roll Server).
+    \item \textbf{Phân hệ quản lý tông môn}: Gồm các use case xây dựng công trình mới, nâng cấp công trình, thu thập tài nguyên sản sinh từ công trình.
+    \item \textbf{Phân hệ quản lý đệ tử}: Gồm các use case chiêu mộ đệ tử ngẫu nhiên, nâng cấp đệ tử, và sắp xếp đội hình chiến đấu.
+    \item \textbf{Phân hệ vượt ải}: Gồm các use case chọn ải chiến dịch, gửi đội hình xuất trận, mô phỏng tính toán trận đấu, và nhận phần thưởng vượt ải.
+\end{enumerate}
+
+\subsection{Quy trình nghiệp vụ cốt lõi}
+Quy trình nghiệp vụ quan trọng nhất của hệ thống là luồng vận hành từ khi người chơi đăng nhập, tiến hành khai thác tài nguyên tại tông môn để nâng cấp đệ tử, sau đó tham gia vượt ải chiến dịch để tích lũy điểm lực chiến và cập nhật thứ hạng trên bảng xếp hạng thời gian thực. Quy trình này đòi hỏi sự phối hợp đồng bộ giữa dịch vụ Gateway nhận yêu cầu, dịch vụ World quản lý tài sản người chơi và dịch vụ Combat thực hiện tính toán kết quả trận đấu một cách độc lập.
+
+\section{Đặc tả chức năng}
+Dưới đây là đặc tả chi tiết của 5 use case quan trọng nhất trong hệ thống trò chơi.
+
+\subsection{Đặc tả use case Đăng nhập hệ thống}
+\begin{itemize}
+    \item \textbf{Tên use case}: Đăng nhập hệ thống.
+    \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã tải ứng dụng Client và có tài khoản đã đăng ký trên hệ thống.
+    \item \textbf{Hậu điều kiện}: Người chơi nhận được mã xác thực JWT, thiết lập kết nối ổn định tới dịch vụ Gateway để bắt đầu phiên chơi.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi nhập thông tin tài khoản (username/password) trên giao diện đăng nhập.
+        \item Client gửi yêu cầu đăng nhập đến dịch vụ Login.
+        \item Dịch vụ Login kiểm tra thông tin tài khoản trong cơ sở dữ liệu PostgreSQL.
+        \item Hệ thống xác thực thành công, tạo mã JWT chứa thông tin người chơi, đồng thời lưu phiên làm việc vào Redis.
+        \item Dịch vụ Login gửi trả mã JWT về phía Client.
+        \item Client sử dụng mã JWT này để kết nối và xác thực với dịch vụ Gateway.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Sai mật khẩu}: Hệ thống thông báo lỗi đăng nhập và yêu cầu người chơi kiểm tra lại thông tin.
+        \item \textit{Tài khoản chưa đăng ký}: Hệ thống gợi ý người chơi chuyển qua giao diện đăng ký tài khoản mới.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Đặc tả use case Xây dựng và nâng cấp công trình}
+\begin{itemize}
+    \item \textbf{Tên use case}: Xây dựng và nâng cấp công trình.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, sở hữu đủ tài nguyên (Gỗ, Đá, Linh thạch) và đạt yêu cầu cấp độ tông môn tối thiểu.
+    \item \textbf{Hậu điều kiện}: Trạng thái công trình trong cơ sở dữ liệu được cập nhật, lượng tài nguyên tương ứng của người chơi bị khấu trừ.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi chọn một khu đất trống hoặc chọn một công trình hiện có để xây dựng hoặc nâng cấp.
+        \item Client gửi yêu cầu kèm ID công trình và loại hành động qua Gateway đến World-server.
+        \item World-server kiểm tra số dư tài nguyên và các điều kiện tiên quyết trong cơ sở dữ liệu.
+        \item Hệ thống thực hiện trừ tài nguyên của người chơi và cập nhật cấp độ mới của công trình trong PostgreSQL.
+        \item World-server gửi phản hồi thành công kèm trạng thái tài nguyên mới về Client.
+        \item Client cập nhật giao diện tông môn của người chơi.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Không đủ tài nguyên}: Hệ thống từ chối yêu cầu, gửi mã lỗi về Client để hiển thị cảnh báo cho người chơi.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Đặc tả use case Chiêu mộ đệ tử}
+\begin{itemize}
+    \item \textbf{Tên use case}: Chiêu mộ đệ tử.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi sở hữu đủ vật phẩm hoặc đơn vị tiền tệ dùng để chiêu mộ đệ tử.
+    \item \textbf{Hậu điều kiện}: Một thẻ đệ tử mới được khởi tạo thành công và lưu vào danh sách sở hữu của người chơi.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi truy cập giao diện chiêu mộ và nhấn chọn lượt chiêu mộ.
+        \item Client gửi yêu cầu chiêu mộ đệ tử qua dịch vụ Gateway tới World-server.
+        \item World-server thực hiện khấu trừ vật phẩm chiêu mộ của người chơi.
+        \item Hệ thống áp dụng thuật toán quay số ngẫu nhiên dựa trên bảng tỷ lệ xuất hiện (rarity weights) để chọn đệ tử.
+        \item World-server lưu thông tin đệ tử mới vào PostgreSQL dưới dạng thẻ bài sở hữu của người chơi.
+        \item World-server trả về thông tin chi tiết đệ tử nhận được cho Client để hiển thị hiệu ứng.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Đặc tả use case Vượt ải chiến dịch}
+\begin{itemize}
+    \item \textbf{Tên use case}: Vượt ải chiến dịch.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã thiết lập đội hình đệ tử xuất trận và chọn ải chiến dịch muốn tham gia.
+    \item \textbf{Hậu điều kiện}: Kết quả trận đấu được tính toán, cập nhật tiến trình vượt ải và phân phối phần thưởng.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi chọn ải chiến dịch và nhấn nút bắt đầu trận đấu.
+        \item Client gửi yêu cầu vượt ải kèm cấu hình đội hình hiện tại qua Gateway đến Combat-server.
+        \item Combat-server lấy thông tin chỉ số đệ tử và quái vật của ải đấu để thực hiện mô phỏng trận đấu tự động theo lượt.
+        \item Combat-server tạo ra log trận đấu và xác định kết quả thắng/thua gửi về cho World-server.
+        \item Nếu người chơi thắng, World-server cập nhật tiến trình vượt ải mới nhất và cộng phần thưởng (Linh thạch, vật phẩm) vào tài khoản người chơi trong PostgreSQL.
+        \item Hệ thống trả kết quả và log mô phỏng về Client để tái hiện trận đấu dưới dạng hoạt ảnh trực quan cho người chơi.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Đặc tả use case Xem bảng xếp hạng thời gian thực}
+\begin{itemize}
+    \item \textbf{Tên use case}: Xem bảng xếp hạng thời gian thực.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi bấm vào biểu tượng bảng xếp hạng trên giao diện sảnh chính.
+    \item \textbf{Hậu điều kiện}: Danh sách người chơi có thứ hạng cao nhất hiển thị đầy đủ trên màn hình Client.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi gửi yêu cầu xem bảng xếp hạng từ Client.
+        \item Yêu cầu được gửi qua Gateway tới World-server.
+        \item World-server truy vấn danh sách người chơi xếp hạng theo điểm lực chiến hoặc tiến trình vượt ải từ cơ sở dữ liệu.
+        \item World-server gửi trả danh sách xếp hạng đã định dạng về Client.
+        \item Client hiển thị danh sách bảng xếp hạng lên màn hình người chơi.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Đặc tả use case Tự động điều phối vùng máy chủ khi quá tải (Roll Server)}
+\begin{itemize}
+    \item \textbf{Tên use case}: Tự động điều phối vùng máy chủ khi quá tải (Roll Server).
+    \item \textbf{Tác nhân}: Hệ thống, Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi gửi yêu cầu đăng nhập vào game. Phân vùng máy chủ hiện tại đã đạt ngưỡng chịu tải cấu hình tối đa.
+    \item \textbf{Hậu điều kiện}: Hệ thống tự động ghi nhận phân vùng máy chủ mới (ví dụ: chuyển từ \textit{zone1} sang \textit{zone2}) và điều hướng kết nối của người chơi đến máy chủ mới.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi gửi yêu cầu đăng nhập từ Client đến dịch vụ Gateway.
+        \item Dịch vụ Gateway/Login kiểm tra số lượng người chơi hoạt động đồng thời (CCU) trên phân vùng máy chủ hiện tại (ví dụ: \textit{zone1}).
+        \item Hệ thống phát hiện số lượng CCU vượt quá ngưỡng chịu tải tối đa của máy chủ hiện tại.
+        \item Hệ thống kích hoạt cơ chế Roll Server, tự động cấp mã thông báo JWT mới chứa thông tin phân vùng máy chủ mới (ví dụ: \textit{zone2}).
+        \item Client nhận phản hồi đăng nhập chứa JWT mới và tự động thiết lập kết nối đến phân vùng mới.
+        \item Nhân vật mới của người chơi được khởi tạo biệt lập trên phân vùng mới thông qua khóa duy nhất (\textit{user\_id}, \textit{server\_id}) trong cơ sở dữ liệu PostgreSQL.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Phân vùng hiện tại chưa quá tải}: Hệ thống tiếp tục giữ phiên kết nối và dữ liệu của người chơi tại phân vùng hiện tại.
+    \end{itemize}
+\end{itemize}
+
+\section{Yêu cầu phi chức năng}
+Để đảm bảo hệ thống vận hành tốt dưới tải lớn và mang lại trải nghiệm mượt mà, các yêu cầu phi chức năng sau đây được thiết lập:
+
+\begin{itemize}
+    \item \textbf{Hiệu năng và tải (Performance \& Scalability)}:
+    \begin{itemize}
+        \item Hệ thống backend được thiết kế để đáp ứng khả năng xử lý đồng thời lượng lớn người chơi ảo (simulated users) trong các kịch bản kiểm thử tải.
+        \item Thời gian phản hồi trung bình (latency) của dịch vụ Gateway đối với các yêu cầu thông thường của người chơi phải nhỏ hơn 200ms dưới điều kiện mạng ổn định.
+        \item Dịch vụ mô phỏng trận đấu (Combat-server) phải hoàn thành tính toán một trận đấu trong thời gian dưới 50ms để đảm bảo không xảy ra nghẽn hàng đợi xử lý.
+    \end{itemize}
+    \item \textbf{Độ tin cậy và Nhất quán dữ liệu (Reliability \& Consistency)}:
+    \begin{itemize}
+        \item Hệ thống hoạt động liên tục với độ sẵn sàng dịch vụ tối thiểu là 99,5\%.
+        \item Đảm bảo tính nhất quán giao dịch tuyệt đối đối với các hành động khấu trừ tài nguyên (Gỗ, Đá, Linh thạch) và trao thưởng vật phẩm, loại bỏ hoàn toàn khả năng xảy ra lỗi trùng lặp giao dịch (double-spending).
+    \end{itemize}
+    \item \textbf{Bảo mật và An toàn thông tin (Security)}:
+    \begin{itemize}
+        \item Mọi kết nối truyền tải thông tin giữa Client và Gateway phải được bảo vệ qua các kênh truyền bảo mật (gRPC over TLS).
+        \item Quản lý phiên kết nối chặt chẽ bằng cơ chế kiểm tra tính hợp lệ của JWT đã lưu trong Redis, ngăn chặn các hình thức tấn công giả mạo yêu cầu.
+    \end{itemize}
+    \item \textbf{Ràng buộc kỹ thuật (Technical Constraints)}:
+    \begin{itemize}
+        \item Hệ thống backend được phát triển hoàn toàn bằng ngôn ngữ Go (phiên bản 1.20 trở lên).
+        \item Hệ quản trị cơ sở dữ liệu sử dụng PostgreSQL 15 để lưu trữ dữ liệu bền vững và Redis 7 làm bộ nhớ đệm tốc độ cao.
+        \item Giao diện và logic client được xây dựng trên công cụ Unity 6.
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+Chương này đã làm rõ các yêu cầu chức năng và phi chức năng của hệ thống qua việc khảo sát hiện trạng, xây dựng biểu đồ use case và đặc tả chi tiết các nghiệp vụ chính. Đây là cơ sở quan trọng để tiến hành phân tích thiết kế kiến trúc hệ thống và lựa chọn công nghệ triển khai phù hợp trong chương tiếp theo – Chương 3.
+
+\end{document}

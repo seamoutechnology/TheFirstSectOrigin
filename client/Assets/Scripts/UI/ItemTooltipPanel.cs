@@ -5,6 +5,7 @@ using GameClient.UI.Core;
 using GameClient.Managers;
 using GameClient.Core;
 using GameClient.Network.Pb; // Nơi định nghĩa ItemConfig từ protobuf
+using GameClient.Network.Api;
 
 namespace GameClient.UI
 {
@@ -19,10 +20,13 @@ namespace GameClient.UI
         [SerializeField] private Image imgItemIcon;
         [SerializeField] private Image imgBackgroundFrame; // Khung màu tương ứng với phẩm chất (Rarity)
 
+        private Button btnUse;
+
         public override void Setup(object data)
         {
             base.Setup(data);
 
+            long itemId = 0;
             string itemCode = "";
             int ownedCount = 0;
             bool hasCustomQuantity = false;
@@ -41,6 +45,20 @@ namespace GameClient.UI
             {
                 itemCode = vtuple.Item1;
                 ownedCount = vtuple.Item2;
+                hasCustomQuantity = true;
+            }
+            else if (data is System.Tuple<long, string, int> tuple3)
+            {
+                itemId = tuple3.Item1;
+                itemCode = tuple3.Item2;
+                ownedCount = tuple3.Item3;
+                hasCustomQuantity = true;
+            }
+            else if (data is System.ValueTuple<long, string, int> vtuple3)
+            {
+                itemId = vtuple3.Item1;
+                itemCode = vtuple3.Item2;
+                ownedCount = vtuple3.Item3;
                 hasCustomQuantity = true;
             }
 
@@ -104,7 +122,84 @@ namespace GameClient.UI
 
                 // 5. Thay đổi màu sắc khung/chữ tiêu đề dựa theo phẩm chất (Rarity)
                 ApplyRarityColor(config.Rarity);
+
+                // 6. Tạo nút Sử Dụng cho đạo cụ tiêu hao nếu mở từ túi đồ
+                CreateUseButton(itemId, itemCode);
             }
+        }
+
+        private void CreateUseButton(long itemId, string itemCode)
+        {
+            if (btnUse != null)
+            {
+                Destroy(btnUse.gameObject);
+                btnUse = null;
+            }
+
+            if (itemId == 0) return;
+
+            var config = ItemDataManager.Instance.GetItemConfig(itemCode);
+            if (config == null || config.Type != "CONSUMABLE") return;
+
+            GameObject btnGo = new GameObject("BtnUse", typeof(RectTransform), typeof(Image), typeof(Button));
+            btnGo.transform.SetParent(imgBackgroundFrame != null ? imgBackgroundFrame.transform : transform, false);
+
+            var rect = btnGo.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0f);
+            rect.anchorMax = new Vector2(0.5f, 0f);
+            rect.pivot = new Vector2(0.5f, 0f);
+            rect.anchoredPosition = new Vector2(0f, 20f);
+            rect.sizeDelta = new Vector2(160f, 40f);
+
+            var img = btnGo.GetComponent<Image>();
+            img.color = new Color(0.1f, 0.6f, 0.2f, 1f); // Màu xanh lá cây
+
+            var btn = btnGo.GetComponent<Button>();
+            btnUse = btn;
+
+            GameObject txtGo = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI));
+            txtGo.transform.SetParent(btnGo.transform, false);
+
+            var txtRect = txtGo.GetComponent<RectTransform>();
+            txtRect.anchorMin = Vector2.zero;
+            txtRect.anchorMax = Vector2.one;
+            txtRect.sizeDelta = Vector2.zero;
+
+            var txt = txtGo.GetComponent<TextMeshProUGUI>();
+            txt.text = "Sử Dụng";
+            txt.fontSize = 16f;
+            txt.color = Color.white;
+            txt.alignment = TextAlignmentOptions.Center;
+
+            btn.onClick.AddListener(async () =>
+            {
+                btn.interactable = false;
+                try
+                {
+                    var response = await SectBuildingApi.UseItemAsync(itemId, 1);
+                    if (response != null && response.Code == 200)
+                    {
+                        ToastManager.Instance?.ShowNormalToast("Sử dụng vật phẩm thành công!");
+                        var invPanel = UIManager.Instance?.GetPanel("InventoryPanel") as InventoryPanel;
+                        if (invPanel != null)
+                        {
+                            invPanel.RefreshInventory();
+                        }
+                        Hide();
+                    }
+                    else
+                    {
+                        string errMsg = response != null ? response.MessageId : "Unknown error";
+                        ToastManager.Instance?.ShowNormalToast($"Sử dụng thất bại: {errMsg}");
+                        btn.interactable = true;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    ToastManager.Instance?.ShowNormalToast($"Lỗi: {ex.Message}");
+                    btn.interactable = true;
+                }
+            });
         }
 
         private async void LoadIconAsync(ItemConfig config, string itemCode)

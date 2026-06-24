@@ -26,7 +26,7 @@ const file_world_proto_rawDesc = "" +
 	"\n" +
 	"\vworld.proto\x12\x02pb\x1a\fcommon.proto\x1a\fplayer.proto\x1a\n" +
 	"sect.proto\x1a\x0edisciple.proto\x1a\n" +
-	"item.proto\x1a\vgacha.proto\x1a\rmission.proto\x1a\fcombat.proto\x1a\fsystem.proto\x1a\x11leaderboard.proto2\xe7\r\n" +
+	"item.proto\x1a\vgacha.proto\x1a\rmission.proto\x1a\fcombat.proto\x1a\fsystem.proto\x1a\x11leaderboard.proto2\x9b\x0f\n" +
 	"\x0eGatewayService\x12;\n" +
 	"\n" +
 	"GetVersion\x12\x15.pb.GetVersionRequest\x1a\x16.pb.GetVersionResponse\x122\n" +
@@ -49,7 +49,10 @@ const file_world_proto_rawDesc = "" +
 	"\x11ValidatePvEResult\x12\x1c.pb.ValidatePvEResultRequest\x1a\x1d.pb.ValidatePvEResultResponse\x124\n" +
 	"\fGetInventory\x12\x15.pb.GetProfileRequest\x1a\r.pb.Inventory\x120\n" +
 	"\tEquipItem\x12\x10.pb.EquipRequest\x1a\x11.pb.EquipResponse\x122\n" +
-	"\aUseItem\x12\x12.pb.UseItemRequest\x1a\x13.pb.UseItemResponse\x12J\n" +
+	"\aUseItem\x12\x12.pb.UseItemRequest\x1a\x13.pb.UseItemResponse\x12>\n" +
+	"\vBuyShopItem\x12\x16.pb.BuyShopItemRequest\x1a\x17.pb.BuyShopItemResponse\x122\n" +
+	"\aGetShop\x12\x12.pb.GetShopRequest\x1a\x13.pb.GetShopResponse\x12>\n" +
+	"\vRefreshShop\x12\x16.pb.RefreshShopRequest\x1a\x17.pb.RefreshShopResponse\x12J\n" +
 	"\x0fGetGachaBanners\x12\x1a.pb.GetGachaBannersRequest\x1a\x1b.pb.GetGachaBannersResponse\x122\n" +
 	"\aDoGacha\x12\x12.pb.DoGachaRequest\x1a\x13.pb.DoGachaResponse\x12>\n" +
 	"\vGetMissions\x12\x16.pb.GetMissionsRequest\x1a\x17.pb.GetMissionsResponse\x12S\n" +
@@ -82,43 +85,49 @@ var file_world_proto_goTypes = []any{
 	(*ValidatePvEResultRequest)(nil),   // 17: pb.ValidatePvEResultRequest
 	(*EquipRequest)(nil),               // 18: pb.EquipRequest
 	(*UseItemRequest)(nil),             // 19: pb.UseItemRequest
-	(*GetGachaBannersRequest)(nil),     // 20: pb.GetGachaBannersRequest
-	(*DoGachaRequest)(nil),             // 21: pb.DoGachaRequest
-	(*GetMissionsRequest)(nil),         // 22: pb.GetMissionsRequest
-	(*GetCompletedStagesRequest)(nil),  // 23: pb.GetCompletedStagesRequest
-	(*GetLeaderboardRequest)(nil),      // 24: pb.GetLeaderboardRequest
-	(*SectInfo)(nil),                   // 25: pb.SectInfo
-	(*EmptyRequest)(nil),               // 26: pb.EmptyRequest
-	(*GetCutsceneRequest)(nil),         // 27: pb.GetCutsceneRequest
-	(*SaveCutsceneRequest)(nil),        // 28: pb.SaveCutsceneRequest
-	(*GetVersionResponse)(nil),         // 29: pb.GetVersionResponse
-	(*GetBaseResponse)(nil),            // 30: pb.GetBaseResponse
-	(*CreatePlayerResponse)(nil),       // 31: pb.CreatePlayerResponse
-	(*GetPlayerProfileResponse)(nil),   // 32: pb.GetPlayerProfileResponse
-	(*UpgradeBuildingResponse)(nil),    // 33: pb.UpgradeBuildingResponse
-	(*SpeedUpBuildingResponse)(nil),    // 34: pb.SpeedUpBuildingResponse
-	(*CollectResourcesResponse)(nil),   // 35: pb.CollectResourcesResponse
-	(*SaveAdminMapResponse)(nil),       // 36: pb.SaveAdminMapResponse
-	(*GetPlayerMapResponse)(nil),       // 37: pb.GetPlayerMapResponse
-	(*SavePlayerMapResponse)(nil),      // 38: pb.SavePlayerMapResponse
-	(*GetHeroesResponse)(nil),          // 39: pb.GetHeroesResponse
-	(*SetFormationResponse)(nil),       // 40: pb.SetFormationResponse
-	(*LevelUpDiscipleResponse)(nil),    // 41: pb.LevelUpDiscipleResponse
-	(*LevelUpHeroResponse)(nil),        // 42: pb.LevelUpHeroResponse
-	(*CheckInDailyResponse)(nil),       // 43: pb.CheckInDailyResponse
-	(*ClaimMissionRewardResponse)(nil), // 44: pb.ClaimMissionRewardResponse
-	(*ValidatePvEResultResponse)(nil),  // 45: pb.ValidatePvEResultResponse
-	(*Inventory)(nil),                  // 46: pb.Inventory
-	(*EquipResponse)(nil),              // 47: pb.EquipResponse
-	(*UseItemResponse)(nil),            // 48: pb.UseItemResponse
-	(*GetGachaBannersResponse)(nil),    // 49: pb.GetGachaBannersResponse
-	(*DoGachaResponse)(nil),            // 50: pb.DoGachaResponse
-	(*GetMissionsResponse)(nil),        // 51: pb.GetMissionsResponse
-	(*GetCompletedStagesResponse)(nil), // 52: pb.GetCompletedStagesResponse
-	(*GetLeaderboardResponse)(nil),     // 53: pb.GetLeaderboardResponse
-	(*BaseResponse)(nil),               // 54: pb.BaseResponse
-	(*ListCutscenesResponse)(nil),      // 55: pb.ListCutscenesResponse
-	(*CutsceneData)(nil),               // 56: pb.CutsceneData
+	(*BuyShopItemRequest)(nil),         // 20: pb.BuyShopItemRequest
+	(*GetShopRequest)(nil),             // 21: pb.GetShopRequest
+	(*RefreshShopRequest)(nil),         // 22: pb.RefreshShopRequest
+	(*GetGachaBannersRequest)(nil),     // 23: pb.GetGachaBannersRequest
+	(*DoGachaRequest)(nil),             // 24: pb.DoGachaRequest
+	(*GetMissionsRequest)(nil),         // 25: pb.GetMissionsRequest
+	(*GetCompletedStagesRequest)(nil),  // 26: pb.GetCompletedStagesRequest
+	(*GetLeaderboardRequest)(nil),      // 27: pb.GetLeaderboardRequest
+	(*SectInfo)(nil),                   // 28: pb.SectInfo
+	(*EmptyRequest)(nil),               // 29: pb.EmptyRequest
+	(*GetCutsceneRequest)(nil),         // 30: pb.GetCutsceneRequest
+	(*SaveCutsceneRequest)(nil),        // 31: pb.SaveCutsceneRequest
+	(*GetVersionResponse)(nil),         // 32: pb.GetVersionResponse
+	(*GetBaseResponse)(nil),            // 33: pb.GetBaseResponse
+	(*CreatePlayerResponse)(nil),       // 34: pb.CreatePlayerResponse
+	(*GetPlayerProfileResponse)(nil),   // 35: pb.GetPlayerProfileResponse
+	(*UpgradeBuildingResponse)(nil),    // 36: pb.UpgradeBuildingResponse
+	(*SpeedUpBuildingResponse)(nil),    // 37: pb.SpeedUpBuildingResponse
+	(*CollectResourcesResponse)(nil),   // 38: pb.CollectResourcesResponse
+	(*SaveAdminMapResponse)(nil),       // 39: pb.SaveAdminMapResponse
+	(*GetPlayerMapResponse)(nil),       // 40: pb.GetPlayerMapResponse
+	(*SavePlayerMapResponse)(nil),      // 41: pb.SavePlayerMapResponse
+	(*GetHeroesResponse)(nil),          // 42: pb.GetHeroesResponse
+	(*SetFormationResponse)(nil),       // 43: pb.SetFormationResponse
+	(*LevelUpDiscipleResponse)(nil),    // 44: pb.LevelUpDiscipleResponse
+	(*LevelUpHeroResponse)(nil),        // 45: pb.LevelUpHeroResponse
+	(*CheckInDailyResponse)(nil),       // 46: pb.CheckInDailyResponse
+	(*ClaimMissionRewardResponse)(nil), // 47: pb.ClaimMissionRewardResponse
+	(*ValidatePvEResultResponse)(nil),  // 48: pb.ValidatePvEResultResponse
+	(*Inventory)(nil),                  // 49: pb.Inventory
+	(*EquipResponse)(nil),              // 50: pb.EquipResponse
+	(*UseItemResponse)(nil),            // 51: pb.UseItemResponse
+	(*BuyShopItemResponse)(nil),        // 52: pb.BuyShopItemResponse
+	(*GetShopResponse)(nil),            // 53: pb.GetShopResponse
+	(*RefreshShopResponse)(nil),        // 54: pb.RefreshShopResponse
+	(*GetGachaBannersResponse)(nil),    // 55: pb.GetGachaBannersResponse
+	(*DoGachaResponse)(nil),            // 56: pb.DoGachaResponse
+	(*GetMissionsResponse)(nil),        // 57: pb.GetMissionsResponse
+	(*GetCompletedStagesResponse)(nil), // 58: pb.GetCompletedStagesResponse
+	(*GetLeaderboardResponse)(nil),     // 59: pb.GetLeaderboardResponse
+	(*BaseResponse)(nil),               // 60: pb.BaseResponse
+	(*ListCutscenesResponse)(nil),      // 61: pb.ListCutscenesResponse
+	(*CutsceneData)(nil),               // 62: pb.CutsceneData
 }
 var file_world_proto_depIdxs = []int32{
 	0,  // 0: pb.GatewayService.GetVersion:input_type -> pb.GetVersionRequest
@@ -142,47 +151,53 @@ var file_world_proto_depIdxs = []int32{
 	4,  // 18: pb.GatewayService.GetInventory:input_type -> pb.GetProfileRequest
 	18, // 19: pb.GatewayService.EquipItem:input_type -> pb.EquipRequest
 	19, // 20: pb.GatewayService.UseItem:input_type -> pb.UseItemRequest
-	20, // 21: pb.GatewayService.GetGachaBanners:input_type -> pb.GetGachaBannersRequest
-	21, // 22: pb.GatewayService.DoGacha:input_type -> pb.DoGachaRequest
-	22, // 23: pb.GatewayService.GetMissions:input_type -> pb.GetMissionsRequest
-	23, // 24: pb.GatewayService.GetCompletedStages:input_type -> pb.GetCompletedStagesRequest
-	24, // 25: pb.GatewayService.GetLeaderboard:input_type -> pb.GetLeaderboardRequest
-	25, // 26: pb.WorldService.InternalSyncSect:input_type -> pb.SectInfo
-	26, // 27: pb.WorldService.ListCutscenes:input_type -> pb.EmptyRequest
-	27, // 28: pb.WorldService.GetCutscene:input_type -> pb.GetCutsceneRequest
-	28, // 29: pb.WorldService.SaveCutscene:input_type -> pb.SaveCutsceneRequest
-	29, // 30: pb.GatewayService.GetVersion:output_type -> pb.GetVersionResponse
-	30, // 31: pb.GatewayService.GetBase:output_type -> pb.GetBaseResponse
-	31, // 32: pb.GatewayService.CreatePlayer:output_type -> pb.CreatePlayerResponse
-	32, // 33: pb.GatewayService.GetPlayerProfile:output_type -> pb.GetPlayerProfileResponse
-	25, // 34: pb.GatewayService.GetSectInfo:output_type -> pb.SectInfo
-	33, // 35: pb.GatewayService.UpgradeBuilding:output_type -> pb.UpgradeBuildingResponse
-	34, // 36: pb.GatewayService.SpeedUpBuilding:output_type -> pb.SpeedUpBuildingResponse
-	35, // 37: pb.GatewayService.CollectResources:output_type -> pb.CollectResourcesResponse
-	36, // 38: pb.GatewayService.SaveAdminMap:output_type -> pb.SaveAdminMapResponse
-	37, // 39: pb.GatewayService.GetPlayerMap:output_type -> pb.GetPlayerMapResponse
-	38, // 40: pb.GatewayService.SavePlayerMap:output_type -> pb.SavePlayerMapResponse
-	39, // 41: pb.GatewayService.GetHeroes:output_type -> pb.GetHeroesResponse
-	40, // 42: pb.GatewayService.SetFormation:output_type -> pb.SetFormationResponse
-	41, // 43: pb.GatewayService.LevelUpDisciple:output_type -> pb.LevelUpDiscipleResponse
-	42, // 44: pb.GatewayService.LevelUpHero:output_type -> pb.LevelUpHeroResponse
-	43, // 45: pb.GatewayService.CheckInDaily:output_type -> pb.CheckInDailyResponse
-	44, // 46: pb.GatewayService.ClaimMissionReward:output_type -> pb.ClaimMissionRewardResponse
-	45, // 47: pb.GatewayService.ValidatePvEResult:output_type -> pb.ValidatePvEResultResponse
-	46, // 48: pb.GatewayService.GetInventory:output_type -> pb.Inventory
-	47, // 49: pb.GatewayService.EquipItem:output_type -> pb.EquipResponse
-	48, // 50: pb.GatewayService.UseItem:output_type -> pb.UseItemResponse
-	49, // 51: pb.GatewayService.GetGachaBanners:output_type -> pb.GetGachaBannersResponse
-	50, // 52: pb.GatewayService.DoGacha:output_type -> pb.DoGachaResponse
-	51, // 53: pb.GatewayService.GetMissions:output_type -> pb.GetMissionsResponse
-	52, // 54: pb.GatewayService.GetCompletedStages:output_type -> pb.GetCompletedStagesResponse
-	53, // 55: pb.GatewayService.GetLeaderboard:output_type -> pb.GetLeaderboardResponse
-	54, // 56: pb.WorldService.InternalSyncSect:output_type -> pb.BaseResponse
-	55, // 57: pb.WorldService.ListCutscenes:output_type -> pb.ListCutscenesResponse
-	56, // 58: pb.WorldService.GetCutscene:output_type -> pb.CutsceneData
-	54, // 59: pb.WorldService.SaveCutscene:output_type -> pb.BaseResponse
-	30, // [30:60] is the sub-list for method output_type
-	0,  // [0:30] is the sub-list for method input_type
+	20, // 21: pb.GatewayService.BuyShopItem:input_type -> pb.BuyShopItemRequest
+	21, // 22: pb.GatewayService.GetShop:input_type -> pb.GetShopRequest
+	22, // 23: pb.GatewayService.RefreshShop:input_type -> pb.RefreshShopRequest
+	23, // 24: pb.GatewayService.GetGachaBanners:input_type -> pb.GetGachaBannersRequest
+	24, // 25: pb.GatewayService.DoGacha:input_type -> pb.DoGachaRequest
+	25, // 26: pb.GatewayService.GetMissions:input_type -> pb.GetMissionsRequest
+	26, // 27: pb.GatewayService.GetCompletedStages:input_type -> pb.GetCompletedStagesRequest
+	27, // 28: pb.GatewayService.GetLeaderboard:input_type -> pb.GetLeaderboardRequest
+	28, // 29: pb.WorldService.InternalSyncSect:input_type -> pb.SectInfo
+	29, // 30: pb.WorldService.ListCutscenes:input_type -> pb.EmptyRequest
+	30, // 31: pb.WorldService.GetCutscene:input_type -> pb.GetCutsceneRequest
+	31, // 32: pb.WorldService.SaveCutscene:input_type -> pb.SaveCutsceneRequest
+	32, // 33: pb.GatewayService.GetVersion:output_type -> pb.GetVersionResponse
+	33, // 34: pb.GatewayService.GetBase:output_type -> pb.GetBaseResponse
+	34, // 35: pb.GatewayService.CreatePlayer:output_type -> pb.CreatePlayerResponse
+	35, // 36: pb.GatewayService.GetPlayerProfile:output_type -> pb.GetPlayerProfileResponse
+	28, // 37: pb.GatewayService.GetSectInfo:output_type -> pb.SectInfo
+	36, // 38: pb.GatewayService.UpgradeBuilding:output_type -> pb.UpgradeBuildingResponse
+	37, // 39: pb.GatewayService.SpeedUpBuilding:output_type -> pb.SpeedUpBuildingResponse
+	38, // 40: pb.GatewayService.CollectResources:output_type -> pb.CollectResourcesResponse
+	39, // 41: pb.GatewayService.SaveAdminMap:output_type -> pb.SaveAdminMapResponse
+	40, // 42: pb.GatewayService.GetPlayerMap:output_type -> pb.GetPlayerMapResponse
+	41, // 43: pb.GatewayService.SavePlayerMap:output_type -> pb.SavePlayerMapResponse
+	42, // 44: pb.GatewayService.GetHeroes:output_type -> pb.GetHeroesResponse
+	43, // 45: pb.GatewayService.SetFormation:output_type -> pb.SetFormationResponse
+	44, // 46: pb.GatewayService.LevelUpDisciple:output_type -> pb.LevelUpDiscipleResponse
+	45, // 47: pb.GatewayService.LevelUpHero:output_type -> pb.LevelUpHeroResponse
+	46, // 48: pb.GatewayService.CheckInDaily:output_type -> pb.CheckInDailyResponse
+	47, // 49: pb.GatewayService.ClaimMissionReward:output_type -> pb.ClaimMissionRewardResponse
+	48, // 50: pb.GatewayService.ValidatePvEResult:output_type -> pb.ValidatePvEResultResponse
+	49, // 51: pb.GatewayService.GetInventory:output_type -> pb.Inventory
+	50, // 52: pb.GatewayService.EquipItem:output_type -> pb.EquipResponse
+	51, // 53: pb.GatewayService.UseItem:output_type -> pb.UseItemResponse
+	52, // 54: pb.GatewayService.BuyShopItem:output_type -> pb.BuyShopItemResponse
+	53, // 55: pb.GatewayService.GetShop:output_type -> pb.GetShopResponse
+	54, // 56: pb.GatewayService.RefreshShop:output_type -> pb.RefreshShopResponse
+	55, // 57: pb.GatewayService.GetGachaBanners:output_type -> pb.GetGachaBannersResponse
+	56, // 58: pb.GatewayService.DoGacha:output_type -> pb.DoGachaResponse
+	57, // 59: pb.GatewayService.GetMissions:output_type -> pb.GetMissionsResponse
+	58, // 60: pb.GatewayService.GetCompletedStages:output_type -> pb.GetCompletedStagesResponse
+	59, // 61: pb.GatewayService.GetLeaderboard:output_type -> pb.GetLeaderboardResponse
+	60, // 62: pb.WorldService.InternalSyncSect:output_type -> pb.BaseResponse
+	61, // 63: pb.WorldService.ListCutscenes:output_type -> pb.ListCutscenesResponse
+	62, // 64: pb.WorldService.GetCutscene:output_type -> pb.CutsceneData
+	60, // 65: pb.WorldService.SaveCutscene:output_type -> pb.BaseResponse
+	33, // [33:66] is the sub-list for method output_type
+	0,  // [0:33] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

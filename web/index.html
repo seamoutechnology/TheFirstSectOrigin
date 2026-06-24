@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The First Sect Origin | Nhất Đại Tông Môn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,24 +20,26 @@
                 <p>Khám phá thế giới tu tiên huyền ảo, xây dựng tông môn của riêng bạn và trở thành đệ nhất thiên hạ.</p>
                 <div class="hero-btns">
                     <button class="btn btn-primary" onclick="showLogin()">Chơi Ngay</button>
-                    <a href="#features" class="btn" style="color: white; border: 1px solid white; margin-left: 10px;">Khám Phá</a>
+                    <a href="#features" class="btn btn-outline">Khám Phá</a>
                 </div>
             </div>
         </header>
 
-        <section id="features" style="padding: 100px 20px; text-align: center;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Tính Năng Đặc Sắc</h2>
-            <div class="grid-3" style="max-width: 1200px; margin: 0 auto;">
-                <div class="card">
-                    <img src="assets/sect_leader.png" style="width: 100%; border-radius: 10px; margin-bottom: 20px;" alt="Sect Leader">
+        <section id="features">
+            <h2 class="features-title">Tính Năng Đặc Sắc</h2>
+            <div class="grid-3">
+                <div class="feature-card">
+                    <i class="fas fa-gavel" style="font-size: 2rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>Xây Dựng Tông Môn</h3>
                     <p>Quản lý tài nguyên, nâng cấp công trình và đào tạo đệ tử tài năng.</p>
                 </div>
-                <div class="card">
+                <div class="feature-card">
+                    <i class="fas fa-gem" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;"></i>
                     <h3>Hệ Thống Gacha</h3>
                     <p>Triệu hồi các anh hùng huyền thoại với sức mạnh vô song.</p>
                 </div>
-                <div class="card">
+                <div class="feature-card">
+                    <i class="fas fa-chess" style="font-size: 2rem; color: var(--info); margin-bottom: 20px;"></i>
                     <h3>Chiến Thuật Đỉnh Cao</h3>
                     <p>Sắp xếp đội hình, khắc chế hệ tộc và chinh phục các thử thách.</p>
                 </div>
@@ -48,44 +52,74 @@
         <aside class="sidebar">
             <div class="sidebar-brand">SECT ORIGIN</div>
             <nav>
-                <a href="#" class="nav-item active" onclick="showTab('overview')">Tổng Quan</a>
-                <a href="#" class="nav-item" onclick="showTab('recharge')">Nạp Thẻ</a>
-                <a href="#" class="nav-item" onclick="showTab('daily')"><i class="fas fa-calendar-check"></i> Điểm Danh</a>
-                <a href="#" class="nav-item" onclick="showTab('disciples')"><i class="fas fa-users"></i> Đệ Tử</a>
-                <a href="#" class="nav-item" onclick="showTab('account')"><i class="fas fa-user-cog"></i> Tài Khoản</a>
+                <a href="#" class="nav-item active" id="btn-tab-overview" onclick="showTab('overview')">
+                    <i class="fas fa-chart-pie"></i> Tổng Quan
+                </a>
+                <a href="#" class="nav-item" id="btn-tab-recharge" onclick="showTab('recharge')">
+                    <i class="fas fa-credit-card"></i> Nạp Thẻ
+                </a>
+                <a href="#" class="nav-item" id="btn-tab-daily" onclick="showTab('daily')">
+                    <i class="fas fa-calendar-check"></i> Điểm Danh
+                </a>
+                <a href="#" class="nav-item" id="btn-tab-disciples" onclick="showTab('disciples')">
+                    <i class="fas fa-users"></i> Đệ Tử
+                </a>
+                <a href="#" class="nav-item" id="btn-tab-account" onclick="showTab('account')">
+                    <i class="fas fa-user-cog"></i> Tài Khoản
+                </a>
             </nav>
-            <div style="margin-top: auto; padding: 20px;">
-                <button class="btn btn-primary" style="width: 100%;" onclick="logout()">Đăng Xuất</button>
+            <div class="sidebar-footer">
+                <button class="btn btn-primary" onclick="logout()">Đăng Xuất</button>
             </div>
         </aside>
 
         <main class="main-content">
+            <!-- Header bar with User Profile -->
+            <div class="welcome-bar">
+                <h2>Chào mừng, <span id="nickname-display">Chưởng Môn</span>!</h2>
+                <div class="user-profile-badge">
+                    <img id="avatar-display" src="" alt="Avatar" />
+                    <span id="username-display">Account</span>
+                </div>
+            </div>
+
             <!-- Overview Tab -->
             <div id="tab-overview" class="tab-content">
-                <div style="display: flex; align-items: center; margin-bottom: 30px;">
-                    <img id="avatar-display" src="" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--accent); margin-right: 15px; background: #222;" alt="Avatar" />
-                    <h2>Chào mừng, <span id="nickname-display">Chưởng Môn</span>! (<span id="username-display"></span>)</h2>
-                </div>
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>Vàng</h3>
-                        <p id="gold-display" style="font-size: 2rem; color: var(--accent);">0</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Bạc (Vàng)</h3>
+                            <div id="gold-display" class="stat-value">0</div>
+                        </div>
+                        <div class="stat-icon gold">
+                            <i class="fas fa-coins"></i>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Kim Cương</h3>
-                        <p id="diamond-display" style="font-size: 2rem; color: var(--cyan);">0</p>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Kim Cương</h3>
+                            <div id="diamond-display" class="stat-value">0</div>
+                        </div>
+                        <div class="stat-icon diamond">
+                            <i class="fas fa-gem"></i>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Cấp Độ</h3>
-                        <p id="level-display" style="font-size: 2rem;">Level 1</p>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3>Cấp Độ</h3>
+                            <div id="level-display" class="stat-value">Lv 1</div>
+                        </div>
+                        <div class="stat-icon level">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Recharge Tab -->
             <div id="tab-recharge" class="tab-content" style="display: none;">
-                <h2>Nạp Thẻ Cào</h2>
-                <div class="card" style="max-width: 500px;">
+                <div class="panel-card">
+                    <h2>Nạp Thẻ Cào</h2>
                     <div class="form-group">
                         <label>Loại Thẻ</label>
                         <select id="card-type">
@@ -118,35 +152,37 @@
 
             <!-- Daily Tab -->
             <div id="tab-daily" class="tab-content" style="display: none;">
-                <h2>Điểm Danh Hằng Ngày</h2>
-                <p style="margin-bottom: 20px; color: var(--text-muted);">Điểm danh liên tục 7 ngày để nhận quà lớn!</p>
-                <div class="card">
+                <div class="panel-card">
+                    <h2>Điểm Danh Hằng Ngày</h2>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">Điểm danh liên tục 7 ngày để nhận quà lớn!</p>
                     <div class="daily-grid">
-                        <div class="daily-day" onclick="claimDaily(1)">Ngày 1<span>+100 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(1)">Ngày 1<span>+100 KC</span></div>
                         <div class="daily-day" onclick="claimDaily(2)">Ngày 2<span>+500 Vàng</span></div>
-                        <div class="daily-day" onclick="claimDaily(3)">Ngày 3<span>+200 Kim Cương</span></div>
-                        <div class="daily-day" onclick="claimDaily(4)">Ngày 4<span>+50 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(3)">Ngày 3<span>+200 KC</span></div>
+                        <div class="daily-day" onclick="claimDaily(4)">Ngày 4<span>+50 KC</span></div>
                         <div class="daily-day" onclick="claimDaily(5)">Ngày 5<span>+1000 Vàng</span></div>
-                        <div class="daily-day" onclick="claimDaily(6)">Ngày 6<span>+300 Kim Cương</span></div>
-                        <div class="daily-day" onclick="claimDaily(7)">Ngày 7<span>+1000 Kim Cương</span></div>
+                        <div class="daily-day" onclick="claimDaily(6)">Ngày 6<span>+300 KC</span></div>
+                        <div class="daily-day" onclick="claimDaily(7)">Ngày 7<span>+1000 KC</span></div>
                     </div>
                 </div>
             </div>
 
             <!-- Disciples Tab -->
             <div id="tab-disciples" class="tab-content" style="display: none;">
-                <h2>Danh Sách Đệ Tử</h2>
-                <div id="disciples-list" class="grid-3">
-                    <!-- Sẽ được render bằng JS -->
+                <div class="panel-card">
+                    <h2>Danh Sách Đệ Tử Tông Môn</h2>
+                    <div id="disciples-list" class="disciples-list">
+                        <!-- Sẽ được render bằng JS -->
+                    </div>
                 </div>
             </div>
 
             <!-- Account Tab -->
             <div id="tab-account" class="tab-content" style="display: none;">
-                <h2>Quản Lý Tài Khoản</h2>
-                <div class="card" style="max-width: 500px;">
+                <div class="panel-card">
+                    <h2>Quản Lý Tài Khoản</h2>
                     <h3>Đổi Mật Khẩu</h3>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 15px;">
                         <label>Mật Khẩu Hiện Tại</label>
                         <input type="password" id="current-password">
                     </div>
@@ -167,7 +203,7 @@
     <!-- Login Modal -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Đăng Nhập</h2>
+            <h2>Đăng Nhập</h2>
             <div class="form-group">
                 <label>Tên Đăng Nhập</label>
                 <input type="text" id="login-username">
@@ -177,11 +213,9 @@
                 <input type="password" id="login-password">
             </div>
             <button class="btn btn-primary" style="width: 100%;" onclick="login()">Vào Game</button>
-            <p style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--text-muted);">Chưa có tài khoản? <a href="#" style="color: var(--accent);">Đăng ký ngay</a></p>
+            <p style="margin-top: 20px; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">Chưa có tài khoản? <a href="#" style="color: var(--primary); font-weight: 600;">Đăng ký ngay</a></p>
         </div>
     </div>
-
-
 
     <!-- Floating Interaction Circle -->
     <div id="floating-assistant" class="floating-circle" onclick="toggleAssistant()">

@@ -15,21 +15,23 @@ namespace GameClient.Gameplay.BaseBuilder
 
             SetupCamera();
 
-            // ⏳ Chờ 1 frame để RuntimeMapRenderer.Awake() chạy xong và
-            // RuntimeMapRenderer.Instance được set trước khi LoadBaseDataAsync()
-            // gọi ImportLayoutFromModel() → RenderMapLayers().
-            // Nếu thiếu bước này, Instance vẫn null → map bị trắng.
+            // ⏳ Chờ 1 frame để RuntimeMapRenderer.Awake() chạy xong
             await Task.Yield();
+
+            // ⚡ Khởi tạo quá trình check thông tin người chơi song song để hiển thị UI tạo nhân vật ngay lập tức nếu cần
+            _ = CheckPlayerAndOpenCreateCharPanelAsync();
 
             Debug.Log("[LocalBase] Đang tải Map...");
             await LoadBaseDataAsync();
-
 
             if (GameClient.UI.SceneTransitionManager.Instance != null)
             {
                 await GameClient.UI.SceneTransitionManager.Instance.ExitTransitionAsync();
             }
+        }
 
+        private async Task CheckPlayerAndOpenCreateCharPanelAsync()
+        {
             try
             {
                 var profileRes = await NetworkManager.Instance.GatewayClient.GetPlayerProfileAsync(new GameClient.Network.Pb.GetPlayerProfileRequest(), NetworkManager.DefaultCallOptions());
@@ -39,12 +41,11 @@ namespace GameClient.Gameplay.BaseBuilder
                     GameContext.HasCharacter = true;
                 }
 
-                // Tải danh sách các ải đã vượt từ server khi khởi động game
+                // Tải danh sách các ải đã vượt từ server
                 var stagesRes = await GameClient.Network.Api.SectBuildingApi.GetCompletedStagesAsync();
                 if (stagesRes != null && stagesRes.Base != null && stagesRes.Base.Code == 0)
                 {
                     GameManager.Instance.SetCompletedStages(stagesRes.StageIds);
-                    Debug.Log($"[LocalBase] Đã đồng bộ {stagesRes.StageIds.Count} ải đã vượt từ server.");
                 }
             }
             catch (System.Exception ex)

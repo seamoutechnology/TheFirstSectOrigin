@@ -1,0 +1,16 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Biểu đồ use case tổng quát của hệ thống}}{5}{figure.caption.8}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Biểu đồ gói UML thể hiện sự phụ thuộc và giao tiếp trong hệ thống}}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Biểu đồ quan hệ giữa các thành phần trong gói World Server}}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Biểu đồ trình tự chức năng Đăng ký tài khoản}}{25}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Biểu đồ trình tự chức năng Thu thập tài nguyên công trình}}{26}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Sơ đồ thực thể liên kết cơ sở dữ liệu (ERD) toàn hệ thống}}{27}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Mô hình triển khai máy chủ vi dịch vụ sử dụng Docker và Nginx}}{35}{figure.caption.36}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsfinish 
+\contentsfinish 

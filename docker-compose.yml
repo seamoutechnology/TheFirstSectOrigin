@@ -87,13 +87,17 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRE_HOURS: ${JWT_EXPIRE_HOURS}
       SERVER_PORT: ${LOGIN_SERVER_PORT}
+      ADMIN_SECRET: ${ADMIN_SECRET}
     ports:
       - "${LOGIN_SERVER_PORT}:${LOGIN_SERVER_PORT}"
+      - "8082:8082"
     depends_on:
       postgres_global:
         condition: service_healthy
       redis:
         condition: service_healthy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     profiles:
       - server
@@ -119,6 +123,9 @@ services:
       WORLD_SERVER_PORT: ${WORLD_SERVER_PORT}
       COMBAT_SERVER_HOST: combat_server
       COMBAT_SERVER_PORT: ${COMBAT_SERVER_PORT}
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+      RATE_LIMIT_RPS: ${RATE_LIMIT_RPS:-20}
+      RATE_LIMIT_BURST: ${RATE_LIMIT_BURST:-50}
     ports:
       - "${GATEWAY_PORT}:${GATEWAY_PORT}"
       - "8081:8080"
@@ -237,185 +244,6 @@ services:
     profiles:
       - server
 
-  # ============================================================
-  # GATEWAY SERVER (Zone 2)
-  # ============================================================
-  gateway_2:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_gateway_2
-    command: ["./bin/gateway"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      SERVER_PORT: 50062
-      WORLD_SERVER_HOST: world_server_2
-      WORLD_SERVER_PORT: 50063
-      COMBAT_SERVER_HOST: combat_server_2
-      COMBAT_SERVER_PORT: 50064
-    ports:
-      - "50062:50062"
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
-
-  # ============================================================
-  # WORLD SERVER (Zone 2)
-  # ============================================================
-  world_server_2:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_world_server_2
-    command: ["./bin/world-server"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      GAME_DB_HOST: postgres_game
-      GAME_DB_PORT: ${GAME_DB_PORT}
-      GAME_DB_USER: ${GAME_DB_USER}
-      GAME_DB_PASSWORD: ${GAME_DB_PASSWORD}
-      GAME_DB_NAME: ${GAME_DB_NAME}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      SERVER_ID: zone2
-      SERVER_PORT: 50063
-      COMBAT_SERVER_HOST: combat_server_2
-      COMBAT_SERVER_PORT: 50064
-    ports:
-      - "50063:50063"
-    depends_on:
-      postgres_game:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
-
-  # ============================================================
-  # COMBAT SERVER (Zone 2)
-  # ============================================================
-  combat_server_2:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_combat_server_2
-    command: ["./bin/combat-server"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      COMBAT_SERVER_PORT: 50064
-    ports:
-      - "50064:50064"
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
-
-  # ============================================================
-  # GATEWAY SERVER (Zone 3)
-  # ============================================================
-  gateway_3:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_gateway_3
-    command: ["./bin/gateway"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      SERVER_PORT: 50072
-      WORLD_SERVER_HOST: world_server_3
-      WORLD_SERVER_PORT: 50073
-      COMBAT_SERVER_HOST: combat_server_3
-      COMBAT_SERVER_PORT: 50074
-    ports:
-      - "50072:50072"
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
-
-  # ============================================================
-  # WORLD SERVER (Zone 3)
-  # ===================================================hi =========
-  world_server_3:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_world_server_3
-    command: ["./bin/world-server"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      GAME_DB_HOST: postgres_game
-      GAME_DB_PORT: ${GAME_DB_PORT}
-      GAME_DB_USER: ${GAME_DB_USER}
-      GAME_DB_PASSWORD: ${GAME_DB_PASSWORD}
-      GAME_DB_NAME: ${GAME_DB_NAME}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      SERVER_ID: zone3
-      SERVER_PORT: 50073
-      COMBAT_SERVER_HOST: combat_server_3
-      COMBAT_SERVER_PORT: 50074
-    ports:
-      - "50073:50073"
-    depends_on:
-      postgres_game:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
-
-  # ============================================================
-  # COMBAT SERVER (Zone 3)
-  # ============================================================
-  combat_server_3:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      target: ${APP_ENV}
-    container_name: ${COMPOSE_PROJECT_NAME}_combat_server_3
-    command: ["./bin/combat-server"]
-    environment:
-      APP_ENV: ${APP_ENV}
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      COMBAT_SERVER_PORT: 50074
-    ports:
-      - "50074:50074"
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    profiles:
-      - server
 
   # ============================================================
   # OBSERVABILITY (Prometheus & Grafana)

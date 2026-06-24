@@ -46,6 +46,10 @@ func (m *MockPlayerRepo) SetFormation(ctx context.Context, playerID int64, slots
 	return nil
 }
 
+func (m *MockPlayerRepo) GetFormation(ctx context.Context, playerID int64) (map[int32]int64, error) {
+	return nil, nil
+}
+
 func (m *MockPlayerRepo) AddHero(ctx context.Context, playerID int64, heroCode string) (*repository.PlayerHero, error) {
 	return &repository.PlayerHero{
 		ID:        1,

@@ -41,6 +41,7 @@ message Hero {
   int32 star = 6; // C# đang tìm .Star
   repeated string traits = 7;
   repeated HeroSkill skills = 8;
+  string element = 9;
 }
 
 message FormationSlot {
@@ -64,6 +65,7 @@ message GetHeroesRequest {}
 message GetHeroesResponse {
   BaseResponse base = 1;      // C# đang tìm .Base
   repeated Hero heroes = 2;   // C# đang tìm .Heroes
+  repeated FormationSlot formation = 3;
 }
 
 message SetFormationRequest {

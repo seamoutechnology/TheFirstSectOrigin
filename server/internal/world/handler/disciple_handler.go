@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"strings"
 
 	"go.uber.org/zap"
 	"server/internal/world/repository"
@@ -88,20 +89,31 @@ func (h *WorldHandler) GetHeroes(ctx context.Context, req *pb.GetHeroesRequest) 
 		actualATK := hero.BaseATK + hero.Level*10
 		actualDEF := hero.BaseDEF + hero.Level*5
 		pbHeroes = append(pbHeroes, &pb.Hero{
-			Id:     hero.ID,
-			Name:   hero.Name,
-			Level:  hero.Level,
-			Rarity: hero.Rarity,
-			Power:  int64(actualATK*10 + actualHP + actualDEF*5),
-			Star:   hero.Star,
-			Traits: traitsList,
-			Skills: pbSkills,
+			Id:      hero.ID,
+			Name:    hero.Name,
+			Level:   hero.Level,
+			Rarity:  hero.Rarity,
+			Power:   int64(actualATK*10 + actualHP + actualDEF*5),
+			Star:    hero.Star,
+			Traits:  traitsList,
+			Skills:  pbSkills,
+			Element: strings.ToUpper(hero.Element),
+		})
+	}
+
+	formationMap, _, _ := h.svc.GetFormation(ctx, userID)
+	pbFormation := make([]*pb.FormationSlot, 0, len(formationMap))
+	for pos, heroID := range formationMap {
+		pbFormation = append(pbFormation, &pb.FormationSlot{
+			Position:     pos,
+			PlayerHeroId: heroID,
 		})
 	}
 
 	return &pb.GetHeroesResponse{
-		Base:   &pb.BaseResponse{Code: 0, Message: "msg_success"},
-		Heroes: pbHeroes,
+		Base:      &pb.BaseResponse{Code: 0, Message: "msg_success"},
+		Heroes:    pbHeroes,
+		Formation: pbFormation,
 	}, nil
 }
 
@@ -178,14 +190,15 @@ func (h *WorldHandler) LevelUpHero(ctx context.Context, req *pb.LevelUpHeroReque
 	return &pb.LevelUpHeroResponse{
 		Base: &pb.BaseResponse{Code: 0, Message: "msg_levelup_hero_success"},
 		Hero: &pb.Hero{
-			Id:     hero.ID,
-			Name:   hero.Name,
-			Level:  hero.Level,
-			Rarity: hero.Rarity,
-			Power:  int64(actualATK*10 + actualHP + actualDEF*5),
-			Star:   hero.Star,
-			Traits: traitsList,
-			Skills: pbSkills,
+			Id:      hero.ID,
+			Name:    hero.Name,
+			Level:   hero.Level,
+			Rarity:  hero.Rarity,
+			Power:   int64(actualATK*10 + actualHP + actualDEF*5),
+			Star:    hero.Star,
+			Traits:  traitsList,
+			Skills:  pbSkills,
+			Element: strings.ToUpper(hero.Element),
 		},
 	}, nil
 }

@@ -12,4 +12,7 @@ type IUserRepository interface {
 
 type IZoneRepository interface {
 	FindActive(ctx context.Context) ([]*Zone, error)
+	UpdateMetrics(ctx context.Context, zoneID int, cpu, ram float64, players int) error
+	CreateZone(ctx context.Context, name, status, gatewayURL string) error
+	GetCount(ctx context.Context) (int, error)
 }

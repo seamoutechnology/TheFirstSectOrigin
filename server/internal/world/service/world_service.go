@@ -456,6 +456,18 @@ func (s *WorldService) GetHeroes(ctx context.Context, userID int64) ([]*reposito
 	return heroes, ErrCodeSuccess, ""
 }
 
+func (s *WorldService) GetFormation(ctx context.Context, userID int64) (map[int32]int64, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, code, msg
+	}
+	formation, err := s.repo.GetFormation(ctx, player.ID)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+	return formation, ErrCodeSuccess, ""
+}
+
 func (s *WorldService) SetFormation(ctx context.Context, userID int64, slots map[int32]int64) (int32, string) {
 	player, code, msg := s.GetPlayerProfile(ctx, userID)
 	if code != ErrCodeSuccess {
@@ -946,14 +958,235 @@ func (s *WorldService) UseItem(ctx context.Context, userID int64, req *pb.UseIte
 		return ErrCodeInternal, "Loại vật phẩm không hỗ trợ sử dụng trực tiếp: " + useType
 	}
 
-	// 5. Run DB Transaction
+
+
+	// 5. Execute Transaction
 	err = s.repo.UseItemTransaction(ctx, player.ID, req.ItemId, req.Quantity, useType, codeParam, valueParam)
 	if err != nil {
-		return ErrCodeInternal, "Lỗi giao dịch sử dụng vật phẩm: " + err.Error()
+		return ErrCodeInternal, "Lỗi thực hiện sử dụng vật phẩm: " + err.Error()
 	}
 
-	return ErrCodeSuccess, "msg_use_item_success"
+	return ErrCodeSuccess, "Sử dụng vật phẩm thành công"
 }
+
+func (s *WorldService) BuyShopItem(ctx context.Context, userID int64, req *pb.BuyShopItemRequest) ([]*pb.Item, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, code, msg
+	}
+
+	if req.Quantity <= 0 {
+		return nil, ErrCodeInternal, "Số lượng không hợp lệ"
+	}
+
+	// Run advanced BuyPlayerShopItemTransaction
+	updatedItems, err := s.repo.BuyPlayerShopItemTransaction(ctx, player.ID, req.InstanceId, req.Quantity)
+	if err != nil {
+		return nil, ErrCodeInternal, err.Error()
+	}
+
+	pbItems := make([]*pb.Item, 0, len(updatedItems))
+	for _, item := range updatedItems {
+		pbItems = append(pbItems, &pb.Item{
+			Id:       item.ID,
+			ItemCode: item.ItemCode,
+			Quantity: item.Quantity,
+		})
+	}
+
+	return pbItems, ErrCodeSuccess, "msg_buy_shop_item_success"
+}
+
+func (s *WorldService) GetShop(ctx context.Context, userID int64, shopType string) ([]*pb.ShopItemInstance, int64, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, 0, code, msg
+	}
+
+	instances, nextRefresh, err := s.repo.GetPlayerShopItems(ctx, player.ID, shopType)
+	if err != nil {
+		return nil, 0, ErrCodeInternal, err.Error()
+	}
+
+	// Auto refresh if expired or no active items
+	if len(instances) == 0 || time.Now().After(nextRefresh) {
+		return s.RefreshShopInternal(ctx, player.ID, shopType, false)
+	}
+
+	return s.toProtoShopInstances(instances), nextRefresh.Unix(), ErrCodeSuccess, "msg_get_shop_success"
+}
+
+func (s *WorldService) RefreshShop(ctx context.Context, userID int64, shopType string) ([]*pb.ShopItemInstance, int64, int32, string) {
+	player, code, msg := s.GetPlayerProfile(ctx, userID)
+	if code != ErrCodeSuccess {
+		return nil, 0, code, msg
+	}
+
+	// Manual refresh cost evaluation: Check for 'shop_reset_ticket' -> fallback 50 Diamond
+	inv, err := s.repo.GetPlayerInventory(ctx, player.ID)
+	hasTicket := false
+	var ticketID int64
+	if err == nil {
+		for _, item := range inv {
+			if item.ItemCode == "shop_reset_ticket" && item.Quantity > 0 {
+				hasTicket = true
+				ticketID = item.ID
+				break
+			}
+		}
+	}
+
+	if hasTicket {
+		err = s.repo.UseItemTransaction(ctx, player.ID, ticketID, 1, "CONSUMABLE", "shop_reset_ticket", 0)
+		if err != nil {
+			return nil, 0, ErrCodeInternal, "Lỗi trừ vé làm mới: " + err.Error()
+		}
+	} else {
+		if player.Diamond < 50 {
+			return nil, 0, ErrCodeNotEnough, "Không đủ Kim Cương để làm mới"
+		}
+		_, err = s.repo.UpdateResources(ctx, player.ID, 0, -50)
+		if err != nil {
+			return nil, 0, ErrCodeInternal, "Lỗi trừ Kim Cương: " + err.Error()
+		}
+	}
+
+	return s.RefreshShopInternal(ctx, player.ID, shopType, true)
+}
+
+func (s *WorldService) RefreshShopInternal(ctx context.Context, playerID int64, shopType string, isManual bool) ([]*pb.ShopItemInstance, int64, int32, string) {
+	configs, err := s.repo.GetShopItemsByType(ctx, shopType)
+	if err != nil {
+		return nil, 0, ErrCodeInternal, err.Error()
+	}
+
+	if len(configs) == 0 {
+		return nil, 0, ErrCodeNotFound, "Cửa hàng không có cấu hình sản phẩm nào"
+	}
+
+	// Custom deterministic shuffle based on timestamp
+	importRand := func(n int) []int {
+		r := make([]int, n)
+		for i := range r {
+			r[i] = i
+		}
+		timeSeed := time.Now().UnixNano()
+		for i := n - 1; i > 0; i-- {
+			j := int(timeSeed % int64(i+1))
+			if j < 0 {
+				j = -j
+			}
+			r[i], r[j] = r[j], r[i]
+		}
+		return r
+	}
+
+	chosenIndices := importRand(len(configs))
+	limit := 4
+	if len(configs) < limit {
+		limit = len(configs)
+	}
+
+	var newInstances []*repository.PlayerShopItemInstance
+	for i := 0; i < limit; i++ {
+		cfg := configs[chosenIndices[i]]
+
+		var origCosts []repository.ShopCost
+		_ = json.Unmarshal([]byte(cfg.OriginalPrice), &origCosts)
+
+		discountPct := int32(0)
+		if shopType == "daily" && cfg.IsDiscountable {
+			discounts := []int32{0, 0, 10, 20, 30, 50}
+			timeSeed := time.Now().UnixNano() + int64(i*99)
+			if timeSeed < 0 {
+				timeSeed = -timeSeed
+			}
+			discountPct = discounts[int(timeSeed%int64(len(discounts)))]
+		}
+
+		var finalCosts []repository.ShopCost
+		for _, cost := range origCosts {
+			discountedAmt := cost.Amount
+			if discountPct > 0 {
+				discountedAmt = cost.Amount - (cost.Amount * discountPct / 100)
+				if discountedAmt <= 0 {
+					discountedAmt = 1
+				}
+			}
+			finalCosts = append(finalCosts, repository.ShopCost{
+				ItemCode: cost.ItemCode,
+				Amount:   discountedAmt,
+			})
+		}
+
+		finalPriceBytes, _ := json.Marshal(finalCosts)
+
+		newInstances = append(newInstances, &repository.PlayerShopItemInstance{
+			PlayerID:    playerID,
+			ShopType:    shopType,
+			ShopItemID:  cfg.ShopItemID,
+			ItemCode:    cfg.ItemCode,
+			Amount:      cfg.Amount,
+			FinalPrice:  string(finalPriceBytes),
+			DiscountPct: discountPct,
+			IsBought:    false,
+		})
+	}
+
+	nextRefresh := time.Now().Add(24 * time.Hour)
+	err = s.repo.SavePlayerShopItems(ctx, playerID, shopType, newInstances, nextRefresh)
+	if err != nil {
+		return nil, 0, ErrCodeInternal, err.Error()
+	}
+
+	dbInstances, _, err := s.repo.GetPlayerShopItems(ctx, playerID, shopType)
+	if err != nil {
+		return nil, 0, ErrCodeInternal, err.Error()
+	}
+
+	return s.toProtoShopInstances(dbInstances), nextRefresh.Unix(), ErrCodeSuccess, "msg_shop_refreshed_success"
+}
+
+func (s *WorldService) toProtoShopInstances(list []*repository.PlayerShopItemInstance) []*pb.ShopItemInstance {
+	var pbList []*pb.ShopItemInstance
+	for _, inst := range list {
+		var costs []repository.ShopCost
+		_ = json.Unmarshal([]byte(inst.FinalPrice), &costs)
+
+		var pbCosts []*pb.ShopCost
+		for _, cost := range costs {
+			pbCosts = append(pbCosts, &pb.ShopCost{
+				ItemCode: cost.ItemCode,
+				Amount:   cost.Amount,
+			})
+		}
+
+		pbList = append(pbList, &pb.ShopItemInstance{
+			Id:          inst.ID,
+			ShopItemId:  inst.ShopItemID,
+			ItemCode:    inst.ItemCode,
+			Amount:      inst.Amount,
+			FinalPrice:  pbCosts,
+			DiscountPct: inst.DiscountPct,
+			IsBought:    inst.IsBought,
+		})
+	}
+	return pbList
+}
+
+func (s *WorldService) AddShopItem(ctx context.Context, item *repository.ShopItem) error {
+	return s.repo.InsertShopItem(ctx, item)
+}
+
+func (s *WorldService) DeleteShopItem(ctx context.Context, shopItemID string) error {
+	return s.repo.DeleteShopItem(ctx, shopItemID)
+}
+
+func (s *WorldService) GetAllShopItems(ctx context.Context) ([]*repository.ShopItem, error) {
+	return s.repo.GetAllShopItems(ctx)
+}
+
+
 
 func (s *WorldService) GetMissions(ctx context.Context, userID int64, filterType pb.MissionType) ([]*pb.Mission, int32, string) {
 	player, code, msg := s.GetPlayerProfile(ctx, userID)

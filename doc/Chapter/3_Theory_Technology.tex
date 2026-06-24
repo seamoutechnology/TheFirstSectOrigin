@@ -1,0 +1,99 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Chương này trình bày chi tiết về các nền tảng lý thuyết và công nghệ cốt lõi được sử dụng để thiết kế và xây dựng hệ thống trò chơi trực tuyến nhiều người chơi "The First Sect Origin". Các công nghệ được lựa chọn bao gồm: ngôn ngữ lập trình Go cho hệ thống máy chủ, giao thức truyền thông gRPC kết hợp Protocol Buffers, hệ quản trị cơ sở dữ liệu PostgreSQL, hệ thống lưu trữ dữ liệu Redis, và game engine Unity 6 cho phía client. Báo cáo tiến hành phân tích lý do lựa chọn từng công nghệ, các giải pháp thay thế tương ứng, và cách thức chúng giải quyết các yêu cầu thực tế đã đặt ra ở Chương 2.
+
+\section{Ngôn ngữ lập trình Go cho hệ thống máy chủ}
+\label{sec:tech_go}
+Hệ thống máy chủ backend của trò chơi đòi hỏi khả năng xử lý đồng thời cao (concurrency) để phục vụ hàng ngàn người chơi tương tác cùng lúc, đồng thời cần tối ưu hóa tài nguyên phần cứng của máy chủ (CPU, RAM). Để đáp ứng yêu cầu này, ngôn ngữ Go \cite{donovan2015go} được lựa chọn làm ngôn ngữ phát triển chính cho các dịch vụ Gateway, Login, World và Combat.
+
+\subsection{Đặc điểm nổi bật}
+Go là ngôn ngữ biên dịch trực tiếp ra mã máy (compiled language), giúp đạt tốc độ thực thi tiệm cận C/C++ mà không gặp độ trễ lớn như các ngôn ngữ thông dịch hoặc chạy trên máy ảo (như Java, C\#). Đặc biệt, Go cung cấp cơ chế xử lý đồng thời siêu nhẹ dựa trên \textit{Goroutines} và kết nối giữa các luồng thông qua \textit{Channels}:
+\begin{itemize}
+    \item \textbf{Goroutine}: Là luồng ảo được quản lý bởi bộ lập lịch của Go (Go Runtime Scheduler) chứ không phải luồng hệ điều hành (OS Thread). Mỗi Goroutine chỉ tiêu tốn khoảng 2 KB bộ nhớ khi khởi tạo (so với 1 MB đến 8 MB của OS Thread). Điều này cho phép một máy chủ có cấu hình RAM trung bình (ví dụ: 8 GB RAM) chạy đồng thời hàng triệu Goroutine (tiêu tốn khoảng 2 GB RAM cho không gian ngăn xếp của luồng) mà không làm cạn kiệt tài nguyên RAM của hệ thống.
+    \item \textbf{Scheduler (M:N)}: Go Runtime phân phối hệ thống $M$ Goroutines lên $N$ luồng hệ điều hành một cách tự động và tối ưu, giúp tận dụng tối đa sức mạnh của bộ vi xử lý đa nhân.
+\end{itemize}
+
+\subsection{Giải pháp thay thế và Lý do lựa chọn}
+Để phát triển máy chủ web/game, các lựa chọn thay thế phổ biến bao gồm Node.js (JavaScript) và Python:
+\begin{table}[H]
+\centering
+\begin{tabular}{|m{3.5cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+\hline
+\textbf{Tiêu chí so sánh} & \textbf{Node.js (JavaScript)} & \textbf{Python} & \textbf{Go (Lựa chọn)} \\ \hline
+\textbf{Mô hình xử lý} & Đơn luồng với Event Loop (Asynchronous I/O). & Đơn luồng bị giới hạn bởi cơ chế khóa GIL. & Đa luồng thực sự thông qua cơ chế Goroutine. \\ \hline
+\textbf{Hiệu năng CPU-bound} & Yếu, nghẽn luồng chính khi chạy tính toán nặng. & Thấp, tốc độ thông dịch chậm. & Rất cao, biên dịch trực tiếp ra mã máy thuần túy. \\ \hline
+\textbf{Mức tiêu thụ tài nguyên} & Trung bình (chạy trên V8 engine). & Cao (tốn RAM và CPU tải thông dịch). & Cực kỳ thấp (tối ưu hóa bộ nhớ tĩnh). \\ \hline
+\end{tabular}
+\caption{Bảng so sánh lựa chọn công nghệ phát triển máy chủ backend}
+\label{tab:compare_go}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{Node.js}: Mặc dù xử lý các tác vụ I/O bất đồng bộ rất tốt, Node.js hoạt động trên mô hình đơn luồng. Khi máy chủ Combat phải tính toán liên tiếp kết quả mô phỏng của hàng loạt trận đấu (tác vụ nặng về tính toán CPU-bound), luồng chính của Node.js sẽ bị nghẽn, dẫn đến việc tất cả các yêu cầu khác của người chơi bị trì trệ.
+    \item \textbf{Python}: Gặp hạn chế nghiêm trọng về hiệu năng thực thi và cơ chế Global Interpreter Lock (GIL) ngăn cản việc chạy đa luồng thực thụ để tối ưu hóa CPU đa nhân.
+    \item \textbf{Lý do lựa chọn Go}: Go kết hợp được cả hai ưu điểm: hiệu năng I/O bất đồng bộ cực cao như Node.js nhờ cơ chế Network Poller ngầm, và hiệu năng tính toán CPU-bound mạnh mẽ nhờ biên dịch trực tiếp ra mã máy và hỗ trợ đa luồng thực sự. Điều này giúp giải quyết triệt để yêu cầu phi chức năng về hiệu năng và độ ổn định của hệ thống máy chủ dưới tải cao.
+\end{itemize}
+
+\section{Giao thức truyền thông gRPC và Protocol Buffers}
+\label{sec:tech_grpc}
+Trong kiến trúc vi dịch vụ (microservices) được áp dụng cho trò chơi \cite{newman2021building}, các dịch vụ cần giao tiếp với nhau liên tục để đồng bộ hóa trạng thái tài sản người chơi và kết quả trận đấu. Ngoài ra, Client game trên Unity cũng cần kết nối với máy chủ backend với độ trễ tối thiểu. Giao thức gRPC \cite{indrasiri2020grpc} kết hợp định dạng Protocol Buffers được lựa chọn làm giải pháp truyền thông chính.
+
+\subsection{Đặc điểm nổi bật}
+gRPC là RPC framework mã nguồn mở chạy trên nền tảng giao thức truyền tải HTTP/2. Điểm đặc trưng của gRPC là sử dụng Protocol Buffers (Protobuf) làm ngôn ngữ định nghĩa giao diện (IDL) và định dạng tuần tự hóa dữ liệu:
+\begin{itemize}
+    \item \textbf{HTTP/2}: Hỗ trợ cơ chế ghép kênh (Multiplexing) cho phép gửi nhiều yêu cầu và nhận nhiều phản hồi đồng thời trên cùng một kết nối TCP duy nhất, loại bỏ việc phải mở mới kết nối liên tục (như HTTP/1.1), giúp giảm đáng kể độ trễ kết nối.
+    \item \textbf{Tuần tự hóa nhị phân}: Protobuf mã hóa dữ liệu thành định dạng nhị phân siêu nhỏ gọn trước khi truyền trên đường truyền, thay vì dùng dạng văn bản như JSON hay XML.
+\end{itemize}
+
+\subsection{Giải pháp thay thế và Lý do lựa chọn}
+Giải pháp truyền thống phổ biến nhất là xây dựng các API theo chuẩn REST sử dụng định dạng JSON (REST/JSON):
+\begin{itemize}
+    \item \textbf{Hạn chế của REST/JSON}: JSON là định dạng văn bản (text-based), chứa nhiều ký tự thừa (ngoặc nhọn, dấu nháy, tên thuộc tính lặp đi lặp lại) làm tăng dung lượng gói tin. Quá trình chuyển đổi cấu trúc dữ liệu trong bộ nhớ sang chuỗi JSON (serialization) và ngược lại (deserialization) tiêu tốn rất nhiều chu kỳ xử lý của CPU. Ngoài ra, REST chạy trên HTTP/1.1 gặp hiện tượng nghẽn đầu đường truyền (Head-of-Line Blocking).
+    \item \textbf{Lý do lựa chọn gRPC}: Sử dụng truyền tải nhị phân giúp dung lượng gói tin giảm từ 60\% đến 80\% so với JSON tương đương, tốc độ tuần tự hóa nhanh gấp 5 đến 10 lần. Cơ chế HTTP/2 Multiplexing giúp Client duy trì một kết nối duy nhất đến Gateway-server, truyền tải gói tin nhanh chóng để cập nhật trạng thái game thời gian thực mà không làm tăng tải của card mạng.
+\end{itemize}
+
+\section{Hệ quản trị cơ sở dữ liệu quan hệ PostgreSQL}
+\label{sec:tech_postgres}
+Cơ sở dữ liệu của trò chơi trực tuyến lưu trữ các thông tin cốt lõi về tài khoản, tài sản người chơi (Gỗ, Đá, Linh thạch), thông tin đệ tử và cấp độ công trình tông môn. Hệ quản trị cơ sở dữ liệu quan hệ PostgreSQL \cite{postgresql2026} được lựa chọn làm kho lưu trữ dữ liệu bền vững.
+
+\subsection{Đặc điểm nổi bật}
+PostgreSQL là hệ quản trị cơ sở dữ liệu quan hệ mã nguồn mở mạnh mẽ, tuân thủ nghiêm ngặt các tính chất ACID (Atomicity, Consistency, Isolation, Durability) của giao dịch (transaction). PostgreSQL hỗ trợ các cơ chế khóa (locking) và mức độ cô lập giao dịch nâng cao (như Serializable), cùng khả năng mở rộng tốt thông qua phân vùng dữ liệu (partitioning).
+
+\subsection{Giải pháp thay thế và Lý do lựa chọn}
+Một lựa chọn thay thế rất phổ biến trong phát triển game là các hệ cơ sở dữ liệu NoSQL như MongoDB:
+\begin{itemize}
+    \item \textbf{MongoDB}: Lưu trữ dữ liệu dạng tài liệu (JSON document) linh hoạt, dễ thay đổi cấu trúc mà không cần khai báo schema trước. Tuy nhiên, MongoDB thiếu khả năng ràng buộc toàn vẹn dữ liệu mạnh mẽ và các giao dịch liên quan đến nhiều tài liệu (multi-document transactions) rất phức tạp và hiệu năng kém hơn so với cơ sở dữ liệu quan hệ truyền thống.
+    \item \textbf{Lý do lựa chọn PostgreSQL}: Trong game chiến thuật thẻ tướng, các giao dịch tài sản yêu cầu tính chính xác và nhất quán tuyệt đối. Ví dụ, khi người chơi thực hiện nâng cấp một công trình tông môn: hệ thống phải kiểm tra số dư tài nguyên, trừ lượng tài nguyên tương ứng (Gỗ, Đá, Linh thạch) và tăng cấp độ công trình trong cơ sở dữ liệu. Tất cả các bước này phải nằm trong một Transaction duy nhất. Nếu bất kỳ bước nào lỗi (ví dụ mất kết nối mạng hoặc lỗi server giữa chừng), toàn bộ giao dịch phải được rollback để tránh trường hợp tài nguyên bị trừ nhưng công trình không tăng cấp, hoặc ngược lại. PostgreSQL cung cấp độ tin cậy giao dịch ACID tối đa để giải quyết bài toán này.
+\end{itemize}
+
+\section{Hệ thống lưu trữ dữ liệu Redis}
+\label{sec:tech_redis}
+Hệ thống yêu cầu cập nhật và truy xuất bảng xếp hạng lực chiến thời gian thực của toàn bộ người chơi. Nếu thực hiện truy vấn này trực tiếp trên cơ sở dữ liệu đĩa như PostgreSQL sẽ gây ra quá tải nghiêm trọng. Hệ thống bộ nhớ đệm Redis \cite{carlson2013redis} được tích hợp để xử lý bài toán này.
+
+\subsection{Đặc điểm nổi bật}
+Redis là hệ thống lưu trữ cấu trúc dữ liệu trong bộ nhớ RAM (in-memory data store) hoạt động dưới dạng key-value với hiệu năng cực cao (tốc độ đọc ghi hơn 100,000 requests/giây với độ trễ dưới 1 mili-giây). Redis hỗ trợ các cấu trúc dữ liệu nâng cao như String, Hash, List, Set và đặc biệt là Sorted Set.
+
+\subsection{Giải pháp thay thế và Lý do lựa chọn}
+Giải pháp thay thế là lưu trữ điểm lực chiến trong PostgreSQL và thực hiện truy vấn sắp xếp trực tiếp khi người chơi yêu cầu xem bảng xếp hạng:
+\begin{itemize}
+    \item \textbf{Hạn chế của việc truy vấn trực tiếp SQL}: Mỗi khi người chơi mở giao diện bảng xếp hạng, hệ thống phải thực hiện lệnh \texttt{SELECT ... ORDER BY luc\_chien DESC LIMIT 100}. Khi số lượng người chơi lớn (hàng chục ngàn người chơi hoạt động đồng thời), việc quét bảng dữ liệu liên tục để sắp xếp lại sẽ vắt kiệt băng thông I/O đĩa cứng của PostgreSQL, gây treo toàn bộ hệ thống cơ sở dữ liệu.
+    \item \textbf{Lý do lựa chọn Redis}: Redis cung cấp cấu trúc dữ liệu \textit{Sorted Set} (ZSET). Trong ZSET, mỗi phần tử (ID người chơi) được liên kết với một điểm số (lực chiến). Redis tự động sắp xếp các phần tử này trong bộ nhớ bằng cấu trúc dữ liệu Skip List kết hợp với Hash Table. Việc cập nhật điểm lực chiến mới của người chơi chỉ mất độ phức tạp thuật toán là $O(\log(N))$, và việc lấy danh sách top 100 người chơi hàng đầu mất độ phức tạp $O(\log(N) + M)$ (với $M=100$). Tác vụ này chạy hoàn toàn trên RAM với tốc độ tức thời, giúp giảm tải hoàn toàn cho PostgreSQL và đáp ứng yêu cầu hiển thị bảng xếp hạng thời gian thực.
+\end{itemize}
+
+\section{Game Engine Unity 6 cho ứng dụng Client}
+\label{sec:tech_unity}
+Ứng dụng phía Client có nhiệm vụ hiển thị đồ họa 2D trực quan, tái hiện các trận đấu thẻ tướng sống động, và giao tiếp với hệ thống backend qua mạng. Game engine Unity 6 \cite{unity2026} được lựa chọn làm công cụ phát triển chính.
+
+\subsection{Đặc điểm nổi bật}
+Unity 6 (phiên bản mới nhất của dòng engine Unity) cải tiến mạnh mẽ về hiệu năng kết xuất đồ họa thông qua SRP (Scriptable Render Pipeline), giảm thiểu bộ nhớ tiêu thụ và tăng tốc độ tải tài nguyên. Unity sử dụng ngôn ngữ lập trình C\# và hỗ trợ công nghệ IL2CPP để biên dịch mã nguồn C\# trực tiếp thành mã nguồn C++ thuần túy trước khi đóng gói ra ứng dụng, giúp tối ưu hóa tối đa hiệu năng chạy trên thiết bị di động Android.
+
+\subsection{Giải pháp thay thế và Lý do lựa chọn}
+Các lựa chọn thay thế bao gồm Unreal Engine hoặc Godot:
+\begin{itemize}
+    \item \textbf{Unreal Engine}: Quá nặng đối với thể loại game thẻ tướng chiến thuật 2D cấu hình nhẹ, dung lượng gói cài đặt (APK/IPA) đầu ra quá lớn và không tối ưu cho các thiết bị di động tầm trung.
+    \item \textbf{Godot Engine}: Mặc dù nhẹ và mã nguồn mở, hệ sinh thái của Godot còn non trẻ, thiếu các thư viện plugin hỗ trợ kết nối mạng (như thư viện tương thích gRPC cho C\#) và cộng đồng hỗ trợ chưa đủ mạnh cho các dự án game thương mại.
+    \item \textbf{Lý do lựa chọn Unity 6}: Cung cấp sự cân bằng hoàn hảo giữa hiệu năng đồ họa mạnh mẽ, dung lượng đóng gói tối ưu, và sự hỗ trợ phong phú từ Asset Store. Đặc biệt, Unity tích hợp tốt với thư viện gRPC dành cho C\# chạy trên nền .NET Standard, giúp đồng bộ hóa dữ liệu trực tiếp với backend vi dịch vụ viết bằng Go một cách dễ dàng và đồng bộ.
+\end{itemize}
+
+\end{document}

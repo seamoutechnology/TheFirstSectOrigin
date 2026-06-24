@@ -186,7 +186,7 @@ namespace GameClient
 
         private async Task ShowMessageAsync(string title, string content, System.Action onConfirm)
         {
-            bool success = await TryLoadConfirmPanelPrefabAsync(title, content, "✓ OK", "", onConfirm, null);
+            bool success = await TryLoadConfirmPanelPrefabAsync(title, content, "OK", "", onConfirm, null);
             if (success) return;
 
             var root = new GameObject("UI_MessageDialogPopup");
@@ -276,7 +276,7 @@ namespace GameClient
                 confirmTextRect.anchorMax = Vector2.one;
                 confirmTextRect.sizeDelta = Vector2.zero;
             }
-            confirmTextComp.text = "✓ OK";
+            confirmTextComp.text = "OK";
             confirmTextComp.fontSize = 14;
             confirmTextComp.alignment = TMPro.TextAlignmentOptions.Center;
             confirmTextComp.color = Color.white;
@@ -327,7 +327,7 @@ namespace GameClient
             string content = string.IsNullOrEmpty(contentArg) ? rawContent : string.Format(rawContent, contentArg);
 
             string acceptText = Managers.LocalizationManager.Instance.GetText(acceptKey);
-            if (string.IsNullOrEmpty(acceptText) || acceptText.StartsWith("[")) acceptText = "✓ Đồng Ý";
+            if (string.IsNullOrEmpty(acceptText) || acceptText.StartsWith("[")) acceptText = "Đồng Ý";
 
             string denyText = Managers.LocalizationManager.Instance.GetText(denyKey);
             if (string.IsNullOrEmpty(denyText) || denyText.StartsWith("[")) denyText = "✗ Hủy";
@@ -534,7 +534,14 @@ namespace GameClient
                     string platformSuffix = Application.isMobilePlatform ? "_Mobile" : "_PC";
                     string platformKey = addressableKey + platformSuffix;
 
-                    uiInstance = await ResourceManager.Instance.InstantiateAsync(platformKey, canvasRoot);
+                    try
+                    {
+                        uiInstance = await ResourceManager.Instance.InstantiateAsync(platformKey, canvasRoot);
+                    }
+                    catch (System.Exception)
+                    {
+                        Debug.LogWarning($"[UIManager] Không tải được panel theo platform key '{platformKey}'. Đang thử tải lại key gốc '{addressableKey}'...");
+                    }
                 }
                 
                 if (uiInstance == null)
@@ -618,6 +625,15 @@ namespace GameClient
                 }
                 return null;
             }
+        }
+
+        public IUIView GetPanel(string addressableKey)
+        {
+            if (_cachedPanels.TryGetValue(addressableKey, out var panel))
+            {
+                return panel;
+            }
+            return null;
         }
 
         public void ClosePanel(string addressableKey)

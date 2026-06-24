@@ -128,6 +128,18 @@ namespace GameClient.Network.Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.UseItemResponse> __Marshaller_pb_UseItemResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.UseItemResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.BuyShopItemRequest> __Marshaller_pb_BuyShopItemRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.BuyShopItemRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.BuyShopItemResponse> __Marshaller_pb_BuyShopItemResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.BuyShopItemResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetShopRequest> __Marshaller_pb_GetShopRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetShopRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetShopResponse> __Marshaller_pb_GetShopResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetShopResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.RefreshShopRequest> __Marshaller_pb_RefreshShopRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.RefreshShopRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::GameClient.Network.Pb.RefreshShopResponse> __Marshaller_pb_RefreshShopResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.RefreshShopResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetGachaBannersRequest> __Marshaller_pb_GetGachaBannersRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetGachaBannersRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::GameClient.Network.Pb.GetGachaBannersResponse> __Marshaller_pb_GetGachaBannersResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::GameClient.Network.Pb.GetGachaBannersResponse.Parser));
@@ -315,6 +327,30 @@ namespace GameClient.Network.Pb {
         "UseItem",
         __Marshaller_pb_UseItemRequest,
         __Marshaller_pb_UseItemResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.BuyShopItemRequest, global::GameClient.Network.Pb.BuyShopItemResponse> __Method_BuyShopItem = new grpc::Method<global::GameClient.Network.Pb.BuyShopItemRequest, global::GameClient.Network.Pb.BuyShopItemResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BuyShopItem",
+        __Marshaller_pb_BuyShopItemRequest,
+        __Marshaller_pb_BuyShopItemResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.GetShopRequest, global::GameClient.Network.Pb.GetShopResponse> __Method_GetShop = new grpc::Method<global::GameClient.Network.Pb.GetShopRequest, global::GameClient.Network.Pb.GetShopResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetShop",
+        __Marshaller_pb_GetShopRequest,
+        __Marshaller_pb_GetShopResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GameClient.Network.Pb.RefreshShopRequest, global::GameClient.Network.Pb.RefreshShopResponse> __Method_RefreshShop = new grpc::Method<global::GameClient.Network.Pb.RefreshShopRequest, global::GameClient.Network.Pb.RefreshShopResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RefreshShop",
+        __Marshaller_pb_RefreshShopRequest,
+        __Marshaller_pb_RefreshShopResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse> __Method_GetGachaBanners = new grpc::Method<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse>(
@@ -524,6 +560,24 @@ namespace GameClient.Network.Pb {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.UseItemResponse> UseItem(global::GameClient.Network.Pb.UseItemRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.BuyShopItemResponse> BuyShopItem(global::GameClient.Network.Pb.BuyShopItemRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.GetShopResponse> GetShop(global::GameClient.Network.Pb.GetShopRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GameClient.Network.Pb.RefreshShopResponse> RefreshShop(global::GameClient.Network.Pb.RefreshShopRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1193,6 +1247,66 @@ namespace GameClient.Network.Pb {
       {
         return CallInvoker.AsyncUnaryCall(__Method_UseItem, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.BuyShopItemResponse BuyShopItem(global::GameClient.Network.Pb.BuyShopItemRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BuyShopItem(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.BuyShopItemResponse BuyShopItem(global::GameClient.Network.Pb.BuyShopItemRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BuyShopItem, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.BuyShopItemResponse> BuyShopItemAsync(global::GameClient.Network.Pb.BuyShopItemRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BuyShopItemAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.BuyShopItemResponse> BuyShopItemAsync(global::GameClient.Network.Pb.BuyShopItemRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BuyShopItem, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetShopResponse GetShop(global::GameClient.Network.Pb.GetShopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetShop(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.GetShopResponse GetShop(global::GameClient.Network.Pb.GetShopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetShop, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetShopResponse> GetShopAsync(global::GameClient.Network.Pb.GetShopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetShopAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.GetShopResponse> GetShopAsync(global::GameClient.Network.Pb.GetShopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetShop, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.RefreshShopResponse RefreshShop(global::GameClient.Network.Pb.RefreshShopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RefreshShop(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GameClient.Network.Pb.RefreshShopResponse RefreshShop(global::GameClient.Network.Pb.RefreshShopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RefreshShop, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.RefreshShopResponse> RefreshShopAsync(global::GameClient.Network.Pb.RefreshShopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RefreshShopAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GameClient.Network.Pb.RefreshShopResponse> RefreshShopAsync(global::GameClient.Network.Pb.RefreshShopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RefreshShop, null, options, request);
+      }
       /// <summary>
       /// --- Gacha ---
       /// </summary>
@@ -1412,6 +1526,9 @@ namespace GameClient.Network.Pb {
           .AddMethod(__Method_GetInventory, serviceImpl.GetInventory)
           .AddMethod(__Method_EquipItem, serviceImpl.EquipItem)
           .AddMethod(__Method_UseItem, serviceImpl.UseItem)
+          .AddMethod(__Method_BuyShopItem, serviceImpl.BuyShopItem)
+          .AddMethod(__Method_GetShop, serviceImpl.GetShop)
+          .AddMethod(__Method_RefreshShop, serviceImpl.RefreshShop)
           .AddMethod(__Method_GetGachaBanners, serviceImpl.GetGachaBanners)
           .AddMethod(__Method_DoGacha, serviceImpl.DoGacha)
           .AddMethod(__Method_GetMissions, serviceImpl.GetMissions)
@@ -1447,6 +1564,9 @@ namespace GameClient.Network.Pb {
       serviceBinder.AddMethod(__Method_GetInventory, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetProfileRequest, global::GameClient.Network.Pb.Inventory>(serviceImpl.GetInventory));
       serviceBinder.AddMethod(__Method_EquipItem, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.EquipRequest, global::GameClient.Network.Pb.EquipResponse>(serviceImpl.EquipItem));
       serviceBinder.AddMethod(__Method_UseItem, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.UseItemRequest, global::GameClient.Network.Pb.UseItemResponse>(serviceImpl.UseItem));
+      serviceBinder.AddMethod(__Method_BuyShopItem, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.BuyShopItemRequest, global::GameClient.Network.Pb.BuyShopItemResponse>(serviceImpl.BuyShopItem));
+      serviceBinder.AddMethod(__Method_GetShop, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetShopRequest, global::GameClient.Network.Pb.GetShopResponse>(serviceImpl.GetShop));
+      serviceBinder.AddMethod(__Method_RefreshShop, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.RefreshShopRequest, global::GameClient.Network.Pb.RefreshShopResponse>(serviceImpl.RefreshShop));
       serviceBinder.AddMethod(__Method_GetGachaBanners, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetGachaBannersRequest, global::GameClient.Network.Pb.GetGachaBannersResponse>(serviceImpl.GetGachaBanners));
       serviceBinder.AddMethod(__Method_DoGacha, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.DoGachaRequest, global::GameClient.Network.Pb.DoGachaResponse>(serviceImpl.DoGacha));
       serviceBinder.AddMethod(__Method_GetMissions, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GameClient.Network.Pb.GetMissionsRequest, global::GameClient.Network.Pb.GetMissionsResponse>(serviceImpl.GetMissions));

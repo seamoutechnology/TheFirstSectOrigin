@@ -1,0 +1,37 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Chương này trình bày lý do lựa chọn đề tài, mục tiêu, phạm vi nghiên cứu và định hướng giải pháp của đồ án tốt nghiệp "Xây dựng trò chơi trực tuyến nhiều người chơi thể loại thẻ tướng chiến thuật tích hợp hệ thống xếp hạng thời gian thực". Các nội dung chính bao gồm: đặt vấn đề về thách thức trong thiết kế hệ thống máy chủ trò chơi; xác định mục tiêu và phạm vi thực hiện; đề xuất giải pháp kỹ thuật; và giới thiệu bố cục của báo cáo đồ án.
+
+\section{Đặt vấn đề}
+Trong những năm gần đây, sự phát triển của công nghệ thông tin và mạng Internet đã thúc đẩy ngành công nghiệp trò chơi trực tuyến trở thành một trong những lĩnh vực giải trí có tốc độ tăng trưởng nhanh nhất trên toàn cầu. Trong đó, thể loại trò chơi thẻ tướng chiến thuật thu hút lượng người chơi đông đảo nhờ tính toán chiến thuật cao và trải nghiệm tương tác phong phú. Người dùng hiện nay đòi hỏi trải nghiệm chơi game mượt mà, công bằng và có độ tin cậy cao. Điều này đặt ra thách thức lớn đối với hệ thống máy chủ backend, nơi xử lý toàn bộ logic trò chơi, đồng bộ trạng thái giữa các client và duy trì dữ liệu người chơi.
+
+Thực tế phát triển hệ thống máy chủ trò chơi trực tuyến thời gian thực phải đối mặt với bài toán xử lý đồng thời phức tạp. Máy chủ cần đảm bảo độ trễ thấp khi truyền tải gói tin, đồng thời duy trì tính nhất quán của dữ liệu khi xảy ra hàng ngàn yêu cầu thay đổi tài sản trò chơi hoặc nâng cấp công trình trong cùng một thời điểm. Nếu không xử lý tốt, hệ thống sẽ gặp hiện tượng mất đồng bộ trạng thái hoặc nghiêm trọng hơn là tạo ra lỗ hổng bảo mật. Do đó, việc thiết kế một kiến trúc máy chủ backend có khả năng mở rộng tốt, chịu tải cao và tối ưu hóa băng thông mạng là nhu cầu thiết yếu để mang lại dịch vụ ổn định cho người dùng.
+
+\section{Mục tiêu và phạm vi đề tài}
+Trên thị trường hiện nay, có nhiều nền tảng máy chủ game thương mại sẵn có như Photon Engine hay Microsoft PlayFab. Mặc dù các dịch vụ này giúp đẩy nhanh tiến độ phát triển ban đầu, nhưng chúng thường có chi phí vận hành lớn và hạn chế khả năng tùy biến sâu của nhà phát triển. Ở hướng tiếp cận khác, việc tự xây dựng máy chủ đơn khối bằng Node.js hoặc Python tuy đơn giản nhưng lại gặp rào cản lớn về mặt hiệu năng xử lý đa luồng dưới tải cao do hạn chế về kiến trúc của các ngôn ngữ này.
+
+Để giải quyết các hạn chế trên, đồ án đặt mục tiêu thiết kế và phát triển hệ thống máy chủ backend theo kiến trúc vi dịch vụ (microservices) tối ưu hiệu năng cho trò chơi thẻ tướng chiến thuật "The First Sect Origin". Phạm vi thực hiện của đề tài bao gồm thiết kế các dịch vụ độc lập là dịch vụ đăng nhập (Login), cổng kết nối (Gateway), quản lý thế giới game (World) và mô phỏng trận đấu (Combat) theo mô hình vi dịch vụ \cite{newman2021building}; xây dựng ứng dụng client trên Unity \cite{unity2026}; đồng thời tích hợp hệ thống bảng xếp hạng thời gian thực. Đồ án tiến hành thử nghiệm hiệu năng và khả năng chịu tải của hệ thống backend tự phát triển nhằm chứng minh tính khả thi của giải pháp.
+
+\section{Định hướng giải pháp}
+Để hiện thực hóa mục tiêu đã đặt ra, đồ án lựa chọn phát triển hệ thống backend theo mô hình vi dịch vụ sử dụng ngôn ngữ lập trình Go và giao thức truyền thông gRPC. Ngôn ngữ Go \cite{donovan2015go} được chọn vì hiệu năng thực thi cao và cơ chế xử lý đồng thời siêu nhẹ Goroutine giúp máy chủ phục vụ lượng lớn kết nối đồng thời với tài nguyên tối thiểu. Giao thức gRPC \cite{indrasiri2020grpc} kết hợp định dạng Protocol Buffers được sử dụng thay thế cho chuẩn REST/JSON để giảm thiểu dung lượng dữ liệu trên đường truyền và tăng tốc độ tuần tự hóa gói tin. Hệ thống sử dụng PostgreSQL \cite{postgresql2026} để lưu trữ dữ liệu bền vững và tích hợp Redis \cite{carlson2013redis} để quản lý phiên đăng nhập.
+
+Đóng góp chính của đồ án là thiết kế và triển khai thành công một kiến trúc backend vi dịch vụ hoàn chỉnh cho game trực tuyến, giải quyết bài toán điều phối yêu cầu giữa các dịch vụ và xây dựng được bảng xếp hạng thời gian thực hoạt động hiệu quả mà không làm nghẽn cơ sở dữ liệu PostgreSQL.
+
+\section{Bố cục đồ án}
+Phần còn lại của báo cáo đồ án tốt nghiệp này được tổ chức như sau.
+
+Chương 2 trình bày kết quả khảo sát các hệ thống tương tự, từ đó phân tích các yêu cầu chức năng và yêu cầu phi chức năng của hệ thống trò chơi.
+
+Chương 3 giới thiệu các nền tảng lý thuyết và công nghệ cốt lõi được sử dụng trong đồ án như ngôn ngữ Go, gRPC, Protocol Buffers, PostgreSQL và Redis.
+
+Chương 4 tập trung phân tích thiết kế chi tiết kiến trúc hệ thống, mô hình cơ sở dữ liệu, các luồng tương tác giữa các dịch vụ, và thuật toán xử lý logic trò chơi. Phần cuối chương trình bày kết quả thử nghiệm hiệu năng của hệ thống.
+
+Chương 5 mô tả các giải pháp kỹ thuật tối ưu hóa hiệu năng hệ thống, bao gồm cải tiến luồng truyền dữ liệu qua gRPC, kiểm soát xử lý đồng thời bằng Goroutine và tối ưu hóa truy vấn cập nhật bảng xếp hạng thời gian thực.
+
+Chương 6 tổng kết các kết quả đạt được, chỉ ra hạn chế còn tồn tại và đề xuất hướng phát triển tiếp theo của đồ án.
+
+\vspace{0.5cm}
+Chương này đã giới thiệu khái quát về bối cảnh đề tài, sự cấp thiết của việc xây dựng backend game trực tuyến hiệu năng cao và định hướng giải pháp kỹ thuật. Những phân tích chi tiết về yêu cầu hệ thống sẽ được trình bày cụ thể trong Chương 2.
+
+\end{document}

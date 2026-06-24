@@ -529,25 +529,48 @@ namespace GameClient.Gameplay.Combat
                         
                         var sr = go.AddComponent<SpriteRenderer>();
                         sr.sortingOrder = 10;
-                        try
+                        
+                        Sprite mSprite = null;
+                        if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
                         {
-                            if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
+                            try
                             {
-                                var sprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
-                                sr.sprite = sprite;
+                                mSprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
                             }
+                            catch {}
                         }
-                        catch {}
 
-                        // Nếu không tải được sprite nào, tạo một Cube 3D con làm hiển thị hình khối tạm thời
-                        if (sr.sprite == null)
+                        if (mSprite == null)
                         {
+                            try
+                            {
+                                mSprite = await Addressables.LoadAssetAsync<Sprite>("char_mon_01").Task;
+                            }
+                            catch {}
+                        }
+
+                        if (mSprite == null)
+                        {
+                            try
+                            {
+                                mSprite = await Addressables.LoadAssetAsync<Sprite>("avt_mon_01").Task;
+                            }
+                            catch {}
+                        }
+
+                        if (mSprite != null)
+                        {
+                            sr.sprite = mSprite;
+                        }
+                        else
+                        {
+                            // Nếu không tải được sprite nào, tạo một Cube 3D con làm hiển thị hình khối tạm thời
                             var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                             cube.transform.SetParent(go.transform, false);
                             cube.transform.localPosition = Vector3.zero;
                             cube.transform.localScale = Vector3.one;
                         }
-                        Debug.LogWarning($"[CombatSceneController] Created fallback for enemy '{config.name}' at {go.transform.position}");
+                        Debug.LogWarning($"[CombatSceneController] Created fallback for enemy '{config.name}' at {go.transform.position} with sprite: {(sr.sprite != null ? sr.sprite.name : "null")}");
                     }
                 }
 

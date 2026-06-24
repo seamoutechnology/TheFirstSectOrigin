@@ -979,6 +979,54 @@ func (h *AdminHandler) GMSyncHeroTemplates(w http.ResponseWriter, r *http.Reques
 	json.NewEncoder(w).Encode(map[string]string{"message": "Sync hero templates successfully!"})
 }
 
+func (h *AdminHandler) GMGetAllShopItems(w http.ResponseWriter, r *http.Request) {
+	configs, err := h.svc.GetAllShopItems()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(configs)
+}
+
+func (h *AdminHandler) GMSaveShopItem(w http.ResponseWriter, r *http.Request) {
+	var req ShopItemData
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid Body", http.StatusBadRequest)
+		return
+	}
+
+	if req.ShopItemID == "" {
+		http.Error(w, "shop_item_id cannot be empty", http.StatusBadRequest)
+		return
+	}
+
+	err := h.svc.SaveShopItem(req)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *AdminHandler) GMDeleteShopItem(w http.ResponseWriter, r *http.Request) {
+	shopItemID := r.URL.Query().Get("id")
+	if shopItemID == "" {
+		http.Error(w, "Invalid Shop Item ID", http.StatusBadRequest)
+		return
+	}
+
+	err := h.svc.DeleteShopItem(shopItemID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
 
 
 

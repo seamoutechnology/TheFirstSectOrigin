@@ -197,7 +197,7 @@ namespace GameClient.UI
                 case "ui_label_building_action_move": return "Di Chuyển";
                 case "ui_label_building_action_demolish": return "Cất Kho";
                 case "ui_label_building_action_close": return "Đóng";
-                case "ui_label_building_action_placement_confirm": return "✓ OK";
+                case "ui_label_building_action_placement_confirm": return "OK";
                 case "ui_label_building_action_placement_cancel": return "✗ Hủy";
                 default: return "";
             }

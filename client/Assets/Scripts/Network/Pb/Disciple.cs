@@ -32,40 +32,41 @@ namespace GameClient.Network.Pb {
             "kQEKCUhlcm9Ta2lsbBISCgpza2lsbF9jb2RlGAEgASgJEgwKBG5hbWUYAiAB",
             "KAkSGQoRZGFtYWdlX211bHRpcGxpZXIYAyABKAISEAoIY29vbGRvd24YBCAB",
             "KAUSEwoLZWZmZWN0X3R5cGUYBSABKAkSDQoFbGV2ZWwYBiABKAUSEQoJaXNf",
-            "bG9ja2VkGAcgASgIIosBCgRIZXJvEgoKAmlkGAEgASgDEgwKBG5hbWUYAiAB",
+            "bG9ja2VkGAcgASgIIpwBCgRIZXJvEgoKAmlkGAEgASgDEgwKBG5hbWUYAiAB",
             "KAkSDQoFbGV2ZWwYAyABKAUSDgoGcmFyaXR5GAQgASgJEg0KBXBvd2VyGAUg",
             "ASgDEgwKBHN0YXIYBiABKAUSDgoGdHJhaXRzGAcgAygJEh0KBnNraWxscxgI",
-            "IAMoCzINLnBiLkhlcm9Ta2lsbCJMCg1Gb3JtYXRpb25TbG90EhAKCHBvc2l0",
-            "aW9uGAEgASgFEhYKDnBsYXllcl9oZXJvX2lkGAIgASgDEhEKCWlzX2xvY2tl",
-            "ZBgDIAEoCCI7CglGb3JtYXRpb24SDAoEbmFtZRgBIAEoCRIgCgVzbG90cxgC",
-            "IAMoCzIRLnBiLkZvcm1hdGlvblNsb3QiFQoTR2V0RGlzY2lwbGVzUmVxdWVz",
-            "dCJXChRHZXREaXNjaXBsZXNSZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIu",
-            "QmFzZVJlc3BvbnNlEh8KCWRpc2NpcGxlcxgCIAMoCzIMLnBiLkRpc2NpcGxl",
-            "IhIKEEdldEhlcm9lc1JlcXVlc3QiTQoRR2V0SGVyb2VzUmVzcG9uc2USHgoE",
-            "YmFzZRgBIAEoCzIQLnBiLkJhc2VSZXNwb25zZRIYCgZoZXJvZXMYAiADKAsy",
-            "CC5wYi5IZXJvIjcKE1NldEZvcm1hdGlvblJlcXVlc3QSIAoFc2xvdHMYASAD",
-            "KAsyES5wYi5Gb3JtYXRpb25TbG90IjYKFFNldEZvcm1hdGlvblJlc3BvbnNl",
-            "Eh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2UiSgoWTGV2ZWxVcERp",
-            "c2NpcGxlUmVxdWVzdBITCgtkaXNjaXBsZV9pZBgBIAEoAxIbChNjb25zdW1l",
-            "X2l0ZW1zX2NvdW50GAIgASgFIlkKF0xldmVsVXBEaXNjaXBsZVJlc3BvbnNl",
-            "Eh4KBGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USHgoIZGlzY2lwbGUY",
-            "AiABKAsyDC5wYi5EaXNjaXBsZSIlChJMZXZlbFVwSGVyb1JlcXVlc3QSDwoH",
-            "aGVyb19pZBgBIAEoAyJNChNMZXZlbFVwSGVyb1Jlc3BvbnNlEh4KBGJhc2UY",
-            "ASABKAsyEC5wYi5CYXNlUmVzcG9uc2USFgoEaGVybxgCIAEoCzIILnBiLkhl",
-            "cm9CKloQc2VydmVyL3BrZy9wYjtwYqoCFUdhbWVDbGllbnQuTmV0d29yay5Q",
-            "YmIGcHJvdG8z"));
+            "IAMoCzINLnBiLkhlcm9Ta2lsbBIPCgdlbGVtZW50GAkgASgJIkwKDUZvcm1h",
+            "dGlvblNsb3QSEAoIcG9zaXRpb24YASABKAUSFgoOcGxheWVyX2hlcm9faWQY",
+            "AiABKAMSEQoJaXNfbG9ja2VkGAMgASgIIjsKCUZvcm1hdGlvbhIMCgRuYW1l",
+            "GAEgASgJEiAKBXNsb3RzGAIgAygLMhEucGIuRm9ybWF0aW9uU2xvdCIVChNH",
+            "ZXREaXNjaXBsZXNSZXF1ZXN0IlcKFEdldERpc2NpcGxlc1Jlc3BvbnNlEh4K",
+            "BGJhc2UYASABKAsyEC5wYi5CYXNlUmVzcG9uc2USHwoJZGlzY2lwbGVzGAIg",
+            "AygLMgwucGIuRGlzY2lwbGUiEgoQR2V0SGVyb2VzUmVxdWVzdCJzChFHZXRI",
+            "ZXJvZXNSZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIuQmFzZVJlc3BvbnNl",
+            "EhgKBmhlcm9lcxgCIAMoCzIILnBiLkhlcm8SJAoJZm9ybWF0aW9uGAMgAygL",
+            "MhEucGIuRm9ybWF0aW9uU2xvdCI3ChNTZXRGb3JtYXRpb25SZXF1ZXN0EiAK",
+            "BXNsb3RzGAEgAygLMhEucGIuRm9ybWF0aW9uU2xvdCI2ChRTZXRGb3JtYXRp",
+            "b25SZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIuQmFzZVJlc3BvbnNlIkoK",
+            "FkxldmVsVXBEaXNjaXBsZVJlcXVlc3QSEwoLZGlzY2lwbGVfaWQYASABKAMS",
+            "GwoTY29uc3VtZV9pdGVtc19jb3VudBgCIAEoBSJZChdMZXZlbFVwRGlzY2lw",
+            "bGVSZXNwb25zZRIeCgRiYXNlGAEgASgLMhAucGIuQmFzZVJlc3BvbnNlEh4K",
+            "CGRpc2NpcGxlGAIgASgLMgwucGIuRGlzY2lwbGUiJQoSTGV2ZWxVcEhlcm9S",
+            "ZXF1ZXN0Eg8KB2hlcm9faWQYASABKAMiTQoTTGV2ZWxVcEhlcm9SZXNwb25z",
+            "ZRIeCgRiYXNlGAEgASgLMhAucGIuQmFzZVJlc3BvbnNlEhYKBGhlcm8YAiAB",
+            "KAsyCC5wYi5IZXJvQipaEHNlcnZlci9wa2cvcGI7cGKqAhVHYW1lQ2xpZW50",
+            "Lk5ldHdvcmsuUGJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::GameClient.Network.Pb.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Disciple), global::GameClient.Network.Pb.Disciple.Parser, new[]{ "Id", "DiscipleCode", "Name", "Rarity", "Level", "Star", "Exp", "Hp", "Atk", "Def", "Traits", "Skills" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.HeroSkill), global::GameClient.Network.Pb.HeroSkill.Parser, new[]{ "SkillCode", "Name", "DamageMultiplier", "Cooldown", "EffectType", "Level", "IsLocked" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Hero), global::GameClient.Network.Pb.Hero.Parser, new[]{ "Id", "Name", "Level", "Rarity", "Power", "Star", "Traits", "Skills" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Hero), global::GameClient.Network.Pb.Hero.Parser, new[]{ "Id", "Name", "Level", "Rarity", "Power", "Star", "Traits", "Skills", "Element" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.FormationSlot), global::GameClient.Network.Pb.FormationSlot.Parser, new[]{ "Position", "PlayerHeroId", "IsLocked" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.Formation), global::GameClient.Network.Pb.Formation.Parser, new[]{ "Name", "Slots" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetDisciplesRequest), global::GameClient.Network.Pb.GetDisciplesRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetDisciplesResponse), global::GameClient.Network.Pb.GetDisciplesResponse.Parser, new[]{ "Base", "Disciples" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetHeroesRequest), global::GameClient.Network.Pb.GetHeroesRequest.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetHeroesResponse), global::GameClient.Network.Pb.GetHeroesResponse.Parser, new[]{ "Base", "Heroes" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.GetHeroesResponse), global::GameClient.Network.Pb.GetHeroesResponse.Parser, new[]{ "Base", "Heroes", "Formation" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.SetFormationRequest), global::GameClient.Network.Pb.SetFormationRequest.Parser, new[]{ "Slots" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.SetFormationResponse), global::GameClient.Network.Pb.SetFormationResponse.Parser, new[]{ "Base" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GameClient.Network.Pb.LevelUpDiscipleRequest), global::GameClient.Network.Pb.LevelUpDiscipleRequest.Parser, new[]{ "DiscipleId", "ConsumeItemsCount" }, null, null, null, null),
@@ -1127,6 +1128,7 @@ namespace GameClient.Network.Pb {
       star_ = other.star_;
       traits_ = other.traits_.Clone();
       skills_ = other.skills_.Clone();
+      element_ = other.element_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1236,6 +1238,18 @@ namespace GameClient.Network.Pb {
       get { return skills_; }
     }
 
+    /// <summary>Field number for the "element" field.</summary>
+    public const int ElementFieldNumber = 9;
+    private string element_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Element {
+      get { return element_; }
+      set {
+        element_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1259,6 +1273,7 @@ namespace GameClient.Network.Pb {
       if (Star != other.Star) return false;
       if(!traits_.Equals(other.traits_)) return false;
       if(!skills_.Equals(other.skills_)) return false;
+      if (Element != other.Element) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1274,6 +1289,7 @@ namespace GameClient.Network.Pb {
       if (Star != 0) hash ^= Star.GetHashCode();
       hash ^= traits_.GetHashCode();
       hash ^= skills_.GetHashCode();
+      if (Element.Length != 0) hash ^= Element.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1318,6 +1334,10 @@ namespace GameClient.Network.Pb {
       }
       traits_.WriteTo(output, _repeated_traits_codec);
       skills_.WriteTo(output, _repeated_skills_codec);
+      if (Element.Length != 0) {
+        output.WriteRawTag(74);
+        output.WriteString(Element);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1354,6 +1374,10 @@ namespace GameClient.Network.Pb {
       }
       traits_.WriteTo(ref output, _repeated_traits_codec);
       skills_.WriteTo(ref output, _repeated_skills_codec);
+      if (Element.Length != 0) {
+        output.WriteRawTag(74);
+        output.WriteString(Element);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1384,6 +1408,9 @@ namespace GameClient.Network.Pb {
       }
       size += traits_.CalculateSize(_repeated_traits_codec);
       size += skills_.CalculateSize(_repeated_skills_codec);
+      if (Element.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Element);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1416,6 +1443,9 @@ namespace GameClient.Network.Pb {
       }
       traits_.Add(other.traits_);
       skills_.Add(other.skills_);
+      if (other.Element.Length != 0) {
+        Element = other.Element;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1467,6 +1497,10 @@ namespace GameClient.Network.Pb {
             skills_.AddEntriesFrom(input, _repeated_skills_codec);
             break;
           }
+          case 74: {
+            Element = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1516,6 +1550,10 @@ namespace GameClient.Network.Pb {
           }
           case 66: {
             skills_.AddEntriesFrom(ref input, _repeated_skills_codec);
+            break;
+          }
+          case 74: {
+            Element = input.ReadString();
             break;
           }
         }
@@ -2619,6 +2657,7 @@ namespace GameClient.Network.Pb {
     public GetHeroesResponse(GetHeroesResponse other) : this() {
       base_ = other.base_ != null ? other.base_.Clone() : null;
       heroes_ = other.heroes_.Clone();
+      formation_ = other.formation_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2657,6 +2696,17 @@ namespace GameClient.Network.Pb {
       get { return heroes_; }
     }
 
+    /// <summary>Field number for the "formation" field.</summary>
+    public const int FormationFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::GameClient.Network.Pb.FormationSlot> _repeated_formation_codec
+        = pb::FieldCodec.ForMessage(26, global::GameClient.Network.Pb.FormationSlot.Parser);
+    private readonly pbc::RepeatedField<global::GameClient.Network.Pb.FormationSlot> formation_ = new pbc::RepeatedField<global::GameClient.Network.Pb.FormationSlot>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::GameClient.Network.Pb.FormationSlot> Formation {
+      get { return formation_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2674,6 +2724,7 @@ namespace GameClient.Network.Pb {
       }
       if (!object.Equals(Base, other.Base)) return false;
       if(!heroes_.Equals(other.heroes_)) return false;
+      if(!formation_.Equals(other.formation_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2683,6 +2734,7 @@ namespace GameClient.Network.Pb {
       int hash = 1;
       if (base_ != null) hash ^= Base.GetHashCode();
       hash ^= heroes_.GetHashCode();
+      hash ^= formation_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2706,6 +2758,7 @@ namespace GameClient.Network.Pb {
         output.WriteMessage(Base);
       }
       heroes_.WriteTo(output, _repeated_heroes_codec);
+      formation_.WriteTo(output, _repeated_formation_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2721,6 +2774,7 @@ namespace GameClient.Network.Pb {
         output.WriteMessage(Base);
       }
       heroes_.WriteTo(ref output, _repeated_heroes_codec);
+      formation_.WriteTo(ref output, _repeated_formation_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2735,6 +2789,7 @@ namespace GameClient.Network.Pb {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Base);
       }
       size += heroes_.CalculateSize(_repeated_heroes_codec);
+      size += formation_.CalculateSize(_repeated_formation_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2754,6 +2809,7 @@ namespace GameClient.Network.Pb {
         Base.MergeFrom(other.Base);
       }
       heroes_.Add(other.heroes_);
+      formation_.Add(other.formation_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2784,6 +2840,10 @@ namespace GameClient.Network.Pb {
             heroes_.AddEntriesFrom(input, _repeated_heroes_codec);
             break;
           }
+          case 26: {
+            formation_.AddEntriesFrom(input, _repeated_formation_codec);
+            break;
+          }
         }
       }
     #endif
@@ -2812,6 +2872,10 @@ namespace GameClient.Network.Pb {
           }
           case 18: {
             heroes_.AddEntriesFrom(ref input, _repeated_heroes_codec);
+            break;
+          }
+          case 26: {
+            formation_.AddEntriesFrom(ref input, _repeated_formation_codec);
             break;
           }
         }

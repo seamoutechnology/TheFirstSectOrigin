@@ -90,9 +90,10 @@ namespace GameClient.UI
                     var slotScript = slotGo.GetComponent<UI_InventoryItem>();
                     if (slotScript != null)
                     {
+                        long instanceId = item.Id;
                         string code = item.ItemCode;
                         int qty = (int)item.Quantity;
-                        slotScript.Setup(code, qty, () => ShowItemDetail(code, qty));
+                        slotScript.Setup(code, qty, () => ShowItemDetail(instanceId, code, qty));
                     }
                 }
             }
@@ -102,12 +103,17 @@ namespace GameClient.UI
             }
         }
 
-        private void ShowItemDetail(string itemCode, int quantity)
+        public async void RefreshInventory()
+        {
+            await LoadInventoryAsync();
+        }
+
+        private void ShowItemDetail(long itemId, string itemCode, int quantity)
         {
             _selectedItemCode = itemCode;
             if (UIManager.Instance != null)
             {
-                UIManager.Instance.OpenPanel("UI_ItemTooltipPanel", (itemCode, quantity), false);
+                UIManager.Instance.OpenPanel("UI_ItemTooltipPanel", (itemId, itemCode, quantity), false);
             }
         }
     }

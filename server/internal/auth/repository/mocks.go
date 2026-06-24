@@ -45,3 +45,22 @@ type MockZoneRepo struct {
 func (m *MockZoneRepo) FindActive(ctx context.Context) ([]*Zone, error) {
 	return m.Zones, nil
 }
+
+func (m *MockZoneRepo) UpdateMetrics(ctx context.Context, zoneID int, cpu, ram float64, players int) error {
+	return nil
+}
+
+func (m *MockZoneRepo) CreateZone(ctx context.Context, name, status, gatewayURL string) error {
+	m.Zones = append(m.Zones, &Zone{
+		ID:         len(m.Zones) + 1,
+		Name:       name,
+		Status:     status,
+		GatewayURL: gatewayURL,
+		IsActive:   true,
+	})
+	return nil
+}
+
+func (m *MockZoneRepo) GetCount(ctx context.Context) (int, error) {
+	return len(m.Zones), nil
+}

@@ -197,6 +197,7 @@ namespace GameClient.UI
                 if (response != null && response.Base != null && response.Base.Code == 0)
                 {
                     GameManager.Instance.SetHeroes(response.Heroes);
+                    GameManager.Instance.SetFormation(response.Formation);
                 }
             }
             catch (System.Exception ex)
@@ -274,6 +275,7 @@ namespace GameClient.UI
                 if (string.IsNullOrEmpty(monsterName)) monsterName = monster.name;
 
                 var slotItem = slot.GetComponent<UI_FormationSlotItem>();
+                if (slotItem == null) slotItem = slot.AddComponent<UI_FormationSlotItem>();
                 if (slotItem != null)
                 {
                     // Tắt tương tác của nút bấm vì đây là quái vật phe địch chỉ hiển thị
@@ -309,7 +311,7 @@ namespace GameClient.UI
             // Để tránh lỗi LogError từ ResourceManager, ta chuyển hướng sang avatar đại diện của quái vật.
             if (address.Contains("Prefab") || address.Contains("prefab"))
             {
-                address = "avt_mon_01"; // Dùng avatar mặc định cho quái vật
+                address = "char_mon_01"; // Dùng avatar mặc định cho quái vật
             }
 
             Sprite sprite = null;
@@ -368,7 +370,7 @@ namespace GameClient.UI
                 if (_slotItems[i] == null) continue;
 
                 bool isActive = activeSlots.Contains(i);
-                _slotItems[i].Button.interactable = isActive;
+                _slotItems[i].SetActiveState(isActive);
 
                 if (!isActive)
                 {
@@ -1194,25 +1196,37 @@ namespace GameClient.UI
                         var sr = go.AddComponent<SpriteRenderer>();
                         sr.sortingOrder = 10;
                         
+                        Sprite mSprite = null;
                         if (!string.IsNullOrEmpty(enemyPrefabAddr) && enemyPrefabAddr != "MonsterPrefab")
                         {
                             try
                             {
-                                var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(enemyPrefabAddr);
-                                if (sprite != null)
-                                {
-                                    sr.sprite = sprite;
-                                }
+                                mSprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(enemyPrefabAddr);
                             }
-                            catch (System.Exception)
+                            catch (System.Exception) {}
+                        }
+
+                        if (mSprite == null)
+                        {
+                            try
                             {
-                                try
-                                {
-                                    var sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("char_mon_01");
-                                    sr.sprite = sprite;
-                                }
-                                catch {}
+                                mSprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("char_mon_01");
                             }
+                            catch (System.Exception) {}
+                        }
+
+                        if (mSprite == null)
+                        {
+                            try
+                            {
+                                mSprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>("avt_mon_01");
+                            }
+                            catch (System.Exception) {}
+                        }
+
+                        if (mSprite != null)
+                        {
+                            sr.sprite = mSprite;
                         }
                     }
 

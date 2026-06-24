@@ -2,13 +2,15 @@ package middleware
 
 import (
 	"context"
+	"net"
+	"sync"
+	"time"
+
+	"golang.org/x/time/rate"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-	"golang.org/x/time/rate"
-	"sync"
-	"time"
 )
 
 type RateLimiter struct {
@@ -68,7 +70,11 @@ func (rl *RateLimiter) UnaryInterceptor() grpc.UnaryServerInterceptor {
 			return nil, status.Errorf(codes.Internal, "failed to get peer info")
 		}
 
-		ip := p.Addr.String() // TODO: extract just IP if port is included
+		ip, _, err := net.SplitHostPort(p.Addr.String())
+		if err != nil {
+			ip = p.Addr.String()
+		}
+
 		limiter := rl.getVisitor(ip)
 		
 		if !limiter.Allow() {
@@ -78,3 +84,4 @@ func (rl *RateLimiter) UnaryInterceptor() grpc.UnaryServerInterceptor {
 		return handler(ctx, req)
 	}
 }
+

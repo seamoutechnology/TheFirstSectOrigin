@@ -21,7 +21,7 @@ MonoBehaviour:
   combatSceneName: Dungeon
   mapIcon: {fileID: 0}
   enemiesConfig:
-  - monsterId: monster_01_1
+  - monsterId: mons_01
     name: mons_01
     level: 1
     maxHP: 1200
@@ -29,7 +29,7 @@ MonoBehaviour:
     defense: 6
     speed: 12
     isBoss: 0
-    prefabAddress: MonsterPrefab
+    prefabAddress: 
   rewards:
   - itemId: 00000
     amount: 50

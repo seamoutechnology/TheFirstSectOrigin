@@ -17,3 +17,17 @@ func (h *GatewayHandler) UseItem(ctx context.Context, req *pb.UseItemRequest) (*
 	return h.world.UseItem(ctx, req)
 }
 
+func (h *GatewayHandler) BuyShopItem(ctx context.Context, req *pb.BuyShopItemRequest) (*pb.BuyShopItemResponse, error) {
+	return h.world.BuyShopItem(ctx, req)
+}
+
+func (h *GatewayHandler) GetShop(ctx context.Context, req *pb.GetShopRequest) (*pb.GetShopResponse, error) {
+	return h.world.GetShop(ctx, req)
+}
+
+func (h *GatewayHandler) RefreshShop(ctx context.Context, req *pb.RefreshShopRequest) (*pb.RefreshShopResponse, error) {
+	return h.world.RefreshShop(ctx, req)
+}
+
+
+

@@ -66,7 +66,10 @@ namespace GameClient.UI
                     GameManager.Instance.SetBuildings(baseTask.Result.Buildings);
 
                 if (heroesTask.Result.Base.Code == 0)
+                {
                     GameManager.Instance.SetHeroes(heroesTask.Result.Heroes);
+                    GameManager.Instance.SetFormation(heroesTask.Result.Formation);
+                }
 
                 if (stagesTask.Result.Base.Code == 0)
                     GameManager.Instance.SetCompletedStages(stagesTask.Result.StageIds);

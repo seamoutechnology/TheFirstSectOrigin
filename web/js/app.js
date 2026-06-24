@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userId && username) {
         document.getElementById('username-display').innerText = username;
         document.getElementById('landing-page').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'grid';
+        document.getElementById('dashboard').style.display = 'flex';
         fetchProfile(userId);
     }
 });
@@ -47,7 +47,7 @@ async function login() {
             
             document.getElementById('username-display').innerText = result.username;
             document.getElementById('landing-page').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'grid';
+            document.getElementById('dashboard').style.display = 'flex';
             document.getElementById('login-modal').style.display = 'none';
             
             // Load profile data
@@ -70,7 +70,7 @@ async function fetchProfile(userId) {
             document.getElementById('nickname-display').innerText = data.nickname;
             document.getElementById('gold-display').innerText = data.gold.toLocaleString();
             document.getElementById('diamond-display').innerText = data.diamond.toLocaleString();
-            document.getElementById('level-display').innerText = `Level ${data.level}`;
+            document.getElementById('level-display').innerText = `Lv ${data.level}`;
 
             const avatarDisplay = document.getElementById('avatar-display');
             if (avatarDisplay) {
@@ -121,7 +121,10 @@ function showTab(tabName) {
     document.getElementById(`tab-${tabName}`).style.display = 'block';
     
     // Activate nav item
-    event.currentTarget.classList.add('active');
+    const currentBtn = document.getElementById(`btn-tab-${tabName}`);
+    if (currentBtn) {
+        currentBtn.classList.add('active');
+    }
 }
 
 function processRecharge() {
@@ -132,8 +135,6 @@ function processRecharge() {
         alert('Gửi thẻ thành công! Vui lòng chờ hệ thống kiểm tra.');
     }, 1000);
 }
-
-async // Existing functions ...
 
 // Change Password Function
 async function changePassword() {
@@ -193,12 +194,16 @@ function claimDaily(day) {
     }
 }
 
-
-
 // Assistant Logic
 function toggleAssistant() {
     const bubble = document.getElementById('assistant-bubble');
-    bubble.classList.toggle('show');
+    if (bubble) {
+        if (bubble.style.display === 'block') {
+            bubble.style.display = 'none';
+        } else {
+            bubble.style.display = 'block';
+        }
+    }
 }
 
 // Disciples Logic
@@ -214,11 +219,16 @@ function renderDisciples() {
     if (!list) return;
     
     list.innerHTML = mockDisciples.map(d => `
-        <div class="card disciple-card">
-            <img src="${d.img}" class="rarity-${d.rarity.toLowerCase()}">
-            <h3>${d.name} <span class="badge badge-${d.rarity.toLowerCase()}">${d.rarity}</span></h3>
-            <p>Cấp độ: ${d.level}</p>
-            <button class="btn btn-primary" style="margin-top: 10px; padding: 8px 20px;">Truyền Công</button>
+        <div class="disciple-card">
+            <div class="disciple-header">
+                <span class="disciple-name">${d.name}</span>
+                <span class="disciple-rarity ${d.rarity}">${d.rarity}</span>
+            </div>
+            <div class="disciple-stat-row">
+                <span>Cấp độ</span>
+                <span style="font-weight:600; color:var(--text-primary);">Lv ${d.level}</span>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 15px; border-radius:10px; padding: 8px 12px; font-size:0.85rem; width:100%;">Truyền Công</button>
         </div>
     `).join('');
 }
@@ -231,11 +241,3 @@ showTab = function(tabName) {
         renderDisciples();
     }
 }
-
-// Check age on load
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('age_verified') === 'true') {
-        document.getElementById('age-modal').style.display = 'none';
-    }
-    // ... các logic load profile khác
-});

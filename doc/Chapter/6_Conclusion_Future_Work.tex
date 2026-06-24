@@ -1,0 +1,150 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Chương này tổng kết lại toàn bộ kết quả nghiên cứu và sản phẩm thực tiễn của đồ án tốt nghiệp thiết kế và xây dựng hệ thống trò chơi trực tuyến nhiều người chơi ``The First Sect Origin''. Đồng thời, chương này cũng phân tích chi tiết những đóng góp nổi bật, các bài học kinh nghiệm thu hoạch được trong suốt quá trình triển khai, nhận diện các mặt còn hạn chế của sản phẩm và đề xuất định hướng phát triển nhằm nâng cấp hệ thống trong tương lai.
+
+\section{Kết luận}
+\label{sec:conclusion}
+
+Đồ án tốt nghiệp đã hoàn thành đầy đủ mục tiêu đề ra là thiết kế và xây dựng một hệ thống game thẻ tướng chiến thuật 2D hoàn chỉnh bao gồm phần máy khách (Client) chạy trên game engine Unity và hệ thống máy chủ (Backend) phân tán theo kiến trúc vi dịch vụ (Microservices) \cite{newman2021building} viết bằng ngôn ngữ lập trình Go. Hệ thống đã chứng minh được tính khả thi, hiệu năng cao và khả năng bảo mật qua các bài kiểm thử nghiêm ngặt dưới tải đồng thời lớn.
+
+\subsection{So sánh với các nghiên cứu hoặc sản phẩm tương tự}
+\label{sec:comparison}
+
+Để làm rõ giá trị thực tiễn và tính tối ưu của giải pháp thiết kế mà đồ án lựa chọn, hệ thống máy chủ vi dịch vụ tự xây dựng được so sánh, đánh giá với hai hướng tiếp cận phổ biến hiện nay trong công nghiệp phát triển game: các dịch vụ máy chủ đám mây thương mại (Backend-as-a-Service - BaaS) như Microsoft PlayFab, Photon Engine và mô hình thiết kế hệ thống đơn khối truyền thống (Monolith) chạy trên nền Node.js kết hợp định dạng dữ liệu truyền tải JSON qua giao thức HTTP.
+
+\subsubsection{So sánh với các dịch vụ Backend đám mây thương mại (PlayFab, Photon Engine)}
+
+Các dịch vụ BaaS như Microsoft PlayFab hay Photon Engine thường được các studio game nhỏ lựa chọn nhờ ưu điểm triển khai nhanh chóng và giảm thiểu gánh nặng tự vận hành phần cứng ở giai đoạn khởi đầu. Tuy nhiên, khi so sánh với giải pháp tự phát triển của đồ án, các dịch vụ này bộc lộ những mặt hạn chế đáng kể:
+\begin{itemize}
+    \item \textbf{Chi phí vận hành dài hạn:} Các dịch vụ đám mây thương mại tính phí dựa trên số lượng người dùng hoạt động hàng tháng (MAU) hoặc lượng người dùng trực tuyến đồng thời (CCU). Khi trò chơi phát triển quy mô và có lượng người chơi lớn, chi phí duy trì sẽ tăng theo cấp số nhân, gây ảnh hưởng trực tiếp đến hiệu quả tài chính của nhà phát hành khi quy mô trò chơi mở rộng. Ngược lại, hệ thống Go Microservices tự phát triển cho phép triển khai linh hoạt trên mọi hạ tầng máy chủ ảo (VPS) giá rẻ hoặc hệ thống máy chủ on-premise của doanh nghiệp, giúp làm chủ chi phí vận hành cố định độc lập với sự tăng trưởng của CCU.
+    \item \textbf{Độ trễ truyền thông (Network Latency):} Do máy chủ của PlayFab hay Photon đặt tại các trung tâm dữ liệu nước ngoài (Singapore, Hồng Kông, Nhật Bản, Mỹ) nên các gói tin truyền qua mạng internet quốc tế thường bị ảnh hưởng bởi băng thông tuyến cáp quang biển. Đối với thị trường Việt Nam, điều này gây ra độ trễ kết nối từ 80ms đến hơn 200ms. Hệ thống tự xây dựng trong đồ án sử dụng giao thức gRPC kết nối trực tiếp đến cụm server đặt tại Việt Nam, mang lại thời gian phản hồi thấp (dưới 15ms), tối ưu hóa trải nghiệm người dùng.
+    \item \textbf{Khả năng tùy biến sâu và làm chủ mã nguồn:} Sử dụng PlayFab đồng nghĩa với việc lập trình viên phải chấp nhận các giới hạn nghiêm ngặt về mặt logic nghiệp vụ (Business Logic). Các hàm xử lý phía máy chủ (Cloud Script) bị cô lập trong môi trường runtime giới hạn thời gian chạy và dung lượng bộ nhớ. Lập trình viên không thể can thiệp sâu vào nhân cơ sở dữ liệu để thực hiện sharding, điều phối cơ chế cache động hoặc triển khai các thuật toán chống hack chiến đấu tùy biến. Với hệ thống tự xây dựng, đồ án làm chủ hoàn toàn mã nguồn, dễ dàng tích hợp các thuật toán xác thực chéo log chiến đấu dựa trên ngưỡng lực chiến, cơ chế ghi nhận tài nguyên lười Lazy Evaluation và cơ chế khóa phân tán Redis Mutex chống tương tranh dữ liệu.
+\end{itemize}
+
+\subsubsection{So sánh với kiến trúc máy chủ đơn khối truyền thống (Node.js Monolith + JSON)}
+
+Kiến trúc đơn khối (Monolith) kết hợp Node.js/Express và truyền dữ liệu JSON qua giao thức HTTP/1.1 là giải pháp rất phổ biến do dễ lập trình và cộng đồng hỗ trợ lớn. Tuy nhiên, khi hệ thống đòi hỏi khả năng xử lý tương tranh cao và tối ưu hóa tài nguyên phần cứng, kiến trúc này bộc lộ nhiều điểm nghẽn:
+\begin{itemize}
+    \item \textbf{Hiệu năng xử lý tương tranh (Concurrency):} Node.js vận hành dựa trên cơ chế đơn luồng (Single-Threaded Event Loop). Khi gặp các tác vụ yêu cầu tính toán CPU nặng (chẳng hạn như phân tích cú pháp chuỗi log chiến đấu dài hoặc tính toán ma trận thuộc tính nhân vật), Node.js dễ bị nghẽn xử lý (CPU-bound blocking), làm chậm toàn bộ các yêu cầu khác đang chờ trong hàng đợi. Trong khi đó, ngôn ngữ Go của hệ thống tự xây dựng hỗ trợ tương tranh mức phần cứng thông qua cơ chế Goroutine siêu nhẹ (chỉ tốn khoảng 2KB RAM khởi tạo so với 1-2MB của hệ điều hành Thread). Go có khả năng tận dụng tối đa kiến trúc CPU đa nhân để xử lý đồng thời hàng chục vạn kết nối mà không gây nghẽn hệ thống.
+    \item \textbf{Hiệu năng truyền tải và định dạng dữ liệu:} Định dạng JSON truyền qua HTTP/1.1 là định dạng văn bản (text-based), đòi hỏi kích thước gói tin lớn và tiêu tốn nhiều tài nguyên CPU của cả Client lẫn Server cho quá trình mã hóa/giải mã (Serialization/Deserialization). Hệ thống của đồ án sử dụng gRPC truyền tải dữ liệu nhị phân (binary-based) được tuần tự hóa cực nhanh bằng Protocol Buffers trên nền giao thức HTTP/2 (hỗ trợ ghép kênh Multiplexing). Kích thước các gói tin truyền thông trong game (như Battle Log, thông tin nhân vật) giảm từ 60\% đến 80\%, giúp tiết kiệm đáng kể băng thông đường truyền và giảm tải xử lý cho CPU.
+    \item \textbf{Khả năng mở rộng độc lập (Scalability):} Trong kiến trúc đơn khối, khi một chức năng (ví dụ như mô phỏng và xác thực trận đấu của Combat Server) bị quá tải CPU, lập trình viên bắt buộc phải nhân bản toàn bộ mã nguồn của cả hệ thống Monolith lên các máy chủ mới, gây lãng phí tài nguyên RAM và Database connections cho các thành phần không cần thiết khác (như Login, Chat). Với kiến trúc vi dịch vụ Go của đồ án, hệ thống được chia nhỏ thành các thành phần độc lập (Gateway, Login, World, Combat). Nhờ đó, ta có thể triển khai co giãn độc lập dịch vụ Combat Server lên hàng chục pod máy chủ khác để chịu tải chiến đấu, trong khi giữ nguyên số lượng pod của Login Server hay World Server, tối ưu hóa triệt để tài nguyên phần cứng đám mây.
+\end{itemize}
+
+Để tổng hợp lại các so sánh trên một cách trực quan, Bảng~\ref{tab:comparison_summary} thể hiện các tiêu chí kỹ thuật cốt lõi giữa hệ thống tự xây dựng của đồ án với hai hướng tiếp cận phổ biến trong công nghiệp.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{2.0cm}|p{3.7cm}|p{3.7cm}|p{3.7cm}|}
+\hline
+\textbf{Tiêu chí so sánh} & \textbf{Hệ thống vi dịch vụ Go + gRPC (Đồ án)} & \textbf{Dịch vụ đám mây BaaS (PlayFab / Photon)} & \textbf{Kiến trúc đơn khối Node.js + JSON} \\ \hline
+\textbf{Chi phí vận hành} & Thấp, cố định theo cấu hình VPS thực tế. & Tăng theo cấp số nhân dựa trên MAU/CCU. & Trung bình, tốn phần cứng do hiệu năng CPU kém. \\ \hline
+\textbf{Độ trễ kết nối (Latency)} & Cực thấp ($<$15ms) do đặt server nội địa. & Cao (80ms - 200ms) do datacenter ở nước ngoài. & Trung bình đến cao (30ms - 80ms) do dùng HTTP/1.1. \\ \hline
+\textbf{Xử lý đồng thời (Concurrency)} & Rất cao (hơn $10^6$ Goroutines đồng thời trên máy chủ từ 8 GB RAM). & Cao, phụ thuộc vào hạ tầng đám mây thuê ngoài. & Trung bình, bị giới hạn bởi cơ chế đơn luồng. \\ \hline
+\textbf{Khả năng tùy biến logic} & Tuyệt đối (100\% mã nguồn tự viết). & Bị hạn chế bởi API đóng gói và Cloud Script. & Cao (tự viết mã nguồn) nhưng khó tách biệt dịch vụ. \\ \hline
+\textbf{Bảo mật và chống hack} & Tích hợp xác thực chéo log chiến đấu thời gian thực. & Phụ thuộc vào các bộ lọc cơ bản hoặc Cloud Script giới hạn tải. & Khó triển khai xác thực chéo hiệu năng cao do nghẽn CPU. \\ \hline
+\textbf{Băng thông truyền tải} & Cực thấp (tuần tự hóa nhị phân Protobuf). & Trung bình, phụ thuộc giao thức API của BaaS. & Cao, sử dụng định dạng văn bản JSON qua HTTP. \\ \hline
+\end{tabular}
+\caption{Bảng so sánh tổng quan giải pháp công nghệ của đồ án với các sản phẩm tương tự}
+\label{tab:comparison_summary}
+\end{table}
+
+\subsection{Phân tích quá trình thực hiện đồ án tốt nghiệp}
+\label{sec:project_analysis}
+
+Trải qua quá trình nghiên cứu lý thuyết, thiết kế hệ thống và phát triển thực nghiệm, đồ án đã đạt được các kết quả quan trọng, đồng thời đánh giá khách quan các hạn chế còn tồn tại cần được khắc phục để hoàn thiện sản phẩm.
+
+\subsubsection{Những kết quả đã đạt được}
+
+Đồ án đã hiện thực hóa thành công sản phẩm trò chơi thẻ tướng chiến thuật 2D ``The First Sect Origin'' bám sát các mục tiêu đề ra ban đầu, đạt được các kết quả cụ thể sau:
+\begin{enumerate}
+    \item \textbf{Phát triển hoàn chỉnh Game Client (Unity):} Xây dựng ứng dụng máy khách trên nền tảng Unity 6 với hệ thống giao diện thích ứng (Responsive UI) chạy tối ưu ở độ phân giải thiết kế 2778 $\times$ 1284 và mật độ điểm ảnh 240 DPI, hoạt động trơn tru trên mọi tỷ lệ màn hình di động Android khác nhau. Tích hợp công nghệ phông chữ vector SDF (Signed Distance Field) sắc nét ở mọi độ phân giải. Xây dựng bộ phân tích cú pháp nhật ký trận đấu (Battle Log parser) để phát lại (Replay) diễn biến trận đấu sinh động dưới dạng hoạt ảnh 2D, hiệu ứng kỹ năng và âm thanh sống động.
+    \item \textbf{Thiết kế hệ thống máy chủ vi dịch vụ (Go):} Xây dựng thành công hệ thống Backend phân tán gồm 4 dịch vụ độc lập giao tiếp qua gRPC nhị phân hiệu năng cao: Gateway Server (định tuyến, bảo mật), Login Server (xác thực, mã hóa Bcrypt, cấp khóa token JWT), World Server (quản lý người chơi, công trình, tài nguyên), và Combat Server (mô phỏng, xác thực trận đấu phi trạng thái).
+    \item \textbf{Bảo mật dữ liệu và giải quyết tương tranh phân tán:} Ứng dụng thành công cơ chế khóa phân tán Redis Mutex chống Race Condition khi người chơi spam request thu hoạch tài nguyên đồng thời từ nhiều thiết bị. Tích hợp giải pháp kiểm soát tương tranh lạc quan OCC tại cơ sở dữ liệu PostgreSQL để bảo vệ an toàn tuyệt đối cho số dư tài sản của người dùng.
+    \item \textbf{Triển khai DevOps và Kiểm thử tải:} Đóng gói toàn bộ ứng dụng bằng Docker và điều phối qua Docker Compose. Sử dụng Nginx Reverse Proxy làm công cụ định tuyến đầu vào và cấp chứng chỉ bảo mật. Tiến hành kiểm thử tải trọng (Load Testing) giả lập thành công kịch bản 5.000 CCU hoạt động đồng thời; hệ thống máy chủ vận hành ổn định và xử lý thành công toàn bộ các yêu cầu truyền đến với độ trễ phản hồi trung bình cực thấp (5 ms) và mức tiêu hao tài nguyên phần cứng tối ưu.
+\end{enumerate}
+
+\subsubsection{Những hạn chế và việc chưa làm được}
+
+Bên cạnh những kết quả tích cực, hệ thống vẫn tồn tại một số điểm hạn chế cần được khắc phục trong các phiên bản tiếp theo:
+\begin{itemize}
+    \item \textbf{Hạ tầng Redis chưa phân tán (Single Node):} Hệ thống cache và quản lý khóa phân tán Redis hiện tại mới chỉ chạy trên một thực thể độc lập (Single Node). Điều này tạo ra điểm nghẽn chịu lỗi duy nhất (Single Point of Failure - SPoF). Nếu máy chủ Redis gặp sự cố sập nguồn hoặc quá tải vật lý, toàn bộ cơ chế khóa phân tán và lưu trữ phiên hoạt động của người chơi sẽ bị gián đoạn.
+    \item \textbf{Chưa tự động hóa Sharding cơ sở dữ liệu:} Cơ chế phân vùng cơ sở dữ liệu PostgreSQL hiện tại mới chỉ được thiết kế ở mức logic trên mã nguồn World Server dựa trên ID người chơi, chưa được cấu hình tự động phân chia vật lý (Dynamic Sharding) trên cụm cơ sở dữ liệu thực tế và chưa tích hợp khả năng co giãn tự động đồng bộ với Kubernetes.
+    \item \textbf{Chưa hỗ trợ tính năng đấu trường đối kháng (PvP):} Hệ thống hiện tại mới chỉ tập trung phát triển và mô phỏng chế độ chơi vượt ải cốt truyện (PvE) đánh với quái vật do máy tính điều khiển. Trò chơi chưa xây dựng được tính năng đấu trường đối kháng giữa người chơi với người chơi (PvP), bao gồm cả hình thức đối kháng không đồng bộ (Asynchronous PvP - thách đấu đội hình phòng thủ lưu sẵn của người chơi khác do máy tính điều khiển) lẫn hình thức đối kháng trực tuyến thời gian thực (Real-time PvP).
+    \item \textbf{Hệ thống kỹ năng và chiều sâu gameplay còn đơn giản:} Hệ thống kỹ năng chiến thuật của các đệ tử tông môn mới dừng lại ở các hiệu ứng cơ bản như gây sát thương vật lý, sát thương phép thuật, và hồi phục máu. Hệ thống chưa có các hiệu ứng chiến thuật phức tạp (khống chế cứng, cướp lượt, hoặc tương tác môi trường chiến đấu).
+\end{itemize}
+
+\subsubsection{Các đóng góp nổi bật của đồ án tốt nghiệp}
+
+Đóng góp lớn nhất của đồ án tốt nghiệp nằm ở việc giải quyết thành công hai bài toán kinh điển trong phát triển game online nhiều người chơi bằng các giải pháp công nghệ tối ưu:
+\begin{enumerate}
+    \item \textbf{Giải pháp xác thực chéo nhật ký trận đấu (Combat Log Validation) hiệu năng cao chống hack phía Client:} Thay vì để máy chủ phải chạy lại toàn bộ tiến trình mô phỏng trận đấu từ đầu gây quá tải CPU nghiêm trọng, hoặc tin tưởng hoàn toàn vào kết quả của Client dẫn đến lỗ hổng hack chỉ số, đồ án đã đề xuất giải pháp xác thực chéo phi trạng thái trên RAM. Bằng việc áp dụng các ràng buộc toán học thông minh (ngưỡng lực chiến tương quan, giới hạn sát thương tối đa của một đòn đánh theo công thức \( \text{Damage}_{\text{hit}} \le \text{PlayerPower} \times 2 \), và kiểm tra tính tồn tại của log), Combat Server viết bằng Go có thể xác thực tính đúng đắn của trận đấu chỉ trong chưa đầy 1ms, chặn đứng 100\% các nỗ lực chỉnh sửa bộ nhớ client hay gửi gói tin thắng giả mạo mà vẫn tối ưu hóa chi phí phần cứng.
+    \item \textbf{Cơ chế đồng bộ hóa tài nguyên nhàn rỗi lười (Lazy Evaluation):} Đồ án đã loại bỏ hoàn toàn các tiến trình chạy ngầm ghi cơ sở dữ liệu định kỳ cho hàng vạn tài khoản (vốn là nguyên nhân hàng đầu gây nghẽn I/O ghi tại Database). Bằng thuật toán tính toán động mốc thời gian chênh lệch chỉ khi có yêu cầu thực tế phát sinh, lượng câu lệnh cập nhật DB giảm từ hàng ngàn câu lệnh mỗi giờ xuống còn 2-3 câu lệnh thực tế cho mỗi người chơi hoạt động, giúp CPU của PostgreSQL luôn duy trì dưới mức 15\% ngay cả khi chạy giả lập tải đỉnh 5.000 CCU.
+\end{enumerate}
+
+\subsubsection{Bài học kinh nghiệm rút ra}
+
+Quá trình thực hiện đồ án đã đúc rút được nhiều kinh nghiệm thực tiễn quan trọng về mặt chuyên môn và thiết kế hệ thống:
+\begin{itemize}
+    \item \textbf{Tư duy thiết kế hệ thống phân tán:} Hiểu rõ cách phân rã một ứng dụng lớn thành các vi dịch vụ độc lập, thiết kế giao thức giao tiếp gRPC hiệu quả và cách tổ chức luồng đi của dữ liệu qua Gateway.
+    \item \textbf{Kỹ năng tối ưu hóa hiệu năng:} Nhận thức được rằng một hệ thống tốt không chỉ chạy đúng mà phải chạy hiệu quả. Việc lựa chọn công nghệ (Go, gRPC, Redis) và thiết kế giải thuật thông minh (Lazy Evaluation, stateless combat simulation) quyết định sự sống còn của hệ thống dưới tải lớn.
+    \item \textbf{Kỹ năng xử lý tương tranh dữ liệu thực tế:} Nắm vững cách thức áp dụng khóa phân tán Redis Mutex và kiểm soát tương tranh lạc quan để giải quyết triệt để các bài toán Race Condition trong môi trường phân tán -- điều mà lý thuyết sách vở rất khó truyền tải hết tính phức tạp.
+    \item \textbf{Kỹ năng làm việc nhóm và quy trình DevOps:} Học cách phối hợp công việc thông qua Git, tự động hóa đóng gói, triển khai ứng dụng bằng Docker/Nginx, và tư duy kiểm thử tải thực tế để đánh giá chất lượng sản phẩm một cách khách quan.
+\end{itemize}
+
+\section{Hướng phát triển}
+\label{sec:future_work}
+
+Để hoàn thiện sản phẩm game ``The First Sect Origin'' và đưa dự án tiếp cận gần hơn với tiêu chuẩn thương mại hóa thực tế, định hướng công việc trong tương lai được nhóm nghiên cứu chia làm hai giai đoạn rõ ràng: hoàn thiện các tính năng/nhiệm vụ hiện tại và nghiên cứu nâng cấp các hướng đi công nghệ mới.
+
+\subsection{Các công việc cần thiết để hoàn thiện sản phẩm}
+\label{sec:improve_existing}
+
+Trước tiên, hệ thống cần tập trung giải quyết các điểm hạn chế đã được nhận diện ở phiên bản hiện tại nhằm đảm bảo độ tin cậy, tính an toàn và chiều sâu của trò chơi:
+\begin{enumerate}
+    \item \textbf{Tích hợp chữ ký số bảo mật cho gói tin Battle Log:} 
+    Để nâng cấp lớp bảo vệ an ninh thông tin, ngăn chặn hacker phân tích cấu trúc Protobuf để xây dựng các chương trình giả lập log chiến đấu hợp lệ vượt qua bộ lọc của Combat Server, hệ thống sẽ áp dụng cơ chế ký số điện tử (Digital Signature) sử dụng mã hóa bất đối xứng (như ECDSA - Elliptic Curve Digital Signature Algorithm).
+    
+    Quy trình hoạt động đề xuất: Khi người chơi bắt đầu trận đấu, Login/World Server sẽ cấp cho Client một cặp khóa phiên (session key) ngắn hạn hoặc sử dụng khóa bí mật được sinh ngẫu nhiên lưu trong vùng nhớ an toàn của thiết bị (Android Keystore hoặc iOS Keychain). Khi trận đấu kết thúc, Client thực hiện băm dữ liệu Battle Log và dùng khóa bí mật (Private Key) để ký số lên gói tin. Combat Server khi nhận được gói tin sẽ dùng khóa công khai (Public Key) tương ứng để xác thực chữ ký. Nếu gói tin bị chỉnh sửa dù chỉ một bit trên đường truyền, chữ ký sẽ lập tức bị coi là bất hợp lệ và yêu cầu xác thực bị hủy bỏ ngay lập tức.
+    
+    \item \textbf{Triển khai Redis Cluster và PostgreSQL Sharding vật lý:}
+    Để loại bỏ điểm nghẽn chịu lỗi duy nhất SPoF của bộ nhớ đệm, hệ thống sẽ cấu hình cụm Redis Cluster phân tán gồm ít nhất 3 node Master và 3 node Slave. Dữ liệu khóa phân tán và phiên làm việc sẽ được phân chia tự động qua 16384 hash slot của Redis, đảm bảo tính sẵn sàng cao (High Availability). Nếu một node Master bị sập, node Slave tương ứng sẽ tự động được nâng cấp lên làm Master trong vòng vài giây mà không gây gián đoạn hệ thống.
+    
+    Song song đó, cơ sở dữ liệu PostgreSQL sẽ được cấu hình sharding vật lý thực tế bằng công cụ trung gian (như Citus hoặc các bộ router sharding chuyên dụng), giúp phân tán dữ liệu người chơi sang nhiều máy chủ database vật lý khác nhau, tăng giới hạn đọc/ghi và giảm tải cho một máy chủ database duy nhất.
+    
+    \item \textbf{Mở rộng hệ thống kỹ năng đệ tử đa dạng:}
+    Nâng cấp mã nguồn mô phỏng chiến đấu tại cả Client (Unity) và Server (Go Combat Server) để hỗ trợ các hiệu ứng trạng thái (Status Effects / Buffs / Debuffs) phức tạp:
+    \begin{itemize}
+        \item \textbf{Khống chế lượt đi:} Các kỹ năng gây choáng (Stun), đóng băng (Freeze) khiến mục tiêu mất lượt, hoặc kỹ năng tăng tốc độ đánh (Speed Buff) giúp đệ tử được ưu tiên tấn công trước.
+        \item \textbf{Hút máu và Phản sát thương:} Kỹ năng chuyển hóa phần trăm sát thương gây ra thành lượng máu hồi phục cho bản thân (Lifesteal), hoặc phản lại một phần sát thương nhận vào cho kẻ tấn công (Thorns).
+        \item \textbf{Triệu hồi và Hiệu ứng môi trường:} Cho phép đệ tử triệu hồi thêm các vật thể phụ trợ (như con rối, thú triệu hồi) tham gia chiến đấu, hoặc tạo ra các trận pháp thay đổi thuộc tính của toàn bộ nhân vật trên sân đấu (như giảm công vật lý, tăng thủ phép).
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Định hướng phát triển và nâng cấp mới}
+\label{sec:new_directions}
+
+Sau khi hoàn thiện các tính năng hiện hữu, các hướng đi mới mang tính đột phá về mặt công nghệ và trải nghiệm người dùng sẽ được nghiên cứu và tích hợp vào hệ thống:
+
+\subsubsection{Xây dựng tính năng đấu trường đối kháng (PvP)}
+
+Để mang lại tính tương tác xã hội cao và tăng sức hấp dẫn cho trò chơi, đồ án định hướng phát triển một dịch vụ vi dịch vụ mới chuyên trách quản lý đấu trường đối kháng PvP, bao gồm chế độ PvP không đồng bộ và đối kháng trực tuyến thời gian thực:
+\begin{itemize}
+    \item \textbf{Đối kháng không đồng bộ (Asynchronous PvP):} Xây dựng cơ chế cho phép người chơi thách đấu với đội hình phòng thủ do AI điều khiển của người chơi khác. World Server sẽ truy vấn dữ liệu đội hình và thuộc tính nhân vật đã lưu của đối thủ từ PostgreSQL, chuyển dữ liệu sang Combat Server để thực hiện mô phỏng phi trạng thái tương tự như chế độ PvE và trả về nhật ký trận đấu.
+    \item \textbf{Đối kháng trực tiếp thời gian thực (Real-time PvP):} Sử dụng tính năng truyền phát hai chiều (\textit{Bidirectional Streaming}) của gRPC trên nền HTTP/2 hoặc giao thức WebSocket \cite{rfc6455} để duy trì luồng dữ liệu liên tục giữa hai client và PvP Server, đồng bộ các thao tác chiến đấu với độ trễ dưới 20ms.
+    \item \textbf{Cơ chế đồng bộ hóa trạng thái (State Synchronization):} Áp dụng mô hình máy chủ làm trọng tài (Server-Authoritative) kết hợp kỹ thuật dự đoán phía client (Client-side Prediction) và bù trừ độ trễ mạng (Lag Compensation) để đảm bảo trận đấu Real-time PvP diễn ra mượt mà ngay cả trong điều kiện mạng chập chờn.
+\end{itemize}
+
+\subsubsection{Triển khai hệ thống tự động co giãn (Auto-scaling) trên Kubernetes (K8s)}
+
+Để đáp ứng linh hoạt với lưu lượng người chơi thay đổi liên tục trong thực tế (ví dụ: lượng người chơi tăng đột biến vào các khung giờ sự kiện hoặc tối cuối tuần), hệ thống sẽ được chuyển đổi hạ tầng triển khai sang cụm Kubernetes:
+\begin{itemize}
+    \item \textbf{Đóng gói và quản lý Pod:} Mỗi vi dịch vụ (Gateway, Login, World, Combat) sẽ được định nghĩa trong các tệp tin cấu hình Kubernetes Deployment độc lập, cho phép quản lý vòng đời và cấu hình giới hạn tài nguyên (CPU/RAM Requests và Limits) cho từng container một cách chi tiết.
+    \item \textbf{Tích hợp Horizontal Pod Autoscaler (HPA):} Cấu hình HPA để tự động theo dõi các chỉ số hiệu năng hệ thống thông qua Prometheus và Grafana. 
+    
+    Khi mức tiêu thụ CPU trung bình của các pod Combat Server vượt quá ngưỡng 70\%, hoặc khi số lượng kết nối gRPC đồng thời tăng cao, Kubernetes sẽ tự động sinh thêm (scale up) các pod Combat Server mới trong vòng vài giây để san sẻ tải lượng tính toán chiến đấu. Ngược lại, khi lượng người chơi giảm xuống vào ban đêm, hệ thống sẽ tự động giải phóng (scale down) các pod dư thừa để tiết kiệm chi phí thuê tài nguyên đám mây cho nhà phát hành.
+    
+    \item \textbf{Quản lý định tuyến động qua Ingress Controller:} Sử dụng các công cụ Ingress Controller hiện đại (như Nginx Ingress Controller) để tự động phát hiện và định tuyến các yêu cầu kết nối từ Gateway Server đến các pod vi dịch vụ mới được khởi tạo một cách trơn tru, không gây gián đoạn bất kỳ phiên kết nối nào của người chơi đang trực tuyến.
+\end{itemize}
+
+\end{document}

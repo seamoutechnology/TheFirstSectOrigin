@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The First Sect Origin - Cổng Tu Luyện</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0c10;
-            --container-bg: rgba(31, 40, 51, 0.65);
-            --accent-color: #66fcf1;
-            --accent-hover: #45f3e7;
-            --text-color: #c5c6c7;
-            --heading-color: #ffffff;
-            --gold-color: #f39c12;
-            --qi-color: #9b59b6;
-            --border-radius: 16px;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --gold-color: #f59e0b;
+            --qi-color: #06b6d4;
+            --border-radius: 20px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
         }
 
         * {
@@ -26,8 +33,8 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #1f2833 0%, #0b0c10 100%);
-            color: var(--text-color);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,43 +44,42 @@
 
         .dashboard-container {
             width: 100%;
-            max-width: 500px;
-            background: var(--container-bg);
-            border: 1px solid rgba(102, 252, 241, 0.25);
-            backdrop-filter: blur(12px);
+            max-width: 480px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            padding: 35px 30px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .dashboard-container:hover {
             transform: translateY(-2px);
-            border-color: rgba(102, 252, 241, 0.5);
+            border-color: rgba(99, 102, 241, 0.2);
         }
 
         h1 {
-            color: var(--heading-color);
+            color: var(--text-primary);
             text-align: center;
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 25px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+            letter-spacing: -0.02em;
         }
 
         .profile-card {
-            background: rgba(11, 12, 16, 0.8);
-            border-radius: 12px;
+            background: #f9fafb;
+            border-radius: 16px;
             padding: 20px;
             margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
         }
 
         .profile-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 12px;
             font-size: 15px;
         }
 
@@ -82,16 +88,17 @@
         }
 
         .label {
-            color: #858688;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .value {
-            font-weight: 600;
-            color: var(--heading-color);
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         .value.accent {
-            color: var(--accent-color);
+            color: var(--primary);
         }
 
         .value.gold {
@@ -104,15 +111,15 @@
 
         .tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .tab-btn {
             flex: 1;
             background: none;
             border: none;
-            color: #858688;
+            color: var(--text-secondary);
             padding: 12px;
             font-size: 15px;
             font-weight: 600;
@@ -122,7 +129,7 @@
         }
 
         .tab-btn.active {
-            color: var(--accent-color);
+            color: var(--primary);
         }
 
         .tab-btn.active::after {
@@ -132,8 +139,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--accent-color);
-            box-shadow: 0 0 8px var(--accent-color);
+            background: var(--primary);
         }
 
         .tab-content {
@@ -152,23 +158,25 @@
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
-            color: #858688;
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         .input-field {
             width: 100%;
-            padding: 14px;
-            background: rgba(11, 12, 16, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--heading-color);
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
             font-size: 15px;
-            transition: border-color 0.2s;
+            outline: none;
+            transition: all 0.15s ease;
         }
 
         .input-field:focus {
-            outline: none;
-            border-color: var(--accent-color);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 
         .btn-submit {
@@ -176,18 +184,18 @@
             padding: 14px;
             background: var(--accent-color);
             border: none;
-            border-radius: 8px;
-            color: #0b0c10;
+            border-radius: 12px;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.2);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
         }
 
         .btn-submit:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+            background: var(--primary-hover);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
             transform: translateY(-1px);
         }
 
@@ -196,8 +204,8 @@
         }
 
         .btn-submit:disabled {
-            background: #4a5568;
-            color: #a0aec0;
+            background: #e5e7eb;
+            color: #9ca3af;
             cursor: not-allowed;
             box-shadow: none;
         }
@@ -210,9 +218,9 @@
         }
 
         .recharge-card {
-            background: rgba(11, 12, 16, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
             padding: 15px;
             text-align: center;
             cursor: pointer;
@@ -220,47 +228,48 @@
         }
 
         .recharge-card:hover {
-            border-color: rgba(102, 252, 241, 0.3);
-            background: rgba(11, 12, 16, 0.9);
+            border-color: rgba(99, 102, 241, 0.2);
+            background: #ffffff;
         }
 
         .recharge-card.selected {
-            border-color: var(--accent-color);
-            background: rgba(102, 252, 241, 0.05);
-            box-shadow: 0 0 10px rgba(102, 252, 241, 0.1);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
         }
 
         .recharge-amount {
             font-size: 16px;
             font-weight: 700;
-            color: var(--heading-color);
+            color: var(--text-primary);
             margin-bottom: 5px;
         }
 
         .recharge-reward {
             font-size: 12px;
-            color: var(--accent-color);
+            font-weight: 500;
+            color: var(--primary);
         }
 
         #result-box {
             margin-top: 15px;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 14px;
+            font-weight: 600;
             display: none;
             text-align: center;
         }
 
         .result-success {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            border: 1px solid rgba(46, 204, 113, 0.3);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .result-error {
-            background: rgba(231, 76, 60, 0.15);
-            color: #e74c3c;
-            border: 1px solid rgba(231, 76, 60, 0.3);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
     </style>
 </head>
@@ -271,7 +280,7 @@
             <div class="profile-row">
                 <span class="label">Máy Chủ (Zone):</span>
                 <span class="value">
-                    <select id="zone-select" class="input-field" style="padding: 4px 8px; width: auto; font-size: 13px; border-radius: 4px; background: rgba(11, 12, 16, 0.9); color: var(--accent-color); border: 1px solid var(--accent-color); cursor: pointer;" onchange="changeZone(this.value)">
+                    <select id="zone-select" class="input-field" style="padding: 4px 8px; width: auto; font-size: 13px; border-radius: 6px; color: var(--primary); border: 1px solid var(--border-color); cursor: pointer;" onchange="changeZone(this.value)">
                         {{range .Zones}}
                         <option value="{{.ID}}" {{if eq $.ZoneID .ID}}selected{{end}}>{{.Name}}</option>
                         {{end}}
@@ -312,7 +321,7 @@
 
         <!-- Recharge Tab -->
         <div id="tab-recharge" class="tab-content">
-            <label>Chọn mốc nạp:</label>
+            <label style="margin-bottom: 12px;">Chọn mốc nạp:</label>
             <div class="recharge-grid">
                 <div class="recharge-card" onclick="selectRecharge(this, 10000)">
                     <div class="recharge-amount">10.000đ</div>

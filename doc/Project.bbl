@@ -1,0 +1,217 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global/global}
+  \entry{newman2021building}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=NS}{%
+         family={Newman},
+         familyi={N\bibinitperiod},
+         given={Sam},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly Media}%
+    }
+    \strng{namehash}{NS1}
+    \strng{fullhash}{NS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Building Microservices}
+    \field{year}{2021}
+  \endentry
+
+  \entry{unity2026}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=U}{%
+         family={{Unity Technologies}},
+         familyi={U\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{U1}
+    \strng{fullhash}{U1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Unity User Manual}
+    \verb{url}
+    \verb https://docs.unity3d.com/Manual/index.html
+    \endverb
+    \field{year}{2026}
+    \field{urlday}{18}
+    \field{urlmonth}{05}
+    \field{urlyear}{2026}
+  \endentry
+
+  \entry{donovan2015go}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=DAAA}{%
+         family={Donovan},
+         familyi={D\bibinitperiod},
+         given={Alan A.\bibnamedelima A.},
+         giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim
+  A\bibinitperiod},
+      }}%
+      {{hash=KBW}{%
+         family={Kernighan},
+         familyi={K\bibinitperiod},
+         given={Brian\bibnamedelima W.},
+         giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Addison-Wesley Professional}%
+    }
+    \strng{namehash}{DAAAKBW1}
+    \strng{fullhash}{DAAAKBW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{The Go Programming Language}
+    \field{year}{2015}
+  \endentry
+
+  \entry{indrasiri2020grpc}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=IK}{%
+         family={Indrasiri},
+         familyi={I\bibinitperiod},
+         given={Kasun},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Kuruppu},
+         familyi={K\bibinitperiod},
+         given={Danesh},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly Media}%
+    }
+    \strng{namehash}{IKKD1}
+    \strng{fullhash}{IKKD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{gRPC: Up and Running}
+    \field{year}{2020}
+  \endentry
+
+  \entry{postgresql2026}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{PostgreSQL Global Development Group}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P1}
+    \strng{fullhash}{P1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{PostgreSQL 16 Documentation}
+    \verb{url}
+    \verb https://www.postgresql.org/docs/16/index.html
+    \endverb
+    \field{year}{2026}
+    \field{urlday}{12}
+    \field{urlmonth}{04}
+    \field{urlyear}{2026}
+  \endentry
+
+  \entry{carlson2013redis}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=CJL}{%
+         family={Carlson},
+         familyi={C\bibinitperiod},
+         given={Josiah\bibnamedelima L.},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Manning Publications}%
+    }
+    \strng{namehash}{CJL1}
+    \strng{fullhash}{CJL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Redis in Action}
+    \field{year}{2013}
+  \endentry
+
+  \entry{rfc7519}{report}{}{}
+    \name{author}{3}{}{%
+      {{hash=JM}{%
+         family={Jones},
+         familyi={J\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Bradley},
+         familyi={B\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SN}{%
+         family={Sakimura},
+         familyi={S\bibinitperiod},
+         given={Nat},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JM+1}
+    \strng{fullhash}{JMBJSN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7519}
+    \field{title}{JSON Web Token (JWT)}
+    \list{institution}{1}{%
+      {Internet Engineering Task Force}%
+    }
+    \field{type}{RFC}
+    \field{year}{2015}
+  \endentry
+
+  \entry{rfc6455}{report}{}{}
+    \name{author}{2}{}{%
+      {{hash=FI}{%
+         family={Fette},
+         familyi={F\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Melnikov},
+         familyi={M\bibinitperiod},
+         given={Alexey},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FIMA1}
+    \strng{fullhash}{FIMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{6455}
+    \field{title}{The WebSocket Protocol}
+    \list{institution}{1}{%
+      {Internet Engineering Task Force}%
+    }
+    \field{type}{RFC}
+    \field{year}{2011}
+  \endentry
+\enddatalist
+\endinput

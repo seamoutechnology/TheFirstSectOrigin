@@ -1,0 +1,9 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+\begin{center}
+    \Large{\textbf{TÓM TẮT ĐỒ ÁN TỐT NGHIỆP}}\\
+\end{center}
+\vspace{1cm}
+
+Trong bối cảnh ngành công nghiệp trò chơi trực tuyến phát triển mạnh mẽ, việc xây dựng hệ thống máy chủ backend hỗ trợ trò chơi nhiều người chơi thời gian thực với hiệu năng cao, độ trễ thấp và khả năng mở rộng tốt là một bài toán vô cùng quan trọng. Các giải pháp truyền thống dựa trên kiến trúc nguyên khối thường gặp khó khăn về khả năng mở rộng và đồng bộ dữ liệu tải cao. Đồ án này lựa chọn hướng tiếp cận tự phát triển hệ thống backend theo kiến trúc microservices sử dụng ngôn ngữ Go kết hợp giao thức truyền thông gRPC/Protobuf. Lựa chọn này giúp tận dụng tối đa hiệu suất xử lý song song vượt trội của Go qua Goroutines và tối ưu hóa băng thông mạng nhờ gRPC. Giải pháp đề xuất bao gồm ứng dụng client xây dựng trên Unity kết nối qua Gateway đến các dịch vụ backend độc lập: Login-server xử lý xác thực, World-server quản lý thông tin đệ tử, xây dựng tông môn, tính toán điểm lực chiến và cập nhật bảng xếp hạng thời gian thực, cùng Combat-server phụ trách mô phỏng các trận đấu chiến thuật. Hệ thống sử dụng PostgreSQL để lưu trữ dữ liệu bền vững và tích hợp Redis để quản lý phiên đăng nhập nhanh chóng. Kết quả thực nghiệm cho thấy hệ thống hoạt động ổn định dưới tải cao, thời gian phản hồi nhanh, độ trễ thấp và đảm bảo tính chính xác khi cập nhật bảng xếp hạng. Đóng góp chính của đồ án là thiết kế và triển khai thành công một kiến trúc máy chủ game microservices hoàn chỉnh, có hiệu năng tốt và khả năng mở rộng linh hoạt cho các tựa game chiến thuật trực tuyến.
+\end{document}

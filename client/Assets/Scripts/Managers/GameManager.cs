@@ -42,6 +42,11 @@ namespace GameClient
             OnHeroesUpdated?.Invoke(PlayerHeroes);
         }
 
+        public void SetFormation(IEnumerable<FormationSlot> formation)
+        {
+            Formation = new List<FormationSlot>(formation);
+        }
+
         public void ClearData()
         {
             CurrentPlayer = null;

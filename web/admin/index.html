@@ -5,27 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The First Sect Origin - Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0d0e12;
-            --card-bg: #161820;
-            --sidebar-bg: #101116;
-            --accent-color: #66fcf1;
-            --accent-hover: #45f3e7;
-            --text-color: #c5c6c7;
-            --heading-color: #ffffff;
-            --gold-color: #f39c12;
-            --rarity-ur: #e74c3c;
-            --rarity-ssr: #e67e22;
-            --rarity-sr: #9b59b6;
-            --rarity-r: #3498db;
+            --bg-color: #f8f9fa;
+            --sidebar-bg: #ffffff;
+            --sidebar-active-bg: rgba(99, 102, 241, 0.1);
+            --sidebar-active-color: #6366f1;
+            --sidebar-text: #6b7280;
+            --card-bg: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border-color: #e5e7eb;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --info: #06b6d4;
+            --danger: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            
+            --rarity-ur: #ef4444;
+            --rarity-ssr: #f59e0b;
+            --rarity-sr: #6366f1;
+            --rarity-r: #06b6d4;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
         }
@@ -33,139 +46,191 @@
         .sidebar {
             height: 100vh;
             background: var(--sidebar-bg);
-            border-right: 1px solid rgba(102, 252, 241, 0.1);
+            border-right: 1px solid var(--border-color);
             position: fixed;
-            padding: 25px 15px;
+            padding: 30px 16px;
         }
 
         .sidebar-brand {
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary);
+            letter-spacing: 0.05em;
             margin-bottom: 40px;
-            padding-left: 10px;
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-brand::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent);
         }
 
         .nav-link {
-            color: #858688;
-            padding: 12px 15px;
-            border-radius: 8px;
+            color: var(--sidebar-text);
+            padding: 12px 16px;
+            border-radius: 12px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--heading-color);
-            background: rgba(102, 252, 241, 0.1);
-            border-left: 3px solid var(--accent-color);
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        .nav-link.active {
+            color: var(--sidebar-active-color);
+            background: var(--sidebar-active-bg);
         }
 
         .main-content {
             margin-left: 16.666667%;
-            padding: 30px;
+            padding: 40px;
             min-height: 100vh;
+        }
+
+        h2 {
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .card {
             background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             margin-bottom: 25px;
+            overflow: hidden;
         }
 
         .card-header {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px 20px;
-            font-weight: 600;
-            color: var(--heading-color);
+            background-color: #f9fafb;
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            padding: 24px;
         }
 
         .table {
-            color: var(--text-color);
+            color: var(--text-primary);
             vertical-align: middle;
+            margin-bottom: 0;
         }
 
         .table th {
-            color: #858688;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            font-size: 0.9rem;
         }
 
         .table td {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
         }
 
         .type-badge {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             padding: 4px 10px;
             border-radius: 6px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .badge-MAINTENANCE { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
-        .badge-RULES { background: rgba(127, 140, 141, 0.2); color: #95a5a6; }
-        .badge-ACTIVITY { background: rgba(52, 152, 219, 0.2); color: #3498db; }
-        .badge-NEWS { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .badge-MAINTENANCE { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .badge-RULES { background: rgba(107, 114, 128, 0.1); color: var(--sidebar-text); }
+        .badge-ACTIVITY { background: rgba(6, 182, 212, 0.1); color: var(--info); }
+        .badge-NEWS { background: rgba(16, 185, 129, 0.1); color: var(--success); }
 
         .btn-primary {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: #000;
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
             font-weight: 600;
+            border-radius: 12px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+            transition: all 0.2s;
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
-            color: #000;
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
         }
 
         .form-control, .form-select {
-            background-color: #1c1e28;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-color);
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 12px;
+            padding: 10px 14px;
         }
 
         .form-control:focus, .form-select:focus {
-            background-color: #222533;
-            border-color: var(--accent-color);
-            color: var(--heading-color);
-            box-shadow: 0 0 0 0.25rem rgba(102, 252, 241, 0.25);
+            background-color: #ffffff;
+            border-color: var(--primary);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 
         .modal-content {
             background-color: var(--card-bg);
-            border: 1px solid rgba(102, 252, 241, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 15px;
+            box-shadow: var(--shadow-md);
         }
 
         .modal-header, .modal-footer {
-            border-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-color);
         }
 
         /* Disciples UI styling */
-        .rarity-UR { color: var(--rarity-ur); font-weight: bold; }
-        .rarity-SSR { color: var(--rarity-ssr); font-weight: bold; }
-        .rarity-SR { color: var(--rarity-sr); font-weight: bold; }
-        .rarity-R { color: var(--rarity-r); font-weight: bold; }
+        .rarity-UR { color: var(--rarity-ur); font-weight: 800; }
+        .rarity-SSR { color: var(--rarity-ssr); font-weight: 800; }
+        .rarity-SR { color: var(--rarity-sr); font-weight: 800; }
+        .rarity-R { color: var(--rarity-r); font-weight: 800; }
 
         .disciple-card {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 10px;
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 20px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .disciple-card:hover {
+            background: #ffffff;
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow);
         }
 
         .stars-container {
-            color: #f1c40f;
+            color: var(--accent);
         }
     </style>
 </head>
@@ -201,14 +266,13 @@
                                         <th>ID</th>
                                         <th>Loại</th>
                                         <th>Tiêu đề</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Hoạt động</th>
-                                        <th>Thao tác</th>
+                                        <th>Nội dung</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
-                                <tbody id="announcementTable">
-                                    <!-- Dynamic Notices -->
+                                <tbody id="notices-list">
+                                    <!-- Dynamic content -->
                                 </tbody>
                             </table>
                         </div>
@@ -217,81 +281,38 @@
 
                 <!-- Players Tab -->
                 <div id="tab-players" class="tab-pane" style="display: none;">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2>Danh sách người chơi</h2>
-                        <div class="d-flex gap-2">
-                            <input type="text" id="player-search" class="form-control" placeholder="Tìm kiếm Email / Username" style="width: 250px;" oninput="loadPlayers(1)">
-                            <select id="zone-select" class="form-select" style="width: 120px;" onchange="loadPlayers(1)">
-                                <option value="1">Zone 1</option>
-                                <option value="2">Zone 2</option>
-                                <option value="3">Zone 3</option>
-                            </select>
+                    <h2 class="mb-4">Quản lý người chơi</h2>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <input type="text" id="search-player-input" class="form-control" placeholder="Nhập tên đăng nhập hoặc Nickname...">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary w-100" onclick="searchPlayers()">Tìm kiếm</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>User ID</th>
-                                                <th>Email</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="playerTable">
-                                            <!-- Dynamic Players -->
-                                        </tbody>
-                                    </table>
-                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <span id="player-total">Tổng số: 0</span>
-                                        <div class="d-flex gap-1" id="player-pagination">
-                                            <!-- Pagination buttons -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Player Detail panel -->
-                        <div class="col-md-5">
-                            <div class="card" id="detail-card" style="display: none;">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <span>Chi tiết tài khoản</span>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('detail-card').style.display='none'">Đóng</button>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label class="text-muted small">Tên Tông Môn / Nickname:</label>
-                                        <div class="h5 text-white" id="info-sect-name">-</div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label class="text-muted small">Cấp độ tông môn:</label>
-                                            <div class="h6 text-white" id="info-level">-</div>
-                                        </div>
-                                        <div class="col">
-                                            <label class="text-muted small">Vàng (Bind Coin):</label>
-                                            <div class="h6 text-warning" id="info-money">0 Vàng</div>
-                                        </div>
-                                    </div>
-
-                                    <hr style="border-color: rgba(255, 255, 255, 0.1);">
-                                    
-                                    <h5 class="mb-3 d-flex justify-content-between align-items-center">
-                                        <span>👥 Danh Sách Đệ Tử</span>
-                                        <button class="btn btn-sm btn-primary" onclick="openAddHeroModal()">+ Thêm</button>
-                                    </h5>
-                                    <div id="disciples-container" style="max-height: 350px; overflow-y: auto;">
-                                        <!-- Disciples list -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card text-center p-5 text-muted" id="detail-card-placeholder">
-                                Chọn một người chơi để xem chi tiết tài khoản và danh sách đệ tử
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Tên Đăng Nhập</th>
+                                        <th>Nickname</th>
+                                        <th>Cấp độ</th>
+                                        <th>Vàng (Bạc)</th>
+                                        <th>Kim Cương</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="players-list">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -299,79 +320,98 @@
         </div>
     </div>
 
-    <!-- Add/Edit Notice Modal -->
+    <!-- Notice Modal -->
     <div class="modal fade" id="noticeModal" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content text-white">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="noticeModalTitle">Thêm Thông báo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="noticeModalTitle">Thêm Thông báo mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="noticeForm">
-                        <input type="hidden" id="noticeId">
-                        <div class="mb-3">
-                            <label class="form-label">Loại thông báo</label>
-                            <select class="form-select" id="noticeType">
-                                <option value="MAINTENANCE">Bảo trì</option>
-                                <option value="RULES">Quy tắc</option>
-                                <option value="ACTIVITY">Hoạt động</option>
-                                <option value="NEWS">Tin tức</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tiêu đề</label>
-                            <input type="text" class="form-control" id="noticeTitle" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Nội dung</label>
-                            <textarea class="form-control" id="noticeContent" rows="4" required></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label">Bắt đầu</label>
-                                <input type="datetime-local" class="form-control" id="noticeStartAt" required>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Kết thúc</label>
-                                <input type="datetime-local" class="form-control" id="noticeEndAt" required>
-                            </div>
-                        </div>
-                        <div class="mt-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="noticeActive" checked>
-                            <label class="form-check-label" for="noticeActive">Hiển thị ngay</label>
-                        </div>
-                    </form>
+                    <input type="hidden" id="notice-id">
+                    <div class="mb-3">
+                        <label class="form-label">Loại thông báo</label>
+                        <select id="notice-type" class="form-select">
+                            <option value="NEWS">Tin tức (NEWS)</option>
+                            <option value="ACTIVITY">Hoạt động (ACTIVITY)</option>
+                            <option value="MAINTENANCE">Bảo trì (MAINTENANCE)</option>
+                            <option value="RULES">Điều khoản (RULES)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tiêu đề</label>
+                        <input type="text" id="notice-title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nội dung</label>
+                        <textarea id="notice-content" class="form-control" rows="4" required></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" onclick="submitAnnouncement()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" style="border-radius:12px; padding:10px 20px;" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNotice()">Lưu</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Hero Modal -->
-    <div class="modal fade" id="addHeroModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content text-white">
+    <!-- Player Details Modal -->
+    <div class="modal fade" id="playerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Ban phát Đệ tử mới</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Chi tiết Chưởng Môn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="heroForm">
-                        <div class="mb-3">
-                            <label class="form-label">Chọn đệ tử / Tướng mẫu</label>
-                            <select class="form-select" id="addHeroSelect">
-                                <!-- Dynamic templates list -->
-                            </select>
+                    <div class="row">
+                        <!-- Left Info -->
+                        <div class="col-md-6">
+                            <h6 class="border-bottom pb-2 mb-3">Thông tin cơ bản</h6>
+                            <input type="hidden" id="edit-player-id">
+                            <div class="mb-3">
+                                <label class="form-label">Tên Đăng Nhập</label>
+                                <input type="text" id="p-username" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nickname trong game</label>
+                                <input type="text" id="p-nickname" class="form-control" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Cấp độ</label>
+                                    <input type="number" id="p-level" class="form-control" required>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">EXP tích lũy</label>
+                                    <input type="number" id="p-exp" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Bạc (Vàng)</label>
+                                    <input type="number" id="p-gold" class="form-control" required>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Kim Cương</label>
+                                    <input type="number" id="p-diamond" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+
+                        <!-- Right Disciples List -->
+                        <div class="col-md-6">
+                            <h6 class="border-bottom pb-2 mb-3">Đệ tử sở hữu</h6>
+                            <div id="player-disciples-container" style="max-height: 350px; overflow-y: auto; padding-right: 5px;">
+                                <!-- Dynamic disciple cards -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" onclick="submitAddHero()">Thêm Đệ tử</button>
+                    <button type="button" class="btn btn-secondary" style="border-radius:12px; padding:10px 20px;" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="savePlayerChanges()">Cập nhật thông tin</button>
                 </div>
             </div>
         </div>
@@ -379,296 +419,249 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let selectedUserId = null;
+        let noticeModalObj;
+        let playerModalObj;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadAnnouncements();
-            loadAllHeroTemplates();
+        document.addEventListener('DOMContentLoaded', () => {
+            noticeModalObj = new bootstrap.Modal(document.getElementById('noticeModal'));
+            playerModalObj = new bootstrap.Modal(document.getElementById('playerModal'));
+            loadNotices();
         });
 
-        function switchTab(tabId) {
+        function switchTab(tabName) {
             document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(`tab-${tabId}`).style.display = 'block';
-            document.getElementById(`link-${tabId}`).classList.add('active');
 
-            if (tabId === 'players') {
-                loadPlayers(1);
-            } else if (tabId === 'notices') {
-                loadAnnouncements();
+            if (tabName === 'notices') {
+                document.getElementById('tab-notices').style.display = 'block';
+                document.getElementById('link-notices').classList.add('active');
+                loadNotices();
+            } else if (tabName === 'players') {
+                document.getElementById('tab-players').style.display = 'block';
+                document.getElementById('link-players').classList.add('active');
+                loadPlayers();
             }
         }
 
-        // ==========================================
-        // ANNOUNCEMENT (THÔNG BÁO) LOGIC
-        // ==========================================
-        async function loadAnnouncements() {
+        // --- Announcements Logic ---
+        async function loadNotices() {
             try {
-                const res = await fetch("/api/gm/notices");
-                const notices = await res.json();
-                const tbody = document.getElementById("announcementTable");
-                tbody.innerHTML = "";
-
-                notices.forEach(n => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td>${n.id}</td>
-                        <td><span class="type-badge badge-${n.type}">${n.type}</span></td>
-                        <td class="text-white fw-bold">${n.title}</td>
-                        <td>${new Date(n.start_at).toLocaleString()}</td>
-                        <td>${new Date(n.end_at).toLocaleString()}</td>
-                        <td>
-                            <span class="badge ${n.is_active ? 'bg-success' : 'bg-secondary'}">
-                                ${n.is_active ? 'Active' : 'Inactive'}
-                            </span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-info me-1" onclick='openEditNoticeModal(${JSON.stringify(n)})'>Sửa</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteAnnouncement(${n.id})">Xóa</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
+                const res = await fetch('/api/admin/notices');
+                const data = await res.json();
+                const container = document.getElementById('notices-list');
+                container.innerHTML = '';
+                
+                if (data.code === 0 && data.notices) {
+                    data.notices.forEach(notice => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${notice.id}</td>
+                            <td><span class="type-badge badge-${notice.type}">${notice.type}</span></td>
+                            <td><strong>${notice.title}</strong></td>
+                            <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${notice.content}</td>
+                            <td>${new Date(notice.created_at * 1000).toLocaleString()}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary me-2" onclick="editNotice(${notice.id}, '${notice.type}', \`${notice.title}\`, \`${notice.content}\`)">Sửa</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteNotice(${notice.id})">Xóa</button>
+                            </td>
+                        `;
+                        container.appendChild(tr);
+                    });
+                }
             } catch (err) {
-                console.error("Lỗi load thông báo:", err);
+                console.error("Lỗi tải thông báo:", err);
             }
         }
 
         function openAddNoticeModal() {
-            document.getElementById("noticeForm").reset();
-            document.getElementById("noticeId").value = "";
-            document.getElementById("noticeModalTitle").innerText = "Thêm Thông báo mới";
-            const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'));
-            noticeModal.show();
+            document.getElementById('noticeModalTitle').innerText = 'Thêm Thông báo mới';
+            document.getElementById('notice-id').value = '';
+            document.getElementById('notice-type').value = 'NEWS';
+            document.getElementById('notice-title').value = '';
+            document.getElementById('notice-content').value = '';
+            noticeModalObj.show();
         }
 
-        function openEditNoticeModal(n) {
-            document.getElementById("noticeId").value = n.id;
-            document.getElementById("noticeType").value = n.type;
-            document.getElementById("noticeTitle").value = n.title;
-            document.getElementById("noticeContent").value = n.content;
-            
-            // Format time for datetime-local (yyyy-MM-ddThh:mm)
-            document.getElementById("noticeStartAt").value = new Date(n.start_at).toISOString().slice(0, 16);
-            document.getElementById("noticeEndAt").value = new Date(n.end_at).toISOString().slice(0, 16);
-            document.getElementById("noticeActive").checked = n.is_active;
-
-            document.getElementById("noticeModalTitle").innerText = "Chỉnh sửa thông báo";
-            const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'));
-            noticeModal.show();
+        function editNotice(id, type, title, content) {
+            document.getElementById('noticeModalTitle').innerText = 'Chỉnh sửa Thông báo';
+            document.getElementById('notice-id').value = id;
+            document.getElementById('notice-type').value = type;
+            document.getElementById('notice-title').value = title;
+            document.getElementById('notice-content').value = content;
+            noticeModalObj.show();
         }
 
-        async function submitAnnouncement() {
-            const id = document.getElementById("noticeId").value;
-            const data = {
-                id: id ? parseInt(id) : 0,
-                type: document.getElementById("noticeType").value,
-                title: document.getElementById("noticeTitle").value,
-                content: document.getElementById("noticeContent").value,
-                start_at: new Date(document.getElementById("noticeStartAt").value).toISOString(),
-                end_at: new Date(document.getElementById("noticeEndAt").value).toISOString(),
-                is_active: document.getElementById("noticeActive").checked
-            };
+        async function saveNotice() {
+            const id = document.getElementById('notice-id').value;
+            const type = document.getElementById('notice-type').value;
+            const title = document.getElementById('notice-title').value.trim();
+            const content = document.getElementById('notice-content').value.trim();
+
+            if (!title || !content) {
+                alert('Vui lòng điền đầy đủ tiêu đề và nội dung');
+                return;
+            }
+
+            const body = { type, title, content };
+            let url = '/api/admin/notices';
+            let method = 'POST';
+
+            if (id) {
+                body.id = parseInt(id);
+                method = 'PUT';
+            }
 
             try {
-                const res = await fetch("/api/gm/notices/save", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
+                const res = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
                 });
-                if (res.ok) {
-                    bootstrap.Modal.getInstance(document.getElementById('noticeModal')).hide();
-                    loadAnnouncements();
+                const result = await res.json();
+                if (result.code === 0) {
+                    noticeModalObj.hide();
+                    loadNotices();
                 } else {
-                    alert("Có lỗi xảy ra khi lưu!");
+                    alert(result.message || 'Lỗi lưu thông báo');
                 }
             } catch (err) {
-                console.error("Lỗi:", err);
+                console.error(err);
+                alert('Không thể kết nối đến API');
             }
         }
 
-        async function deleteAnnouncement(id) {
-            if (!confirm("Bạn có chắc chắn muốn xoá thông báo này?")) return;
+        async function deleteNotice(id) {
+            if (!confirm('Bạn có chắc chắn muốn xóa thông báo này?')) return;
             try {
-                const res = await fetch("/api/gm/notices/delete", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id: id })
-                });
-                if (res.ok) {
-                    loadAnnouncements();
-                }
-            } catch (err) {
-                console.error("Lỗi xoá thông báo:", err);
-            }
-        }
-
-        // ==========================================
-        // PLAYER & DISCIPLE (NGƯỜI CHƠI & ĐỆ TỬ) LOGIC
-        // ==========================================
-        let heroTemplates = [];
-
-        async function loadAllHeroTemplates() {
-            try {
-                const res = await fetch("/api/gm/heroes");
-                heroTemplates = await res.json();
-                const select = document.getElementById("addHeroSelect");
-                select.innerHTML = "";
-                heroTemplates.forEach(h => {
-                    const opt = document.createElement("option");
-                    opt.value = h.code;
-                    opt.innerText = `[${h.rarity}] - ${h.name} (${h.code})`;
-                    select.appendChild(opt);
-                });
-            } catch (err) {
-                console.error("Lỗi tải hero templates:", err);
-            }
-        }
-
-        async function loadPlayers(page = 1) {
-            const search = document.getElementById("player-search").value;
-            const zoneId = document.getElementById("zone-select").value;
-            try {
-                const res = await fetch(`/api/gm/users/list?page=${page}&limit=10&search=${encodeURIComponent(search)}&zone_id=${zoneId}`);
-                const data = await res.json();
-                
-                const tbody = document.getElementById("playerTable");
-                tbody.innerHTML = "";
-
-                document.getElementById("player-total").innerText = `Tổng số: ${data.total}`;
-
-                if (data.data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="3" class="text-center text-muted">Không tìm thấy người chơi nào</td></tr>`;
-                    return;
-                }
-
-                data.data.forEach(p => {
-                    const tr = document.createElement("tr");
-                    tr.style.cursor = "pointer";
-                    if (selectedUserId === p.user_id) {
-                        tr.classList.add("table-active");
-                    }
-                    tr.onclick = () => selectPlayer(p.user_id);
-                    tr.innerHTML = `
-                        <td class="text-white">${p.user_id}</td>
-                        <td>${p.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); selectPlayer(${p.user_id})">Chi tiết</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-
-                // Render Pagination
-                const pagination = document.getElementById("player-pagination");
-                pagination.innerHTML = "";
-                
-                const totalPages = Math.ceil(data.total / 10);
-                for (let i = 1; i <= totalPages; i++) {
-                    const btn = document.createElement("button");
-                    btn.className = `btn btn-sm ${data.page === i ? 'btn-primary' : 'btn-outline-secondary'}`;
-                    btn.innerText = i;
-                    btn.onclick = () => loadPlayers(i);
-                    pagination.appendChild(btn);
-                }
-            } catch (err) {
-                console.error("Lỗi load players:", err);
-            }
-        }
-
-        async function selectPlayer(userId) {
-            selectedUserId = userId;
-            const zoneId = document.getElementById("zone-select").value;
-            document.getElementById("detail-card-placeholder").style.display = "none";
-            document.getElementById("detail-card").style.display = "block";
-
-            // Highlight selected row
-            loadPlayersListSelection();
-
-            try {
-                const res = await fetch(`/api/gm/user?id=${userId}&zone_id=${zoneId}`);
-                const data = await res.json();
-
-                document.getElementById("info-sect-name").innerText = data.sect_name || "Chưa lập Tông môn";
-                document.getElementById("info-level").innerText = data.level ? `Cấp ${data.level}` : "Chưa tạo nhân vật";
-                document.getElementById("info-money").innerText = `${data.money || 0} Vàng`;
-
-                const container = document.getElementById("disciples-container");
-                container.innerHTML = "";
-
-                if (!data.disciples || data.disciples.length === 0) {
-                    container.innerHTML = `<div class="text-center text-muted p-4">Chưa chiêu mộ đệ tử nào</div>`;
-                    return;
-                }
-
-                data.disciples.forEach(d => {
-                    const card = document.createElement("div");
-                    card.className = "disciple-card";
-
-                    let stars = "";
-                    for(let i = 0; i < d.star; i++) {
-                        stars += '<i class="fas fa-star"></i>';
-                    }
-
-                    card.innerHTML = `
-                        <div>
-                            <span class="rarity-${d.rarity} me-2">[${d.rarity}]</span>
-                            <span class="text-white fw-bold">${d.name}</span>
-                            <div class="small text-muted">${d.hero_code} | Cấp ${d.level}</div>
-                        </div>
-                        <div class="text-end">
-                            <div class="stars-container">${stars}</div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (err) {
-                console.error("Lỗi tải chi tiết người chơi:", err);
-            }
-        }
-
-        function loadPlayersListSelection() {
-            const rows = document.querySelectorAll("#playerTable tr");
-            rows.forEach(row => {
-                const firstCol = row.querySelector("td");
-                if (firstCol && firstCol.innerText == selectedUserId) {
-                    row.classList.add("table-active");
+                const res = await fetch(`/api/admin/notices?id=${id}`, { method: 'DELETE' });
+                const result = await res.json();
+                if (result.code === 0) {
+                    loadNotices();
                 } else {
-                    row.classList.remove("table-active");
+                    alert(result.message || 'Xóa thất bại');
                 }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // --- Players Logic ---
+        async function loadPlayers() {
+            try {
+                const res = await fetch('/api/admin/players');
+                const data = await res.json();
+                renderPlayers(data.players || []);
+            } catch (err) {
+                console.error("Lỗi tải người chơi:", err);
+            }
+        }
+
+        function renderPlayers(players) {
+            const container = document.getElementById('players-list');
+            container.innerHTML = '';
+            players.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${p.user_id}</td>
+                    <td>${p.username}</td>
+                    <td><strong class="text-primary">${p.nickname || 'Chưa Tạo'}</strong></td>
+                    <td>Lv ${p.level}</td>
+                    <td>${p.gold.toLocaleString()} Bạc</td>
+                    <td>${p.diamond.toLocaleString()} KC</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="viewPlayerDetails(${p.user_id})">Quản lý</button>
+                    </td>
+                `;
+                container.appendChild(tr);
             });
         }
 
-        function openAddHeroModal() {
-            if (!selectedUserId) {
-                alert("Vui lòng chọn người chơi trước!");
+        async function searchPlayers() {
+            const query = document.getElementById('search-player-input').value.trim();
+            if (!query) {
+                loadPlayers();
                 return;
             }
-            const modal = new bootstrap.Modal(document.getElementById('addHeroModal'));
-            modal.show();
+            try {
+                const res = await fetch(`/api/admin/players/search?query=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                renderPlayers(data.players || []);
+            } catch (err) {
+                console.error("Tìm kiếm thất bại:", err);
+            }
         }
 
-        async function submitAddHero() {
-            const zoneId = document.getElementById("zone-select").value;
-            const heroCode = document.getElementById("addHeroSelect").value;
-            
+        async function viewPlayerDetails(userId) {
             try {
-                const res = await fetch(`/api/gm/user/add-hero?id=${selectedUserId}&zone_id=${zoneId}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ hero_code: heroCode })
-                });
+                const res = await fetch(`/api/admin/player/detail?user_id=${userId}`);
+                const data = await res.json();
+                if (data.code === 0 && data.player) {
+                    const p = data.player;
+                    document.getElementById('edit-player-id').value = p.user_id;
+                    document.getElementById('p-username').value = p.username;
+                    document.getElementById('p-nickname').value = p.nickname;
+                    document.getElementById('p-level').value = p.level;
+                    document.getElementById('p-exp').value = p.exp;
+                    document.getElementById('p-gold').value = p.gold;
+                    document.getElementById('p-diamond').value = p.diamond;
 
-                if (res.ok) {
-                    bootstrap.Modal.getInstance(document.getElementById('addHeroModal')).hide();
-                    selectPlayer(selectedUserId); // Reload details
-                } else {
-                    const text = await res.text();
-                    alert("Lỗi: " + text);
+                    // render disciples list
+                    const container = document.getElementById('player-disciples-container');
+                    container.innerHTML = '';
+                    if (data.disciples && data.disciples.length > 0) {
+                        data.disciples.forEach(d => {
+                            const div = document.createElement('div');
+                            div.className = 'disciple-card';
+                            div.innerHTML = `
+                                <div>
+                                    <div class="fw-bold">${d.name} <span class="rarity-${d.rarity}">${d.rarity}</span></div>
+                                    <div class="stars-container">${'★'.repeat(d.star)}</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="small text-muted">Lv ${d.level}</div>
+                                    <div class="small text-muted">Lực Chiến: ${d.atk * 2 + d.hp / 5}</div>
+                                </div>
+                            `;
+                            container.appendChild(div);
+                        });
+                    } else {
+                        container.innerHTML = '<div class="text-muted text-center py-4">Không sở hữu đệ tử nào.</div>';
+                    }
+                    playerModalObj.show();
                 }
             } catch (err) {
-                console.error("Lỗi:", err);
+                console.error(err);
+            }
+        }
+
+        async function savePlayerChanges() {
+            const userId = parseInt(document.getElementById('edit-player-id').value);
+            const nickname = document.getElementById('p-nickname').value.trim();
+            const level = parseInt(document.getElementById('p-level').value);
+            const exp = parseInt(document.getElementById('p-exp').value);
+            const gold = parseInt(document.getElementById('p-gold').value);
+            const diamond = parseInt(document.getElementById('p-diamond').value);
+
+            if (!nickname) {
+                alert('Tên nickname không được để trống');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/player/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, nickname, level, exp, gold, diamond })
+                });
+                const result = await res.json();
+                if (result.code === 0) {
+                    playerModalObj.hide();
+                    loadPlayers();
+                } else {
+                    alert(result.message || 'Cập nhật thất bại');
+                }
+            } catch (err) {
+                console.error(err);
             }
         }
     </script>

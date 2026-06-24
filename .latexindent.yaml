@@ -1,0 +1,29 @@
+% .latexindent.yaml – LaTeX formatting configuration for latexindent
+% Place this file in the project root (c:/Project/TheFirstSectOrigin)
+% The options below are a common “clean‑up” style that:
+%   • uses two‑space indentation
+%   • aligns environments and arguments
+%   • keeps comment placement
+%   • does not modify your custom macros
+defaultIndent: "  "
+modifyLineBreaks:
+  preserveBlankLines: true
+  oneSentencePerLine: true
+  removeTrailingWhitespace: true
+indentAfterHeadings:
+  - name: chapter
+    indent: true
+  - name: section
+    indent: true
+  - name: subsection
+    indent: true
+  - name: subsubsection
+    indent: true
+alignDoubleBackslashes: true
+blankLines: 1
+commentAlignment: true
+ignore:
+  - "\\begin{lstlisting}"
+  - "\\end{lstlisting}"
+  - "\\begin{verbatim}"
+  - "\\end{verbatim}"

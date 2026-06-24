@@ -74,5 +74,16 @@ namespace GameClient.UI
                 imgTextBg.gameObject.SetActive(active);
             }
         }
+
+        public void SetActiveState(bool isActive)
+        {
+            if (Button != null) Button.interactable = isActive;
+            
+            var bgImg = GetComponent<Image>();
+            if (bgImg != null)
+            {
+                bgImg.color = isActive ? Color.white : new Color(0.2f, 0.2f, 0.2f, 0.5f);
+            }
+        }
     }
 }

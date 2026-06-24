@@ -255,6 +255,7 @@ type Hero struct {
 	Star          int32                  `protobuf:"varint,6,opt,name=star,proto3" json:"star,omitempty"` // C# đang tìm .Star
 	Traits        []string               `protobuf:"bytes,7,rep,name=traits,proto3" json:"traits,omitempty"`
 	Skills        []*HeroSkill           `protobuf:"bytes,8,rep,name=skills,proto3" json:"skills,omitempty"`
+	Element       string                 `protobuf:"bytes,9,opt,name=element,proto3" json:"element,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -343,6 +344,13 @@ func (x *Hero) GetSkills() []*HeroSkill {
 		return x.Skills
 	}
 	return nil
+}
+
+func (x *Hero) GetElement() string {
+	if x != nil {
+		return x.Element
+	}
+	return ""
 }
 
 type FormationSlot struct {
@@ -585,6 +593,7 @@ type GetHeroesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Base          *BaseResponse          `protobuf:"bytes,1,opt,name=base,proto3" json:"base,omitempty"`     // C# đang tìm .Base
 	Heroes        []*Hero                `protobuf:"bytes,2,rep,name=heroes,proto3" json:"heroes,omitempty"` // C# đang tìm .Heroes
+	Formation     []*FormationSlot       `protobuf:"bytes,3,rep,name=formation,proto3" json:"formation,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -629,6 +638,13 @@ func (x *GetHeroesResponse) GetBase() *BaseResponse {
 func (x *GetHeroesResponse) GetHeroes() []*Hero {
 	if x != nil {
 		return x.Heroes
+	}
+	return nil
+}
+
+func (x *GetHeroesResponse) GetFormation() []*FormationSlot {
+	if x != nil {
+		return x.Formation
 	}
 	return nil
 }
@@ -949,7 +965,7 @@ const file_disciple_proto_rawDesc = "" +
 	"\veffect_type\x18\x05 \x01(\tR\n" +
 	"effectType\x12\x14\n" +
 	"\x05level\x18\x06 \x01(\x05R\x05level\x12\x1b\n" +
-	"\tis_locked\x18\a \x01(\bR\bisLocked\"\xc1\x01\n" +
+	"\tis_locked\x18\a \x01(\bR\bisLocked\"\xdb\x01\n" +
 	"\x04Hero\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -958,7 +974,8 @@ const file_disciple_proto_rawDesc = "" +
 	"\x05power\x18\x05 \x01(\x03R\x05power\x12\x12\n" +
 	"\x04star\x18\x06 \x01(\x05R\x04star\x12\x16\n" +
 	"\x06traits\x18\a \x03(\tR\x06traits\x12%\n" +
-	"\x06skills\x18\b \x03(\v2\r.pb.HeroSkillR\x06skills\"n\n" +
+	"\x06skills\x18\b \x03(\v2\r.pb.HeroSkillR\x06skills\x12\x18\n" +
+	"\aelement\x18\t \x01(\tR\aelement\"n\n" +
 	"\rFormationSlot\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12$\n" +
 	"\x0eplayer_hero_id\x18\x02 \x01(\x03R\fplayerHeroId\x12\x1b\n" +
@@ -970,10 +987,11 @@ const file_disciple_proto_rawDesc = "" +
 	"\x14GetDisciplesResponse\x12$\n" +
 	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\x12*\n" +
 	"\tdisciples\x18\x02 \x03(\v2\f.pb.DiscipleR\tdisciples\"\x12\n" +
-	"\x10GetHeroesRequest\"[\n" +
+	"\x10GetHeroesRequest\"\x8c\x01\n" +
 	"\x11GetHeroesResponse\x12$\n" +
 	"\x04base\x18\x01 \x01(\v2\x10.pb.BaseResponseR\x04base\x12 \n" +
-	"\x06heroes\x18\x02 \x03(\v2\b.pb.HeroR\x06heroes\">\n" +
+	"\x06heroes\x18\x02 \x03(\v2\b.pb.HeroR\x06heroes\x12/\n" +
+	"\tformation\x18\x03 \x03(\v2\x11.pb.FormationSlotR\tformation\">\n" +
 	"\x13SetFormationRequest\x12'\n" +
 	"\x05slots\x18\x01 \x03(\v2\x11.pb.FormationSlotR\x05slots\"<\n" +
 	"\x14SetFormationResponse\x12$\n" +
@@ -1029,17 +1047,18 @@ var file_disciple_proto_depIdxs = []int32{
 	0,  // 3: pb.GetDisciplesResponse.disciples:type_name -> pb.Disciple
 	15, // 4: pb.GetHeroesResponse.base:type_name -> pb.BaseResponse
 	2,  // 5: pb.GetHeroesResponse.heroes:type_name -> pb.Hero
-	3,  // 6: pb.SetFormationRequest.slots:type_name -> pb.FormationSlot
-	15, // 7: pb.SetFormationResponse.base:type_name -> pb.BaseResponse
-	15, // 8: pb.LevelUpDiscipleResponse.base:type_name -> pb.BaseResponse
-	0,  // 9: pb.LevelUpDiscipleResponse.disciple:type_name -> pb.Disciple
-	15, // 10: pb.LevelUpHeroResponse.base:type_name -> pb.BaseResponse
-	2,  // 11: pb.LevelUpHeroResponse.hero:type_name -> pb.Hero
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	3,  // 6: pb.GetHeroesResponse.formation:type_name -> pb.FormationSlot
+	3,  // 7: pb.SetFormationRequest.slots:type_name -> pb.FormationSlot
+	15, // 8: pb.SetFormationResponse.base:type_name -> pb.BaseResponse
+	15, // 9: pb.LevelUpDiscipleResponse.base:type_name -> pb.BaseResponse
+	0,  // 10: pb.LevelUpDiscipleResponse.disciple:type_name -> pb.Disciple
+	15, // 11: pb.LevelUpHeroResponse.base:type_name -> pb.BaseResponse
+	2,  // 12: pb.LevelUpHeroResponse.hero:type_name -> pb.Hero
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_disciple_proto_init() }

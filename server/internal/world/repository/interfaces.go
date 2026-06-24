@@ -25,6 +25,7 @@ type IPlayerRepository interface {
 	GetOrCreatePity(ctx context.Context, playerID int64, bannerID int32) (int32, error)
 	UpdatePity(ctx context.Context, playerID int64, bannerID int32, newCount int32) error
 	SetFormation(ctx context.Context, playerID int64, slots map[int32]int64) error
+	GetFormation(ctx context.Context, playerID int64) (map[int32]int64, error)
 	GetVersionConfig(ctx context.Context, platform string) (*VersionConfig, error)
 	
 	SaveCutscene(ctx context.Context, id string, jsonData string) error
@@ -54,6 +55,14 @@ type IPlayerRepository interface {
 	GetCompletedStages(ctx context.Context, playerID int64) ([]string, error)
 	GetLeaderboard(ctx context.Context, leaderboardType string) ([]*LeaderboardRecord, error)
 	CollectResource(ctx context.Context, playerID int64, instanceID int64, itemCode string, amount int64) error
+	GetShopItem(ctx context.Context, shopItemID string) (*ShopItem, error)
+	GetShopItemsByType(ctx context.Context, shopType string) ([]*ShopItem, error)
+	GetPlayerShopItems(ctx context.Context, playerID int64, shopType string) ([]*PlayerShopItemInstance, time.Time, error)
+	SavePlayerShopItems(ctx context.Context, playerID int64, shopType string, items []*PlayerShopItemInstance, nextRefresh time.Time) error
+	BuyPlayerShopItemTransaction(ctx context.Context, playerID int64, instanceID int64, quantity int32) ([]*UserItem, error)
+	InsertShopItem(ctx context.Context, item *ShopItem) error
+	DeleteShopItem(ctx context.Context, shopItemID string) error
+	GetAllShopItems(ctx context.Context) ([]*ShopItem, error)
 }
 
 type LeaderboardRecord struct {
@@ -90,4 +99,33 @@ type RepoItemConfig struct {
 	Effects       string
 	RequiredLevel int32
 }
+
+type ShopItem struct {
+	ID             int64
+	ShopItemID     string
+	ShopType       string
+	ItemCode       string
+	Amount         int32
+	OriginalPrice  string
+	IsDiscountable bool
+}
+
+type ShopCost struct {
+	ItemCode string `json:"item_code"`
+	Amount   int32  `json:"amount"`
+}
+
+type PlayerShopItemInstance struct {
+	ID          int64
+	PlayerID    int64
+	ShopType    string
+	ShopItemID  string
+	ItemCode    string
+	Amount      int32
+	FinalPrice  string
+	DiscountPct int32
+	IsBought    bool
+}
+
+
 

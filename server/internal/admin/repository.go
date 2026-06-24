@@ -30,6 +30,10 @@ type Repository interface {
 	SaveItemConfig(config ItemConfigData) error
 	DeleteItemConfig(itemCode string) error
 
+	GetAllShopItems() ([]ShopItemData, error)
+	SaveShopItem(config ShopItemData) error
+	DeleteShopItem(shopItemID string) error
+
 	GetAllEffectConfigs() ([]EffectConfigData, error)
 	SaveEffectConfig(config EffectConfigData) error
 	DeleteEffectConfig(effectCode string) error
@@ -1061,6 +1065,56 @@ func (r *adminRepo) CreateGiftCode(code string, rewardGold int64, rewardDiamond 
 		    max_uses = EXCLUDED.max_uses
 	`
 	_, err = db.Exec(q, code, rewardGold, rewardDiamond, rewardItems, maxUses)
+	return err
+}
+
+func (r *adminRepo) GetAllShopItems() ([]ShopItemData, error) {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return nil, err
+	}
+	var list []ShopItemData
+	err = db.Select(&list, "SELECT id, shop_item_id, shop_type, item_code, amount, original_price::text as original_price, is_discountable FROM shop_items ORDER BY id ASC")
+	if err != nil {
+		return nil, err
+	}
+	return list, nil
+}
+
+func (r *adminRepo) SaveShopItem(c ShopItemData) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+	if c.OriginalPrice == "" {
+		c.OriginalPrice = "[]"
+	}
+	var count int
+	err = db.Get(&count, "SELECT COUNT(*) FROM shop_items WHERE shop_item_id = $1", c.ShopItemID)
+	if err != nil {
+		return err
+	}
+	if count > 0 {
+		_, err = db.Exec(`
+			UPDATE shop_items 
+			SET shop_type = $2, item_code = $3, amount = $4, original_price = $5::jsonb, is_discountable = $6 
+			WHERE shop_item_id = $1`,
+			c.ShopItemID, c.ShopType, c.ItemCode, c.Amount, c.OriginalPrice, c.IsDiscountable)
+	} else {
+		_, err = db.Exec(`
+			INSERT INTO shop_items (shop_item_id, shop_type, item_code, amount, original_price, is_discountable) 
+			VALUES ($1, $2, $3, $4, $5::jsonb, $6)`,
+			c.ShopItemID, c.ShopType, c.ItemCode, c.Amount, c.OriginalPrice, c.IsDiscountable)
+	}
+	return err
+}
+
+func (r *adminRepo) DeleteShopItem(shopItemID string) error {
+	db, err := r.getGameDB(1)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec("DELETE FROM shop_items WHERE shop_item_id = $1", shopItemID)
 	return err
 }
 

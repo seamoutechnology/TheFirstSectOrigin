@@ -177,3 +177,14 @@ type SyncTraitReq struct {
 	JSONData  string `json:"json_data"`
 }
 
+type ShopItemData struct {
+	ID             int64  `json:"id" db:"id"`
+	ShopItemID     string `json:"shop_item_id" db:"shop_item_id"`
+	ShopType       string `json:"shop_type" db:"shop_type"`
+	ItemCode       string `json:"item_code" db:"item_code"`
+	Amount         int32  `json:"amount" db:"amount"`
+	OriginalPrice  string `json:"original_price" db:"original_price"`
+	IsDiscountable bool   `json:"is_discountable" db:"is_discountable"`
+}
+
+

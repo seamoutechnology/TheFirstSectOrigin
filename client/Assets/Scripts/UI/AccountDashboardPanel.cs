@@ -76,8 +76,8 @@ namespace GameClient.UI
                 if (txtUserName != null) txtUserName.text = realUsername;
                 
                 _currentAccountId = "1000" + UnityEngine.Random.Range(10, 99);
-                if (txtAccountId != null) txtAccountId.text = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_account_id", "ID: " + _currentAccountId);
-                if (txtAccountRole != null) txtAccountRole.text = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_account_role", "Quyền: Người chơi");
+                if (txtAccountId != null) txtAccountId.text = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_account_id", _currentAccountId);
+                if (txtAccountRole != null) txtAccountRole.text = Managers.LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, "ui_account_role", "Người chơi");
                 
                 if (txtActiveZone != null) 
                 {

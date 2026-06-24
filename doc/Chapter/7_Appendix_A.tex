@@ -1,0 +1,77 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Nếu trong nội dung chính không đủ không gian cho các use case khác (ngoài các use case nghiệp vụ chính) thì đặc tả thêm cho các use case đó ở đây.
+
+\section{Đặc tả use case Đăng ký tài khoản}
+\label{sec:spec_register}
+\begin{itemize}
+    \item \textbf{Tên use case}: Đăng ký tài khoản.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã tải ứng dụng Client, thiết bị có kết nối mạng Internet và chưa đăng ký tài khoản (hoặc muốn tạo thêm tài khoản mới).
+    \item \textbf{Hậu điều kiện}: Tài khoản mới được ghi nhận thành công vào cơ sở dữ liệu PostgreSQL của hệ thống, mật khẩu được mã hóa an toàn, người chơi sẵn sàng đăng nhập vào game.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi chọn chức năng "Đăng ký" trên màn hình chính của Client.
+        \item Người chơi điền thông tin tài khoản bao gồm: tên đăng nhập (username), mật khẩu (password) và địa chỉ email.
+        \item Client gửi yêu cầu đăng ký kèm dữ liệu tài khoản đến dịch vụ Login.
+        \item Dịch vụ Login thực hiện kiểm tra tính hợp lệ của dữ liệu đầu vào (tên tài khoản chưa tồn tại, độ dài mật khẩu tối thiểu 6 ký tự, email đúng định dạng).
+        \item Hệ thống thực hiện mã hóa mật khẩu sử dụng thuật toán bcrypt, tạo bản ghi tài khoản mới trong cơ sở dữ liệu PostgreSQL.
+        \item Dịch vụ Login trả về kết quả đăng ký thành công cho Client.
+        \item Client hiển thị thông báo thành công và chuyển hướng người chơi về màn hình đăng nhập.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Tên đăng nhập đã tồn tại}: Dịch vụ Login kiểm tra thấy username đã có người sử dụng, phản hồi mã lỗi tương ứng. Client nhận thông tin lỗi và yêu cầu người chơi chọn tên đăng nhập khác.
+        \item \textit{Định dạng thông tin sai}: Mật khẩu quá ngắn hoặc email không hợp lệ, hệ thống từ chối đăng ký và trả về thông tin lỗi tương ứng để người chơi điều chỉnh.
+    \end{itemize}
+\end{itemize}
+
+\section{Đặc tả use case Sắp xếp đội hình chiến đấu}
+\label{sec:spec_formation}
+\begin{itemize}
+    \item \textbf{Tên use case}: Sắp xếp đội hình chiến đấu.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập vào game thành công và sở hữu ít nhất một đệ tử trong danh sách đệ tử tông môn.
+    \item \textbf{Hậu điều kiện}: Cấu hình đội hình chiến đấu mới của người chơi được cập nhật vào cơ sở dữ liệu và được sử dụng khi tham gia vượt ải chiến dịch.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi truy cập vào giao diện "Đội hình" từ màn hình chính tông môn.
+        \item Hệ thống hiển thị danh sách đệ tử hiện có và sơ đồ trận hình hiện tại.
+        \item Người chơi kéo thả hoặc click chọn đệ tử từ danh sách vào các vị trí trong sơ đồ trận hình (các vị trí hàng trước và hàng sau).
+        \item Người chơi bấm nút "Xác nhận" để lưu lại sơ đồ đội hình mới.
+        \item Client gửi yêu cầu thay đổi đội hình kèm danh sách ID đệ tử và mã vị trí tương ứng qua Gateway tới dịch vụ World.
+        \item Dịch vụ World kiểm tra tính hợp lệ của yêu cầu (đệ tử có thực sự thuộc sở hữu của người chơi, số lượng đệ tử không vượt quá giới hạn tối đa của đội hình).
+        \item Dịch vụ World thực hiện cập nhật cấu hình trận hình của người chơi trong cơ sở dữ liệu PostgreSQL.
+        \item Dịch vụ World phản hồi lưu thành công về Client.
+        \item Client cập nhật giao diện hiển thị đội hình mới nhất.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Đệ tử không hợp lệ}: ID đệ tử không tồn tại hoặc không nằm trong danh sách sở hữu của người chơi, hệ thống hủy bỏ giao dịch, báo lỗi về Client và giữ nguyên đội hình cũ.
+    \end{itemize}
+\end{itemize}
+
+\section{Đặc tả use case Thu thập tài nguyên công trình}
+\label{sec:spec_collect}
+\begin{itemize}
+    \item \textbf{Tên use case}: Thu thập tài nguyên công trình.
+    \item \textbf{Tác nhân}: Người chơi.
+    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, tông môn sở hữu các công trình sản xuất tài nguyên nhàn rỗi (như Nhà Gỗ, Mỏ Đá, Linh Thạch Khoáng) và các công trình này đã tích lũy được lượng sản lượng lớn hơn 0 kể từ lần thu hoạch trước.
+    \item \textbf{Hậu điều kiện}: Lượng tài nguyên nhàn rỗi tích lũy trong các công trình được chuyển vào ví tài sản của người chơi (Gỗ, Đá, Linh thạch), trạng thái tích lũy của công trình được đưa về 0.
+    \item \textbf{Luồng sự kiện chính}:
+    \begin{enumerate}
+        \item Người chơi click vào biểu tượng tài nguyên hiển thị phía trên công trình sản xuất tài nguyên ở bản đồ tông môn.
+        \item Client gửi yêu cầu thu thập tài nguyên kèm ID công trình qua Gateway tới dịch vụ World.
+        \item Dịch vụ World truy vấn cơ sở dữ liệu để lấy mốc thời gian thu hoạch gần nhất của công trình, tính toán sản lượng tích lũy dựa trên công suất sản xuất của công trình và thời gian đã trôi qua.
+        \item Dịch vụ World cập nhật lượng tài nguyên tích lũy của công trình về 0 và cộng lượng tài nguyên đã thu hoạch vào tổng số dư tài sản (Gỗ, Đá, Linh thạch) của người chơi trong cơ sở dữ liệu PostgreSQL.
+        \item Dịch vụ World gửi phản hồi thành công kèm lượng tài nguyên thu hoạch được và số dư tài sản mới về Client.
+        \item Client thực hiện hoạt ảnh bay tài nguyên và cập nhật số lượng tài nguyên mới trên giao diện người chơi.
+    \end{enumerate}
+    \item \textbf{Luồng sự kiện phát sinh}:
+    \begin{itemize}
+        \item \textit{Lượng tài nguyên bằng 0}: Thời gian giữa hai lần thu hoạch quá ngắn dẫn đến lượng tài nguyên sản sinh bằng 0, hệ thống từ chối yêu cầu thu hoạch hoặc trả về sản lượng bằng 0.
+    \end{itemize}
+\end{itemize}
+
+\end{document}

@@ -49,6 +49,9 @@ service GatewayService {
   rpc GetInventory(GetProfileRequest) returns (Inventory);
   rpc EquipItem(EquipRequest) returns (EquipResponse);
   rpc UseItem(UseItemRequest) returns (UseItemResponse);
+  rpc BuyShopItem(BuyShopItemRequest) returns (BuyShopItemResponse);
+  rpc GetShop(GetShopRequest) returns (GetShopResponse);
+  rpc RefreshShop(RefreshShopRequest) returns (RefreshShopResponse);
 
   // --- Gacha ---
   rpc GetGachaBanners(GetGachaBannersRequest) returns (GetGachaBannersResponse);
