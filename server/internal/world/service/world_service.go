@@ -150,28 +150,8 @@ func (s *WorldService) CreatePlayer(ctx context.Context, userID int64, nickname 
 	}
 	player, err := s.repo.Create(ctx, userID, s.serverID, nickname)
 	if err != nil {
-		return nil, ErrCodeInternal, fmt.Sprintf("internal: %v", err)
+		return nil, ErrCodeInternal, fmt.Sprintf("Lỗi tạo nhân vật: %v", err)
 	}
-	if err = s.repo.InitPlayerBuildings(ctx, player.ID); err != nil {
-		return nil, ErrCodeInternal, fmt.Sprintf("init buildings: %v", err)
-	}
-	
-	// Tự động cấp 3 tướng tân thủ mặc định cho người chơi mới
-	defaultSlots := make(map[int32]int64)
-	hero1, err := s.repo.AddHero(ctx, player.ID, "FIRE_WARRIOR_01")
-	if err == nil && hero1 != nil {
-		defaultSlots[0] = hero1.ID
-	}
-	hero2, err := s.repo.AddHero(ctx, player.ID, "WATER_TANK_01")
-	if err == nil && hero2 != nil {
-		defaultSlots[1] = hero2.ID
-	}
-	hero3, err := s.repo.AddHero(ctx, player.ID, "WOOD_HEALER_01")
-	if err == nil && hero3 != nil {
-		defaultSlots[2] = hero3.ID
-	}
-
-	_ = s.repo.SetFormation(ctx, player.ID, defaultSlots)
 	return player, ErrCodeSuccess, "Tạo nhân vật thành công"
 }
 

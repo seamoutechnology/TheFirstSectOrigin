@@ -136,17 +136,88 @@ func (r *PlayerRepository) RecoverStamina(ctx context.Context, p *Player) {
 }
 
 func (r *PlayerRepository) Create(ctx context.Context, userID int64, serverID string, nickname string) (*Player, error) {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Insert player
 	q := `
 		INSERT INTO players (user_id, server_id, nickname)
 		VALUES ($1, $2, $3)
 		RETURNING id, user_id, server_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
-	err := r.db.QueryRow(ctx, q, userID, serverID, nickname).Scan(
+	err = tx.QueryRow(ctx, q, userID, serverID, nickname).Scan(
 		&p.ID, &p.UserID, &p.ServerID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
 		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
-	return p, err
+	if err != nil {
+		return nil, err
+	}
+
+	// 2. Init player buildings
+	_, err = tx.Exec(ctx, `
+		INSERT INTO player_buildings (player_id, building_code)
+		SELECT $1, code FROM buildings
+		ON CONFLICT DO NOTHING
+	`, p.ID)
+	if err != nil {
+		return nil, fmt.Errorf("init buildings error: %w", err)
+	}
+
+	// 3. Add 3 starter heroes
+	starterHeroes := []string{"FIRE_WARRIOR_01", "WATER_TANK_01", "WOOD_HEALER_01"}
+	heroIDs := make([]int64, len(starterHeroes))
+	for i, heroCode := range starterHeroes {
+		var skillsJSON string
+		switch heroCode {
+		case "DARK_ASSASSIN_01":
+			skillsJSON = `[{"skill_code": "skill_shadow_strike", "level": 1}]`
+		case "FIRE_GENERAL_01", "LIGHT_MAGE_01":
+			skillsJSON = `[{"skill_code": "skill_fireball", "level": 1}]`
+		case "WATER_TANK_01":
+			skillsJSON = `[{"skill_code": "skill_shield", "level": 1}]`
+		case "WOOD_HEALER_01":
+			skillsJSON = `[{"skill_code": "skill_heal", "level": 1}]`
+		default:
+			skillsJSON = `[{"skill_code": "skill_slash", "level": 1}]`
+		}
+
+		err = tx.QueryRow(ctx, `
+			INSERT INTO player_heroes (player_id, hero_code, traits, skills) 
+			VALUES ($1, $2, '[]'::jsonb, $3::jsonb)
+			RETURNING id`, p.ID, heroCode, skillsJSON).Scan(&heroIDs[i])
+		if err != nil {
+			return nil, fmt.Errorf("add starter hero %s error: %w", heroCode, err)
+		}
+	}
+
+	// 4. Set formation
+	for slotIndex, heroID := range heroIDs {
+		_, err = tx.Exec(ctx, `
+			INSERT INTO player_formations (player_id, slot_index, player_hero_id)
+			VALUES ($1, $2, $3)
+			ON CONFLICT (player_id, slot_index) DO UPDATE SET player_hero_id = EXCLUDED.player_hero_id`,
+			p.ID, int32(slotIndex), heroID)
+		if err != nil {
+			return nil, fmt.Errorf("set starter formation slot %d error: %w", slotIndex, err)
+		}
+	}
+
+	// 5. Update player power
+	_, err = tx.Exec(ctx, "UPDATE players SET power = 1500 WHERE id = $1", p.ID)
+	if err != nil {
+		return nil, err
+	}
+	p.Power = 1500
+
+	if err = tx.Commit(ctx); err != nil {
+		return nil, err
+	}
+
+	return p, nil
 }
 
 func (r *PlayerRepository) FindByNickname(ctx context.Context, nickname string, serverID string) (*Player, error) {
@@ -414,23 +485,29 @@ func (r *PlayerRepository) GetPlayerHeroes(ctx context.Context, playerID int64) 
 }
 
 func (r *PlayerRepository) AddHero(ctx context.Context, playerID int64, heroCode string) (*PlayerHero, error) {
+	var skillsJSON string
+	switch heroCode {
+	case "DARK_ASSASSIN_01":
+		skillsJSON = `[{"skill_code": "skill_shadow_strike", "level": 1}]`
+	case "FIRE_GENERAL_01", "LIGHT_MAGE_01":
+		skillsJSON = `[{"skill_code": "skill_fireball", "level": 1}]`
+	case "WATER_TANK_01":
+		skillsJSON = `[{"skill_code": "skill_shield", "level": 1}]`
+	case "WOOD_HEALER_01":
+		skillsJSON = `[{"skill_code": "skill_heal", "level": 1}]`
+	default:
+		skillsJSON = `[{"skill_code": "skill_slash", "level": 1}]`
+	}
+
 	q := `
 		INSERT INTO player_heroes (player_id, hero_code, traits, skills) 
-		VALUES ($1, $2, '[]'::jsonb, 
-			CASE 
-				WHEN $2 = 'DARK_ASSASSIN_01' THEN '[{"skill_code": "skill_shadow_strike", "level": 1}]'::jsonb
-				WHEN $2 IN ('FIRE_GENERAL_01', 'LIGHT_MAGE_01') THEN '[{"skill_code": "skill_fireball", "level": 1}]'::jsonb
-				WHEN $2 = 'WATER_TANK_01' THEN '[{"skill_code": "skill_shield", "level": 1}]'::jsonb
-				WHEN $2 = 'WOOD_HEALER_01' THEN '[{"skill_code": "skill_heal", "level": 1}]'::jsonb
-				ELSE '[{"skill_code": "skill_slash", "level": 1}]'::jsonb
-			END
-		)
+		VALUES ($1, $2, '[]'::jsonb, $3::jsonb)
 		RETURNING id, player_id, hero_code, level, star, exp, traits, skills
 	`
 	h := &PlayerHero{PlayerID: playerID, HeroCode: heroCode}
 	var traitsBytes []byte
 	var skillsBytes []byte
-	err := r.db.QueryRow(ctx, q, playerID, heroCode).Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Level, &h.Star, &h.Exp, &traitsBytes, &skillsBytes)
+	err := r.db.QueryRow(ctx, q, playerID, heroCode, skillsJSON).Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Level, &h.Star, &h.Exp, &traitsBytes, &skillsBytes)
 	h.Traits = string(traitsBytes)
 	h.Skills = string(skillsBytes)
 	if err == nil {
