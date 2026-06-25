@@ -197,9 +197,9 @@ func (r *PlayerRepository) Create(ctx context.Context, userID int64, serverID st
 	// 4. Set formation
 	for slotIndex, heroID := range heroIDs {
 		_, err = tx.Exec(ctx, `
-			INSERT INTO player_formations (player_id, slot_index, player_hero_id)
+			INSERT INTO player_formations (player_id, position, player_hero_id)
 			VALUES ($1, $2, $3)
-			ON CONFLICT (player_id, slot_index) DO UPDATE SET player_hero_id = EXCLUDED.player_hero_id`,
+			ON CONFLICT (player_id, position) DO UPDATE SET player_hero_id = EXCLUDED.player_hero_id`,
 			p.ID, int32(slotIndex), heroID)
 		if err != nil {
 			return nil, fmt.Errorf("set starter formation slot %d error: %w", slotIndex, err)
