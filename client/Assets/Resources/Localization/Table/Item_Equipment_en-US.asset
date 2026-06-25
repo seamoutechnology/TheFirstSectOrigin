@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -149,6 +149,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2000022
     m_Localized: Stamina used for adventure stages and other actions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 989299603793334
+    m_Localized: Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 537260745754115
+    m_Localized: Gold
     m_Metadata:
       m_Items: []
   references:

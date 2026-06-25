@@ -52,6 +52,7 @@ type Service interface {
 	GMAddHero(zoneID int, userID int64, heroCode string) error
 	GMAddHeroWithTraits(zoneID int, userID int64, heroCode string, traits []string) error
 	CreateGiftCode(code string, rewardGold int64, rewardDiamond int64, rewardItems string, maxUses int) error
+	CleanupOrphanedPlayers(zoneID int) (int64, error)
 }
 
 type adminService struct {
@@ -310,5 +311,9 @@ func (s *adminService) SaveShopItem(c ShopItemData) error {
 
 func (s *adminService) DeleteShopItem(shopItemID string) error {
 	return s.repo.DeleteShopItem(shopItemID)
+}
+
+func (s *adminService) CleanupOrphanedPlayers(zoneID int) (int64, error) {
+	return s.repo.CleanupOrphanedPlayers(zoneID)
 }
 

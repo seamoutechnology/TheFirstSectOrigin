@@ -29,6 +29,7 @@ func (h *WorldHandler) GetHeroes(ctx context.Context, req *pb.GetHeroesRequest) 
 	}
 
 	heroes, code, msg := h.svc.GetHeroes(ctx, userID)
+	h.log.Info("GetHeroes service returned", zap.Int64("userID", userID), zap.Int("count", len(heroes)), zap.Int32("code", code), zap.String("msg", msg))
 	if code != 0 {
 		return &pb.GetHeroesResponse{Base: &pb.BaseResponse{Code: code, Message: msg}}, nil
 	}

@@ -6,9 +6,9 @@ namespace GameClient.Core
     public class GameSettings : ScriptableObject
     {
         [Header("Mạng & Server")]
-        public string apiBaseUrl = "http://192.168.0.111";
-        public string cdnUrl = "http://192.168.0.111/cdn/";
-        public string gatewayAddr = "192.168.0.111:50051";
+        public string apiBaseUrl = "http://127.0.0.1";
+        public string cdnUrl = "http://127.0.0.1/cdn/";
+        public string gatewayAddr = "127.0.0.1:50051";
 
         [Header("Phiên bản")]
         public string gameVersion = "1.0.0";

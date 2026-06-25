@@ -423,15 +423,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10304074506006528
-    m_Localized: "T\u1EAFt \xE2m thanh"
+    m_Localized: "\xC2m thanh"
     m_Metadata:
       m_Items: []
   - m_Id: 10304195985633280
-    m_Localized: "T\u1EAFt nh\u1EA1c"
+    m_Localized: "Nh\u1EA1c"
     m_Metadata:
       m_Items: []
   - m_Id: 10304249047773184
-    m_Localized: "T\u1EAFt SFX"
+    m_Localized: SFX
     m_Metadata:
       m_Items: []
   - m_Id: 10307279960895488

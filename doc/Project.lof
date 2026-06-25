@@ -3,12 +3,16 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Biểu đồ use case tổng quát của hệ thống}}{5}{figure.caption.8}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Biểu đồ gói UML thể hiện sự phụ thuộc và giao tiếp trong hệ thống}}{19}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Biểu đồ quan hệ giữa các thành phần trong gói World Server}}{20}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Biểu đồ trình tự chức năng Đăng ký tài khoản}}{25}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Biểu đồ trình tự chức năng Thu thập tài nguyên công trình}}{26}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Sơ đồ thực thể liên kết cơ sở dữ liệu (ERD) toàn hệ thống}}{27}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Mô hình triển khai máy chủ vi dịch vụ sử dụng Docker và Nginx}}{35}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Biểu đồ gói UML thể hiện sự phụ thuộc và giao tiếp trong hệ thống}}{20}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Biểu đồ quan hệ giữa các thành phần trong gói World Server}}{21}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Biểu đồ trình tự chức năng Đăng ký tài khoản}}{26}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Biểu đồ trình tự chức năng Thu thập tài nguyên công trình}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Sơ đồ thực thể liên kết cơ sở dữ liệu (ERD) toàn hệ thống}}{35}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Giao diện đăng nhập và đăng ký tài khoản người chơi}}{42}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Giao diện Bản đồ Tông môn và Khai thác tài nguyên}}{43}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Giao diện Sắp xếp Đội hình đệ tử xuất trận}}{44}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Giao diện mô phỏng Trận đấu vượt ải Campaign}}{45}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Mô hình triển khai máy chủ vi dịch vụ sử dụng Docker và Nginx}}{50}{figure.caption.59}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -361,37 +361,73 @@ namespace GameClient.Gameplay.BaseBuilder
         public void SyncBuildingsWithServerData(IEnumerable<GameClient.Network.Pb.Building> serverBuildings)
         {
             if (serverBuildings == null) return;
+            
             var dict = new Dictionary<long, GameClient.Network.Pb.Building>();
+            var codeMap = new Dictionary<string, List<GameClient.Network.Pb.Building>>();
+            
             foreach (var sb in serverBuildings)
             {
                 dict[sb.InstanceId] = sb;
+                if (!codeMap.ContainsKey(sb.BuildingCode))
+                {
+                    codeMap[sb.BuildingCode] = new List<GameClient.Network.Pb.Building>();
+                }
+                codeMap[sb.BuildingCode].Add(sb);
             }
 
+            var matchedServerIds = new HashSet<long>();
+
+            // First pass: match exact InstanceID (for buildings that already have a valid non-zero ID)
             foreach (var active in _activeBuildings)
             {
-                if (active != null && active.Data != null && dict.TryGetValue(active.InstanceID, out var sb))
+                if (active != null && active.InstanceID != 0 && dict.TryGetValue(active.InstanceID, out var sb))
                 {
-                    // Calculate state based on UpgradeEndAt
-                    BuildingState state = BuildingState.Normal;
-                    if (sb.UpgradeEndAt > 0)
-                    {
-                        var endOffset = System.DateTimeOffset.FromUnixTimeSeconds(sb.UpgradeEndAt);
-                        if (System.DateTimeOffset.UtcNow < endOffset)
-                        {
-                            state = BuildingState.Upgrading;
-                        }
-                    }
-                    else
-                    {
-                        if (active.Data is ProductionBuildingData)
-                        {
-                            state = active.HasResourcesToHarvest() ? BuildingState.ReadyToHarvest : BuildingState.Producing;
-                        }
-                    }
-                    
-                    active.SyncUpgradeState(sb.Level, sb.UpgradeEndAt, state);
+                    SyncActiveWithServer(active, sb);
+                    matchedServerIds.Add(sb.InstanceId);
                 }
             }
+
+            // Second pass: for buildings with InstanceID == 0, match by BuildingCode
+            foreach (var active in _activeBuildings)
+            {
+                if (active != null && active.InstanceID == 0 && active.Data != null)
+                {
+                    string code = active.Data.BuildingID;
+                    if (codeMap.TryGetValue(code, out var sbs))
+                    {
+                        var sb = sbs.Find(b => !matchedServerIds.Contains(b.InstanceId));
+                        if (sb != null)
+                        {
+                            active.UpdateInstanceID(sb.InstanceId);
+                            SyncActiveWithServer(active, sb);
+                            matchedServerIds.Add(sb.InstanceId);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SyncActiveWithServer(BuildingInstance active, GameClient.Network.Pb.Building sb)
+        {
+            // Calculate state based on UpgradeEndAt
+            BuildingState state = BuildingState.Normal;
+            if (sb.UpgradeEndAt > 0)
+            {
+                var endOffset = System.DateTimeOffset.FromUnixTimeSeconds(sb.UpgradeEndAt);
+                if (System.DateTimeOffset.UtcNow < endOffset)
+                {
+                    state = BuildingState.Upgrading;
+                }
+            }
+            else
+            {
+                if (active.Data is ProductionBuildingData)
+                {
+                    state = active.HasResourcesToHarvest() ? BuildingState.ReadyToHarvest : BuildingState.Producing;
+                }
+            }
+            
+            active.SyncUpgradeState(sb.Level, sb.UpgradeEndAt, state);
         }
         
         #endregion

@@ -220,6 +220,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2>Danh sách người chơi</h2>
                         <div class="d-flex gap-2">
+                            <button class="btn btn-outline-danger" onclick="cleanupOrphanedPlayers()"><i class="fas fa-trash-alt"></i> Dọn dẹp nhân vật rác</button>
                             <input type="text" id="player-search" class="form-control" placeholder="Tìm kiếm Email / Username" style="width: 250px;" oninput="loadPlayers(1)">
                             <select id="zone-select" class="form-select" style="width: 120px;" onchange="loadPlayers(1)">
                                 <option value="1">Zone 1</option>
@@ -574,6 +575,26 @@
                 }
             } catch (err) {
                 console.error("Lỗi load players:", err);
+            }
+        }
+
+        async function cleanupOrphanedPlayers() {
+            const zoneId = document.getElementById("zone-select").value;
+            if (!confirm(`Bạn có chắc chắn muốn dọn dẹp tất cả nhân vật không có tài khoản liên kết tại Zone ${zoneId}?`)) {
+                return;
+            }
+            try {
+                const res = await fetch(`/api/gm/users/cleanup-orphaned?zone_id=${zoneId}`);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    alert(`Đã dọn dẹp thành công! Số nhân vật bị xóa: ${data.rows_deleted}`);
+                    loadPlayers(1);
+                } else {
+                    alert(`Có lỗi xảy ra: ${data.message || 'Lỗi không xác định'}`);
+                }
+            } catch (err) {
+                console.error("Lỗi dọn dẹp nhân vật:", err);
+                alert("Lỗi kết nối server!");
             }
         }
 

@@ -18,15 +18,11 @@ namespace GameClient.UI
         [SerializeField] private Transform contentContainer;
         [SerializeField] private Button btnClose;
         [SerializeField] private Button btnRefresh;
-        [SerializeField] private TMP_Text txtRefreshCost;
         [SerializeField] private TMP_Text txtRefreshTimer;
 
-        [Header("Shop Tabs")]
-        [SerializeField] private Button btnTabDaily;
-        [SerializeField] private Button btnTabGuild;
-        [SerializeField] private Button btnTabArena;
+        [Header("Shop Settings")]
+        [SerializeField] private string currentShopType = "daily";
 
-        private string currentShopType = "daily";
         private List<UI_ShopItem> spawnedItems = new List<UI_ShopItem>();
         private System.DateTime nextRefreshTime;
         private bool isTimerActive = false;
@@ -51,44 +47,12 @@ namespace GameClient.UI
                 itemPrefab.gameObject.SetActive(false); // Hide the template
             }
 
-            // Tabs setup
-            if (btnTabDaily != null) btnTabDaily.onClick.AddListener(() => SwitchShopTab("daily"));
-            if (btnTabGuild != null) btnTabGuild.onClick.AddListener(() => SwitchShopTab("guild"));
-            if (btnTabArena != null) btnTabArena.onClick.AddListener(() => SwitchShopTab("arena"));
-
             // Dynamic lookup fallback if fields are not assigned in Inspector
             FindUiElementsFallback();
         }
 
         private void FindUiElementsFallback()
         {
-            if (btnTabDaily == null)
-            {
-                var dailyBtnObj = transform.Find("Tabs/Daily") ?? transform.Find("btnTabDaily") ?? transform.Find("DailyTab");
-                if (dailyBtnObj != null)
-                {
-                    btnTabDaily = dailyBtnObj.GetComponent<Button>();
-                    btnTabDaily.onClick.AddListener(() => SwitchShopTab("daily"));
-                }
-            }
-            if (btnTabGuild == null)
-            {
-                var guildBtnObj = transform.Find("Tabs/Guild") ?? transform.Find("btnTabGuild") ?? transform.Find("GuildTab");
-                if (guildBtnObj != null)
-                {
-                    btnTabGuild = guildBtnObj.GetComponent<Button>();
-                    btnTabGuild.onClick.AddListener(() => SwitchShopTab("guild"));
-                }
-            }
-            if (btnTabArena == null)
-            {
-                var arenaBtnObj = transform.Find("Tabs/Arena") ?? transform.Find("btnTabArena") ?? transform.Find("ArenaTab");
-                if (arenaBtnObj != null)
-                {
-                    btnTabArena = arenaBtnObj.GetComponent<Button>();
-                    btnTabArena.onClick.AddListener(() => SwitchShopTab("arena"));
-                }
-            }
             if (btnRefresh == null)
             {
                 var refreshBtnObj = transform.Find("btnRefresh") ?? transform.Find("RefreshButton");
@@ -103,31 +67,13 @@ namespace GameClient.UI
                 var timerObj = transform.Find("txtRefreshTimer") ?? transform.Find("RefreshTimer");
                 if (timerObj != null) txtRefreshTimer = timerObj.GetComponent<TMP_Text>();
             }
-            if (txtRefreshCost == null)
-            {
-                var costObj = transform.Find("txtRefreshCost") ?? transform.Find("RefreshCost");
-                if (costObj != null) txtRefreshCost = costObj.GetComponent<TMP_Text>();
-            }
+
         }
 
         protected override void OnShow()
         {
             base.OnShow();
-            SwitchShopTab("daily");
-        }
-
-        private void SwitchShopTab(string shopType)
-        {
-            currentShopType = shopType;
-            UpdateTabVisuals();
             _ = LoadShopDataFromServer();
-        }
-
-        private void UpdateTabVisuals()
-        {
-            if (btnTabDaily != null) btnTabDaily.image.color = currentShopType == "daily" ? Color.green : Color.white;
-            if (btnTabGuild != null) btnTabGuild.image.color = currentShopType == "guild" ? Color.green : Color.white;
-            if (btnTabArena != null) btnTabArena.image.color = currentShopType == "arena" ? Color.green : Color.white;
         }
 
         private async Task LoadShopDataFromServer()
@@ -151,8 +97,6 @@ namespace GameClient.UI
                     long epoch = response.NextRefreshAt;
                     nextRefreshTime = System.DateTimeOffset.FromUnixTimeSeconds(epoch).LocalDateTime;
                     isTimerActive = true;
-                    
-                    UpdateRefreshCostLabel();
                 }
                 else
                 {
@@ -173,7 +117,11 @@ namespace GameClient.UI
                 UI_ShopItem newCard = Instantiate(itemPrefab, contentContainer);
                 newCard.gameObject.SetActive(true);
 
-                string itemName = LocalizationManager.Instance.GetText("item", item.ItemCode) ?? item.ItemCode;
+                string itemName = LocalizationManager.Instance.GetText("Item_Equipment", item.ItemCode);
+                if (string.IsNullOrEmpty(itemName) || itemName.StartsWith("["))
+                {
+                    itemName = item.ItemCode;
+                }
                 string iconKey = $"{item.ItemCode}_icon";
 
                 Sprite iconSprite = null;
@@ -187,12 +135,18 @@ namespace GameClient.UI
                     priceAmount = item.FinalPrice[0].Amount;
                 }
 
+                string currencyName = LocalizationManager.Instance.GetText("Item_Equipment", currency);
+                if (string.IsNullOrEmpty(currencyName) || currencyName.StartsWith("["))
+                {
+                    currencyName = currency;
+                }
+
                 newCard.Setup(
                     item.Id,
                     item.ItemCode,
                     itemName,
                     priceAmount,
-                    currency,
+                    currencyName,
                     item.DiscountPct,
                     item.IsBought,
                     iconSprite,
@@ -201,8 +155,6 @@ namespace GameClient.UI
 
                 spawnedItems.Add(newCard);
             }
-
-            UpdateRefreshCostLabel();
         }
 
         private async Task LoadIconAsync(string key, UI_ShopItem card)
@@ -212,8 +164,7 @@ namespace GameClient.UI
                 Sprite s = await ResourceManager.Instance.LoadAssetAsync<Sprite>(key);
                 if (s != null && card != null)
                 {
-                    var img = card.GetComponentInChildren<Image>();
-                    if (img != null) img.sprite = s;
+                    card.SetIcon(s);
                 }
             }
             catch
@@ -222,14 +173,7 @@ namespace GameClient.UI
             }
         }
 
-        private void UpdateRefreshCostLabel()
-        {
-            if (txtRefreshCost != null)
-            {
-                bool hasTicket = HasRefreshTicket();
-                txtRefreshCost.text = hasTicket ? "Refresh: 1 ticket" : "Refresh: 50 Diamond";
-            }
-        }
+
 
         private bool HasRefreshTicket()
         {
@@ -247,7 +191,12 @@ namespace GameClient.UI
 
         private void OnBuyItemClicked(UI_ShopItem itemCard)
         {
-            string confirmMsg = $"Bạn có muốn tiêu hao {itemCard.PriceAmount} {itemCard.CurrencyType} để mua {itemCard.ItemCode}?";
+            string localizedItemName = LocalizationManager.Instance.GetText("Item_Equipment", itemCard.ItemCode);
+            if (string.IsNullOrEmpty(localizedItemName) || localizedItemName.StartsWith("["))
+            {
+                localizedItemName = itemCard.ItemCode;
+            }
+            string confirmMsg = $"Bạn có muốn tiêu hao {itemCard.PriceAmount} {itemCard.CurrencyType} để mua {localizedItemName}?";
             
             UIManager.Instance.ShowConfirmDialog(
                 "Mua Vật Phẩm",
@@ -344,11 +293,11 @@ namespace GameClient.UI
                 var diff = nextRefreshTime - System.DateTime.Now;
                 if (diff.TotalSeconds > 0)
                 {
-                    txtRefreshTimer.text = string.Format("F5 sau: {0:D2}:{1:D2}:{2:D2}", diff.Hours, diff.Minutes, diff.Seconds);
+                    txtRefreshTimer.text = string.Format("{0:D2}:{1:D2}:{2:D2}", diff.Hours, diff.Minutes, diff.Seconds);
                 }
                 else
                 {
-                    txtRefreshTimer.text = "Có thể làm mới!";
+                    txtRefreshTimer.text = "00:00:00";
                     isTimerActive = false;
                     _ = LoadShopDataFromServer(); // Auto refresh
                 }

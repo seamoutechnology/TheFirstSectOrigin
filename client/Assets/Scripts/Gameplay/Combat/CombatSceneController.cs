@@ -517,60 +517,111 @@ namespace GameClient.Gameplay.Combat
 
                     if (go == null)
                     {
-                        // Tạo GameObject rỗng làm cha để chứa SpriteRenderer, tránh xung đột với MeshRenderer của Cube
-                        go = new GameObject($"Enemy_{config.name}_Fallback");
-                        go.transform.SetParent(enemySpawnPoints[targetSlot]);
-                        go.transform.localPosition = Vector3.zero;
-                        go.transform.localRotation = Quaternion.identity;
-                        var pScale = enemySpawnPoints[targetSlot].localScale;
-                        float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
-                        float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
-                        go.transform.localScale = new Vector3(sx, sy, 1f);
-                        
-                        var sr = go.AddComponent<SpriteRenderer>();
-                        sr.sortingOrder = 10;
-                        
-                        Sprite mSprite = null;
-                        if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
+                        bool isUI = enemySpawnPoints[targetSlot].GetComponentInParent<Canvas>() != null;
+                        if (isUI)
                         {
-                            try
+                            go = new GameObject($"Enemy_{config.name}_Fallback", typeof(RectTransform));
+                            go.transform.SetParent(enemySpawnPoints[targetSlot], false);
+                            var rect = go.GetComponent<RectTransform>();
+                            rect.anchoredPosition = Vector2.zero;
+                            rect.localRotation = Quaternion.identity;
+                            var parentRect = enemySpawnPoints[targetSlot].GetComponent<RectTransform>();
+                            rect.sizeDelta = parentRect != null ? parentRect.sizeDelta : new Vector2(120f, 120f);
+                            
+                            var img = go.AddComponent<UnityEngine.UI.Image>();
+                            img.preserveAspect = true;
+                            
+                            Sprite mSprite = null;
+                            if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
                             {
-                                mSprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                }
+                                catch {}
                             }
-                            catch {}
-                        }
 
-                        if (mSprite == null)
-                        {
-                            try
+                            if (mSprite == null)
                             {
-                                mSprite = await Addressables.LoadAssetAsync<Sprite>("char_mon_01").Task;
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>("char_mon_01").Task;
+                                }
+                                catch {}
                             }
-                            catch {}
-                        }
 
-                        if (mSprite == null)
-                        {
-                            try
+                            if (mSprite == null)
                             {
-                                mSprite = await Addressables.LoadAssetAsync<Sprite>("avt_mon_01").Task;
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>("avt_mon_01").Task;
+                                }
+                                catch {}
                             }
-                            catch {}
-                        }
 
-                        if (mSprite != null)
-                        {
-                            sr.sprite = mSprite;
+                            if (mSprite != null)
+                            {
+                                img.sprite = mSprite;
+                            }
+                            Debug.LogWarning($"[CombatSceneController] Created fallback UI Image for enemy '{config.name}' at {go.transform.position} with sprite: {(img.sprite != null ? img.sprite.name : "null")}");
                         }
                         else
                         {
-                            // Nếu không tải được sprite nào, tạo một Cube 3D con làm hiển thị hình khối tạm thời
-                            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            cube.transform.SetParent(go.transform, false);
-                            cube.transform.localPosition = Vector3.zero;
-                            cube.transform.localScale = Vector3.one;
+                            // Tạo GameObject rỗng làm cha để chứa SpriteRenderer, tránh xung đột với MeshRenderer của Cube
+                            go = new GameObject($"Enemy_{config.name}_Fallback");
+                            go.transform.SetParent(enemySpawnPoints[targetSlot]);
+                            go.transform.localPosition = Vector3.zero;
+                            go.transform.localRotation = Quaternion.identity;
+                            var pScale = enemySpawnPoints[targetSlot].localScale;
+                            float sx = 10f / (pScale.x != 0 ? pScale.x : 1f);
+                            float sy = 10f / (pScale.y != 0 ? pScale.y : 1f);
+                            go.transform.localScale = new Vector3(sx, sy, 1f);
+                            
+                            var sr = go.AddComponent<SpriteRenderer>();
+                            sr.sortingOrder = 10;
+                            
+                            Sprite mSprite = null;
+                            if (!string.IsNullOrEmpty(config.prefabAddress) && config.prefabAddress != "MonsterPrefab")
+                            {
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>(config.prefabAddress).Task;
+                                }
+                                catch {}
+                            }
+
+                            if (mSprite == null)
+                            {
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>("char_mon_01").Task;
+                                }
+                                catch {}
+                            }
+
+                            if (mSprite == null)
+                            {
+                                try
+                                {
+                                    mSprite = await Addressables.LoadAssetAsync<Sprite>("avt_mon_01").Task;
+                                }
+                                catch {}
+                            }
+
+                            if (mSprite != null)
+                            {
+                                sr.sprite = mSprite;
+                            }
+                            else
+                            {
+                                // Nếu không tải được sprite nào, tạo một Cube 3D con làm hiển thị hình khối tạm thời
+                                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                                cube.transform.SetParent(go.transform, false);
+                                cube.transform.localPosition = Vector3.zero;
+                                cube.transform.localScale = Vector3.one;
+                            }
+                            Debug.LogWarning($"[CombatSceneController] Created fallback SpriteRenderer for enemy '{config.name}' at {go.transform.position} with sprite: {(sr.sprite != null ? sr.sprite.name : "null")}");
                         }
-                        Debug.LogWarning($"[CombatSceneController] Created fallback for enemy '{config.name}' at {go.transform.position} with sprite: {(sr.sprite != null ? sr.sprite.name : "null")}");
                     }
                 }
 

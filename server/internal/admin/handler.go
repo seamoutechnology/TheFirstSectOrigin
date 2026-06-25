@@ -473,6 +473,26 @@ func (h *AdminHandler) GMGetUsersList(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+func (h *AdminHandler) GMCleanupOrphanedPlayers(w http.ResponseWriter, r *http.Request) {
+	zoneStr := r.URL.Query().Get("zone_id")
+	zoneID, err := strconv.Atoi(zoneStr)
+	if err != nil || zoneID <= 0 {
+		zoneID = 1 // default
+	}
+
+	rowsDeleted, err := h.svc.CleanupOrphanedPlayers(zoneID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"status":       "success",
+		"rows_deleted": rowsDeleted,
+	})
+}
+
 func (h *AdminHandler) GMGetAllZones(w http.ResponseWriter, r *http.Request) {
 	zones, err := h.svc.GetAllZones()
 	if err != nil {

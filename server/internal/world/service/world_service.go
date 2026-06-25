@@ -641,17 +641,19 @@ func (s *WorldService) GetPlayerMapWithFallback(ctx context.Context, userID int6
 	if err != nil {
 		adminData, errAdmin := s.repo.GetAdminMap(ctx, "default_base")
 		if errAdmin != nil {
-			return "", errAdmin
+			return "{}", nil
 		}
 		return adminData, nil
 	}
 
 	playerID := player.ID
 	jsonData, err := s.repo.GetPlayerMap(ctx, playerID)
-	if err != nil && (err.Error() == "sql: no rows in result set" || err.Error() == "not found") {
+	if err != nil && (errors.Is(err, repository.ErrNotFound) || err.Error() == "sql: no rows in result set" || err.Error() == "not found") {
 		adminData, errAdmin := s.repo.GetAdminMap(ctx, "default_base")
 		if errAdmin != nil {
-			return "", errAdmin
+			emptyMap := `{"gridWidth":32,"gridHeight":32,"buildings":[]}`
+			s.repo.SavePlayerMap(ctx, playerID, emptyMap)
+			return emptyMap, nil
 		}
 		s.repo.SavePlayerMap(ctx, playerID, adminData)
 		return adminData, nil
@@ -774,9 +776,26 @@ func (s *WorldService) SavePlayerMap(ctx context.Context, userID int64, jsonData
 		}
 	}
 
+	existingJSON, errExisting := s.repo.GetPlayerMap(ctx, player.ID)
+	if errExisting != nil || existingJSON == "" {
+		existingJSON, _ = s.repo.GetAdminMap(ctx, "default_base")
+	}
+
 	if mainHallLevel < 2 {
+		existingPlacedIDs := make(map[int64]bool)
+		if existingJSON != "" {
+			var existingMap MapLayoutJSON
+			if jsonErr := json.Unmarshal([]byte(existingJSON), &existingMap); jsonErr == nil {
+				for _, eb := range existingMap.Buildings {
+					if eb.InstanceID != 0 {
+						existingPlacedIDs[eb.InstanceID] = true
+					}
+				}
+			}
+		}
+
 		for _, ob := range ownedBuildings {
-			if placedCount[ob.BuildingCode] <= 0 {
+			if existingPlacedIDs[ob.ID] && !mappedIDs[ob.ID] {
 				return fmt.Errorf("đại điện phải đạt cấp 2 mới được phép cất công trình %s vào kho", ob.BuildingCode)
 			}
 		}
@@ -793,13 +812,6 @@ func (s *WorldService) SavePlayerMap(ctx context.Context, userID int64, jsonData
 	// Sau đó merge vào JSON trước khi lưu.
 	// =========================================================
 	if len(incoming.GroundLayers) == 0 && len(incoming.GroundTiles) == 0 {
-		// Lấy map hiện tại của player để giữ lại ground data
-		existingJSON, errExisting := s.repo.GetPlayerMap(ctx, player.ID)
-		if errExisting != nil || existingJSON == "" {
-			// Chưa có map riêng → lấy từ admin default
-			existingJSON, _ = s.repo.GetAdminMap(ctx, "default_base")
-		}
-
 		if existingJSON != "" {
 			var existingMap MapLayoutJSON
 			if jsonErr := json.Unmarshal([]byte(existingJSON), &existingMap); jsonErr == nil {
@@ -939,20 +951,58 @@ func (s *WorldService) UseItem(ctx context.Context, userID int64, req *pb.UseIte
 			}
 		}
 	case "CONSUMABLE":
-		// Check consumable stats: EFF_ADD_STAMINA, EFF_ADD_EXP etc.
-		for _, eff := range effects {
-			if eff.EffectCode == "EFF_ADD_STAMINA" {
-				codeParam = "stamina"
-				valueParam = int32(eff.Value)
-				break
-			} else if eff.EffectCode == "EFF_ADD_EXP" {
-				codeParam = "exp"
-				valueParam = int32(eff.Value)
-				break
+		if inst.ItemCode == "recruit_ticket" {
+			useType = "RECRUIT_TICKET"
+			
+			pool, err := s.repo.GetGachaHeroPool(ctx)
+			if err != nil {
+				return ErrCodeInternal, err.Error()
 			}
-		}
-		if codeParam == "" {
-			return ErrCodeInternal, "Vật phẩm tiêu hao không có hiệu ứng chỉ số hợp lệ"
+			if len(pool) == 0 {
+				return ErrCodeInternal, "Không có đệ tử nào trong bể gacha"
+			}
+			
+			pityCount, err := s.repo.GetOrCreatePity(ctx, player.ID, 1) // Standard banner ID is 1
+			if err != nil {
+				return ErrCodeInternal, err.Error()
+			}
+			
+			rng := rand.New(rand.NewSource(time.Now().UnixNano()))
+			var rolledHeroes []string
+			for i := int32(0); i < req.Quantity; i++ {
+				pityCount++
+				heroCode := rollHero(pool, pityCount, 80, rng)
+				rolledHeroes = append(rolledHeroes, heroCode)
+				
+				// Reset pity count if Rarity is SSR or UR
+				for _, t := range pool {
+					if t.Code == heroCode {
+						if t.Rarity == "SSR" || t.Rarity == "UR" {
+							pityCount = 0
+						}
+						break
+					}
+				}
+			}
+			
+			codeParam = strings.Join(rolledHeroes, ",")
+			valueParam = pityCount
+		} else {
+			// Check consumable stats: EFF_ADD_STAMINA, EFF_ADD_EXP etc.
+			for _, eff := range effects {
+				if eff.EffectCode == "EFF_ADD_STAMINA" {
+					codeParam = "stamina"
+					valueParam = int32(eff.Value)
+					break
+				} else if eff.EffectCode == "EFF_ADD_EXP" {
+					codeParam = "exp"
+					valueParam = int32(eff.Value)
+					break
+				}
+			}
+			if codeParam == "" {
+				return ErrCodeInternal, "Vật phẩm tiêu hao không có hiệu ứng chỉ số hợp lệ"
+			}
 		}
 	default:
 		return ErrCodeInternal, "Loại vật phẩm không hỗ trợ sử dụng trực tiếp: " + useType
@@ -966,7 +1016,11 @@ func (s *WorldService) UseItem(ctx context.Context, userID int64, req *pb.UseIte
 		return ErrCodeInternal, "Lỗi thực hiện sử dụng vật phẩm: " + err.Error()
 	}
 
-	return ErrCodeSuccess, "Sử dụng vật phẩm thành công"
+	if useType == "RECRUIT_TICKET" {
+		_ = s.repo.UpdatePlayerPower(ctx, player.ID)
+	}
+
+	return 200, "Sử dụng vật phẩm thành công"
 }
 
 func (s *WorldService) BuyShopItem(ctx context.Context, userID int64, req *pb.BuyShopItemRequest) ([]*pb.Item, int32, string) {

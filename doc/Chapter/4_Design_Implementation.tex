@@ -36,7 +36,7 @@ Dưới đây trình bày sơ đồ gói UML (UML Package Diagram) thể hiện 
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[node distance=1.4cm and 1.8cm, 
+\begin{tikzpicture}[scale=0.82, transform shape, node distance=1.4cm and 2.4cm, 
   package/.style={draw, rectangle, rounded corners=3pt, minimum width=3cm, minimum height=1.2cm, align=center, fill=blue!5, font=\small},
   db/.style={draw, cylinder, shape border rotate=90, minimum width=1.8cm, minimum height=1.6cm, align=center, fill=purple!10, font=\small, aspect=0.15}]
   
@@ -46,27 +46,27 @@ Dưới đây trình bày sơ đồ gói UML (UML Package Diagram) thể hiện 
   % Gateway Layer
   \node[package, fill=teal!15, below=of client] (gateway) {\textbf{Gateway Package (Go)} \\ API Reverse Proxy, \\ JWT Auth, Rate Limiter};
   
-  % Services Layer
+  % Services Layer (using slightly larger left/right spacing to avoid text clashes)
   \node[package, fill=green!15, below=1.5cm of gateway] (world) {\textbf{World Server Package} \\ Sect Management, Gacha, \\ Formation, Inventory};
-  \node[package, fill=green!15, left=2.2cm of world] (login) {\textbf{Login Server Package} \\ Account \& Session Auth, \\ Password Encryption};
-  \node[package, fill=green!15, right=2.2cm of world] (combat) {\textbf{Combat Server Package} \\ Turn-based Simulation, \\ Damage Calculation};
+  \node[package, fill=green!15, left=2.5cm of world] (login) {\textbf{Login Server Package} \\ Account \& Session Auth, \\ Password Encryption};
+  \node[package, fill=green!15, right=2.5cm of world] (combat) {\textbf{Combat Server Package} \\ Turn-based Simulation, \\ Damage Calculation};
   
-  % DB Layer
-  \node[db, below=2cm of world] (pg_game) {PostgreSQL \\ (Game Shard DB)};
-  \node[db, below=2cm of login] (pg_global) {PostgreSQL \\ (Global DB)};
-  \node[db, below=2cm of combat] (redis) {Redis \\ (Cache \& ZSET)};
+  % DB Layer (aligned nicely with increased spacing)
+  \node[db, below=2.2cm of world] (pg_game) {PostgreSQL \\ (Game Shard DB)};
+  \node[db, below=2.2cm of login] (pg_global) {PostgreSQL \\ (Global DB)};
+  \node[db, below=2.2cm of combat] (redis) {Redis \\ (Cache \& ZSET)};
 
-  % Dependencies (solid lines with arrows for communications/calls)
-  \draw[->, >=stealth, thick] (client) -- (gateway) node[midway, right] {gRPC (HTTP/2)};
-  \draw[->, >=stealth, thick] (gateway) -- (login) node[midway, above left] {gRPC};
-  \draw[->, >=stealth, thick] (gateway) -- (world) node[midway, right] {gRPC};
-  \draw[->, >=stealth, thick] (gateway) -- (combat) node[midway, above right] {gRPC};
+  % Dependencies (labeled using scriptsize to avoid overlapping and text clashing)
+  \draw[->, >=stealth, thick] (client) -- (gateway) node[midway, right, font=\scriptsize] {gRPC (HTTP/2)};
+  \draw[->, >=stealth, thick] (gateway) -- (login) node[midway, above left, font=\scriptsize] {gRPC};
+  \draw[->, >=stealth, thick] (gateway) -- (world) node[midway, right, font=\scriptsize] {gRPC};
+  \draw[->, >=stealth, thick] (gateway) -- (combat) node[midway, above right, font=\scriptsize] {gRPC};
   
-  \draw[->, >=stealth, thick, dashed] (login) -- (pg_global) node[midway, right] {SQL};
-  \draw[->, >=stealth, thick, dashed] (world) -- (pg_game) node[midway, right] {SQL};
-  \draw[->, >=stealth, thick, dashed] (world) -- (redis) node[midway, right] {TCP};
+  \draw[->, >=stealth, thick, dashed] (login) -- (pg_global) node[midway, right, font=\scriptsize] {SQL};
+  \draw[->, >=stealth, thick, dashed] (world) -- (pg_game) node[midway, right, font=\scriptsize] {SQL};
+  \draw[->, >=stealth, thick, dashed] (world) -- (redis) node[midway, right, font=\scriptsize] {TCP};
   
-  \draw[->, >=stealth, thick] (world) -- (combat) node[midway, above] {gRPC Simulate};
+  \draw[->, >=stealth, thick] (world) -- (combat) node[midway, above, font=\scriptsize] {gRPC Simulate};
 \end{tikzpicture}
 \caption{Biểu đồ gói UML thể hiện sự phụ thuộc và giao tiếp trong hệ thống}
 \label{fig:package_diagram}
@@ -243,7 +243,7 @@ Quy trình thực hiện đăng ký một tài khoản người chơi mới trê
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[node distance=1.5cm, every node/.style={font=\small}]
+\begin{tikzpicture}[scale=0.85, transform shape, node distance=1.5cm, every node/.style={font=\small}]
   % Lifelines
   \draw[thick] (0, 0) -- (0, -12.0) node[below] {Client (Unity)};
   \draw[thick] (4.5, 0) -- (4.5, -12.0) node[below] {Gateway};
@@ -277,7 +277,7 @@ Người chơi tiến hành thu thập tài nguyên nhàn rỗi (ví dụ như G
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[node distance=1.5cm, every node/.style={font=\small}]
+\begin{tikzpicture}[scale=0.85, transform shape, node distance=1.5cm, every node/.style={font=\small}]
   % Lifelines
   \draw[thick] (0, 0) -- (0, -15.2) node[below] {Client (Unity)};
   \draw[thick] (3.5, 0) -- (3.5, -15.2) node[below] {Gateway};
@@ -312,6 +312,260 @@ Người chơi tiến hành thu thập tài nguyên nhàn rỗi (ví dụ như G
 \caption{Biểu đồ trình tự chức năng Thu thập tài nguyên công trình}
 \label{fig:seq_collect_resources}
 \end{figure}
+
+\subsection{Thiết kế giao diện truyền thông gRPC (IDL)}
+\label{sec:thiet_ke_interface_idl}
+
+Để chuẩn hóa hợp đồng giao tiếp giữa các thành phần trong hệ thống vi dịch vụ (từ Client đến Gateway, và giữa các vi dịch vụ với nhau), đồ án sử dụng ngôn ngữ định nghĩa giao diện (Interface Definition Language - IDL) là Protocol Buffers (Phiên bản Proto3) của Google. Dưới đây là đặc tả các tệp tin cấu hình IDL cốt lõi cho các nghiệp vụ chính của hệ thống.
+
+\subsubsection{Đặc tả dịch vụ Xác thực (game\_auth.proto)}
+Tệp tin này đặc tả dịch vụ \texttt{AuthService} quản lý đăng ký, đăng nhập tài khoản và danh sách phân vùng (Zone List) để người chơi chọn máy chủ khi đăng nhập:
+
+\begin{lstlisting}[caption=Đặc tả IDL dịch vụ xác thực tài khoản]
+syntax = "proto3";
+package pb;
+
+service AuthService {
+  // Dang ky tai khoan moi
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  
+  // Dang nhap he thong
+  rpc Login(LoginRequest) returns (LoginResponse);
+
+  // Dang xuat
+  rpc Logout(LogoutRequest) returns (BaseResponse);
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message RegisterResponse {
+  int32 code = 1;
+  string message_id = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  int32 code = 1;
+  string message_id = 2;
+  string token = 3;        // Ma thong bao JWT cho cac yeu cau tiep theo
+  int64 user_id = 4;
+  ZoneList zone_list = 5;  // Danh sach phan vung kha dung
+}
+
+message ZoneList {
+  repeated Zone zones = 1;
+}
+
+message Zone {
+  int32 zone_id = 1;
+  string name = 2;
+  string status = 3;      // Trang thai: Normal, Crowded, Maintenance
+  string gateway_url = 4; // Dia chi IP/Domain cua Gateway tuong ung
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả cổng dịch vụ Gateway (world.proto)}
+Tệp tin này đặc tả dịch vụ \texttt{GatewayService} là điểm tiếp nhận duy nhất từ phía Client để điều phối các tác vụ nghiệp vụ game chính như nâng cấp công trình, thu hoạch tài nguyên và cấu hình đội hình:
+
+\begin{lstlisting}[caption=Đặc tả IDL cổng dịch vụ GatewayService]
+syntax = "proto3";
+package pb;
+
+service GatewayService {
+  // Lay thong tin co ban va thong tin tong mon
+  rpc GetSectInfo(GetProfileRequest) returns (SectInfo);
+
+  // Yeu cau nang cap cong trinh tong mon
+  rpc UpgradeBuilding(UpgradeBuildingRequest) returns (UpgradeBuildingResponse);
+
+  // Yeu cau thu hoach tai nguyen nhan roi tich luy
+  rpc CollectResources(CollectResourcesRequest) returns (CollectResourcesResponse);
+
+  // Sap xep va luu cau hinh doi hinh chien dau
+  rpc SetFormation(SetFormationRequest) returns (SetFormationResponse);
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả nghiệp vụ xây dựng tông môn (sect.proto)}
+Định nghĩa các đối tượng dữ liệu và cấu trúc gói tin yêu cầu nâng cấp, thu thập tài nguyên từ phía Client:
+
+\begin{lstlisting}[caption=Đặc tả IDL cac thong diep nghiep vu tong mon]
+syntax = "proto3";
+package pb;
+
+message Building {
+  string building_code = 1; // Ma dinh danh loai cong trinh
+  string name = 2;
+  int32 level = 3;          // Cap do hien tai
+  int64 upgrade_end_at = 4; // Thoi diem hoan thanh nang cap (Unix timestamp)
+  int64 last_collect_at = 5;// Lan thu hoach tai nguyen cuoi
+  int64 pending_gold = 6;   // San luong tich luy chua thu hoach
+  int32 max_level = 7;
+  int64 instance_id = 8;    // ID duy nhat cua cong trinh thuc te
+}
+
+message SectInfo {
+  BaseResponse base = 1;
+  string sect_name = 2;
+  repeated Building buildings = 3; // Danh sach cong trinh dang so huu
+}
+
+message UpgradeBuildingRequest {
+  string building_code = 1;
+  int64 instance_id = 2;
+}
+
+message UpgradeBuildingResponse {
+  BaseResponse base = 1;
+  Building building = 2;
+}
+
+message CollectResourcesRequest {
+  string building_code = 1;
+  int64 instance_id = 2;
+}
+
+message CollectResourcesResponse {
+  BaseResponse base = 1;
+  int64 gold_gained = 2;          // So luong vang (linh thach) thu hoach duoc
+  map<string, int64> resources = 4; // Chi tiet tai nguyen nhan duoc
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả nghiệp vụ quản lý đệ tử và đội hình (disciple.proto)}
+Đặc tả các cấu trúc dữ liệu liên quan đến đệ tử (thẻ tướng) bao gồm các chỉ số (HP, ATK, DEF), kỹ năng đệ tử, và cấu hình trận hình chiến đấu 9 ô:
+
+\begin{lstlisting}[caption=Đặc tả IDL nghiep vu de tu va doi hinh]
+syntax = "proto3";
+package pb;
+
+message Disciple {
+  int64 id = 1;
+  string disciple_code = 2;
+  string name = 3;
+  string rarity = 4;        // Do hiem: UR, SSR, SR, R
+  int32 level = 5;
+  int32 star = 6;
+  int64 exp = 7;
+}
+
+message HeroSkill {
+  string skill_code = 1;
+  string name = 2;
+  float damage_multiplier = 3;
+  int32 cooldown = 4;
+}
+
+message Hero {
+  int64 id = 1;
+  string name = 2;
+  int32 level = 3;
+  string rarity = 4;
+  int64 power = 5;
+  int32 star = 6;
+  repeated HeroSkill skills = 8;
+  string element = 9;
+}
+
+message FormationSlot {
+  int32 position = 1;       // Vi tri tren tran hinh 9 o (0 den 8)
+  int64 player_hero_id = 2; // ID de tu duoc sap xep vao o nay
+  bool is_locked = 3;
+}
+
+message SetFormationRequest {
+  repeated FormationSlot slots = 1;
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả nghiệp vụ Chiêu mộ đệ tử (gacha.proto)}
+Đặc tả cấu trúc dữ liệu liên quan đến vòng quay chiêu mộ đệ tử ngẫu nhiên (Gacha Banner) và kết quả quay tướng bao gồm cơ chế bảo hiểm (pity count):
+
+\begin{lstlisting}[caption=Đặc tả IDL nghiep vu chieu mo de tu]
+syntax = "proto3";
+package pb;
+
+message GachaBanner {
+  int32 banner_id = 1;
+  string name = 2;
+  string description = 3;
+  int32 cost_diamond = 4;  // Linh thach tieu hao moi luot quay
+  string end_time = 5;
+}
+
+message DoGachaRequest {
+  int32 banner_id = 1;
+  int32 count = 2;         // So luot quay: quay don (1) hoac quay x10 (10)
+}
+
+message DoGachaResponse {
+  BaseResponse base = 1;
+  repeated Hero heroes = 3; // Danh sach de tu nhan duoc tu luot quay
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả nghiệp vụ Chiến đấu vượt ải (combat.proto)}
+Quy trình mô phỏng trận đấu được chạy cục bộ tại Client (để đạt hiệu ứng hoạt ảnh mượt mà). Sau khi kết thúc trận đấu, Client gửi nhật ký hành động chiến đấu (combat log) lên máy chủ World Server để xác thực tính hợp lệ nhằm chống gian lận (anti-cheat):
+
+\begin{lstlisting}[caption=Đặc tả IDL nghiep vu chien dau vuot ai]
+syntax = "proto3";
+package pb;
+
+message CombatActionLog {
+  string caster_id = 1;
+  string target_id = 2;
+  string skill_id = 3;
+  int32 damage = 4;
+  int32 heal = 5;
+  bool is_crit = 6;
+}
+
+message ValidatePvEResultRequest {
+  string enemy_id = 1;
+  bool is_victory = 2;
+  int32 player_power = 3;
+  int32 enemy_power = 4;
+  repeated CombatActionLog combat_logs = 5; // Nhat ky tran dau de server xac thuc
+}
+
+message ValidatePvEResultResponse {
+  BaseResponse base = 1;
+  bool is_valid = 2;       // Ket qua xac thuc: true neu hop le, nguoc lai false
+  int32 reward_exp = 3;    // Kinh nghiem thuong nhan duoc
+  int32 reward_linh_thach = 4;
+}
+\end{lstlisting}
+
+\subsubsection{Đặc tả dịch vụ Bảng xếp hạng (leaderboard.proto)}
+Đặc tả các yêu cầu truy vấn xếp hạng người chơi dựa trên lực chiến tổng môn hoặc tiến độ vượt ải chiến dịch:
+
+\begin{lstlisting}[caption=Đặc tả IDL dich vu bang xep hang]
+syntax = "proto3";
+package pb;
+
+message LeaderboardEntry {
+  int64 rank = 1;          // Vi tri xep hang (1, 2, 3...)
+  string nickname = 2;     // Ten nguoi choi
+  int64 value = 3;         // Gia tri so sanh (Diem luc chien hoac map_id)
+}
+
+message GetLeaderboardRequest {
+  string type = 1;         // Kieu xep hang: "power" (Luc chien) hoac "stage" (Vuot ai)
+}
+
+message GetLeaderboardResponse {
+  BaseResponse base = 1;
+  repeated LeaderboardEntry entries = 2;
+}
+\end{lstlisting}
 
 \subsection{Thiết kế cơ sở dữ liệu}
 \label{sec:thiet_ke_csdl}
@@ -448,7 +702,9 @@ Hệ thống sử dụng giải pháp phân mảnh cơ sở dữ liệu (Databas
   % Connectors (using clean straight/stepped paths and non-overlapping label alignments)
   \draw[thick] (users) -- (social) node[midway, above] {1:N};
   \draw[thick, dashed] (users) -- (players) node[midway, right] {1:1};
-  \draw[thick] ([yshift=-0.6cm]players.west) -- ++(-0.8, 0) |- (player_buildings.east) node[pos=0.8, above] {1:N};
+  \draw[thick] ([yshift=-0.6cm]players.west) -- ++(-0.8, 0) |- (player_buildings.east);
+  \node[above right, font=\tiny, xshift=0.1cm] at (player_buildings.east) {1:N};
+  
   \draw[thick] (buildings) -- (player_buildings) node[midway, above] {1:N};
   \draw[thick] ([yshift=0.4cm]players.east) -- ([yshift=0.4cm]player_heroes.west) node[midway, above] {1:N};
   \draw[thick] (hero_templates) -- (player_heroes) node[midway, above] {1:N};
@@ -458,7 +714,8 @@ Hệ thống sử dụng giải pháp phân mảnh cơ sở dữ liệu (Databas
   \draw[thick] (banners) -- (player_pity) node[midway, above] {1:N};
   
   % Orthogonal down-right connection players -> player_formations (bypasses player_heroes horizontally and vertically)
-  \draw[thick] ([yshift=-0.6cm]players.east) -- ++(0.8, 0) |- (player_formations.west) node[pos=0.8, above] {1:N};
+  \draw[thick] ([yshift=-0.6cm]players.east) -- ++(0.8, 0) |- (player_formations.west);
+  \node[above left, font=\tiny, xshift=-0.1cm] at (player_formations.west) {1:N};
 \end{tikzpicture}
 }
 \caption{Sơ đồ thực thể liên kết cơ sở dữ liệu (ERD) toàn hệ thống}
@@ -471,49 +728,175 @@ Dưới đây là mô tả cấu trúc chi tiết của các bảng quan trọng
 
 \paragraph{Bảng users (Quản lý tài khoản toàn cục)}
 Lưu thông tin đăng nhập cốt lõi của người chơi trên toàn hệ thống phân vùng:
-\begin{itemize}
-    \item \texttt{id} (BIGSERIAL, Primary Key): ID tự tăng, khóa chính định danh người dùng.
-    \item \texttt{username} (VARCHAR(32), Unique, Not Null): Tên đăng nhập của người dùng.
-    \item \texttt{email} (VARCHAR(128), Unique, Not Null): Địa chỉ email liên kết phục vụ bảo mật.
-    \item \texttt{password\_hash} (VARCHAR(255), Not Null): Chuỗi mã hóa bcrypt của mật khẩu người dùng.
-    \item \texttt{is\_banned} (BOOLEAN, Default False): Đánh dấu trạng thái tài khoản có đang bị khóa hay không.
-    \item \texttt{created\_at} (TIMESTAMPTZ, Default NOW()): Thời gian khởi tạo tài khoản.
-\end{itemize}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & ID tự tăng định danh tài khoản. \\ \hline
+2 & username & VARCHAR(32) & Unique, Not Null & Tên đăng nhập của người dùng. \\ \hline
+3 & email & VARCHAR(128) & Unique, Not Null & Địa chỉ email liên kết của tài khoản. \\ \hline
+4 & password\_hash & VARCHAR(255) & Not Null & Chuỗi băm bcrypt của mật khẩu. \\ \hline
+5 & is\_banned & BOOLEAN & Default False & Trạng thái tài khoản có bị khóa hay không. \\ \hline
+6 & created\_at & TIMESTAMPTZ & Default NOW() & Mốc thời gian khởi tạo tài khoản. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng users}
+\label{tab:db_users}
+\end{table}
 
 \paragraph{Bảng players (Thông tin người chơi tại từng phân vùng)}
 Lưu trạng thái và số dư tài sản của người chơi ở phân vùng hiện tại:
-\begin{itemize}
-    \item \texttt{id} (BIGSERIAL, Primary Key): ID định danh người chơi trong Zone cụ thể.
-    \item \texttt{user\_id} (BIGINT, Unique, Not Null): Khóa ngoại chéo tham chiếu đến bảng \texttt{users} ở cơ sở dữ liệu Global.
-    \item \texttt{nickname} (VARCHAR(32), Not Null): Tên nhân vật do người chơi tự đặt trong phân vùng.
-    \item \texttt{level} (INT, Default 1): Cấp độ tông môn của người chơi.
-    \item \texttt{gold} (BIGINT, Default 1000): Số lượng Gỗ (tài nguyên thông dụng để xây dựng).
-    \item \texttt{diamond} (BIGINT, Default 100): Số lượng Linh thạch (tài nguyên quý giá để chiêu mộ tướng).
-    \item \texttt{stamina} (INT, Default 100): Điểm thể lực hiện tại phục vụ vượt ải.
-    \item \texttt{last\_stamina\_at} (TIMESTAMPTZ, Default NOW()): Mốc thời gian cuối cùng cập nhật thể lực.
-\end{itemize}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & ID người chơi trong Zone cụ thể. \\ \hline
+2 & user\_id & BIGINT & Unique, Not Null & FK, tham chiếu đến users(id) ở Global DB. \\ \hline
+3 & nickname & VARCHAR(32) & Not Null & Tên nhân vật do người chơi tự đặt. \\ \hline
+4 & level & INT & Default 1 & Cấp độ tông môn của người chơi. \\ \hline
+5 & gold & BIGINT & Default 1000 & Số lượng Gỗ sở hữu (tài nguyên chính). \\ \hline
+6 & diamond & BIGINT & Default 100 & Số lượng Linh thạch (tài nguyên quý). \\ \hline
+7 & stamina & INT & Default 100 & Điểm thể lực hiện tại phục vụ vượt ải. \\ \hline
+8 & last\_stamina\_at & TIMESTAMPTZ & Default NOW() & Thời điểm cuối cùng cập nhật thể lực. \\ \hline
+9 & server\_id & INT & Not Null & ID phân vùng máy chủ game mà player chơi. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng players}
+\label{tab:db_players}
+\end{table}
 
 \paragraph{Bảng player\_buildings (Công trình của người chơi)}
 Lưu trạng thái thăng cấp và thu hoạch của từng công trình trong tông môn:
-\begin{itemize}
-    \item \texttt{id} (BIGSERIAL, Primary Key): Khóa chính tự tăng.
-    \item \texttt{player\_id} (BIGINT, References players(id), Not Null): ID người chơi sở hữu công trình.
-    \item \texttt{building\_code} (VARCHAR(32), References buildings(code), Not Null): Mã loại công trình.
-    \item \texttt{level} (INT, Default 1): Cấp độ hiện tại của công trình.
-    \item \texttt{upgrade\_end\_at} (TIMESTAMPTZ, Nullable): Thời điểm hoàn tất nâng cấp công trình. Nếu bằng NULL thì công trình đang ở trạng thái hoạt động bình thường.
-    \item \texttt{last\_collect\_at} (TIMESTAMPTZ, Default NOW()): Thời điểm thu hoạch tài nguyên nhàn rỗi gần nhất.
-\end{itemize}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính của bảng công trình. \\ \hline
+2 & player\_id & BIGINT & FK, Not Null & Tham chiếu đến bảng players(id). \\ \hline
+3 & building\_code & VARCHAR(32) & FK, Not Null & Tham chiếu đến bảng buildings(code). \\ \hline
+4 & level & INT & Default 1 & Cấp độ hiện tại của công trình. \\ \hline
+5 & upgrade\_end\_at & TIMESTAMPTZ & Nullable & Thời điểm hoàn tất nâng cấp công trình. \\ \hline
+6 & last\_collect\_at & TIMESTAMPTZ & Default NOW() & Lần thu hoạch tài nguyên nhàn rỗi gần nhất. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng player\_buildings}
+\label{tab:db_player_buildings}
+\end{table}
 
 \paragraph{Bảng player\_heroes (Danh sách đệ tử sở hữu)}
 Lưu trữ thông tin đệ tử của người chơi:
-\begin{itemize}
-    \item \texttt{id} (BIGSERIAL, Primary Key): Khóa chính tự tăng.
-    \item \texttt{player\_id} (BIGINT, References players(id), Not Null): ID người chơi sở hữu đệ tử này.
-    \item \texttt{hero\_code} (VARCHAR(32), References hero\_templates(code), Not Null): Mã tướng cơ sở dữ liệu.
-    \item \texttt{level} (INT, Default 1): Cấp độ của đệ tử.
-    \item \texttt{star} (INT, Default 1): Số sao thăng tiến (1 đến 6).
-    \item \texttt{exp} (BIGINT, Default 0): Điểm kinh nghiệm đệ tử tích lũy.
-\end{itemize}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính đệ tử sở hữu của player. \\ \hline
+2 & player\_id & BIGINT & FK, Not Null & Tham chiếu đến bảng players(id). \\ \hline
+3 & hero\_code & VARCHAR(32) & FK, Not Null & Tham chiếu đến hero\_templates(code). \\ \hline
+4 & level & INT & Default 1 & Cấp độ hiện tại của đệ tử. \\ \hline
+5 & star & INT & Default 1 & Số sao thăng tiến của đệ tử (1 đến 6). \\ \hline
+6 & exp & BIGINT & Default 0 & Điểm kinh nghiệm đệ tử tích lũy. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng player\_heroes}
+\label{tab:db_player_heroes}
+\end{table}
+
+\paragraph{Bảng player\_formations (Đội hình chiến đấu của người chơi)}
+Lưu trữ thông tin cấu hình trận hình đệ tử trên sơ đồ 9 ô:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính tự tăng của bảng. \\ \hline
+2 & player\_id & BIGINT & FK, Not Null & Tham chiếu đến bảng players(id). \\ \hline
+3 & hero\_id\_0...8 & BIGINT & FK, Nullable & ID đệ tử tại các vị trí 0-8 (player\_heroes). \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng player\_formations}
+\label{tab:db_player_formations}
+\end{table}
+
+\paragraph{Bảng player\_pity (Nhật ký bảo hiểm Gacha)}
+Theo dõi số lượt quay đệ tử của người chơi để tính bảo hiểm:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính tự tăng của bảng bảo hiểm. \\ \hline
+2 & player\_id & BIGINT & FK, Not Null & Tham chiếu đến bảng players(id). \\ \hline
+3 & banner\_id & BIGINT & FK, Not Null & Tham chiếu đến bảng banners(id). \\ \hline
+4 & pity\_count & INT & Default 0 & Số lượt roll tích lũy chưa ra SSR. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng player\_pity}
+\label{tab:db_player_pity}
+\end{table}
+
+\paragraph{Bảng hero\_templates (Danh sách hạt giống đệ tử)}
+Lưu thông tin đệ tử gốc trong game:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & code & VARCHAR(32) & Primary Key & Mã định danh duy nhất đệ tử gốc. \\ \hline
+2 & name & VARCHAR(64) & Not Null & Tên đệ tử gốc. \\ \hline
+3 & rarity & VARCHAR(16) & Not Null & Độ hiếm đệ tử (R, SR, SSR). \\ \hline
+4 & base\_hp & INT & Not Null & Chỉ số Máu cơ bản. \\ \hline
+5 & base\_atk & INT & Not Null & Chỉ số Tấn công cơ bản. \\ \hline
+6 & base\_def & INT & Not Null & Chỉ số Phòng thủ cơ bản. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng hero\_templates}
+\label{tab:db_hero_templates}
+\end{table}
+
+\paragraph{Bảng banners (Cấu hình sự kiện Chiêu mộ)}
+Lưu thông tin sự kiện gacha đang mở:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính tự tăng. \\ \hline
+2 & name & VARCHAR(64) & Not Null & Tên sự kiện chiêu mộ đệ tử. \\ \hline
+3 & type & VARCHAR(16) & Not Null & Loại banner chiêu mộ (Standard, Limited). \\ \hline
+4 & rate\_up\_code & VARCHAR(32) & Nullable & Mã đệ tử được tăng tỉ lệ xuất hiện. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng banners}
+\label{tab:db_banners}
+\end{table}
+
+\paragraph{Bảng buildings (Danh sách hạt giống công trình)}
+Lưu cấu hình công trình cơ bản tông môn:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & code & VARCHAR(32) & Primary Key & Mã định danh duy nhất công trình gốc. \\ \hline
+2 & name & VARCHAR(64) & Not Null & Tên công trình gốc. \\ \hline
+3 & type & VARCHAR(16) & Not Null & Loại công trình (sản xuất hoặc nghiệp vụ). \\ \hline
+4 & efficiency & INT & Not Null & Hiệu suất sản xuất tài nguyên gốc mỗi giờ. \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng buildings}
+\label{tab:db_buildings}
+\end{table}
+
+\paragraph{Bảng skills (Thông tin kỹ năng đệ tử)}
+Lưu các kỹ năng chủ động và bị động trong trận đấu:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{3.2cm}|p{3.0cm}|p{2.5cm}|p{5.5cm}|}
+\hline
+\textbf{STT} & \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc} & \textbf{Mô tả} \\ \hline
+1 & id & BIGSERIAL & Primary Key & Khóa chính tự tăng của kỹ năng. \\ \hline
+2 & name & VARCHAR(64) & Not Null & Tên kỹ năng của đệ tử. \\ \hline
+3 & damage\_rate & DOUBLE PRECISION & Not Null & Tỉ lệ sát thương gốc gây ra của kỹ năng. \\ \hline
+4 & effect\_type & VARCHAR(32) & Nullable & Loại hiệu ứng đi kèm (choáng, hồi phục...). \\ \hline
+\end{tabular}
+\caption{Đặc tả thuộc tính của bảng skills}
+\label{tab:db_skills}
+\end{table}
 
 \section{Xây dựng ứng dụng}
 \label{sec:xay_dung_ung_dung}
@@ -525,26 +908,26 @@ Quá trình phát triển hệ thống sử dụng các ngôn ngữ, công cụ 
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|p{5.5cm}|p{6cm}|l|}
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{1.5cm}|p{6.5cm}|}
 \hline
-\textbf{Mục đích sử dụng} & \textbf{Công cụ / Thư viện} & \textbf{Phiên bản} \\ \hline
-Ngôn ngữ lập trình Backend & Go & 1.22.3 \\
-Ngôn ngữ lập trình Client & C\# (.NET Standard 2.1) & 12.0 \\
-Game Engine phía Client & Unity (Unity 6 LTS) & 6000.0.0f1 \\
-Hệ quản trị cơ sở dữ liệu chính & PostgreSQL & 16.2 \\
-Hệ thống bộ nhớ đệm và bảng xếp hạng & Redis & 7.2.4 \\
-Giao thức truyền thông mạng & gRPC & v1.62.2 \\
-Trình biên dịch file cấu hình proto & Protobuf & v3.25.1 \\
-Thư viện kết nối PostgreSQL trong Go & pgx & v5.5.5 \\
-Thư viện kết nối Redis trong Go & go-redis & v9.5.1 \\
-Thư viện sinh mã thông báo an toàn & jwt-go & v5.2.1 \\
-Thư viện mã hóa mật khẩu & bcrypt & v0.21.0 \\
-Môi trường ảo hóa máy chủ & Docker & v26.1.1 \\
-Công cụ điều phối container máy chủ & Docker Compose & v2.27.0 \\
-Công cụ định tuyến và cân bằng tải & Nginx & v1.24.0 \\
-Công cụ kiểm thử đơn vị Backend & Testify & v1.9.0 \\
-Công cụ kiểm thử tải & K6 / Go custom script & v0.50.0 \\
-Môi trường phát triển tích hợp (IDE) & GoLand \& Visual Studio Code & 2024.1 / 1.90 \\
+\textbf{Mục đích sử dụng} & \textbf{Công cụ / Thư viện} & \textbf{Phiên bản} & \textbf{URL tham khảo} \\ \hline
+Ngôn ngữ lập trình Backend & Go & 1.22.3 & \url{https://go.dev} \\
+Ngôn ngữ lập trình Client & C\# (.NET Standard 2.1) & 12.0 & \url{https://learn.microsoft.com/dotnet/csharp} \\
+Game Engine phía Client & Unity (Unity 6 LTS) & 6000.0.0f1 & \url{https://unity.com} \\
+Hệ quản trị cơ sở dữ liệu chính & PostgreSQL & 16.2 & \url{https://www.postgresql.org} \\
+Hệ thống bộ nhớ đệm và bảng xếp hạng & Redis & 7.2.4 & \url{https://redis.io} \\
+Giao thức truyền thông mạng & gRPC & v1.62.2 & \url{https://grpc.io} \\
+Trình biên dịch file cấu hình proto & Protobuf & v3.25.1 & \url{https://protobuf.dev} \\
+Thư viện kết nối PostgreSQL trong Go & pgx & v5.5.5 & \url{https://github.com/jackc/pgx} \\
+Thư viện kết nối Redis trong Go & go-redis & v9.5.1 & \url{https://github.com/redis/go-redis} \\
+Thư viện sinh mã thông báo an toàn & jwt-go & v5.2.1 & \url{https://github.com/golang-jwt/jwt} \\
+Thư viện mã hóa mật khẩu & bcrypt & v0.21.0 & \url{https://pkg.go.dev/golang.org/x/crypto/bcrypt} \\
+Môi trường ảo hóa máy chủ & Docker & v26.1.1 & \url{https://www.docker.com} \\
+Công cụ điều phối container máy chủ & Docker Compose & v2.27.0 & \url{https://docs.docker.com/compose} \\
+Công cụ định tuyến và cân bằng tải & Nginx & v1.24.0 & \url{https://nginx.org} \\
+Công cụ kiểm thử đơn vị Backend & Testify & v1.9.0 & \url{https://github.com/stretchr/testify} \\
+Công cụ kiểm thử tải & K6 / Go custom script & v0.50.0 & \url{https://k6.io} \\
+Môi trường phát triển tích hợp (IDE) & GoLand \& VS Code & 2024.1 / 1.90 & \url{https://code.visualstudio.com} \\
 \hline
 \end{tabular}
 \caption{Danh sách các thư viện và công cụ sử dụng trong dự án}
@@ -589,13 +972,43 @@ Cấu hình Docker \& Nginx & 680 & 8 & 24 KB (File .yaml) & YAML \\ \hline
 \subsection{Minh họa các chức năng chính}
 \label{sec:minh_hoa_chuc_nang}
 
-Các giao diện chức năng chính trên client được thiết kế trực quan và kết nối đồng bộ trực tiếp với máy chủ backend vi dịch vụ:
-\begin{enumerate}
-    \item \textbf{Giao diện Đăng nhập / Đăng ký}: Giao diện cho phép người chơi điền tên tài khoản, mật khẩu để xác thực. Client gửi thông tin đăng nhập và nhận về chuỗi JWT token. Sau khi nhận JWT, client sẽ tự động lưu token vào bộ nhớ cục bộ và thực hiện gửi yêu cầu tiếp theo đến Gateway.
-    \item \textbf{Giao diện Bản đồ Tông môn \& Khai thác tài nguyên}: Hiển thị bố cục tông môn với các công trình chính. Phía trên các công trình sản xuất tài nguyên (nhà khai thác gỗ, mỏ linh thạch) hiển thị biểu tượng tài nguyên nổi lên khi có sản lượng nhàn rỗi tích lũy lớn hơn 0. Khi click vào biểu tượng này, người chơi sẽ kích hoạt luồng gRPC thu hoạch lên World Server, tài sản trên thanh trạng thái phía trên sẽ lập tức được cộng dồn kèm theo hoạt ảnh số tiền bay lên sống động.
-    \item \textbf{Giao diện Sắp xếp Đội hình đệ tử}: Cung cấp sơ đồ trận hình 9 vị trí (3 hàng trước, 3 hàng giữa, 3 hàng sau). Người chơi có thể chọn đệ tử từ danh sách đệ tử tông môn kéo thả vào các vị trí này. Khi bấm nút "Lưu đội hình", một yêu cầu gRPC sẽ được gửi đi để cập nhật cấu trúc trận hình của người chơi trong bảng \texttt{player\_formations} trong PostgreSQL.
-    \item \textbf{Giao diện Vượt ải \& Mô phỏng Trận đấu}: Người chơi lựa chọn ải chiến dịch và bấm xuất trận. World Server sẽ gửi đội hình đã sắp xếp sang Combat Server để thực hiện mô phỏng. Trận đấu được tái hiện trên giao diện client dưới dạng hoạt ảnh thẻ bài tấn công theo lượt dựa vào tệp tin nhật ký trận đấu (battle log) nhận được từ server, giúp trải nghiệm mượt mà không phụ thuộc độ trễ mạng trong khi trận đấu đang diễn ra.
-\end{enumerate}
+Các giao diện chức năng chính của trò chơi được triển khai trên Client Unity 6 và kết nối đồng bộ trực tiếp với hệ thống Backend vi dịch vụ thông qua giao thức gRPC. Dưới đây là mô tả chi tiết kèm hình ảnh minh họa thực tế từ trò chơi:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/login_screen.png}
+    \caption{Giao diện đăng nhập và đăng ký tài khoản người chơi}
+    \label{fig:login_screen}
+\end{figure}
+
+Giao diện Đăng nhập / Đăng ký (Hình~\ref{fig:login_screen}) cho phép người chơi điền tên tài khoản và mật khẩu để xác thực. Khi người chơi nhấn nút đăng nhập, Client gửi yêu cầu gRPC chứa thông tin đăng nhập đến Gateway Server, sau đó Gateway chuyển tiếp đến Login Server. Nếu thông tin chính xác, Login Server sẽ sinh mã JWT token hợp lệ trả về cho Client. Token này được lưu trữ cục bộ để tự động đính kèm vào phần metadata của các cuộc gọi gRPC tiếp theo. Đồng thời, để hỗ trợ việc thử nghiệm và trình diễn (demo) ngoại tuyến trong các môi trường giả lập (Emulator) khác nhau hoặc trên thiết bị thật, giao diện tích hợp thêm nút chức năng "Config Server IP". Người dùng có thể nhấn vào nút này để thay đổi trực tiếp IP và cổng kết nối của máy chủ (ví dụ: 10.0.2.2 cho Android Studio Emulator, 192.168.56.1 cho LDPlayer/Genymotion, hoặc địa chỉ IP LAN). Cấu hình mới sẽ được lưu trữ cục bộ qua PlayerPrefs để tự động sử dụng cho các phiên chơi tiếp theo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/sect_map.png}
+    \caption{Giao diện Bản đồ Tông môn và Khai thác tài nguyên}
+    \label{fig:sect_map}
+\end{figure}
+
+Giao diện Bản đồ Tông môn (Hình~\ref{fig:sect_map}) là màn hình chính của trò chơi, hiển thị các công trình kiến trúc của tông môn như Điện chính, Linh điền, Luyện đan phòng, Binh khí các. Phía trên các công trình sản xuất tài nguyên (như nhà khai thác gỗ, mỏ linh thạch) hiển thị biểu tượng tài nguyên nổi lên khi có sản lượng nhàn rỗi tích lũy lớn hơn 0. Khi click vào biểu tượng này, người chơi sẽ kích hoạt luồng gRPC thu hoạch lên World Server, tài sản trên thanh trạng thái phía trên sẽ lập tức được cộng dồn kèm theo hoạt ảnh số tiền bay lên trực quan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/formation_setup.png}
+    \caption{Giao diện Sắp xếp Đội hình đệ tử xuất trận}
+    \label{fig:formation_setup}
+\end{figure}
+
+Giao diện Sắp xếp Đội hình (Hình~\ref{fig:formation_setup}) cung cấp sơ đồ trận hình 9 vị trí dạng ô lưới $3 \times 3$ (chia làm 3 hàng: trước, giữa, sau). Người chơi có thể lựa chọn các đệ tử (tướng) từ danh sách đang sở hữu ở bảng phía dưới và kéo thả vào vị trí mong muốn trên trận hình. Khi nhấn nút "Lưu", Client gửi yêu cầu gRPC lưu cấu trúc trận hình hiện tại. World Server tiếp nhận và cập nhật trực tiếp vào cơ sở dữ liệu qua bảng \texttt{player\_formations}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/battle_screen.png}
+    \caption{Giao diện mô phỏng Trận đấu vượt ải Campaign}
+    \label{fig:battle_screen}
+\end{figure}
+
+Giao diện Chiến đấu (Hình~\ref{fig:battle_screen}) hiển thị tiến trình trận đấu vượt ải dưới dạng đồ họa thẻ bài chiến đấu theo lượt. Trận đấu được mô phỏng toàn bộ tại Combat Server dưới dạng phi trạng thái (stateless) nhằm chống gian lận. Combat Server tính toán chi tiết từng lượt đánh, sát thương, kích hoạt kỹ năng và sinh ra một tệp tin nhật ký trận đấu (battle log). Nhật ký này được gửi về Client để dựng lại hoạt ảnh chiêu thức và diễn biến trận đánh một cách mượt mà và trực quan nhất.
 
 \section{Kiểm thử}
 \label{sec:kiem_thu}
@@ -604,49 +1017,144 @@ Quá trình kiểm thử phần mềm áp dụng hai kỹ thuật chính: \textb
 
 \subsubsection{Các kịch bản kiểm thử chi tiết}
 
-\paragraph{Kịch bản 1: Kiểm thử chức năng đăng nhập hệ thống}
+\paragraph{Kịch bản 1: Kiểm thử chức năng Đăng nhập hệ thống}
+
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{1.5cm}|m{3.5cm}|m{3.5cm}|m{2.5cm}|c|}
+\begin{tabular}{|l|p{11.5cm}|}
 \hline
-\textbf{Mã Case} & \textbf{Dữ liệu đầu vào} & \textbf{Kết quả mong đợi} & \textbf{Kết quả thực tế} & \textbf{Trạng thái} \\ \hline
-TC-AUTH-01 & Tên tài khoản đúng, mật khẩu đúng đã đăng ký. & Đăng nhập thành công, nhận mã JWT hợp lệ. & Đăng nhập thành công, nhận JWT. & PASS \\ \hline
-TC-AUTH-02 & Tên tài khoản đúng, mật khẩu sai ký tự cuối. & Đăng nhập thất bại, hệ thống báo mật khẩu không đúng. & Phản hồi báo sai mật khẩu. & PASS \\ \hline
-TC-AUTH-03 & Tên tài khoản chưa đăng ký trên hệ thống. & Đăng nhập thất bại, hệ thống báo tài khoản không tồn tại. & Phản hồi báo không tìm thấy tài khoản. & PASS \\ \hline
-TC-AUTH-04 & Nhập tên tài khoản rỗng hoặc mật khẩu rỗng. & Hệ thống từ chối xử lý, báo dữ liệu đầu vào không hợp lệ. & Trả về lỗi định dạng yêu cầu. & PASS \\ \hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-AUTH-01 \\ \hline
+\textbf{Tên kịch bản} & Đăng nhập thành công vào hệ thống \\ \hline
+\textbf{Mục tiêu} & Xác minh người chơi có thể đăng nhập thành công với tài khoản và mật khẩu hợp lệ. \\ \hline
+\textbf{Điều kiện} & Tài khoản đã được đăng ký trước trên hệ thống và đang hoạt động. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Mở ứng dụng client, truy cập giao diện Đăng nhập. \\
+& 2. Nhập tên tài khoản hợp lệ vào ô tài khoản. \\
+& 3. Nhập mật khẩu chính xác vào ô mật khẩu. \\
+& 4. Nhấn nút "Đăng nhập". \\ \hline
+\textbf{Dữ liệu đầu vào} & Username: \texttt{hailua99}, Password: \texttt{Matkhau123@} \\ \hline
+\textbf{Kết quả mong đợi} & Hệ thống xác thực thành công, sinh mã JWT token hợp lệ gửi về client, giao diện chuyển sang màn hình chính. \\ \hline
+\textbf{Kết quả thực tế} & Đăng nhập thành công, nhận JWT token, client tự động lưu token và chuyển cảnh vào game. \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
 \end{tabular}
-\caption{Kịch bản kiểm thử chi tiết chức năng Đăng nhập}
-\label{tab:test_auth}
+\caption{Kịch bản kiểm thử TC-AUTH-01: Đăng nhập thành công}
+\label{tab:tc_auth_01}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{11.5cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-AUTH-02 \\ \hline
+\textbf{Tên kịch bản} & Đăng nhập thất bại do mật khẩu không chính xác \\ \hline
+\textbf{Mục tiêu} & Đảm bảo hệ thống từ chối các yêu cầu đăng nhập sử dụng mật khẩu sai. \\ \hline
+\textbf{Điều kiện} & Tài khoản đã được đăng ký trước trên hệ thống. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Mở ứng dụng client, truy cập giao diện Đăng nhập. \\
+& 2. Nhập tên tài khoản hợp lệ vào ô tài khoản. \\
+& 3. Nhập mật khẩu không chính xác vào ô mật khẩu. \\
+& 4. Nhấn nút "Đăng nhập". \\ \hline
+\textbf{Dữ liệu đầu vào} & Username: \texttt{hailua99}, Password: \texttt{WrongPass1} \\ \hline
+\textbf{Kết quả mong đợi} & Hệ thống từ chối xác thực, trả về mã lỗi bảo mật, client hiển thị thông báo "Mật khẩu không chính xác". \\ \hline
+\textbf{Kết quả thực tế} & Đăng nhập thất bại, nhận thông báo lỗi từ server, client giữ nguyên giao diện đăng nhập và thông báo sai mật khẩu. \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
+\end{tabular}
+\caption{Kịch bản kiểm thử TC-AUTH-02: Đăng nhập thất bại do sai mật khẩu}
+\label{tab:tc_auth_02}
 \end{table}
 
 \paragraph{Kịch bản 2: Kiểm thử chức năng Thu thập tài nguyên công trình}
 Kịch bản kiểm thử đảm bảo việc cộng tài sản chính xác và không cho phép người chơi khai thác vượt sản lượng sản sinh thực tế:
+
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{1.5cm}|m{3.5cm}|m{3.5cm}|m{2.5cm}|c|}
+\begin{tabular}{|l|p{11.5cm}|}
 \hline
-\textbf{Mã Case} & \textbf{Dữ liệu đầu vào} & \textbf{Kết quả mong đợi} & \textbf{Kết quả thực tế} & \textbf{Trạng thái} \\ \hline
-TC-COLL-01 & Thời gian trôi qua từ lần thu hoạch trước là 3600 giây, công suất 100 gỗ/giờ. & Thu hoạch thành công 100 gỗ, số dư gold tăng thêm 100 đơn vị. & Nhận về 100 gỗ, số dư gold được cập nhật chính xác. & PASS \\ \hline
-TC-COLL-02 & Thực hiện bấm thu hoạch liên tiếp 2 lần trong vòng dưới 2 giây. & Lần 1 thành công. Lần 2 trả về 0 gỗ và báo lỗi thời gian chờ thu hoạch tối thiểu chưa đủ. & Lần 2 từ chối thu hoạch, trả về sản lượng bằng 0. & PASS \\ \hline
-TC-COLL-03 & Gửi yêu cầu thu hoạch kèm ID công trình không thuộc sở hữu. & Hệ thống báo lỗi sở hữu công trình không hợp lệ, không cộng tài sản. & Trả về lỗi từ chối quyền sở hữu công trình. & PASS \\ \hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-COLL-01 \\ \hline
+\textbf{Tên kịch bản} & Thu hoạch tài nguyên thành công từ công trình sản xuất \\ \hline
+\textbf{Mục tiêu} & Xác minh tài sản của người chơi được cộng chính xác dựa trên sản lượng tích lũy thực tế của công trình. \\ \hline
+\textbf{Điều kiện} & Người chơi đang ở màn hình Tông môn, công trình (Linh điền) thuộc sở hữu của người chơi và thời gian tích lũy sản lượng lớn hơn 0. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Người chơi bấm chọn biểu tượng linh thạch nổi lên phía trên Linh điền. \\
+& 2. Client gửi yêu cầu thu hoạch \texttt{CollectResourcesRequest} chứa ID công trình lên World Server qua gRPC. \\ \hline
+\textbf{Dữ liệu đầu vào} & ID công trình: \texttt{1024}, Thời gian tích lũy: 3600 giây (hiệu suất 100 linh thạch/giờ). \\ \hline
+\textbf{Kết quả mong đợi} & World Server xác nhận thông tin, tính toán cộng thêm 100 linh thạch vào tài khoản của người chơi, cập nhật cơ sở dữ liệu và trả về phản hồi thành công. \\ \hline
+\textbf{Kết quả thực tế} & Thu hoạch thành công, số dư linh thạch của người chơi trên thanh trạng thái tăng thêm 100 đơn vị, cơ sở dữ liệu ghi nhận chính xác. \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
 \end{tabular}
-\caption{Kịch bản kiểm thử chi tiết chức năng Thu thập tài nguyên}
-\label{tab:test_collect}
+\caption{Kịch bản kiểm thử TC-COLL-01: Thu hoạch tài nguyên thành công}
+\label{tab:tc_collect_01}
 \end{table}
 
-\paragraph{Kịch bản 3: Kiểm thử chức năng Sắp xếp đội hình chiến đấu}
-Kịch bản kiểm thử ngăn chặn việc đưa đệ tử giả lập hoặc không sở hữu vào đội hình:
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{1.5cm}|m{3.5cm}|m{3.5cm}|m{2.5cm}|c|}
+\begin{tabular}{|l|p{11.5cm}|}
 \hline
-\textbf{Mã Case} & \textbf{Dữ liệu đầu vào} & \textbf{Kết quả mong đợi} & \textbf{Kết quả thực tế} & \textbf{Trạng thái} \\ \hline
-TC-FORM-01 & Đưa đệ tử thuộc sở hữu của người chơi vào vị trí 0 (hàng trước). & Sắp xếp thành công, bản ghi \texttt{player\_formations} được cập nhật. & Đội hình được cập nhật chính xác trong DB. & PASS \\ \hline
-TC-FORM-02 & Gửi ID đệ tử không tồn tại trong danh sách sở hữu của player. & Hệ thống báo lỗi đệ tử không thuộc sở hữu và từ chối cập nhật. & Phản hồi báo lỗi đệ tử không hợp lệ. & PASS \\ \hline
-TC-FORM-03 & Đặt đệ tử vào vị trí số 9 (ngoài giới hạn từ 0 đến 8). & Hệ thống từ chối do vi phạm ràng buộc dữ liệu vị trí đội hình. & Trả về mã lỗi vị trí ngoài biên hợp lệ. & PASS \\ \hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-COLL-02 \\ \hline
+\textbf{Tên kịch bản} & Ngăn chặn thu hoạch tài nguyên khi bấm liên tục (Spam) \\ \hline
+\textbf{Mục tiêu} & Ngăn chặn việc gửi liên tiếp các yêu cầu thu hoạch nhằm mục đích gian lận hoặc làm quá tải máy chủ. \\ \hline
+\textbf{Điều kiện} & Người chơi vừa thực hiện thu hoạch tài nguyên thành công. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Người chơi thực hiện click liên tiếp 2 lần trong vòng dưới 2 giây vào biểu tượng thu hoạch trên công trình. \\
+& 2. Client gửi liên tục 2 yêu cầu gRPC thu hoạch lên World Server. \\ \hline
+\textbf{Dữ liệu đầu vào} & ID công trình: \texttt{1024}, Khoảng cách giữa 2 yêu cầu: 0,5 giây. \\ \hline
+\textbf{Kết quả mong đợi} & Yêu cầu thứ nhất xử lý thành công. Yêu cầu thứ hai bị máy chủ từ chối, trả về mã lỗi hoặc thông báo sản lượng thu hoạch bằng 0 do chưa đủ thời gian chờ tối thiểu. \\ \hline
+\textbf{Kết quả thực tế} & Máy chủ từ chối yêu cầu thứ hai, trả về 0 tài nguyên thu hoạch, số dư linh thạch của người chơi không bị cộng sai lệch. \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
 \end{tabular}
-\caption{Kịch bản kiểm thử chi tiết chức năng Sắp xếp đội hình}
-\label{tab:test_formation}
+\caption{Kịch bản kiểm thử TC-COLL-02: Ngăn chặn thu hoạch tài nguyên liên tục}
+\label{tab:tc_collect_02}
+\end{table}
+
+\paragraph{Kịch bản 3: Kiểm thử chức năng Sắp xếp đội hình và Nâng cấp công trình}
+Kịch bản kiểm thử kiểm tra các thao tác quản trị đội hình chiến đấu và nâng cấp hạ tầng tông môn:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{11.5cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-FORM-01 \\ \hline
+\textbf{Tên kịch bản} & Sắp xếp đội hình hợp lệ và lưu thành công \\ \hline
+\textbf{Mục tiêu} & Đảm bảo người chơi có thể thay đổi vị trí đệ tử trong đội hình $3 \times 3$ và lưu lại trạng thái mới trên cơ sở dữ liệu. \\ \hline
+\textbf{Điều kiện} & Người chơi đang sở hữu ít nhất 1 đệ tử trong tông môn. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Truy cập giao diện Đội hình. \\
+& 2. Chọn đệ tử đang sở hữu và kéo thả vào vị trí số 0 (hàng trước). \\
+& 3. Nhấn nút "Lưu đội hình". \\ \hline
+\textbf{Dữ liệu đầu vào} & Hero ID: \texttt{501}, Vị trí sắp xếp: \texttt{0} (Hàng trước, ô trái). \\ \hline
+\textbf{Kết quả mong đợi} & Client gửi yêu cầu \texttt{SaveFormationRequest} lên World Server, server xác thực đệ tử thuộc sở hữu, cập nhật vị trí vào bảng \texttt{player\_formations} trong PostgreSQL và trả về thành công. \\ \hline
+\textbf{Kết quả thực tế} & Cấu hình đội hình được lưu thành công, cơ sở dữ liệu cập nhật chính xác vị trí đệ tử, client hiển thị thông báo "Lưu đội hình thành công". \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
+\end{tabular}
+\caption{Kịch bản kiểm thử TC-FORM-01: Sắp xếp đội hình hợp lệ}
+\label{tab:tc_formation_01}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{11.5cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung mô tả} \\ \hline
+\textbf{Mã kịch bản} & TC-UPGR-01 \\ \hline
+\textbf{Tên kịch bản} & Nâng cấp công trình thành công khi đủ tài nguyên \\ \hline
+\textbf{Mục tiêu} & Xác minh logic thăng cấp công trình hoạt động chính xác, trừ đúng lượng tài nguyên yêu cầu và cập nhật cấp độ mới. \\ \hline
+\textbf{Điều kiện} & Người chơi có đủ lượng gỗ và vàng (linh thạch) đáp ứng yêu cầu nâng cấp của công trình. \\ \hline
+\textbf{Các bước thực hiện} & 
+1. Người chơi chọn công trình Luyện đan phòng (cấp 1). \\
+& 2. Nhấn nút "Nâng cấp" trên bảng thông tin chi tiết. \\
+& 3. Client gửi yêu cầu \texttt{UpgradeBuildingRequest} lên World Server qua gRPC. \\ \hline
+\textbf{Dữ liệu đầu vào} & ID công trình: \texttt{2048}, Cấp hiện tại: 1. Tài sản người chơi: 10.000 linh thạch (Yêu cầu: 2.000 linh thạch). \\ \hline
+\textbf{Kết quả mong đợi} & World Server xác nhận tài sản của người chơi đủ điều kiện, thực hiện trừ 2.000 linh thạch, nâng cấp công trình lên cấp 2 trong bảng \texttt{player\_buildings} và phản hồi thành công. \\ \hline
+\textbf{Kết quả thực tế} & Nâng cấp thành công, cấp công trình tăng lên 2, số dư linh thạch của người chơi bị trừ chính xác 2.000 đơn vị, giao diện client hiển thị cấp độ mới của Luyện đan phòng. \\ \hline
+\textbf{Trạng thái} & \textbf{PASS} \\ \hline
+\end{tabular}
+\caption{Kịch bản kiểm thử TC-UPGR-01: Nâng cấp công trình thành công}
+\label{tab:tc_upgrade_01}
 \end{table}
 
 \subsubsection{Tổng kết kết quả kiểm thử}

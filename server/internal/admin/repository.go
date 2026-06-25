@@ -25,6 +25,7 @@ type Repository interface {
 	GetUserInventory(zoneID int, userID int64) ([]UserItem, error)
 	AddUserItem(zoneID int, userID int64, itemCode string, quantity int) error
 	RemoveUserItem(zoneID int, itemID int64) error
+	CleanupOrphanedPlayers(zoneID int) (int64, error)
 
 	GetAllItemConfigs() ([]ItemConfigData, error)
 	SaveItemConfig(config ItemConfigData) error
@@ -1116,6 +1117,47 @@ func (r *adminRepo) DeleteShopItem(shopItemID string) error {
 	}
 	_, err = db.Exec("DELETE FROM shop_items WHERE shop_item_id = $1", shopItemID)
 	return err
+}
+
+func (r *adminRepo) CleanupOrphanedPlayers(zoneID int) (int64, error) {
+	// 1. Get all user IDs from global database
+	var userIDs []int64
+	err := r.db.Select(&userIDs, "SELECT id FROM users")
+	if err != nil {
+		return 0, fmt.Errorf("failed to get users: %v", err)
+	}
+
+	// 2. Get the game database connection
+	db, err := r.getGameDB(zoneID)
+	if err != nil {
+		return 0, fmt.Errorf("failed to get game db: %v", err)
+	}
+
+	// 3. Delete players whose user_id is not in the list of user IDs
+	var query string
+	var args []interface{}
+	if len(userIDs) == 0 {
+		query = "DELETE FROM players"
+	} else {
+		query, args, err = sqlx.In("DELETE FROM players WHERE user_id NOT IN (?)", userIDs)
+		if err != nil {
+			return 0, err
+		}
+		query = db.Rebind(query)
+	}
+
+	res, err := db.Exec(query, args...)
+	if err != nil {
+		return 0, fmt.Errorf("failed to delete players: %v", err)
+	}
+
+	rowsAffected, _ := res.RowsAffected()
+
+	// Also clean up player_shops and player_shop_resets since they don't have CASCADE
+	_, _ = db.Exec("DELETE FROM player_shops WHERE player_id NOT IN (SELECT id FROM players)")
+	_, _ = db.Exec("DELETE FROM player_shop_resets WHERE player_id NOT IN (SELECT id FROM players)")
+
+	return rowsAffected, nil
 }
 
 

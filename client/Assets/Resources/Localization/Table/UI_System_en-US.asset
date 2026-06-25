@@ -419,15 +419,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10304074506006528
-    m_Localized: Toggle sound
+    m_Localized: Sound
     m_Metadata:
       m_Items: []
   - m_Id: 10304195985633280
-    m_Localized: Toggle music
+    m_Localized: Music
     m_Metadata:
       m_Items: []
   - m_Id: 10304249047773184
-    m_Localized: Toggle sfx
+    m_Localized: SFX
     m_Metadata:
       m_Items: []
   - m_Id: 10307279960895488

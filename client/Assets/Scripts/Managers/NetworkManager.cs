@@ -85,7 +85,11 @@ namespace GameClient.Network
 
         public void ConnectToDefaultGateway()
         {
-            string addr = GameSettings.Instance?.gatewayAddr;
+            string addr = PlayerPrefs.GetString("TFSO_SERVER_IP", "");
+            if (string.IsNullOrEmpty(addr))
+            {
+                addr = GameSettings.Instance?.gatewayAddr;
+            }
             if (string.IsNullOrEmpty(addr)) addr = "127.0.0.1:" + GameConstants.Network.DEFAULT_PORT;
 
             // Loại bỏ http:// nếu có (Grpc.Core không cần prefix)
@@ -113,6 +117,14 @@ namespace GameClient.Network
 
         public void ConnectToGateway(string host, int port)
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
+            if (host == "127.0.0.1" || host.ToLower() == "localhost")
+            {
+                Debug.Log("[Network] Phát hiện chạy trên Android, tự động chuyển đổi localhost/127.0.0.1 thành 10.0.2.2 cho Emulator");
+                host = "10.0.2.2";
+            }
+            #endif
+
             _lastHost = host;
             _lastPort = port;
             IsReconnecting = false;

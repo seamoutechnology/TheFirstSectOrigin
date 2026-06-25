@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0960c620ceddc4f4b82e2bfed0c55575
+    m_Address: shop_reset_ticket_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0ca9b12791290f647938e55bab669666
     m_Address: UI_BuildingActionPanel
     m_ReadOnly: 0
@@ -37,6 +42,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0edef1222349f574692279acc25ba319
     m_Address: SFX_UI_Hover
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f0b81ad8d0e90949bf56eb429641cd7
+    m_Address: UI_ShopPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -85,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23cc9ef6d1efa754aaba9c791c4a6ffe
+    m_Address: UI_LeaderboardItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 26d5fdf003de90a4594cac7769988cc9
     m_Address: char_04_img
     m_ReadOnly: 0
@@ -115,6 +130,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48b7c3dd93dd680489342e576b28118e
+    m_Address: UI_LeaderboardPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 498f86b7d2c83da43b24595357d78236
     m_Address: MainGameHUDPanel
     m_ReadOnly: 0
@@ -122,6 +142,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a421aac098647243a556f7af8273898
     m_Address: UI_BuildingDetailPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d5947eb1e58a464680569ff152165b1
+    m_Address: UI_ShopItem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -190,6 +215,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7796d1146d87f4f42bf18522ec903a2d
+    m_Address: speed_hourglass_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 787519642234753459ade929289a2e68
     m_Address: coin_icon
     m_ReadOnly: 0
@@ -222,6 +252,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84820fa1d091bb0438f1887a709c9466
     m_Address: UI_HeroesPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8734615c70d385641985e249ad71f0af
+    m_Address: iron_ore_icon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -342,6 +377,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e3bbdd0a11312394ab1fce67637de835
     m_Address: Assets/AssetData/Sprites/Menu/Login.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3de88e1947515b499ea918d6c658283
+    m_Address: recruit_ticket_icon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

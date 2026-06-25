@@ -21,115 +21,129 @@
 \contentsline {subsection}{\numberline {2.3.2}Đặc tả use case Xây dựng và nâng cấp công trình}{7}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Đặc tả use case Chiêu mộ đệ tử}{7}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}Đặc tả use case Vượt ải chiến dịch}{8}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Đặc tả use case Xem bảng xếp hạng thời gian thực}{8}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.5}Đặc tả use case Xem bảng xếp hạng thời gian thực}{9}{subsection.2.3.5}%
 \contentsline {subsection}{\numberline {2.3.6}Đặc tả use case Tự động điều phối vùng máy chủ khi quá tải (Roll Server)}{9}{subsection.2.3.6}%
 \contentsline {section}{\numberline {2.4}Yêu cầu phi chức năng}{10}{section.2.4}%
 \contentsline {chapter}{\numberline {3}NỀN TẢNG LÝ THUYẾT VÀ CÔNG NGHỆ SỬ DỤNG}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Ngôn ngữ lập trình Go cho hệ thống máy chủ}{12}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Đặc điểm nổi bật}{12}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Giải pháp thay thế và Lý do lựa chọn}{12}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.2}Giải pháp thay thế và Lý do lựa chọn}{13}{subsection.3.1.2}%
 \contentsline {section}{\numberline {3.2}Giao thức truyền thông gRPC và Protocol Buffers}{13}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Đặc điểm nổi bật}{13}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.1}Đặc điểm nổi bật}{14}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Giải pháp thay thế và Lý do lựa chọn}{14}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Hệ quản trị cơ sở dữ liệu quan hệ PostgreSQL}{14}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Đặc điểm nổi bật}{14}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Giải pháp thay thế và Lý do lựa chọn}{14}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.2}Giải pháp thay thế và Lý do lựa chọn}{15}{subsection.3.3.2}%
 \contentsline {section}{\numberline {3.4}Hệ thống lưu trữ dữ liệu Redis}{15}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Đặc điểm nổi bật}{15}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Giải pháp thay thế và Lý do lựa chọn}{15}{subsection.3.4.2}%
 \contentsline {section}{\numberline {3.5}Game Engine Unity 6 cho ứng dụng Client}{16}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Đặc điểm nổi bật}{16}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Giải pháp thay thế và Lý do lựa chọn}{16}{subsection.3.5.2}%
-\contentsline {chapter}{\numberline {4}PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI VÀ ĐÁNH GIÁ HỆ THỐNG}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Thiết kế kiến trúc}{17}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Lựa chọn kiến trúc phần mềm}{17}{subsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {a}Mô hình kiến trúc Vi dịch vụ (Microservices)}{17}{subsubsection.4.1.1.1}%
-\contentsline {subsubsection}{\numberline {b}Mô hình Clean Architecture cho từng dịch vụ}{18}{subsubsection.4.1.1.2}%
-\contentsline {subsection}{\numberline {4.1.2}Thiết kế tổng quan}{18}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Thiết kế chi tiết gói}{20}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Thiết kế chi tiết}{21}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Thiết kế giao diện}{21}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {a}Đặc tả kỹ thuật giao diện}{21}{subsubsection.4.2.1.1}%
-\contentsline {subsubsection}{\numberline {b}Chuẩn hóa thiết kế và bảng màu tông môn}{21}{subsubsection.4.2.1.2}%
-\contentsline {subsection}{\numberline {4.2.2}Thiết kế lớp}{22}{subsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {a}Chi tiết các lớp đối tượng cốt lõi}{22}{subsubsection.4.2.2.1}%
-\contentsline {paragraph}{Lớp Player (Thực thể người chơi)}{22}{paragraph*.13}%
-\contentsline {paragraph}{Lớp PlayerBuilding (Thực thể công trình của người chơi)}{23}{paragraph*.15}%
-\contentsline {paragraph}{Lớp PlayerHero (Thực thể đệ tử)}{24}{paragraph*.17}%
-\contentsline {subsubsection}{\numberline {b}Biểu đồ trình tự các Use Case nghiệp vụ chính}{25}{subsubsection.4.2.2.2}%
-\contentsline {paragraph}{Luồng Đăng ký tài khoản mới}{25}{paragraph*.19}%
-\contentsline {paragraph}{Luồng Thu thập tài nguyên nhàn rỗi sản sinh từ công trình}{25}{paragraph*.21}%
-\contentsline {subsection}{\numberline {4.2.3}Thiết kế cơ sở dữ liệu}{26}{subsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {a}Biểu đồ thực thể liên kết (ERD)}{27}{subsubsection.4.2.3.1}%
-\contentsline {subsubsection}{\numberline {b}Chi tiết các bảng dữ liệu chủ đạo}{27}{subsubsection.4.2.3.2}%
-\contentsline {paragraph}{Bảng users (Quản lý tài khoản toàn cục)}{27}{paragraph*.24}%
-\contentsline {paragraph}{Bảng players (Thông tin người chơi tại từng phân vùng)}{28}{paragraph*.25}%
-\contentsline {paragraph}{Bảng player\_buildings (Công trình của người chơi)}{28}{paragraph*.26}%
-\contentsline {paragraph}{Bảng player\_heroes (Danh sách đệ tử sở hữu)}{29}{paragraph*.27}%
-\contentsline {section}{\numberline {4.3}Xây dựng ứng dụng}{29}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Thư viện và công cụ sử dụng}{29}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Kết quả đạt được}{30}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {a}Mô tả các thành phần đóng gói}{30}{subsubsection.4.3.2.1}%
-\contentsline {subsubsection}{\numberline {b}Thống kê quy mô mã nguồn}{31}{subsubsection.4.3.2.2}%
-\contentsline {subsection}{\numberline {4.3.3}Minh họa các chức năng chính}{31}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Kiểm thử}{32}{section.4.4}%
-\contentsline {subsubsection}{\numberline {a}Các kịch bản kiểm thử chi tiết}{33}{subsubsection.4.4.0.1}%
-\contentsline {paragraph}{Kịch bản 1: Kiểm thử chức năng đăng nhập hệ thống}{33}{paragraph*.30}%
-\contentsline {paragraph}{Kịch bản 2: Kiểm thử chức năng Thu thập tài nguyên công trình}{33}{paragraph*.32}%
-\contentsline {paragraph}{Kịch bản 3: Kiểm thử chức năng Sắp xếp đội hình chiến đấu}{34}{paragraph*.34}%
-\contentsline {subsubsection}{\numberline {b}Tổng kết kết quả kiểm thử}{34}{subsubsection.4.4.0.2}%
-\contentsline {section}{\numberline {4.5}Triển khai}{34}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Mô hình triển khai hệ thống}{34}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Cấu hình mạng và Cân bằng tải (Reverse Proxy)}{35}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Cơ chế Roll Server điều phối phân vùng}{35}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Đánh giá kết quả triển khai thử nghiệm}{36}{subsection.4.5.4}%
-\contentsline {subsubsection}{\numberline {a}Cấu hình giới hạn tần suất yêu cầu (Rate Limiting)}{36}{subsubsection.4.5.4.1}%
-\contentsline {subsubsection}{\numberline {b}Kết quả thực nghiệm}{36}{subsubsection.4.5.4.2}%
-\contentsline {chapter}{\numberline {5}CÁC GIẢI PHÁP VÀ ĐÓNG GÓP NỔI BẬT}{38}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Thiết kế giao diện thích ứng (Responsive UI) và quản lý phông chữ trong Unity 6}{38}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Dẫn dắt và giới thiệu bài toán}{38}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Giải pháp đề xuất}{39}{subsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {a}Cấu hình Canvas Scaler động dựa trên tỷ lệ Aspect Ratio}{39}{subsubsection.5.1.2.1}%
-\contentsline {subsubsection}{\numberline {b}Hệ thống neo giữ Anchor Presets và Điểm xoay Pivot}{39}{subsubsection.5.1.2.2}%
-\contentsline {subsubsection}{\numberline {c}Chuẩn hóa bố cục tự động bằng Auto-Layout Components}{40}{subsubsection.5.1.2.3}%
-\contentsline {subsubsection}{\numberline {d}Quản lý phông chữ độ phân giải cao bằng TextMesh Pro và SDF}{40}{subsubsection.5.1.2.4}%
-\contentsline {subsection}{\numberline {5.1.3}Kết quả đạt được}{40}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}Cơ chế xử lý đồng thời và đồng bộ hóa tài nguyên nhàn rỗi (Idle Resource Generation) an toàn giao dịch}{41}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Dẫn dắt và giới thiệu bài toán}{41}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Giải pháp đề xuất}{42}{subsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {a}Thuật toán tính toán lười phi trạng thái (Stateless Lazy Calculation)}{42}{subsubsection.5.2.2.1}%
-\contentsline {subsubsection}{\numberline {b}Khóa phân tán (Distributed Lock) sử dụng Redis Mutex}{42}{subsubsection.5.2.2.2}%
-\contentsline {subsubsection}{\numberline {c}Kiểm soát tương tranh lạc quan (Optimistic Concurrency Control - OCC) tại Database}{43}{subsubsection.5.2.2.3}%
-\contentsline {subsection}{\numberline {5.2.3}Kết quả đạt được}{44}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Giải pháp kiểm thử và xác thực nhật ký trận đấu (Combat Log Validation) chống gian lận hiệu năng cao}{44}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Dẫn dắt và giới thiệu bài toán}{44}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Giải pháp đề xuất}{45}{subsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {a}Cơ chế ghi nhận nhật ký trận đấu (Combat Action Log) tại Client}{45}{subsubsection.5.3.2.1}%
-\contentsline {subsubsection}{\numberline {b}Gửi yêu cầu xác thực qua gRPC (Validate PVE Result)}{45}{subsubsection.5.3.2.2}%
-\contentsline {subsubsection}{\numberline {c}Thuật toán xác thực chéo (Cross-Validation Algorithm) tại Combat Server (Go)}{45}{subsubsection.5.3.2.3}%
-\contentsline {subsubsection}{\numberline {d}Cập nhật tiến trình và trao thưởng tại World Server}{46}{subsubsection.5.3.2.4}%
-\contentsline {subsection}{\numberline {5.3.3}Kết quả đạt được}{46}{subsection.5.3.3}%
-\contentsline {chapter}{\numberline {6}KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}{48}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Kết luận}{48}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}So sánh với các nghiên cứu hoặc sản phẩm tương tự}{48}{subsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {a}So sánh với các dịch vụ Backend đám mây thương mại (PlayFab, Photon Engine)}{48}{subsubsection.6.1.1.1}%
-\contentsline {subsubsection}{\numberline {b}So sánh với kiến trúc máy chủ đơn khối truyền thống (Node.js Monolith + JSON)}{49}{subsubsection.6.1.1.2}%
-\contentsline {subsection}{\numberline {6.1.2}Phân tích quá trình thực hiện đồ án tốt nghiệp}{51}{subsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {a}Những kết quả đã đạt được}{51}{subsubsection.6.1.2.1}%
-\contentsline {subsubsection}{\numberline {b}Những hạn chế và việc chưa làm được}{52}{subsubsection.6.1.2.2}%
-\contentsline {subsubsection}{\numberline {c}Các đóng góp nổi bật của đồ án tốt nghiệp}{53}{subsubsection.6.1.2.3}%
-\contentsline {subsubsection}{\numberline {d}Bài học kinh nghiệm rút ra}{53}{subsubsection.6.1.2.4}%
-\contentsline {section}{\numberline {6.2}Hướng phát triển}{54}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Các công việc cần thiết để hoàn thiện sản phẩm}{54}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Định hướng phát triển và nâng cấp mới}{55}{subsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {a}Xây dựng tính năng đấu trường đối kháng (PvP)}{56}{subsubsection.6.2.2.1}%
-\contentsline {subsubsection}{\numberline {b}Triển khai hệ thống tự động co giãn (Auto-scaling) trên Kubernetes (K8s)}{56}{subsubsection.6.2.2.2}%
-\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{59}{section*.41}%
-\contentsline {chapter}{PHỤ LỤC}{61}{section*.42}%
+\contentsline {chapter}{\numberline {4}PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI VÀ ĐÁNH GIÁ HỆ THỐNG}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Thiết kế kiến trúc}{18}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Lựa chọn kiến trúc phần mềm}{18}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {a}Mô hình kiến trúc Vi dịch vụ (Microservices)}{18}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {b}Mô hình Clean Architecture cho từng dịch vụ}{19}{subsubsection.4.1.1.2}%
+\contentsline {subsection}{\numberline {4.1.2}Thiết kế tổng quan}{19}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Thiết kế chi tiết gói}{21}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Thiết kế chi tiết}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Thiết kế giao diện}{22}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {a}Đặc tả kỹ thuật giao diện}{22}{subsubsection.4.2.1.1}%
+\contentsline {subsubsection}{\numberline {b}Chuẩn hóa thiết kế và bảng màu tông môn}{22}{subsubsection.4.2.1.2}%
+\contentsline {subsection}{\numberline {4.2.2}Thiết kế lớp}{23}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {a}Chi tiết các lớp đối tượng cốt lõi}{23}{subsubsection.4.2.2.1}%
+\contentsline {paragraph}{Lớp Player (Thực thể người chơi)}{23}{paragraph*.13}%
+\contentsline {paragraph}{Lớp PlayerBuilding (Thực thể công trình của người chơi)}{24}{paragraph*.15}%
+\contentsline {paragraph}{Lớp PlayerHero (Thực thể đệ tử)}{25}{paragraph*.17}%
+\contentsline {subsubsection}{\numberline {b}Biểu đồ trình tự các Use Case nghiệp vụ chính}{26}{subsubsection.4.2.2.2}%
+\contentsline {paragraph}{Luồng Đăng ký tài khoản mới}{26}{paragraph*.19}%
+\contentsline {paragraph}{Luồng Thu thập tài nguyên nhàn rỗi sản sinh từ công trình}{26}{paragraph*.21}%
+\contentsline {subsection}{\numberline {4.2.3}Thiết kế giao diện truyền thông gRPC (IDL)}{27}{subsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {a}Đặc tả dịch vụ Xác thực (game\_auth.proto)}{27}{subsubsection.4.2.3.1}%
+\contentsline {subsubsection}{\numberline {b}Đặc tả cổng dịch vụ Gateway (world.proto)}{29}{subsubsection.4.2.3.2}%
+\contentsline {subsubsection}{\numberline {c}Đặc tả nghiệp vụ xây dựng tông môn (sect.proto)}{29}{subsubsection.4.2.3.3}%
+\contentsline {subsubsection}{\numberline {d}Đặc tả nghiệp vụ quản lý đệ tử và đội hình (disciple.proto)}{31}{subsubsection.4.2.3.4}%
+\contentsline {subsubsection}{\numberline {e}Đặc tả nghiệp vụ Chiêu mộ đệ tử (gacha.proto)}{32}{subsubsection.4.2.3.5}%
+\contentsline {subsubsection}{\numberline {f}Đặc tả nghiệp vụ Chiến đấu vượt ải (combat.proto)}{32}{subsubsection.4.2.3.6}%
+\contentsline {subsubsection}{\numberline {g}Đặc tả dịch vụ Bảng xếp hạng (leaderboard.proto)}{33}{subsubsection.4.2.3.7}%
+\contentsline {subsection}{\numberline {4.2.4}Thiết kế cơ sở dữ liệu}{34}{subsection.4.2.4}%
+\contentsline {subsubsection}{\numberline {a}Biểu đồ thực thể liên kết (ERD)}{35}{subsubsection.4.2.4.1}%
+\contentsline {subsubsection}{\numberline {b}Chi tiết các bảng dữ liệu chủ đạo}{35}{subsubsection.4.2.4.2}%
+\contentsline {paragraph}{Bảng users (Quản lý tài khoản toàn cục)}{35}{paragraph*.24}%
+\contentsline {paragraph}{Bảng players (Thông tin người chơi tại từng phân vùng)}{36}{paragraph*.26}%
+\contentsline {paragraph}{Bảng player\_buildings (Công trình của người chơi)}{36}{paragraph*.28}%
+\contentsline {paragraph}{Bảng player\_heroes (Danh sách đệ tử sở hữu)}{37}{paragraph*.30}%
+\contentsline {paragraph}{Bảng player\_formations (Đội hình chiến đấu của người chơi)}{37}{paragraph*.32}%
+\contentsline {paragraph}{Bảng player\_pity (Nhật ký bảo hiểm Gacha)}{38}{paragraph*.34}%
+\contentsline {paragraph}{Bảng hero\_templates (Danh sách hạt giống đệ tử)}{38}{paragraph*.36}%
+\contentsline {paragraph}{Bảng banners (Cấu hình sự kiện Chiêu mộ)}{38}{paragraph*.38}%
+\contentsline {paragraph}{Bảng buildings (Danh sách hạt giống công trình)}{38}{paragraph*.40}%
+\contentsline {paragraph}{Bảng skills (Thông tin kỹ năng đệ tử)}{39}{paragraph*.42}%
+\contentsline {section}{\numberline {4.3}Xây dựng ứng dụng}{39}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Thư viện và công cụ sử dụng}{39}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Kết quả đạt được}{40}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {a}Mô tả các thành phần đóng gói}{41}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {b}Thống kê quy mô mã nguồn}{41}{subsubsection.4.3.2.2}%
+\contentsline {subsection}{\numberline {4.3.3}Minh họa các chức năng chính}{42}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Kiểm thử}{45}{section.4.4}%
+\contentsline {subsubsection}{\numberline {a}Các kịch bản kiểm thử chi tiết}{46}{subsubsection.4.4.0.1}%
+\contentsline {paragraph}{Kịch bản 1: Kiểm thử chức năng Đăng nhập hệ thống}{46}{paragraph*.50}%
+\contentsline {paragraph}{Kịch bản 2: Kiểm thử chức năng Thu thập tài nguyên công trình}{47}{paragraph*.53}%
+\contentsline {paragraph}{Kịch bản 3: Kiểm thử chức năng Sắp xếp đội hình và Nâng cấp công trình}{48}{paragraph*.56}%
+\contentsline {subsubsection}{\numberline {b}Tổng kết kết quả kiểm thử}{49}{subsubsection.4.4.0.2}%
+\contentsline {section}{\numberline {4.5}Triển khai}{49}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Mô hình triển khai hệ thống}{49}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Cấu hình mạng và Cân bằng tải (Reverse Proxy)}{50}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Cơ chế Roll Server điều phối phân vùng}{50}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Đánh giá kết quả triển khai thử nghiệm}{51}{subsection.4.5.4}%
+\contentsline {subsubsection}{\numberline {a}Cấu hình giới hạn tần suất yêu cầu (Rate Limiting)}{51}{subsubsection.4.5.4.1}%
+\contentsline {subsubsection}{\numberline {b}Kết quả thực nghiệm}{51}{subsubsection.4.5.4.2}%
+\contentsline {chapter}{\numberline {5}CÁC GIẢI PHÁP VÀ ĐÓNG GÓP NỔI BẬT}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Thiết kế giao diện thích ứng (Responsive UI) và quản lý phông chữ trong Unity 6}{53}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Dẫn dắt và giới thiệu bài toán}{53}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Giải pháp đề xuất}{54}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {a}Cấu hình Canvas Scaler động dựa trên tỷ lệ Aspect Ratio}{54}{subsubsection.5.1.2.1}%
+\contentsline {subsubsection}{\numberline {b}Hệ thống neo giữ Anchor Presets và Điểm xoay Pivot}{54}{subsubsection.5.1.2.2}%
+\contentsline {subsubsection}{\numberline {c}Chuẩn hóa bố cục tự động bằng Auto-Layout Components}{55}{subsubsection.5.1.2.3}%
+\contentsline {subsubsection}{\numberline {d}Quản lý phông chữ độ phân giải cao bằng TextMesh Pro và SDF}{55}{subsubsection.5.1.2.4}%
+\contentsline {subsection}{\numberline {5.1.3}Kết quả đạt được}{55}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Cơ chế xử lý đồng thời và đồng bộ hóa tài nguyên nhàn rỗi (Idle Resource Generation) an toàn giao dịch}{56}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Dẫn dắt và giới thiệu bài toán}{56}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Giải pháp đề xuất}{57}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {a}Thuật toán tính toán lười phi trạng thái (Stateless Lazy Calculation)}{57}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {b}Khóa phân tán (Distributed Lock) sử dụng Redis Mutex}{57}{subsubsection.5.2.2.2}%
+\contentsline {subsubsection}{\numberline {c}Kiểm soát tương tranh lạc quan (Optimistic Concurrency Control - OCC) tại Database}{58}{subsubsection.5.2.2.3}%
+\contentsline {subsection}{\numberline {5.2.3}Kết quả đạt được}{59}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Giải pháp kiểm thử và xác thực nhật ký trận đấu (Combat Log Validation) chống gian lận hiệu năng cao}{59}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Dẫn dắt và giới thiệu bài toán}{59}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Giải pháp đề xuất}{60}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {a}Cơ chế ghi nhận nhật ký trận đấu (Combat Action Log) tại Client}{60}{subsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {b}Gửi yêu cầu xác thực qua gRPC (Validate PVE Result)}{60}{subsubsection.5.3.2.2}%
+\contentsline {subsubsection}{\numberline {c}Thuật toán xác thực chéo (Cross-Validation Algorithm) tại Combat Server (Go)}{60}{subsubsection.5.3.2.3}%
+\contentsline {subsubsection}{\numberline {d}Cập nhật tiến trình và trao thưởng tại World Server}{61}{subsubsection.5.3.2.4}%
+\contentsline {subsection}{\numberline {5.3.3}Kết quả đạt được}{61}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Kết luận}{63}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}So sánh với các nghiên cứu hoặc sản phẩm tương tự}{63}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {a}So sánh với các dịch vụ Backend đám mây thương mại (PlayFab, Photon Engine)}{63}{subsubsection.6.1.1.1}%
+\contentsline {subsubsection}{\numberline {b}So sánh với kiến trúc máy chủ đơn khối truyền thống (Node.js Monolith + JSON)}{64}{subsubsection.6.1.1.2}%
+\contentsline {subsection}{\numberline {6.1.2}Phân tích quá trình thực hiện đồ án tốt nghiệp}{66}{subsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {a}Những kết quả đã đạt được}{66}{subsubsection.6.1.2.1}%
+\contentsline {subsubsection}{\numberline {b}Những hạn chế và việc chưa làm được}{67}{subsubsection.6.1.2.2}%
+\contentsline {subsubsection}{\numberline {c}Các đóng góp nổi bật của đồ án tốt nghiệp}{68}{subsubsection.6.1.2.3}%
+\contentsline {subsubsection}{\numberline {d}Bài học kinh nghiệm rút ra}{68}{subsubsection.6.1.2.4}%
+\contentsline {section}{\numberline {6.2}Hướng phát triển}{69}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Các công việc cần thiết để hoàn thiện sản phẩm}{69}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Định hướng phát triển và nâng cấp mới}{70}{subsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {a}Xây dựng tính năng đấu trường đối kháng (PvP)}{71}{subsubsection.6.2.2.1}%
+\contentsline {subsubsection}{\numberline {b}Triển khai hệ thống tự động co giãn (Auto-scaling) trên Kubernetes (K8s)}{71}{subsubsection.6.2.2.2}%
+\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{74}{section*.64}%
+\contentsline {chapter}{PHỤ LỤC}{76}{section*.65}%
 \ttl@change@i {\@ne }{chapter}{0.0cm}{\bfseries \vspace {0.3cm}}{{\bfseries {\scshape } \thecontentslabel .\ }}{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
 \ttl@change@v {chapter}{}{}{}\relax 
-\contentsline {chapter}{\numberline {A}ĐẶC TẢ USE CASE}{61}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Đặc tả use case Đăng ký tài khoản}{61}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Đặc tả use case Sắp xếp đội hình chiến đấu}{62}{section.1.A.2}%
-\contentsline {section}{\numberline {A.3}Đặc tả use case Thu thập tài nguyên công trình}{62}{section.1.A.3}%
+\contentsline {chapter}{\numberline {A}ĐẶC TẢ USE CASE}{76}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Đặc tả use case Đăng ký tài khoản}{76}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Đặc tả use case Sắp xếp đội hình chiến đấu}{77}{section.1.A.2}%
+\contentsline {section}{\numberline {A.3}Đặc tả use case Thu thập tài nguyên công trình}{77}{section.1.A.3}%
 \contentsfinish 

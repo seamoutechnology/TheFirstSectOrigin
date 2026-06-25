@@ -138,8 +138,7 @@ namespace GameClient.UI
                 TMP_Text txtTabName = tabGo.GetComponentInChildren<TMP_Text>();
                 if (txtTabName != null)
                 {
-                    string typePrefix = GetTypePrefix(notice.type);
-                    txtTabName.text = $"{typePrefix} {notice.title}";
+                    txtTabName.text = GetColoredTitle(notice.type, notice.title);
                 }
 
                 Button btnTab = tabGo.GetComponent<Button>();
@@ -155,8 +154,18 @@ namespace GameClient.UI
 
         public void DisplayNoticeDetails(string title, string date, string content)
         {
-            txtTitle.text = title;
-            txtDate.text = date;
+            if (txtTitle != null)
+            {
+                txtTitle.text = title;
+                var theme = txtTitle.GetComponent<UIThemeText>();
+                if (theme != null) theme.ApplyStyle();
+            }
+            if (txtDate != null)
+            {
+                txtDate.text = date;
+                var theme = txtDate.GetComponent<UIThemeText>();
+                if (theme != null) theme.ApplyStyle();
+            }
             
             ClearContentBlocks();
             ParseAndBuildContent(content);
@@ -210,8 +219,19 @@ namespace GameClient.UI
             if (contentContainer == null) return;
             GameObject txtObj = ObjectPoolManager.Instance.Get("NoticeText", contentContainer);
             txtObj.SetActive(true);
+            
+            var themeText = txtObj.GetComponent<UIThemeText>();
+            if (themeText != null)
+            {
+                themeText.enabled = false;
+            }
+
             var tmp = txtObj.GetComponentInChildren<TMP_Text>();
-            if (tmp != null) tmp.text = text;
+            if (tmp != null)
+            {
+                tmp.color = Color.black;
+                tmp.text = text;
+            }
             _contentBlocks.Add(txtObj);
         }
 
@@ -282,27 +302,28 @@ namespace GameClient.UI
             _contentBlocks.Clear();
         }
 
-        private string GetTypePrefix(string type)
+        private string GetColoredTitle(string type, string title)
         {
-            string prefix = LocalizationManager.Instance.GetText(GameClient.Core.GameConstants.LocaleTable.UI_SYSTEM, $"ui_notice_type_{type.ToLower()}");
-            
+            string color = "white";
             switch (type)
             {
                 case "MAINTENANCE": 
-                    if (string.IsNullOrEmpty(prefix) || prefix.StartsWith("[")) prefix = "[Bảo Trì]";
-                    return $"<color=red>{prefix}</color>";
+                    color = "red";
+                    break;
                 case "RULES": 
-                    if (string.IsNullOrEmpty(prefix) || prefix.StartsWith("[")) prefix = "[Luật]";
-                    return $"<color=yellow>{prefix}</color>";
+                    color = "yellow";
+                    break;
                 case "ACTIVITY": 
-                    if (string.IsNullOrEmpty(prefix) || prefix.StartsWith("[")) prefix = "[Sự Kiện]";
-                    return $"<color=green>{prefix}</color>";
+                    color = "green";
+                    break;
                 case "NEWS": 
-                    if (string.IsNullOrEmpty(prefix) || prefix.StartsWith("[")) prefix = "[Tin Tức]";
-                    return $"<color=#00BFFF>{prefix}</color>";
+                    color = "#00BFFF";
+                    break;
                 default: 
-                    return $"[{type}]";
+                    color = "white";
+                    break;
             }
+            return $"<color={color}>{title}</color>";
         }
 
         private void ClearTabs()

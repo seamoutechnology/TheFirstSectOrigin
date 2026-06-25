@@ -71,5 +71,13 @@ namespace GameClient.UI
                 btnBuy.onClick.AddListener(() => onBuyClicked?.Invoke(this));
             }
         }
+
+        public void SetIcon(Sprite sprite)
+        {
+            if (imgIcon != null && sprite != null)
+            {
+                imgIcon.sprite = sprite;
+            }
+        }
     }
 }

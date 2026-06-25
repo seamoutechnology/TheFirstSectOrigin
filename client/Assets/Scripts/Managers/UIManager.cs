@@ -330,7 +330,7 @@ namespace GameClient
             if (string.IsNullOrEmpty(acceptText) || acceptText.StartsWith("[")) acceptText = "Đồng Ý";
 
             string denyText = Managers.LocalizationManager.Instance.GetText(denyKey);
-            if (string.IsNullOrEmpty(denyText) || denyText.StartsWith("[")) denyText = "✗ Hủy";
+            if (string.IsNullOrEmpty(denyText) || denyText.StartsWith("[")) denyText = "Hủy";
 
             bool success = await TryLoadConfirmPanelPrefabAsync(title, content, acceptText, denyText, onAccept, onDeny);
             if (success) return;

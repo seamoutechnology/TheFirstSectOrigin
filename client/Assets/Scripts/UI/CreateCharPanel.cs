@@ -148,6 +148,10 @@ namespace GameClient.UI
                     {
                         GameManager.Instance.SetPlayer(res.Profile);
                     }
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.OpenPanel("MainGameHUDPanel");
+                    }
                     string nickName = res.Profile != null ? res.Profile.Nickname : charName;
                     if (ToastManager.Instance != null)
                         ToastManager.Instance.ShowBigToast($"Chào mừng {nickName} gia nhập Tu Tiên Giới!");

@@ -117,7 +117,7 @@ namespace GameClient.UI
                     }
                 }
                 _traitsTextCached = string.Join(", ", translatedTraits);
-                string traitLabel = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_hero_traits") ?? "Thiên Phú";
+                string traitLabel = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_traits") ?? "Thiên Phú";
                 traitText.text = $"{traitLabel}: {_traitsTextCached}";
             }
 

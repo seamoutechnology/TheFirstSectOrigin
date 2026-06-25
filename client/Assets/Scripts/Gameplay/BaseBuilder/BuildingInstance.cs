@@ -21,6 +21,11 @@ namespace GameClient.Gameplay.BaseBuilder
         private GameObject _currentVFX;
         private Coroutine _constructionSoundCoroutine;
 
+        public void UpdateInstanceID(long instanceId)
+        {
+            InstanceID = instanceId;
+        }
+
         public void Setup(BuildingData data, int x, int y, int level = 1, BuildingState state = BuildingState.Normal, bool flipX = false, long instanceId = 0)
         {
             Data = data;

@@ -5,6 +5,8 @@ using GameClient.Managers;
 using GameClient.Core.Interfaces;
 using GameClient.UI.Presenters;
 using System;
+using GameClient.Core;
+using GameClient.Network;
 using VContainer;
 
 namespace GameClient.UI
@@ -163,6 +165,49 @@ namespace GameClient.UI
             {
                 _presenter.Dispose();
             }
+        }
+
+        private bool _showDebugIP = false;
+        private string _tempIP = "";
+
+        private void OnGUI()
+        {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_ANDROID
+            // Vẽ nút cấu hình ở góc trên bên phải màn hình
+            if (GUI.Button(new Rect(Screen.width - 160, 10, 150, 45), "Config Server IP"))
+            {
+                _showDebugIP = !_showDebugIP;
+                _tempIP = PlayerPrefs.GetString("TFSO_SERVER_IP", GameSettings.Instance?.gatewayAddr ?? "127.0.0.1:50051");
+            }
+
+            if (_showDebugIP)
+            {
+                // Vẽ hộp thoại nhập liệu giữa màn hình
+                Rect boxRect = new Rect(Screen.width / 2 - 150, Screen.height / 2 - 90, 300, 180);
+                GUI.Box(boxRect, "Cấu hình IP Server (gRPC Gateway)");
+
+                GUI.Label(new Rect(boxRect.x + 20, boxRect.y + 40, 260, 20), "Nhập IP và Port (Ví dụ: 10.0.2.2:50051):");
+                _tempIP = GUI.TextField(new Rect(boxRect.x + 20, boxRect.y + 60, 260, 30), _tempIP);
+
+                if (GUI.Button(new Rect(boxRect.x + 50, boxRect.y + 110, 90, 40), "Lưu & Kết nối"))
+                {
+                    PlayerPrefs.SetString("TFSO_SERVER_IP", _tempIP.Trim());
+                    PlayerPrefs.Save();
+                    _showDebugIP = false;
+                    
+                    // Thực hiện kết nối đến IP mới
+                    if (NetworkManager.Instance != null)
+                    {
+                        NetworkManager.Instance.ConnectToGateway(_tempIP.Trim());
+                    }
+                }
+
+                if (GUI.Button(new Rect(boxRect.x + 160, boxRect.y + 110, 90, 40), "Đóng"))
+                {
+                    _showDebugIP = false;
+                }
+            }
+            #endif
         }
     }
 }

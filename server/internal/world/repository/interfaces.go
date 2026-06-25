@@ -55,6 +55,7 @@ type IPlayerRepository interface {
 	GetCompletedStages(ctx context.Context, playerID int64) ([]string, error)
 	GetLeaderboard(ctx context.Context, leaderboardType string) ([]*LeaderboardRecord, error)
 	CollectResource(ctx context.Context, playerID int64, instanceID int64, itemCode string, amount int64) error
+	UpdatePlayerPower(ctx context.Context, playerID int64) error
 	GetShopItem(ctx context.Context, shopItemID string) (*ShopItem, error)
 	GetShopItemsByType(ctx context.Context, shopType string) ([]*ShopItem, error)
 	GetPlayerShopItems(ctx context.Context, playerID int64, shopType string) ([]*PlayerShopItemInstance, time.Time, error)

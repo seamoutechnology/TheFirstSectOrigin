@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -155,6 +155,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2000022
     m_Localized: "Th\u1EC3 l\u1EF1c ti\xEAuh hao khi \u0111i ph\xF3 b\u1EA3n ho\u1EB7c th\u1EF1c hi\u1EC7n c\xE1c ho\u1EA1t \u0111\u1ED9ng kh\xE1c."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 989299603793334
+    m_Localized: "Xu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 537260745754115
+    m_Localized: "Vàng Thỏi"
     m_Metadata:
       m_Items: []
   references:

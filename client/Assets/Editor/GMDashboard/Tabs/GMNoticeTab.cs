@@ -184,7 +184,7 @@ namespace GameClient.Editor.GMDashboard
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     EditorUtility.DisplayDialog("Lưu thành công", $"Thông báo '{notice.title}' đã được bắn lên Server!", "OK");
-                    // không gọi FetchAllNotices() nữa để tránh mất list hiện tại nếu API chưa hoàn thiện
+                    FetchAllNotices();
                 }
                 else
                 {

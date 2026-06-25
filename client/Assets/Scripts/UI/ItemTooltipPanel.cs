@@ -180,7 +180,7 @@ namespace GameClient.UI
                     if (response != null && response.Code == 200)
                     {
                         ToastManager.Instance?.ShowNormalToast("Sử dụng vật phẩm thành công!");
-                        var invPanel = UIManager.Instance?.GetPanel("InventoryPanel") as InventoryPanel;
+                        var invPanel = UIManager.Instance?.GetPanel("UI_InventoryPanel") as InventoryPanel;
                         if (invPanel != null)
                         {
                             invPanel.RefreshInventory();

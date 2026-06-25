@@ -379,6 +379,37 @@ func (r *PlayerRepository) GetPlayerHeroes(ctx context.Context, playerID int64) 
 		h.Skills = string(skillsBytes)
 		result = append(result, h)
 	}
+
+	if len(result) == 0 {
+		// Tự động cấp 3 tướng tân thủ mặc định nếu tài khoản chưa có tướng nào
+		defaultHeroes := []string{"FIRE_WARRIOR_01", "WATER_TANK_01", "WOOD_HEALER_01"}
+		defaultSlots := make(map[int32]int64)
+		for i, code := range defaultHeroes {
+			hero, err := r.AddHero(ctx, playerID, code)
+			if err == nil && hero != nil {
+				defaultSlots[int32(i)] = hero.ID
+			}
+		}
+		_ = r.SetFormation(ctx, playerID, defaultSlots)
+
+		// Truy vấn lại để lấy thông tin các tướng vừa thêm
+		rows2, err := r.db.Query(ctx, q, playerID)
+		if err == nil {
+			defer rows2.Close()
+			for rows2.Next() {
+				h := &PlayerHero{}
+				var traitsBytes []byte
+				var skillsBytes []byte
+				if err := rows2.Scan(&h.ID, &h.PlayerID, &h.HeroCode, &h.Name, &h.Rarity, &h.Element, &h.Role,
+					&h.Level, &h.Star, &h.Exp, &h.BaseHP, &h.BaseATK, &h.BaseDEF, &h.BaseSpeed, &traitsBytes, &skillsBytes); err == nil {
+					h.Traits = string(traitsBytes)
+					h.Skills = string(skillsBytes)
+					result = append(result, h)
+				}
+			}
+		}
+	}
+
 	return result, nil
 }
 
@@ -844,6 +875,37 @@ func (r *PlayerRepository) UseItemTransaction(ctx context.Context, playerID int6
 		} else if codeParam == "level" {
 			_, err = tx.Exec(ctx, "UPDATE players SET level = level + $1 WHERE id = $2", valueParam*quantity, playerID)
 		}
+	case "RECRUIT_TICKET":
+		heroCodes := strings.Split(codeParam, ",")
+		for _, heroCode := range heroCodes {
+			if heroCode == "" {
+				continue
+			}
+			var skillsJSON string
+			switch heroCode {
+			case "DARK_ASSASSIN_01":
+				skillsJSON = `[{"skill_code": "skill_shadow_strike", "level": 1}]`
+			case "FIRE_GENERAL_01", "LIGHT_MAGE_01":
+				skillsJSON = `[{"skill_code": "skill_fireball", "level": 1}]`
+			case "WATER_TANK_01":
+				skillsJSON = `[{"skill_code": "skill_shield", "level": 1}]`
+			case "WOOD_HEALER_01":
+				skillsJSON = `[{"skill_code": "skill_heal", "level": 1}]`
+			default:
+				skillsJSON = `[{"skill_code": "skill_slash", "level": 1}]`
+			}
+			_, err = tx.Exec(ctx, `
+				INSERT INTO player_heroes (player_id, hero_code, traits, skills) 
+				VALUES ($1, $2, '[]'::jsonb, $3::jsonb)`, playerID, heroCode, skillsJSON)
+			if err != nil {
+				return err
+			}
+		}
+		_, err = tx.Exec(ctx, `
+			INSERT INTO player_gacha_pity (player_id, banner_id, pull_count)
+			VALUES ($1, 1, $2)
+			ON CONFLICT (player_id, banner_id) DO UPDATE SET pull_count = EXCLUDED.pull_count`,
+			playerID, valueParam)
 	}
 
 	if err != nil {
@@ -1583,7 +1645,7 @@ func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, pla
 	// 2. Lock & check currencies/items
 	for _, cost := range costs {
 		totalCost := int64(cost.Amount) * int64(quantity)
-		if cost.ItemCode == "gold" {
+		if cost.ItemCode == "gold" || cost.ItemCode == "00001" {
 			var currentGold int64
 			err = tx.QueryRow(ctx, "SELECT gold FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentGold)
 			if err != nil {
@@ -1596,7 +1658,7 @@ func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, pla
 			if err != nil {
 				return nil, err
 			}
-		} else if cost.ItemCode == "diamond" {
+		} else if cost.ItemCode == "diamond" || cost.ItemCode == "00000" {
 			var currentDiamond int64
 			err = tx.QueryRow(ctx, "SELECT diamond FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentDiamond)
 			if err != nil {

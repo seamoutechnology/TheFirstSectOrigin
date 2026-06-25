@@ -3,19 +3,32 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Bảng so sánh lựa chọn công nghệ phát triển máy chủ backend}}{13}{table.caption.9}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Bảng chuẩn hóa phối màu giao diện người dùng}}{21}{table.caption.12}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp Player}}{23}{table.caption.14}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp PlayerBuilding}}{24}{table.caption.16}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp PlayerHero}}{24}{table.caption.18}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Danh sách các thư viện và công cụ sử dụng trong dự án}}{30}{table.caption.28}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Thống kê số lượng mã nguồn và kích thước đóng gói sản phẩm}}{31}{table.caption.29}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Kịch bản kiểm thử chi tiết chức năng Đăng nhập}}{33}{table.caption.31}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Kịch bản kiểm thử chi tiết chức năng Thu thập tài nguyên}}{33}{table.caption.33}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Kịch bản kiểm thử chi tiết chức năng Sắp xếp đội hình}}{34}{table.caption.35}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces So sánh thông số hiệu năng hệ thống dưới các mức tải CCU khác nhau}}{37}{table.caption.37}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Bảng chuẩn hóa phối màu giao diện người dùng}}{22}{table.caption.12}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp Player}}{24}{table.caption.14}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp PlayerBuilding}}{25}{table.caption.16}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Đặc tả thuộc tính và phương thức của lớp PlayerHero}}{25}{table.caption.18}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Đặc tả thuộc tính của bảng users}}{36}{table.caption.25}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Đặc tả thuộc tính của bảng players}}{36}{table.caption.27}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Đặc tả thuộc tính của bảng player\_buildings}}{37}{table.caption.29}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Đặc tả thuộc tính của bảng player\_heroes}}{37}{table.caption.31}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Đặc tả thuộc tính của bảng player\_formations}}{37}{table.caption.33}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Đặc tả thuộc tính của bảng player\_pity}}{38}{table.caption.35}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Đặc tả thuộc tính của bảng hero\_templates}}{38}{table.caption.37}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Đặc tả thuộc tính của bảng banners}}{38}{table.caption.39}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Đặc tả thuộc tính của bảng buildings}}{39}{table.caption.41}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Đặc tả thuộc tính của bảng skills}}{39}{table.caption.43}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Danh sách các thư viện và công cụ sử dụng trong dự án}}{40}{table.caption.44}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Thống kê số lượng mã nguồn và kích thước đóng gói sản phẩm}}{41}{table.caption.45}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Kịch bản kiểm thử TC-AUTH-01: Đăng nhập thành công}}{46}{table.caption.51}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Kịch bản kiểm thử TC-AUTH-02: Đăng nhập thất bại do sai mật khẩu}}{46}{table.caption.52}%
+\contentsline {table}{\numberline {4.19}{\ignorespaces Kịch bản kiểm thử TC-COLL-01: Thu hoạch tài nguyên thành công}}{47}{table.caption.54}%
+\contentsline {table}{\numberline {4.20}{\ignorespaces Kịch bản kiểm thử TC-COLL-02: Ngăn chặn thu hoạch tài nguyên liên tục}}{48}{table.caption.55}%
+\contentsline {table}{\numberline {4.21}{\ignorespaces Kịch bản kiểm thử TC-FORM-01: Sắp xếp đội hình hợp lệ}}{48}{table.caption.57}%
+\contentsline {table}{\numberline {4.22}{\ignorespaces Kịch bản kiểm thử TC-UPGR-01: Nâng cấp công trình thành công}}{49}{table.caption.58}%
+\contentsline {table}{\numberline {4.23}{\ignorespaces So sánh thông số hiệu năng hệ thống dưới các mức tải CCU khác nhau}}{52}{table.caption.60}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Bảng so sánh tổng quan giải pháp công nghệ của đồ án với các sản phẩm tương tự}}{51}{table.caption.38}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Bảng so sánh tổng quan giải pháp công nghệ của đồ án với các sản phẩm tương tự}}{66}{table.caption.61}%
 \addvspace {10\p@ }
 \contentsfinish 
 \contentsfinish 
