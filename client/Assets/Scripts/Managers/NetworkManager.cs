@@ -283,6 +283,17 @@ namespace GameClient.Network
             return true;
         }
 
+        public string GetApiBaseUrl()
+        {
+            if (GameSettings.Instance == null) return "http://127.0.0.1";
+            string baseUrl = GameSettings.Instance.apiBaseUrl;
+            if (!string.IsNullOrEmpty(_lastHost))
+            {
+                baseUrl = baseUrl.Replace("127.0.0.1", _lastHost).Replace("localhost", _lastHost);
+            }
+            return baseUrl;
+        }
+
         public async Task<string> PostAsync(string url, object data)
         {
             if (!CheckAndTrackRateLimit())
@@ -292,7 +303,7 @@ namespace GameClient.Network
 
             if (url.StartsWith("/") && GameSettings.Instance != null)
             {
-                url = GameSettings.Instance.apiBaseUrl.TrimEnd('/') + url;
+                url = GetApiBaseUrl().TrimEnd('/') + url;
             }
 
             Debug.Log($"[Network] POST → {url}");

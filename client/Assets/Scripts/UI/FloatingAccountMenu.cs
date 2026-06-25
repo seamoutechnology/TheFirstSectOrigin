@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using GameClient.Managers;
 using GameClient.Core;
 using DG.Tweening;
+using GameClient.Network;
 
 namespace GameClient.UI
 {
@@ -170,7 +171,7 @@ namespace GameClient.UI
                 zoneId = 1;
             }
 
-            string baseUrl = GameSettings.Instance != null ? GameSettings.Instance.apiBaseUrl : "http://localhost:8080";
+            string baseUrl = NetworkManager.Instance != null ? NetworkManager.Instance.GetApiBaseUrl() : (GameSettings.Instance != null ? GameSettings.Instance.apiBaseUrl : "http://localhost:8080");
             string url = baseUrl.TrimEnd('/') + "/user/dashboard?token=" + System.Uri.EscapeDataString(token) + "&zone_id=" + zoneId;
             
             Debug.Log("[Dashboard] Mở cổng tu luyện ngoài từ FloatingMenu: " + url);

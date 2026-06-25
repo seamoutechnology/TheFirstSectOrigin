@@ -63,6 +63,126 @@ Dưới đây là biểu đồ phân rã của các nhóm chức năng cốt lõ
     \item \textbf{Phân hệ vượt ải}: Gồm các use case chọn ải chiến dịch, gửi đội hình xuất trận, mô phỏng tính toán trận đấu, và nhận phần thưởng vượt ải.
 \end{enumerate}
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.85, transform shape]
+      % Actor Player
+      \draw[thick] (0,0.5) circle (0.2);
+      \draw[thick] (0,0.3) -- (0,-0.3) coordinate (torso);
+      \draw[thick] (-0.4,0.1) -- (0.4,0.1);
+      \draw[thick] (torso) -- (-0.25,-0.8);
+      \draw[thick] (torso) -- (0.25,-0.8);
+      \node at (0,-1.15) {\scriptsize Người chơi};
+
+      % Subsystem Boundary
+      \draw[thick, gray] (1.5, -2.0) rectangle (5.5, 2.0);
+      \node[font=\bfseries\scriptsize, anchor=north west] at (1.5, 2.0) {Phân hệ Xác thực};
+
+      % Use Cases
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc1) at (3.5, 1.1) {Đăng ký tài khoản};
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc2) at (3.5, 0.0) {Đăng nhập hệ thống};
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc3) at (3.5, -1.1) {Điều phối máy chủ};
+
+      % Connections
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc1.west);
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc2.west);
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc3.west);
+    \end{tikzpicture}
+    \caption{Phân hệ Xác thực}
+    \label{fig:uc_auth}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.85, transform shape]
+      % Actor Player
+      \draw[thick] (0,0.5) circle (0.2);
+      \draw[thick] (0,0.3) -- (0,-0.3) coordinate (torso);
+      \draw[thick] (-0.4,0.1) -- (0.4,0.1);
+      \draw[thick] (torso) -- (-0.25,-0.8);
+      \draw[thick] (torso) -- (0.25,-0.8);
+      \node at (0,-1.15) {\scriptsize Người chơi};
+
+      % Subsystem Boundary
+      \draw[thick, gray] (1.5, -2.0) rectangle (5.5, 2.0);
+      \node[font=\bfseries\scriptsize, anchor=north west] at (1.5, 2.0) {Phân hệ Tông môn};
+
+      % Use Cases
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc1) at (3.5, 0.8) {Xây \& Nâng cấp\\công trình};
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc2) at (3.5, -0.8) {Thu thập tài nguyên};
+
+      % Connections
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc1.west);
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc2.west);
+    \end{tikzpicture}
+    \caption{Phân hệ Quản lý Tông môn}
+    \label{fig:uc_sect}
+  \end{subfigure}
+  \caption{Biểu đồ use case phân rã phân hệ Xác thực và Quản lý Tông môn}
+  \label{fig:usecase_decom_1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.85, transform shape]
+      % Actor Player
+      \draw[thick] (0,0.5) circle (0.2);
+      \draw[thick] (0,0.3) -- (0,-0.3) coordinate (torso);
+      \draw[thick] (-0.4,0.1) -- (0.4,0.1);
+      \draw[thick] (torso) -- (-0.25,-0.8);
+      \draw[thick] (torso) -- (0.25,-0.8);
+      \node at (0,-1.15) {\scriptsize Người chơi};
+
+      % Subsystem Boundary
+      \draw[thick, gray] (1.5, -2.0) rectangle (5.5, 2.0);
+      \node[font=\bfseries\scriptsize, anchor=north west] at (1.5, 2.0) {Phân hệ Đệ tử};
+
+      % Use Cases
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc1) at (3.5, 0.8) {Chiêu mộ đệ tử};
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc2) at (3.5, -0.8) {Sắp xếp đội hình};
+
+      % Connections
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc1.west);
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc2.west);
+    \end{tikzpicture}
+    \caption{Phân hệ Quản lý Đệ tử}
+    \label{fig:uc_disciples}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.85, transform shape]
+      % Actor Player
+      \draw[thick] (0,0.5) circle (0.2);
+      \draw[thick] (0,0.3) -- (0,-0.3) coordinate (torso);
+      \draw[thick] (-0.4,0.1) -- (0.4,0.1);
+      \draw[thick] (torso) -- (-0.25,-0.8);
+      \draw[thick] (torso) -- (0.25,-0.8);
+      \node at (0,-1.15) {\scriptsize Người chơi};
+
+      % Subsystem Boundary
+      \draw[thick, gray] (1.5, -2.0) rectangle (5.5, 2.0);
+      \node[font=\bfseries\scriptsize, anchor=north west] at (1.5, 2.0) {Phân hệ Vượt ải};
+
+      % Use Cases
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc1) at (3.5, 0.8) {Vượt ải chiến dịch};
+      \node[draw, ellipse, minimum width=3.3cm, minimum height=0.8cm, align=center, font=\scriptsize] (uc2) at (3.5, -0.8) {Mô phỏng trận đấu};
+
+      % Connections
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc1.west);
+      \draw[->, >=stealth, thick] (0.4, 0) -- (uc2.west);
+    \end{tikzpicture}
+    \caption{Phân hệ Vượt ải}
+    \label{fig:uc_campaign}
+  \end{subfigure}
+  \caption{Biểu đồ use case phân rã phân hệ Quản lý Đệ tử và Vượt ải}
+  \label{fig:usecase_decom_2}
+\end{figure}
+
 \subsection{Quy trình nghiệp vụ cốt lõi}
 Quy trình nghiệp vụ quan trọng nhất của hệ thống là luồng vận hành từ khi người chơi đăng nhập, tiến hành khai thác tài nguyên tại tông môn để nâng cấp đệ tử, sau đó tham gia vượt ải chiến dịch để tích lũy điểm lực chiến và cập nhật thứ hạng trên bảng xếp hạng thời gian thực. Quy trình này đòi hỏi sự phối hợp đồng bộ giữa dịch vụ Gateway nhận yêu cầu, dịch vụ World quản lý tài sản người chơi và dịch vụ Combat thực hiện tính toán kết quả trận đấu một cách độc lập.
 
