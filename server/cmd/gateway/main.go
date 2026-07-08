@@ -10,14 +10,14 @@ import (
 	"syscall"
 	"time"
 
-	"go.uber.org/zap"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"golang.org/x/time/rate"
+	"go.uber.org/zap"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
-	"github.com/improbable-eng/grpc-web/go/grpcweb"
+	"golang.org/x/time/rate"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	gatewayHandler "server/internal/gateway/handler"
 	"server/internal/gateway/middleware"
@@ -50,8 +50,6 @@ func main() {
 		zap.String("addr", cfg.Server.Addr),
 	)
 
-	// chọc tạm vô port kế tiếp, mốt deploy thật nhớ tách cẩn thận :))
-	// chọc tạm vô port kế tiếp, deploy thật nhớ check nha ae =))
 	worldAddr := fmt.Sprintf("%s:%d", cfg.Server.Host, cfg.Server.Port+1) // World chạy trên port +1
 	if v := os.Getenv("WORLD_SERVER_HOST"); v != "" {
 		worldPort := os.Getenv("WORLD_SERVER_PORT")
@@ -68,7 +66,7 @@ func main() {
 	}
 	defer worldClient.Close()
 
-	combatAddr := fmt.Sprintf("%s:%d", cfg.Server.Host, 50054) 
+	combatAddr := fmt.Sprintf("%s:%d", cfg.Server.Host, 50054)
 	if v := os.Getenv("COMBAT_SERVER_HOST"); v != "" {
 		combatPort := os.Getenv("COMBAT_SERVER_PORT")
 		if combatPort == "" {
@@ -126,12 +124,12 @@ func main() {
 
 	go func() {
 		mux := http.NewServeMux()
-		
+
 		RegisterCutsceneHTTPHandler(mux, worldClient, log)
-		
+
 		fs := http.FileServer(http.Dir("assets"))
 		mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
-		
+
 		log.Info("HTTP Static server listening on :8080")
 		if err := http.ListenAndServe(":8080", mux); err != nil {
 			log.Error("Static server failed", zap.Error(err))

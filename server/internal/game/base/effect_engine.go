@@ -33,7 +33,7 @@ func ProcessProductionCycle(layout *BaseLayout, state *BaseState, now time.Time)
 
 		if cfg.EffectType == EffectResourceGen {
 			speedLvl := float64(b.UpgradeBranches[BranchSpeed])
-			actualInterval := float64(cfg.BaseInterval) * (1.0 - (speedLvl * 0.05)) // Giảm 5% mỗi cấp
+			actualInterval := float64(cfg.BaseInterval) * (1.0 - (speedLvl * 0.05))
 			if actualInterval < 1 {
 				actualInterval = 1
 			}
@@ -81,7 +81,7 @@ func ProcessProductionCycle(layout *BaseLayout, state *BaseState, now time.Time)
 					}
 
 					b.Storage[cfg.RareProduct] += totalRare
-					
+
 					b.LastHarvestTime += int64(float64(cycles) * actualInterval)
 				}
 			}

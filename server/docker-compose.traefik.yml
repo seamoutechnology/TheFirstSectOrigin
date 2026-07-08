@@ -21,19 +21,18 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./letsencrypt:/letsencrypt"
     networks:
-      - tso-network
+      - tfso-network
 
   admin-server:
-    # Thêm các labels này vào service admin-server của bạn
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.admin.rule=Host(`admin.seamou.studio`)" # Thay bằng domain của bạn
+      - "traefik.http.routers.admin.rule=Host(`admin.seamou.studio`)"
       - "traefik.http.routers.admin.entrypoints=websecure"
       - "traefik.http.routers.admin.tls.certresolver=myresolver"
       - "traefik.http.services.admin.loadbalancer.server.port=8080"
     networks:
-      - tso-network
+      - tfso-network
 
 networks:
-  tso-network:
+  tfso-network:
     external: true

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +59,8 @@
             transition: all 0.3s ease;
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover,
+        .nav-link.active {
             color: var(--heading-color);
             background: rgba(102, 252, 241, 0.1);
             border-left: 3px solid var(--accent-color);
@@ -107,10 +109,25 @@
             font-weight: 600;
         }
 
-        .badge-MAINTENANCE { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
-        .badge-RULES { background: rgba(127, 140, 141, 0.2); color: #95a5a6; }
-        .badge-ACTIVITY { background: rgba(52, 152, 219, 0.2); color: #3498db; }
-        .badge-NEWS { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .badge-MAINTENANCE {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        .badge-RULES {
+            background: rgba(127, 140, 141, 0.2);
+            color: #95a5a6;
+        }
+
+        .badge-ACTIVITY {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .badge-NEWS {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
 
         .btn-primary {
             background-color: var(--accent-color);
@@ -125,13 +142,15 @@
             color: #000;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             background-color: #1c1e28;
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-color);
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             background-color: #222533;
             border-color: var(--accent-color);
             color: var(--heading-color);
@@ -143,15 +162,31 @@
             border: 1px solid rgba(102, 252, 241, 0.2);
         }
 
-        .modal-header, .modal-footer {
+        .modal-header,
+        .modal-footer {
             border-color: rgba(255, 255, 255, 0.05);
         }
 
         /* Disciples UI styling */
-        .rarity-UR { color: var(--rarity-ur); font-weight: bold; }
-        .rarity-SSR { color: var(--rarity-ssr); font-weight: bold; }
-        .rarity-SR { color: var(--rarity-sr); font-weight: bold; }
-        .rarity-R { color: var(--rarity-r); font-weight: bold; }
+        .rarity-UR {
+            color: var(--rarity-ur);
+            font-weight: bold;
+        }
+
+        .rarity-SSR {
+            color: var(--rarity-ssr);
+            font-weight: bold;
+        }
+
+        .rarity-SR {
+            color: var(--rarity-sr);
+            font-weight: bold;
+        }
+
+        .rarity-R {
+            color: var(--rarity-r);
+            font-weight: bold;
+        }
 
         .disciple-card {
             background: rgba(0, 0, 0, 0.2);
@@ -169,6 +204,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -220,16 +256,19 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2>Danh sách người chơi</h2>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-danger" onclick="cleanupOrphanedPlayers()"><i class="fas fa-trash-alt"></i> Dọn dẹp nhân vật rác</button>
-                            <input type="text" id="player-search" class="form-control" placeholder="Tìm kiếm Email / Username" style="width: 250px;" oninput="loadPlayers(1)">
-                            <select id="zone-select" class="form-select" style="width: 120px;" onchange="loadPlayers(1)">
+                            <button class="btn btn-outline-danger" onclick="cleanupOrphanedPlayers()"><i
+                                    class="fas fa-trash-alt"></i> Dọn dẹp nhân vật rác</button>
+                            <input type="text" id="player-search" class="form-control"
+                                placeholder="Tìm kiếm Email / Username" style="width: 250px;" oninput="loadPlayers(1)">
+                            <select id="zone-select" class="form-select" style="width: 120px;"
+                                onchange="loadPlayers(1)">
                                 <option value="1">Zone 1</option>
                                 <option value="2">Zone 2</option>
                                 <option value="3">Zone 3</option>
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-7">
                             <div class="card">
@@ -261,7 +300,8 @@
                             <div class="card" id="detail-card" style="display: none;">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <span>Chi tiết tài khoản</span>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('detail-card').style.display='none'">Đóng</button>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="document.getElementById('detail-card').style.display='none'">Đóng</button>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -280,10 +320,11 @@
                                     </div>
 
                                     <hr style="border-color: rgba(255, 255, 255, 0.1);">
-                                    
+
                                     <h5 class="mb-3 d-flex justify-content-between align-items-center">
                                         <span>👥 Danh Sách Đệ Tử</span>
-                                        <button class="btn btn-sm btn-primary" onclick="openAddHeroModal()">+ Thêm</button>
+                                        <button class="btn btn-sm btn-primary" onclick="openAddHeroModal()">+
+                                            Thêm</button>
                                     </h5>
                                     <div id="disciples-container" style="max-height: 350px; overflow-y: auto;">
                                         <!-- Disciples list -->
@@ -390,7 +431,7 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-            
+
             document.getElementById(`tab-${tabId}`).style.display = 'block';
             document.getElementById(`link-${tabId}`).classList.add('active');
 
@@ -449,7 +490,7 @@
             document.getElementById("noticeType").value = n.type;
             document.getElementById("noticeTitle").value = n.title;
             document.getElementById("noticeContent").value = n.content;
-            
+
             // Format time for datetime-local (yyyy-MM-ddThh:mm)
             document.getElementById("noticeStartAt").value = new Date(n.start_at).toISOString().slice(0, 16);
             document.getElementById("noticeEndAt").value = new Date(n.end_at).toISOString().slice(0, 16);
@@ -533,7 +574,7 @@
             try {
                 const res = await fetch(`/api/gm/users/list?page=${page}&limit=10&search=${encodeURIComponent(search)}&zone_id=${zoneId}`);
                 const data = await res.json();
-                
+
                 const tbody = document.getElementById("playerTable");
                 tbody.innerHTML = "";
 
@@ -564,7 +605,7 @@
                 // Render Pagination
                 const pagination = document.getElementById("player-pagination");
                 pagination.innerHTML = "";
-                
+
                 const totalPages = Math.ceil(data.total / 10);
                 for (let i = 1; i <= totalPages; i++) {
                     const btn = document.createElement("button");
@@ -628,7 +669,7 @@
                     card.className = "disciple-card";
 
                     let stars = "";
-                    for(let i = 0; i < d.star; i++) {
+                    for (let i = 0; i < d.star; i++) {
                         stars += '<i class="fas fa-star"></i>';
                     }
 
@@ -673,7 +714,7 @@
         async function submitAddHero() {
             const zoneId = document.getElementById("zone-select").value;
             const heroCode = document.getElementById("addHeroSelect").value;
-            
+
             try {
                 const res = await fetch(`/api/gm/user/add-hero?id=${selectedUserId}&zone_id=${zoneId}`, {
                     method: "POST",
@@ -694,4 +735,5 @@
         }
     </script>
 </body>
+
 </html>

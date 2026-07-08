@@ -32,7 +32,7 @@ var Database = map[string]BuildingConfig{
 	},
 	"GOLD_MINE": {
 		ID: "GOLD_MINE", SizeX: 2, SizeY: 2, EffectType: EffectResourceGen,
-		BaseInterval: 3600, BaseYield: 100, MaxCapacity: 500, MainProduct: "Gold", RareProduct: "Diamond",
+		BaseInterval: 3600, BaseYield: 100, MaxCapacity: 500, MainProduct: "000001", RareProduct: "000002",
 	},
 	"TRAINING_HQ": {
 		ID: "TRAINING_HQ", SizeX: 3, SizeY: 3, EffectType: EffectStatBoost,

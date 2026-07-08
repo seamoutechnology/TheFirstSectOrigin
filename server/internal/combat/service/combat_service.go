@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"server/pkg/pb"
+
 	"go.uber.org/zap"
 )
 
@@ -26,7 +27,7 @@ func (s *CombatService) ValidatePvEResult(ctx context.Context, req *pb.ValidateP
 	if len(req.CombatLogs) > 0 {
 		fmt.Printf("--- COMBAT LOGS START ---\n")
 		for i, log := range req.CombatLogs {
-			fmt.Printf("  [%02d] Caster:%-8s -> Target:%-8s | Skill:%-8s | Dmg:%-5d | Crit:%v\n", 
+			fmt.Printf("  [%02d] Caster:%-8s -> Target:%-8s | Skill:%-8s | Dmg:%-5d | Crit:%v\n",
 				i+1, log.CasterId, log.TargetId, log.SkillId, log.Damage, log.IsCrit)
 		}
 		fmt.Printf("--- COMBAT LOGS END ---\n")
@@ -47,7 +48,7 @@ func (s *CombatService) ValidatePvEResult(ctx context.Context, req *pb.ValidateP
 	minRequiredPower := float64(req.EnemyPower) * 0.5
 	if float64(req.PlayerPower) < minRequiredPower {
 		s.log.Warn("Suspicious combat result detected, attempting soft validation on logs", zap.Int("log_count", len(req.CombatLogs)))
-		
+
 		isValid := s.verifyCombatLog(req.CombatLogs, req.PlayerPower, req.EnemyPower)
 		if !isValid {
 			return &pb.ValidatePvEResultResponse{
@@ -68,12 +69,12 @@ func (s *CombatService) ValidatePvEResult(ctx context.Context, req *pb.ValidateP
 
 func (s *CombatService) verifyCombatLog(logs []*pb.CombatActionLog, playerPower int32, enemyPower int32) bool {
 	if len(logs) == 0 {
-		return false // Thắng mà không có action nào thì là hack chắc chắn
+		return false
 	}
 
 	totalDamage := int32(0)
-	
-	maxPossibleHitDamage := playerPower * 2 
+
+	maxPossibleHitDamage := playerPower * 2
 
 	for _, log := range logs {
 		if log.Damage > 0 {
