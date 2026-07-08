@@ -29,10 +29,11 @@ namespace GameClient.Gameplay.BaseBuilder
         public string buildingID; // VD: "main_hall"
 
         [Header("VFX Prefabs (Optional)")]
-        [Tooltip("Hiá»‡u á»©ng bá»¥i khá»‘i lÃºc Ä‘ang xÃ¢y hoáº·c nÃ¢ng cáº¥p")]
         public GameObject constructionVFXPrefab;
-        [Tooltip("Hiá»‡u á»©ng lÃºc nhÃ  Ä‘ang hoáº¡t Ä‘á»™ng/sáº£n xuáº¥t (vÃ­ dá»¥ khÃ³i bÃªp, lá»  rÃ¨n)")]
+        [Tooltip("Hiệu ứng lúc nhà đang hoạt động/sản xuất (ví dụ khói bếp, lò rèn)")]
         public GameObject workingVFXPrefab;
+        [Tooltip("Hình ảnh Icon hiện lên khi có thể thu hoạch")]
+        public Sprite harvestIconSprite;
 
         [Header("Level Visuals")]
         public List<BuildingLevelVisual> levelVisuals = new List<BuildingLevelVisual>();

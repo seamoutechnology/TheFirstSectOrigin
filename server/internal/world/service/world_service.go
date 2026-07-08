@@ -250,9 +250,7 @@ func (s *WorldService) UpgradeBuilding(ctx context.Context, userID int64, instan
 			}
 		}
 
-		if goldReq > 0 && player.Gold < goldReq {
-			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ vàng (cần %d)", goldReq)
-		}
+		// player.Gold check removed as DeductUserItems handles it
 		if len(itemRequirements) > 0 {
 			err := s.repo.DeductUserItems(ctx, player.ID, itemRequirements)
 			if err != nil {
@@ -260,11 +258,10 @@ func (s *WorldService) UpgradeBuilding(ctx context.Context, userID int64, instan
 			}
 		}
 		if goldReq > 0 {
-			updatedPlayer, err := s.repo.UpdateResources(ctx, player.ID, -goldReq, 0)
+			err := s.repo.DeductUserItems(ctx, player.ID, map[string]int32{"00001": int32(goldReq)})
 			if err != nil {
 				return nil, nil, ErrCodeInternal, err.Error()
 			}
-			player = updatedPlayer
 		}
 
 		upgradeTime := time.Duration(buildTimeSeconds) * time.Second
@@ -278,9 +275,6 @@ func (s *WorldService) UpgradeBuilding(ctx context.Context, userID int64, instan
 
 	// 2. Fallback cấu hình cũ nếu không tìm thấy file cấu hình
 	goldReq := int64(current.Level * 200)
-	if player.Gold < goldReq {
-		return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ vàng (cần %d)", goldReq)
-	}
 
 	woodReq := current.Level * 100
 	itemRequirements := map[string]int32{
@@ -292,7 +286,7 @@ func (s *WorldService) UpgradeBuilding(ctx context.Context, userID int64, instan
 		return nil, nil, ErrCodeNotEnough, err.Error()
 	}
 
-	updatedPlayer, err := s.repo.UpdateResources(ctx, player.ID, -goldReq, 0)
+	err = s.repo.DeductUserItems(ctx, player.ID, map[string]int32{"00001": int32(goldReq)})
 	if err != nil {
 		return nil, nil, ErrCodeInternal, err.Error()
 	}
@@ -303,8 +297,7 @@ func (s *WorldService) UpgradeBuilding(ctx context.Context, userID int64, instan
 	if err != nil {
 		return nil, nil, ErrCodeInternal, err.Error()
 	}
-
-	return building, updatedPlayer, ErrCodeSuccess, ""
+	return building, player, ErrCodeSuccess, ""
 }
 
 func (s *WorldService) SpeedUpBuilding(ctx context.Context, userID int64, instanceID int64) (*repository.PlayerBuilding, *repository.Player, int32, string) {
@@ -413,11 +406,13 @@ func (s *WorldService) CollectResources(ctx context.Context, userID int64, insta
 		return 0, nil, player, ErrCodeSuccess, "chưa có vàng để thu thập"
 	}
 
-	updatedPlayer, err := s.repo.UpdateResources(ctx, player.ID, goldGained, 0)
+	err = s.repo.CollectResource(ctx, player.ID, instanceID, "00001", goldGained)
 	if err != nil {
 		return 0, nil, nil, ErrCodeInternal, err.Error()
 	}
-	return goldGained, map[string]int64{"gold": goldGained}, updatedPlayer, ErrCodeSuccess, ""
+	
+	updatedPlayer, _, _ := s.GetPlayerProfile(ctx, userID)
+	return goldGained, map[string]int64{"00001": goldGained}, updatedPlayer, ErrCodeSuccess, ""
 }
 
 
@@ -503,23 +498,19 @@ func (s *WorldService) DoGacha(ctx context.Context, userID int64, bannerID int32
 		// Vẫn load lại profile sau khi trừ item
 		updatedPlayer, _, _ = s.GetPlayerProfile(ctx, userID)
 	} else if banner.CostGold > 0 {
-		totalGoldCost := int64(banner.CostGold) * int64(count)
-		if player.Gold < totalGoldCost {
+		totalGoldCost := int32(banner.CostGold) * count
+		err := s.repo.DeductUserItems(ctx, player.ID, map[string]int32{"00001": totalGoldCost})
+		if err != nil {
 			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ Vàng (cần %d)", totalGoldCost)
 		}
-		updatedPlayer, err = s.repo.UpdateResources(ctx, player.ID, -totalGoldCost, 0)
-		if err != nil {
-			return nil, nil, ErrCodeInternal, err.Error()
-		}
+		updatedPlayer, _, _ = s.GetPlayerProfile(ctx, userID)
 	} else {
-		totalCost := int64(banner.CostDiamond) * int64(count)
-		if player.Diamond < totalCost {
+		totalCost := int32(banner.CostDiamond) * count
+		err := s.repo.DeductUserItems(ctx, player.ID, map[string]int32{"00000": totalCost})
+		if err != nil {
 			return nil, nil, ErrCodeNotEnough, fmt.Sprintf("không đủ kim cương (cần %d)", totalCost)
 		}
-		updatedPlayer, err = s.repo.UpdateResources(ctx, player.ID, 0, -totalCost)
-		if err != nil {
-			return nil, nil, ErrCodeInternal, err.Error()
-		}
+		updatedPlayer, _, _ = s.GetPlayerProfile(ctx, userID)
 	}
 
 	pool, err := s.repo.GetGachaHeroPool(ctx)

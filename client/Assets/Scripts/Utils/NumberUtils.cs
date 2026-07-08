@@ -22,6 +22,9 @@ namespace GameClient.Utils
                 i++;
             }
 
+            // Round down to 1 decimal place to prevent rounding up (e.g. 600.05k -> 600.0k instead of 600.1k)
+            value = Math.Floor(value * 10) / 10;
+            
             // Trả về dạng 1.0k, 12.5m...
             return value.ToString("0.0") + suffixes[i];
         }

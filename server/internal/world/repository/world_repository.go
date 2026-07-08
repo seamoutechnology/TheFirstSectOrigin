@@ -261,14 +261,12 @@ func (r *PlayerRepository) FindByUserID(ctx context.Context, userID int64, serve
 func (r *PlayerRepository) UpdateResources(ctx context.Context, playerID int64, goldDelta, diamondDelta int64) (*Player, error) {
 	q := `
 		UPDATE players
-		SET gold    = gold + $2,
-		    diamond = diamond + $3,
-		    updated_at = NOW()
+		SET updated_at = NOW()
 		WHERE id = $1
 		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
-	err := r.db.QueryRow(ctx, q, playerID, goldDelta, diamondDelta).Scan(
+	err := r.db.QueryRow(ctx, q, playerID).Scan(
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
 		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)
@@ -900,10 +898,20 @@ func (r *PlayerRepository) UseItemTransaction(ctx context.Context, playerID int6
 	switch useType {
 	case "CURRENCY":
 		// codeParam: "gold", "diamond"
-		if codeParam == "gold" {
-			_, err = tx.Exec(ctx, "UPDATE players SET gold = gold + $1 WHERE id = $2", int64(valueParam)*int64(quantity), playerID)
-		} else if codeParam == "diamond" {
-			_, err = tx.Exec(ctx, "UPDATE players SET diamond = diamond + $1 WHERE id = $2", int64(valueParam)*int64(quantity), playerID)
+		rewardCode := codeParam
+		if rewardCode == "gold" { rewardCode = "00001" }
+		if rewardCode == "diamond" { rewardCode = "00000" }
+		
+		rewardAmt := int64(valueParam)*int64(quantity)
+		var exists bool
+		err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, rewardCode).Scan(&exists)
+		if err != nil {
+			return err
+		}
+		if exists {
+			_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = $3", rewardAmt, playerID, rewardCode)
+		} else {
+			_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, rewardCode, rewardAmt)
 		}
 	case "SKIN_UNLOCKER":
 		// codeParam: skin_code
@@ -1072,13 +1080,11 @@ func (r *PlayerRepository) ClaimMissionRewardDB(ctx context.Context, playerID in
 
 	// Add rewards to player profile/inventory
 	for itemCode, qty := range rewards {
-		if itemCode == "gold" {
-			_, err = tx.Exec(ctx, "UPDATE players SET gold = gold + $1 WHERE id = $2", int64(qty), playerID)
-		} else if itemCode == "exp" {
+		if itemCode == "exp" {
 			_, err = tx.Exec(ctx, "UPDATE players SET exp = exp + $1 WHERE id = $2", int64(qty), playerID)
-		} else if itemCode == "diamond" {
-			_, err = tx.Exec(ctx, "UPDATE players SET diamond = diamond + $1 WHERE id = $2", int64(qty), playerID)
 		} else {
+			if itemCode == "gold" { itemCode = "00001" }
+			if itemCode == "diamond" { itemCode = "00000" }
 			// standard inventory item insert
 			var exists bool
 			err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = $2)", playerID, itemCode).Scan(&exists)
@@ -1741,33 +1747,11 @@ func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, pla
 	// 2. Lock & check currencies/items
 	for _, cost := range costs {
 		totalCost := int64(cost.Amount) * int64(quantity)
-		if cost.ItemCode == "gold" || cost.ItemCode == "00001" {
-			var currentGold int64
-			err = tx.QueryRow(ctx, "SELECT gold FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentGold)
-			if err != nil {
-				return nil, err
-			}
-			if currentGold < totalCost {
-				return nil, errors.New("không đủ vàng")
-			}
-			_, err = tx.Exec(ctx, "UPDATE players SET gold = gold - $1 WHERE id = $2", totalCost, playerID)
-			if err != nil {
-				return nil, err
-			}
-		} else if cost.ItemCode == "diamond" || cost.ItemCode == "00000" {
-			var currentDiamond int64
-			err = tx.QueryRow(ctx, "SELECT diamond FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentDiamond)
-			if err != nil {
-				return nil, err
-			}
-			if currentDiamond < totalCost {
-				return nil, errors.New("không đủ xu/kim cương")
-			}
-			_, err = tx.Exec(ctx, "UPDATE players SET diamond = diamond - $1 WHERE id = $2", totalCost, playerID)
-			if err != nil {
-				return nil, err
-			}
-		} else if cost.ItemCode == "stamina" {
+		codeToCheck := cost.ItemCode
+		if codeToCheck == "gold" { codeToCheck = "00001" }
+		if codeToCheck == "diamond" { codeToCheck = "00000" }
+
+		if codeToCheck == "stamina" {
 			var currentStamina int32
 			err = tx.QueryRow(ctx, "SELECT stamina FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&currentStamina)
 			if err != nil {
@@ -1783,7 +1767,7 @@ func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, pla
 		} else {
 			// It is an inventory item! Check from user_items
 			var currentQty int32
-			err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = $2 FOR UPDATE", playerID, cost.ItemCode).Scan(&currentQty)
+			err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = $2 FOR UPDATE", playerID, codeToCheck).Scan(&currentQty)
 			if err != nil {
 				if errors.Is(err, pgx.ErrNoRows) {
 					return nil, fmt.Errorf("không có vật phẩm %s trong túi", cost.ItemCode)
@@ -1791,18 +1775,16 @@ func (r *PlayerRepository) BuyPlayerShopItemTransaction(ctx context.Context, pla
 				return nil, err
 			}
 			if int64(currentQty) < totalCost {
-				return nil, fmt.Errorf("không đủ vật phẩm %s", cost.ItemCode)
+				return nil, fmt.Errorf("không đủ vật phẩm %s", codeToCheck)
 			}
-
-			// Deduct items
-			if int64(currentQty) == totalCost {
-				_, err = tx.Exec(ctx, "DELETE FROM user_items WHERE player_id = $1 AND item_code = $2", playerID, cost.ItemCode)
+			if currentQty == int32(totalCost) {
+				_, err = tx.Exec(ctx, "DELETE FROM user_items WHERE player_id = $1 AND item_code = $2", playerID, codeToCheck)
 			} else {
-				_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = $3", totalCost, playerID, cost.ItemCode)
+				_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = $3", totalCost, playerID, codeToCheck)
 			}
-			if err != nil {
-				return nil, err
-			}
+		}
+		if err != nil {
+			return nil, err
 		}
 	}
 

@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingID: farm
   constructionVFXPrefab: {fileID: 8055626195559770800, guid: 4a4172096b0830f40b8a99247b62f92a, type: 3}
   workingVFXPrefab: {fileID: 0}
+  harvestIconSprite: {fileID: 21300000, guid: 787519642234753459ade929289a2e68, type: 3}
   levelVisuals:
   - level: 1
     normalSprite: {fileID: 21300000, guid: b13520f234dfa574b82484c111e8dd5f, type: 3}

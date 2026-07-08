@@ -80,12 +80,14 @@ namespace GameClient.Gameplay.Combat
         private void Die()
         {
             OnDie?.Invoke();
+            gameObject.SetActive(false); // Ẩn ảnh nhân vật/quái khi chết
         }
 
         public void Revive(int healAmount)
         {
             if (!IsDead) return;
             
+            gameObject.SetActive(true); // Hiện lại khi hồi sinh
             currentHP = healAmount;
             if (currentHP > maxHP) currentHP = maxHP;
             

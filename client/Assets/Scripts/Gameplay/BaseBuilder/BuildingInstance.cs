@@ -20,6 +20,8 @@ namespace GameClient.Gameplay.BaseBuilder
         private SpriteRenderer _spriteRenderer;
         private GameObject _currentVFX;
         private Coroutine _constructionSoundCoroutine;
+        
+        private GameObject _harvestIconGO;
 
         public void UpdateInstanceID(long instanceId)
         {
@@ -59,6 +61,25 @@ namespace GameClient.Gameplay.BaseBuilder
             
             UpdateVisualSprite();
             UpdateVisualPosition();
+            
+            // Dynamically create Harvest Icon if needed
+            if (Data != null && Data.VisualConfig != null && Data.VisualConfig.harvestIconSprite != null)
+            {
+                if (_harvestIconGO == null)
+                {
+                    _harvestIconGO = new GameObject("HarvestIcon");
+                    _harvestIconGO.transform.SetParent(transform, false);
+                    var sr = _harvestIconGO.AddComponent<SpriteRenderer>();
+                    sr.sprite = Data.VisualConfig.harvestIconSprite;
+                    sr.sortingOrder = 20000;
+                    
+                    // Position it above the building
+                    float h = Data.SizeY * BaseGridManager.TILE_HEIGHT;
+                    _harvestIconGO.transform.localPosition = new Vector3(0, h * 0.8f, 0);
+                    _harvestIconGO.transform.localScale = new Vector3(0.3f, 0.3f, 1f); // Scale 30%
+                    _harvestIconGO.SetActive(false);
+                }
+            }
 
             if (CurrentState == BuildingState.Building || CurrentState == BuildingState.Upgrading)
             {
@@ -194,6 +215,22 @@ namespace GameClient.Gameplay.BaseBuilder
         }
 
         private float _currentStorage = 0f;
+        
+        public void SyncProduction(long lastCollectAt)
+        {
+            if (Data is ProductionBuildingData prodData)
+            {
+                long now = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                long elapsed = now - lastCollectAt;
+                if (elapsed < 0) elapsed = 0;
+                
+                _currentStorage = elapsed * prodData.ProductionRatePerSecond;
+                if (_currentStorage > prodData.MaxCapacity)
+                {
+                    _currentStorage = prodData.MaxCapacity;
+                }
+            }
+        }
         
         private GameObject _progressBarGO;
         private UnityEngine.UI.Slider _progressBarSlider;
@@ -406,6 +443,15 @@ namespace GameClient.Gameplay.BaseBuilder
                             SetState(BuildingState.ReadyToHarvest);
                         }
                     }
+                }
+            }
+
+            if (_harvestIconGO != null)
+            {
+                bool shouldShowHarvest = HasResourcesToHarvest();
+                if (_harvestIconGO.activeSelf != shouldShowHarvest)
+                {
+                    _harvestIconGO.SetActive(shouldShowHarvest);
                 }
             }
 

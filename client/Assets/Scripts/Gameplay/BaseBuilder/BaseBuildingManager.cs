@@ -428,6 +428,7 @@ namespace GameClient.Gameplay.BaseBuilder
             }
             
             active.SyncUpgradeState(sb.Level, sb.UpgradeEndAt, state);
+            active.SyncProduction(sb.LastCollectAt);
         }
         
         #endregion
