@@ -35,6 +35,9 @@ namespace GameClient.EditorTools
             public int sizeX;
             public int sizeY;
             public string prefabAddress;
+            public string producedResource;
+            public float productionRatePerSecond;
+            public int maxCapacity;
             public List<ExportedBuildingLevel> levelStats = new List<ExportedBuildingLevel>();
         }
 
@@ -90,6 +93,13 @@ namespace GameClient.EditorTools
                     sizeY = asset.SizeY,
                     prefabAddress = asset.PrefabAddress
                 };
+
+                if (asset is ProductionBuildingData prodData)
+                {
+                    data.producedResource = prodData.ProducedItemCode;
+                    data.productionRatePerSecond = prodData.ProductionRatePerSecond;
+                    data.maxCapacity = prodData.MaxCapacity;
+                }
 
                 if (asset.LevelStats != null)
                 {

@@ -145,6 +145,8 @@ namespace GameClient.BaseBuilding.Core
                             if (_pressedBuilding.CurrentState == BuildingState.ReadyToHarvest || _pressedBuilding.HasResourcesToHarvest())
                             {
                                 _pressedBuilding.CollectResourcesVisually();
+                                _ = GameClient.Network.Api.SectBuildingApi.CollectResourcesAsync(_pressedBuilding.InstanceID);
+                                return; // Do not open UI if harvested
                             }
 
                             if (UIManager.Instance != null)
@@ -173,6 +175,8 @@ namespace GameClient.BaseBuilding.Core
                             if (_pressedBuilding.CurrentState == BuildingState.ReadyToHarvest || _pressedBuilding.HasResourcesToHarvest())
                             {
                                 _pressedBuilding.CollectResourcesVisually();
+                                _ = GameClient.Network.Api.SectBuildingApi.CollectResourcesAsync(_pressedBuilding.InstanceID);
+                                return; // Do not open UI if harvested
                             }
 
                             if (UIManager.Instance != null)

@@ -75,7 +75,7 @@ namespace GameClient.Gameplay.BaseBuilder
                     
                     // Position it above the building
                     float h = Data.SizeY * BaseGridManager.TILE_HEIGHT;
-                    _harvestIconGO.transform.localPosition = new Vector3(0, h * 0.8f, 0);
+                    _harvestIconGO.transform.localPosition = new Vector3(0, h * 0.5f, 0);
                     _harvestIconGO.transform.localScale = new Vector3(0.3f, 0.3f, 1f); // Scale 30%
                     _harvestIconGO.SetActive(false);
                 }
@@ -547,6 +547,8 @@ namespace GameClient.Gameplay.BaseBuilder
             if (CurrentState == BuildingState.ReadyToHarvest || HasResourcesToHarvest())
             {
                 CollectResourcesVisually();
+                _ = GameClient.Network.Api.SectBuildingApi.CollectResourcesAsync(InstanceID);
+                return; // Do not open menu if harvested
             }
             
             if (GameClient.UIManager.Instance != null)
