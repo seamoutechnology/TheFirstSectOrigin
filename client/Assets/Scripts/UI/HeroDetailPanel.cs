@@ -153,32 +153,70 @@ namespace GameClient.UI
             }
         }
 
-        private void UpdateRequiredMaterialsText()
+        private async void UpdateRequiredMaterialsText()
         {
             if (txtRequiredMaterials == null) return;
 
             long reqGold = GetRequiredGoldForLevelUp(_currentHero.Level);
-            long reqStamina = GetRequiredStaminaForLevelUp(_currentHero.Level);
+            long reqWood = GetRequiredWoodForLevelUp(_currentHero.Level);
+            long reqStone = GetRequiredStoneForLevelUp(_currentHero.Level);
 
-            string goldColor = GameManager.Instance.CurrentPlayer != null && GameManager.Instance.CurrentPlayer.Gold >= reqGold ? "#2ECC71" : "#E74C3C";
-            string staminaColor = GameManager.Instance.CurrentPlayer != null && GameManager.Instance.CurrentPlayer.Stamina >= reqStamina ? "#2ECC71" : "#E74C3C";
+            long currentGold = await GetResourceCountAsync("00001");
+            long currentWood = await GetResourceCountAsync("00003");
+            long currentStone = await GetResourceCountAsync("00002");
 
-            string currentGold = GameManager.Instance.CurrentPlayer != null ? GameManager.Instance.CurrentPlayer.Gold.ToString() : "0";
-            string currentStamina = GameManager.Instance.CurrentPlayer != null ? GameManager.Instance.CurrentPlayer.Stamina.ToString() : "0";
+            string goldColor = currentGold >= reqGold ? "#2ECC71" : "#E74C3C";
+            string woodColor = currentWood >= reqWood ? "#2ECC71" : "#E74C3C";
+            string stoneColor = currentStone >= reqStone ? "#2ECC71" : "#E74C3C";
 
             txtRequiredMaterials.text = $"Cần tiêu hao:\n" +
-                                        $"- Bạc: <color={goldColor}>{currentGold}/{reqGold}</color>\n" +
-                                        $"- Linh Lực: <color={staminaColor}>{currentStamina}/{reqStamina}</color>";
+                                        $"- Vàng: <color={goldColor}>{currentGold}/{reqGold}</color>\n" +
+                                        $"- Gỗ I: <color={woodColor}>{currentWood}/{reqWood}</color>\n" +
+                                        $"- Đá I: <color={stoneColor}>{currentStone}/{reqStone}</color>";
+        }
+
+        private async System.Threading.Tasks.Task<long> GetResourceCountAsync(string itemCode)
+        {
+            try
+            {
+                var inventory = await GameClient.Network.Api.SectBuildingApi.GetInventoryAsync();
+                if (inventory != null && inventory.Items != null)
+                {
+                    foreach (var item in inventory.Items)
+                    {
+                        if (item.ItemCode == itemCode)
+                        {
+                            return item.Quantity;
+                        }
+                    }
+                }
+            }
+            catch {}
+            return 0;
         }
 
         private long GetRequiredGoldForLevelUp(int currentLevel)
         {
-            return currentLevel * 150;
+            if (currentLevel < 10) return currentLevel * 100;
+            else if (currentLevel < 20) return currentLevel * 250;
+            else if (currentLevel < 30) return currentLevel * 500;
+            else return currentLevel * 1000;
         }
 
-        private long GetRequiredStaminaForLevelUp(int currentLevel)
+        private long GetRequiredWoodForLevelUp(int currentLevel)
         {
-            return currentLevel * 5;
+            if (currentLevel < 10) return currentLevel * 10;
+            else if (currentLevel < 20) return currentLevel * 15;
+            else if (currentLevel < 30) return currentLevel * 25;
+            else return currentLevel * 50;
+        }
+
+        private long GetRequiredStoneForLevelUp(int currentLevel)
+        {
+            if (currentLevel < 10) return 0;
+            else if (currentLevel < 20) return (currentLevel - 9) * 5;
+            else if (currentLevel < 30) return (currentLevel - 9) * 10;
+            else return (currentLevel - 9) * 20;
         }
 
         private void UpdateSkillsUI()
@@ -225,12 +263,14 @@ namespace GameClient.UI
             if (_currentHero == null) return;
 
             long reqGold = GetRequiredGoldForLevelUp(_currentHero.Level);
-            long reqStamina = GetRequiredStaminaForLevelUp(_currentHero.Level);
+            long reqWood = GetRequiredWoodForLevelUp(_currentHero.Level);
+            long reqStone = GetRequiredStoneForLevelUp(_currentHero.Level);
 
-            long currentGold = GameManager.Instance.CurrentPlayer != null ? GameManager.Instance.CurrentPlayer.Gold : 0;
-            long currentStamina = GameManager.Instance.CurrentPlayer != null ? GameManager.Instance.CurrentPlayer.Stamina : 0;
+            long currentGold = await GetResourceCountAsync("00001");
+            long currentWood = await GetResourceCountAsync("00003");
+            long currentStone = await GetResourceCountAsync("00002");
 
-            if (currentGold < reqGold || currentStamina < reqStamina)
+            if (currentGold < reqGold || currentWood < reqWood || currentStone < reqStone)
             {
                 string failedTitle = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_upgrade_failed") ?? "Thất Bại";
                 UIManager.Instance.ShowMessage(failedTitle, "Không đủ tài nguyên để nâng cấp đệ tử!");

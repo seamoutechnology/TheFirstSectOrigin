@@ -241,8 +241,6 @@ namespace GameClient.UI
             // Khởi tạo mặc định số lượng cho các chỉ số và vật phẩm tài nguyên cơ bản
             currentResourceAmounts["gold"] = player != null ? (int)player.Gold : 0;
             currentResourceAmounts["qi"] = player != null ? (int)player.Diamond : 0;
-            currentResourceAmounts["00001"] = player != null ? (int)player.Gold : 0; // Vàng thỏi là 00001
-            currentResourceAmounts["00000"] = player != null ? (int)player.Diamond : 0; // Xu/Diamond là 00000
             currentResourceAmounts["stamina"] = player != null ? (int)player.Stamina : 0; // Thể Lực lưu theo key 'stamina'
             currentResourceAmounts["max_stamina"] = player != null ? (int)player.MaxStamina : 100;
             currentResourceAmounts["00002"] = 0;
@@ -266,7 +264,7 @@ namespace GameClient.UI
                             if (item == null) continue;
 
                             // Tránh việc ghi đè các chỉ số tiền tệ/thể lực chính bằng các vật phẩm ảo trùng tên trong user_items
-                            if (item.ItemCode == "stamina" || item.ItemCode == "00000" || item.ItemCode == "00001" || item.ItemCode == "gold" || item.ItemCode == "qi" || item.ItemCode == "coin")
+                            if (item.ItemCode == "stamina" || item.ItemCode == "gold" || item.ItemCode == "qi" || item.ItemCode == "coin")
                             {
                                 continue;
                             }

@@ -342,3 +342,13 @@ CREATE INDEX IF NOT EXISTS idx_player_stages_player_id ON player_stages(player_i
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.
 
+
+CREATE TABLE IF NOT EXISTS recharge_history (
+    id SERIAL PRIMARY KEY,
+    player_id BIGINT NOT NULL,
+    amount BIGINT NOT NULL,
+    diamond_reward BIGINT NOT NULL,
+    gold_reward BIGINT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);

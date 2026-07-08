@@ -1171,13 +1171,16 @@ func (r *PlayerRepository) LevelUpHero(ctx context.Context, playerID int64, hero
 		stoneCost = (currentLvl - 9) * 20
 	}
 
-	// 3. Verify player gold
-	var playerGold int64
-	err = tx.QueryRow(ctx, "SELECT gold FROM players WHERE id = $1 FOR UPDATE", playerID).Scan(&playerGold)
+	// 3. Verify player gold (from items)
+	var playerGold int32
+	err = tx.QueryRow(ctx, "SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00001' FOR UPDATE", playerID).Scan(&playerGold)
 	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, fmt.Errorf("không đủ vàng (cần %d)", goldCost)
+		}
 		return nil, err
 	}
-	if playerGold < goldCost {
+	if int64(playerGold) < goldCost {
 		return nil, fmt.Errorf("không đủ vàng (cần %d)", goldCost)
 	}
 
@@ -1211,7 +1214,7 @@ func (r *PlayerRepository) LevelUpHero(ctx context.Context, playerID int64, hero
 	}
 
 	// 5. Deduct gold
-	_, err = tx.Exec(ctx, "UPDATE players SET gold = gold - $1 WHERE id = $2", goldCost, playerID)
+	_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity - $1 WHERE player_id = $2 AND item_code = '00001'", goldCost, playerID)
 	if err != nil {
 		return nil, err
 	}
@@ -1412,21 +1415,37 @@ func (r *PlayerRepository) ProcessPvECombatResult(ctx context.Context, playerID 
 				}
 			}
 		}
+
+		// Reward gold to user_items (00001)
+		if goldDelta > 0 {
+			var exists bool
+			err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM user_items WHERE player_id = $1 AND item_code = '00001')", playerID).Scan(&exists)
+			if err != nil {
+				return nil, err
+			}
+			if exists {
+				_, err = tx.Exec(ctx, "UPDATE user_items SET quantity = quantity + $1, updated_at = NOW() WHERE player_id = $2 AND item_code = '00001'", goldDelta, playerID)
+			} else {
+				_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, '00001', $2, '[]')", playerID, goldDelta)
+			}
+			if err != nil {
+				return nil, err
+			}
+		}
 	}
 
 	// 5. Update players table
 	q := `
 		UPDATE players
 		SET stamina = $2,
-		    last_stamina_at = $5,
-		    gold = gold + $3,
-		    exp = exp + $4,
+		    last_stamina_at = $4,
+		    exp = exp + $3,
 		    updated_at = NOW()
 		WHERE id = $1
 		RETURNING id, user_id, nickname, level, exp, gold, diamond, stamina, max_stamina, last_stamina_at, power, created_at, updated_at
 	`
 	p := &Player{}
-	err = tx.QueryRow(ctx, q, playerID, stamina, goldDelta, expDelta, lastStaminaAt).Scan(
+	err = tx.QueryRow(ctx, q, playerID, stamina, expDelta, lastStaminaAt).Scan(
 		&p.ID, &p.UserID, &p.Nickname, &p.Level, &p.Exp, &p.Gold, &p.Diamond,
 		&p.Stamina, &p.MaxStamina, &p.LastStaminaAt, &p.Power, &p.CreatedAt, &p.UpdatedAt,
 	)

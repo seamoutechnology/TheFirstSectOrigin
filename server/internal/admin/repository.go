@@ -336,10 +336,19 @@ func (r *adminRepo) AddUserItem(zoneID int, userID int64, itemCode string, quant
 	
 	if err == nil {
 		_, err = db.Exec("UPDATE user_items SET quantity = quantity + $1 WHERE id = $2", quantity, id)
-		return err
+	} else {
+	    _, err = db.Exec("INSERT INTO user_items (player_id, item_code, quantity) VALUES ($1, $2, $3)", playerID, itemCode, quantity)
+    }
+
+	// Đồng bộ cập nhật tiền tệ trực tiếp vào bảng players
+	if itemCode == "00001" || itemCode == "gold" {
+		db.Exec("UPDATE players SET gold = gold + $1 WHERE id = $2", quantity, playerID)
+	} else if itemCode == "00000" || itemCode == "diamond" || itemCode == "qi" {
+		db.Exec("UPDATE players SET diamond = diamond + $1 WHERE id = $2", quantity, playerID)
+	} else if itemCode == "stamina" {
+		db.Exec("UPDATE players SET stamina = stamina + $1 WHERE id = $2", quantity, playerID)
 	}
-	
-	_, err = db.Exec("INSERT INTO user_items (player_id, item_code, quantity) VALUES ($1, $2, $3)", playerID, itemCode, quantity)
+
 	return err
 }
 
@@ -754,12 +763,8 @@ func (r *adminRepo) RedeemGiftCode(zoneID int, playerID int64, code string) (str
 		return "", err
 	}
 
-	// 5. Cộng tài nguyên (Vàng, Qi/Kim Cương) cho người chơi
+	// 5. Cộng tài nguyên (Vàng, Qi/Kim Cương) cho người chơi bằng Item
 	if giftCode.RewardGold > 0 || giftCode.RewardDiamond > 0 {
-		_, err = tx.Exec("UPDATE players SET gold = gold + $1, diamond = diamond + $2, updated_at = NOW() WHERE id = $3", giftCode.RewardGold, giftCode.RewardDiamond, playerID)
-		if err != nil {
-			return "", err
-		}
 
 		if giftCode.RewardGold > 0 {
 			var hasGoldItem bool
@@ -860,11 +865,7 @@ func (r *adminRepo) RechargePlayer(zoneID int, playerID int64, amount int64) (in
 		return 0, 0, err
 	}
 
-	// 2. Cộng tiền vào bảng players
-	_, err = tx.Exec("UPDATE players SET gold = gold + $1, diamond = diamond + $2, updated_at = NOW() WHERE id = $3", goldReward, diamondReward, playerID)
-	if err != nil {
-		return 0, 0, err
-	}
+	// 2. Không cộng tiền vào bảng players nữa (đã chuyển sang Item)
 
 	// Đồng bộ vào user_items
 	// Vàng thỏi: 00001
@@ -897,12 +898,10 @@ func (r *adminRepo) RechargePlayer(zoneID int, playerID int64, amount int64) (in
 		return 0, 0, err
 	}
 
-	// 3. Lấy chỉ số mới
+	// 3. Lấy chỉ số mới từ túi đồ
 	var newGold, newDiamond int64
-	err = tx.QueryRow("SELECT gold, diamond FROM players WHERE id = $1", playerID).Scan(&newGold, &newDiamond)
-	if err != nil {
-		return 0, 0, err
-	}
+	tx.QueryRow("SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00001'", playerID).Scan(&newGold)
+	tx.QueryRow("SELECT quantity FROM user_items WHERE player_id = $1 AND item_code = '00000'", playerID).Scan(&newDiamond)
 
 	err = tx.Commit()
 	if err != nil {
