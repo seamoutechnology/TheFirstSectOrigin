@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+import "player.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message Building {
+  string building_code = 1;
+  string name = 2;
+  int32 level = 3;
+  int64 upgrade_end_at = 4;
+  int64 last_collect_at = 5;
+  int64 pending_gold = 6;
+  int32 max_level = 7;
+  int64 instance_id = 8;
+}
+
+message AlignmentInfo {
+  int32 current_alignment = 1;
+  int32 karma_points = 2;
+  string title = 3;
+}
+
+message SectInfo {
+  BaseResponse base = 1;
+  string sect_name = 2;
+  repeated Building buildings = 3;
+  AlignmentInfo alignment = 4;
+}
+
+// --- Requests ---
+message UpgradeBuildingRequest {
+  string building_code = 1;
+  int64 instance_id = 2;
+}
+
+message CollectResourcesRequest {
+  string building_code = 1; // Thêm mã công trình
+  int64 instance_id = 2;
+}
+
+message SaveAdminMapRequest {
+  string map_json_data = 1;
+}
+
+message GetPlayerMapRequest {
+  // Empty, determined by jwt
+}
+
+// --- Responses ---
+
+message GetBaseResponse {
+  BaseResponse base = 1;
+  repeated Building buildings = 2; // C# đang tìm .Buildings
+}
+
+message SaveAdminMapResponse {
+  BaseResponse base = 1;
+}
+
+message GetPlayerMapResponse {
+  BaseResponse base = 1;
+  string map_json_data = 2;
+}
+
+message UpgradeBuildingResponse {
+  BaseResponse base = 1;
+  Building building = 2;
+}
+
+message CollectResourcesResponse {
+  BaseResponse base = 1;
+  int64 gold_gained = 2;
+  PlayerProfile player = 3;
+  map<string, int64> resources = 4;
+}
+
+message SavePlayerMapRequest {
+  string map_json_data = 1;
+}
+
+message SavePlayerMapResponse {
+  BaseResponse base = 1;
+}
+
+message SpeedUpBuildingRequest {
+  string building_code = 1;
+  int64 instance_id = 2;
+}
+
+message SpeedUpBuildingResponse {
+  BaseResponse base = 1;
+  Building building = 2;
+  PlayerProfile player = 3;
+}
+

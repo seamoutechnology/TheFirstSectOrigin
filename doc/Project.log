@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.20)  25 JUN 2026 14:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.20)  1 JUL 2026 12:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
 Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count275
 \c@chapter=\count276
@@ -56,12 +56,7 @@ Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line
  370.
-)))
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 3.
-
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/vntex\vietnam.sty
+))) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/vntex\vietnam.sty
 Package: vietnam 2009/07/12 v1.3 support for Vietnamese
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
@@ -662,17 +657,51 @@ Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 \Verbatim@Infile=\read3
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
+)
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count313
+)
+\MT@toks=\toks38
+\MT@tempbox=\box71
+\MT@count=\count314
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
+LaTeX Info: Redefining \leftprotrusion on input line 1085.
+\MT@prot@toks=\toks39
+LaTeX Info: Redefining \rightprotrusion on input line 1104.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen268
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count315
+
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdf
+tex.def
+File: microtype-pdftex.def 2026/03/01 v3.2d Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 944.
+LaTeX Info: Redefining \lslig on input line 944.
+\MT@outer@space=\skip55
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks38
-\thm@bodyfont=\toks39
-\thm@headfont=\toks40
-\thm@notefont=\toks41
-\thm@headpunct=\toks42
-\thm@preskip=\skip55
-\thm@postskip=\skip56
-\thm@headsep=\skip57
-\dth@everypar=\toks43
+\thm@style=\toks40
+\thm@bodyfont=\toks41
+\thm@headfont=\toks42
+\thm@notefont=\toks43
+\thm@headpunct=\toks44
+\thm@preskip=\skip56
+\thm@postskip=\skip57
+\thm@headsep=\skip58
+\dth@everypar=\toks45
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -682,7 +711,7 @@ LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
-\@mathmargin=\skip58
+\@mathmargin=\skip59
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
@@ -690,61 +719,61 @@ Package: amstext 2024/11/17 v2.01 AMS text
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks44
-\ex@=\dimen268
+\@emptytoks=\toks46
+\ex@=\dimen269
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen269
+\pmbraise@=\dimen270
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count313
+\inf@bad=\count316
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count314
-\leftroot@=\count315
+\uproot@=\count317
+\leftroot@=\count318
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count316
-\DOTSCASE@=\count317
+\classnum@=\count319
+\DOTSCASE@=\count320
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box71
-\strutbox@=\box72
+\Mathstrutbox@=\box72
+\strutbox@=\box73
 LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen270
+\big@size=\dimen271
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count318
+\macc@depth=\count321
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count319
+\c@MaxMatrixCols=\count322
 \dotsspace@=\muskip17
-\c@parentequation=\count320
-\dspbrk@lvl=\count321
-\tag@help=\toks45
-\row@=\count322
-\column@=\count323
-\maxfields@=\count324
-\andhelp@=\toks46
-\eqnshift@=\dimen271
-\alignsep@=\dimen272
-\tagshift@=\dimen273
-\tagwidth@=\dimen274
-\totwidth@=\dimen275
-\lineht@=\dimen276
-\@envbody=\toks47
-\multlinegap=\skip59
-\multlinetaggap=\skip60
-\mathdisplay@stack=\toks48
+\c@parentequation=\count323
+\dspbrk@lvl=\count324
+\tag@help=\toks47
+\row@=\count325
+\column@=\count326
+\maxfields@=\count327
+\andhelp@=\toks48
+\eqnshift@=\dimen272
+\alignsep@=\dimen273
+\tagshift@=\dimen274
+\tagwidth@=\dimen275
+\totwidth@=\dimen276
+\lineht@=\dimen277
+\@envbody=\toks49
+\multlinegap=\skip60
+\multlinetaggap=\skip61
+\mathdisplay@stack=\toks50
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
@@ -763,22 +792,22 @@ Package: times 2020/03/25 PSNFSS-v9.3 (SPQR)
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
-\col@sep=\dimen277
-\ar@mcellbox=\box73
-\extrarowheight=\dimen278
-\NC@list=\toks49
-\extratabsurround=\skip61
-\backup@length=\skip62
-\ar@cellbox=\box74
+\col@sep=\dimen278
+\ar@mcellbox=\box74
+\extrarowheight=\dimen279
+\NC@list=\toks51
+\extratabsurround=\skip62
+\backup@length=\skip63
+\ar@cellbox=\box75
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
-\labelindent=\skip63
-\enit@outerparindent=\dimen279
-\enit@toks=\toks50
-\enit@inbox=\box75
-\enit@count@id=\count325
-\enitdp@description=\count326
+\labelindent=\skip64
+\enit@outerparindent=\dimen280
+\enit@toks=\toks52
+\enit@inbox=\box76
+\enit@count@id=\count328
+\enitdp@description=\count329
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/subfiles\subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
@@ -788,19 +817,19 @@ Package: import 2020/04/01  v 6.2
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
-\ttl@box=\box76
-\beforetitleunit=\skip64
-\aftertitleunit=\skip65
-\ttl@plus=\dimen280
-\ttl@minus=\dimen281
-\ttl@toksa=\toks51
-\titlewidth=\dimen282
-\titlewidthlast=\dimen283
-\titlewidthfirst=\dimen284
+\ttl@box=\box77
+\beforetitleunit=\skip65
+\aftertitleunit=\skip66
+\ttl@plus=\dimen281
+\ttl@minus=\dimen282
+\ttl@toksa=\toks53
+\titlewidth=\dimen283
+\titlewidthlast=\dimen284
+\titlewidthfirst=\dimen285
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titletoc.sty
 Package: titletoc 2025/01/04 v2.17 TOC entries
-\ttl@leftsep=\dimen285
+\ttl@leftsep=\dimen286
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/chngcntr\chngcntr.sty
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
@@ -822,143 +851,143 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpage.sty
 Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
-\AP@output=\toks52
-\AP@partial=\box77
-\AP@footins=\box78
+\AP@output=\toks54
+\AP@partial=\box78
+\AP@footins=\box79
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e
 .sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count327
-\algocf@hangindent=\skip66
+\c@AlgoLine=\count330
+\algocf@hangindent=\skip67
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count328
+\c@checkoddpage=\count331
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip67
-\skiplinenumber=\skip68
-\skiprule=\skip69
-\skiphlne=\skip70
-\skiptext=\skip71
-\skiplength=\skip72
-\algomargin=\skip73
-\skipalgocfslide=\skip74
-\algowidth=\dimen286
-\inoutsize=\dimen287
-\inoutindent=\dimen288
-\interspacetitleruled=\dimen289
-\interspacealgoruled=\dimen290
-\interspacetitleboxruled=\dimen291
-\algocf@ruledwidth=\skip75
-\algocf@inoutbox=\box79
-\algocf@inputbox=\box80
-\AlCapSkip=\skip76
-\AlCapHSkip=\skip77
-\algoskipindent=\skip78
-\algocf@nlbox=\box81
-\algocf@hangingbox=\box82
-\algocf@untilbox=\box83
-\algocf@skipuntil=\skip79
-\algocf@capbox=\box84
-\algocf@lcaptionbox=\skip80
-\algoheightruledefault=\skip81
-\algoheightrule=\skip82
-\algotitleheightruledefault=\skip83
-\algotitleheightrule=\skip84
-\c@algocfline=\count329
-\c@algocfproc=\count330
-\c@algocf=\count331
-\algocf@algoframe=\box85
-\algocf@algobox=\box86
+\skiptotal=\skip68
+\skiplinenumber=\skip69
+\skiprule=\skip70
+\skiphlne=\skip71
+\skiptext=\skip72
+\skiplength=\skip73
+\algomargin=\skip74
+\skipalgocfslide=\skip75
+\algowidth=\dimen287
+\inoutsize=\dimen288
+\inoutindent=\dimen289
+\interspacetitleruled=\dimen290
+\interspacealgoruled=\dimen291
+\interspacetitleboxruled=\dimen292
+\algocf@ruledwidth=\skip76
+\algocf@inoutbox=\box80
+\algocf@inputbox=\box81
+\AlCapSkip=\skip77
+\AlCapHSkip=\skip78
+\algoskipindent=\skip79
+\algocf@nlbox=\box82
+\algocf@hangingbox=\box83
+\algocf@untilbox=\box84
+\algocf@skipuntil=\skip80
+\algocf@capbox=\box85
+\algocf@lcaptionbox=\skip81
+\algoheightruledefault=\skip82
+\algoheightrule=\skip83
+\algotitleheightruledefault=\skip84
+\algotitleheightrule=\skip85
+\c@algocfline=\count332
+\c@algocfproc=\count333
+\c@algocf=\count334
+\algocf@algoframe=\box86
+\algocf@algobox=\box87
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/capt-of\capt-of.sty
 Package: capt-of 2009/12/29 v0.2 standard captions outside of floats
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip85
-\multirow@cntb=\count332
-\multirow@dima=\skip86
-\bigstrutjot=\dimen292
+\multirow@colwidth=\skip86
+\multirow@cntb=\count335
+\multirow@dima=\skip87
+\bigstrutjot=\dimen293
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip87
-\f@nch@offset@elh=\skip88
-\f@nch@offset@erh=\skip89
-\f@nch@offset@olh=\skip90
-\f@nch@offset@orh=\skip91
-\f@nch@offset@elf=\skip92
-\f@nch@offset@erf=\skip93
-\f@nch@offset@olf=\skip94
-\f@nch@offset@orf=\skip95
-\f@nch@height=\skip96
-\f@nch@footalignment=\skip97
-\f@nch@widthL=\skip98
-\f@nch@widthC=\skip99
-\f@nch@widthR=\skip100
-\@temptokenb=\toks53
+\f@nch@headwidth=\skip88
+\f@nch@offset@elh=\skip89
+\f@nch@offset@erh=\skip90
+\f@nch@offset@olh=\skip91
+\f@nch@offset@orh=\skip92
+\f@nch@offset@elf=\skip93
+\f@nch@offset@erf=\skip94
+\f@nch@offset@olf=\skip95
+\f@nch@offset@orf=\skip96
+\f@nch@height=\skip97
+\f@nch@footalignment=\skip98
+\f@nch@widthL=\skip99
+\f@nch@widthC=\skip100
+\f@nch@widthR=\skip101
+\@temptokenb=\toks55
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/appendix\appendix.sty
 Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count333
-\c@@ppsavesec=\count334
-\c@@ppsaveapp=\count335
+\c@@pps=\count336
+\c@@ppsavesec=\count337
+\c@@ppsaveapp=\count338
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen293
-\captionmargin=\dimen294
-\caption@leftmargin=\dimen295
-\caption@rightmargin=\dimen296
-\caption@width=\dimen297
-\caption@indent=\dimen298
-\caption@parindent=\dimen299
-\caption@hangindent=\dimen300
+\caption@tempdima=\dimen294
+\captionmargin=\dimen295
+\caption@leftmargin=\dimen296
+\caption@rightmargin=\dimen297
+\caption@width=\dimen298
+\caption@indent=\dimen299
+\caption@parindent=\dimen300
+\caption@hangindent=\dimen301
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count336
-\c@continuedfloat=\count337
+\c@caption@flags=\count339
+\c@continuedfloat=\count340
 Package caption Info: longtable package is loaded.
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: scrextend package is loaded.
-\caption@addmargin@hsize=\dimen301
-\caption@addmargin@linewidth=\dimen302
+\caption@addmargin@hsize=\dimen302
+\caption@addmargin@linewidth=\dimen303
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count338
-\lst@gtempboxa=\box87
-\lst@token=\toks54
-\lst@length=\count339
-\lst@currlwidth=\dimen303
-\lst@column=\count340
-\lst@pos=\count341
-\lst@lostspace=\dimen304
-\lst@width=\dimen305
-\lst@newlines=\count342
-\lst@lineno=\count343
-\lst@maxwidth=\dimen306
+\lst@mode=\count341
+\lst@gtempboxa=\box88
+\lst@token=\toks56
+\lst@length=\count342
+\lst@currlwidth=\dimen304
+\lst@column=\count343
+\lst@pos=\count344
+\lst@lostspace=\dimen305
+\lst@width=\dimen306
+\lst@newlines=\count345
+\lst@lineno=\count346
+\lst@maxwidth=\dimen307
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
 File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-\c@lstnumber=\count344
-\lst@skipnumbers=\count345
-\lst@framebox=\box88
+\c@lstnumber=\count347
+\lst@skipnumbers=\count348
+\lst@framebox=\box89
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2025/11/14 1.11b listings configuration
@@ -972,18 +1001,18 @@ Package: listings 2025/11/14 1.11b (Carsten Heinz)
     so I'm assuming it got fixed.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count346
-\float@exts=\toks55
-\float@box=\box89
-\@float@everytoks=\toks56
-\@floatcapt=\box90
+\c@float@type=\count349
+\float@exts=\toks57
+\float@box=\box90
+\@float@everytoks=\toks58
+\@floatcapt=\box91
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count347
+\c@subfigure=\count350
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count348
+\c@subtable=\count351
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
 Package: xurl 2022/01/09 v 0.10 modify URL breaks
 
@@ -1000,22 +1029,18 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
-\XKV@toks=\toks57
-\XKV@tempa@toks=\toks58
+\XKV@toks=\toks59
+\XKV@tempa@toks=\toks60
 )
-\XKV@depth=\count349
+\XKV@depth=\count352
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/mfirstuc\mfirstuc.sty
 Package: mfirstuc 2025/04/03 v2.09 (NLCT)
-
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
-Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count350
+\@glsmfirst=\toks61
+\@glsmrest=\toks62
 )
-\@glsmfirst=\toks59
-\@glsmrest=\toks60
-) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/xfor\xfor.sty
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/xfor\xfor.sty
 Package: xfor 2009/02/05 v1.05 (NLCT)
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-base.
@@ -1027,56 +1052,56 @@ Package: tracklang 2026/05/24 v1.6.8 (NLCT) Track Languages
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/tracklang\tracklang.t
 ex))
-\l__datatool_tmpa_int=\count351
-\l__datatool_tmpb_int=\count352
-\l__datatool_tmpc_int=\count353
-\l__datatool_tmpd_int=\count354
-\l__datatool_count_int=\count355
-\l__datatool_tmp_datatype_int=\count356
-\l__datatool_tmpa_dim=\dimen307
-\l__datatool_tmpb_dim=\dimen308
+\l__datatool_tmpa_int=\count353
+\l__datatool_tmpb_int=\count354
+\l__datatool_tmpc_int=\count355
+\l__datatool_tmpd_int=\count356
+\l__datatool_count_int=\count357
+\l__datatool_tmp_datatype_int=\count358
+\l__datatool_tmpa_dim=\dimen308
+\l__datatool_tmpb_dim=\dimen309
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-l3fp.
 def
 File: datatool-l3fp.def 2025/12/04 v3.4.3 (NLCT)
 )
-\@dtl@toks=\toks61
-\@dtl@tmpcount=\count357
-\dtl@tmplength=\skip101
-\l__datatool_measure_box=\box91
-\dtl@sortresult=\count358
+\@dtl@toks=\toks63
+\@dtl@tmpcount=\count359
+\dtl@tmplength=\skip102
+\l__datatool_measure_box=\box92
+\dtl@sortresult=\count360
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-utf8.
 ldf
 File: datatool-utf8.ldf 2025/12/04 v3.4.3 (NLCT)
 )
-\@dtl@datatype=\count359
-\c_datatool_unknown_int=\count360
-\l__datatool_year_int=\count361
-\l__datatool_month_int=\count362
-\l__datatool_day_int=\count363
-\l__datatool_hour_int=\count364
-\l__datatool_minute_int=\count365
-\l__datatool_second_int=\count366
-\l__datatool_tzhour_int=\count367
-\l__datatool_tzminute_int=\count368
-\l__datatool_julian_int=\count369
-\l__datatool_local_julian_int=\count370
-\l__datatool_prefix_int=\count371
-\l__datatool_suffix_int=\count372
-\@dtl@foreach@level=\count373
-\dtl@codeA=\count374
-\dtl@codeB=\count375
+\@dtl@datatype=\count361
+\c_datatool_unknown_int=\count362
+\l__datatool_year_int=\count363
+\l__datatool_month_int=\count364
+\l__datatool_day_int=\count365
+\l__datatool_hour_int=\count366
+\l__datatool_minute_int=\count367
+\l__datatool_second_int=\count368
+\l__datatool_tzhour_int=\count369
+\l__datatool_tzminute_int=\count370
+\l__datatool_julian_int=\count371
+\l__datatool_local_julian_int=\count372
+\l__datatool_prefix_int=\count373
+\l__datatool_suffix_int=\count374
+\@dtl@foreach@level=\count375
+\dtl@codeA=\count376
+\dtl@codeB=\count377
 )
-\gls@level=\count376
-\@gls@tmpb=\toks62
-\gls@tmplen=\skip102
-\l__glossaries_tmpa_dim=\dimen309
-\l__glossaries_tmpb_dim=\dimen310
-\glskeylisttok=\toks63
-\glslabeltok=\toks64
-\glsshorttok=\toks65
-\glslongtok=\toks66
+\gls@level=\count378
+\@gls@tmpb=\toks64
+\gls@tmplen=\skip103
+\l__glossaries_tmpa_dim=\dimen310
+\l__glossaries_tmpb_dim=\dimen311
+\glskeylisttok=\toks65
+\glslabeltok=\toks66
+\glsshorttok=\toks67
+\glslongtok=\toks68
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-hypernav.sty
@@ -1085,13 +1110,13 @@ Package: glossary-hypernav 2026/04/21 v5.1 (NLCT)
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-list.sty
 Package: glossary-list 2026/04/21 v5.1 (NLCT)
-\glslistdottedwidth=\skip103
+\glslistdottedwidth=\skip104
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-long.sty
 Package: glossary-long 2026/04/21 v5.1 (NLCT)
-\glsdescwidth=\skip104
-\glspagelistwidth=\skip105
+\glsdescwidth=\skip105
+\glspagelistwidth=\skip106
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-super.sty
@@ -1100,37 +1125,37 @@ Package: glossary-super 2026/04/21 v5.1 (NLCT)
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/supertabular\supertabul
 ar.sty
 Package: supertabular 2025/06/26 v4.2d the supertabular environment
-\c@tracingst=\count377
-\ST@wd=\dimen311
-\ST@rightskip=\skip106
-\ST@leftskip=\skip107
-\ST@parfillskip=\skip108
-\ST@pageleft=\dimen312
-\ST@headht=\dimen313
-\ST@tailht=\dimen314
-\ST@pagesofar=\dimen315
-\ST@pboxht=\dimen316
-\ST@rowht=\dimen317
-\ST@prevht=\dimen318
-\ST@toadd=\dimen319
-\ST@dimen=\dimen320
-\ST@pbox=\box92
+\c@tracingst=\count379
+\ST@wd=\dimen312
+\ST@rightskip=\skip107
+\ST@leftskip=\skip108
+\ST@parfillskip=\skip109
+\ST@pageleft=\dimen313
+\ST@headht=\dimen314
+\ST@tailht=\dimen315
+\ST@pagesofar=\dimen316
+\ST@pboxht=\dimen317
+\ST@rowht=\dimen318
+\ST@prevht=\dimen319
+\ST@toadd=\dimen320
+\ST@dimen=\dimen321
+\ST@pbox=\box93
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-tree.sty
 Package: glossary-tree 2026/04/21 v5.1 (NLCT)
-\l__glossaries_tree_max_known_level_int=\count378
-\l__glossaries_tree_offset_dim=\dimen321
-\l__glossaries_tree_namewidth_dim=\dimen322
-\l__glossaries_tree_symbolwidth_dim=\dimen323
-\l__glossaries_tree_prenamesym_width_dim=\dimen324
-\l__glossaries_tree_presubnamesym_width_dim=\dimen325
-\l__glossaries_tree_namewidth_padding_dim=\dimen326
-\l__glossaries_tree_symbolwidth_padding_dim=\dimen327
-\l__glossaries_tree_namesymbolwidth_dim=\dimen328
-\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen329
-\l__glossaries_tree_level_int=\count379
-\glstreeindent=\skip109
+\l__glossaries_tree_max_known_level_int=\count380
+\l__glossaries_tree_offset_dim=\dimen322
+\l__glossaries_tree_namewidth_dim=\dimen323
+\l__glossaries_tree_symbolwidth_dim=\dimen324
+\l__glossaries_tree_prenamesym_width_dim=\dimen325
+\l__glossaries_tree_presubnamesym_width_dim=\dimen326
+\l__glossaries_tree_namewidth_padding_dim=\dimen327
+\l__glossaries_tree_symbolwidth_padding_dim=\dimen328
+\l__glossaries_tree_namesymbolwidth_dim=\dimen329
+\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen330
+\l__glossaries_tree_level_int=\count381
+\glstreeindent=\skip110
 ))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gloss
 ary-superragged.sty
@@ -1139,43 +1164,32 @@ Package: glossary-superragged 2026/04/21 v5.1 (NLCT)
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
-Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
-
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
-Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
-Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-)
-(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
-Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-)))
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.st
 y
 Package: tocbasic 2026/02/02 v3.49.2 KOMA-Script package (handling toc-files)
-\scr@dte@tocline@numberwidth=\skip110
-\scr@dte@tocline@numbox=\box93
+\scr@dte@tocline@numberwidth=\skip111
+\scr@dte@tocline@numbox=\box94
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
-\c@blindtext=\count380
-\c@Blindtext=\count381
-\c@blind@countparstart=\count382
-\blind@countxx=\count383
-\blindtext@numBlindtext=\count384
-\blind@countyy=\count385
-\c@blindlist=\count386
-\c@blindlistlevel=\count387
-\c@blindlist@level=\count388
-\blind@listitem=\count389
-\c@blind@listcount=\count390
-\c@blind@levelcount=\count391
-\blind@mathformula=\count392
-\blind@Mathformula=\count393
-\c@blind@randomcount=\count394
-\c@blind@randommax=\count395
-\c@blind@pangramcount=\count396
-\c@blind@pangrammax=\count397
+\c@blindtext=\count382
+\c@Blindtext=\count383
+\c@blind@countparstart=\count384
+\blind@countxx=\count385
+\blindtext@numBlindtext=\count386
+\blind@countyy=\count387
+\c@blindlist=\count388
+\c@blindlistlevel=\count389
+\c@blindlist@level=\count390
+\blind@listitem=\count391
+\c@blind@listcount=\count392
+\c@blind@levelcount=\count393
+\blind@mathformula=\count394
+\blind@Mathformula=\count395
+\c@blind@randomcount=\count396
+\c@blind@randommax=\count397
+\c@blind@pangramcount=\count398
+\c@blind@pangrammax=\count399
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
 Package: biblatex 2025/07/10 v3.21 programmable bibliographies (PK/MW)
 
@@ -1188,73 +1202,82 @@ Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 ty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
+)
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count398
+\lrq@indent=\count400
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count399
-\c@listtotal=\count400
-\c@listcount=\count401
-\c@liststart=\count402
-\c@liststop=\count403
-\c@citecount=\count404
-\c@citetotal=\count405
-\c@multicitecount=\count406
-\c@multicitetotal=\count407
-\c@instcount=\count408
-\c@maxnames=\count409
-\c@minnames=\count410
-\c@maxitems=\count411
-\c@minitems=\count412
-\c@citecounter=\count413
-\c@maxcitecounter=\count414
-\c@savedcitecounter=\count415
-\c@uniquelist=\count416
-\c@uniquename=\count417
-\c@refsection=\count418
-\c@refsegment=\count419
-\c@maxextratitle=\count420
-\c@maxextratitleyear=\count421
-\c@maxextraname=\count422
-\c@maxextradate=\count423
-\c@maxextraalpha=\count424
-\c@abbrvpenalty=\count425
-\c@highnamepenalty=\count426
-\c@lownamepenalty=\count427
-\c@maxparens=\count428
-\c@parenlevel=\count429
-\blx@tempcnta=\count430
-\blx@tempcntb=\count431
-\blx@tempcntc=\count432
-\c@blx@maxsection=\count433
-\blx@maxsegment@0=\count434
-\blx@notetype=\count435
-\blx@parenlevel@text=\count436
-\blx@parenlevel@foot=\count437
-\blx@sectionciteorder@0=\count438
-\blx@sectionciteorderinternal@0=\count439
-\blx@entrysetcounter=\count440
-\blx@biblioinstance=\count441
-\labelnumberwidth=\skip111
-\labelalphawidth=\skip112
-\biblabelsep=\skip113
-\bibitemsep=\skip114
-\bibnamesep=\skip115
-\bibinitsep=\skip116
-\bibparsep=\skip117
-\bibhang=\skip118
+\c@tabx@nest=\count401
+\c@listtotal=\count402
+\c@listcount=\count403
+\c@liststart=\count404
+\c@liststop=\count405
+\c@citecount=\count406
+\c@citetotal=\count407
+\c@multicitecount=\count408
+\c@multicitetotal=\count409
+\c@instcount=\count410
+\c@maxnames=\count411
+\c@minnames=\count412
+\c@maxitems=\count413
+\c@minitems=\count414
+\c@citecounter=\count415
+\c@maxcitecounter=\count416
+\c@savedcitecounter=\count417
+\c@uniquelist=\count418
+\c@uniquename=\count419
+\c@refsection=\count420
+\c@refsegment=\count421
+\c@maxextratitle=\count422
+\c@maxextratitleyear=\count423
+\c@maxextraname=\count424
+\c@maxextradate=\count425
+\c@maxextraalpha=\count426
+\c@abbrvpenalty=\count427
+\c@highnamepenalty=\count428
+\c@lownamepenalty=\count429
+\c@maxparens=\count430
+\c@parenlevel=\count431
+\blx@tempcnta=\count432
+\blx@tempcntb=\count433
+\blx@tempcntc=\count434
+\c@blx@maxsection=\count435
+\blx@maxsegment@0=\count436
+\blx@notetype=\count437
+\blx@parenlevel@text=\count438
+\blx@parenlevel@foot=\count439
+\blx@sectionciteorder@0=\count440
+\blx@sectionciteorderinternal@0=\count441
+\blx@entrysetcounter=\count442
+\blx@biblioinstance=\count443
+\labelnumberwidth=\skip112
+\labelalphawidth=\skip113
+\biblabelsep=\skip114
+\bibitemsep=\skip115
+\bibnamesep=\skip116
+\bibinitsep=\skip117
+\bibparsep=\skip118
+\bibhang=\skip119
 \blx@bcfin=\read4
 \blx@bcfout=\write5
 \blx@langwohyphens=\language79
-\c@mincomprange=\count442
-\c@maxcomprange=\count443
-\c@mincompwidth=\count444
+\c@mincomprange=\count444
+\c@maxcomprange=\count445
+\c@mincompwidth=\count446
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -1265,88 +1288,88 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count445
-\c@savedafterword=\count446
-\c@annotator=\count447
-\c@savedannotator=\count448
-\c@author=\count449
-\c@savedauthor=\count450
-\c@bookauthor=\count451
-\c@savedbookauthor=\count452
-\c@commentator=\count453
-\c@savedcommentator=\count454
-\c@editor=\count455
-\c@savededitor=\count456
-\c@editora=\count457
-\c@savededitora=\count458
-\c@editorb=\count459
-\c@savededitorb=\count460
-\c@editorc=\count461
-\c@savededitorc=\count462
-\c@foreword=\count463
-\c@savedforeword=\count464
-\c@holder=\count465
-\c@savedholder=\count466
-\c@introduction=\count467
-\c@savedintroduction=\count468
-\c@namea=\count469
-\c@savednamea=\count470
-\c@nameb=\count471
-\c@savednameb=\count472
-\c@namec=\count473
-\c@savednamec=\count474
-\c@translator=\count475
-\c@savedtranslator=\count476
-\c@shortauthor=\count477
-\c@savedshortauthor=\count478
-\c@shorteditor=\count479
-\c@savedshorteditor=\count480
-\c@labelname=\count481
-\c@savedlabelname=\count482
-\c@institution=\count483
-\c@savedinstitution=\count484
-\c@lista=\count485
-\c@savedlista=\count486
-\c@listb=\count487
-\c@savedlistb=\count488
-\c@listc=\count489
-\c@savedlistc=\count490
-\c@listd=\count491
-\c@savedlistd=\count492
-\c@liste=\count493
-\c@savedliste=\count494
-\c@listf=\count495
-\c@savedlistf=\count496
-\c@location=\count497
-\c@savedlocation=\count498
-\c@organization=\count499
-\c@savedorganization=\count500
-\c@origlocation=\count501
-\c@savedoriglocation=\count502
-\c@origpublisher=\count503
-\c@savedorigpublisher=\count504
-\c@publisher=\count505
-\c@savedpublisher=\count506
-\c@language=\count507
-\c@savedlanguage=\count508
-\c@origlanguage=\count509
-\c@savedoriglanguage=\count510
-\c@pageref=\count511
-\c@savedpageref=\count512
-\shorthandwidth=\skip119
-\shortjournalwidth=\skip120
-\shortserieswidth=\skip121
-\shorttitlewidth=\skip122
-\shortauthorwidth=\skip123
-\shorteditorwidth=\skip124
-\locallabelnumberwidth=\skip125
-\locallabelalphawidth=\skip126
-\localshorthandwidth=\skip127
-\localshortjournalwidth=\skip128
-\localshortserieswidth=\skip129
-\localshorttitlewidth=\skip130
-\localshortauthorwidth=\skip131
-\localshorteditorwidth=\skip132
+\c@afterword=\count447
+\c@savedafterword=\count448
+\c@annotator=\count449
+\c@savedannotator=\count450
+\c@author=\count451
+\c@savedauthor=\count452
+\c@bookauthor=\count453
+\c@savedbookauthor=\count454
+\c@commentator=\count455
+\c@savedcommentator=\count456
+\c@editor=\count457
+\c@savededitor=\count458
+\c@editora=\count459
+\c@savededitora=\count460
+\c@editorb=\count461
+\c@savededitorb=\count462
+\c@editorc=\count463
+\c@savededitorc=\count464
+\c@foreword=\count465
+\c@savedforeword=\count466
+\c@holder=\count467
+\c@savedholder=\count468
+\c@introduction=\count469
+\c@savedintroduction=\count470
+\c@namea=\count471
+\c@savednamea=\count472
+\c@nameb=\count473
+\c@savednameb=\count474
+\c@namec=\count475
+\c@savednamec=\count476
+\c@translator=\count477
+\c@savedtranslator=\count478
+\c@shortauthor=\count479
+\c@savedshortauthor=\count480
+\c@shorteditor=\count481
+\c@savedshorteditor=\count482
+\c@labelname=\count483
+\c@savedlabelname=\count484
+\c@institution=\count485
+\c@savedinstitution=\count486
+\c@lista=\count487
+\c@savedlista=\count488
+\c@listb=\count489
+\c@savedlistb=\count490
+\c@listc=\count491
+\c@savedlistc=\count492
+\c@listd=\count493
+\c@savedlistd=\count494
+\c@liste=\count495
+\c@savedliste=\count496
+\c@listf=\count497
+\c@savedlistf=\count498
+\c@location=\count499
+\c@savedlocation=\count500
+\c@organization=\count501
+\c@savedorganization=\count502
+\c@origlocation=\count503
+\c@savedoriglocation=\count504
+\c@origpublisher=\count505
+\c@savedorigpublisher=\count506
+\c@publisher=\count507
+\c@savedpublisher=\count508
+\c@language=\count509
+\c@savedlanguage=\count510
+\c@origlanguage=\count511
+\c@savedoriglanguage=\count512
+\c@pageref=\count513
+\c@savedpageref=\count514
+\shorthandwidth=\skip120
+\shortjournalwidth=\skip121
+\shortserieswidth=\skip122
+\shorttitlewidth=\skip123
+\shortauthorwidth=\skip124
+\shorteditorwidth=\skip125
+\locallabelnumberwidth=\skip126
+\locallabelalphawidth=\skip127
+\localshorthandwidth=\skip128
+\localshortjournalwidth=\skip129
+\localshortserieswidth=\skip130
+\localshorttitlewidth=\skip131
+\localshortauthorwidth=\skip132
+\localshorteditorwidth=\skip133
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -1367,19 +1390,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
 File: biblatex.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
-\c@textcitecount=\count513
-\c@textcitetotal=\count514
-\c@textcitemaxnames=\count515
-\c@biburlbigbreakpenalty=\count516
-\c@biburlbreakpenalty=\count517
-\c@biburlnumpenalty=\count518
-\c@biburlucpenalty=\count519
-\c@biburllcpenalty=\count520
+\c@textcitecount=\count515
+\c@textcitetotal=\count516
+\c@textcitemaxnames=\count517
+\c@biburlbigbreakpenalty=\count518
+\c@biburlbreakpenalty=\count519
+\c@biburlnumpenalty=\count520
+\c@biburlucpenalty=\count521
+\c@biburllcpenalty=\count522
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count521
+\c@smartand=\count523
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -1404,8 +1427,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.b
 bx
 File: standard.bbx 2025/07/10 v3.21 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count522
-\c@bbx:relatedtotal=\count523
+\c@bbx:relatedcount=\count524
+\c@bbx:relatedtotal=\count525
 ))))
 Package biblatex Info: Trying to load citation style 'ieee'...
 Package biblatex Info: ... file 'ieee.cbx' found.
@@ -1444,7 +1467,7 @@ Package: expl3 2025-12-24 L3 programming layer (loader)
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count524
+\l__color_backend_stack_int=\count526
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2025-12-24 L3 programming layer (loader) 
@@ -1461,7 +1484,7 @@ Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
 ))
 
 LaTeX Warning: \include should only be used after \begin{document} on input lin
-e 65.
+e 66.
 
 No file lstlisting.
 (Abbreviation.tex)
@@ -1487,16 +1510,16 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count525
+\c@section@level=\count527
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.s
 ty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
-\@linkdim=\dimen330
-\Hy@linkcounter=\count526
-\Hy@pagecounter=\count527
+\@linkdim=\dimen331
+\Hy@linkcounter=\count528
+\Hy@pagecounter=\count529
  (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -1504,7 +1527,7 @@ Now handling font encoding PD1 ...
 ) (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count528
+\Hy@SavedSpaceFactor=\count530
  (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -1517,9 +1540,9 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count529
+\c@Hy@tempcnt=\count531
 LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen331
+\XeTeXLinkMargin=\dimen332
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -1529,9 +1552,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count530
-\Field@Width=\dimen332
-\Fld@charsize=\dimen333
+\Fld@menulength=\count532
+\Field@Width=\dimen333
+\Fld@charsize=\dimen334
 Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
@@ -1539,16 +1562,16 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count531
-\c@Item=\count532
-\c@Hfootnote=\count533
+\Hy@abspage=\count533
+\c@Item=\count534
+\c@Hfootnote=\count535
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count534
-\c@bookmark@seq@number=\count535
+\Fld@listcount=\count536
+\c@bookmark@seq@number=\count537
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
 echeck.sty
@@ -1561,7 +1584,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip133
+\Hy@SectionHShift=\skip134
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/hypcap\hypcap.sty
 Package: hypcap 2024-07-26 v1.13 Adjusting the anchors of captions (HO)
@@ -1570,43 +1593,43 @@ Package: hypcap 2024-07-26 v1.13 Adjusting the anchors of captions (HO)
 .sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ))
-\c@example=\count536
-\@quotelevel=\count537
-\@quotereset=\count538
-LaTeX Font Info:    Trying to load font information for T5+ptm on input line 16
-9.
+\c@example=\count538
+\@quotelevel=\count539
+\@quotereset=\count540
+LaTeX Font Info:    Trying to load font information for T5+ptm on input line 17
+0.
  (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5ptm.fd
 File: t5utm.fd 2005/08/24 Fontinst v1.929 font definitions for T5/ptm.
 )
 
 LaTeX Warning: Unused global option(s):
-    [13pt,3p].
+    [3p].
 
 (Project.aux
-\g__glossaries_gls_ref_acronym_int=\count539
+\g__glossaries_gls_ref_acronym_int=\count541
 )
 \openout1 = `Project.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 170.
+LaTeX Font Info:    ... okay on input line 170.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1615,30 +1638,30 @@ LaTeX Font Info:    ... okay on input line 169.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
-* h-part:(L,W,R)=(99.58464pt, 426.79135pt, 71.13188pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 455.24411pt, 56.9055pt)
 * v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=426.79135pt
+* \textwidth=455.24411pt
 * \textheight=731.23584pt
-* \oddsidemargin=27.31465pt
-* \evensidemargin=-1.1381pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
 * \topmargin=-52.36449pt
 * \headheight=10.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=111.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=11.69997pt plus 5.19942pt minus 2.60054pt
+* \skip\footins=10.79997pt plus 4.79947pt minus 2.4005pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
+* \@twosidefalse
+* \@mparswitchfalse
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
@@ -1646,17 +1669,17 @@ LaTeX Font Info:    ... okay on input line 169.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count540
-\scratchdimen=\dimen334
-\scratchbox=\box94
-\nofMPsegments=\count541
-\nofMParguments=\count542
-\everyMPshowfont=\toks67
-\MPscratchCnt=\count543
-\MPscratchDim=\dimen335
-\MPnumerator=\count544
-\makeMPintoPDFobject=\count545
-\everyMPtoPDFconversion=\toks68
+\scratchcounter=\count542
+\scratchdimen=\dimen335
+\scratchbox=\box95
+\nofMPsegments=\count543
+\nofMParguments=\count544
+\everyMPshowfont=\toks69
+\MPscratchCnt=\count545
+\MPscratchDim=\dimen336
+\MPnumerator=\count546
+\makeMPintoPDFobject=\count547
+\everyMPtoPDFconversion=\toks70
 )
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -1676,6 +1699,32 @@ G,.JBIG2,.JB2,.eps]
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
+LaTeX Info: Redefining \microtypecontext on input line 170.
+Package microtype Info: Applying patch `item' on input line 170.
+Package microtype Info: Applying patch `toc' on input line 170.
+Package microtype Info: Applying patch `eqnum' on input line 170.
+Package microtype Info: Applying patch `footnote' on input line 170.
+Package microtype Info: Applying patch `verbatim' on input line 170.
+LaTeX Info: Redefining \microtypesetup on input line 170.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg
+File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
+)
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/12'. Switching off
+(microtype)                protrusion for this font on input line 170.
+
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1683,9 +1732,9 @@ Package caption Info: hypcap package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count546
+\c@lstlisting=\count548
 Package tocbasic Info: omitting babel extension for `lol'
-(tocbasic)             because of missing \bbl@set@language on input line 169.
+(tocbasic)             because of missing \bbl@set@language on input line 170.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -1704,53 +1753,57 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Project.bbl' found.
  (Project.bbl)
-Package biblatex Info: Reference section=0 on input line 169.
-Package biblatex Info: Reference segment=0 on input line 169.
-Package hyperref Info: Link coloring OFF on input line 169.
+Package biblatex Info: Reference section=0 on input line 170.
+Package biblatex Info: Reference segment=0 on input line 170.
+Package hyperref Info: Link coloring OFF on input line 170.
  (Project.out) (Project.out)
 \@outlinefile=\write6
 \openout6 = `Project.out'.
 
  (FrontCover.tex
-LaTeX Font Info:    Calculating math sizes for size <13> on input line 42.
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/12'. Switching off
+(microtype)                protrusion for this font on input line 13.
 
 
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 42.
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/14.39996'. Switching off
+(microtype)                protrusion for this font on input line 13.
 
 
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13> not available
-(Font)              size <12> substituted on input line 42.
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/24.88806'. Switching off
+(microtype)                protrusion for this font on input line 15.
 
 
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.5> not available
-(Font)              size <6> substituted on input line 42.
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/17.28003'. Switching off
+(microtype)                protrusion for this font on input line 16.
 
 
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 42.
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/14.39996'. Switching off
+(microtype)                protrusion for this font on input line 19.
 
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 42.
-
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 42
 .
+
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 42.
-
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 42.
-
 LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
 
@@ -1758,42 +1811,58 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
 [1
 
 {C:/Users/manag/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/mana
 g/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/vntex/t5.enc}])
-(BackCover.tex [2]) (Chapter/0_2_Acknowledgement.tex) [1]
-(Chapter/0_3_Abstract.tex) [2] (Project.toc
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(BackCover.tex
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.43 \newpage
+              [1]) (Chapter/0_2_Acknowledgement.tex
 
- [3
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/17.28003'. Switching off
+(microtype)                protrusion for this font on input line 5.
 
-]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/it/12'. Switching off
+(microtype)                protrusion for this font on input line 16.
 
- [5])
+) [1] (Chapter/0_3_Abstract.tex) [2] (Project.toc
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/sc/12'. Switching off
+(microtype)                protrusion for this font on input line 8.
+
+[3
+
+] [4] [5])
 \tf@toc=\write7
 \openout7 = `Project.toc'.
 
-
-[6] (Project.lof)
+ [6] (Project.lof)
 \tf@lof=\write8
 \openout8 = `Project.lof'.
 
- [7
+
+
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 228.
+
+[7
 
 
 
-] (Project.lot
-Overfull \hbox (2.02664pt too wide) in paragraph at lines 25--25
- [][] []\T5/ptm/m/n/13 B£ng []K‡ch b£n ki∫m th˚ TC-COLL-01: Thu ho§ch t†i nguy∂
-n th†nh 
- []
-
-)
+] (Project.lot)
 \tf@lot=\write9
 \openout9 = `Project.lot'.
 
@@ -1807,144 +1876,177 @@ n input line 8.
 Package glossaries Info: Preparing to sort glossary `acronym' (total number of
 (glossaries)             referenced entries: 30)
 
+
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 8.
+
 [8
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 8.
+
+[9
 
 
-]
-[10]) [11] (Chapter/0_6_Glossary.tex) [12]
+]) [10] (Chapter/0_6_Glossary.tex) [11]
+
+Package fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 252.
+
+
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 254.
+
 Ch\uhorn \ohorn ng 1.
 (Chapter/1_Introduction.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 18.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.15 
+l.18 
       [1
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-09.
 
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/10.95007'. Switching off
+(microtype)                protrusion for this font on input line 110.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/8.00006'. Switching off
+(microtype)                protrusion for this font on input line 110.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/8.00006'. Switching off
+(microtype)                protrusion for this font on input line 110.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/6'. Switching off
+(microtype)                protrusion for this font on input line 110.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/10.95007'. Switching off
+(microtype)                protrusion for this font on input line 111.
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+17.
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.112         \item \textit
-                           {Gateway Server:} ƒê√≥ng vai tr√≤ l√† c·ªïng ƒë√≥...
-[2{C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[2{C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}])
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[3])
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[4]
+[3]
 Ch\uhorn \ohorn ng 2.
 (Chapter/2_Requirement_Analysis.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 20.
+
+[4
 
 ]
 
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/10.00012'. Switching off
+(microtype)                protrusion for this font on input line 93.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/10.00012'. Switching off
+(microtype)                protrusion for this font on input line 93.
+
+
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
+
+[5]
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [6]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [7]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [9]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[10]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[10])
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[11])
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[12]
+[11]
 Ch\uhorn \ohorn ng 3.
 (Chapter/3_Theory_Technology.tex
 LaTeX Font Info:    Trying to load font information for T5+pcr on input line 14
@@ -1953,853 +2055,262 @@ LaTeX Font Info:    Trying to load font information for T5+pcr on input line 14
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5pcr.fd
 File: t5ucr.fd 2005/08/24 Fontinst v1.929 font definitions for T5/pcr.
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/pcr/m/n/12'. Switching off
+(microtype)                protrusion for this font on input line 14.
 
-]
+
 Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|\T5/ptm/b/n/13 Node.js
+[]|\T5/ptm/b/n/12 (+20) Node.js
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\T5/ptm/m/n/13 ^^^Ïn luÁng vÓi
+[]|\T5/ptm/m/n/12 (+20) ^^^Ïn luÁng vÓi
  []
 
 
-Underfull \hbox (badness 7186) in paragraph at lines 24--24
-\T5/ptm/m/n/13 h§n bi cÏ ch∏
+Underfull \hbox (badness 1048) in paragraph at lines 25--25
+[]|\T5/ptm/m/n/12 (+20) Y∏u, ngh≥n luÁng
  []
 
 
-Underfull \hbox (badness 1859) in paragraph at lines 26--26
-[]|\T5/ptm/m/n/13 Trung bºnh (ch§y
+Underfull \hbox (badness 2119) in paragraph at lines 26--26
+[]|\T5/ptm/m/n/12 (+20) Trung bºnh (ch§y
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\T5/ptm/m/n/13 Cao (tËn RAM
+[]|\T5/ptm/m/n/12 (+20) Cao (tËn RAM
  []
 
 
-Overfull \hbox (21.54718pt too wide) in paragraph at lines 21--28
- [][] 
- []
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 31.
 
+[12
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
+
+[13]
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [14]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[15]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[15])
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [16]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[17])
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[18]
 Ch\uhorn \ohorn ng 4.
 (Chapter/4_Design_Implementation.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 21.
+
+[17
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[20]
-Overfull \hbox (12.44063pt too wide) in paragraph at lines 70--71
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+<Image/ui_building_construct.png, id=660, 849.1725pt x 390.70969pt>
+File: Image/ui_building_construct.png Graphic file (type png)
+<use Image/ui_building_construct.png>
+Package pdftex.def Info: Image/ui_building_construct.png  used on input line 48
+.
+(pdftex.def)             Requested size: 386.96027pt x 178.04146pt.
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[21]
-Underfull \vbox (badness 6493) has occurred while \output is active []
-
+[18]
+<Image/ui_build_menu.png, id=673, 849.1725pt x 386.19281pt>
+File: Image/ui_build_menu.png Graphic file (type png)
+<use Image/ui_build_menu.png>
+Package pdftex.def Info: Image/ui_build_menu.png  used on input line 59.
+(pdftex.def)             Requested size: 386.96027pt x 175.98317pt.
+<Image/ui_building_info.png, id=674, 852.18375pt x 395.22656pt>
+File: Image/ui_building_info.png Graphic file (type png)
+<use Image/ui_building_info.png>
+Package pdftex.def Info: Image/ui_building_info.png  used on input line 70.
+(pdftex.def)             Requested size: 386.96027pt x 179.46652pt.
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[22]
-Underfull \hbox (badness 4060) in paragraph at lines 143--143
-[]|\T5/ptm/m/n/13 NÛt x°c nh™n chΩnh, vi∑n
- []
-
-
-Overfull \hbox (57.94678pt too wide) in paragraph at lines 139--147
- [][] 
- []
+[19 <./Image/ui_building_construct.png> <./Image/ui_build_menu.png>]
+<Image/ui_disciple_list.png, id=681, 855.195pt x 387.69844pt>
+File: Image/ui_disciple_list.png Graphic file (type png)
+<use Image/ui_disciple_list.png>
+Package pdftex.def Info: Image/ui_disciple_list.png  used on input line 83.
+(pdftex.def)             Requested size: 386.96027pt x 175.42696pt.
+<Image/ui_use_item.png, id=682, 845.40843pt x 395.97937pt>
+File: Image/ui_use_item.png Graphic file (type png)
+<use Image/ui_use_item.png>
+Package pdftex.def Info: Image/ui_use_item.png  used on input line 94.
+(pdftex.def)             Requested size: 386.96027pt x 181.2464pt.
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
+
+[20 <./Image/ui_building_info.png> <./Image/ui_disciple_list.png>]
+<Image/ui_level_select.png, id=690, 852.93657pt x 390.70969pt>
+File: Image/ui_level_select.png Graphic file (type png)
+<use Image/ui_level_select.png>
+Package pdftex.def Info: Image/ui_level_select.png  used on input line 107.
+(pdftex.def)             Requested size: 386.96027pt x 177.26047pt.
+<Image/ui_victory.png, id=691, 849.92531pt x 393.72093pt>
+File: Image/ui_victory.png Graphic file (type png)
+<use Image/ui_victory.png>
+Package pdftex.def Info: Image/ui_victory.png  used on input line 118.
+(pdftex.def)             Requested size: 386.96027pt x 179.25745pt.
+
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
+
+[21 <./Image/ui_use_item.png> <./Image/ui_level_select.png>]
+<Image/ui_defeat.png, id=699, 855.195pt x 393.72093pt>
+File: Image/ui_defeat.png Graphic file (type png)
+<use Image/ui_defeat.png>
+Package pdftex.def Info: Image/ui_defeat.png  used on input line 129.
+(pdftex.def)             Requested size: 386.96027pt x 178.15204pt.
+
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
+
+[22 <./Image/ui_victory.png> <./Image/ui_defeat.png>]
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 175--175
-[]|\T5/ptm/m/n/13 BIGINT
- []
-
-
-Overfull \hbox (11.93808pt too wide) in paragraph at lines 177--177
-[]|\T5/ptm/m/n/13 VARCHAR(32)| 
- []
-
-
-Overfull \hbox (18.93204pt too wide) in paragraph at lines 181--181
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--183
-[]|\T5/pcr/m/n/13 RemoveItem(code,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
-[]|\T5/ptm/m/n/13 BIGINT
- []
-
-
-Underfull \hbox (badness 1331) in paragraph at lines 198--199
-[]|\T5/ptm/m/n/13 M¢ ^^_‡nh danh duy nhßt cıa
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
-[]|\T5/ptm/m/n/13 BIGINT
- []
-
-
-Overfull \hbox (11.93808pt too wide) in paragraph at lines 200--200
-[]|\T5/ptm/m/n/13 VARCHAR(32)| 
- []
-
-
-Underfull \hbox (badness 3148) in paragraph at lines 200--201
-[]|\T5/ptm/m/n/13 M¢ lo§i cÊng trºnh (vΩ dˆ:
- []
-
-
-Overfull \hbox (18.93204pt too wide) in paragraph at lines 202--202
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Overfull \hbox (18.93204pt too wide) in paragraph at lines 203--203
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Overfull \hbox (22.85278pt too wide) in paragraph at lines 206--206
-[]|\T5/pcr/m/n/13 StartUpgrade(duration)| 
- []
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 220--220
-[]|\T5/ptm/m/n/13 BIGINT
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 221--221
-[]|\T5/ptm/m/n/13 BIGINT
- []
-
-
-Overfull \hbox (11.93808pt too wide) in paragraph at lines 222--222
-[]|\T5/ptm/m/n/13 VARCHAR(32)| 
- []
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [25]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [26]
-Overfull \hbox (97.8461pt too wide) in paragraph at lines 323--334
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[27]
-LaTeX Font Info:    Calculating math sizes for size <8.66673> on input line 529
-.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.33336> not available
-(Font)              size <5> substituted on input line 529.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.33336> not available
-(Font)              size <5> substituted on input line 529.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.33336> not available
-(Font)              size <5> substituted on input line 529.
-
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <4.33336> not available
-(Font)              size <5> substituted on input line 529.
-
+[27])
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
 [28]
-Underfull \hbox (badness 3690) in paragraph at lines 545--545
-[]|\T5/ptm/m/n/13 ID t¸ t´ng ^^_‡nh danh t†i
- []
-
-
-Underfull \hbox (badness 6125) in paragraph at lines 546--546
-[]|\T5/ptm/m/n/13 Unique, Not
- []
-
-
-Underfull \hbox (badness 3701) in paragraph at lines 546--546
-[]|\T5/ptm/m/n/13 T∂n ^^_´ng nh™p cıa ng˜Ìi
- []
-
-
-Overfull \hbox (4.2117pt too wide) in paragraph at lines 547--547
-[]|\T5/ptm/m/n/13 VARCHAR(128)| 
- []
-
-
-Underfull \hbox (badness 6125) in paragraph at lines 547--547
-[]|\T5/ptm/m/n/13 Unique, Not
- []
-
-
-Overfull \hbox (4.2117pt too wide) in paragraph at lines 548--548
-[]|\T5/ptm/m/n/13 VARCHAR(255)| 
- []
-
-
-Underfull \hbox (badness 1281) in paragraph at lines 548--548
-[]|\T5/ptm/m/n/13 ChuÈi b´m bcrypt cıa m™t
- []
-
-
-Underfull \hbox (badness 1342) in paragraph at lines 549--549
-[]|\T5/ptm/m/n/13 Tr§ng th°i t†i kho£n c‚ b‡
- []
-
-
-Overfull \hbox (4.70566pt too wide) in paragraph at lines 550--550
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 550--550
-[]|\T5/ptm/m/n/13 Default
- []
-
-
-Underfull \hbox (badness 1112) in paragraph at lines 550--550
-[]|\T5/ptm/m/n/13 MËc thÌi gian khi t§o t†i
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 542--552
- [][] 
- []
-
-
-Underfull \hbox (badness 6125) in paragraph at lines 564--564
-[]|\T5/ptm/m/n/13 Unique, Not
- []
-
-
-Overfull \hbox (4.70566pt too wide) in paragraph at lines 568--568
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 568--568
-[]|\T5/ptm/m/n/13 Default
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 560--571
- [][] 
- []
-
-
-Underfull \hbox (badness 1237) in paragraph at lines 582--582
-[]|\T5/ptm/m/n/13 Kh‚a chΩnh cıa b£ng cÊng
- []
-
-
-Overfull \hbox (4.70566pt too wide) in paragraph at lines 586--586
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Overfull \hbox (4.70566pt too wide) in paragraph at lines 587--587
-[]|\T5/ptm/m/n/13 TIMESTAMPTZ| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 587--587
-[]|\T5/ptm/m/n/13 Default
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 579--589
- [][] 
- []
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 602--602
-[]|\T5/ptm/m/n/13 Tham chi∏u ^^_∏n
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 597--607
- [][] 
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 615--622
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[30]
-Underfull \hbox (badness 1237) in paragraph at lines 635--635
-[]|\T5/ptm/m/n/13 Tham chi∏u ^^_∏n b£ng ban-
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 630--638
- [][] 
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 646--656
- [][] 
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 664--672
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[31]
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 680--688
- [][] 
- []
-
-
-Overfull \hbox (63.9996pt too wide) in paragraph at lines 696--704
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 720--720
-[]|\T5/ptm/b/n/13 Phi∂n
- []
-
-
-Underfull \hbox (badness 1490) in paragraph at lines 723--723
-[]|\T5/ptm/m/n/13 Unity (Unity 6
- []
-
-
-Overfull \hbox (13.64987pt too wide) in paragraph at lines 723--723
-[]|\T5/ptm/m/n/13 6000.0.0f1| 
- []
-
-
-Underfull \hbox (badness 3088) in paragraph at lines 726--726
-[]|\T5/ptm/m/n/13 Giao th˘c truy∑n
- []
-
-
-Underfull \hbox (badness 1394) in paragraph at lines 728--728
-[]|\T5/ptm/m/n/13 Th˜ viªn k∏t nËi
- []
-
-
-Underfull \hbox (badness 2512) in paragraph at lines 728--728
-\T5/ptm/m/n/13 Post-greSQL trong
- []
-
-
-Underfull \hbox (badness 1394) in paragraph at lines 729--729
-[]|\T5/ptm/m/n/13 Th˜ viªn k∏t nËi
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 733--733
-[]|\T5/ptm/m/n/13 Docker Com-
- []
-
-
-Underfull \hbox (badness 5578) in paragraph at lines 737--737
-[]|\T5/ptm/m/n/13 MÊi tr˜Ìng ph°t
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 737--737
-\T5/ptm/m/n/13 tri∫n tΩch hÒp
- []
-
-
-Underfull \hbox (badness 1755) in paragraph at lines 737--737
-[]|\T5/ptm/m/n/13 GoLand & VS
- []
-
-
-Overfull \hbox (35.77354pt too wide) in paragraph at lines 718--740
- [][] 
- []
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[32]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[33]
-Underfull \hbox (badness 10000) in paragraph at lines 765--765
-[]|\T5/ptm/b/n/13 Quy mÊ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 766--766
-[]|\T5/ptm/m/n/13 211,6 MB
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 766--766
-\T5/ptm/m/n/13 (5 con-tainer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 767--767
-[]|\T5/ptm/m/n/13 84,9 MB
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 767--767
-\T5/ptm/m/n/13 (86.890 KB
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 768--768
-[]|\T5/ptm/m/n/13 32 KB (File
- []
-
-
-Underfull \hbox (badness 3536) in paragraph at lines 769--769
-[]|\T5/ptm/m/n/13 Script cßu hºnh DB
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 769--769
-[]|\T5/ptm/m/n/13 85 KB (File
- []
-
-
-Underfull \hbox (badness 2818) in paragraph at lines 770--770
-[]|\T5/ptm/m/n/13 Cßu hºnh Docker &
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 770--770
-[]|\T5/ptm/m/n/13 24 KB (File
- []
-
-
-Overfull \hbox (19.72078pt too wide) in paragraph at lines 763--775
- [][] 
- []
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[34]
-<figures/login_screen.png, id=918, 1437.87187pt x 665.48625pt>
-File: figures/login_screen.png Graphic file (type png)
-<use figures/login_screen.png>
-Package pdftex.def Info: figures/login_screen.png  used on input line 786.
-(pdftex.def)             Requested size: 362.77525pt x 167.90448pt.
-<figures/sect_map.png, id=921, 1438.6247pt x 666.99188pt>
-File: figures/sect_map.png Graphic file (type png)
-<use figures/sect_map.png>
-Package pdftex.def Info: figures/sect_map.png  used on input line 795.
-(pdftex.def)             Requested size: 362.77525pt x 168.19275pt.
-<figures/formation_setup.png, id=923, 1437.11906pt x 665.48625pt>
-File: figures/formation_setup.png Graphic file (type png)
-<use figures/formation_setup.png>
-Package pdftex.def Info: figures/formation_setup.png  used on input line 804.
-(pdftex.def)             Requested size: 362.77525pt x 167.98572pt.
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[35 <./figures/login_screen.png>]
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[36 <./figures/sect_map.png> <./figures/formation_setup.png>]
-<figures/battle_screen.png, id=937, 1440.13031pt x 668.4975pt>
-File: figures/battle_screen.png Graphic file (type png)
-<use figures/battle_screen.png>
-Package pdftex.def Info: figures/battle_screen.png  used on input line 813.
-(pdftex.def)             Requested size: 362.77525pt x 168.38881pt.
-
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 831--848
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[37 <./figures/battle_screen.png>]
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 854--871
- [][] 
- []
-
-
-Underfull \vbox (badness 7814) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[38]
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 880--895
- [][] 
- []
-
-
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 901--916
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[39]
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 925--941
- [][] 
- []
-
-
-Underfull \hbox (badness 1048) in paragraph at lines 957--957
-[]|\T5/ptm/m/n/13 3. Client g˚i y∂u c¶u \T5/pcr/m/n/13 Up-grade-Build-in-gRe-qu
-est \T5/ptm/m/n/13 l∂n
- []
-
-
-Overfull \hbox (33.3723pt too wide) in paragraph at lines 947--963
- [][] 
- []
-
-
-Underfull \vbox (badness 4927) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[40]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[41]
-Overfull \hbox (5.2517pt too wide) in paragraph at lines 1018--1019
-\T5/ptm/m/n/13 tÓi con-tainer cıa Lo-gin Server, trong khi c°c cuÎc gÂi \T5/pcr
-/m/n/13 /pb.WorldService/
- []
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[42]
-Overfull \hbox (117.34991pt too wide) in paragraph at lines 1027--1028
-[]\T5/ptm/m/n/13 Danh s°ch m°y chı k±m ^^_‡a chø URL ^^_‡nh tuy∏n cˆ th∫ (vΩ dˆ
- \T5/pcr/m/n/13 zone1.thefirstsect.com:443\T5/ptm/m/n/13 )
- []
-
-
-Overfull \hbox (30.90074pt too wide) in paragraph at lines 1037--1038
-\T5/ptm/m/n/13 tr˜Ìng (\T5/pcr/m/n/13 RATE_LIMIT_ENABLED\T5/ptm/m/n/13 , \T5/pc
-r/m/n/13 RATE_LIMIT_RPS\T5/ptm/m/n/13 , \T5/pcr/m/n/13 RATE_LIMIT_BURST\T5/ptm/
-m/n/13 ),
- []
-
-
-Overfull \hbox (25.50467pt too wide) in paragraph at lines 1041--1042
-\T5/ptm/m/n/13 CÏ ch∏ giÓi h§n t¶n sußt ^^_˜Òc t§m thÌi vÊ hiªu h‚a (\T5/pcr/m/
-n/13 RATE_LIMIT_ENABLED=false\T5/ptm/m/n/13 )
- []
-
-
-Overfull \hbox (139.85457pt too wide) in paragraph at lines 1047--1059
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[43])
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 34.6375pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.6375pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-24.6375pt}.
-
-[44]
 Ch\uhorn \ohorn ng 5.
 (Chapter/5_Solutions_Contributions.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [45
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 24.
+
+[29
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
-
-[46]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/8'. Switching off
+(microtype)                protrusion for this font on input line 29.
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[47]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[30]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[48]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[31]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[49]
+[32]
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
@@ -2809,389 +2320,352 @@ File: lstlang2.sty 2025/11/14 1.11b listings language file
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang3.sty
 File: lstlang3.sty 2025/11/14 1.11b listings language file
 )
-Overfull \hbox (72.41373pt too wide) in paragraph at lines 99--100
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (205.01508pt too wide) in paragraph at lines 101--102
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Overfull \hbox (3.12125pt too wide) in paragraph at lines 97--98
+[]\T5/ptm/m/n/12 (-20) Ngay khi nh™n ^^_˜Òc y∂u c¶u thu ho§ch t†i nguy∂n t¯ ng˜
+Ìi chÏi c‚ ^^_‡nh danh \T5/pcr/m/n/12 player_id\T5/ptm/m/n/12 (-20) ,
  []
 
 (C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
-Underfull \vbox (badness 6961) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[50]
-Overfull \hbox (2.32666pt too wide) in paragraph at lines 121--122
-[]\T5/ptm/m/n/13 **B£o m™t tuyªt ^^_Ëi**: Lo§i b‰ ho†n to†n lÈ hÍng Dou-ble Col
--lect. Th˚ nghiªm
+[33]
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
+
+[34]
+(C:\Users\manag\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+)
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
+
+[35]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/pcr/m/n/10.00012'. Switching off
+(microtype)                protrusion for this font on input line 218.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [01] Caster:H≠c S°t Th¶n -> Tar-get:Qu°i thÛ hoang d¢ |
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
-
-[51]
-Overfull \hbox (166.01468pt too wide) in paragraph at lines 159--160
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [02] Caster:Qu°i thÛ hoang d¢ -> Tar-get:Thıy HÎ Thu®n | S
+kill:enemy_attack
  []
 
 
-Underfull \vbox (badness 5908) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
-
-[52]
-Overfull \hbox (6.37158pt too wide) in paragraph at lines 168--169
-[]$\OMS/cmsy/m/n/12 ^^O$ \T5/ptm/m/n/13 N∏u l¸c chi∏n cıa ng˜Ìi chÏi bºnh th˜Ìn
-g ($[] \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 
-5 \OMS/cmsy/m/n/12 ^^B []$\T5/ptm/m/n/13 ),
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [04] Caster:H≠c S°t Th¶n -> Tar-get:Qu°i thÛ hoang d¢ |
  []
 
 
-Overfull \hbox (16.22603pt too wide) in paragraph at lines 170--171
-[]$\OMS/cmsy/m/n/12 ^^O$ \T5/ptm/m/n/13 N∏u l¸c chi∏n cıa ng˜Ìi chÏi thßp bßt t
-h˜Ìng ($[] \OML/cmm/m/it/12 < \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/1
-2 5 \OMS/cmsy/m/n/12 ^^B []$
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [24] Caster:L˚a Chi∏n Binh -> Tar-get:Qu°i thÛ hoang d¢| S
+kill:skill_slash |
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [WARN] 2026-06-24 15:30:10 [PVE] Sus-pect com-bat! Play-er
+-Power(1200) << En-e-my-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [ERROR] 2026-06-24 15:30:10 [SE-CU-RITY] HACK DE-TECTED: E
+mpty com-bat logs
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [ERROR] 2026-06-24 15:30:10 [SE-CU-RITY] -> Ac-tion: RE-JE
+CT_BATTLE_RESULT.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [WARN] 2026-06-24 15:35:22 [PVE] Sus-pect com-bat! Play-er
+-Power(3400) vs En-e-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [ERROR] 2026-06-24 15:35:22 [SE-CU-RITY] HACK DE-TECTED: M
+ax Sin-gle Hit Limit
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [ERROR] 2026-06-24 15:35:22 [SE-CU-RITY] -> Dam-age hit: 9
+99999. Max Pos-si-ble
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/pcr/m/n/10.00012 [ERROR] 2026-06-24 15:35:22 [SE-CU-RITY] -> Ac-tion: RE-JE
+CT_BATTLE_RESULT &
+ []
+
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 191--220
+[]
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[53])
+[36]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.47202pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.47202pt}.
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.47202pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
 
-[54]
+[37])
+
+Package fancyhdr Warning: \headheight is too small (10.0pt): 
+(fancyhdr)                Make it at least 16.12802pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.12802pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-6.12802pt}.
+
+[38]
 Ch\uhorn \ohorn ng 6.
 (Chapter/6_Conclusion_Future_Work.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55
+LaTeX Warning: Citation 'scheuner2020faas' on page 39 undefined on input line 2
+1.
+
+
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 22.
+
+[39
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[56]
-Underfull \hbox (badness 10000) in paragraph at lines 40--40
-[]|\T5/ptm/b/n/13 Ti∂u chΩ
- []
-
-
-Underfull \hbox (badness 1400) in paragraph at lines 40--40
-[]|\T5/ptm/b/n/13 Hª thËng vi d‡ch
- []
-
-
-Underfull \hbox (badness 8170) in paragraph at lines 40--40
-\T5/ptm/b/n/13 BaaS (Play-Fab /
+[40]
+Underfull \hbox (badness 1755) in paragraph at lines 40--40
+[]|\T5/ptm/b/n/12 (+20) D‡ch vˆ ^^_°m m•y
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 41--41
-[]|\T5/ptm/b/n/13 Chi phΩ
+[]|\T5/ptm/b/n/12 (+20) Chi phΩ
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--41
-[]|\T5/ptm/m/n/13 T´ng theo cßp
- []
-
-
-Underfull \hbox (badness 3724) in paragraph at lines 41--41
-\T5/ptm/m/n/13 sË nh•n d¸a tr∂n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 41--41
-[]|\T5/ptm/m/n/13 Trung bºnh, tËn
+Underfull \hbox (badness 2229) in paragraph at lines 41--41
+\T5/ptm/m/n/12 (+20) c˘ng do hiªu n´ng
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 42--42
-[]|\T5/ptm/b/n/13 ^^^Î trπ
+[]|\T5/ptm/b/n/12 (+20) ^^^Î trπ
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 42--42
-\T5/ptm/b/n/13 k∏t nËi
+\T5/ptm/b/n/12 (+20) k∏t nËi
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 42--42
-[]|\T5/ptm/m/n/13 C¸c thßp ($\OML/cmm/m/it/12 <$\T5/ptm/m/n/13 15ms)
+Underfull \hbox (badness 4181) in paragraph at lines 42--42
+\T5/ptm/m/n/12 (+20) (30ms - 80ms) do
  []
 
 
-Underfull \hbox (badness 3138) in paragraph at lines 42--42
-\T5/ptm/m/n/13 do ^^_∞t server nÎi
+Underfull \hbox (badness 2961) in paragraph at lines 43--43
+\T5/ptm/m/n/12 (+20) m°y chı t¯ 8 GB
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
-\T5/ptm/m/n/13 do dat-a-cen-ter 
+Underfull \hbox (badness 1502) in paragraph at lines 43--43
+[]|\T5/ptm/m/n/12 (+20) Trung bºnh, b‡ giÓi
  []
 
 
-Underfull \hbox (badness 1142) in paragraph at lines 42--42
-\T5/ptm/m/n/13 (30ms - 80ms) do
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 43--43
-[]|\T5/ptm/b/n/13 X˚ l˛
- []
-
-
-Underfull \hbox (badness 1248) in paragraph at lines 43--43
-\T5/ptm/b/n/13 ^^_Áng thÌi
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 43--43
-\T5/ptm/b/n/13 (Con-cur-
- []
-
-
-Underfull \hbox (badness 3271) in paragraph at lines 43--43
-[]|\T5/ptm/m/n/13 Rßt cao (hÏn $\OT1/cmr/m/n/12 10[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 43--43
-\T5/ptm/m/n/13 Gor-ou-tines ^^_Áng
- []
-
-
-Underfull \hbox (badness 2245) in paragraph at lines 43--43
-\T5/ptm/m/n/13 h§ t¶ng ^^_°m m•y
+Underfull \hbox (badness 3019) in paragraph at lines 44--44
+[]|\T5/ptm/b/n/12 (+20) Kh£ n´ng
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 44--44
-\T5/ptm/b/n/13 tÚy bi∏n
+\T5/ptm/b/n/12 (+20) tÚy bi∏n
  []
 
 
-Underfull \hbox (badness 7415) in paragraph at lines 44--44
-[]|\T5/ptm/m/n/13 Cao (t¸ vi∏t m¢
+Underfull \hbox (badness 2253) in paragraph at lines 44--44
+\T5/ptm/m/n/12 (+20) ^^_‚ng g‚i v† Cloud
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 44--44
-\T5/ptm/m/n/13 nguÁn) nh˜ng kh‚
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\T5/ptm/m/n/12 (+20) Cao (t¸ vi∏t m¢
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--45
-[]|\T5/ptm/b/n/13 B£o m™t
+Underfull \hbox (badness 7944) in paragraph at lines 44--44
+\T5/ptm/m/n/12 (+20) nguÁn) nh˜ng kh‚
  []
 
 
-Underfull \hbox (badness 6758) in paragraph at lines 45--45
-\T5/ptm/b/n/13 v† chËng
+Underfull \hbox (badness 3557) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/12 (+20) TΩch hÒp x°c th¸c
  []
 
 
-Underfull \hbox (badness 6204) in paragraph at lines 45--45
-\T5/ptm/m/n/13 Cloud Script giÓi
+Underfull \hbox (badness 1629) in paragraph at lines 45--45
+\T5/ptm/m/n/12 (+20) ch≤o log chi∏n ^^_ßu
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 46--46
-[]|\T5/ptm/b/n/13 B´ng
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--46
-\T5/ptm/b/n/13 thÊng
- []
-
-
-Underfull \hbox (badness 1694) in paragraph at lines 46--46
-[]|\T5/ptm/m/n/13 C¸c thßp (tu¶n t¸
+Underfull \hbox (badness 1968) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/12 (+20) Kh‚ tri∫n khai x°c
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 46--46
-[]|\T5/ptm/m/n/13 Trung bºnh, phˆ
+[]|\T5/ptm/b/n/12 (+20) B´ng
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 46--46
+\T5/ptm/b/n/12 (+20) thÊng
+ []
 
 
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[57]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 3260) in paragraph at lines 46--46
+\T5/ptm/m/n/12 (+20) giao th˘c API cıa
+ []
 
 
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
-
-[58]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+Underfull \hbox (badness 2698) in paragraph at lines 46--46
+[]|\T5/ptm/m/n/12 (+20) Cao, s˚ dˆng ^^_‡nh
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[59]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[41]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[60]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[42]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[61]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[43]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[62]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[44]
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[63])
+[45])
 
 Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 17.97902pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.97902pt}.
+(fancyhdr)                Make it at least 16.59601pt, for example:
+(fancyhdr)                \setlength{\headheight}{16.59601pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-7.97902pt}.
+(fancyhdr)                \addtolength{\topmargin}{-6.59601pt}.
 
-[64] [65
-
-] [66
-
-] [67
-
-]
-Ph\d {u} l\d {u}c A.
-(Chapter/7_Appendix_A.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [68
-
-]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[46]
+Overfull \hbox (5.33076pt too wide) in paragraph at lines 296--296
+\T5/ptm/m/n/12 (-20) line]. Avail-able: []$\T5/pcr/m/n/12 https : / / learn . m
+icrosoft . com / en -[] us / gaming / playfab/$[] 
+ []
 
 
+Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 298.
 
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 15.977pt, for example:
-(fancyhdr)                \setlength{\headheight}{15.977pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.977pt}.
+[47
 
-[69])
-
-Package fancyhdr Warning: \headheight is too small (10.0pt): 
-(fancyhdr)                Make it at least 15.977pt, for example:
-(fancyhdr)                \setlength{\headheight}{15.977pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.977pt}.
-
-[70] (Project.aux)
+] (Project.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 
 
-LaTeX Font Warning: Size substitutions with differences
-(Font)              up to 1.0pt have occurred.
-
-
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `Project.out' has not changed.
-(rerunfilecheck)             Checksum: 7EC5A52DB41F215A6ECB909A25ABDCB8;19980.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Project.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Project.out':
+(rerunfilecheck)             Before: 0D9CC6C80DE71E0A47211DEC44711B9D;17060
+(rerunfilecheck)             After:  9A2724172B2957C822D596014DDF3B34;17069.
 
 Package biblatex Warning: Please (re)run BibTeX on the file(s):
 (biblatex)                Project
@@ -3202,28 +2676,28 @@ Package logreq Info: Writing requests to 'Project.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47236 strings out of 467871
- 922286 string characters out of 5418376
- 1794713 words of memory out of 5000000
- 74991 multiletter control sequences out of 15000+600000
- 684481 words of font info for 95 fonts, out of 8000000 for 9000
+ 49105 strings out of 467871
+ 953898 string characters out of 5418376
+ 1866662 words of memory out of 5000000
+ 76690 multiletter control sequences out of 15000+600000
+ 694069 words of font info for 203 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,12n,107p,2510b,1525s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,12n,107p,2510b,1556s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmex10.pfb><C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmmi12.pfb><C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmmi9.pfb><C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts
+ublic/amsfonts/cm/cmmi8.pfb><C:/Users/manag/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmr12.pfb><C:/Users/manag/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/manag/AppData/Local/Progra
+eX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/manag/AppData/Local/Progra
 ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/manag/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/vntex/urwvn/ucrr8v.pfb><C:/Users/manag/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><C:/Users/manag/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/manag/AppData
 /Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><C:/Users/manag/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb>
-Output written on Project.pdf (84 pages, 8033157 bytes).
+Output written on Project.pdf (60 pages, 5046469 bytes).
 PDF statistics:
- 1306 PDF objects out of 1440 (max. 8388607)
- 376 named destinations out of 1000 (max. 500000)
- 681 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1011 PDF objects out of 1200 (max. 8388607)
+ 283 named destinations out of 1000 (max. 500000)
+ 41037 words of extra memory for PDF output out of 42996 (max. 10000000)
 

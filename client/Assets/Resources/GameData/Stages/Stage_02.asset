@@ -25,7 +25,7 @@ MonoBehaviour:
     name: "Qu\xE1i th\xFA F-2.1"
     level: 2
     maxHP: 2200
-    attack: 22
+    attack: 200
     defense: 11
     speed: 13
     isBoss: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     name: mons_01
     level: 2
     maxHP: 2400
-    attack: 24
+    attack: 200
     defense: 12
     speed: 14
     isBoss: 0

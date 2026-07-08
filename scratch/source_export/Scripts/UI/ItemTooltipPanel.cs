@@ -1,0 +1,317 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using GameClient.UI.Core;
+using GameClient.Managers;
+using GameClient.Core;
+using GameClient.Network.Pb; // Nơi định nghĩa ItemConfig từ protobuf
+using GameClient.Network.Api;
+
+namespace GameClient.UI
+{
+    public class ItemTooltipPanel : BaseUIPanel
+    {
+        [Header("UI References")]
+        [SerializeField] private TMP_Text txtItemName;
+        [SerializeField] private TMP_Text txtItemType;
+        [SerializeField] private TMP_Text txtRequiredLevel;
+        [SerializeField] private TMP_Text txtDescription;
+        [SerializeField] private TMP_Text txtOwnedQuantity;
+        [SerializeField] private Image imgItemIcon;
+        [SerializeField] private Image imgBackgroundFrame; // Khung màu tương ứng với phẩm chất (Rarity)
+
+        private Button btnUse;
+
+        public override void Setup(object data)
+        {
+            base.Setup(data);
+
+            long itemId = 0;
+            string itemCode = "";
+            int ownedCount = 0;
+            bool hasCustomQuantity = false;
+
+            if (data is string code)
+            {
+                itemCode = code;
+            }
+            else if (data is System.Tuple<string, int> tuple)
+            {
+                itemCode = tuple.Item1;
+                ownedCount = tuple.Item2;
+                hasCustomQuantity = true;
+            }
+            else if (data is System.ValueTuple<string, int> vtuple)
+            {
+                itemCode = vtuple.Item1;
+                ownedCount = vtuple.Item2;
+                hasCustomQuantity = true;
+            }
+            else if (data is System.Tuple<long, string, int> tuple3)
+            {
+                itemId = tuple3.Item1;
+                itemCode = tuple3.Item2;
+                ownedCount = tuple3.Item3;
+                hasCustomQuantity = true;
+            }
+            else if (data is System.ValueTuple<long, string, int> vtuple3)
+            {
+                itemId = vtuple3.Item1;
+                itemCode = vtuple3.Item2;
+                ownedCount = vtuple3.Item3;
+                hasCustomQuantity = true;
+            }
+
+            if (!string.IsNullOrEmpty(itemCode))
+            {
+                // 1. Lấy dữ liệu cấu hình vật phẩm từ ItemDataManager
+                var config = ItemDataManager.Instance.GetItemConfig(itemCode);
+                if (config == null)
+                {
+                    Debug.LogWarning($"[ItemTooltip] Không tìm thấy cấu hình cho item: {itemCode}");
+                    Hide();
+                    return;
+                }
+
+                // 2. Cập nhật thông tin và dịch thuật qua LocalizationManager từ bảng ITEM_EQUIPMENT
+                if (txtItemName != null) txtItemName.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.NameKey);
+                if (txtDescription != null) txtDescription.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.DescKey);
+                if (txtItemType != null)
+                {
+                    string localizedType = TranslateItemType(config.Type);
+                    txtItemType.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_type", localizedType);
+                }
+                
+                // Cấp dùng từ cấu hình
+                if (txtRequiredLevel != null)
+                {
+                    int reqLvl = config.RequiredLevel > 0 ? (int)config.RequiredLevel : 1;
+                    txtRequiredLevel.text = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_req_level", reqLvl);
+                }
+
+                // 3. Hiển thị số lượng sở hữu thực tế của người chơi từ Inventory
+                if (!hasCustomQuantity)
+                {
+                    ownedCount = GetOwnedQuantity(itemCode);
+                }
+                
+                string desc = txtDescription != null ? LocalizationManager.Instance.GetText(GameConstants.LocaleTable.ITEM_EQUIPMENT, config.DescKey) : "";
+                string ownedText = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, "ui_item_owned", ownedCount);
+                
+                if (txtDescription != null)
+                {
+                    txtDescription.alignment = TextAlignmentOptions.TopLeft;
+                    txtDescription.text = $"{desc}\n\n<color=#00FF00>{ownedText}</color>";
+                    txtDescription.ForceMeshUpdate();
+                    
+                    // Tự động giãn chiều cao RectTransform theo nội dung chữ
+                    var rt = txtDescription.rectTransform;
+                    if (rt != null)
+                    {
+                        rt.sizeDelta = new Vector2(rt.sizeDelta.x, txtDescription.preferredHeight);
+                    }
+                }
+                
+                if (txtOwnedQuantity != null)
+                {
+                    txtOwnedQuantity.gameObject.SetActive(false);
+                }
+
+                // 4. Load ảnh icon vật phẩm từ Addressable
+                LoadIconAsync(config, itemCode);
+
+                // 5. Thay đổi màu sắc khung/chữ tiêu đề dựa theo phẩm chất (Rarity)
+                ApplyRarityColor(config.Rarity);
+
+                // 6. Tạo nút Sử Dụng cho đạo cụ tiêu hao nếu mở từ túi đồ
+                CreateUseButton(itemId, itemCode);
+            }
+        }
+
+        private void CreateUseButton(long itemId, string itemCode)
+        {
+            if (btnUse != null)
+            {
+                Destroy(btnUse.gameObject);
+                btnUse = null;
+            }
+
+            if (itemId == 0) return;
+
+            var config = ItemDataManager.Instance.GetItemConfig(itemCode);
+            if (config == null || config.Type != "CONSUMABLE") return;
+
+            GameObject btnGo = new GameObject("BtnUse", typeof(RectTransform), typeof(Image), typeof(Button));
+            btnGo.transform.SetParent(imgBackgroundFrame != null ? imgBackgroundFrame.transform : transform, false);
+
+            var rect = btnGo.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0f);
+            rect.anchorMax = new Vector2(0.5f, 0f);
+            rect.pivot = new Vector2(0.5f, 0f);
+            rect.anchoredPosition = new Vector2(0f, 20f);
+            rect.sizeDelta = new Vector2(160f, 40f);
+
+            var img = btnGo.GetComponent<Image>();
+            img.color = new Color(0.1f, 0.6f, 0.2f, 1f); // Màu xanh lá cây
+
+            var btn = btnGo.GetComponent<Button>();
+            btnUse = btn;
+
+            GameObject txtGo = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI));
+            txtGo.transform.SetParent(btnGo.transform, false);
+
+            var txtRect = txtGo.GetComponent<RectTransform>();
+            txtRect.anchorMin = Vector2.zero;
+            txtRect.anchorMax = Vector2.one;
+            txtRect.sizeDelta = Vector2.zero;
+
+            var txt = txtGo.GetComponent<TextMeshProUGUI>();
+            txt.text = "Sử Dụng";
+            txt.fontSize = 16f;
+            txt.color = Color.white;
+            txt.alignment = TextAlignmentOptions.Center;
+
+            btn.onClick.AddListener(async () =>
+            {
+                btn.interactable = false;
+                try
+                {
+                    var response = await SectBuildingApi.UseItemAsync(itemId, 1);
+                    if (response != null && response.Code == 200)
+                    {
+                        ToastManager.Instance?.ShowNormalToast("Sử dụng vật phẩm thành công!");
+                        var invPanel = UIManager.Instance?.GetPanel("UI_InventoryPanel") as InventoryPanel;
+                        if (invPanel != null)
+                        {
+                            invPanel.RefreshInventory();
+                        }
+                        Hide();
+                    }
+                    else
+                    {
+                        string errMsg = response != null ? response.MessageId : "Unknown error";
+                        ToastManager.Instance?.ShowNormalToast($"Sử dụng thất bại: {errMsg}");
+                        btn.interactable = true;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    ToastManager.Instance?.ShowNormalToast($"Lỗi: {ex.Message}");
+                    btn.interactable = true;
+                }
+            });
+        }
+
+        private async void LoadIconAsync(ItemConfig config, string itemCode)
+        {
+            if (imgItemIcon == null) return;
+
+            Sprite sprite = null;
+            string iconKey = config != null && !string.IsNullOrEmpty(config.Icon) ? config.Icon : itemCode + "_icon";
+
+            try
+            {
+                sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(iconKey);
+            }
+            catch (System.Exception)
+            {
+                try
+                {
+                    sprite = await ResourceManager.Instance.LoadAssetAsync<Sprite>(itemCode);
+                }
+                catch (System.Exception) {}
+            }
+
+            if (sprite == null)
+            {
+                // Fallback to legacy Resources load
+                sprite = Resources.Load<Sprite>($"Sprites/Items/{iconKey}");
+            }
+
+            if (imgItemIcon != null && sprite != null)
+            {
+                imgItemIcon.sprite = sprite;
+            }
+        }
+
+        private int GetOwnedQuantity(string itemCode)
+        {
+            return 1; 
+        }
+
+        private string TranslateItemType(string rawType)
+        {
+            string key = "ui_item_type_default";
+            switch (rawType.ToUpper())
+            {
+                case "CONSUMABLE": key = "ui_item_type_consumable"; break;
+                case "EQUIPMENT": key = "ui_item_type_equipment"; break;
+                case "CURRENCY": key = "ui_item_type_currency"; break;
+                case "SKIN_UNLOCKER": key = "ui_item_type_skin"; break;
+            }
+            string localized = LocalizationManager.Instance.GetText(GameConstants.LocaleTable.UI_SYSTEM, key);
+            if (string.IsNullOrEmpty(localized) || localized.StartsWith("["))
+            {
+                switch (rawType.ToUpper())
+                {
+                    case "CONSUMABLE": return "Đạo Cụ";
+                    case "EQUIPMENT": return "Trang Bị";
+                    case "CURRENCY": return "Tiền Tệ";
+                    case "SKIN_UNLOCKER": return "Ngoại Trang";
+                    default: return "Vật Phẩm";
+                }
+            }
+            return localized;
+        }
+
+        private void ApplyRarityColor(string rarity)
+        {
+            if (txtItemName == null) return;
+            
+            // Đổi màu tiêu đề vật phẩm theo phẩm chất (Rarity)
+            switch (rarity.ToUpper())
+            {
+                case "LEGENDARY": // Đỏ/Cam
+                    txtItemName.color = new Color(1f, 0.3f, 0.3f);
+                    break;
+                case "EPIC": // Tím
+                    txtItemName.color = new Color(0.7f, 0.3f, 1f);
+                    break;
+                case "RARE": // Lam
+                    txtItemName.color = new Color(0.2f, 0.6f, 1f);
+                    break;
+                default: // Trắng/Lục
+                    txtItemName.color = Color.white;
+                    break;
+            }
+        }
+
+        private float _openTime;
+
+        protected override void OnShow()
+        {
+            base.OnShow();
+            _openTime = Time.time;
+        }
+
+        private void Update()
+        {
+            if (Time.time - _openTime < 0.15f) return;
+
+            if (InputManager.Instance != null && InputManager.Instance.IsPrimaryPointerDown())
+            {
+                Vector2 pointerPos = InputManager.Instance.GetPointerPosition();
+                RectTransform rectTransform = transform as RectTransform;
+                if (rectTransform != null)
+                {
+                    var canvas = GetComponentInParent<Canvas>();
+                    var cam = (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : Camera.main;
+                    if (!RectTransformUtility.RectangleContainsScreenPoint(rectTransform, pointerPos, cam))
+                    {
+                        Hide();
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
-\documentclass[a4paper,13pt,3p,twoside,openany]{report}
+\documentclass[a4paper,12pt,3p,oneside,openany]{report}
 \usepackage{scrextend}
-\changefontsizes{13pt}
+\changefontsizes{12pt}
 \usepackage[utf8]{vietnam}
-\usepackage[top=2cm, bottom=2cm, left=3.5cm, right=2.5cm]{geometry}
+\usepackage[top=2cm, bottom=2cm, left=3.0cm, right=2.0cm]{geometry}
 \usepackage{longtable}
 
 \usepackage{graphicx} % Cho phép chèn hỉnh ảnh
@@ -10,12 +10,13 @@
 \usetikzlibrary{shapes.geometric, positioning, arrows}
 \usepackage{fancybox} % Tạo khung box
 \usepackage{indentfirst} % Thụt đầu dòng ở dòng đầu tiên trong đoạn
+\usepackage{microtype} % Tối ưu khoảng cách giữa các chữ, tránh chữ bị giãn cách không đều
 \usepackage{amsthm} % Cho phép thêm các môi trường định nghĩa
 \usepackage{latexsym} % Các kí hiệu toán học
 \usepackage{amsmath} % Hỗ trợ một số biểu thức toán học
 \usepackage{amssymb} % Bổ sung thêm kí hiệu về toán học
 \usepackage{amsbsy} % Hỗ trợ các kí hiệu in đậm
-\usepackage{times} % Chọn font Time New Romans
+\usepackage{times} % Chọn font Time New Romans tròn trịa theo ý người dùng
 \usepackage{array} % Tạo bảng array
 \usepackage{enumitem} % Cho phép thay đổi kí hiệu của list
 \usepackage{subfiles} % Chèn các file nhỏ, giúp chia các chapter ra nhiều file hơn
@@ -42,8 +43,8 @@
 \usepackage{glossary-superragged}
 \setglossarystyle{superraggedheaderborder}
 \usepackage{setspace}
-\usepackage{parskip}
-
+\linespread{1.3} % Dãn dòng 1.3 chuẩn luận văn
+% Bỏ parskip để đoạn văn thụt lề chuẩn
 % package content table
 \usepackage{tocbasic}
 
@@ -161,7 +162,7 @@
 %Khoảng cách xuống dòng
 \setlength{\parskip}{6pt}
 %Lùi đầu dòng
-\setlength{\parindent}{15pt}
+\setlength{\parindent}{1.27cm}
 
 
 
@@ -288,33 +289,10 @@
 
 \newpage
 %\pagestyle{fancy} % Áp dụng header và footer
-\chapter*{MỘT SỐ LƯU Ý VỀ TÀI LIỆU THAM KHẢO} %Kết luận và hướng phát triển}
-\label{chapter:reference}
-% \subfile{Chapter/7_Notes_References}
-
-
 % ===================================================
 \newpage
 \renewcommand\bibname{TÀI LIỆU THAM KHẢO}
 \printbibliography
 \phantomsection\addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
 
-\appendixpage
-\appendices
-\addappheadtotoc
-
-% \chapter*{PHỤ LỤC} %Kết luận và hướng phát triển}
-
-%\mainmatter
-\titleformat{\chapter}[hang]{\centering\bfseries}{ \thechapter.\ }{0pt}{}[]
-\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
-
-\titlecontents{chapter}
-    [0.0cm]             % left margin
-    {\bfseries\vspace{0.3cm}}                  % above code
-    {{\bfseries{\scshape} \thecontentslabel.\ }} % numbered format
-    {}         % unnumbered format
-    {\titlerule*[0.3pc]{.}\contentspage}         % filler-page-format, e.g dots
-\chapter{ĐẶC TẢ USE CASE}
-\subfile{Chapter/7_Appendix_A}
 \end{document}

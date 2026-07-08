@@ -1,9 +1,22 @@
 \documentclass[../Project.tex]{subfiles}
 \begin{document}
 \begin{center}
-    \Large{\textbf{TÓM TẮT ĐỒ ÁN TỐT NGHIỆP}}\\
+    \Large{\textbf{TÓM TẮT NỘI DUNG ĐỒ ÁN}}\\
 \end{center}
-\vspace{1cm}
+\vspace{0.5cm}
 
-Trong bối cảnh ngành công nghiệp trò chơi trực tuyến phát triển mạnh mẽ, việc xây dựng hệ thống máy chủ backend hỗ trợ trò chơi nhiều người chơi thời gian thực với hiệu năng cao, độ trễ thấp và khả năng mở rộng tốt là một bài toán vô cùng quan trọng. Các giải pháp truyền thống dựa trên kiến trúc nguyên khối thường gặp khó khăn về khả năng mở rộng và đồng bộ dữ liệu tải cao. Đồ án này lựa chọn hướng tiếp cận tự phát triển hệ thống backend theo kiến trúc microservices sử dụng ngôn ngữ Go kết hợp giao thức truyền thông gRPC/Protobuf. Lựa chọn này giúp tận dụng tối đa hiệu suất xử lý song song vượt trội của Go qua Goroutines và tối ưu hóa băng thông mạng nhờ gRPC. Giải pháp đề xuất bao gồm ứng dụng client xây dựng trên Unity kết nối qua Gateway đến các dịch vụ backend độc lập: Login-server xử lý xác thực, World-server quản lý thông tin đệ tử, xây dựng tông môn, tính toán điểm lực chiến và cập nhật bảng xếp hạng thời gian thực, cùng Combat-server phụ trách mô phỏng các trận đấu chiến thuật. Hệ thống sử dụng PostgreSQL để lưu trữ dữ liệu bền vững và tích hợp Redis để quản lý phiên đăng nhập nhanh chóng. Kết quả thực nghiệm cho thấy hệ thống hoạt động ổn định dưới tải cao, thời gian phản hồi nhanh, độ trễ thấp và đảm bảo tính chính xác khi cập nhật bảng xếp hạng. Đóng góp chính của đồ án là thiết kế và triển khai thành công một kiến trúc máy chủ game microservices hoàn chỉnh, có hiệu năng tốt và khả năng mở rộng linh hoạt cho các tựa game chiến thuật trực tuyến.
+Quy trình phát triển hệ thống máy chủ trò chơi (Game Server) trực tuyến hiện đối mặt với nhiều hạn chế do phụ thuộc vào kiến trúc nguyên khối (Monolithic), khiến máy chủ dễ quá tải, tiêu tốn nhiều tài nguyên phần cứng và khó khăn trong việc mở rộng quy mô. Một số giải pháp như sử dụng các dịch vụ đám mây có sẵn (BaaS) hoặc công nghệ Node.js/Python đã xuất hiện nhưng gặp nhược điểm là chi phí duy trì cao hoặc hạn chế về hiệu năng xử lý đa luồng khi tính toán logic phức tạp.
+
+Đồ án lựa chọn hướng tiếp cận xây dựng hệ thống máy chủ trò chơi theo kiến trúc vi dịch vụ (Microservices) bằng ngôn ngữ lập trình Go, kết hợp giao thức truyền thông tốc độ cao gRPC/Protobuf. Hướng đi này giúp tối ưu hóa tài nguyên phần cứng nhờ cơ chế xử lý đồng thời siêu nhẹ (Goroutines), đồng thời nâng cao trải nghiệm người chơi nhờ tốc độ phản hồi cực kỳ nhanh chóng và liên tục.
+
+Tổng quan giải pháp bao gồm hệ thống máy chủ phân tán kết nối với cơ sở dữ liệu PostgreSQL và bộ nhớ đệm Redis, phân hệ Gateway điều phối và định tuyến yêu cầu, cụm Auth Server xử lý đăng nhập, cùng các cụm World Server và Combat Server dành cho tính toán logic tài nguyên tông môn và mô phỏng trận đấu theo thời gian thực.
+
+Đóng góp chính của đồ án bao gồm việc hoàn thiện cơ chế trò chơi thẻ tướng chiến thuật nhiều người chơi, thiết kế thuật toán mô phỏng trận đấu theo lượt (Turn-based), và triển khai thành công hệ thống bảng xếp hạng đồng bộ thời gian thực (Real-time Leaderboard). Kết quả sau cùng là một giải pháp máy chủ hoàn thiện, hoạt động ổn định và đáp ứng hàng ngàn yêu cầu xử lý từ người chơi với độ trễ thấp.
+
+\vspace{1cm}
+\begin{flushright}
+Sinh viên thực hiện\\[0.5cm]
+\textbf{Bùi Xuân Hải}
+\end{flushright}
+
 \end{document}

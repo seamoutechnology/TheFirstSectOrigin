@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+import "player.proto";
+import "sect.proto";
+import "disciple.proto";
+import "item.proto";
+import "gacha.proto";
+import "mission.proto";
+import "combat.proto";
+import "system.proto";
+import "leaderboard.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+service GatewayService {
+  // --- System & Updates ---
+  rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
+  rpc GetBase(GetBaseRequest) returns (GetBaseResponse);
+
+  // --- Player ---
+  rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse);
+  rpc GetPlayerProfile(GetPlayerProfileRequest) returns (GetPlayerProfileResponse);
+
+  // --- Sect & Buildings & Map ---
+  rpc GetSectInfo(GetProfileRequest) returns (SectInfo);
+  rpc UpgradeBuilding(UpgradeBuildingRequest) returns (UpgradeBuildingResponse);
+  rpc SpeedUpBuilding(SpeedUpBuildingRequest) returns (SpeedUpBuildingResponse);
+  rpc CollectResources(CollectResourcesRequest) returns (CollectResourcesResponse);
+  rpc SaveAdminMap(SaveAdminMapRequest) returns (SaveAdminMapResponse);
+  rpc GetPlayerMap(GetPlayerMapRequest) returns (GetPlayerMapResponse);
+  rpc SavePlayerMap(SavePlayerMapRequest) returns (SavePlayerMapResponse);
+
+  // --- Heroes ---
+  rpc GetHeroes(GetHeroesRequest) returns (GetHeroesResponse); 
+  rpc SetFormation(SetFormationRequest) returns (SetFormationResponse);
+  rpc LevelUpDisciple(LevelUpDiscipleRequest) returns (LevelUpDiscipleResponse);
+  rpc LevelUpHero(LevelUpHeroRequest) returns (LevelUpHeroResponse);
+  rpc CheckInDaily(CheckInDailyRequest) returns (CheckInDailyResponse);
+  rpc ClaimMissionReward(ClaimMissionRewardRequest) returns (ClaimMissionRewardResponse);
+
+  // --- Combat ---
+  rpc ValidatePvEResult(ValidatePvEResultRequest) returns (ValidatePvEResultResponse);
+
+  // --- Inventory & Items ---
+  rpc GetInventory(GetProfileRequest) returns (Inventory);
+  rpc EquipItem(EquipRequest) returns (EquipResponse);
+  rpc UseItem(UseItemRequest) returns (UseItemResponse);
+  rpc BuyShopItem(BuyShopItemRequest) returns (BuyShopItemResponse);
+  rpc GetShop(GetShopRequest) returns (GetShopResponse);
+  rpc RefreshShop(RefreshShopRequest) returns (RefreshShopResponse);
+
+  // --- Gacha ---
+  rpc GetGachaBanners(GetGachaBannersRequest) returns (GetGachaBannersResponse);
+  rpc DoGacha(DoGachaRequest) returns (DoGachaResponse);
+
+  // --- Missions ---
+  rpc GetMissions(GetMissionsRequest) returns (GetMissionsResponse);
+
+  // --- Leaderboards & Stages ---
+  rpc GetCompletedStages(GetCompletedStagesRequest) returns (GetCompletedStagesResponse);
+  rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
+}
+
+service WorldService {
+  rpc InternalSyncSect(SectInfo) returns (BaseResponse);
+  
+  // Cutscenes
+  rpc ListCutscenes(EmptyRequest) returns (ListCutscenesResponse);
+  rpc GetCutscene(GetCutsceneRequest) returns (CutsceneData);
+  rpc SaveCutscene(SaveCutsceneRequest) returns (BaseResponse);
+}

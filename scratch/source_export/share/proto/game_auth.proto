@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+service AuthService {
+  // Đăng ký tài khoản
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  
+  // Đăng nhập
+  rpc Login(LoginRequest) returns (LoginResponse);
+
+  // Đăng xuất
+  rpc Logout(LogoutRequest) returns (BaseResponse);
+
+  // Quên mật khẩu
+  rpc ForgetPassword(ForgetPasswordRequest) returns (BaseResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (BaseResponse);
+
+  // 2FA
+  rpc Enable2FA(BaseRequest) returns (Enable2FAResponse);
+  rpc Verify2FA(Verify2FARequest) returns (BaseResponse);
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message RegisterResponse {
+  int32 code = 1;
+  string message_id = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  BaseResponse base = 6; // Thêm Base cho khớp C#
+  int32 code = 1;
+  string message_id = 2;
+  string token = 3;        // JWT Token để dùng cho các request sau
+  int64 user_id = 4;
+  ZoneList zone_list = 5;  // Trả về danh sách server để user chọn
+}
+
+// Dành cho tính năng Zone/Server list
+message ZoneList {
+  repeated Zone zones = 1;
+}
+
+message Zone {
+  int32 zone_id = 1;
+  string name = 2;
+  string status = 3; // Nomal, Crowded, Maintenance
+  string gateway_url = 4; // Địa chỉ IP/Domain của Gateway tương ứng để client connect
+}
+
+message LogoutRequest {
+  string token = 1;
+}
+
+message ForgetPasswordRequest {
+  string email = 1;
+}
+
+message ResetPasswordRequest {
+  string email = 1;
+  string otp = 2;
+  string new_password = 3;
+}
+
+message Enable2FAResponse {
+  int32 code = 1;
+  string message_id = 2;
+  string secret = 3;    // Mã bí mật 2FA
+  string qr_code = 4;   // URL để hiển thị mã QR
+}
+
+message Verify2FARequest {
+  string code = 1;      // Mã 6 số từ Google Authenticator hoặc Email
+}
+

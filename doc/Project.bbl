@@ -186,6 +186,69 @@
     \field{year}{2015}
   \endentry
 
+  \entry{nodejs2026}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=O}{%
+         family={{OpenJS Foundation}},
+         familyi={O\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{O1}
+    \strng{fullhash}{O1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Node.js Documentation}
+    \verb{url}
+    \verb https://nodejs.org/docs/
+    \endverb
+    \field{year}{2026}
+    \field{urlday}{29}
+    \field{urlmonth}{06}
+    \field{urlyear}{2026}
+  \endentry
+
+  \entry{playfab2026}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Microsoft Corporation}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M1}
+    \strng{fullhash}{M1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Azure PlayFab Documentation}
+    \verb{url}
+    \verb https://learn.microsoft.com/en-us/gaming/playfab/
+    \endverb
+    \field{year}{2026}
+    \field{urlday}{29}
+    \field{urlmonth}{06}
+    \field{urlyear}{2026}
+  \endentry
+
+  \entry{wondernetwork2026}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=W}{%
+         family={{WonderNetwork}},
+         familyi={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{W1}
+    \strng{fullhash}{W1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Global Ping Statistics}
+    \verb{url}
+    \verb https://wondernetwork.com/pings/
+    \endverb
+    \field{year}{2026}
+    \field{urlday}{29}
+    \field{urlmonth}{06}
+    \field{urlyear}{2026}
+  \endentry
+
   \entry{rfc6455}{report}{}{}
     \name{author}{2}{}{%
       {{hash=FI}{%

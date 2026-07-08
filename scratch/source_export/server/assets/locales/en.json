@@ -1,0 +1,19 @@
+{
+    "msg_success": "Success",
+    "msg_register_success": "Account registered successfully",
+    "msg_login_success": "Login successful",
+    "msg_logout_success": "Logged out successfully",
+    "msg_logout_failed": "Logout failed",
+    "msg_forget_password_sent": "Verification code has been sent to your email",
+    "msg_reset_password_success": "Password reset successfully",
+    "msg_2fa_verified": "2FA verified successfully",
+    "msg_create_player_success": "Character created successfully",
+    "msg_alliance_joined": "Joined alliance successfully",
+    "msg_levelup_success": "Level up successful",
+    "msg_gacha_success": "Disciple recruited successfully",
+    "msg_equip_success": "Item equipped successfully",
+    "msg_craft_success": "Item crafting completed",
+    "msg_mission_completed": "Mission completed and rewards claimed",
+    "error_internal": "Internal server error, please try again later",
+    "error_unauthorized": "Session expired or invalid"
+}

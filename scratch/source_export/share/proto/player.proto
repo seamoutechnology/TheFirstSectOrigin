@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+message PlayerProfile {
+  int64 user_id = 1;
+  string nickname = 2;
+  int32 level = 3;
+  int64 exp = 4;
+  int64 gold = 5;
+  int64 diamond = 6;
+  int32 stamina = 7;
+  int32 max_stamina = 8;
+  string avatar = 9;
+  string skin_id = 10;
+  string title = 11;
+  int64 power = 12;
+  int32 alignment = 13;
+}
+
+message GetProfileRequest {}
+message GetPlayerProfileRequest {} // C# đang tìm cái này
+
+message GetProfileResponse {
+  BaseResponse base = 1;
+  PlayerProfile profile = 2;
+}
+
+message GetPlayerProfileResponse {
+  BaseResponse base = 1;      // C# đang tìm .Base
+  PlayerProfile profile = 2;
+}
+
+message CreatePlayerRequest {
+  string nickname = 1;
+}
+message CreatePlayerResponse {
+  BaseResponse base = 1;
+  PlayerProfile profile = 2;
+}

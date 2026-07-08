@@ -1,0 +1,153 @@
+syntax = "proto3";
+
+package pb;
+
+import "common.proto";
+
+option go_package = "server/pkg/pb;pb";
+option csharp_namespace = "GameClient.Network.Pb";
+
+// --- Item Configuration (Tĩnh) ---
+
+message ItemSource {
+  string label_key = 1;     // Key cho tên nguồn (VD: "SOURCE_BLACKSMITH")
+  string inner_link = 2;    // Đường dẫn DeepLink (VD: "building/blacksmith")
+  int64 start_time = 3;     
+  int64 end_time = 4;       
+}
+
+message ItemEffect {
+  string effect_code = 1;   // "EFF_ADD_HP", "EFF_LIFESTEAL"
+  float value = 2;          // Giá trị (VD: 10, 0.05)
+  float min_value = 3;      // Giá trị tối thiểu (VD: 0)
+  float max_value = 4;      // Giá trị tối đa (VD: 1000)
+}
+
+message ItemConfig {
+  string item_code = 1;
+  string name_key = 2;          // Thay thế name -> name_key
+  string type = 3;          
+  string rarity = 4;        
+  string icon = 5;          
+  string desc_key = 6;          // Thay thế description -> desc_key
+  int32 max_stack = 7;      
+  repeated ItemSource sources = 8; 
+  repeated ItemEffect effects = 9;  // Hiệu ứng dạng List
+  int32 required_level = 10;
+}
+
+// --- Item Instance (Động) ---
+
+message Item {
+  int64 id = 1;          // Instance ID (duy nhất cho từng item trong túi đồ)
+  string item_code = 2;  // Mã item để liên kết với ItemConfig
+  string name = 3;       // (Có thể bỏ nếu dùng name từ Config, nhưng giữ lại cho trang bị có tiền tố random)
+  string type = 4;       // (Có thể bỏ nếu dùng type từ Config)
+  string rarity = 5;     // (Có thể bỏ nếu dùng rarity từ Config)
+  int32 quantity = 6;    // Số lượng (Dùng cho stackable)
+  map<string, int32> stats = 7; // Chỉ số cộng thêm nếu là trang bị
+}
+
+message Inventory {
+  repeated Item items = 1;
+  repeated ItemConfig configs = 2;
+}
+
+// --- Equipment ---
+
+message EquipRequest {
+  int64 disciple_id = 1;
+  int64 item_id = 2;     // ID của item trong túi đồ
+  string slot = 3;       // 'weapon', 'armor', 'accessory'
+}
+
+message EquipResponse {
+  int32 code = 1;
+  string message_id = 2;
+  Item equipped_item = 3;
+}
+
+// --- Crafting (Chế tạo) ---
+
+message Recipe {
+  string recipe_id = 1;
+  string result_item_code = 2;
+  map<string, int32> materials = 3; // item_code -> quantity
+  int32 success_rate = 4;           // % thành công
+  int32 crafting_time = 5;          // Giây
+}
+
+message CraftRequest {
+  string recipe_id = 1;
+  int32 count = 2;
+}
+
+message CraftResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated Item gained_items = 3;
+}
+
+// --- Using Items ---
+
+message UseItemRequest {
+  int64 item_id = 1;      // Instance ID of the item in player inventory
+  int32 quantity = 2;     // Quantity to use
+}
+
+message UseItemResponse {
+  int32 code = 1;         // 0: Success, other: error code
+  string message_id = 2;  // Response message ID (for i18n)
+}
+
+// --- Advanced Shop System ---
+
+message ShopCost {
+  string item_code = 1;
+  int32 amount = 2;
+}
+
+message ShopItemInstance {
+  int64 id = 1; // Instance ID in player_shops
+  string shop_item_id = 2;
+  string item_code = 3;
+  int32 amount = 4;
+  repeated ShopCost final_price = 5;
+  int32 discount_pct = 6;
+  bool is_bought = 7;
+}
+
+message GetShopRequest {
+  string shop_type = 1;
+}
+
+message GetShopResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated ShopItemInstance items = 3;
+  int64 next_refresh_at = 4; // Unix timestamp
+}
+
+message RefreshShopRequest {
+  string shop_type = 1;
+}
+
+message RefreshShopResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated ShopItemInstance items = 3;
+  int64 next_refresh_at = 4;
+}
+
+message BuyShopItemRequest {
+  int64 instance_id = 1; // player_shops.id
+  int32 quantity = 2;
+}
+
+message BuyShopItemResponse {
+  int32 code = 1;
+  string message_id = 2;
+  repeated Item gained_items = 3;
+}
+
+

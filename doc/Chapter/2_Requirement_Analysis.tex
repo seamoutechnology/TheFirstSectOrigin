@@ -8,7 +8,7 @@ Trong quá trình phát triển các trò chơi trực tuyến nhiều người 
 
 \begin{enumerate}
     \item \textbf{Sử dụng máy chủ đơn khối (Monolithic Server) với Node.js hoặc Python}: Đây là giải pháp phổ biến cho các dự án nhỏ nhờ sự đơn giản trong triển khai và tài liệu phong phú. Tuy nhiên, kiến trúc đơn khối rất khó mở rộng quy mô khi số lượng người chơi tăng đột biến. Đồng thời, cơ chế xử lý Single-thread của Node.js hoặc Global Interpreter Lock (GIL) của Python gây ra nghẽn cổ chai nghiêm trọng đối với các tác vụ tính toán logic nặng như mô phỏng trận đấu thời gian thực hoặc sắp xếp bảng xếp hạng.
-    \item \textbf{Sử dụng các dịch vụ Cloud Backend thương mại (Photon Engine, PlayFab)}: Hướng tiếp cận này giúp rút ngắn đáng kể thời gian phát triển ban đầu thông qua các API tích hợp sẵn. Tuy nhiên, nhà phát triển phải đối mặt với chi phí vận hành tăng lũy tiến cực kỳ tốn kém theo số lượng người dùng. Bên cạnh đó, các dịch vụ này là hệ thống mã nguồn đóng, gây hạn chế lớn trong việc tùy biến sâu các thuật toán logic game đặc thù.
+    \item \textbf{Sử dụng các dịch vụ Cloud Backend thương mại (Photon Engine, PlayFab)}: Hướng tiếp cận này giúp rút ngắn đáng kể thời gian phát triển ban đầu thông qua các API tích hợp sẵn. Tuy nhiên, nhà phát triển phải đối mặt với chi phí vận hành tăng lũy tiến tốn kém theo số lượng người dùng. Bên cạnh đó, các dịch vụ này là hệ thống mã nguồn đóng, gây hạn chế lớn trong việc tùy biến sâu các thuật toán logic game đặc thù.
     \item \textbf{Tự phát triển hệ thống dựa trên kiến trúc vi dịch vụ (Microservices) với Go}: Giải pháp này chia nhỏ hệ thống máy chủ thành các dịch vụ độc lập kết nối với nhau qua gRPC. Sử dụng ngôn ngữ Go mang lại hiệu năng thực thi tương đương mã máy và khả năng xử lý song song vượt trội qua Goroutine. Dù kiến trúc này đòi hỏi thời gian thiết kế hệ thống ban đầu phức tạp hơn, nhưng nó mang lại khả năng mở rộng linh hoạt và tối ưu chi phí vận hành.
 \end{enumerate}
 
@@ -215,7 +215,7 @@ Dưới đây là đặc tả chi tiết của 5 use case quan trọng nhất tr
 \begin{itemize}
     \item \textbf{Tên use case}: Xây dựng và nâng cấp công trình.
     \item \textbf{Tác nhân}: Người chơi.
-    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, sở hữu đủ tài nguyên (Gỗ, Đá, Linh thạch) và đạt yêu cầu cấp độ tông môn tối thiểu.
+    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, sở hữu đủ tài nguyên (Gỗ, Đá, Vàng (Item ID: 00001)) và đạt yêu cầu cấp độ tông môn tối thiểu.
     \item \textbf{Hậu điều kiện}: Trạng thái công trình trong cơ sở dữ liệu được cập nhật, lượng tài nguyên tương ứng của người chơi bị khấu trừ.
     \item \textbf{Luồng sự kiện chính}:
     \begin{enumerate}
@@ -261,7 +261,7 @@ Dưới đây là đặc tả chi tiết của 5 use case quan trọng nhất tr
         \item Client gửi yêu cầu vượt ải kèm cấu hình đội hình hiện tại qua Gateway đến Combat-server.
         \item Combat-server lấy thông tin chỉ số đệ tử và quái vật của ải đấu để thực hiện mô phỏng trận đấu tự động theo lượt.
         \item Combat-server tạo ra log trận đấu và xác định kết quả thắng/thua gửi về cho World-server.
-        \item Nếu người chơi thắng, World-server cập nhật tiến trình vượt ải mới nhất và cộng phần thưởng (Linh thạch, vật phẩm) vào tài khoản người chơi trong PostgreSQL.
+        \item Nếu người chơi thắng, World-server cập nhật tiến trình vượt ải mới nhất và cộng phần thưởng (Vàng (Item ID: 00001), vật phẩm) vào tài khoản người chơi trong PostgreSQL.
         \item Hệ thống trả kết quả và log mô phỏng về Client để tái hiện trận đấu dưới dạng hoạt ảnh trực quan cho người chơi.
     \end{enumerate}
 \end{itemize}
@@ -316,7 +316,7 @@ Dưới đây là đặc tả chi tiết của 5 use case quan trọng nhất tr
     \item \textbf{Độ tin cậy và Nhất quán dữ liệu (Reliability \& Consistency)}:
     \begin{itemize}
         \item Hệ thống hoạt động liên tục với độ sẵn sàng dịch vụ tối thiểu là 99,5\%.
-        \item Đảm bảo tính nhất quán giao dịch tuyệt đối đối với các hành động khấu trừ tài nguyên (Gỗ, Đá, Linh thạch) và trao thưởng vật phẩm, loại bỏ hoàn toàn khả năng xảy ra lỗi trùng lặp giao dịch (double-spending).
+        \item Đảm bảo tính nhất quán giao dịch tuyệt đối đối với các hành động khấu trừ tài nguyên (Gỗ, Đá, Vàng (Item ID: 00001)) và trao thưởng vật phẩm, loại bỏ hoàn toàn khả năng xảy ra lỗi trùng lặp giao dịch (double-spending).
     \end{itemize}
     \item \textbf{Bảo mật và An toàn thông tin (Security)}:
     \begin{itemize}

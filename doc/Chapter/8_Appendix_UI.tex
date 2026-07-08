@@ -1,0 +1,100 @@
+\documentclass[../Project.tex]{subfiles}
+\begin{document}
+
+Để bổ sung cho phần 4.3.3 về các giao diện cốt lõi của hệ thống, phụ lục này cung cấp hình ảnh minh họa chi tiết và mô tả nghiệp vụ của các chức năng quản lý Tông môn, Đệ tử, Vật phẩm và Chiến đấu.
+
+\section{Giao diện Quản lý Tông môn}
+
+\textbf{1. Màn hình Xây dựng Công trình:}
+
+Mô tả: Giao diện trực quan trên lưới (grid) cho phép người chơi đặt nền móng và tiến hành xây dựng các tòa nhà mới trong Tông môn.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_building_construct.png}
+    \caption{Màn hình Xây dựng Công trình}
+    \label{fig:ui_building_construct}
+\end{figure}
+
+\textbf{2. Màn hình Menu Xây dựng:}
+
+Mô tả: Cung cấp danh sách các công trình kiến trúc có thể xây dựng. Hiển thị thông tin tổng quan, thời gian hoàn thành và chi phí tài nguyên yêu cầu cho từng loại công trình.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_build_menu.png}
+    \caption{Màn hình Menu Xây dựng}
+    \label{fig:ui_build_menu}
+\end{figure}
+
+\textbf{3. Màn hình Thông tin Công trình:}
+
+Mô tả: Hiển thị thông tin chi tiết của một công trình đã xây dựng, bao gồm cấp độ hiện tại, tiến độ nâng cấp, và các chỉ số tài nguyên/sức mạnh cộng thêm cho Tông môn.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_building_info.png}
+    \caption{Màn hình Thông tin Công trình}
+    \label{fig:ui_building_info}
+\end{figure}
+
+\section{Giao diện Đệ tử và Túi đồ}
+
+\textbf{1. Màn hình Danh sách Đệ tử:}
+
+Mô tả: Giao diện hiển thị và quản lý toàn bộ Đệ tử người chơi đang sở hữu. Người chơi có thể phân loại, xem thông tin tóm tắt và lựa chọn đệ tử để bồi dưỡng.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_disciple_list.png}
+    \caption{Màn hình Danh sách Đệ tử}
+    \label{fig:ui_disciple_list}
+\end{figure}
+
+\textbf{2. Màn hình Sử dụng Vật phẩm (Item):}
+
+Mô tả: Giao diện túi đồ (Inventory) nơi người chơi kiểm tra tài nguyên, xem chi tiết và sử dụng các loại vật phẩm (đan dược, rương tài nguyên) để hỗ trợ quá trình tu luyện.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_use_item.png}
+    \caption{Màn hình Sử dụng Vật phẩm}
+    \label{fig:ui_use_item}
+\end{figure}
+
+\section{Giao diện Bản đồ và Kết quả Chiến đấu}
+
+\textbf{1. Màn hình Chọn Màn chơi:}
+
+Mô tả: Bản đồ chiến dịch nơi người chơi lựa chọn các ải (Level) để tiến hành khiêu chiến. Giao diện hiển thị tuyến đường, số sao đạt được và phần thưởng rớt ra ở từng ải.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_level_select.png}
+    \caption{Màn hình Chọn Màn chơi}
+    \label{fig:ui_level_select}
+\end{figure}
+
+\textbf{2. Màn hình Kết quả - Thắng (Victory):}
+
+Mô tả: Giao diện tổng kết sau khi người chơi vượt ải thành công, hiển thị lượng kinh nghiệm (EXP), vàng và các tài nguyên (gỗ, đá, vàng (Item ID: 00001)) thu thập được từ trận đấu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_victory.png}
+    \caption{Màn hình Kết quả Trận đấu (Thắng)}
+    \label{fig:ui_victory}
+\end{figure}
+
+\textbf{3. Màn hình Kết quả - Thua (Defeat):}
+
+Mô tả: Giao diện thông báo kết quả khi đội hình người chơi bị hạ gục. Giao diện cung cấp tùy chọn thoát hoặc thử lại, đồng thời gợi ý nâng cấp sức mạnh.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Image/ui_defeat.png}
+    \caption{Màn hình Kết quả Trận đấu (Thua)}
+    \label{fig:ui_defeat}
+\end{figure}
+
+\end{document}

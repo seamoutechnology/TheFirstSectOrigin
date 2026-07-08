@@ -57,14 +57,14 @@ Nếu trong nội dung chính không đủ không gian cho các use case khác (
 \begin{itemize}
     \item \textbf{Tên use case}: Thu thập tài nguyên công trình.
     \item \textbf{Tác nhân}: Người chơi.
-    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, tông môn sở hữu các công trình sản xuất tài nguyên nhàn rỗi (như Nhà Gỗ, Mỏ Đá, Linh Thạch Khoáng) và các công trình này đã tích lũy được lượng sản lượng lớn hơn 0 kể từ lần thu hoạch trước.
-    \item \textbf{Hậu điều kiện}: Lượng tài nguyên nhàn rỗi tích lũy trong các công trình được chuyển vào ví tài sản của người chơi (Gỗ, Đá, Linh thạch), trạng thái tích lũy của công trình được đưa về 0.
+    \item \textbf{Tiền điều kiện}: Người chơi đã đăng nhập, tông môn sở hữu các công trình sản xuất tài nguyên nhàn rỗi (như Nhà Gỗ, Mỏ Đá, Vàng (Item ID: 00001) Khoáng) và các công trình này đã tích lũy được lượng sản lượng lớn hơn 0 kể từ lần thu hoạch trước.
+    \item \textbf{Hậu điều kiện}: Lượng tài nguyên nhàn rỗi tích lũy trong các công trình được chuyển vào ví tài sản của người chơi (Gỗ, Đá, Vàng (Item ID: 00001)), trạng thái tích lũy của công trình được đưa về 0.
     \item \textbf{Luồng sự kiện chính}:
     \begin{enumerate}
         \item Người chơi click vào biểu tượng tài nguyên hiển thị phía trên công trình sản xuất tài nguyên ở bản đồ tông môn.
         \item Client gửi yêu cầu thu thập tài nguyên kèm ID công trình qua Gateway tới dịch vụ World.
         \item Dịch vụ World truy vấn cơ sở dữ liệu để lấy mốc thời gian thu hoạch gần nhất của công trình, tính toán sản lượng tích lũy dựa trên công suất sản xuất của công trình và thời gian đã trôi qua.
-        \item Dịch vụ World cập nhật lượng tài nguyên tích lũy của công trình về 0 và cộng lượng tài nguyên đã thu hoạch vào tổng số dư tài sản (Gỗ, Đá, Linh thạch) của người chơi trong cơ sở dữ liệu PostgreSQL.
+        \item Dịch vụ World cập nhật lượng tài nguyên tích lũy của công trình về 0 và cộng lượng tài nguyên đã thu hoạch vào tổng số dư tài sản (Gỗ, Đá, Vàng (Item ID: 00001)) của người chơi trong cơ sở dữ liệu PostgreSQL.
         \item Dịch vụ World gửi phản hồi thành công kèm lượng tài nguyên thu hoạch được và số dư tài sản mới về Client.
         \item Client thực hiện hoạt ảnh bay tài nguyên và cập nhật số lượng tài nguyên mới trên giao diện người chơi.
     \end{enumerate}

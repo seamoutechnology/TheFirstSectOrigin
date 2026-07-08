@@ -589,6 +589,10 @@ MonoBehaviour:
     m_Key: ui_shop_success
     m_Metadata:
       m_Items: []
+  - m_Id: 981960290092288
+    m_Key: ui_upgrade_failed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

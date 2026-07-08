@@ -6,7 +6,7 @@
 -- ============================================================
 CREATE TABLE IF NOT EXISTS players (
     id              BIGSERIAL PRIMARY KEY,
-    user_id         BIGINT       NOT NULL UNIQUE, -- ID từ Global DB
+    user_id         BIGINT       NOT NULL, -- ID từ Global DB
     nickname        VARCHAR(32)  NOT NULL,
     level           INT          NOT NULL DEFAULT 1,
     exp             BIGINT       NOT NULL DEFAULT 0,
@@ -206,6 +206,8 @@ INSERT INTO item_configs (item_code, name_key, type, rarity, icon, desc_key, max
 ('EXP_pill', 'EXP_pill', 'CONSUMABLE', 'RARE', 'EXP_pill_icon', 'EXP_pill_des', 99, 1, '[{"effect_code": "EFF_ADD_EXP", "value": 100}]'::jsonb),
 ('00001', 'gold', 'CURRENCY', 'COMMON', 'gold_icon', 'gold_des', 999999, 1, '[]'::jsonb),
 ('00000', 'coin', 'CURRENCY', 'COMMON', 'coin_icon', 'coin_des', 999999, 1, '[]'::jsonb),
+('00002', 'stone_1', 'CONSUMABLE', 'COMMON', 'stone_1_icon', 'stone_1_des', 999999, 1, '[]'::jsonb),
+('00003', 'wood_1', 'CONSUMABLE', 'COMMON', 'wood_1_icon', 'wood_1_des', 999999, 1, '[]'::jsonb),
 ('stamina', 'stamina', 'CURRENCY', 'COMMON', 'stamina_icon', 'stamina_des', 999999, 1, '[]'::jsonb)
 ON CONFLICT (item_code) DO UPDATE 
 SET name_key = EXCLUDED.name_key,
@@ -339,4 +341,4 @@ CREATE INDEX IF NOT EXISTS idx_player_stages_player_id ON player_stages(player_i
 
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.
--- (Bỏ qua vì chúng ta gộp thành schema chính khởi tạo từ đầu)
+

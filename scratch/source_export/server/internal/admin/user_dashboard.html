@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Sect Origin - Cổng Tu Luyện</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --gold-color: #f59e0b;
+            --qi-color: #06b6d4;
+            --border-radius: 20px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 35px 30px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dashboard-container:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        h1 {
+            color: var(--text-primary);
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -0.02em;
+        }
+
+        .profile-card {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .profile-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .value {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .value.accent {
+            color: var(--primary);
+        }
+
+        .value.gold {
+            color: var(--gold-color);
+        }
+
+        .value.qi {
+            color: var(--qi-color);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.15s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .recharge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .recharge-card {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .recharge-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            background: #ffffff;
+        }
+
+        .recharge-card.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .recharge-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .recharge-reward {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        #result-box {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            text-align: center;
+        }
+
+        .result-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .result-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>CỔNG TU LUYỆN</h1>
+        <div class="profile-card">
+            <div class="profile-row">
+                <span class="label">Máy Chủ (Zone):</span>
+                <span class="value">
+                    <select id="zone-select" class="input-field" style="padding: 4px 8px; width: auto; font-size: 13px; border-radius: 6px; color: var(--primary); border: 1px solid var(--border-color); cursor: pointer;" onchange="changeZone(this.value)">
+                        {{range .Zones}}
+                        <option value="{{.ID}}" {{if eq $.ZoneID .ID}}selected{{end}}>{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </span>
+            </div>
+            <div class="profile-row">
+                <span class="label">Tên Nhân Vật:</span>
+                <span id="player-nickname" class="value accent">{{.Nickname}}</span>
+            </div>
+            <div class="profile-row">
+                <span class="label">Cấp Độ:</span>
+                <span id="player-level" class="value">{{.Level}}</span>
+            </div>
+            <div class="profile-row">
+                <span class="label">Vàng Tích Lũy:</span>
+                <span id="player-gold" class="value gold">{{.Gold}} Vàng</span>
+            </div>
+            <div class="profile-row">
+                <span class="label">Xu Tích Lũy:</span>
+                <span id="player-diamond" class="value qi">{{.Diamond}} Xu</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('redeem')">Đổi GiftCode</button>
+            <button class="tab-btn" onclick="switchTab('recharge')">Nạp Xu & Vàng</button>
+        </div>
+
+        <!-- Redeem Tab -->
+        <div id="tab-redeem" class="tab-content active">
+            <div class="form-group">
+                <label for="giftcode-input">Nhập mã GiftCode:</label>
+                <input type="text" id="giftcode-input" class="input-field" placeholder="Ví dụ: SECT666" style="text-transform: uppercase;">
+            </div>
+            <button id="btn-redeem" class="btn-submit" onclick="submitRedeem()">XÁC NHẬN ĐỔI MÃ</button>
+        </div>
+
+        <!-- Recharge Tab -->
+        <div id="tab-recharge" class="tab-content">
+            <label style="margin-bottom: 12px;">Chọn mốc nạp:</label>
+            <div class="recharge-grid">
+                <div class="recharge-card" onclick="selectRecharge(this, 10000)">
+                    <div class="recharge-amount">10.000đ</div>
+                    <div class="recharge-reward">+10 Xu / +100k Vàng</div>
+                </div>
+                <div class="recharge-card" onclick="selectRecharge(this, 50000)">
+                    <div class="recharge-amount">50.000đ</div>
+                    <div class="recharge-reward">+50 Xu / +500k Vàng</div>
+                </div>
+                <div class="recharge-card" onclick="selectRecharge(this, 100000)">
+                    <div class="recharge-amount">100.000đ</div>
+                    <div class="recharge-reward">+100 Xu / +1M Vàng</div>
+                </div>
+                <div class="recharge-card" onclick="selectRecharge(this, 200000)">
+                    <div class="recharge-amount">200.000đ</div>
+                    <div class="recharge-reward">+200 Xu / +2M Vàng</div>
+                </div>
+            </div>
+            <button id="btn-recharge" class="btn-submit" onclick="submitRecharge()" disabled>XÁC NHẬN NẠP TIỀN</button>
+        </div>
+
+        <div id="result-box"></div>
+    </div>
+
+    <script>
+        const token = "{{.Token}}";
+        const hasChar = {{.HasCharacter}};
+        let selectedAmount = 0;
+
+        if (!hasChar) {
+            document.getElementById("btn-redeem").disabled = true;
+            document.getElementById("btn-recharge").disabled = true;
+            showResult("Bạn chưa tạo nhân vật trong game. Vui lòng vào game tạo nhân vật trước!", false);
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            
+            // clear result box
+            const resBox = document.getElementById("result-box");
+            resBox.style.display = "none";
+        }
+
+        function selectRecharge(element, amount) {
+            if (!hasChar) return;
+            document.querySelectorAll('.recharge-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedAmount = amount;
+            document.getElementById("btn-recharge").disabled = false;
+        }
+
+        function showResult(message, isSuccess) {
+            const resBox = document.getElementById("result-box");
+            resBox.className = isSuccess ? "result-success" : "result-error";
+            resBox.innerText = message;
+            resBox.style.display = "block";
+        }
+
+        async function submitRedeem() {
+            const input = document.getElementById("giftcode-input");
+            const code = input.value.trim();
+            if (!code) {
+                showResult("Vui lòng nhập mã GiftCode!", false);
+                return;
+            }
+
+            const btn = document.getElementById("btn-redeem");
+            btn.disabled = true;
+
+            try {
+                const response = await fetch("/api/user/redeem?token=" + encodeURIComponent(token) + "&zone_id={{.ZoneID}}", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code: code })
+                });
+                const res = await response.json();
+                if (res.code === 0) {
+                    showResult(res.message, true);
+                    input.value = "";
+                    updateStats(res.gold, res.diamond);
+                } else {
+                    showResult(res.message || "Đổi mã thất bại", false);
+                }
+            } catch (err) {
+                showResult("Lỗi kết nối tới máy chủ", false);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function submitRecharge() {
+            if (selectedAmount <= 0) return;
+
+            const btn = document.getElementById("btn-recharge");
+            btn.disabled = true;
+
+            try {
+                const response = await fetch("/api/user/recharge?token=" + encodeURIComponent(token) + "&zone_id={{.ZoneID}}", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ amount: selectedAmount })
+                });
+                const res = await response.json();
+                if (res.code === 0) {
+                    showResult(res.message, true);
+                    updateStats(res.gold, res.diamond);
+                } else {
+                    showResult(res.message || "Nạp tiền thất bại", false);
+                }
+            } catch (err) {
+                showResult("Lỗi kết nối tới máy chủ", false);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function updateStats(gold, diamond) {
+            document.getElementById("player-gold").innerText = gold + " Vàng";
+            document.getElementById("player-diamond").innerText = diamond + " Xu";
+        }
+
+        function changeZone(newZoneId) {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set("zone_id", newZoneId);
+            window.location.href = currentUrl.toString();
+        }
+    </script>
+</body>
+</html>

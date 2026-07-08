@@ -86,6 +86,10 @@ MonoBehaviour:
     m_Localized: "\u0110ang x\xE1c th\u1EF1c danh t\xEDnh..."
     m_Metadata:
       m_Items: []
+  - m_Id: 557579417161728
+    m_Localized: "Đang tải {0}%"
+    m_Metadata:
+      m_Items: []
   - m_Id: 3015083591348224
     m_Localized: '           '
     m_Metadata:
@@ -451,7 +455,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10485400186089472
-    m_Localized: 
+    m_Localized: "Bảo Điện Triệu Hồi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10485405483495424
+    m_Localized: "Nơi tập hợp và chiêu mộ các đệ tử ưu tú gia nhập tông môn."
     m_Metadata:
       m_Items: []
   - m_Id: 1000100
@@ -584,6 +592,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 981960290092268
     m_Localized: "Th\u1EA5t B\u1EA1i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 981960290092288
+    m_Localized: "Nâng Cấp Thất Bại"
     m_Metadata:
       m_Items: []
   - m_Id: 143253569155264

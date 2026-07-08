@@ -1,0 +1,29 @@
+global:
+  env: "production"
+
+gateway:
+  replicaCount: 2
+  image:
+    repository: your-dockerhub-username/thefirstsectorigin-gateway
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  service:
+    type: LoadBalancer
+    port: 8080
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+admin:
+  replicaCount: 1
+  image:
+    repository: your-dockerhub-username/thefirstsectorigin-admin
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8081

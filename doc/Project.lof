@@ -1,22 +1,20 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Kiến trúc hệ thống định hướng giải pháp tổng quan}}{2}{figure.caption.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Biểu đồ use case tổng quát của hệ thống}}{6}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Biểu đồ use case phân rã phân hệ Xác thực và Quản lý Tông môn}}{7}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Biểu đồ use case phân rã phân hệ Quản lý Đệ tử và Vượt ải}}{7}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Biểu đồ use case tổng quát của hệ thống}}{5}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Biểu đồ use case phân rã phân hệ Xác thực và Quản lý Tông môn}}{6}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Biểu đồ use case phân rã phân hệ Quản lý Đệ tử và Vượt ải}}{6}{figure.caption.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Biểu đồ gói UML thể hiện sự phụ thuộc và giao tiếp trong hệ thống}}{21}{figure.caption.13}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Biểu đồ quan hệ giữa các thành phần trong gói World Server}}{22}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Biểu đồ trình tự chức năng Đăng ký tài khoản}}{26}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Biểu đồ trình tự chức năng Thu thập tài nguyên công trình}}{27}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Sơ đồ thực thể liên kết cơ sở dữ liệu (ERD) toàn hệ thống}}{28}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Giao diện đăng nhập và đăng ký tài khoản người chơi}}{35}{figure.caption.50}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Giao diện Bản đồ Tông môn và Khai thác tài nguyên}}{36}{figure.caption.51}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Giao diện Sắp xếp Đội hình đệ tử xuất trận}}{36}{figure.caption.52}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Giao diện mô phỏng Trận đấu vượt ải Campaign}}{37}{figure.caption.53}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Mô hình triển khai máy chủ vi dịch vụ sử dụng Docker và Nginx}}{42}{figure.caption.63}%
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Màn hình Xây dựng Công trình}}{19}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Màn hình Menu Xây dựng}}{19}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Màn hình Thông tin Công trình}}{20}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Màn hình Danh sách Đệ tử}}{20}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Màn hình Sử dụng Vật phẩm}}{21}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Màn hình Chọn Màn chơi}}{21}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Màn hình Kết quả Trận đấu (Thắng)}}{22}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Màn hình Kết quả Trận đấu (Thua)}}{22}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Mô hình triển khai máy chủ vi dịch vụ sử dụng Docker và Nginx}}{26}{figure.caption.30}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 
