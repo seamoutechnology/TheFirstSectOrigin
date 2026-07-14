@@ -84,3 +84,5 @@
 2026-06-25T14:25:26.657+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
 2026-06-28T17:10:33.211+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
 2026-06-28T17:10:33.211+0700	[34mINFO[0m	logger/logger_test.go:32	test info message
+2026-07-13T05:01:47.379+0700	[35mDEBUG[0m	logger/logger_test.go:31	test debug message
+2026-07-13T05:01:47.379+0700	[34mINFO[0m	logger/logger_test.go:32	test info message

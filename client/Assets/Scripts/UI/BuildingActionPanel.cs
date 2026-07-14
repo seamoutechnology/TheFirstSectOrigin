@@ -522,6 +522,8 @@ namespace GameClient.UI
                             else if (name == "iron_ore") name = "Quặng Sắt";
                             else if (name == "00003") name = "Gỗ I";
                             else if (name == "00002") name = "Đá I";
+                            else if (name == "00000") name = "Xu";
+                            else if (name == "00001") name = "Vàng";
                             itemsList.Add($"+{kvp.Value} {name}");
                         }
                         message = "Nhận được: " + string.Join(", ", itemsList);
@@ -530,12 +532,22 @@ namespace GameClient.UI
                     {
                         message = $"Nhận được {resp.GoldGained} Vàng!";
                     }
+                    if (resp.Player != null)
+                    {
+                        GameClient.GameManager.Instance.SetPlayer(resp.Player);
+                    }
                     GameClient.UIManager.Instance.ShowMessage("Thu Hoạch Thành Công", message);
                     
                     var baseResp = await SectBuildingApi.GetBaseAsync();
                     if (baseResp != null)
                     {
                         GameClient.GameManager.Instance.SetBuildings(baseResp.Buildings);
+                    }
+                    
+                    var hud = GameClient.UIManager.Instance?.GetPanel("MainGameHUDPanel") as MainGameHUDPanel;
+                    if (hud != null)
+                    {
+                        hud.RefreshResources();
                     }
                     Hide();
                 }

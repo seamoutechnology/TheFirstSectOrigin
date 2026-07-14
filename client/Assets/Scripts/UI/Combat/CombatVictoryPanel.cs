@@ -157,7 +157,7 @@ namespace GameClient.UI.Combat
             {
                 if (txts.Length == 1)
                 {
-                    txts[0].text = $"{displayName}\nx{amount}";
+                    txts[0].text = $"x{amount}";
                 }
                 else
                 {
@@ -169,12 +169,12 @@ namespace GameClient.UI.Combat
                         if (nameLower.Contains("name") || nameLower.Contains("title")) txtName = t;
                         else if (nameLower.Contains("qty") || nameLower.Contains("quantity") || nameLower.Contains("count") || nameLower.Contains("amount")) txtQty = t;
                     }
-                    if (txtName != null) txtName.text = displayName;
+                    if (txtName != null) txtName.text = "";
                     if (txtQty != null) txtQty.text = $"x{amount}";
 
                     if (txtName == null && txtQty == null)
                     {
-                        txts[0].text = displayName;
+                        txts[0].text = "";
                         if (txts.Length > 1) txts[1].text = $"x{amount}";
                     }
                 }

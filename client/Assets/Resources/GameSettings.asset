@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6582721e84ad39f4982871a7113571d7, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: Assembly-CSharp::GameClient.Core.GameSettings
-  apiBaseUrl: http://seamou.studio
-  cdnUrl: http://seamou.studio/cdn/
-  gatewayAddr: http://seamou.studio:50051
+  apiBaseUrl: http://192.168.0.111
+  cdnUrl: http://192.168.0.111/cdn/
+  gatewayAddr: http://192.168.0.111:50051
   gameVersion: 1.0.0
   buildNumber: 1
   defaultLocaleCode: vi-VN

@@ -38,7 +38,7 @@
             "sizeX": 2,
             "sizeY": 2,
             "prefabAddress": "",
-            "producedResource": "00001",
+            "producedResource": "00000",
             "productionRatePerSecond": 1.0,
             "maxCapacity": 100,
             "levelStats": [

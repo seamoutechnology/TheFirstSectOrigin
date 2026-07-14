@@ -239,8 +239,6 @@ namespace GameClient.UI
             
             currentResourceAmounts.Clear();
             // Khởi tạo mặc định số lượng cho các chỉ số và vật phẩm tài nguyên cơ bản
-            currentResourceAmounts["gold"] = player != null ? (int)player.Gold : 0;
-            currentResourceAmounts["qi"] = player != null ? (int)player.Diamond : 0;
             currentResourceAmounts["stamina"] = player != null ? (int)player.Stamina : 0; // Thể Lực lưu theo key 'stamina'
             currentResourceAmounts["max_stamina"] = player != null ? (int)player.MaxStamina : 100;
             currentResourceAmounts["00002"] = 0;

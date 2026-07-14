@@ -542,12 +542,41 @@ namespace GameClient.Gameplay.BaseBuilder
             SetState(BuildingState.Producing);
         }
 
+        private async void HarvestBuildingAsync()
+        {
+            try
+            {
+                var resp = await GameClient.Network.Api.SectBuildingApi.CollectResourcesAsync(InstanceID);
+                if (resp != null)
+                {
+                    if (resp.Player != null)
+                    {
+                        GameClient.GameManager.Instance.SetPlayer(resp.Player);
+                    }
+                    var baseResp = await GameClient.Network.Api.SectBuildingApi.GetBaseAsync();
+                    if (baseResp != null)
+                    {
+                        GameClient.GameManager.Instance.SetBuildings(baseResp.Buildings);
+                    }
+                    var hud = GameClient.UIManager.Instance?.GetPanel("MainGameHUDPanel") as GameClient.UI.MainGameHUDPanel;
+                    if (hud != null)
+                    {
+                        hud.RefreshResources();
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[BuildingInstance] Lỗi thu hoạch: {ex.Message}");
+            }
+        }
+
         private void OnMouseUpAsButton()
         {
             if (CurrentState == BuildingState.ReadyToHarvest || HasResourcesToHarvest())
             {
                 CollectResourcesVisually();
-                _ = GameClient.Network.Api.SectBuildingApi.CollectResourcesAsync(InstanceID);
+                HarvestBuildingAsync();
                 return; // Do not open menu if harvested
             }
             

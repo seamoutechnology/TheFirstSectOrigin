@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	"server/pkg/pb"
 
@@ -20,21 +19,28 @@ func NewCombatService(log *zap.Logger) *CombatService {
 }
 
 func (s *CombatService) ValidatePvEResult(ctx context.Context, req *pb.ValidatePvEResultRequest) (*pb.ValidatePvEResultResponse, error) {
-	fmt.Printf("\n=======================================================\n")
-	fmt.Printf("[SERVER LOG] PvE VALIDATION REQUEST RECEIVED\n")
-	fmt.Printf("- Player Power: %d | Enemy Power: %d\n", req.PlayerPower, req.EnemyPower)
-	fmt.Printf("- Reported Victory: %v | Logs Count: %d\n", req.IsVictory, len(req.CombatLogs))
+	s.log.Info("[SERVER LOG] PvE VALIDATION REQUEST RECEIVED",
+		zap.Int32("player_power", req.PlayerPower),
+		zap.Int32("enemy_power", req.EnemyPower),
+		zap.Bool("reported_victory", req.IsVictory),
+		zap.Int("logs_count", len(req.CombatLogs)),
+	)
 	if len(req.CombatLogs) > 0 {
-		fmt.Printf("--- COMBAT LOGS START ---\n")
-		for i, log := range req.CombatLogs {
-			fmt.Printf("  [%02d] Caster:%-8s -> Target:%-8s | Skill:%-8s | Dmg:%-5d | Crit:%v\n",
-				i+1, log.CasterId, log.TargetId, log.SkillId, log.Damage, log.IsCrit)
+		s.log.Info("--- COMBAT LOGS START ---")
+		for i, combatLog := range req.CombatLogs {
+			s.log.Info("Combat Log Entry",
+				zap.Int("idx", i+1),
+				zap.String("caster", combatLog.CasterId),
+				zap.String("target", combatLog.TargetId),
+				zap.String("skill", combatLog.SkillId),
+				zap.Int32("dmg", combatLog.Damage),
+				zap.Bool("crit", combatLog.IsCrit),
+			)
 		}
-		fmt.Printf("--- COMBAT LOGS END ---\n")
+		s.log.Info("--- COMBAT LOGS END ---")
 	} else {
-		fmt.Printf("--- NO COMBAT LOGS PROVIDED ---\n")
+		s.log.Warn("--- NO COMBAT LOGS PROVIDED ---")
 	}
-	fmt.Printf("=======================================================\n\n")
 
 	s.log.Info("Validating PvE result", zap.String("enemy", req.EnemyId), zap.Int32("player_power", req.PlayerPower), zap.Int32("enemy_power", req.EnemyPower), zap.Bool("is_victory", req.IsVictory))
 

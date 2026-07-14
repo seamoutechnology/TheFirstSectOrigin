@@ -380,24 +380,35 @@ func (r *PlayerRepository) SpeedUpBuilding(ctx context.Context, playerID int64, 
 }
 
 func (r *PlayerRepository) CollectGold(ctx context.Context, playerID int64, instanceID int64) (int64, error) {
-	q := `
-		UPDATE player_buildings
-		SET last_collect_at = NOW()
-		WHERE player_id = $1 AND id = $2
-		RETURNING level, last_collect_at,
-		          EXTRACT(EPOCH FROM (NOW() - last_collect_at)) / 3600 AS hours
-	`
-	var level int32
-	var lastCollect time.Time
-	var hours float64
-	err := r.db.QueryRow(ctx, q, playerID, instanceID).Scan(&level, &lastCollect, &hours)
+	tx, err := r.db.Begin(ctx)
 	if err != nil {
 		return 0, err
 	}
+	defer tx.Rollback(ctx)
+
+	var level int32
+	var lastCollect time.Time
+	err = tx.QueryRow(ctx, "SELECT level, last_collect_at FROM player_buildings WHERE player_id = $1 AND id = $2", playerID, instanceID).Scan(&level, &lastCollect)
+	if err != nil {
+		return 0, err
+	}
+
+	hours := time.Since(lastCollect).Hours()
 	if hours > 12 {
 		hours = 12
 	}
 	gold := int64(float64(level) * 10 * hours)
+
+	_, err = tx.Exec(ctx, "UPDATE player_buildings SET last_collect_at = NOW() WHERE player_id = $1 AND id = $2", playerID, instanceID)
+	if err != nil {
+		return 0, err
+	}
+
+	err = tx.Commit(ctx)
+	if err != nil {
+		return 0, err
+	}
+
 	return gold, nil
 }
 
@@ -1558,6 +1569,17 @@ func (r *PlayerRepository) CollectResource(ctx context.Context, playerID int64, 
 	} else {
 		_, err = tx.Exec(ctx, "INSERT INTO user_items (player_id, item_code, quantity, stats) VALUES ($1, $2, $3, '[]')", playerID, itemCode, amount)
 	}
+	if err != nil {
+		return err
+	}
+
+	if itemCode == "00001" {
+		_, err = tx.Exec(ctx, "UPDATE players SET gold = gold + $1, updated_at = NOW() WHERE id = $2", amount, playerID)
+		if err != nil {
+			return err
+		}
+	}
+
 	return tx.Commit(ctx)
 }
 

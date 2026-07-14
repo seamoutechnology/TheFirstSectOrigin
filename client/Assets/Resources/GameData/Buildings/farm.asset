@@ -44,6 +44,6 @@ MonoBehaviour:
     RequiredReputation: 0
     CostItems: []
     BuildTimeSeconds: 0
-  ProducedItemCode: 00001
+  ProducedItemCode: 00000
   ProductionRatePerSecond: 1
   MaxCapacity: 100

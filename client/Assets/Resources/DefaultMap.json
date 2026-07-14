@@ -1031,9 +1031,9 @@
     "buildings": [
         {
             "instance_id": 0,
-            "id": "farm",
-            "x": 32,
-            "y": 27,
+            "id": "main_hall",
+            "x": 23,
+            "y": 26,
             "flipX": false,
             "level": 1,
             "state": 0,
@@ -1041,9 +1041,9 @@
         },
         {
             "instance_id": 0,
-            "id": "main_hall",
-            "x": 23,
-            "y": 26,
+            "id": "farm",
+            "x": 32,
+            "y": 27,
             "flipX": false,
             "level": 1,
             "state": 0,
